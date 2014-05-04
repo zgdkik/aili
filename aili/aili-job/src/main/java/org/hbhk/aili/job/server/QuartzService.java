@@ -63,7 +63,7 @@ public class QuartzService {
 		logger.info("cronPattern:"+cronPattern);
 		CronTrigger trigger = TriggerBuilder.newTrigger()
 				//触发名称 分组名称
-				.withIdentity(jobName + "_trigger", Scheduler.DEFAULT_GROUP)
+				.withIdentity(jobName + "_trigger")//, Scheduler.DEFAULT_GROUP
 				.forJob(jobDetail)
 				.withSchedule(CronScheduleBuilder.cronSchedule(cronPattern))
 				.build();

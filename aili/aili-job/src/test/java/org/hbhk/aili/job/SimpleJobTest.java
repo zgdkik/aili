@@ -8,6 +8,7 @@ import org.apache.commons.logging.LogFactory;
 import org.hbhk.aili.job.server.QuartzService;
 import org.junit.Test;
 import org.quartz.Job;
+import org.quartz.SchedulerException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -40,7 +41,6 @@ public class SimpleJobTest {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			//quartzService.deleteJob(jobName);
 
 			quartzService.getQuartzJobList();
 
@@ -49,9 +49,16 @@ public class SimpleJobTest {
 		}
 
 	}
+	@Test
+	public void deleteJob() throws SchedulerException{
+		ApplicationContext context = new ClassPathXmlApplicationContext(
+				"classpath:job/jobContext.xml");
 
+		QuartzService quartzService = (QuartzService) context
+				.getBean("quartzService");
+		quartzService.deleteJob("jobName");
+	}
 	public static void main(String[] args) {
-
 		try {
 			ApplicationContext context = new ClassPathXmlApplicationContext(
 					"classpath:job/jobContext.xml");
