@@ -1,6 +1,3 @@
-#set( $symbol_pound = '#' )
-#set( $symbol_dollar = '$' )
-#set( $symbol_escape = '\' )
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
 <log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/" debug="false">
@@ -10,7 +7,7 @@
 		</layout>
 	</appender>
 	<appender name="FILE" class="org.apache.log4j.RollingFileAppender">
-		<param name="file" value="${user.home}/foss-framework.log" />
+		<param name="file" value="${user.home}/aili.log" />
 		<param name="append" value="true" />
 		<param name="maxFileSize" value="10MB" />
 		<param name="maxBackupIndex" value="100" />
@@ -19,7 +16,7 @@
 		</layout>
 	</appender>
 	<logger name="jdbc.sqltiming">         
-		<level value="INFO" />     
+		<level value="ERROR" />     
 	</logger>
 	<logger name="jdbc.connection">         
 		<level value="ERROR" />     
@@ -38,7 +35,7 @@
 		<appender-ref ref="CONSOLE" /> 
 	</logger>
   	<root>
-		<level value="INFO" />
+		<level value="${log4j.level}" />
 		<appender-ref ref="CONSOLE" />
 		<appender-ref ref="FILE" />
 	</root>
