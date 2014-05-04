@@ -10,7 +10,6 @@ import java.io.InputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.hbhk.aili.core.share.util.ModuleConstants;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,7 +18,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping(ModuleConstants.MODULE_FRAMEWORK)
+@RequestMapping("/core")
 public class FileUploadControllor {
 
 	@RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
