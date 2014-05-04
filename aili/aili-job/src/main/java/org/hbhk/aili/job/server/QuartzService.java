@@ -26,8 +26,6 @@ public class QuartzService {
 
 	private static final Logger logger = Logger.getLogger(QuartzService.class);
 
-	private static Map<String, String> quartzStatus = new HashMap<String, String>(10);
-
 	@Autowired
 	private QuartzDao quartzDao;
 	
