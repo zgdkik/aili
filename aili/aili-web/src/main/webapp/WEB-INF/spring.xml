@@ -62,12 +62,6 @@
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 
-	<!-- 自动扫描组件，这里要把web下面的 controller去除，他们是在spring3-servlet.xml中配置的，如果不去除会影响事务管理的。 -->
-	<context:component-scan base-package="org.hbhk">
-		<context:exclude-filter type="regex"
-			expression="org.hbhk.*.*.server.controller.*" />
-	</context:component-scan>
-
 	<!-- 验证码 -->
 	<bean id="captchaProducer" class="com.google.code.kaptcha.impl.DefaultKaptcha">
 		<property name="config">
@@ -89,12 +83,16 @@
 		</property>
 	</bean>
 
-	<bean id="loginLimitCache"  class="org.hbhk.aili.security.server.cache.LoginLimitCache">
-		<property name="exp" value="500"/>
-		<property name="strategy" value="3"/>
-		<property name="storage" ref="redisCacheTemplet"/>
+	<bean id="limitCache" class="org.hbhk.aili.security.server.cache.LoginLimitCache">
+		<property name="exp" value="500" />
+		<property name="strategy" value="3" />
+		<property name="storage" ref="redisCacheTemplet" />
 	</bean>
-	<context:component-scan base-package="org.hbhk.aili.core.server">
+
+	<!-- <context:component-scan base-package="org.hbhk"> <context:exclude-filter 
+		type="regex" expression="org.hbhk.*.*.server.controller.*" /> </context:component-scan> -->
+
+	<context:component-scan base-package="org.hbhk.aili.*.server">
 		<context:exclude-filter type="annotation"
 			expression="org.springframework.stereotype.Controller" />
 		<context:exclude-filter type="annotation"
