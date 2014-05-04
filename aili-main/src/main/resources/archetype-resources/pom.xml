@@ -11,7 +11,6 @@
 	<url>http://maven.apache.org</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<hbhk-version>1.0.0-SNAPSHOT</hbhk-version>
 	</properties>
 
 	<dependencyManagement>
@@ -36,8 +35,6 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
-
-	
 
 	<build>
 		<plugins>
@@ -125,12 +122,12 @@
 					</executions>
 					<configuration>
 						<minimize>${wro4j-minimize}</minimize>
-						<extraConfigFile>${basedir}/src/main/resources/org/hbhk/aili/${moduleName}/server/META-INF/wro.properties</extraConfigFile>
+						<extraConfigFile>${basedir}/src/main/resources/org/hbhk/${moduleName}/server/META-INF/wro.properties</extraConfigFile>
 						<wroManagerFactory>ro.isdc.wro.maven.plugin.manager.factory.ConfigurableWroManagerFactory</wroManagerFactory>
-						<cssDestinationFolder>${project.build.directory}/classes/org/hbhk/aili/${moduleName}/server/META-INF/styles/wro/</cssDestinationFolder>
-						<jsDestinationFolder>${project.build.directory}/classes/org/hbhk/aili/${moduleName}/server/META-INF/scripts/wro/</jsDestinationFolder>
-						<wroFile>${basedir}/src/main/resources/org/hbhk/aili/${moduleName}/server/META-INF/wro.xml</wroFile>
-						<groupNameMappingFile>${project.build.directory}/classes/org/hbhk/aili/${moduleName}/server/META-INF/wromapping.properties</groupNameMappingFile>
+						<cssDestinationFolder>${project.build.directory}/classes/org/hbhk/${moduleName}/server/META-INF/styles/wro/</cssDestinationFolder>
+						<jsDestinationFolder>${project.build.directory}/classes/org/hbhk/${moduleName}/server/META-INF/scripts/wro/</jsDestinationFolder>
+						<wroFile>${basedir}/src/main/resources/org/hbhk/${moduleName}/server/META-INF/wro.xml</wroFile>
+						<groupNameMappingFile>${project.build.directory}/classes/org/hbhk/${moduleName}/server/META-INF/wromapping.properties</groupNameMappingFile>
 					</configuration>
 				</plugin>
 			</plugins>
