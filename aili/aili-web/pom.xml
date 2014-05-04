@@ -106,7 +106,7 @@
 		</profile>
 		<!-- 生产环境 -->
 		<profile>
-			<id>production</id>
+			<id>prd</id>
 			<properties>
 				<env>production</env>
 			</properties>
