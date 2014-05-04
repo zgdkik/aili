@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:jaxws="http://cxf.apache.org/jaxws" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd">
+
+	<jaxws:client id="helloClient" serviceClass="org.hbhk.server.HelloWorld"
+		address="http://localhost:8080/SpreingCXFDemo/service/HelloWorld" />
+
+	<jaxws:client id="testcxf" serviceClass="org.hbhk.server.TestCXF"
+		address="http://localhost:8080/SpreingCXFDemo/service/testcxf" />
+		
+		<jaxws:client id="testbosws" serviceClass="org.hbhk.service.TestBosWS"
+		address="http://localhost:6888/web/services/WSYQToFOSSWSBankPayRefundFacade" />
+
+	<jaxws:client id="userService" serviceClass="org.hbhk.service.UserService"
+		address="http://localhost:8080/SHCXFDemo/service/userService"><!--
+	
+		
+		<jaxws:outInterceptors>
+			<bean class="org.apache.cxf.interceptor.LoggingOutInterceptor" />
+			<bean class="org.apache.cxf.binding.soap.saaj.SAAJOutInterceptor" />
+			<bean class="org.apache.cxf.ws.security.wss4j.WSS4JOutInterceptor">
+				<constructor-arg>
+					<map>
+						<entry key="action" value="UsernameToken" />
+						<entry key="passwordType" value="PasswordText" />
+						<entry key="user" value="hbhk" />
+						<entry key="passwordCallbackRef">
+							<ref bean="clientPasswordCallback" />
+						</entry>
+					</map>
+				</constructor-arg>
+			</bean>
+		</jaxws:outInterceptors>
+
+	--></jaxws:client>
+	
+	<bean id="clientPasswordCallback" class="org.hbhk.util.security.ClientPasswordCallback"></bean>
+	<jaxws:client id="bosTest" serviceClass="com.deppon.ws.bostest.ITestBOS"
+	address="http://localhost:1112/SHCXFDemo/service//bosTest"></jaxws:client>
+</beans>
