@@ -4,12 +4,12 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.hbhk.aili</groupId>
 	<artifactId>aili-module</artifactId>
-	<version>${hbhk-release-version}</version>
+	<version>${aili-release-version}</version>
 
 	<packaging>maven-archetype</packaging>
 	
 	<properties>
-		<hbhk-release-version>1.0.0-SNAPSHOT</hbhk-release-version>
+		<aili-release-version>1.0.0-SNAPSHOT</aili-release-version>
 	</properties>
 	<profiles>
 		<profile>
@@ -21,7 +21,7 @@
 				</property>
 			</activation>
 			<properties>
-				<hbhk-release-version>1.0.1</hbhk-release-version>
+				<aili-release-version>1.0.1</aili-release-version>
 			</properties>
 		</profile>
 	</profiles>
@@ -29,12 +29,12 @@
 	<distributionManagement>
 		<repository>
 			<id>releases</id>
-			<url>http://192.168.65.191:8081/nexus/content/repositories/releases</url>
+			<url>http://127.0.0.1:8081/nexus/content/repositories/releases</url>
 			<uniqueVersion>false</uniqueVersion>
 		</repository>
 		<snapshotRepository>
 			<id>snapshots</id>
-			<url>http://192.168.65.191:8081/nexus/content/repositories/snapshots</url>
+			<url>http://127.0.0.1:8081/nexus/content/repositories/snapshots</url>
 			<uniqueVersion>false</uniqueVersion>
 		</snapshotRepository>
 	</distributionManagement>
