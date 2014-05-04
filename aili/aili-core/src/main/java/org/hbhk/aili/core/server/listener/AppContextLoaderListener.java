@@ -2,7 +2,6 @@ package org.hbhk.aili.core.server.listener;
 
 import javax.servlet.ServletContext;
 
-import org.apache.commons.lang.BooleanUtils;
 import org.apache.commons.lang.StringUtils;
 import org.hbhk.aili.core.share.consts.AppConst;
 import org.springframework.web.context.ConfigurableWebApplicationContext;
@@ -36,7 +35,7 @@ public class AppContextLoaderListener extends ContextLoaderListener {
         XmlWebApplicationContext context = (XmlWebApplicationContext) applicationContext;  
         String override = servletContext.getInitParameter(AppConst.ALLOW_BEAN_DEFINITION_OVERRIDING);
         if(StringUtils.isNotBlank(override)) {
-            context.setAllowBeanDefinitionOverriding(BooleanUtils.toBoolean(override));
+            context.setAllowBeanDefinitionOverriding(Boolean.parseBoolean(override));
         } else {
             context.setAllowBeanDefinitionOverriding(true); 
         }
