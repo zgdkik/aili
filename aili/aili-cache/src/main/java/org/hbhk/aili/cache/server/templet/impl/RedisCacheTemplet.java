@@ -15,8 +15,6 @@ import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.core.StringRedisTemplate;
 
-import redis.clients.jedis.exceptions.JedisConnectionException;
-
 public class RedisCacheTemplet<V> implements ICacheTemplet<String, V>,InitializingBean {
 	private static final Log log = LogFactory.getLog(RedisCacheTemplet.class);
 	private StringRedisTemplate stringRedisTemplate;
@@ -243,18 +241,7 @@ public class RedisCacheTemplet<V> implements ICacheTemplet<String, V>,Initializi
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		try {
-			stringRedisTemplate.execute(new RedisCallback<String>() {
-				@Override
-				public String doInRedis(RedisConnection connection)
-						throws DataAccessException {
-					try {
-						connection.ping();
-					} catch (Exception e) {
-						log.error(e.getMessage(), e);
-					}
-					return null;
-				}
-			});
+			stringRedisTemplate.exec();
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
 		}
