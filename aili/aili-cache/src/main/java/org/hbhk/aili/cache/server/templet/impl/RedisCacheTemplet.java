@@ -245,8 +245,6 @@ public class RedisCacheTemplet<V> implements ICacheTemplet<String, V>,Initializi
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
 		}
-		
-		
 	}
 
 }
