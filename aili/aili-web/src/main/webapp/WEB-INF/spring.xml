@@ -16,7 +16,7 @@
 			http://www.springframework.org/schema/aop 
 			http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 
-	<context:property-placeholder location="/WEB-INF/config.properties" />
+	<context:property-placeholder location="classpath:config.properties" />
 	<!-- 数据源 jndi方式 -->
 	<bean id="dataSourceSpied" class="org.springframework.jndi.JndiObjectFactoryBean">
 		<property name="jndiName">
