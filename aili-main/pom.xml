@@ -11,11 +11,11 @@
 	</properties>
 	<profiles>
 		<profile>
-			<id>product</id>
+			<id>prd</id>
 			<activation>
 				<property>
 					<name>release</name>
-					<value>product</value>
+					<value>prd</value>
 				</property>
 			</activation>
 			<properties>
