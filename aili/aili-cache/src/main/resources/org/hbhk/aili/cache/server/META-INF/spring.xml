@@ -37,7 +37,7 @@
 
 	<bean id="redisCacheTemplet"
 		class="org.hbhk.aili.cache.server.templet.impl.RedisCacheTemplet">
-		<property name="StringRedisTemplate" ref="redisTemplate" />
+		<property name="stringRedisTemplate" ref="redisTemplate" />
 	</bean>
 	<bean id="memoryCacheTemplet"
 		class="org.hbhk.aili.cache.server.templet.impl.MemoryCacheTemplet">
