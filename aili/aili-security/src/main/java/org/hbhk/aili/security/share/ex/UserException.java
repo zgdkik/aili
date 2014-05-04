@@ -1,6 +1,6 @@
 package org.hbhk.aili.security.share.ex;
 
-import org.hbhk.aili.core.server.exception.BusinessException;
+import org.hbhk.aili.core.share.ex.BusinessException;
 
 public class  UserException extends BusinessException{
 
