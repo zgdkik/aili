@@ -8,9 +8,8 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hbhk.aili.core.server.annotation.RenderMethod;
 import org.hbhk.aili.core.server.annotation.RenderParameter;
-import org.hbhk.aili.core.server.annotation.Request;
-import org.hbhk.aili.core.server.annotation.SecurityFilter;
 import org.hbhk.aili.core.server.annotation.RenderParameter.ScopeType;
+import org.hbhk.aili.core.server.annotation.SecurityFilter;
 
 public class TestHBHK {
 
