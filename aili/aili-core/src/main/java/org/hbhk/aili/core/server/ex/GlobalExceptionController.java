@@ -4,6 +4,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hbhk.aili.core.server.exception.BusinessException;
 import org.hbhk.aili.core.share.pojo.ExceptionEntity;
+import org.hbhk.aili.core.share.util.WebErrorUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -34,7 +35,7 @@ public class GlobalExceptionController {
 		log.error(ex.getMessage(), ex);
 		ExceptionEntity entity = new ExceptionEntity();
 		entity.setCode("500");
-		entity.setMsg("Internal Server Error");
+		entity.setMsg(WebErrorUtils.getStackTrace(ex));
 		ResponseEntity<ExceptionEntity> httpEntity = new ResponseEntity<ExceptionEntity>(
 				entity, HttpStatus.INTERNAL_SERVER_ERROR);
 
