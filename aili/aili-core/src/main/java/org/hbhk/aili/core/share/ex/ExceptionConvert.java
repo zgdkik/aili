@@ -1,12 +1,13 @@
-package org.hbhk.aili.core.server.exception;
+package org.hbhk.aili.core.share.ex;
 
+import org.hbhk.aili.core.server.ex.IExceptionConvert;
 import org.springframework.stereotype.Component;
 @Component
 public class ExceptionConvert implements IExceptionConvert {
     
 	/**
 	 * 
-	 * @see com.deppon.foss.framework.server.components.exception.IExceptionConvert#convert(java.lang.Throwable)
+	 * @see org.hbhk.aili.core.server.ex.deppon.foss.framework.server.components.exception.IExceptionConvert#convert(java.lang.Throwable)
 	 * convert
 	 * @param target
 	 * @return
@@ -34,7 +35,7 @@ public class ExceptionConvert implements IExceptionConvert {
     
     /**
      * 
-     * @see com.deppon.foss.framework.server.components.exception.IExceptionConvert#nativeConvert(java.lang.Throwable)
+     * @see org.hbhk.aili.core.server.ex.deppon.foss.framework.server.components.exception.IExceptionConvert#nativeConvert(java.lang.Throwable)
      * nativeConvert
      * @param target
      * @return

@@ -1,4 +1,6 @@
-package org.hbhk.aili.core.server.exception;
+package org.hbhk.aili.core.share.ex;
+
+import org.hbhk.aili.core.server.ex.IException;
 
 public abstract class GeneralException extends RuntimeException implements IException {
     

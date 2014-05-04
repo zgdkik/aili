@@ -1,4 +1,4 @@
-package org.hbhk.aili.core.server.exception;
+package org.hbhk.aili.core.share.ex;
 
 public final class TypeMismatchAccessException extends GeneralException {
     

@@ -1,4 +1,4 @@
-package org.hbhk.aili.core.server.exception;
+package org.hbhk.aili.core.server.ex;
 public interface IException {
     
     String getErrorCode();

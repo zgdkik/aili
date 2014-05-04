@@ -1,4 +1,4 @@
-package org.hbhk.aili.core.server.exception;
+package org.hbhk.aili.core.share.ex;
 public final class DuplicateKeyException extends GeneralException {
     
     private static final long serialVersionUID = 1L;

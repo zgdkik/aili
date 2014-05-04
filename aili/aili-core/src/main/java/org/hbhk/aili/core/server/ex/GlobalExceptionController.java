@@ -2,7 +2,7 @@ package org.hbhk.aili.core.server.ex;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.hbhk.aili.core.server.exception.BusinessException;
+import org.hbhk.aili.core.share.ex.BusinessException;
 import org.hbhk.aili.core.share.pojo.ExceptionEntity;
 import org.hbhk.aili.core.share.util.WebErrorUtils;
 import org.springframework.http.HttpStatus;

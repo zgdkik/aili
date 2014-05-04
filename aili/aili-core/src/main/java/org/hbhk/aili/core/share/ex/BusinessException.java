@@ -1,6 +1,8 @@
-package org.hbhk.aili.core.server.exception;
+package org.hbhk.aili.core.share.ex;
 
 import java.io.Serializable;
+
+import org.hbhk.aili.core.server.ex.IException;
 
 public class BusinessException extends RuntimeException implements Serializable, IException {
 	
