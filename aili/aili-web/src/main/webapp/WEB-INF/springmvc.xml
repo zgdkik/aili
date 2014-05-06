@@ -16,7 +16,7 @@
 
 	<!-- 约定优于配置，约定优于配置 -->
 
-	<!-- 配置静态资源，直接映射到对应的文件夹，不被DispatcherServlet处理，3.04新增功能，需要重新设置spring-mvc-3.0.xsd -->
+	<!-- 配置静态资源，直接映射到对应的文件夹，不被DispatcherServlet处理-->
 	<mvc:resources mapping="#{resourceBean.resourcePrefix}/images/**"
 		location="/images/" />
 	<mvc:resources mapping="#{resourceBean.resourcePrefix}/scripts/**"
