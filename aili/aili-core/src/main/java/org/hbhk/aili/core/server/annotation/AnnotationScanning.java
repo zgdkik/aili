@@ -13,6 +13,7 @@ import org.springframework.core.type.filter.AnnotationTypeFilter;
 
 public class AnnotationScanning {
 
+	//是否使用默认过滤器true使用 
 	private ClassPathScanningCandidateComponentProvider packageScan = new ClassPathScanningCandidateComponentProvider(false);
 	
 	private List<Class<?>> annotatedClasses ;
