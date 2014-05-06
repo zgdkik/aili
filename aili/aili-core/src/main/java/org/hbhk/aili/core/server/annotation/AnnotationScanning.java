@@ -9,32 +9,45 @@ import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider;
 import org.springframework.core.type.filter.AnnotationTypeFilter;
 
-
-
 public class AnnotationScanning {
 
-	//是否使用默认过滤器true使用 
-	private ClassPathScanningCandidateComponentProvider packageScan = new ClassPathScanningCandidateComponentProvider(false);
-	
-	private List<Class<?>> annotatedClasses ;
-	
-	public AnnotationScanning(Annotation annotation ,String... basePackage) throws ClassNotFoundException {
-		this.packageScan.addIncludeFilter(new AnnotationTypeFilter(annotation.getClass()));
-		if (basePackage == null) {
-			return;
+	private static AnnotationScanning scanning;
+
+	private AnnotationScanning() {
+	}
+	public static AnnotationScanning getInstance(){
+		if(scanning==null){
+			scanning = new AnnotationScanning();
 		}
-		annotatedClasses = new ArrayList<Class<?>>();
-		for (String pack : basePackage) {
-			Set<BeanDefinition> bds = this.packageScan.findCandidateComponents(pack);
-			for (BeanDefinition beanDefinition : bds) {
-				annotatedClasses.add(Class.forName(beanDefinition.getBeanClassName()));
-			}
-		}
+		return scanning;
 	}
 
-	public List<Class<?>> getAnnotatedClasses() {
+	/**
+	 * 获取指定注解的所有类
+	 * @param annotation
+	 * @param scannPackage
+	 * @return
+	 * @throws ClassNotFoundException
+	 */
+	public List<Class<?>> getAnnotatedClasses(Annotation annotation,
+			String... scannPackage) throws ClassNotFoundException {
+		// 是否使用默认过滤器true使用
+		ClassPathScanningCandidateComponentProvider packageScan = new ClassPathScanningCandidateComponentProvider(
+				false);
+		packageScan.addIncludeFilter(new AnnotationTypeFilter(annotation
+				.getClass()));
+		if (scannPackage == null) {
+			return null;
+		}
+		List<Class<?>> annotatedClasses = new ArrayList<Class<?>>();
+		for (String pack : scannPackage) {
+			Set<BeanDefinition> bds = packageScan.findCandidateComponents(pack);
+			for (BeanDefinition beanDefinition : bds) {
+				annotatedClasses.add(Class.forName(beanDefinition
+						.getBeanClassName()));
+			}
+		}
 		return annotatedClasses;
 	}
 
-	
 }
