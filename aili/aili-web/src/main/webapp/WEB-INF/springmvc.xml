@@ -110,18 +110,18 @@
 	</bean>
 
 	<!--spring 国际化 -->
-	<bean id="localeResolver"
+	<!-- <bean id="localeResolver"
 		class="org.springframework.web.servlet.i18n.SessionLocaleResolver" />
 	<bean id="messageSource"
 		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
 		<property name="basenames">
 			<list>
-				<!-- 配置语言文件的地址的默认配置文件,在这里我是message_zh_CN.properties -->
+				配置语言文件的地址的默认配置文件,在这里我是message_zh_CN.properties
 				<value>classpath:org/hbhk/module/framework/server/META-INF/messages/message_zh_CN
 				</value>
 			</list>
 		</property>
 		<property name="cacheSeconds" value="-1" />
-	</bean>
+	</bean> -->
 
 </beans>   
