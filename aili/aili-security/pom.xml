@@ -51,6 +51,11 @@
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 		</dependency>
+		<!-- jetbrick -->
+		<dependency>
+			<groupId>com.github.subchen</groupId>
+			<artifactId>jetbrick-template</artifactId>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>
