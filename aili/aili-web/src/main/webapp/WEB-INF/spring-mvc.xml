@@ -68,10 +68,9 @@
     </bean>
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="order" value="100" />
 		<property name="prefix" value="/WEB-INF/views/"></property>
 		<property name="suffix" value=".jsp"></property>
-		 <property name="order" value="9999" />
+		<property name="order" value="9999" />
 	</bean>
 
 	<bean id="contentNegotiationManager"
