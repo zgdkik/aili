@@ -31,9 +31,7 @@ public class MemoryCacheTemplet<V> implements ICacheTemplet<String, V> {
 	@Override
 	public boolean set(String key, V value) {
 		try {
-			if (StringUtils.isEmpty(key)) {
-				throw new RuntimeException("key不允许为null或空串!");
-			}
+			keyNot(key);
 			cache.put(key, value);
 			return true;
 		} catch (Exception e) {
@@ -43,6 +41,12 @@ public class MemoryCacheTemplet<V> implements ICacheTemplet<String, V> {
 
 	}
 
+	private void  keyNot(String key){
+		if (StringUtils.isEmpty(key)) {
+			throw new RuntimeException("key不允许为null或空串!");
+		}
+	}
+	
 	@Override
 	public boolean set(String key, V value, int expire) {
 		try {
@@ -70,9 +74,7 @@ public class MemoryCacheTemplet<V> implements ICacheTemplet<String, V> {
 
 	@Override
 	public void invalid(String key) {
-		if (StringUtils.isEmpty(key)) {
-			throw new RuntimeException("key不允许为null或空串!");
-		}
+		keyNot(key);
 		cache.remove(key);
 
 	}

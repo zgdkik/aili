@@ -25,10 +25,7 @@ public class RedisCacheTemplet<V> implements ICacheTemplet<String, V>,Initializi
 
 	@Override
 	public V get(String key) {
-		if (StringUtils.isBlank((java.lang.String) key)) {
-			log.error("key不允许为null或空串!");
-			throw new RuntimeException("key不允许为null或空串!");
-		}
+		keyNot(key);
 		final String newKey = key;
 		V value = stringRedisTemplate.execute(new RedisCallback<V>() {
 			@SuppressWarnings("unchecked")
@@ -74,10 +71,7 @@ public class RedisCacheTemplet<V> implements ICacheTemplet<String, V>,Initializi
 	@Override
 	public boolean set(String key, V value, int expire) {
 		try {
-			if (StringUtils.isBlank(key) || value == null) {
-				log.error("key或value不允许为null或空串!");
-				throw new RuntimeException("key或value不允许为null或空串!");
-			}
+			keyNot(key);
 			final String newKey = key;
 			final V newValue = value;
 			final int newexpire = expire;
@@ -102,10 +96,7 @@ public class RedisCacheTemplet<V> implements ICacheTemplet<String, V>,Initializi
 	
 	public boolean setNX(String key, V value, int expire) {
 		try {
-			if (StringUtils.isBlank(key) || value == null) {
-				log.error("key或value不允许为null或空串!");
-				throw new RuntimeException("key或value不允许为null或空串!");
-			}
+			keyNot(key);
 			final String newKey = key;
 			final V newValue = value;
 			final int newexpire = expire;
@@ -203,11 +194,7 @@ public class RedisCacheTemplet<V> implements ICacheTemplet<String, V>,Initializi
 
 	@Override
 	public boolean set(String key, V value) {
-
-		if (StringUtils.isBlank(key) || value == null) {
-			log.error("key或value不允许为null或空串!");
-			throw new RuntimeException("key或value不允许为null或空串!");
-		}
+		keyNot(key);
 		final String newKey = key;
 		final V newValue = value;
 		stringRedisTemplate.execute(new RedisCallback<V>() {
@@ -246,5 +233,11 @@ public class RedisCacheTemplet<V> implements ICacheTemplet<String, V>,Initializi
 			log.error(e.getMessage(), e);
 		}
 	}
+	private void  keyNot(String key){
+		if (StringUtils.isEmpty(key)) {
+			throw new RuntimeException("key不允许为null或空串!");
+		}
+	}
+	
 
 }
