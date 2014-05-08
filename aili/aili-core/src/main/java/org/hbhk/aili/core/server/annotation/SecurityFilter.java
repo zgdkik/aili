@@ -9,5 +9,5 @@ import java.lang.annotation.Target;
 @Target({ElementType.METHOD})		// 注解对象为方法
 public @interface SecurityFilter {
 	
-	public String sec() default  "none";	// 参数名
+	boolean value() default  true;	// 参数名
 }
