@@ -26,7 +26,7 @@ public class TestHBHK {
 		}
 	}
  
-	@SecurityFilter(sec="ROLE-USER")
+	@SecurityFilter()
 	public  void   saveUser(String name,String password){
 		System.out.println("保存成功");
 	}
@@ -39,8 +39,8 @@ public class TestHBHK {
 			if (rm != null) {
 				try {
 			    //获取到配置的权限
-				String  sec = rm.sec();
-				if(!sec.equals("ROLE-USER")){
+				boolean  sec = rm.value();
+				if(!sec){
 					throw new Exception("权限不足");
 				}
 				//设置参数，为了测试 这里手动赋值 ，实际中从前端传来
