@@ -1,4 +1,4 @@
-package org.hbhk.aili.test.server;
+package org.hbhk.aili.test.server.aop;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;

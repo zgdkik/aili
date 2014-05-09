@@ -1,4 +1,4 @@
-package org.hbhk.aili.test.server;
+package org.hbhk.aili.test.server.aop;
 
 
 public class PersonServiceBean implements PersonServer{  
