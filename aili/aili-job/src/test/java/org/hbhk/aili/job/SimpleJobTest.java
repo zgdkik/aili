@@ -35,14 +35,14 @@ public class SimpleJobTest {
 				Class<?> jobclass = Class
 						.forName("org.hbhk.aili.job.ParseModelJob");
 				Job jobInstance = (Job) jobclass.newInstance();
-				quartzService.addParseModelJob(jobName, topicIds, description,
-						cronPattern, jobInstance);
+//				quartzService.addParseModelJob(jobName, topicIds, description,
+//						cronPattern, jobInstance);
 
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 
-			quartzService.getQuartzJobList();
+			quartzService.getQuartzJobList(jobName);
 
 		} catch (Exception e) {
 			e.printStackTrace();
