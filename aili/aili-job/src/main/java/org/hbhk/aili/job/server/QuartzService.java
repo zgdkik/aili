@@ -37,8 +37,8 @@ public class QuartzService {
 	 * 
 	 * @return
 	 */
-	public List<QuartzInfo> getQuartzJobList() {
-		return quartzDao.selectAllQuartJob();
+	public List<QuartzInfo> getQuartzJobList(String jobName) {
+		return quartzDao.selectAllQuartJob(jobName);
 	}
 
 	/**
