@@ -1,9 +1,7 @@
 package org.hbhk.aili.job.server;
 
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.commons.lang.time.DateFormatUtils;
 import org.apache.log4j.Logger;
@@ -25,22 +23,16 @@ import org.springframework.stereotype.Service;
 public class QuartzService {
 
 	private static final Logger logger = Logger.getLogger(QuartzService.class);
-
 	@Autowired
 	private QuartzDao quartzDao;
-	
     @Autowired
 	private Scheduler quartzScheduler; // quartzScheduler
-
 	/**
 	 * 查询所有定时任务信息
-	 * 
-	 * @return
 	 */
 	public List<QuartzInfo> getQuartzJobList(String jobName) {
 		return quartzDao.selectAllQuartJob(jobName);
 	}
-
 	/**
 	 * 增加定时任务
 	 */
@@ -68,12 +60,8 @@ public class QuartzService {
 		// 添加cornjob
 		quartzScheduler.scheduleJob(jobDetail, trigger);
 	}
-
 	/**
 	 * 删除定时任务
-	 * 
-	 * @param jobName
-	 * @throws SchedulerException
 	 */
 	public void deleteJob(String jobName) throws SchedulerException {
 		quartzScheduler.deleteJob(new JobKey(jobName, Scheduler.DEFAULT_GROUP));
