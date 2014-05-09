@@ -23,8 +23,8 @@
 	<import resource="classpath:META-INF/cxf/cxf-extension-xml.xml" />
 
 	<bean id="getInfoService" class="org.hbhk.aili.test.server.ws.impl.GetInfoService"></bean>
-	<jaxws:endpoint id="getInfoService" implementor="#getInfoService"
-		address="/getInfo"></jaxws:endpoint>
+	<!-- <jaxws:endpoint id="getInfoService" implementor="#getInfoService"
+		address="/getInfo"></jaxws:endpoint> -->
 
 	<!-- <bean id="inMessageInterceptor" class="com.hoo.interceptor.MessageInterceptor"> 
 		<constructor-arg value="receive" /> </bean> -->
