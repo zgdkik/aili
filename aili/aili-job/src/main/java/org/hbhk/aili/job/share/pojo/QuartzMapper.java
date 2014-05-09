@@ -8,16 +8,16 @@ import java.util.List;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.ResultSetExtractor;
 
-public class QuartzMapper implements ResultSetExtractor<List<QuartzEntity>> {
+public class QuartzMapper implements ResultSetExtractor<List<QuartzInfo>> {
 
 	@Override
-	public List<QuartzEntity> extractData(ResultSet rs) throws SQLException,
+	public List<QuartzInfo> extractData(ResultSet rs) throws SQLException,
 			DataAccessException {
 
-		QuartzEntity q = null;
-		List<QuartzEntity> qs = new ArrayList<QuartzEntity>();
+		QuartzInfo q = null;
+		List<QuartzInfo> qs = new ArrayList<QuartzInfo>();
 		while (rs.next()) {
-			q = new QuartzEntity();
+			q = new QuartzInfo();
 			String jobName = rs.getString("JOB_NAME");
 			q.setJobNname(jobName);
 			String trggerName = rs.getString("TRIGGER_NAME");

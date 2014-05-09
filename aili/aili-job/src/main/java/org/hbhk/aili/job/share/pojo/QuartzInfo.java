@@ -1,7 +1,7 @@
 package org.hbhk.aili.job.share.pojo;
 
 
-public class QuartzEntity {
+public class QuartzInfo {
 
 	private String jobNname;
 	private String trggerName;

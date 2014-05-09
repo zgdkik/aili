@@ -7,7 +7,7 @@ import java.util.Map;
 
 import org.apache.commons.lang.time.DateFormatUtils;
 import org.apache.log4j.Logger;
-import org.hbhk.aili.job.share.pojo.QuartzEntity;
+import org.hbhk.aili.job.share.pojo.QuartzInfo;
 import org.quartz.CronScheduleBuilder;
 import org.quartz.CronTrigger;
 import org.quartz.Job;
@@ -37,7 +37,7 @@ public class QuartzService {
 	 * 
 	 * @return
 	 */
-	public List<QuartzEntity> getQuartzJobList() {
+	public List<QuartzInfo> getQuartzJobList() {
 		return quartzDao.selectAllQuartJob();
 	}
 
