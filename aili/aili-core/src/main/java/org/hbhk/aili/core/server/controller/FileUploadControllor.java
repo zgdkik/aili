@@ -5,6 +5,7 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
@@ -66,9 +68,8 @@ public class FileUploadControllor {
 	}
 
 	@RequestMapping("/download")
-	public ModelAndView download( String fileName,
-			HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
+	public ModelAndView download(String fileName, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
 		response.setContentType("text/html;charset=utf-8");
 		request.setCharacterEncoding("UTF-8");
 		java.io.BufferedInputStream bis = null;
@@ -76,13 +77,14 @@ public class FileUploadControllor {
 		String ctxPath = request.getSession().getServletContext()
 				.getRealPath("/")
 				+ "\\" + "images\\";
-		fileName = new String(fileName.getBytes("UTF-8"),"UTF-8");
+		fileName = new String(fileName.getBytes("UTF-8"), "UTF-8");
 		String downLoadPath = ctxPath + fileName;
 		System.out.println(downLoadPath);
 		try {
 			long fileLength = new File(downLoadPath).length();
 			response.setContentType("application/x-msdownload;");
-			response.setHeader("Content-disposition", "attachment; filename="+ fileName);
+			response.setHeader("Content-disposition", "attachment; filename="
+					+ fileName);
 			response.setHeader("Content-Length", String.valueOf(fileLength));
 			bis = new BufferedInputStream(new FileInputStream(downLoadPath));
 			bos = new BufferedOutputStream(response.getOutputStream());
@@ -100,6 +102,18 @@ public class FileUploadControllor {
 				bos.close();
 		}
 		return null;
+	}
+
+	@RequestMapping(value = "/form", method = RequestMethod.POST)
+	public String handleFormUpload(@RequestParam("name") String name,
+			@RequestParam("file") MultipartFile file) throws IOException {
+		if (!file.isEmpty()) {
+			byte[] bytes = file.getBytes();
+			// store the bytes somewhere
+			return "redirect:uploadSuccess";
+		} else {
+			return "redirect:uploadFailure";
+		}
 	}
 
 }
