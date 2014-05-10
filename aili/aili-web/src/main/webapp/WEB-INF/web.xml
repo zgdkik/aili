@@ -40,6 +40,7 @@
 		<url-pattern>*.ctrl</url-pattern>
 	</filter-mapping>
 	<!-- 权限拦截器 -->
+	<!-- 	
 	<filter>
 		<filter-name>securityInterceptor</filter-name>
 		<filter-class>org.hbhk.aili.security.server.security.SecurityInterceptor</filter-class>
@@ -48,6 +49,7 @@
 		<filter-name>securityInterceptor</filter-name>
 		<url-pattern>*.ctrl</url-pattern>
 	</filter-mapping>
+	 -->
 
 	<filter>
 		<filter-name>characterEncoding</filter-name>
