@@ -2,6 +2,7 @@ package org.hbhk.aili.security.server.controller;
 
 import javax.annotation.Resource;
 
+import org.hbhk.aili.core.server.annotation.SecurityFilter;
 import org.hbhk.aili.security.server.service.IUserService;
 import org.hbhk.aili.security.share.define.SecurityConstant;
 import org.springframework.stereotype.Controller;
@@ -15,12 +16,14 @@ public class UserController {
 	private IUserService userService;
 	
 	@RequestMapping("/login")
+	@SecurityFilter(false)
 	public String login(String username , String password){
 		userService.login(username, password);
 		return "redirect:"+SecurityConstant.moduleName+"/main.ctrl";
 	}
 	
 	@RequestMapping("/main")
+	@SecurityFilter(false)
 	public String main(){
 		return "main";
 	}

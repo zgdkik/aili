@@ -8,6 +8,7 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.hbhk.aili.core.server.annotation.SecurityFilter;
 import org.hbhk.aili.security.share.define.SecurityConstant;
 import org.hbhk.aili.security.share.define.UserConstants;
 import org.springframework.stereotype.Controller;
@@ -28,6 +29,7 @@ public class ValidateCodeCreateController {
 	}
 
 	@RequestMapping("/validateCode")
+	@SecurityFilter(false)
 	public ModelAndView handleRequest(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 
