@@ -33,6 +33,7 @@
 		<java-encoding>UTF-8</java-encoding>
 		<cxf.version>2.7.0</cxf.version>
 		<wro4j-minimize>false</wro4j-minimize>
+		<memcached-version>3.4.0</memcached-version>
 	</properties>
 	<dependencyManagement>
 		<dependencies>
@@ -438,12 +439,26 @@
 				<artifactId>spring-data-mongodb</artifactId>
 				<version>1.2.1.RELEASE</version>
 			</dependency>
-				<!-- jetbrick -->
+			<!-- jetbrick -->
 			<dependency>
 				<groupId>com.github.subchen</groupId>
 				<artifactId>jetbrick-template</artifactId>
 				<version>1.2.2</version>
 			</dependency>
+			<!-- 这是针对xmemcached 客户端 -->
+			<dependency>
+				<groupId>com.google.code.simple-spring-memcached</groupId>
+				<artifactId>xmemcached-provider</artifactId>
+				<version>${memcached-version}</version>
+			</dependency>
+			<!-- 这是针对spymemcached客户端 -->
+			<dependency>
+				<groupId>com.google.code.simple-spring-memcached</groupId>
+				<artifactId>spymemcached-provider</artifactId>
+				<version>${memcached-version}</version>
+			</dependency>
+
+
 		</dependencies>
 	</dependencyManagement>
 
