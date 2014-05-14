@@ -9,7 +9,7 @@ import java.lang.annotation.Target;
 @Target(ElementType.METHOD)
 public @interface ReadCache {
 
-	String namespace() default "[unassigned]";
+	String namespace() default "";
 
 	int expire() default 0;
 }
