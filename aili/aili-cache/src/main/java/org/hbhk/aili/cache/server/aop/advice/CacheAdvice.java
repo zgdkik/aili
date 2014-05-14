@@ -22,8 +22,10 @@ import org.springframework.stereotype.Component;
 public class CacheAdvice {
 	ICacheTemplet<String, Object> cacheTemplet = new MemoryCacheTemplet<Object>();
 
+	private final String pointcut ="execution(* org.hbhk.*.*.server.dao.impl.*.*(..))";
+	
 	// 定义切面
-	@Pointcut("execution(* org.hbhk.*.*.server.dao.impl.*.*(..))")
+	@Pointcut(pointcut)
 	public void cachedPointcut() {
 	}
 
@@ -85,6 +87,14 @@ public class CacheAdvice {
 		}
 		return sb.toString();
 
+	}
+
+	public ICacheTemplet<String, Object> getCacheTemplet() {
+		return cacheTemplet;
+	}
+
+	public void setCacheTemplet(ICacheTemplet<String, Object> cacheTemplet) {
+		this.cacheTemplet = cacheTemplet;
 	}
 
 }
