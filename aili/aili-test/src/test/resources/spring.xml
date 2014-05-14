@@ -18,9 +18,4 @@
 	<bean id="personServiceBean" class="org.hbhk.aili.test.server.aop.PersonServiceBean" />
 	<bean id="myInterceptor" class="org.hbhk.aili.test.server.aop.MyInterceptor" />
 
-	<bean id="calculatorService" init-method="invoke">
-		<constructor-arg index="0"
-			value="http://localhost:7009/cxf-spring-test/calculatorService?wsdl" />
-	</bean>
-
 </beans>  
