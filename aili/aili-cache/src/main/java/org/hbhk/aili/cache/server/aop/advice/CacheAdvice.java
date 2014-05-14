@@ -22,8 +22,8 @@ import org.springframework.stereotype.Component;
 public class CacheAdvice {
 	ICacheTemplet<String, Object> cacheTemplet = new MemoryCacheTemplet<Object>();
 
-	private final String pointcut ="execution(* org.hbhk.*.*.server.dao.impl.*.*(..))";
-	
+	private final String pointcut = "execution(* org.hbhk.*.*.server.dao.impl.*.*(..))";
+
 	// 定义切面
 	@Pointcut(pointcut)
 	public void cachedPointcut() {
@@ -66,7 +66,7 @@ public class CacheAdvice {
 						String prefix = flush.namespace();
 						String key = getKey(call.getArgs());
 						// 删除缓存
-						cacheTemplet.invalid(prefix + key);
+						cacheTemplet.invalid(prefix + "_" + key);
 
 					}
 				}
