@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.hbhk.aili.cache.server.aop.annotation.ParameterKeyProvider;
+import org.hbhk.aili.cache.server.aop.annotation.ReadCache;
 import org.hbhk.aili.core.server.data.AiliSqlSessionDaoSupport;
 import org.hbhk.aili.security.server.dao.IUserDao;
 import org.hbhk.aili.security.share.pojo.UserInfo;
@@ -16,7 +18,8 @@ public class UserDao extends AiliSqlSessionDaoSupport implements IUserDao {
 	private final String NAMESPACE = "aili.user.";
 
 	@Override
-	public UserInfo getMe(String username) {
+	@ReadCache
+	public UserInfo getMe(@ParameterKeyProvider(order=1) String username) {
 		Map<String, Object> parameter = new HashMap<String, Object>();
 		parameter.put("username", username);
 		List<UserInfo> userInfos = getSqlSession().selectList(

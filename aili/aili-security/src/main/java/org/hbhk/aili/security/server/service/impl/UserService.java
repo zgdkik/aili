@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 
 import org.hbhk.aili.cache.server.CacheManager;
 import org.hbhk.aili.cache.server.ICache;
+import org.hbhk.aili.cache.server.aop.annotation.ParameterKeyProvider;
 import org.hbhk.aili.core.server.context.RequestContext;
 import org.hbhk.aili.security.server.cache.LoginLimitCache;
 import org.hbhk.aili.security.server.cache.UserResourceCache;
@@ -29,11 +30,12 @@ public class UserService implements IUserService {
 
 	@Override
 	public UserInfo getMe(String username) {
-		return null;
+		return userDao.getMe(usernames);
 	}
 
 	@Override
 	public boolean login(String username, String password) {
+		getMe(username);
 		UserInfo userInfo = userDao.login(username, password);
 		if (userInfo != null) {
 			UserContext.setCurrentUser(userInfo);
