@@ -30,7 +30,7 @@ public class UserService implements IUserService {
 
 	@Override
 	public UserInfo getMe(String username) {
-		return userDao.getMe(usernames);
+		return userDao.getMe(username);
 	}
 
 	@Override
