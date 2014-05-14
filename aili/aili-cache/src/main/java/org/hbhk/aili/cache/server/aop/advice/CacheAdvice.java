@@ -42,9 +42,8 @@ public class CacheAdvice {
 				if (m.isAnnotationPresent(ReadCache.class)) {
 					ReadCache cache = m.getAnnotation(ReadCache.class);
 					if (cache != null) {
-						String tempKey = this.getKey(call.getArgs());
 						String prefix = cache.namespace();
-						String key = prefix + "_" + tempKey;
+						String key = (prefix + "_" + getKey(call.getArgs())).trim();
 						result = cacheTemplet.get(key);
 						if (null == result) {
 							try {
@@ -64,9 +63,9 @@ public class CacheAdvice {
 					InvaliCache flush = method.getAnnotation(InvaliCache.class);
 					if (flush != null) {
 						String prefix = flush.namespace();
-						String key = getKey(call.getArgs());
+						String key = (prefix + "_" + getKey(call.getArgs())).trim();
 						// 删除缓存
-						cacheTemplet.invalid(prefix + "_" + key);
+						cacheTemplet.invalid(key);
 
 					}
 				}
@@ -81,8 +80,12 @@ public class CacheAdvice {
 	private String getKey(Object[] args) {
 		StringBuffer sb = new StringBuffer();
 		if (args != null && args.length > 0) {
-			for (Object arg : args) {
-				sb.append(arg);
+			for (int i = 0; i < args.length; i++) {
+				if (i == args.length - 1) {
+					sb.append(args[i].toString());
+					continue;
+				}
+				sb.append(args[i].toString() + "_");
 			}
 		}
 		return sb.toString();
