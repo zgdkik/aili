@@ -30,7 +30,7 @@
      rcode varchar(255)
    );
  
-   --资源表resources
+   -- 资源表resources
    CREATE TABLE t_aili_resource (
      id varchar(255) PRIMARY KEY ,
      -- 权限所对应的url地址
