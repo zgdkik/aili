@@ -11,7 +11,7 @@ import org.aspectj.lang.annotation.Pointcut;
   
 @Aspect  
 public class MyInterceptor {  
-    @Pointcut("execution(* org.hbhk.aili.test.server.*.*(..))")  
+    @Pointcut("execution(* org.hbhk.aili.test.server.aop.*.*(..))")  
     private void anyMethod(){}//定义一个切入点  
       
     @Before("anyMethod() && args(name)")  
