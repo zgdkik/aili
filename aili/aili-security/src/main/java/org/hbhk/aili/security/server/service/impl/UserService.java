@@ -6,7 +6,6 @@ import javax.annotation.Resource;
 
 import org.hbhk.aili.cache.server.CacheManager;
 import org.hbhk.aili.cache.server.ICache;
-import org.hbhk.aili.cache.server.aop.annotation.ParameterKeyProvider;
 import org.hbhk.aili.core.server.context.RequestContext;
 import org.hbhk.aili.security.server.cache.LoginLimitCache;
 import org.hbhk.aili.security.server.cache.UserResourceCache;
