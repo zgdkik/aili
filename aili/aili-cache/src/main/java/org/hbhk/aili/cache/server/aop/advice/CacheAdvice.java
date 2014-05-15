@@ -83,8 +83,7 @@ public class CacheAdvice {
 	private String getKey(Method method, Object[] args) {
 		Annotation[][] ans = method.getParameterAnnotations();
 		int index = -1;
-		int length = ans.length;
-		for (int i = 0; i < length; i++) {
+		for (int i = 0; i < ans.length; i++) {
 			int flag = getAnnotation(CacheKey.class, ans[i]);
 			++index;
 			if (flag == 1) {
@@ -92,6 +91,9 @@ public class CacheAdvice {
 			}
 		}
 		if (args != null && args.length >= index && index > -1) {
+			if (args[index] == null) {
+				return null;
+			}
 			return args[index].toString();
 		}
 		return null;
