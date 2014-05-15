@@ -17,6 +17,9 @@
 			http://www.springframework.org/schema/aop/spring-aop.xsd">
 
 	<aop:aspectj-autoproxy />
+	<bean class="org.hbhk.aili.cache.server.aop.advice.CacheAdvice">
+		<property name="cacheTemplet" ref="memoryCacheTemplet"/>
+	</bean>
 	<context:property-placeholder location="classpath:config.properties" />
 	<!-- 数据源 jndi方式 -->
 	<bean id="dataSourceSpied" class="org.springframework.jndi.JndiObjectFactoryBean">
