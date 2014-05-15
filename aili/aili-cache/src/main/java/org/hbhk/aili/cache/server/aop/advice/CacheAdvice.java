@@ -1,5 +1,6 @@
 package org.hbhk.aili.cache.server.aop.advice;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -8,6 +9,7 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.hbhk.aili.cache.server.aop.annotation.CacheKey;
 import org.hbhk.aili.cache.server.aop.annotation.InvaliCache;
 import org.hbhk.aili.cache.server.aop.annotation.ReadCache;
 import org.hbhk.aili.cache.server.templet.ICacheTemplet;
@@ -43,7 +45,7 @@ public class CacheAdvice {
 					ReadCache cache = m.getAnnotation(ReadCache.class);
 					if (cache != null) {
 						String prefix = cache.namespace();
-						String key = (prefix + "_" + getKey(call.getArgs()))
+						String key = (prefix + "_" + getKey(m, call.getArgs()))
 								.trim();
 						result = cacheTemplet.get(key);
 						if (null == result) {
@@ -64,11 +66,10 @@ public class CacheAdvice {
 					InvaliCache flush = method.getAnnotation(InvaliCache.class);
 					if (flush != null) {
 						String prefix = flush.namespace();
-						String key = (prefix + "_" + getKey(call.getArgs()))
+						String key = (prefix + "_" + getKey(m, call.getArgs()))
 								.trim();
 						// 删除缓存
 						cacheTemplet.invalid(key);
-
 					}
 				}
 			}
@@ -79,23 +80,32 @@ public class CacheAdvice {
 	/**
 	 * 组装 key 值
 	 */
-	private String getKey(Object[] args) {
-		StringBuilder sb = new StringBuilder();
-		if (args != null && args.length > 0) {
-			for (int i = 0; i < args.length; i++) {
-				Object param = args[i];
-				if (param == null) {
-					continue;
-				}
-				if (i == args.length - 1) {
-					sb.append(param.toString());
-					continue;
-				}
-				sb.append(param.toString() + "_");
+	private String getKey(Method method, Object[] args) {
+		Annotation[][] ans = method.getParameterAnnotations();
+		int index = -1;
+		int length = ans.length;
+		for (int i = 0; i < length; i++) {
+			int flag = getAnnotation(CacheKey.class, ans[i]);
+			++index;
+			if (flag == 1) {
+				break;
 			}
 		}
-		return sb.toString();
+		if (args != null && args.length >= index && index > -1) {
+			return args[index].toString();
+		}
+		return null;
+	}
 
+	public int getAnnotation(Class<?> annotationClass, Annotation[] annotations) {
+		if (annotations != null && annotations.length > 0) {
+			for (final Annotation annotation : annotations) {
+				if (annotationClass.equals(annotation.annotationType())) {
+					return 1;
+				}
+			}
+		}
+		return -1;
 	}
 
 	public ICacheTemplet<String, Object> getCacheTemplet() {

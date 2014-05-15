@@ -7,12 +7,7 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.PARAMETER)
-public @interface ParameterKeyProvider {
+public @interface CacheKey {
 
-	   /**
-     * If more than one parameter in method declaration is annotated then this parameter tells about the order of params
-     * in cache key.
-     * @return order of the parameter in generated cache key
-     */
     int order() default 0;
 }
