@@ -7,7 +7,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations="classpath:applicationContext-jdbc-base.xml")
+@ContextConfiguration(locations="classpath:memcached-spring.xml")
 public class MemcachedTest extends AbstractJUnit4SpringContextTests {
 	
 	@Autowired
@@ -15,12 +15,14 @@ public class MemcachedTest extends AbstractJUnit4SpringContextTests {
 	
 	@Test
 	public void save(){
-	
+		User user= new User();
+		user.setUserId("1");
+		dao.saveUser(user);
 	}
 	
 	@Test
 	public void get(){
-		
+		dao.getById("1","2");
 	}
 	
 	@Test
@@ -31,6 +33,14 @@ public class MemcachedTest extends AbstractJUnit4SpringContextTests {
 	@Test
 	public void delete(){
 		
+	}
+
+	public UserDao getDao() {
+		return dao;
+	}
+
+	public void setDao(UserDao dao) {
+		this.dao = dao;
 	}
 
 }
