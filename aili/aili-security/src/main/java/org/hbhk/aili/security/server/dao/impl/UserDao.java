@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.hbhk.aili.cache.server.aop.annotation.CacheKey;
 import org.hbhk.aili.cache.server.aop.annotation.ReadCache;
 import org.hbhk.aili.core.server.data.AiliSqlSessionDaoSupport;
 import org.hbhk.aili.security.server.dao.IUserDao;
@@ -18,7 +19,7 @@ public class UserDao extends AiliSqlSessionDaoSupport implements IUserDao {
 
 	@Override
 	@ReadCache(namespace="user",expire=60)
-	public UserInfo getMe(String username) {
+	public UserInfo getMe(@CacheKey String username) {
 		Map<String, Object> parameter = new HashMap<String, Object>();
 		parameter.put("username", username);
 		List<UserInfo> userInfos = getSqlSession().selectList(
@@ -30,7 +31,8 @@ public class UserDao extends AiliSqlSessionDaoSupport implements IUserDao {
 	}
 
 	@Override
-	public UserInfo login(String username, String password) {
+	@ReadCache(namespace="userInfo",expire=60)
+	public UserInfo login(String username, @CacheKey String password) {
 		Map<String, Object> parameter = new HashMap<String, Object>();
 		parameter.put("username", username);
 		parameter.put("password", password);
