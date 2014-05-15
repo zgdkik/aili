@@ -13,16 +13,13 @@ import org.hbhk.aili.cache.server.aop.annotation.CacheKey;
 import org.hbhk.aili.cache.server.aop.annotation.InvaliCache;
 import org.hbhk.aili.cache.server.aop.annotation.ReadCache;
 import org.hbhk.aili.cache.server.templet.ICacheTemplet;
-import org.hbhk.aili.cache.server.templet.impl.MemoryCacheTemplet;
-import org.springframework.stereotype.Component;
 
 /**
  * 拦截缓存
  */
-@Component
 @Aspect
 public class CacheAdvice {
-	ICacheTemplet<String, Object> cacheTemplet = new MemoryCacheTemplet<Object>();
+	ICacheTemplet<String, Object> cacheTemplet;
 
 	private final String pointcut = "execution(* org.hbhk.*.*.server.dao.impl.*.*(..))";
 
