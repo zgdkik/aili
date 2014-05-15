@@ -10,7 +10,6 @@
            http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 
   <import resource="simplesm-context.xml" />
-<context:property-placeholder location="classpath:memcached.properties" ignore-unresolvable="true"/> 
   <aop:aspectj-autoproxy />  
 
   <bean name="defaultMemcachedClient" class="com.google.code.ssm.CacheFactory">
@@ -20,7 +19,7 @@
     <property name="addressProvider">
       <bean class="com.google.code.ssm.config.DefaultAddressProvider">
       <!-- memcached 服务器地址，可配置多个，用“，”号隔开 -->
-        <property name="address" value="${memcached.address}" />
+        <property name="address" value="127.0.0.1:11211" />
       </bean>
     </property>
     <property name="configuration">
@@ -32,4 +31,5 @@
     <!-- 该Memcached配置的Cache名称 一个应用中存在多个Memcached时，各个配置的cacheName必须不同。如果该值未设，系统默认为default 
     <property name="cacheName" value="mailbill"/>-->
   </bean>
+  <context:component-scan base-package="org.hbhk.aili.cache.mem"/>
 </beans>
