@@ -2,6 +2,8 @@ package org.hbhk.aili.cache.server.aop.advice;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
@@ -22,6 +24,8 @@ public class CacheAdvice {
 	ICacheTemplet<String, Object> cacheTemplet;
 
 	private final String pointcut = "execution(* org.hbhk.*.*.server.dao.impl.*.*(..))";
+
+	private static Map<String, Integer> paramIndexs = new ConcurrentHashMap<String, Integer>();
 
 	// 定义切面
 	@Pointcut(pointcut)
@@ -78,21 +82,29 @@ public class CacheAdvice {
 	 * 组装 key 值
 	 */
 	private String getKey(Method method, Object[] args) {
-		Annotation[][] ans = method.getParameterAnnotations();
+		String methodName = method.toString();
 		int index = -1;
-		for (int i = 0; i < ans.length; i++) {
-			int flag = getAnnotation(CacheKey.class, ans[i]);
-			++index;
-			if (flag == 1) {
-				break;
+		if (paramIndexs.containsKey(methodName)) {
+			index = paramIndexs.get(methodName);
+		} else {
+			Annotation[][] ans = method.getParameterAnnotations();
+
+			for (int i = 0; i < ans.length; i++) {
+				int flag = getAnnotation(CacheKey.class, ans[i]);
+				++index;
+				if (flag == 1) {
+					break;
+				}
+			}
+			if (args != null && args.length >= index && index > -1) {
+				if (args[index] == null) {
+					return null;
+				}
+				paramIndexs.put(methodName, index);
+				return args[index].toString();
 			}
 		}
-		if (args != null && args.length >= index && index > -1) {
-			if (args[index] == null) {
-				return null;
-			}
-			return args[index].toString();
-		}
+
 		return null;
 	}
 
