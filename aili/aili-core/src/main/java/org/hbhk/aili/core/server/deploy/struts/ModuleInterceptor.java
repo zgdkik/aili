@@ -16,9 +16,6 @@ import com.opensymphony.xwork2.interceptor.AbstractInterceptor;
 
 /**
  * JSP页面定位拦截器
- *
- * @author 梁飞
- *
  */
 public class ModuleInterceptor extends AbstractInterceptor {
 
