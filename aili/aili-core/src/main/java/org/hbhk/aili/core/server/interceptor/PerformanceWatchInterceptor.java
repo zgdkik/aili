@@ -37,7 +37,7 @@ public class PerformanceWatchInterceptor extends HandlerInterceptorAdapter {
 			queryString = queryString == null ? "" : "?" + queryString;
 			log.info("access url path:" + currentPath + queryString + " |time:"
 					+ stopWatch.getTotalTimeMillis());
-			stopWatchLocal.set(null);
+			stopWatchLocal.remove();
 		}
 	}
 
