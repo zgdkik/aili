@@ -9,7 +9,7 @@ import org.springframework.util.StopWatch;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 public class PerformanceWatchInterceptor extends HandlerInterceptorAdapter {
-	private  Log   log =LogFactory.getLog(getClass());
+	private Log log = LogFactory.getLog(getClass());
 	ThreadLocal<StopWatch> stopWatchLocal = new ThreadLocal<StopWatch>();
 	private boolean usePerformance = true;
 
@@ -40,6 +40,5 @@ public class PerformanceWatchInterceptor extends HandlerInterceptorAdapter {
 			stopWatchLocal.remove();
 		}
 	}
-
 
 }
