@@ -5,13 +5,13 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.collections.CollectionUtils;
-import org.hbhk.aili.core.server.data.AiliSqlSessionDaoSupport;
+import org.hbhk.aili.core.server.data.AiliDaoSupport;
 import org.hbhk.aili.security.server.dao.IRoleDao;
 import org.hbhk.aili.security.share.pojo.RoleInfo;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class RoleDao extends AiliSqlSessionDaoSupport implements IRoleDao {
+public class RoleDao extends AiliDaoSupport implements IRoleDao {
 	private final String NAMESPACE = "aili.role.";
 
 	@Override
