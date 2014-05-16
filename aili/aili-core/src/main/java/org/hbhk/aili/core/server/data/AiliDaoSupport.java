@@ -1,13 +1,12 @@
 package org.hbhk.aili.core.server.data;
 
-import javax.annotation.Resource;
-
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
+import org.springframework.beans.factory.annotation.Autowired;
 public class AiliDaoSupport extends SqlSessionDaoSupport {
 	
 	@Override
-	@Resource
+	@Autowired(required=false)
 	public void setSqlSessionFactory(SqlSessionFactory sqlSessionFactory) {
 		super.setSqlSessionFactory(sqlSessionFactory);
 	}
