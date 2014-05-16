@@ -4,7 +4,7 @@ import javax.annotation.Resource;
 
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
-public class AiliSqlSessionDaoSupport extends SqlSessionDaoSupport {
+public class AiliDaoSupport extends SqlSessionDaoSupport {
 	
 	@Override
 	@Resource
