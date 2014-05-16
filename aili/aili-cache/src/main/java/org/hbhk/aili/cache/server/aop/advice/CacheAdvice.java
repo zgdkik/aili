@@ -86,6 +86,10 @@ public class CacheAdvice {
 		int index = -1;
 		if (paramIndexs.containsKey(methodName)) {
 			index = paramIndexs.get(methodName);
+			if (args[index] == null) {
+				return null;
+			}
+			return args[index].toString(); 
 		} else {
 			Annotation[][] ans = method.getParameterAnnotations();
 
