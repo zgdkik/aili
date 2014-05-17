@@ -73,6 +73,7 @@ public class ModuleConfigProvider implements ConfigurationProvider {
 	/**
 	 * 初始化provider
 	 */
+	@Override
 	public void init(Configuration config) throws ConfigurationException {
 		for (ConfigurationProvider provider : providers) {
 			provider.init(config);
@@ -82,6 +83,7 @@ public class ModuleConfigProvider implements ConfigurationProvider {
 	/**
 	 * 销毁所有provider
 	 */
+	@Override
 	public void destroy() {
 		for (ConfigurationProvider provider : providers) {
 			provider.destroy();
@@ -91,12 +93,13 @@ public class ModuleConfigProvider implements ConfigurationProvider {
 	/**
 	 * 加载package
 	 */
+	@Override
 	public void loadPackages() throws ConfigurationException {
 		for (ConfigurationProvider provider : providers) {
 			provider.loadPackages();
 		}
 	}
-
+	@Override
 	public boolean needsReload() {
 		for (ConfigurationProvider provider : providers) {
 			if (provider.needsReload()) {
@@ -109,6 +112,7 @@ public class ModuleConfigProvider implements ConfigurationProvider {
 	/**
 	 * 绑定ContainerBuilder
 	 */
+	@Override
 	public void register(ContainerBuilder builder,
 			LocatableProperties properties) throws ConfigurationException {
 		for (ConfigurationProvider provider : providers) {
