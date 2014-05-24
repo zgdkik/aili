@@ -10,6 +10,7 @@
 		<module>hbhk-ioc</module>
 		<module>hbhk-core</module>
 		<module>hbhk-mvc</module>
+		<module>hbhk-web</module>
 	</modules>
 	<properties>
 		<hbhk-version>1.0.0-SNAPSHOT</hbhk-version>
