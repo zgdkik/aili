@@ -35,44 +35,37 @@ public class CacheAdvice {
 	@Around("cachedPointcut()")
 	public Object doAround(ProceedingJoinPoint call) {
 		Object result = null;
-		Method[] methods = call.getTarget().getClass().getDeclaredMethods();
 		Signature signature = call.getSignature();
 		MethodSignature methodSignature = (MethodSignature) signature;
 		Method method = methodSignature.getMethod();
-		for (Method m : methods) {
-			// 循环方法，找匹配的方法进行执
-			if (m.getName().equals(method.getName())) {
-				if (m.isAnnotationPresent(ReadCache.class)) {
-					ReadCache cache = m.getAnnotation(ReadCache.class);
-					if (cache != null) {
-						String prefix = cache.namespace();
-						String key = (prefix + "_" + getKey(m, call.getArgs()))
-								.trim();
-						result = cacheTemplet.get(key);
-						if (null == result) {
-							try {
-								result = call.proceed();
-								int expire = cache.expire();
-								if (expire > 0) {
-									cacheTemplet.set(key, result, expire);
-								} else {
-									cacheTemplet.set(key, result);
-								}
-							} catch (Throwable e) {
-								throw new RuntimeException(e);
-							}
+		if (method.isAnnotationPresent(ReadCache.class)) {
+			ReadCache cache = method.getAnnotation(ReadCache.class);
+			if (cache != null) {
+				String prefix = cache.namespace();
+				String key = (prefix + "_" + getKey(method, call.getArgs()))
+						.trim();
+				result = cacheTemplet.get(key);
+				if (null == result) {
+					try {
+						result = call.proceed();
+						int expire = cache.expire();
+						if (expire > 0) {
+							cacheTemplet.set(key, result, expire);
+						} else {
+							cacheTemplet.set(key, result);
 						}
-					}
-				} else if (method.isAnnotationPresent(InvaliCache.class)) {
-					InvaliCache flush = method.getAnnotation(InvaliCache.class);
-					if (flush != null) {
-						String prefix = flush.namespace();
-						String key = (prefix + "_" + getKey(m, call.getArgs()))
-								.trim();
-						// 删除缓存
-						cacheTemplet.invalid(key);
+					} catch (Throwable e) {
+						throw new RuntimeException(e);
 					}
 				}
+			}
+		} else if (method.isAnnotationPresent(InvaliCache.class)) {
+			InvaliCache flush = method.getAnnotation(InvaliCache.class);
+			if (flush != null) {
+				String prefix = flush.namespace();
+				String key = (prefix + "_" + getKey(method, call.getArgs())).trim();
+				// 删除缓存
+				cacheTemplet.invalid(key);
 			}
 		}
 		return result;
@@ -89,7 +82,7 @@ public class CacheAdvice {
 			if (args[index] == null) {
 				return null;
 			}
-			return args[index].toString(); 
+			return args[index].toString();
 		} else {
 			Annotation[][] ans = method.getParameterAnnotations();
 
