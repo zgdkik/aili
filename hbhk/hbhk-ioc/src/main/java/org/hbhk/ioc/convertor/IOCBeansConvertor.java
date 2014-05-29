@@ -6,6 +6,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Resource;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
@@ -21,6 +22,7 @@ import org.hbhk.ioc.domain.Beans;
 import org.hbhk.ioc.domain.Property;
 import org.hbhk.ioc.util.JAXBContextUtil;
 
+@Resource(name="bean")
 public class IOCBeansConvertor {
 
 	/** The Constant CLZZ. */
