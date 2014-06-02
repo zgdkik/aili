@@ -13,6 +13,11 @@
 		<aili-version>1.0.0-SNAPSHOT</aili-version>
 	</properties>
 	<dependencies>
+		<dependency>
+			<artifactId>hbhk-mvc</artifactId>
+			<groupId>org.hbhk.mvc</groupId>
+			<version>1.0.0-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -35,7 +40,7 @@
 				<groupId>org.apache.tomcat.maven</groupId>
 				<artifactId>tomcat6-maven-plugin</artifactId>
 				<configuration>
-					<path>/aili</path>
+					<path>/hbhk</path>
 					<port>8080</port>
 					<warSourceDirectory>${project.build.directory}/webapp</warSourceDirectory>
 				</configuration>
