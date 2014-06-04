@@ -16,6 +16,11 @@ public class LoginController {
 		return "loginpage";
 	}
 
+	@SecurityFilter(false)
+	@RequestMapping("/home")
+	private String home() {
+		return "home";
+	}
 	@RequestMapping("/logout")
 	@SecurityFilter(false)
 	private String logout() {
