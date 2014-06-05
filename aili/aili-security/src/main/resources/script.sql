@@ -33,15 +33,25 @@
    -- 资源表resources
    CREATE TABLE t_aili_resource (
      id varchar(255) PRIMARY KEY ,
+      -- 权限所对应的编码
+     code varchar(255) ,
      -- 权限所对应的url地址
      url varchar(255),
      -- 优先权
-     priority int(11),
-     -- 类型
+     priority int(2),
+      -- 上级菜单
+     parent_code varchar(255) ,
+     -- 是否有 子节点
+     hasChildren  active char(1),
+     -- css 样式
+     classes  varchar(100) ,
+     -- 是否展开
+     expanded  char(1),
+     --是否启用 YN
+     active char(1),
+     -- 类型  
      type varchar(255) ,
-     -- 权限所对应的编码，例201代表发表文章
-     code varchar(255) ,
-     name varchar(255) ,
+     text varchar(255) ,
       -- 备注
      memo varchar(255)
      
@@ -74,3 +84,21 @@ VALUES ('3','re003','删除','user/del','用户');
 insert into t_aili_role_resource(id,rocode,recode)  VALUES ('1','r001','re001');
 insert into t_aili_role_resource(id,rocode,recode)  VALUES ('2','r001','re002');
 insert into t_aili_role_resource(id,rocode,recode)  VALUES ('3','r001','re003');
+
+   -- 资源表resources
+   CREATE TABLE t_aili_menu (
+     id varchar(255) PRIMARY KEY ,
+     -- 菜单所对应的url地址
+     url varchar(255),
+     -- 菜单名称
+     name varchar(255),
+     --是否启用 YN
+     active char(1),
+     -- 显示顺序
+     sort int(2),
+     -- 上级菜单
+     parent  int(11)
+      -- 备注
+     memo varchar(255)
+     
+   );

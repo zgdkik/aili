@@ -19,7 +19,7 @@
 			ofType="org.hbhk.aili.security.share.pojo.ResourceInfo">
 			<result property="id" column="reid" />
 			<result property="code" column="recode" />
-			<result property="name" column="resname" />
+			<result property="text" column="resname" />
 			<result property="url" column="url" />
 			<result property="priority" column="priority" />
 			<result property="type" column="type" />
