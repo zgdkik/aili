@@ -44,11 +44,11 @@ public class ModuleInterceptor extends HandlerInterceptorAdapter {
 				// + ResourceRoot.resourcePrefix + "scripts" + moduleName);
 				// request.setAttribute("styles", contextPath
 				// + ResourceRoot.resourcePrefix + "styles" + moduleName);
-				request.setAttribute("images", contextPath + "images/"
+				request.setAttribute("images", contextPath + "images"
 						+ moduleName);
-				request.setAttribute("scripts", contextPath + "scripts/"
+				request.setAttribute("scripts", contextPath + "scripts"
 						+ moduleName);
-				request.setAttribute("styles", contextPath + "styles/"
+				request.setAttribute("styles", contextPath + "styles"
 						+ moduleName);
 				moduleName = moduleName.substring(moduleName.indexOf("/") + 1,
 						moduleName.length());
