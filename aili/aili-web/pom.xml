@@ -50,21 +50,20 @@
 			<groupId>javax.servlet</groupId>
 			<artifactId>jsp-api</artifactId>
 		</dependency>
+		<!-- logback s -->
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-core</artifactId>
-			<version>1.1.2</version>
 		</dependency>
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-access</artifactId>
-			<version>1.1.2</version>
 		</dependency>
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
-			<version>1.1.2</version>
 		</dependency>
+		<!-- logback e -->
 	</dependencies>
 
 	<build>
