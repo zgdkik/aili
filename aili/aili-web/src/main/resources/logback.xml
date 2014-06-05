@@ -52,7 +52,7 @@
 		ref="STDOUT" /></logger> <logger name="java.sql.ResultSet" level="DEBUG"><appender-ref 
 		ref="STDOUT" /></logger> -->
 	<root level="DEBUG">
-		<appender-ref ref="ROLLING" />
+		<!-- <appender-ref ref="ROLLING" /> -->
 		<appender-ref ref="STDOUT" />
 	</root>
 </configuration>
