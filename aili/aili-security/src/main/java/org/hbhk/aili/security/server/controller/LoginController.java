@@ -19,7 +19,7 @@ public class LoginController {
 	@SecurityFilter(false)
 	@RequestMapping("/home")
 	private String home() {
-		return "home";
+		return "home4";
 	}
 	@RequestMapping("/logout")
 	@SecurityFilter(false)
