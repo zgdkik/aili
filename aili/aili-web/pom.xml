@@ -35,11 +35,11 @@
 			<artifactId>aili-i18n</artifactId>
 			<version>${aili-version}</version>
 		</dependency>
-		<dependency>
+		<!-- <dependency>
 			<groupId>org.hbhk.aili</groupId>
 			<artifactId>aili-test</artifactId>
 			<version>${aili-version}</version>
-		</dependency>
+		</dependency> -->
 		<dependency>
 			<groupId>org.hbhk.aili</groupId>
 			<artifactId>aili-security</artifactId>
