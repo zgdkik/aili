@@ -214,7 +214,7 @@
 			<artifactId>slf4j-log4j12</artifactId>
 		</dependency> -->
 		<!-- logback s -->
-		<dependency>
+		<!-- 	<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-core</artifactId>
 		</dependency>
@@ -225,7 +225,7 @@
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
-		</dependency>
+		</dependency> -->
 		<!-- logback e -->
 		<dependency>
 			<groupId>org.lazyluke</groupId>
