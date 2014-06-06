@@ -9,5 +9,5 @@ public interface IResourceDao {
 	public ResourceInfo getResByCode(String code);
 
 	public List<ResourceInfo> getResByPaCode(String pcode);
-
+ 
 }

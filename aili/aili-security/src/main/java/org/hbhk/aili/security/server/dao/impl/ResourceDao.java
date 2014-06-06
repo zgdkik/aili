@@ -23,7 +23,7 @@ public class ResourceDao extends AiliDaoSupport implements IResourceDao {
 		if (CollectionUtils.isEmpty(resInfos)) {
 			return null;
 		}
-		return resInfos.get(0);
+		return resInfos.get(0); 
 	}
 
 	@Override
