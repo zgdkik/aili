@@ -1,11 +1,13 @@
 package org.hbhk.aili.security.server.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang3.StringUtils;
 import org.hbhk.aili.core.server.annotation.SecurityFilter;
 import org.hbhk.aili.security.server.context.UserContext;
 import org.hbhk.aili.security.server.service.IResourceService;
@@ -18,9 +20,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping(SecurityConstant.moduleName)
 public class LoginController {
-	
+
 	@Resource
-	private  IResourceService resourceService;
+	private IResourceService resourceService;
 
 	@RequestMapping("/loginpage")
 	@SecurityFilter(false)
@@ -57,31 +59,40 @@ public class LoginController {
 	@RequestMapping("/getMenu")
 	@SecurityFilter(false)
 	@ResponseBody
-	public Map<String, List<ResourceInfo>> getMenu(String root) {
+	public List<ResourceInfo> getMenu(String root, String additional) {
 
-//		ResourceInfo menus = new ResourceInfo();
-//		menus.setText("text");
-//		menus.setExpanded(true);
-//		menus.setHasChildren(true);
-//		List<ResourceInfo> mm = new ArrayList<ResourceInfo>();
-//		for (int i = 0; i < 3; i++) {
-//			ResourceInfo m = new ResourceInfo();
-//			for (int j = 0; j < 1 && i == j; j++) {
-//				ResourceInfo mj = new ResourceInfo();
-//				mj.setText("textj");
-//				List<ResourceInfo> mm1 = new ArrayList<ResourceInfo>();
-//				mm1.add(mj);
-//				m.setChildren(mm1);
-//			}
-//			m.setText("text" + i);
-//			mm.add(m);
-//		}
-//		menus.setChildren(mm);
-		List<ResourceInfo> ress = resourceService.getResByPaCode("re001");
+		// ResourceInfo menus = new ResourceInfo();
+		// menus.setText("text");
+		// menus.setExpanded(true);
+		// menus.setHasChildren(true);
+		// List<ResourceInfo> mm = new ArrayList<ResourceInfo>();
+		// for (int i = 0; i < 3; i++) {
+		// ResourceInfo m = new ResourceInfo();
+		// for (int j = 0; j < 1 && i == j; j++) {
+		// ResourceInfo mj = new ResourceInfo();
+		// mj.setText("textj");
+		// List<ResourceInfo> mm1 = new ArrayList<ResourceInfo>();
+		// mm1.add(mj);
+		// m.setChildren(mm1);
+		// }
+		// m.setText("text" + i);
+		// mm.add(m);
+		// }
+		// menus.setChildren(mm);
+		ResourceInfo menus = new ResourceInfo();
+		List<ResourceInfo> ress  = new ArrayList<ResourceInfo>();
+		if (root.equals("re001")) {
+			menus = resourceService.getResByCode(root);
+			List<ResourceInfo> ress1 = resourceService.getResByPaCode(root);
+			menus.setChildren(ress1);
+			ress.add(menus);
+		}else{
+			ress = resourceService.getResByPaCode(root);
+		}
 		Map<String, List<ResourceInfo>> map = new HashMap<String, List<ResourceInfo>>();
-		map.put("root", resourceService.getResByPaCode("re001"));
-		
-		return map;
+		map.put("root", ress);
+
+		return ress;
 	}
 
 }

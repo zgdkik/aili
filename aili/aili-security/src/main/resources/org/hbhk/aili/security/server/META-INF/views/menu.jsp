@@ -43,7 +43,6 @@
 	<ul id="menu">
 	</ul>
 	<button id="refresh">Refresh both Trees</button>
-	</div>
 
 </body>
 </html>

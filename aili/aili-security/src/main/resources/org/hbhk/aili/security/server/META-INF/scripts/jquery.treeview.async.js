@@ -91,7 +91,7 @@ $.fn.treeview = function(settings) {
 	}
 	var container = this;
 	if (!container.children().size())
-		load(settings, "source", this, container);
+		load(settings, "re001", this, container);
 	var userToggle = settings.toggle;
 	return proxied.call(this, $.extend({}, settings, {
 		collapsed: true,

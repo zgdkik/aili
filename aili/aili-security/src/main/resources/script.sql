@@ -82,6 +82,14 @@ VALUES ('2','re002','贵州省','user/add','菜单','re001','Y','menu','N','Y');
 VALUES ('3','re003','四川省','user/add','菜单','re001','N','menu','N','Y');   
 insert into t_aili_resource(id,code,text,url,type,parent_code,hasChildren,classes,expanded,active)  
 VALUES ('4','re004','云南省','user/add','菜单','re001','N','menu','N','Y');
+
+insert into t_aili_resource(id,code,text,url,type,parent_code,hasChildren,classes,expanded,active)  
+VALUES ('5','re005','贵阳市','user/add','菜单','re002','Y','menu','N','Y');
+   insert into t_aili_resource(id,code,text,url,type,parent_code,hasChildren,classes,expanded,active)  
+VALUES ('6','re006','遵义市','user/add','菜单','re002','N','menu','N','Y');   
+insert into t_aili_resource(id,code,text,url,type,parent_code,hasChildren,classes,expanded,active)  
+VALUES ('7','re007','习水县','user/add','菜单','re002','N','menu','N','Y');
+
 insert into t_aili_role_resource(id,rocode,recode)  VALUES ('1','r001','re001');
 insert into t_aili_role_resource(id,rocode,recode)  VALUES ('2','r001','re001');
 insert into t_aili_role_resource(id,rocode,recode)  VALUES ('3','r001','re002');
