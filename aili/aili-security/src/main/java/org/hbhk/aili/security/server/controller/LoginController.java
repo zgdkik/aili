@@ -1,18 +1,23 @@
 package org.hbhk.aili.security.server.controller;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.hbhk.aili.core.server.annotation.SecurityFilter;
+import org.hbhk.aili.security.server.comparator.ResourceComparator;
 import org.hbhk.aili.security.server.context.UserContext;
 import org.hbhk.aili.security.server.service.IResourceService;
 import org.hbhk.aili.security.share.define.SecurityConstant;
 import org.hbhk.aili.security.share.pojo.ResourceInfo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -21,6 +26,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping(SecurityConstant.moduleName)
 public class LoginController {
 
+	private Logger  log = LoggerFactory.getLogger(getClass());
 	@Resource
 	private IResourceService resourceService;
 
@@ -89,8 +95,9 @@ public class LoginController {
 		}else{
 			ress = resourceService.getResByPaCode(root);
 		}
-		Map<String, List<ResourceInfo>> map = new HashMap<String, List<ResourceInfo>>();
-		map.put("root", ress);
+		//排序
+		Collections.sort(ress, new ResourceComparator());
+		log.info("menu");
 
 		return ress;
 	}
