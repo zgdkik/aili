@@ -29,7 +29,6 @@ public class ResourceService implements IResourceService {
 		if(StringUtils.isEmpty(pcode)){
 			return null;
 		}
-		resourceDao.getResByCode(pcode);
 		return resourceDao.getResByPaCode(pcode);
 	}
 
