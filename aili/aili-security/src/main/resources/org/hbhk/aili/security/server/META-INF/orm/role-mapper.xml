@@ -30,7 +30,7 @@
 	<select id="getMe" resultMap="roleReResultMap" parameterType="map">
 		SELECT ro.id roid,ro.enable enable,
 			ro.name roname,ro.code rocode,
-			re.id reid,re.code recode ,re.name resname,
+			re.id reid,re.code recode ,re.text resname,
 			url,priority,type,memo
 			from t_aili_role ro
 			LEFT JOIN t_aili_role_resource rr on ro.code = rr.rocode

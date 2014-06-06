@@ -22,7 +22,7 @@ public class ResourceInfo implements java.io.Serializable {
 
 	private String active;
 
-	private String parent_code;
+	private String parentCode;
 	// 显示 顺序
 	private int priority;
 	// 需要 打开的url
@@ -84,12 +84,14 @@ public class ResourceInfo implements java.io.Serializable {
 		this.active = active;
 	}
 
-	public String getParent_code() {
-		return parent_code;
+	
+
+	public String getParentCode() {
+		return parentCode;
 	}
 
-	public void setParent_code(String parent_code) {
-		this.parent_code = parent_code;
+	public void setParentCode(String parentCode) {
+		this.parentCode = parentCode;
 	}
 
 	public int getPriority() {
