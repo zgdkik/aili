@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
 	<!-- log output to file -->
-	<appender name="ROLLING"
+	<appender name="file"
 		class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<file>${user.home}/aili.txt</file>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
@@ -21,7 +21,7 @@
 		</encoder>
 	</appender>
 	<!-- log output to console -->
-	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+	<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
 		<encoder>
 			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} -
 				%msg%n</pattern>
@@ -33,26 +33,26 @@
 		class="com.mchange.v2.c3p0.ComboPooledDataSource"> <driverClass>com.mysql.jdbc.Driver</driverClass> 
 		<url>jdbc:mysql://127.0.0.1:3306/tunneldb</url> <user>root</user> <password>123123</password> 
 		</dataSource> </connectionSource> </appender> -->
-	<logger name="jdbc.sqltiming" level="DEBUG">
-		<appender-ref ref="STDOUT" />
+	<logger name="jdbc.sqltiming" level="ERROR">
+		<appender-ref ref="console" />
 	</logger>
 	<logger name="jdbc.sqlonly" level="DEBUG">
-		<appender-ref ref="STDOUT" />
+		<appender-ref ref="console" />
 	</logger>
 	<logger name="java.sql.Connection" level="ERROR">
-		<appender-ref ref="STDOUT" />
+		<appender-ref ref="console" />
 	</logger>
 	<logger name="java.sql.Statement" level="ERROR">
-		<appender-ref ref="STDOUT" />
+		<appender-ref ref="console" />
 	</logger>
 	<logger name="java.sql.PreparedStatement" level="ERROR">
-		<appender-ref ref="STDOUT" />
+		<appender-ref ref="console" />
 	</logger>
-	<logger name="java.sql.ResultSet" level="DEBUG">
-		<appender-ref ref="STDOUT" />
+	<logger name="java.sql.ResultSet" level="ERROR">
+		<appender-ref ref="console" />
 	</logger>
-	<root level="DEBUG">
-		<!-- <appender-ref ref="ROLLING" /> -->
-		<appender-ref ref="STDOUT" />
+	<root level="INFO">
+		<!-- <appender-ref ref="file" /> -->
+		<appender-ref ref="console" />
 	</root>
 </configuration>
