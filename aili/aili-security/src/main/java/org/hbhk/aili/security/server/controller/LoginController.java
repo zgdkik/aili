@@ -87,14 +87,15 @@ public class LoginController {
 		// menus.setChildren(mm);
 		ResourceInfo menus = new ResourceInfo();
 		List<ResourceInfo> ress  = new ArrayList<ResourceInfo>();
-		if (root.equals("re001")) {
-			menus = resourceService.getResByCode(root);
-			List<ResourceInfo> ress1 = resourceService.getResByPaCode(root);
-			menus.setChildren(ress1);
-			ress.add(menus);
-		}else{
-			ress = resourceService.getResByPaCode(root);
-		}
+//		if (root.equals("re001")) {
+//			menus = resourceService.getResByCode(root);
+//			List<ResourceInfo> ress1 = resourceService.getResByPaCode(root);
+//			menus.setChildren(ress1);
+//			ress.add(menus);
+//		}else{
+//			ress = resourceService.getResByPaCode(root);
+//		}
+		ress = resourceService.getResByPaCode(root);
 		//排序
 		Collections.sort(ress, new ResourceComparator());
 		log.info("menu");

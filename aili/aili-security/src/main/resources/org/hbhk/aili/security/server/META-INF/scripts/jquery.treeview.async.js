@@ -17,28 +17,33 @@
 
 function load(settings, root, child, container) {
 	function createNode(parent) {
-		var current = $("<li/>").attr("id", this.code || "")
-		.html('<a href="'+this.url+'">' + this.text + "</a>").appendTo(parent);
-		if (this.classes) {
-			current.children("span").addClass(this.classes);
-		}
-		if (this.expanded) {
-			current.addClass("open");
-		}
-		if (this.hasChildren || this.children && this.children.length) {
-			var branch = $("<ul/>").appendTo(current);
-			if (this.hasChildren) {
-				current.addClass("hasChildren");
-				createNode.call({
-					classes: "placeholder",
-					text: "&nbsp;",
-					children:[]
-				}, branch);
+		if(typeof(this.code) != 'undefined' ){
+			
+			var current = $("<li/>").attr("id", this.code || "")
+			.html('<a href="'+this.url+'">' + this.text + "</a>").appendTo(parent);
+			if (this.classes) {
+				current.children("span").addClass(this.classes);
 			}
-			if (this.children && this.children.length) {
-				$.each(this.children, createNode, [branch])
+			if (this.expanded) {
+				current.addClass("open");
 			}
+			if (this.hasChildren || this.children && this.children.length) {
+				var branch = $("<ul/>").appendTo(current);
+				if (this.hasChildren) {
+					current.addClass("hasChildren");
+					createNode.call({
+						classes: "placeholder",
+						text: "&nbsp;",
+						children:[]
+					}, branch);
+				}
+				if (this.children && this.children.length) {
+					$.each(this.children, createNode, [branch])
+				}
+			}
+			
 		}
+	
 	}
 	$.ajax($.extend(true, {
 		url: settings.url,
@@ -91,7 +96,7 @@ $.fn.treeview = function(settings) {
 	}
 	var container = this;
 	if (!container.children().size())
-		load(settings, "re001", this, container);
+		load(settings, "root", this, container);
 	var userToggle = settings.toggle;
 	return proxied.call(this, $.extend({}, settings, {
 		collapsed: true,

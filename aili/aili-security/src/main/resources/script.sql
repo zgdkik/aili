@@ -74,8 +74,10 @@ insert into t_aili_user_role(id,ucode,rcode)  VALUES ('1','hbhk','r001');
 insert into t_aili_user_role(id,ucode,rcode)  VALUES ('2','hbhk','r002');
 insert into t_aili_user_role(id,ucode,rcode)  VALUES ('3','hbhk','r003');
  delete from  t_aili_resource;
+ insert into t_aili_resource(id,code,text,url,type,parent_code,hasChildren,classes,expanded,active)  
+VALUES ('root','root','root','root','root',NULL,'Y','menu','N','Y');
    insert into t_aili_resource(id,code,text,url,type,parent_code,hasChildren,classes,expanded,active)  
-VALUES ('1','re001','中国','user/add','分类',null,'Y','menu','N','Y');
+VALUES ('1','re001','中国','user/add','分类','root','Y','menu','N','Y');
   insert into t_aili_resource(id,code,text,url,type,parent_code,hasChildren,classes,expanded,active)  
 VALUES ('2','re002','贵州省','user/add','菜单','re001','Y','menu','N','Y');
    insert into t_aili_resource(id,code,text,url,type,parent_code,hasChildren,classes,expanded,active)  

@@ -18,6 +18,7 @@
 	function initTrees() {
 		$("#menu").treeview({
 			url : "getMenu.ctrl",
+			persist:'cookie',
 			ajax : {
 				data : {
 					"additional" : function() {
