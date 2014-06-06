@@ -24,14 +24,14 @@ public class BusinessLockDao extends SqlSessionDaoSupport implements
 	public Long setnx(String key, String value, int ttl) {
 		String existValue = this.get(key);
 		if (StringUtils.isNotBlank(existValue)) {
-			return new Long(0);
+			return 0l;
 		} else {
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("key", key);
 			map.put("value", value);
 			map.put("ttl", ttl);
 			this.getSqlSession().insert(NAMESPACE + ".insert", map);
-			return new Long(1);
+			return 1l;
 		}
 	}
 
