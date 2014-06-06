@@ -54,6 +54,7 @@ public class CacheAdvice {
 						} else {
 							cacheTemplet.set(key, result);
 						}
+						return result;
 					} catch (Throwable e) {
 						throw new RuntimeException(e);
 					}
@@ -66,6 +67,12 @@ public class CacheAdvice {
 				String key = (prefix + "_" + getKey(method, call.getArgs())).trim();
 				// 删除缓存
 				cacheTemplet.invalid(key);
+			}
+		}else{
+			try {
+				result = call.proceed();
+			} catch (Throwable e) {
+				throw new RuntimeException(e);
 			}
 		}
 		return result;
