@@ -3,8 +3,6 @@ package org.hbhk.aili.hibernate.share.model;
 import java.util.HashSet;
 import java.util.Set;
 
-// 标准注解
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,9 +10,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
-
-//增加的注解
 
 import org.hibernate.annotations.GenericGenerator;
 
