@@ -22,7 +22,7 @@
 		<param-name>contextConfigLocation</param-name>
 		<param-value>/WEB-INF/spring.xml,classpath*:org/hbhk/**/server/META-INF/spring.xml</param-value>
 	</context-param>
-	<!--应用关闭时清除应用产生的class loader  -->
+	<!--应用关闭时清除应用产生的class loader -->
 	<listener>
 		<listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
 	</listener>
@@ -40,6 +40,14 @@
 		<url-pattern>*.ctrl</url-pattern>
 	</filter-mapping>
 
+	<filter>
+		<filter-name>openSession</filter-name>
+		<filter-class>org.springframework.orm.hibernate4.support.OpenSessionInViewFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>openSession</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
 	<filter>
 		<filter-name>characterEncoding</filter-name>
 		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
@@ -96,14 +104,14 @@
 	<listener>
 		<listener-class>jetbrick.template.web.JetWebEngineLoader</listener-class>
 	</listener>
-	
+
 	<servlet>
-	    <servlet-name>cxf</servlet-name>
-	    <servlet-class>org.apache.cxf.transport.servlet.CXFServlet</servlet-class>
+		<servlet-name>cxf</servlet-name>
+		<servlet-class>org.apache.cxf.transport.servlet.CXFServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
-	    <servlet-name>cxf</servlet-name>
-	    <url-pattern>/cxf/*</url-pattern>
+		<servlet-name>cxf</servlet-name>
+		<url-pattern>/cxf/*</url-pattern>
 	</servlet-mapping>
 
 </web-app>
