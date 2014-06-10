@@ -34,6 +34,9 @@
 				<prop key="hibernate.hbm2ddl.auto">update</prop>
 				<prop key="hibernate.show_sql">true</prop>
 				<prop key="hiberante.format_sql">true</prop>
+			<!-- 	<prop key="hibernate.current_session_context_class">org.springframework.orm.hibernate4.SpringSessionContext
+				</prop> -->
+				<prop key="hibernate.current_session_context_class">thread</prop>
 			</props>
 		</property>
 		<property name="configLocations">
@@ -43,7 +46,7 @@
 				</value>
 			</list>
 		</property>
-		<!-- <property name="packagesToScan"  value="org.hbhk.aili.*.share.model"/> -->
+		<!-- <property name="packagesToScan" value="org.hbhk.aili.*.share.model"/> -->
 	</bean>
 
 	<!-- 事务管理器 -->
@@ -53,21 +56,26 @@
 	</bean>
 
 	<!-- 事务代理类 -->
-	<bean id="transactionBese"
-		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean"
-		lazy-init="true" abstract="true">
-		<property name="transactionManager" ref="transactionManager"></property>
-		<property name="transactionAttributes">
-			<props>
-				<prop key="add*">PROPAGATION_REQUIRED,-Exception</prop>
-				<prop key="update*">PROPAGATION_REQUIRED,-Exception</prop>
-				<prop key="insert*">PROPAGATION_REQUIRED,-Exception</prop>
-				<prop key="modify*">PROPAGATION_REQUIRED,-Exception</prop>
-				<prop key="delete*">PROPAGATION_REQUIRED,-Exception</prop>
-				<prop key="del*">PROPAGATION_REQUIRED,-Exception</prop>
-				<prop key="get*">PROPAGATION_NEVER</prop>
-			</props>
-		</property>
-	</bean>
+	
+	<!-- <tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="add*" propagation="REQUIRED" read-only="false" />
+			<tx:method name="save*" propagation="REQUIRED" read-only="false" />
+			<tx:method name="remove*" propagation="REQUIRED" read-only="false" />
+			<tx:method name="delete*" propagation="REQUIRED" read-only="false" />
+			<tx:method name="modify*" propagation="REQUIRED" read-only="false" />
+			<tx:method name="update*" propagation="REQUIRED" read-only="false" />
+			<tx:method name="*" propagation="SUPPORTS" read-only="true" />
+		</tx:attributes>
+	</tx:advice>
 
+	<aop:config proxy-target-class="true">
+		<aop:advisor advice-ref="txAdvice"
+			pointcut="execution(* org.hbhk..service..*.*(..))" />
+	</aop:config> -->
+	<!-- 事务注解支持 -->
+	<context:annotation-config/>
+	<aop:aspectj-autoproxy/>
+	<tx:annotation-driven transaction-manager="transactionManager" />
+	<context:component-scan base-package="org.hbhk.aili.hibernate.server"></context:component-scan>
 </beans>

@@ -22,6 +22,9 @@ public class HibernateTest {
 		try {
 			Session session= sessionFactory.openSession();
 			User user= new User();
+			user.setAge("12");
+			user.setId("1");
+			user.setUserName("hbhk");
 			session.save(user);
 			
 		} catch (Exception e) {

@@ -20,6 +20,19 @@ public class HTest {
 	@Resource
 	private SessionFactory sessionFactory;
 
+	
+	@Test
+	public void addc() {
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		Category c = new Category();
+		c.setId(2);
+		c.setName("c1");
+		c.setDescription("desc");
+		session.save(c);
+		session.getTransaction().commit();
+	}
+
 	@Test
 	public void add() {
 		Session session = sessionFactory.openSession();
