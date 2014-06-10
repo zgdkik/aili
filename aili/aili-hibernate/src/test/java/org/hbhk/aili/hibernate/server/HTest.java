@@ -1,9 +1,5 @@
 package org.hbhk.aili.hibernate.server;
 
-/**
- * 
- */
-
 import java.util.Set;
 
 import javax.annotation.Resource;
@@ -28,7 +24,10 @@ public class HTest {
 	public void add() {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
-		Category c = (Category) session.get(Category.class, 5);
+		Category c = new Category();
+		c.setId(1);
+		c.setName("c1");
+		c.setDescription("desc");
 		Product p = new Product();
 		p.setName("计算机科学与技术");
 		p.setPrice("123");
@@ -44,7 +43,7 @@ public class HTest {
 	public void find() {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
-		Category c = (Category) session.get(Category.class, 5);
+		Category c = (Category) session.get(Category.class, 1);
 		System.out.println("id: " + c.getId() + "  name:" + c.getName());
 		Set<Product> p = c.getProducts();
 		for (Product product : p) {
