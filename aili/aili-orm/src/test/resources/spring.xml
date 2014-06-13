@@ -21,8 +21,8 @@
 
 	<hbhk:dao-config base-package="loxia.dao" />
 
-	<!-- <aop:aspectj-autoproxy proxy-target-class="true" /> -->
-
+	 <aop:aspectj-autoproxy /> 
+	 
 	<context:annotation-config />
 	<context:component-scan base-package="org.hbhk.aili.orm.server" />
 	<bean id="queryInterceptor" class="org.hbhk.aili.orm.server.aspect.QueryInterceptor" />
