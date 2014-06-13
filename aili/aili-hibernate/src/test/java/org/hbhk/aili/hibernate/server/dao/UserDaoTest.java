@@ -2,8 +2,8 @@ package org.hbhk.aili.hibernate.server.dao;
 
 import javax.annotation.Resource;
 
-import org.hbhk.aili.hibernate.server.service.CateDao;
-import org.hbhk.aili.hibernate.server.service.UsersDao1;
+import org.hbhk.aili.hibernate.server.dao.impl.CateDao;
+import org.hbhk.aili.hibernate.server.dao.impl.UsersDao;
 import org.hbhk.aili.hibernate.share.model.Category;
 import org.hbhk.aili.hibernate.share.model.User;
 import org.junit.Test;
@@ -16,7 +16,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 public class UserDaoTest {
 
 	@Resource
-	UsersDao1 userDao;
+	UsersDao userDao;
 	@Resource
 	CateDao cateDao;
 
