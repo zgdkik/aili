@@ -1,4 +1,4 @@
-package org.hbhk.theme.server.controller;
+package org.hbhk.aili.theme.server.controller;
 
 import org.hbhk.aili.core.server.annotation.SecurityFilter;
 import org.springframework.stereotype.Controller;
