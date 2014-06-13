@@ -31,7 +31,7 @@ import org.springframework.util.Assert;
  *            主键类型
  * 
  */
-public abstract class AiliDaoSurpport<T, PK extends Serializable> {
+public  class AiliDaoSurpport<T, PK extends Serializable> {
 
 	protected Logger logger = LoggerFactory.getLogger(getClass());
 

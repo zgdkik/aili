@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class HibernateTestController {
 
 	@Resource
-	UsersDao userDao;
+	UsersDao usersDao;
 	@Resource
 	ICateService cateService;
 
@@ -27,7 +27,7 @@ public class HibernateTestController {
 		user.setAge("12");
 		user.setId("1");
 		user.setUserName("hbhk");
-		userDao.save(user);
+		usersDao.save(user);
 		return "";
 	}
 
