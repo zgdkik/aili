@@ -17,5 +17,12 @@
 			http://www.springframework.org/schema/aop/spring-aop-3.2.xsd">
 
 	
-
+	<bean id="queryInterceptor" class="org.hbhk.aili.orm.server.aspect.QueryInterceptor"/>
+	<bean id="genericDaoProxy" class="org.springframework.aop.framework.ProxyFactoryBean" abstract="true">
+	    <property name="interceptorNames">
+	        <list>
+	            <value>queryInterceptor</value>
+	        </list>
+	    </property>
+	</bean>
 </beans>
