@@ -8,7 +8,7 @@ import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.criterion.Criterion;
 
-public interface CommonDao<T, PK extends Serializable> {
+public interface ICommonDao<T, PK extends Serializable> {
 
 	public void save(T entity);
 

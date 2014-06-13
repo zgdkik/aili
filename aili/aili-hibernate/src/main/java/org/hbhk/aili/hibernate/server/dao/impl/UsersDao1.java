@@ -1,6 +1,5 @@
-package org.hbhk.aili.hibernate.server.service;
+package org.hbhk.aili.hibernate.server.dao.impl;
 
-import org.hbhk.aili.hibernate.server.dao.impl.AiliDaoSurpport;
 import org.hbhk.aili.hibernate.share.model.User;
 import org.springframework.stereotype.Service;
 

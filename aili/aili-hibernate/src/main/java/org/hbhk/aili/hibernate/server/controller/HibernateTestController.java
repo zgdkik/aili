@@ -3,8 +3,9 @@ package org.hbhk.aili.hibernate.server.controller;
 import javax.annotation.Resource;
 
 import org.hbhk.aili.core.server.annotation.SecurityFilter;
-import org.hbhk.aili.hibernate.server.service.CateDao;
-import org.hbhk.aili.hibernate.server.service.UsersDao1;
+import org.hbhk.aili.hibernate.server.dao.impl.CateDao;
+import org.hbhk.aili.hibernate.server.dao.impl.UsersDao1;
+import org.hbhk.aili.hibernate.server.service.ICateService;
 import org.hbhk.aili.hibernate.share.model.Category;
 import org.hbhk.aili.hibernate.share.model.User;
 import org.springframework.stereotype.Controller;
@@ -17,7 +18,7 @@ public class HibernateTestController {
 	@Resource
 	UsersDao1 userDao1;
 	@Resource
-	CateDao cateDao;
+	ICateService cateService;
 
 	@RequestMapping("/t1")
 	@SecurityFilter(false)
@@ -36,12 +37,11 @@ public class HibernateTestController {
 		c.setId(2);
 		c.setName("c1");
 		c.setDescription("desc");
-		cateDao.save(c);
+		cateService.save(c);
 
 	}
 
 	public void t3() {
-		cateDao.findAll();
 
 	}
 

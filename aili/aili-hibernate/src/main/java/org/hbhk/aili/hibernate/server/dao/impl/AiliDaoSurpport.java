@@ -6,7 +6,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.hbhk.aili.hibernate.server.dao.CommonDao;
+import org.hbhk.aili.hibernate.server.dao.ICommonDao;
 import org.hbhk.aili.hibernate.share.model.Page;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
@@ -33,7 +33,7 @@ import org.springframework.util.Assert;
  */
 @SuppressWarnings("unchecked")
 public class AiliDaoSurpport<T, PK extends Serializable> implements
-		CommonDao<T, PK> {
+		ICommonDao<T, PK> {
 
 	protected Logger logger = LoggerFactory.getLogger(getClass());
 
