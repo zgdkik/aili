@@ -70,6 +70,7 @@ public class GenericDaoBeanDefinitionParser extends
 		}
 		
 		AbstractBeanDefinition rootDefinition = new GenericBeanDefinition();
+		////queryAspect genericDaoProxy
 		rootDefinition.setParentName("genericDaoProxy");
 		rootDefinition.getPropertyValues().addPropertyValue("proxyInterfaces",interfaces);
 		rootDefinition.getPropertyValues().addPropertyValue("target",beanDefinition);		
