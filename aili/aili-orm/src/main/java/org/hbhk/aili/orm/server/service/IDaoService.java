@@ -1,14 +1,15 @@
-package org.hbhk.aili.orm.server.dao;
+package org.hbhk.aili.orm.server.service;
 
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
+import org.hbhk.aili.orm.server.dao.Sort;
 import org.hbhk.aili.orm.share.model.Pagination;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.SqlParameter;
 
-public interface DaoService {
+public interface IDaoService {
 	<T> T getByPrimaryKey(Class<T> clazz, Serializable pk);
 	
 	<T> T save(T model);

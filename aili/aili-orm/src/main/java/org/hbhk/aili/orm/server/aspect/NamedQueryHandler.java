@@ -9,15 +9,15 @@ import org.aopalliance.intercept.MethodInvocation;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.hbhk.aili.orm.server.annotation.NamedQuery;
-import org.hbhk.aili.orm.server.dao.DaoService;
 import org.hbhk.aili.orm.server.dao.ModelClassSupport;
 import org.hbhk.aili.orm.server.dao.Page;
 import org.hbhk.aili.orm.server.dao.Sort;
+import org.hbhk.aili.orm.server.service.IDaoService;
 import org.hbhk.aili.orm.share.model.Pagination;
 
 public class NamedQueryHandler extends AbstractQueryHandler{
 	
-	public NamedQueryHandler(DaoService daoService){
+	public NamedQueryHandler(IDaoService daoService){
 		super(daoService);
 	}
 	
@@ -37,8 +37,9 @@ public class NamedQueryHandler extends AbstractQueryHandler{
 		boolean pagable = (page!= null) || namedQuery.pagable();		
 		String queryName = namedQuery.value();
 		if(queryName.equals("")){
-			if(!(obj instanceof ModelClassSupport)) 
+			if(!(obj instanceof ModelClassSupport)) {
 				throw new RuntimeException("QueryName can not be empty");
+			}
 			ModelClassSupport mcs = (ModelClassSupport)obj;
 			queryName += mcs.getModelClass().getSimpleName();
 			queryName += "." + m.getName();				

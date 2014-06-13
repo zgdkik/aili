@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-        <artifactId>aili</artifactId>
-        <groupId>org.hbhk.aili</groupId>
-        <version>1.0.0-SNAPSHOT</version>
-    </parent>
+		<artifactId>aili</artifactId>
+		<groupId>org.hbhk.aili</groupId>
+		<version>1.0.0-SNAPSHOT</version>
+	</parent>
 	<artifactId>aili-orm</artifactId>
 	<packaging>jar</packaging>
 	<name>aili-orm</name>
@@ -21,9 +22,13 @@
 			<version>1.0.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
-  <groupId>commons-beanutils</groupId>
-  <artifactId>commons-beanutils</artifactId>
-  <version>1.7.0</version>
+			<groupId>commons-beanutils</groupId>
+			<artifactId>commons-beanutils</artifactId>
+			<version>1.7.0</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.persistence</groupId>
+			<artifactId>persistence-api</artifactId>
 		</dependency>
 	</dependencies>
 </project>
