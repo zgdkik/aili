@@ -1,17 +1,17 @@
 package org.hbhk.aili.hibernate.server.dao.impl;
 
 import java.io.Serializable;
-import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.hbhk.aili.hibernate.server.dao.ICommonDao;
+import org.hbhk.aili.hibernate.server.dao.AiliDaoCallback;
 import org.hbhk.aili.hibernate.share.model.Page;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 import org.slf4j.Logger;
@@ -31,9 +31,7 @@ import org.springframework.util.Assert;
  *            主键类型
  * 
  */
-@SuppressWarnings("unchecked")
-public class AiliDaoSurpport<T, PK extends Serializable> implements
-		ICommonDao<T, PK> {
+public abstract class AiliDaoSurpport<T, PK extends Serializable> {
 
 	protected Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -51,28 +49,41 @@ public class AiliDaoSurpport<T, PK extends Serializable> implements
 	}
 
 	public Session getSession() {
-		return getSessionFactory().getCurrentSession();
+		return getSessionFactory().openSession();
 	}
 
-	public AiliDaoSurpport() {
-		this.entityClass = (Class<T>) ((ParameterizedType) getClass()
-				.getGenericSuperclass()).getActualTypeArguments()[0];
+	public T execute(AiliDaoCallback<T> action) {
+		Assert.notNull(action, "Callback object 对象不能为 Null ");
+		Session session = getSession();
+		Transaction tr = session.beginTransaction();
+		T result = action.doInHibernate(session);
+		tr.commit();
+		session.close();
+		return result;
 	}
 
-	public AiliDaoSurpport(SessionFactory sessionFactory, Class<T> entityClass) {
-		setSessionFactory(sessionFactory);
-		this.entityClass = entityClass;
-	}
-
-	public void save(T entity) {
+	public void save(final T entity) {
 		Assert.notNull(entity);
-		getSession().saveOrUpdate(entity);
+		execute(new AiliDaoCallback<T>() {
+			@Override
+			public T doInHibernate(Session session) {
+				session.saveOrUpdate(entity);
+				return null;
+			}
+		});
 		logger.debug("save entity: {}", entity);
 	}
 
-	public void delete(T entity) {
+	public void delete(final T entity) {
 		Assert.notNull(entity);
-		getSession().delete(entity);
+		execute(new AiliDaoCallback<T>() {
+			@Override
+			public T doInHibernate(Session session) {
+				session.delete(entity);
+				return null;
+			}
+			
+		});
 		logger.debug("delete entity: {}", entity);
 	}
 
@@ -85,7 +96,7 @@ public class AiliDaoSurpport<T, PK extends Serializable> implements
 		return findByCriteria();
 	}
 
-	public Page<T> findAll(Page<T> page) {
+	public Page findAll(Page page) {
 		return findByCriteria(page);
 	}
 
@@ -97,20 +108,18 @@ public class AiliDaoSurpport<T, PK extends Serializable> implements
 		return createQuery(hql, values).list();
 	}
 
+	@SuppressWarnings("unchecked")
 	public Page<T> find(Page<T> page, String hql, Object... values) {
-		// Assert.notNull(page);
-		//
-		// if (page.isAutoCount()) {
-		// logger.warn("HQL查询暂不支持自动获取总结果数,hql为{}", hql);
-		// }
-		// Query q = createQuery(hql, values);
-		// if (page.isFirstSetted()) {
-		// q.setFirstResult(page.getFirst());
-		// }
-		// if (page.isPageSizeSetted()) {
-		// q.setMaxResults(page.getPageSize());
-		// }
-		// page.setResult(q.list());
+		 Assert.notNull(page);
+		
+		 Query q = createQuery(hql, values);
+		 if (page.getCurrentPageNo() != 0) {
+			 q.setFirstResult(page.getCurrentPageNo());
+		 }
+		 if (page.getPageSize()!=0) {
+			 q.setMaxResults(page.getPageSize());
+		 }
+		 page.setData(q.list());
 		return page;
 	}
 
@@ -133,7 +142,7 @@ public class AiliDaoSurpport<T, PK extends Serializable> implements
 		return createCriteria(criterion).list();
 	}
 
-	public Page<T> findByCriteria(Page<T> page, Criterion... criterion) {
+	public Page findByCriteria(Page page, Criterion... criterion) {
 		// Assert.notNull(page);
 		//
 		// Criteria c = createCriteria(criterion);
@@ -202,7 +211,7 @@ public class AiliDaoSurpport<T, PK extends Serializable> implements
 		return (object == null);
 	}
 
-	public int countQueryResult(Page<T> page, Criteria c) {
+	public int countQueryResult(Page page, Criteria c) {
 		// CriteriaImpl impl = (CriteriaImpl) c;
 		//
 		// // 先把Projection、ResultTransformer、OrderBy取出来,清空三者后再执行Count操作

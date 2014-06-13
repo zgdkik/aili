@@ -4,6 +4,6 @@ import org.hbhk.aili.hibernate.share.model.User;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UsersDao1 extends  AiliDaoSurpport<User, Integer> {
+public class UsersDao extends  AiliDaoSurpport<User, Integer> {
 
 }

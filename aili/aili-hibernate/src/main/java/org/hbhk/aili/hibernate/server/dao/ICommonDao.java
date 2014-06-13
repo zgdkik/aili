@@ -18,7 +18,7 @@ public interface ICommonDao<T, PK extends Serializable> {
 
 	public List<T> findAll();
 
-	public Page<T> findAll(Page<T> page);
+	public Page findAll(Page page);
 
 	/**
 	 * 按id获取对象.
@@ -47,7 +47,7 @@ public interface ICommonDao<T, PK extends Serializable> {
 	 * 
 	 * @return 分页查询结果,附带结果列表及所有查询时的参数.
 	 */
-	public Page<T> find(Page<T> page, String hql, Object... values);
+	public Page find(Page page, String hql, Object... values);
 
 	/**
 	 * 按HQL查询唯一对象.
@@ -83,7 +83,7 @@ public interface ICommonDao<T, PK extends Serializable> {
 	 *            数量可变的Criterion.
 	 * @return 分页查询结果.附带结果列表及所有查询时的参数.
 	 */
-	public Page<T> findByCriteria(Page<T> page, Criterion... criterion);
+	public Page findByCriteria(Page page, Criterion... criterion);
 
 	/**
 	 * 按属性查找对象列表.
@@ -117,5 +117,5 @@ public interface ICommonDao<T, PK extends Serializable> {
 	 * 
 	 * @return page对象中的totalCount属性将赋值.
 	 */
-	public int countQueryResult(Page<T> page, Criteria c);
+	public int countQueryResult(Page page, Criteria c);
 }
