@@ -6,8 +6,8 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
 import org.hbhk.aili.orm.server.dao.GenericEntityDao;
-import org.hbhk.aili.orm.server.dao.ModelClassSupport;
-import org.hbhk.aili.orm.server.dao.SimpleModelClassSupport;
+import org.hbhk.aili.orm.server.surpport.ModelClassSupport;
+import org.hbhk.aili.orm.server.surpport.SimpleModelClassSupport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.BeanCreationException;

@@ -4,11 +4,10 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.Resource;
-
-import org.hbhk.aili.orm.server.dao.Sort;
 import org.hbhk.aili.orm.server.service.IDaoService;
+import org.hbhk.aili.orm.server.surpport.Sort;
 import org.hbhk.aili.orm.share.model.Pagination;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.SqlParameter;
@@ -17,7 +16,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class DaoService implements IDaoService {
 
-	@Resource
+	@Autowired(required=false)
 	protected JdbcTemplate jdbcTemplate;
 
 	public JdbcTemplate getJdbcTemplate() {

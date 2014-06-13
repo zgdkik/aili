@@ -1,4 +1,4 @@
-package org.hbhk.aili.orm.server.aspect;
+package org.hbhk.aili.orm.server.handler;
 
 import java.beans.PropertyDescriptor;
 import java.lang.annotation.Annotation;
@@ -8,9 +8,9 @@ import java.util.Map;
 
 import org.apache.commons.beanutils.PropertyUtils;
 import org.hbhk.aili.orm.server.annotation.QueryParam;
-import org.hbhk.aili.orm.server.dao.Page;
-import org.hbhk.aili.orm.server.dao.Sort;
 import org.hbhk.aili.orm.server.service.IDaoService;
+import org.hbhk.aili.orm.server.surpport.Page;
+import org.hbhk.aili.orm.server.surpport.Sort;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

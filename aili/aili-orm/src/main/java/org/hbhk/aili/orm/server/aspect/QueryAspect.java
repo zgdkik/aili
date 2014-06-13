@@ -5,6 +5,7 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.hbhk.aili.orm.server.annotation.NativeQuery;
+import org.hbhk.aili.orm.server.handler.NativeQueryHandler;
 import org.hbhk.aili.orm.server.service.IDaoService;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;

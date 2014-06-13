@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.hbhk.aili.orm.server.annotation.NativeQuery;
+import org.hbhk.aili.orm.server.surpport.DefaultPage;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.beans.factory.annotation.Autowired;
 

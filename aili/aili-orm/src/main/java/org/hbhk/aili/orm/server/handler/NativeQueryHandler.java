@@ -1,4 +1,4 @@
-package org.hbhk.aili.orm.server.aspect;
+package org.hbhk.aili.orm.server.handler;
 
 import java.lang.reflect.Method;
 import java.sql.ResultSet;
@@ -16,12 +16,13 @@ import org.hbhk.aili.orm.server.annotation.ColumnTranslator;
 import org.hbhk.aili.orm.server.annotation.NativeQuery;
 import org.hbhk.aili.orm.server.annotation.NativeQuery.DEFAULT;
 import org.hbhk.aili.orm.server.annotation.NativeUpdate;
-import org.hbhk.aili.orm.server.dao.ModelClassSupport;
-import org.hbhk.aili.orm.server.dao.Page;
-import org.hbhk.aili.orm.server.dao.Sort;
+import org.hbhk.aili.orm.server.aspect.DummyColumnTranslator;
 import org.hbhk.aili.orm.server.mapper.BaseRowMapper;
 import org.hbhk.aili.orm.server.mapper.CommonBeanRowMapper;
 import org.hbhk.aili.orm.server.service.IDaoService;
+import org.hbhk.aili.orm.server.surpport.ModelClassSupport;
+import org.hbhk.aili.orm.server.surpport.Page;
+import org.hbhk.aili.orm.server.surpport.Sort;
 import org.hbhk.aili.orm.share.model.Pagination;
 import org.springframework.jdbc.core.RowMapper;
 

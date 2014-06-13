@@ -3,6 +3,8 @@ package org.hbhk.aili.orm.server.dao;
 import java.io.Serializable;
 import java.util.List;
 
+import org.hbhk.aili.orm.server.surpport.DefaultPage;
+
 public interface IAiliDao <T,PK extends Serializable> {
     /**
     *  按ID获取实体

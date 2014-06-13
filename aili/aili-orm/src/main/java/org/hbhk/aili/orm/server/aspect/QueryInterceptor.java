@@ -7,6 +7,7 @@ import javax.annotation.PostConstruct;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 import org.hbhk.aili.orm.server.annotation.NativeQuery;
+import org.hbhk.aili.orm.server.handler.NativeQueryHandler;
 import org.hbhk.aili.orm.server.service.IDaoService;
 import org.springframework.beans.factory.annotation.Autowired;
 

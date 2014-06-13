@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
-import org.hbhk.aili.orm.server.dao.Sort;
+import org.hbhk.aili.orm.server.surpport.Sort;
 import org.hbhk.aili.orm.share.model.Pagination;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.SqlParameter;

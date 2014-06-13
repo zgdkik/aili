@@ -1,4 +1,5 @@
-package org.hbhk.aili.orm.server.dao;
+package org.hbhk.aili.orm.server.surpport;
+
 
 
 public class SimpleModelClassSupport implements ModelClassSupport {

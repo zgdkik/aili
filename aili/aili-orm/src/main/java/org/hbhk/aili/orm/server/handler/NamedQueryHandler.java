@@ -1,4 +1,4 @@
-package org.hbhk.aili.orm.server.aspect;
+package org.hbhk.aili.orm.server.handler;
 
 import java.lang.reflect.Method;
 import java.util.Arrays;
@@ -9,10 +9,10 @@ import org.aopalliance.intercept.MethodInvocation;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.hbhk.aili.orm.server.annotation.NamedQuery;
-import org.hbhk.aili.orm.server.dao.ModelClassSupport;
-import org.hbhk.aili.orm.server.dao.Page;
-import org.hbhk.aili.orm.server.dao.Sort;
 import org.hbhk.aili.orm.server.service.IDaoService;
+import org.hbhk.aili.orm.server.surpport.ModelClassSupport;
+import org.hbhk.aili.orm.server.surpport.Page;
+import org.hbhk.aili.orm.server.surpport.Sort;
 import org.hbhk.aili.orm.share.model.Pagination;
 
 public class NamedQueryHandler extends AbstractQueryHandler{
