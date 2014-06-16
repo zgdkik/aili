@@ -14,6 +14,11 @@ public class DemoAction{
 		return  "bootstrap";
 	}
 	
+	@RequestMapping("index")
+	@SecurityFilter(false)
+	public  String  index(){
+		return  "index";
+	}
 	
 	
 }
