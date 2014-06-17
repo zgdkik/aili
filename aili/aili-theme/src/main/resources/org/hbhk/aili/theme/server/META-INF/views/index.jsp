@@ -3,8 +3,7 @@
 <html lang="zh-cn">
 <head>
 <link rel="stylesheet" href="${styles}/bootstrap/bootstrap.min.css">
-<link rel="stylesheet"
-	href="${styles}/bootstrap/bootstrap-theme.min.css">
+<link rel="stylesheet" href="${styles}/bootstrap/bootstrap-theme.min.css">
 <link rel="stylesheet" href="${styles}/index.css">
 <script src="${scripts}/jquery/jquery-1.9.1.js"></script>
 <script src="${scripts}/bootstrap/bootstrap.min.js"></script>
