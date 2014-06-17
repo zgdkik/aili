@@ -37,7 +37,7 @@
 	</filter>
 	<filter-mapping>
 		<filter-name>appFilter</filter-name>
-		<url-pattern>*.ctrl</url-pattern>
+		<url-pattern>*.htm</url-pattern>
 	</filter-mapping>
 
 	<filter>
@@ -76,7 +76,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>springmvc</servlet-name>
-		<url-pattern>*.html</url-pattern>
+		<url-pattern>*.htm</url-pattern>
 	</servlet-mapping>
 
 	<!-- struts2 -->
@@ -105,14 +105,14 @@
 		<listener-class>jetbrick.template.web.JetWebEngineLoader</listener-class>
 	</listener>
 
-	<servlet>
+	<!-- <servlet>
 		<servlet-name>cxf</servlet-name>
 		<servlet-class>org.apache.cxf.transport.servlet.CXFServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>cxf</servlet-name>
 		<url-pattern>/cxf/*</url-pattern>
-	</servlet-mapping>
+	</servlet-mapping> -->
 	
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>

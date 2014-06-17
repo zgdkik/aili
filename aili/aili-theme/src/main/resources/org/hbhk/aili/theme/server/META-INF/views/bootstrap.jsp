@@ -2,11 +2,17 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<link rel="stylesheet" href="${styles}/bootstrap.min.css">
-<link rel="stylesheet" href="${styles}/bootstrap-theme.min.css">
+<link rel="stylesheet" href="${styles}/bootstrap/bootstrap.min.css">
+<link rel="stylesheet" href="${styles}/bootstrap/bootstrap-theme.min.css">
 <link rel="stylesheet" href="${styles}/nav.css">
-<script src="${scripts}/jquery-1.9.1.js"></script>
-<script src="${scripts}/bootstrap.min.js"></script>
+<script src="${scripts}/jquery/jquery-1.9.1.js"></script>
+<script src="${scripts}/bootstrap/bootstrap.min.js"></script>
+<script type="text/javascript">
+$('.carousel').carousel({
+	  interval: 2000 // in milliseconds
+	})
+
+</script>
 </head>
 <body>
 <div class="masthead">
