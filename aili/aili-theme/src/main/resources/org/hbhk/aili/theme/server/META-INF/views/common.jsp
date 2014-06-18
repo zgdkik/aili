@@ -9,6 +9,6 @@
 	<script src="${scripts}/jquery/jquery-1.9.1.js"></script>
 	<script src="${scripts}/jquery/jquery.cookie.js"></script>
 	<script src="${scripts}/bootstrap/bootstrap.min.js"></script>
-	<script src="${scripts}/bootstrap/bootstrapValidator.js"></script>
+	<script src="${scripts}/common.js"></script>
 	<script src="${scripts}/index.js"></script>
 </head>
