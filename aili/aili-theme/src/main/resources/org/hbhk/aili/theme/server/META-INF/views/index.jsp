@@ -2,14 +2,14 @@
 <!DOCTYPE HTML>
 <html lang="zh-cn">
 <head>
-<link rel="stylesheet" href="${styles}/bootstrap/bootstrap.min.css">
-<link rel="stylesheet" href="${styles}/bootstrap/bootstrap-theme.min.css">
-<link rel="stylesheet" href="${styles}/index.css">
-<script src="${scripts}/jquery/jquery-1.9.1.js"></script>
-<script src="${scripts}/bootstrap/bootstrap.min.js"></script>
-<script src="${scripts}/index.js"></script>
+	<link rel="stylesheet" href="${styles}/bootstrap/bootstrap.min.css">
+	<link rel="stylesheet" href="${styles}/bootstrap/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="${styles}/index.css">
+	<script src="${scripts}/jquery/jquery-1.9.1.js"></script>
+	<script src="${scripts}/jquery/jquery.cookie.js"></script>
+	<script src="${scripts}/bootstrap/bootstrap.min.js"></script>
+	<script src="${scripts}/index.js"></script>
 </head>
-
 <body>
 	<div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
 		<div class="container">
@@ -28,18 +28,16 @@
 					<li><a href="#about">关于</a></li>
 					<li><a href="#contact">联系我们</a></li>
 				</ul>
-			</div>
-			<div class="navbar-collapse">
-				<div class="nav navbar-nav">
-					<form class="form-inline">
-						<input type="text" class="input-small" placeholder="Email">
-						<input type="password" class="input-small" placeholder="Password">
-						<label class="checkbox"> <input type="checkbox">
-							Remember me
-						</label>
-						<button type="submit" class="btn">Sign in</button>
-					</form>
-				</div>
+				<form id = "login_form" class="pull-right">
+					<input type="email" name="username" class="span3" placeholder="邮箱" required autofocus>
+					<input type="password" name="password" class="span3" placeholder="密码" required>
+					<button type="button" class="btn btn-primary">登陆</button>
+					<button type="button" class="btn btn-primary">注册</button>
+				</form>
+				<ul id = "user_info" class="nav navbar-nav pull-right">
+					<li class="active"><a>你好,何波</a></li>
+					<li><a id="logout">[退出]</a></li>
+				</ul>
 			</div>
 			<!-- /.nav-collapse -->
 		</div>
@@ -186,8 +184,10 @@
 			<div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar"
 				role="navigation">
 				<div class="list-group">
-					<a href="#" class="list-group-item active">Link</a>             <a href="#"
-						class="list-group-item">Link</a> <a href="#"
+					<a href="#" class="list-group-item active">页面导航</a>
+					<a href="#" class="list-group-item">Link</a>
+					<a href="#"class="list-group-item">Link</a> 
+					<a href="#"
 						class="list-group-item">Link</a> <a href="#"
 						class="list-group-item">Link</a> <a href="#"
 						class="list-group-item">Link</a> <a href="#"
