@@ -38,21 +38,21 @@
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
 		destroy-method="close">
 		<property name="driverClass">
-			<value>oracle.jdbc.driver.OracleDriver</value>
+			<value>${db.driverClass}</value>
 		</property>
 		<property name="jdbcUrl">
-			<value>jdbc:oracle:thin:@localhost:1521:Test</value>
+			<value>${db.jdbcUrl}</value>
 		</property>
 		<property name="user">
-			<value>Kay</value>
+			<value>${db.user}</value>
 		</property>
 		<property name="password">
-			<value>root</value>
+			<value>${db.password}</value>
 		</property>
 		<!--连接池中保留的最小连接数。 -->
-		<property name="minPoolSize" value="10" />
+		<property name="minPoolSize" value="5" />
 		<!--连接池中保留的最大连接数。Default: 15 -->
-		<property name="maxPoolSize" value="100" />
+		<property name="maxPoolSize" value="50" />
 		<!--最大空闲时间,1800秒内未使用则连接被丢弃。若为0则永不丢弃。Default: 0 -->
 		<property name="maxIdleTime" value="1800" />
 		<!--当连接池中的连接耗尽的时候c3p0一次同时获取的连接数。Default: 3 -->
