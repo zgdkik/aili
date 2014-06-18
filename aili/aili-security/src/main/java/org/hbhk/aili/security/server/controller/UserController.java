@@ -11,6 +11,7 @@ import org.hbhk.aili.security.server.service.IUserService;
 import org.hbhk.aili.security.share.define.SecurityConstant;
 import org.hbhk.aili.security.share.pojo.UserInfo;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -23,9 +24,10 @@ public class UserController {
 	
 	@RequestMapping("/login")
 	@SecurityFilter(false)
-	public String login(String username , String password ){
+	public String login(String username , String password ,Model model ){
 		userService.login(username, password);
-		return "redirect:"+SecurityConstant.moduleName+"/main.ctrl";
+		model.addAttribute("username", username);
+		return "redirect:theme/index.htm";
 	}
 	private List<UserInfo>  getUserList(){
 		
