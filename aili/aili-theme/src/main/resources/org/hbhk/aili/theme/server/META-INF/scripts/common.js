@@ -1,9 +1,10 @@
 	var domain = document.domain;
 	function getReqUrl(url){
-		if(domain == 'localhost' || domain == '127.0.0.1' ){
-			domain = "http://"+domain+":5416/aili/"
+		var  base_url  = domain;
+		if(base_url == 'localhost' || base_url == '127.0.0.1' ){
+			base_url = "http://"+url+":5416/aili/"
 		}else{
-			domain = "http://"+domain+"/"
+			base_url = "http://"+base_url+"/"
 		}
-		return	domain+url;
+		return	base_url+url;
 	}
