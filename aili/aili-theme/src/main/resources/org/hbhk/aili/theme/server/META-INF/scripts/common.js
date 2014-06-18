@@ -5,6 +5,6 @@
 			base_url = "http://"+url+":5416/aili/"
 		}else{
 			base_url = "http://"+base_url+"/"
-		}
+		} 
 		return	base_url+url;
 	}
