@@ -3,7 +3,6 @@ package org.hbhk.aili.hibernate.server.controller;
 import javax.annotation.Resource;
 
 import org.hbhk.aili.core.server.annotation.SecurityFilter;
-import org.hbhk.aili.hibernate.server.dao.impl.UsersDao;
 import org.hbhk.aili.hibernate.server.service.ICateService;
 import org.hbhk.aili.hibernate.share.model.Category;
 import org.hbhk.aili.hibernate.share.model.User;
@@ -15,8 +14,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class HibernateTestController {
 
 	@Resource
-	UsersDao usersDao;
-	@Resource
 	ICateService cateService;
 
 	@RequestMapping("/t1")
@@ -27,7 +24,6 @@ public class HibernateTestController {
 		user.setAge("12");
 		user.setId("1");
 		user.setUserName("hbhk");
-		usersDao.save(user);
 		return "";
 	}
 

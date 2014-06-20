@@ -10,10 +10,12 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
-@Entity(name = "t_test_category")
+@Entity
+@Table(name = "t_test_category")
 public class Category implements java.io.Serializable {
 
 	private static final long serialVersionUID = 3240281547213597385L;

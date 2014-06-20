@@ -12,7 +12,9 @@ public class Page<T> {
 
 	private int pageSize = DEFAULT_PAGE_SIZE; // 每页的记录数
 
-	private int start; // 当前页第一条数据在List中的位置,从0开始
+	private int firstIndex; // 当前页第一条数据在List中的位置,从0开始
+	
+	private int pageNo;
 
 	private List<T> data; // 当前页中存放的记录,类型一般为List
 
@@ -23,10 +25,19 @@ public class Page<T> {
 	}
 
 	public Page(int start, int totalCount, int pageSize, List<T> data) {
-		this.start = start;
+		this.firstIndex = start;
 		this.totalCount = totalCount;
 		this.pageSize = pageSize;
 		this.data = data;
+	}
+
+	
+	public int getPageNo() {
+		return pageNo;
+	}
+
+	public void setPageNo(int pageNo) {
+		this.pageNo = pageNo;
 	}
 
 	/**
@@ -43,7 +54,6 @@ public class Page<T> {
 	 * 
 	 * @return
 	 */
-	
 
 	/**
 	 * 取每页的数据容量
@@ -54,12 +64,12 @@ public class Page<T> {
 		return this.pageSize;
 	}
 
-	public int getStart() {
-		return start;
+	public int getFirstIndex() {
+		return firstIndex;
 	}
 
-	public void setStart(int start) {
-		this.start = start;
+	public void setFirstIndex(int firstIndex) {
+		this.firstIndex = firstIndex;
 	}
 
 	public List<T> getData() {
@@ -94,7 +104,7 @@ public class Page<T> {
 	 * @return
 	 */
 	public int getCurrentPageNo() {
-		return start % pageSize + 1;
+		return firstIndex % pageSize + 1;
 	}
 
 	/**

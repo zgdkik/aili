@@ -2,10 +2,9 @@ package org.hbhk.aili.hibernate.server.dao;
 
 import javax.annotation.Resource;
 
-import org.hbhk.aili.hibernate.server.dao.impl.CateDao;
-import org.hbhk.aili.hibernate.server.dao.impl.UsersDao;
+import org.hbhk.aili.hibernate.server.service.ICateService;
 import org.hbhk.aili.hibernate.share.model.Category;
-import org.hbhk.aili.hibernate.share.model.User;
+import org.hbhk.aili.hibernate.share.model.Page;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -16,33 +15,29 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 public class UserDaoTest {
 
 	@Resource
-	UsersDao userDao;
-	@Resource
-	CateDao cateDao;
+	ICateService cateService;
 
 	@Test
 	public void t1() {
-		User user = new User();
-		user.setAge("12");
-		user.setId("1");
-		user.setUserName("hbhk");
-		userDao.save(user);
+		Category user = new Category();
+		user.setDescription("sfsdf");
+		user.setId(33);
+		user.setName("sdfsdf");
+		cateService.save(user);
 
 	}
 
 	@Test
 	public void t2() {
-		Category c = new Category();
-		c.setId(2);
-		c.setName("c1");
-		c.setDescription("desc");
-		cateDao.save(c);
-
+		Page<Category> p = cateService.queryForList("from Category ",
+				new String[] {}, new Page<Category>());
+		for (int i = 0; i < p.getData().size(); i++) {
+			System.out.println(p.getData().get(i).getName());
+		}
 	}
 
 	@Test
 	public void t3() {
-		cateDao.findAll();
 
 	}
 }
