@@ -6,7 +6,7 @@ import org.hbhk.aili.hibernate.share.model.Category;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CateService extends AiliDaoSurpport<Category, String> implements
+public class CateService extends AiliDaoSurpport<Category, Integer> implements
 		ICateService {
 
 }

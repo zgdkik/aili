@@ -120,9 +120,8 @@ public class AiliDaoSurpport<T, PK extends Serializable> implements
 
 	// 获取全部实体。
 	public List<T> loadAll() {
-		return null;
+		return getHibernateTemplate().createCriteria(entityClass).list();
 	}
-
 	// loadAllWithLock() ?
 
 	// 更新实体
@@ -208,7 +207,7 @@ public class AiliDaoSurpport<T, PK extends Serializable> implements
 	private void setQueryParams(Query query, Object[] params) {
 		if (params != null && params.length > 0) {
 			for (int i = 0; i < params.length; i++) {
-				query.setParameter(i + 1, params[i]);
+				query.setParameter(i, params[i]);
 			}
 		}
 	}

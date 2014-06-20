@@ -29,8 +29,8 @@ public class UserDaoTest {
 
 	@Test
 	public void t2() {
-		Page<Category> p = cateService.queryForList("from Category ",
-				new String[] {}, new Page<Category>());
+		Page<Category> p = cateService.queryForList("from Category c where  c.id= ? ",
+				new Integer[] {2}, new Page<Category>());
 		for (int i = 0; i < p.getData().size(); i++) {
 			System.out.println(p.getData().get(i).getName());
 		}
