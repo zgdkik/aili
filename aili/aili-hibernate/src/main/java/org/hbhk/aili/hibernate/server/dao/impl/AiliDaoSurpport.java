@@ -6,7 +6,7 @@ import java.lang.reflect.Type;
 import java.util.List;
 
 import org.hbhk.aili.hibernate.server.dao.IAiliDaoCallback;
-import org.hbhk.aili.hibernate.server.dao.IGenericDao;
+import org.hbhk.aili.hibernate.server.dao.IAiliDao;
 import org.hbhk.aili.hibernate.share.model.Page;
 import org.hibernate.Criteria;
 import org.hibernate.LockMode;
@@ -39,7 +39,7 @@ import com.atomikos.beans.PropertyUtils;
  * 
  */
 public class AiliDaoSurpport<T, PK extends Serializable> implements
-		IGenericDao<T, PK> {
+		IAiliDao<T, PK> {
 
 	protected Logger logger = LoggerFactory.getLogger(getClass());
 

@@ -10,7 +10,7 @@ import org.hibernate.LockMode;
  * 
  * @author lny
  */
-public interface IGenericDao<T, PK> {
+public interface IAiliDao<T, PK> {
 	// -------------------- 基本检索、增加、修改、删除操作 --------------------
 
 	// 根据主键获取实体。如果没有相应的实体，返回 null。
