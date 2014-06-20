@@ -12,13 +12,14 @@
 		<module>aili-cache</module>
 		<module>aili-i18n</module>
 		<module>aili-job</module>
-		<module>aili-test</module>
-		<module>aili-security</module>
 		<module>aili-orm</module>
 		<module>aili-nosql</module>
 		<module>aili-lock</module>
 		<module>aili-theme</module>
 		<module>aili-hibernate</module>
+		<module>aili-mybatis</module>
+		<module>aili-security</module>
+		<module>aili-test</module>
 	</modules>
 
 	<properties>
