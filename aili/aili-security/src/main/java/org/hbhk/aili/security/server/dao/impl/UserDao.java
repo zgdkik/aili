@@ -7,13 +7,13 @@ import java.util.Map;
 import org.apache.commons.collections.CollectionUtils;
 import org.hbhk.aili.cache.server.aop.annotation.CacheKey;
 import org.hbhk.aili.cache.server.aop.annotation.ReadCache;
-import org.hbhk.aili.core.server.data.AiliDaoSupport;
+import org.hbhk.aili.mybatis.server.dao.impl.AiliDaoSupport;
 import org.hbhk.aili.security.server.dao.IUserDao;
 import org.hbhk.aili.security.share.pojo.UserInfo;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class UserDao extends AiliDaoSupport implements IUserDao {
+public class UserDao extends AiliDaoSupport<UserInfo,String> implements IUserDao {
 
 	private final String NAMESPACE = "aili.user.";
 
@@ -42,6 +42,11 @@ public class UserDao extends AiliDaoSupport implements IUserDao {
 			return null;
 		}
 		return userInfos.get(0);
+	}
+
+	@Override
+	public String getNamespace() {
+		return NAMESPACE;
 	}
 
 }

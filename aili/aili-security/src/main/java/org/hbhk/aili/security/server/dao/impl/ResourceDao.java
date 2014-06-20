@@ -5,13 +5,14 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.collections.CollectionUtils;
-import org.hbhk.aili.core.server.data.AiliDaoSupport;
+import org.hbhk.aili.mybatis.server.dao.impl.AiliDaoSupport;
 import org.hbhk.aili.security.server.dao.IResourceDao;
 import org.hbhk.aili.security.share.pojo.ResourceInfo;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class ResourceDao extends AiliDaoSupport implements IResourceDao {
+public class ResourceDao extends AiliDaoSupport<ResourceInfo,String> implements IResourceDao {
+	
 	private final String NAMESPACE = "aili.res.";
 
 	@Override
@@ -32,6 +33,11 @@ public class ResourceDao extends AiliDaoSupport implements IResourceDao {
 		parameter.put("pcode", pcode);
 	return getSqlSession().selectList(
 				NAMESPACE + "getResByPaCode", parameter);
+	}
+
+	@Override
+	public String getNamespace() {
+		return NAMESPACE;
 	}
 
 }
