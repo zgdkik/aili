@@ -43,6 +43,9 @@ public class AiliDaoSurpport<T, PK extends Serializable> implements
 
 	protected Logger logger = LoggerFactory.getLogger(getClass());
 
+	@Autowired
+	private SessionFactory sessionFactory;
+	
 	// 实体类类型(由构造方法自动赋值)
 	private Class<T> entityClass;
 
@@ -67,9 +70,6 @@ public class AiliDaoSurpport<T, PK extends Serializable> implements
 		session.close();
 		return result;
 	}
-
-	@Autowired
-	private SessionFactory sessionFactory;
 
 	public SessionFactory getSessionFactory() {
 		return sessionFactory;
