@@ -24,8 +24,16 @@ public class WebApplicationContextHolder implements ApplicationContextAware {
         }
 	}
 	
+	public static void setContext(ApplicationContext context) {
+		WebApplicationContextHolder.context = context;
+	}
+
 	public static WebApplicationContext getWebApplicationContext() {
 		return (WebApplicationContext)context;
+	}
+	
+	public static ApplicationContext getApplicationContext() {
+		return (ApplicationContext)context;
 	}
 
 }
