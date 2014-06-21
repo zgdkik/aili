@@ -9,6 +9,15 @@ public class Pagination<T> implements Serializable{
 	 */
 	private static final long serialVersionUID = 520741651051423364L;
 
+	private List<T> items;
+	private long count;
+	private int currentPage;
+	private int totalPages;
+	private int start;
+	private int size;
+	private String sortStr;
+		
+	
 	public Pagination(){}
 	public Pagination(List<T> items, long count){
 		this.items = items;
@@ -22,14 +31,7 @@ public class Pagination<T> implements Serializable{
 		this.start = start;
 		this.size = size;
 	}
-	private List<T> items;
-	private long count;
-	private int currentPage;
-	private int totalPages;
-	private int start;
-	private int size;
-	private String sortStr;
-		
+	
 	public int getCurrentPage() {
 		return currentPage;
 	}

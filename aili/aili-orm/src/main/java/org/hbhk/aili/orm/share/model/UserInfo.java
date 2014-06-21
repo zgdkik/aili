@@ -1,8 +1,9 @@
 package org.hbhk.aili.orm.share.model;
 
-import java.util.Set;
+import java.io.Serializable;
 
-public class UserInfo implements java.io.Serializable {
+
+public class UserInfo implements Serializable {
 
 	private static final long serialVersionUID = 54122579931594962L;
 	private String id;

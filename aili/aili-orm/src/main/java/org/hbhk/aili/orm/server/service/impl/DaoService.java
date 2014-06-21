@@ -6,6 +6,9 @@ import java.util.Map;
 
 import javax.sql.DataSource;
 
+import org.apache.commons.collections.CollectionUtils;
+import org.hbhk.aili.orm.server.page.MySqlPageQueryProvider;
+import org.hbhk.aili.orm.server.page.PageQueryProvider;
 import org.hbhk.aili.orm.server.service.IDaoService;
 import org.hbhk.aili.orm.server.surpport.Sort;
 import org.hbhk.aili.orm.share.model.Pagination;
@@ -17,14 +20,17 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class DaoService implements IDaoService {
-	
+
 	protected JdbcTemplate jdbcTemplate;
-	
+
+	private PageQueryProvider pageQueryProvider;
+
 	@Autowired
 	public void setDataSource(DataSource dataSource) {
-        this.jdbcTemplate = new JdbcTemplate(dataSource);
-    }
-	
+		pageQueryProvider = new MySqlPageQueryProvider();
+		this.jdbcTemplate = new JdbcTemplate(dataSource);
+	}
+
 	public JdbcTemplate getJdbcTemplate() {
 		return jdbcTemplate;
 	}
@@ -192,8 +198,7 @@ public class DaoService implements IDaoService {
 	@Override
 	public <T> List<T> findByNativeQuery(String queryString, Object[] params,
 			RowMapper<T> rowMapper) {
-		// TODO Auto-generated method stub
-		return null;
+		return (List<T>) jdbcTemplate.queryForList(queryString, rowMapper);
 	}
 
 	@Override
@@ -214,30 +219,40 @@ public class DaoService implements IDaoService {
 	@Override
 	public <T> List<T> findByNativeQuery(String queryString, Object[] params,
 			Sort[] sorts, RowMapper<T> rowMapper) {
-		// TODO Auto-generated method stub
-		return null;
+		return (List<T>) jdbcTemplate.queryForList(queryString, rowMapper);
 	}
 
 	@Override
 	public <T> List<T> findByNativeQuery(String queryString, Object[] params,
-			Sort[] sorts, int start, int pageSize, RowMapper<T> rowMapper) {
-		
-		return null;
+			Sort[] sorts, int start, final int pageSize,
+			final RowMapper<T> rowMapper) {
+		queryString = pageQueryProvider.getPagableQuery(queryString, start,
+				pageSize);
+		return (List<T>) jdbcTemplate.queryForList(queryString, rowMapper);
 	}
 
 	@Override
 	public <T> Pagination<T> findByNativeQuery(String queryString,
 			Object[] params, Sort[] sorts, int start, int pageSize,
 			boolean withGroupby, RowMapper<T> rowMapper) {
-		// TODO Auto-generated method stub
+		List<T> totalCountList = findByNativeQuery(queryString, params, rowMapper);
+		queryString = pageQueryProvider.getPagableQuery(queryString, start,
+				pageSize);
+		List<T> l = (List<T>) jdbcTemplate.queryForList(queryString,rowMapper);
+		Pagination<T> p = new Pagination<T>();
+		p.setItems(l);
+		p.setStart(start);
+		p.setSize(pageSize);
+		if(CollectionUtils.isNotEmpty(totalCountList)){
+			p.setTotalPages(totalCountList.size()/pageSize+1);
+		}
 		return null;
 	}
 
 	@Override
 	public <T> T findOneByNativeQuery(String queryString, Object[] params,
 			RowMapper<T> rowMapper, Sort[] sorts) {
-
-		return	(T) jdbcTemplate.queryForObject(queryString, rowMapper);
+		return (T) jdbcTemplate.queryForObject(queryString, rowMapper);
 	}
 
 	@Override
