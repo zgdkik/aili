@@ -198,14 +198,7 @@ public class DaoService implements IDaoService {
 	@Override
 	public <T> List<T> findByNativeQuery(String queryString, Object[] params,
 			RowMapper<T> rowMapper) {
-		return (List<T>) jdbcTemplate.queryForList(queryString, rowMapper);
-	}
-
-	@Override
-	public <T> List<T> findByNativeQuery(String queryString, Object[] params,
-			int start, int pageSize, RowMapper<T> rowMapper) {
-		// TODO Auto-generated method stub
-		return null;
+		return (List<T>) jdbcTemplate.query(queryString, rowMapper);
 	}
 
 	@Override
@@ -219,16 +212,22 @@ public class DaoService implements IDaoService {
 	@Override
 	public <T> List<T> findByNativeQuery(String queryString, Object[] params,
 			Sort[] sorts, RowMapper<T> rowMapper) {
-		return (List<T>) jdbcTemplate.queryForList(queryString, rowMapper);
+		return (List<T>) jdbcTemplate.query(queryString, rowMapper);
 	}
-
+	@Override
+	public <T> List<T> findByNativeQuery(String queryString, Object[] params,
+			int start, int pageSize, RowMapper<T> rowMapper) {
+		queryString = pageQueryProvider.getPagableQuery(queryString, start,
+				pageSize);
+		return (List<T>) jdbcTemplate.query(queryString, rowMapper);
+	}
 	@Override
 	public <T> List<T> findByNativeQuery(String queryString, Object[] params,
 			Sort[] sorts, int start, final int pageSize,
 			final RowMapper<T> rowMapper) {
 		queryString = pageQueryProvider.getPagableQuery(queryString, start,
 				pageSize);
-		return (List<T>) jdbcTemplate.queryForList(queryString, rowMapper);
+		return (List<T>) jdbcTemplate.query(queryString, rowMapper);
 	}
 
 	@Override
@@ -238,7 +237,7 @@ public class DaoService implements IDaoService {
 		List<T> totalCountList = findByNativeQuery(queryString, params, rowMapper);
 		queryString = pageQueryProvider.getPagableQuery(queryString, start,
 				pageSize);
-		List<T> l = (List<T>) jdbcTemplate.queryForList(queryString,rowMapper);
+		List<T> l = (List<T>) jdbcTemplate.query(queryString,rowMapper);
 		Pagination<T> p = new Pagination<T>();
 		p.setItems(l);
 		p.setStart(start);
@@ -246,13 +245,13 @@ public class DaoService implements IDaoService {
 		if(CollectionUtils.isNotEmpty(totalCountList)){
 			p.setTotalPages(totalCountList.size()/pageSize+1);
 		}
-		return null;
+		return p;
 	}
 
 	@Override
 	public <T> T findOneByNativeQuery(String queryString, Object[] params,
 			RowMapper<T> rowMapper, Sort[] sorts) {
-		return (T) jdbcTemplate.queryForObject(queryString, rowMapper);
+		return (T) jdbcTemplate.query(queryString, rowMapper).get(0);
 	}
 
 	@Override

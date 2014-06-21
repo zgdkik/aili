@@ -44,6 +44,15 @@
 		<property name="username" value="${quartz.username}" />
 		<property name="password" value="${quartz.password}" />
 	</bean>
-	
+	<bean id="testsql" class="org.hbhk.aili.orm.server.surpport.OrmConfig">
+		<constructor-arg>
+			<value>
+				<![CDATA[
+					select *from t_aili_user where id=$[id]
+				]]>
+			</value>
+		</constructor-arg>
+		
+	</bean>
 
 </beans>

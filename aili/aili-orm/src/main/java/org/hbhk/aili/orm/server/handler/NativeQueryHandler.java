@@ -32,7 +32,6 @@ public class NativeQueryHandler extends DynamicQueryHandler  {
 		super(daoService);
 		
 	}
-
 	public Object handleNativeQuery(NativeQuery nativeQuery, MethodInvocation invocation){
 		return handleNativeQueryNative(nativeQuery, invocation.getThis(), invocation.getMethod(), invocation.getArguments());
 	}
@@ -42,6 +41,7 @@ public class NativeQueryHandler extends DynamicQueryHandler  {
 		return handleNativeQueryNative(nativeQuery, pjp.getThis(), ms.getMethod(), pjp.getArgs());
 	}
 	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private Object handleNativeQueryNative(NativeQuery nativeQuery, Object obj, Method m, Object[] args){
 		Map<String, Object[]> paramsEx = getParamsEx(m, args);
 		Map<String,Object> templateParams = new HashMap<String, Object>();
@@ -53,9 +53,9 @@ public class NativeQueryHandler extends DynamicQueryHandler  {
 		
 		String queryName = nativeQuery.value();
 		if(queryName.equals("")){
-//			if(!(obj instanceof ModelClassSupport)) {
-//				throw new RuntimeException("QueryName can not be empty");
-//			}
+			if(!(obj instanceof ModelClassSupport)) {
+				throw new RuntimeException("QueryName can not be empty");
+			}
 			ModelClassSupport mcs = (ModelClassSupport)obj;
 			queryName += mcs.getModelClass().getSimpleName();
 			queryName += "." + m.getName();				

@@ -10,14 +10,28 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.hbhk.aili.orm.server.annotation.DynamicQuery;
 import org.hbhk.aili.orm.server.service.IDaoService;
+import org.hbhk.aili.orm.server.service.IGetbrickTemplate;
+import org.hbhk.aili.orm.server.service.impl.GetbrickTemplate;
 import org.hbhk.aili.orm.server.surpport.ModelClassSupport;
 import org.hbhk.aili.orm.server.surpport.Page;
 import org.hbhk.aili.orm.server.surpport.Sort;
 import org.hbhk.aili.orm.share.model.Pagination;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 
 public class DynamicQueryHandler extends AbstractQueryHandler {
 	
-	
+	@Autowired
+	@Qualifier("getbrickTemplate")
+	private IGetbrickTemplate getbrickTemplate = new GetbrickTemplate();
+
+	public IGetbrickTemplate getGetbrickTemplate() {
+		return getbrickTemplate;
+	}
+
+	public void setGetbrickTemplate(IGetbrickTemplate getbrickTemplate) {
+		this.getbrickTemplate = getbrickTemplate;
+	}
 
 	public DynamicQueryHandler(IDaoService daoService) {
 		super(daoService);
@@ -97,7 +111,6 @@ public class DynamicQueryHandler extends AbstractQueryHandler {
 	* @throws
 	 */
 	protected String getDynamicQuery(String queryName, Map<String, Object> params) {
-		//
-		return "select *from t_aili_user";
+		return getbrickTemplate.setContextData(params, queryName);
 	}
 }
