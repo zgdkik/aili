@@ -98,6 +98,6 @@ public class DynamicQueryHandler extends AbstractQueryHandler {
 	 */
 	protected String getDynamicQuery(String queryName, Map<String, Object> params) {
 		//
-		return "";
+		return "select *from t_aili_user";
 	}
 }

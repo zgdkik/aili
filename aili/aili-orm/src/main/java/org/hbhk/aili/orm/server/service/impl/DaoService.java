@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
+import javax.sql.DataSource;
+
 import org.hbhk.aili.orm.server.service.IDaoService;
 import org.hbhk.aili.orm.server.surpport.Sort;
 import org.hbhk.aili.orm.share.model.Pagination;
@@ -15,10 +17,14 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class DaoService implements IDaoService {
-
-	@Autowired(required=false)
+	
 	protected JdbcTemplate jdbcTemplate;
-
+	
+	@Autowired
+	public void setDataSource(DataSource dataSource) {
+        this.jdbcTemplate = new JdbcTemplate(dataSource);
+    }
+	
 	public JdbcTemplate getJdbcTemplate() {
 		return jdbcTemplate;
 	}
@@ -215,7 +221,7 @@ public class DaoService implements IDaoService {
 	@Override
 	public <T> List<T> findByNativeQuery(String queryString, Object[] params,
 			Sort[] sorts, int start, int pageSize, RowMapper<T> rowMapper) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
@@ -231,7 +237,7 @@ public class DaoService implements IDaoService {
 	public <T> T findOneByNativeQuery(String queryString, Object[] params,
 			RowMapper<T> rowMapper, Sort[] sorts) {
 
-		return null;
+		return	(T) jdbcTemplate.queryForObject(queryString, rowMapper);
 	}
 
 	@Override
