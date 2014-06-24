@@ -8,11 +8,8 @@ import jetbrick.template.JetEngine;
 import jetbrick.template.JetTemplate;
 import jetbrick.template.ResourceNotFoundException;
 
-import org.hbhk.aili.core.server.web.WebApplicationContextHolder;
 import org.hbhk.aili.orm.server.context.OrmContext;
 import org.hbhk.aili.orm.server.service.IGetbrickTemplate;
-import org.hbhk.aili.orm.server.surpport.OrmConfig;
-import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 
 @Service(value = "getbrickTemplate")
