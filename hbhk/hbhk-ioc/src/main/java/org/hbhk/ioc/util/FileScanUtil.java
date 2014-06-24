@@ -12,9 +12,7 @@ import java.net.URL;
 import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.Enumeration;
-import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
@@ -28,9 +26,16 @@ public class FileScanUtil {
 
 	public List<String> scanBeansXml(String dirPath, String filename)
 			throws IOException {
-
-		Enumeration<URL> urls = this.getClass().getClassLoader()
-				.getResources(dirPath);
+		Enumeration<URL> urls = null;
+		if (StringUtils.isEmpty(dirPath)) {
+			if (StringUtils.isNotEmpty(filename)) {
+				urls = this.getClass().getClassLoader().getResources(filename);
+			} else {
+				urls = this.getClass().getClassLoader().getResources("orm.xml");
+			}
+		} else {
+			urls = this.getClass().getClassLoader().getResources(dirPath);
+		}
 		List<String> beansXml = new ArrayList<String>();
 		while (urls.hasMoreElements()) {
 			// 获取下一个元素
@@ -53,9 +58,9 @@ public class FileScanUtil {
 					if (!name.startsWith(dirPath) || entry.isDirectory()) {
 						continue;
 					}
-					if (!name.endsWith("beans.xml")) {
-						continue;
-					}
+					// if (!name.endsWith("orm.xml")) {
+					// continue;
+					// }
 					if (StringUtils.isNotEmpty(filename)) {
 						if (!name.endsWith(filename)) {
 							continue;
@@ -74,11 +79,7 @@ public class FileScanUtil {
 			} else if (protocol.equals("file")) {
 
 				String filePath = URLDecoder.decode(url.getFile(), "UTF-8");
-				String context = readFileContext(filePath);
-				if (StringUtils.isNotEmpty(context)) {
-					beansXml.add(context);
-				}
-				log.debug("file" + context);
+				readFileContext(filePath, beansXml, filename);
 
 			}
 		}
@@ -113,10 +114,12 @@ public class FileScanUtil {
 
 	}
 
-	private String readFileContext(String filePath) throws IOException {
+	private List<String> readFileContext(String filePath, List<String> fileStr,
+			final String filename) throws IOException {
 
 		// 获取此包的目录 建立一个File
 		File dir = new File(filePath);
+
 		// 如果不存在或者 也不是目录就直接返回
 		if (!dir.exists() || !dir.isDirectory()) {
 			// log.warn("用户定义包名 " + packageName + " 下没有任何文件");
@@ -126,15 +129,19 @@ public class FileScanUtil {
 		File[] dirfiles = dir.listFiles(new FileFilter() {
 			// 自定义过滤规则 如果可以循环(包含子目录) 或则是以.class结尾的文件(编译好的java类文件)
 			public boolean accept(File file) {
+				boolean  ename = true;
+				 if(StringUtils.isNotEmpty(filename)){
+					 ename = file.getName().endsWith(filename);
+				 }
 				return (file.isDirectory())
-						|| (file.getName().endsWith("beans.xml"));
+						|| (ename);
 			}
 		});
 		// 循环所有文件
 		for (File file : dirfiles) {
 			// 如果是目录 则继续扫描
 			if (file.isDirectory()) {
-				readFileContext(file.getAbsolutePath());
+				readFileContext(file.getAbsolutePath(), fileStr, filename);
 			} else {
 				InputStream is = null;
 				InputStreamReader isr = null;
@@ -146,9 +153,9 @@ public class FileScanUtil {
 					StringBuilder context = new StringBuilder();
 					String line;
 					while ((line = br.readLine()) != null) {
-						context.append(line);
+						context.append(line + "\t\n");
 					}
-					return context.toString();
+					fileStr.add(context.toString());
 				} finally {
 					if (br != null) {
 						br.close();
@@ -163,7 +170,7 @@ public class FileScanUtil {
 
 			}
 		}
-		return null;
+		return fileStr;
 
 	}
 
@@ -171,8 +178,8 @@ public class FileScanUtil {
 		FileScanUtil f = new FileScanUtil();
 		// List<String> paths = f.getFilePath("org/hbhk/");
 		// System.out.println(paths.size());
-		String dirPath = "org/hbhk/aili/";
-		List<String> xmls=f.scanBeansXml(dirPath, null);
+		String dirPath = "org/hbhk/aili";
+		List<String> xmls = f.scanBeansXml(dirPath, "orm.xml");
 		for (String string : xmls) {
 			System.out.println(string);
 		}
