@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.ObjectUtils;
 import org.hbhk.aili.orm.server.convertor.OrmConvertor;
 import org.hbhk.aili.orm.share.model.Delete;
 import org.hbhk.aili.orm.share.model.Insert;
@@ -16,9 +17,9 @@ import org.hbhk.aili.orm.share.util.FileScanUtil;
 
 public class OrmContext {
 
-	public static Map<String, Object> context = new ConcurrentHashMap<String, Object>();
+	private static Map<String, Object> context = new ConcurrentHashMap<String, Object>();
 
-	public void inti() throws IOException {
+	public static void init() throws IOException {
 		FileScanUtil scanUtil = new FileScanUtil();
 		OrmConvertor convertor = new OrmConvertor();
 		List<String> orms = scanUtil.scanBeansXml("org/hbhk/aili", "orm.xml");
@@ -56,10 +57,27 @@ public class OrmContext {
 		}
 	}
 
-	private void keyExit(String key) {
+	public static String getSql(String id) {
+		if (context.size() == 0) {
+			try {
+				init();
+			} catch (IOException e) {
+				throw new RuntimeException(e);
+			}
+		}
+		String sql = (String) context.get(id);
+		return sql;
+
+	}
+
+	private static void keyExit(String key) {
 		if (context.containsKey(key)) {
 			throw new RuntimeException("id is exits");
 		}
 	}
 
+	public static Map<String, Object> getOrmContext() {
+		Map<String, Object> sqlcontext = ObjectUtils.clone(context);
+		return sqlcontext;
+	}
 }
