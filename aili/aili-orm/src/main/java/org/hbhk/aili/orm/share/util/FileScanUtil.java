@@ -29,12 +29,23 @@ public class FileScanUtil {
 		Enumeration<URL> urls = null;
 		if (StringUtils.isEmpty(dirPath)) {
 			if (StringUtils.isNotEmpty(filename)) {
-				urls = this.getClass().getClassLoader().getResources(filename);
+				urls = FileScanUtil.class.getClass().getClassLoader()
+						.getResources(filename);
 			} else {
-				urls = this.getClass().getClassLoader().getResources("orm.xml");
+				ClassLoader loader = FileScanUtil.class.getClass().getClassLoader();
+				if (loader == null) {
+					urls = ClassLoader.getSystemResources("orm.xml");
+				} else {
+					urls = loader.getResources(dirPath);
+				}
 			}
 		} else {
-			urls = this.getClass().getClassLoader().getResources(dirPath);
+			ClassLoader loader = FileScanUtil.class.getClass().getClassLoader();
+			if (loader == null) {
+				urls = ClassLoader.getSystemResources(dirPath);
+			} else {
+				urls = loader.getResources(dirPath);
+			}
 		}
 		List<String> beansXml = new ArrayList<String>();
 		while (urls.hasMoreElements()) {
@@ -129,12 +140,11 @@ public class FileScanUtil {
 		File[] dirfiles = dir.listFiles(new FileFilter() {
 			// 自定义过滤规则 如果可以循环(包含子目录) 或则是以.class结尾的文件(编译好的java类文件)
 			public boolean accept(File file) {
-				boolean  ename = true;
-				 if(StringUtils.isNotEmpty(filename)){
-					 ename = file.getName().endsWith(filename);
-				 }
-				return (file.isDirectory())
-						|| (ename);
+				boolean ename = true;
+				if (StringUtils.isNotEmpty(filename)) {
+					ename = file.getName().endsWith(filename);
+				}
+				return (file.isDirectory()) || (ename);
 			}
 		});
 		// 循环所有文件
@@ -174,15 +184,4 @@ public class FileScanUtil {
 
 	}
 
-	public static void main(String[] args) throws Exception {
-		FileScanUtil f = new FileScanUtil();
-		// List<String> paths = f.getFilePath("org/hbhk/");
-		// System.out.println(paths.size());
-		String dirPath = "org/hbhk/aili";
-		List<String> xmls = f.scanBeansXml(dirPath, "orm.xml");
-		for (String string : xmls) {
-			System.out.println(string);
-		}
-
-	}
 }
