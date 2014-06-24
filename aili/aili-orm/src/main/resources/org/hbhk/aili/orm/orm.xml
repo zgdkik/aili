@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<orm xmlns="http://www.hbhk.org/orm/sql">
+    <delete class="class" id="id">
+        <sql>asdasd</sql>
+    </delete>
+</orm>
