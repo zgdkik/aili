@@ -18,24 +18,24 @@
 			http://hbhk.aili.org/schema/hbhk  
 			http://hbhk.aili.org/schema/hbhk/aili-spring-ext.xsd
 			">
-
 	<hbhk:dao-config base-package="org.hbhk.aili.**.test" />
 
 	 <!-- <aop:aspectj-autoproxy />  -->
 	 
 	<context:annotation-config />
 	<context:component-scan base-package="org.hbhk.aili.orm.server" />
+ <bean id="queryInterceptor" class="org.hbhk.aili.orm.server.aspect.QueryInterceptor" />
 	
-	<bean id="queryInterceptor" class="org.hbhk.aili.orm.server.aspect.QueryInterceptor" />
 	<bean id="genericDaoProxy" class="org.springframework.aop.framework.ProxyFactoryBean"
 		abstract="true">
-		<property name="interceptorNames">
+		<!-- <property name="interceptorNames">
 			<list>
 				<value>queryInterceptor</value>
 			</list>
-		</property>
-	</bean>
-
+		</property> -->
+	</bean> 
+ 	<aop:aspectj-autoproxy />  
+ 	<bean class="org.hbhk.aili.orm.server.aspect.QueryAspect"></bean>
 	<context:property-placeholder location="classpath*:jdbc.properties" />
 	<bean id="dataSource" destroy-method="close"
 		class="org.apache.commons.dbcp.BasicDataSource">
@@ -43,16 +43,6 @@
 		<property name="url" value="${quartz.url}" />
 		<property name="username" value="${quartz.username}" />
 		<property name="password" value="${quartz.password}" />
-	</bean>
-	<bean id="testsql" class="org.hbhk.aili.orm.server.surpport.OrmConfig">
-		<constructor-arg>
-			<value>
-				<![CDATA[
-					select *from t_aili_user where id=$[id]
-				]]>
-			</value>
-		</constructor-arg>
-		
 	</bean>
 
 </beans>
