@@ -28,14 +28,17 @@
 	
 	<bean id="genericDaoProxy" class="org.springframework.aop.framework.ProxyFactoryBean"
 		abstract="true">
+		<!-- 老的aop方式 -->
 		<!-- <property name="interceptorNames">
 			<list>
 				<value>queryInterceptor</value>
 			</list>
 		</property> -->
 	</bean> 
+	<!-- 新的aop方式 -->
  	<aop:aspectj-autoproxy />  
  	<bean class="org.hbhk.aili.orm.server.aspect.QueryAspect"></bean>
+ 	
 	<context:property-placeholder location="classpath*:jdbc.properties" />
 	<bean id="dataSource" destroy-method="close"
 		class="org.apache.commons.dbcp.BasicDataSource">
