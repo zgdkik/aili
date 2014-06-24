@@ -14,15 +14,21 @@ import org.hbhk.aili.orm.share.model.Orm;
 import org.hbhk.aili.orm.share.model.Select;
 import org.hbhk.aili.orm.share.model.Update;
 import org.hbhk.aili.orm.share.util.FileScanUtil;
+import org.hbhk.aili.orm.share.util.PropertiesUtil;
 
 public class OrmContext {
 
 	private static Map<String, Object> context = new ConcurrentHashMap<String, Object>();
+	private static String path = "orm.auotscan.path";
+	private static String filename = "orm.auotscan.filename";
 
 	public static void init() throws IOException {
 		FileScanUtil scanUtil = new FileScanUtil();
 		OrmConvertor convertor = new OrmConvertor();
-		List<String> orms = scanUtil.scanBeansXml("org/hbhk/aili", "orm.xml");
+
+		List<String> orms = scanUtil.scanBeansXml(
+				PropertiesUtil.getPValue(path),
+				PropertiesUtil.getPValue(filename));
 		for (String str : orms) {
 			Orm orm = convertor.toMessage(str);
 			List<Insert> inserts = orm.getInsert();
