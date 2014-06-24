@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <orm xmlns="http://www.hbhk.org/orm/sql">
-    <delete class="class" id="id">
-        <sql>asdasd</sql>
+    <delete class="class" id="testsql">
+        <sql>select *from t_aili_user where id=${id}</sql>
     </delete>
 </orm>
