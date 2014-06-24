@@ -9,6 +9,7 @@ import jetbrick.template.JetTemplate;
 import jetbrick.template.ResourceNotFoundException;
 
 import org.hbhk.aili.core.server.web.WebApplicationContextHolder;
+import org.hbhk.aili.orm.server.context.OrmContext;
 import org.hbhk.aili.orm.server.service.IGetbrickTemplate;
 import org.hbhk.aili.orm.server.surpport.OrmConfig;
 import org.springframework.context.ApplicationContext;
@@ -18,8 +19,8 @@ import org.springframework.stereotype.Service;
 public class GetbrickTemplate implements IGetbrickTemplate {
 
 	@Override
-	public String setContextData(Map<String, Object> context, String beanId) {
-		JetTemplate template = getTemplate(beanId);
+	public String setContextData(Map<String, Object> context, String id) {
+		JetTemplate template = getTemplate(id);
 		// 渲染模板
 		StringWriter writer = new StringWriter();
 		template.render(context, writer);
@@ -27,15 +28,10 @@ public class GetbrickTemplate implements IGetbrickTemplate {
 	}
 
 	@Override
-	public JetTemplate getTemplate(String beanId)
+	public JetTemplate getTemplate(String id)
 			throws ResourceNotFoundException {
 		JetEngine engine = JetEngine.create();
-		ApplicationContext context = WebApplicationContextHolder
-				.getApplicationContext();
-		OrmConfig orm = context.getBean(beanId, OrmConfig.class);
-		String sql = orm.getSql();
-		sql = sql.replace("[", "{");
-		sql = sql.replace("]", "}");
+		String sql = OrmContext.getSql(id);
 		// 获取一个模板对象
 		JetTemplate template = engine.createTemplate(sql);
 		return template;
