@@ -37,8 +37,8 @@ public class GenericDaoConfigBeanDefinitionParser implements BeanDefinitionParse
 	public BeanDefinition parse(Element element, ParserContext parserContext) {
 		if(element.hasAttribute(BASE_PACKAGE_ATTRIBUTE)){
 			logger.debug("Start auto Dao detection...");
-			//element.getAttribute(BASE_PACKAGE_ATTRIBUTE) 扫描的包路径
-			Set<BeanDefinition> beanDefinitions = getDaoInterfaces("org.hbhk.aili.**.test",
+			//element.getAttribute(BASE_PACKAGE_ATTRIBUTE) "org.hbhk.aili.**.test" 扫描的包路径
+			Set<BeanDefinition> beanDefinitions = getDaoInterfaces(element.getAttribute(BASE_PACKAGE_ATTRIBUTE) ,
 						parserContext.getReaderContext().getResourceLoader());
 			for(BeanDefinition bean: beanDefinitions){
 				registerDao(bean, parserContext);
