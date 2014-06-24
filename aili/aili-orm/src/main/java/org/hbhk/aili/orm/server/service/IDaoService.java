@@ -16,8 +16,8 @@ public interface IDaoService {
 	<T> void delete(T model);
 	<T> void deleteByPrimaryKey(Class<T> clazz,Serializable pk);
 	
-	<T> T findOneByNamedQuery(String queryName, Map<String,Object> params, Sort[] sorts);
-	<T> T findOneByQuery(String queryString, Map<String,Object> params, Sort[] sorts);
+	//<T> T findOneByNamedQuery(String queryName, Map<String,Object> params, Sort[] sorts);
+	//<T> T findOneByQuery(String queryString, Map<String,Object> params, Sort[] sorts);
 	
 	/**
 	 * Similiar with findOneByQuery, the difference is that the params can contain other definition do not used by query 
@@ -28,20 +28,19 @@ public interface IDaoService {
 	 */
 	<T> T findOneByQueryEx(String queryString, Map<String,Object> params, Sort[] sorts);	
 	
-	<T> List<T> findByNamedQuery(String queryName, Map<String,Object> params);
-	<T> List<T> findByNamedQuery(String queryName, Map<String,Object> params, int start, int pageSize);
-	<T> Pagination<T> findByNamedQuery(String queryName, Map<String,Object> params, int start, int pageSize, boolean withGroupby);
-	<T> List<T> findByNamedQuery(String queryName, Map<String,Object> params, Sort[] sorts);
-	<T> List<T> findByNamedQuery(String queryName, Map<String,Object> params, Sort[] sorts, int start, int pageSize);
-	<T> Pagination<T> findByNamedQuery(String queryName, Map<String,Object> params, Sort[] sorts, int start, int pageSize, boolean withGroupby);
+	//	<T> List<T> findByNamedQuery(String queryName, Map<String,Object> params);
+	//	<T> List<T> findByNamedQuery(String queryName, Map<String,Object> params, int start, int pageSize);
+	//	<T> Pagination<T> findByNamedQuery(String queryName, Map<String,Object> params, int start, int pageSize, boolean withGroupby);
+	//	<T> List<T> findByNamedQuery(String queryName, Map<String,Object> params, Sort[] sorts);
+	//	<T> List<T> findByNamedQuery(String queryName, Map<String,Object> params, Sort[] sorts, int start, int pageSize);
+	//	<T> Pagination<T> findByNamedQuery(String queryName, Map<String,Object> params, Sort[] sorts, int start, int pageSize, boolean withGroupby);
 	
-	<T> List<T> findByQuery(String queryString, Map<String,Object> params);
-	<T> List<T> findByQuery(String queryString, Map<String,Object> params, int start, int pageSize);
-	<T> Pagination<T> findByQuery(String queryString, Map<String,Object> params, int start, int pageSize, boolean withGroupby);
-	<T> List<T> findByQuery(String queryString, Map<String,Object> params, Sort[] sorts);
-	<T> List<T> findByQuery(String queryString, Map<String,Object> params, Sort[] sorts, int start, int pageSize);
-	<T> Pagination<T> findByQuery(String queryString, Map<String,Object> params, Sort[] sorts, int start, int pageSize, boolean withGroupby);
-	
+	//	<T> List<T> findByQuery(String queryString, Map<String,Object> params);
+	//	<T> List<T> findByQuery(String queryString, Map<String,Object> params, int start, int pageSize);
+	//	<T> Pagination<T> findByQuery(String queryString, Map<String,Object> params, int start, int pageSize, boolean withGroupby);
+	//	<T> List<T> findByQuery(String queryString, Map<String,Object> params, Sort[] sorts);
+	//	<T> List<T> findByQuery(String queryString, Map<String,Object> params, Sort[] sorts, int start, int pageSize);
+	//	<T> Pagination<T> findByQuery(String queryString, Map<String,Object> params, Sort[] sorts, int start, int pageSize, boolean withGroupby);
 	/**
 	 * Similiar with findByQuery, the difference is that the params can contain other definition do not used by query 
 	 * @param <T>
@@ -55,8 +54,8 @@ public interface IDaoService {
 	<T> List<T> findByQueryEx(String queryString, Map<String,Object> params, Sort[] sorts, int start, int pageSize);
 	<T> Pagination<T> findByQueryEx(String queryString, Map<String,Object> params, Sort[] sorts, int start, int pageSize, boolean withGroupby);
 	
-	int batchUpdateByNamedQuery(String queryName, Map<String,Object> params);
-	int batchUpdateByQuery(String queryString, Map<String,Object> params);
+	//int batchUpdateByNamedQuery(String queryName, Map<String,Object> params);
+	//int batchUpdateByQuery(String queryString, Map<String,Object> params);
 		
 	<T> List<T> findByNativeQuery(String queryString, Object[] params, RowMapper<T> rowMapper);
 	<T> List<T> findByNativeQuery(String queryString, Object[] params, int start, int pageSize, RowMapper<T> rowMapper);

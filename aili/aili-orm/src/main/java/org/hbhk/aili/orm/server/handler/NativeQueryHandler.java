@@ -20,13 +20,29 @@ import org.hbhk.aili.orm.server.aspect.DummyColumnTranslator;
 import org.hbhk.aili.orm.server.mapper.BaseRowMapper;
 import org.hbhk.aili.orm.server.mapper.CommonBeanRowMapper;
 import org.hbhk.aili.orm.server.service.IDaoService;
+import org.hbhk.aili.orm.server.service.IGetbrickTemplate;
+import org.hbhk.aili.orm.server.service.impl.GetbrickTemplate;
 import org.hbhk.aili.orm.server.surpport.ModelClassSupport;
 import org.hbhk.aili.orm.server.surpport.Page;
 import org.hbhk.aili.orm.server.surpport.Sort;
 import org.hbhk.aili.orm.share.model.Pagination;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.RowMapper;
 
-public class NativeQueryHandler extends DynamicQueryHandler  {
+public class NativeQueryHandler extends AbstractQueryHandler  {
+
+	@Autowired
+	@Qualifier("getbrickTemplate")
+	private IGetbrickTemplate getbrickTemplate = new GetbrickTemplate();
+
+	public IGetbrickTemplate getGetbrickTemplate() {
+		return getbrickTemplate;
+	}
+
+	public void setGetbrickTemplate(IGetbrickTemplate getbrickTemplate) {
+		this.getbrickTemplate = getbrickTemplate;
+	}
 
 	public NativeQueryHandler(IDaoService daoService) {
 		super(daoService);
@@ -258,5 +274,18 @@ public class NativeQueryHandler extends DynamicQueryHandler  {
 				return result;
 			}
 		}
+	}
+	/**
+	 * 
+	* @author 何波
+	* @Description: 查找对于模板生成sql语句
+	* @param queryName
+	* @param params
+	* @return   
+	* String   
+	* @throws
+	 */
+	protected String getDynamicQuery(String queryName, Map<String, Object> params) {
+		return getbrickTemplate.setContextData(params, queryName);
 	}
 }
