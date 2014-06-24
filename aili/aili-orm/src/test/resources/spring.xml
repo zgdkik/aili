@@ -19,7 +19,7 @@
 			http://hbhk.aili.org/schema/hbhk/aili-spring-ext.xsd
 			">
 
-	<hbhk:dao-config base-package="loxia.dao" />
+	<hbhk:dao-config base-package="org.hbhk.aili.**.test" />
 
 	 <!-- <aop:aspectj-autoproxy />  -->
 	 
