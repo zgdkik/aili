@@ -10,13 +10,11 @@ import org.hbhk.aili.orm.server.service.IDaoService;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.Ordered;
-import org.springframework.stereotype.Component;
 
 @Aspect
-@Component
 public class QueryAspect implements Ordered, InitializingBean {
 
-	private final String pointcut = "execution(* org.hbhk.*.*.server.dao.*.*(..))";
+	protected  final String pointcut = "execution(* org.hbhk.*.*.server.dao.*.*(..))";
 	@Autowired
 	private IDaoService daoService;
 
@@ -30,7 +28,7 @@ public class QueryAspect implements Ordered, InitializingBean {
 		return 20;
 	}
 
-	@Around(pointcut)
+	@Around("this(org.hbhk.aili.orm.server.dao.GenericEntityDao)")
 	public Object doQuery(ProceedingJoinPoint pjp) throws Throwable {
 		MethodSignature ms = (MethodSignature) pjp.getSignature();
 		NativeQuery nativeQuery = ms.getMethod().getAnnotation(NativeQuery.class);
