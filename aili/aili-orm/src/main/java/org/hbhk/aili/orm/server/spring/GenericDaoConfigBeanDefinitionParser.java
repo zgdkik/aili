@@ -86,7 +86,6 @@ public class GenericDaoConfigBeanDefinitionParser implements BeanDefinitionParse
 			rootDefinition.setParentName("genericDaoProxy");
 			rootDefinition.getPropertyValues().addPropertyValue("proxyInterfaces",interfaces);
 			rootDefinition.getPropertyValues().addPropertyValue("target",targetBean);	
-			
 			BeanComponentDefinition definition =
                 new BeanComponentDefinition(rootDefinition, beanName);
 			parserContext.registerBeanComponent(definition);
