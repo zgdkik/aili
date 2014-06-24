@@ -8,8 +8,10 @@
 
 package org.hbhk.aili.orm.share.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
@@ -44,9 +46,9 @@ import javax.xml.bind.annotation.XmlType;
     "update",
     "select"
 })
-public class Orm {
-
-    protected List<Insert> insert;
+public class Orm implements Serializable{
+	private static final long serialVersionUID = -6182547750119647956L;
+	protected List<Insert> insert;
     protected List<Delete> delete;
     protected List<Update> update;
     protected List<Select> select;
@@ -167,4 +169,21 @@ public class Orm {
         return this.select;
     }
 
+	public void setInsert(List<Insert> insert) {
+		this.insert = insert;
+	}
+
+	public void setDelete(List<Delete> delete) {
+		this.delete = delete;
+	}
+
+	public void setUpdate(List<Update> update) {
+		this.update = update;
+	}
+
+	public void setSelect(List<Select> select) {
+		this.select = select;
+	}
+
+    
 }
