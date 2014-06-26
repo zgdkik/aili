@@ -96,21 +96,3 @@ insert into t_aili_role_resource(id,rocode,recode)  VALUES ('1','r001','re001');
 insert into t_aili_role_resource(id,rocode,recode)  VALUES ('2','r001','re001');
 insert into t_aili_role_resource(id,rocode,recode)  VALUES ('3','r001','re002');
 insert into t_aili_role_resource(id,rocode,recode)  VALUES ('4','r001','re004');
-
-   -- 资源表resources
-   CREATE TABLE t_aili_menu (
-     id varchar(255) PRIMARY KEY ,
-     -- 菜单所对应的url地址
-     url varchar(255),
-     -- 菜单名称
-     name varchar(255),
-     --是否启用 YN
-     active char(1),
-     -- 显示顺序
-     sort int(2),
-     -- 上级菜单
-     parent  int(11)
-      -- 备注
-     memo varchar(255)
-     
-   );
