@@ -3,8 +3,6 @@ package org.hbhk.aili.orm.server.convertor;
 import java.io.ByteArrayInputStream;
 import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
@@ -15,7 +13,6 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.stream.FactoryConfigurationError;
 import javax.xml.transform.stream.StreamSource;
 
-import org.hbhk.aili.orm.share.model.Delete;
 import org.hbhk.aili.orm.share.model.ObjectFactory;
 import org.hbhk.aili.orm.share.model.Orm;
 import org.hbhk.aili.orm.share.util.JAXBContextUtil;
