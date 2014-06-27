@@ -39,8 +39,8 @@ public class OrmConvertor {
 					stream), CLZZ);
 			return element.getValue();
 		} catch (JAXBException e) {
+			throw new RuntimeException(e);
 		}
-		return null;
 	}
 
 	public String fromMessage(Orm value) {
@@ -63,9 +63,11 @@ public class OrmConvertor {
 			stringWriter.flush();
 			return stringWriter.toString();
 		} catch (PropertyException e) {
+			throw new RuntimeException(e);
 		} catch (FactoryConfigurationError e) {
+			throw new RuntimeException(e);
 		} catch (JAXBException e) {
+			throw new RuntimeException(e);
 		}
-		return null;
 	}
 }
