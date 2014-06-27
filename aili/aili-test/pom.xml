@@ -60,31 +60,48 @@
 			<artifactId>cxf-rt-management</artifactId>
 		</dependency>
 		<!-- End of CXF Dependencies -->
+		<!-- jcr start -->
+		<dependency>
+			<groupId>org.springframework.extensions</groupId>
+			<artifactId>se-jcr-commons</artifactId>
+			<version>2.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.extensions</groupId>
+			<artifactId>se-jcr</artifactId>
+			<version>0.9</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.jcr</groupId>
+			<artifactId>jcr</artifactId>
+			<version>2.0</version>
+		</dependency>
+		<!-- All the Jackrabbit libraries needed for DavEx, plus JcrUtils -->
+		<dependency>
+			<groupId>org.apache.jackrabbit</groupId>
+			<artifactId>jackrabbit-jcr2dav</artifactId>
+			<version>2.7.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.jackrabbit</groupId>
+			<artifactId>jackrabbit-core</artifactId>
+			<version>2.7.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jcrom</groupId>
+			<artifactId>jcrom</artifactId>
+			<version>2.1.0</version>
+		</dependency>
+		<!-- jcr end -->
 	</dependencies>
 	<build>
 		<plugins>
-		<!-- 	<plugin>
-				<groupId>org.apache.cxf</groupId>
-				<artifactId>cxf-codegen-plugin</artifactId>
-				<version>${cxf.version}</version>
-				<executions>
-					<execution>
-						<id>generate-sources</id>
-						<phase>generate-sources</phase>
-						<configuration>
-							<sourceRoot>generated/cxf</sourceRoot>
-							<wsdlOptions>
-								<wsdlOption>
-									<wsdl>http://localhost:8082/cxf-spring-test/getInfoService?wsdl</wsdl>
-								</wsdlOption>
-							</wsdlOptions>
-						</configuration>
-						<goals>
-							<goal>wsdl2java</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin> -->
+			<!-- <plugin> <groupId>org.apache.cxf</groupId> <artifactId>cxf-codegen-plugin</artifactId> 
+				<version>${cxf.version}</version> <executions> <execution> <id>generate-sources</id> 
+				<phase>generate-sources</phase> <configuration> <sourceRoot>generated/cxf</sourceRoot> 
+				<wsdlOptions> <wsdlOption> <wsdl>http://localhost:8082/cxf-spring-test/getInfoService?wsdl</wsdl> 
+				</wsdlOption> </wsdlOptions> </configuration> <goals> <goal>wsdl2java</goal> 
+				</goals> </execution> </executions> </plugin> -->
 		</plugins>
 
 	</build>
