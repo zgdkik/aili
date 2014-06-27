@@ -38,7 +38,6 @@ import org.hbhk.aili.orm.server.aspect.DummyColumnTranslator;
  * <li>alias：返回<code>Map&lt;String,Object&gt;</code>类型数据时需指定的列名列表</li>
  * <li>classes：返回<code>Map&lt;String,Object&gt;</code>类型数据时需指定的类列表</li>
  * </ul>
- * @author Benjamin
  *
  */
 @Target(ElementType.METHOD)
