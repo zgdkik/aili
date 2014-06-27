@@ -13,6 +13,7 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.stream.FactoryConfigurationError;
 import javax.xml.transform.stream.StreamSource;
 
+import org.apache.commons.lang3.StringUtils;
 import org.hbhk.aili.orm.share.model.ObjectFactory;
 import org.hbhk.aili.orm.share.model.Orm;
 import org.hbhk.aili.orm.share.util.JAXBContextUtil;
@@ -25,15 +26,16 @@ public class OrmConvertor {
 	/** The context. */
 	private static JAXBContext context = JAXBContextUtil.initContext(CLZZ);
 
-	public Orm toMessage(String string) throws UnsupportedEncodingException {
+	public Orm toMessage(String msg) throws UnsupportedEncodingException {
+		if (StringUtils.isEmpty(msg)) {
+			throw new RuntimeException("msg is null");
+		}
 		if (context == null) {
 			JAXBContextUtil.initContext(CLZZ);// 再次尝试一次
-			if (context == null) {
-			}
 		}
 		try {
 			ByteArrayInputStream stream = new ByteArrayInputStream(
-					string.getBytes("UTF-8"));
+					msg.getBytes("UTF-8"));
 			Unmarshaller unmarshaller = context.createUnmarshaller();
 			JAXBElement<Orm> element = unmarshaller.unmarshal(new StreamSource(
 					stream), CLZZ);
@@ -44,13 +46,11 @@ public class OrmConvertor {
 	}
 
 	public String fromMessage(Orm value) {
+		if (value == null) {
+			throw new RuntimeException("value is null");
+		}
 		if (context == null) {
 			JAXBContextUtil.initContext(CLZZ);// 再次尝试一次
-			if (context == null) {
-			}
-		}
-		if (value == null) {
-			return null;
 		}
 		try {
 			StringWriter stringWriter = new StringWriter();
