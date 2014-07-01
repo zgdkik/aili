@@ -10,8 +10,7 @@
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
 		">
 
-	<util:properties id="meta"
-		location="classpath*:metainfo.properties"/>
+	<util:properties id="meta" location="classpath:metainfo.properties"/>
 	<!--dataSource -->
 	<bean id="parentSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
 		p:driverClass="#{meta['dataSource.driverClassName']}">
