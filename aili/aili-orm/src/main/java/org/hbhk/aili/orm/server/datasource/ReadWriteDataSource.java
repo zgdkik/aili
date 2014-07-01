@@ -5,18 +5,22 @@ import java.util.Map;
 
 import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
+import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
+@Component
 public class ReadWriteDataSource extends AbstractRoutingDataSource {
-	
+
+	@Autowired(required = false)
 	private DataSource readDataSource;
-	
+
+	@Autowired(required = false)
 	private DataSource writeDataSource;
-	
-	
+
 	@Override
-	public void afterPropertiesSet() {				
+	public void afterPropertiesSet() {
 		Assert.notNull(readDataSource, "readDataSource can not be null");
 		Assert.notNull(writeDataSource, "writeDataSource can not be null");
 		Map<Object, Object> targetDataSources = new HashMap<Object, Object>();
@@ -29,11 +33,12 @@ public class ReadWriteDataSource extends AbstractRoutingDataSource {
 
 	@Override
 	protected Object determineCurrentLookupKey() {
-		logger.debug("Current LookupKey:" + ReadWriteStatusHolder.getReadWriteStatus());
-		if(ReadWriteStatusHolder.getReadWriteStatus() == null){
+		logger.debug("Current LookupKey:"
+				+ ReadWriteStatusHolder.getReadWriteStatus());
+		if (ReadWriteStatusHolder.getReadWriteStatus() == null) {
 			return ReadWriteSupport.WRITE;
 		}
-			
+
 		return ReadWriteStatusHolder.getReadWriteStatus();
 	}
 
