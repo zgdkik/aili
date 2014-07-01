@@ -27,6 +27,7 @@ public class ReadWriteDataSourceAspect {
 		TransactionAttribute ta = transactionAttributeSouce
 				.getTransactionAttribute(ms.getMethod(), pjp.getTarget()
 						.getClass());
+		//没有事务或者 事务状态不是新建事务
 		if (ta == null
 				|| (ReadWriteStatusHolder.getReadWriteStatus() != null && ta
 						.getPropagationBehavior() != TransactionDefinition.PROPAGATION_REQUIRES_NEW)) {
@@ -40,14 +41,18 @@ public class ReadWriteDataSourceAspect {
 
 		String currentStatus = ReadWriteStatusHolder.getReadWriteStatus();
 		if (ta != null) {
+			//判断是否需要写数据
 			if (ta.getPropagationBehavior() == TransactionDefinition.PROPAGATION_REQUIRES_NEW) {
 				logger.debug("New writable connection is required for new transaction.");
 				ReadWriteStatusHolder
 						.setReadWriteStatus(ReadWriteSupport.WRITE);
-			} else
+			} else{
+				//有事务且是readOnly
 				ReadWriteStatusHolder.setReadWriteStatus((ta != null && ta
 						.isReadOnly()) ? ReadWriteSupport.READ
 						: ReadWriteSupport.WRITE);
+			}
+				
 		}
 		try {
 			Object rtn = pjp.proceed(pjp.getArgs());
@@ -55,16 +60,22 @@ public class ReadWriteDataSourceAspect {
 		} catch (Throwable e) {
 			throw e;
 		} finally {
+		
 			if (ta != null) {
+				//新建事务类型
 				if (ta.getPropagationBehavior() == TransactionDefinition.PROPAGATION_REQUIRES_NEW) {
 					logger.debug("Fallback to previous Read/Write Status: {}",
 							currentStatus);
-					if (currentStatus == null)
+					if (currentStatus == null){
+						//执行完之后清理 读写状态
 						ReadWriteStatusHolder.clearReadWriteStatus();
-					else
+					}else{
+						//设置当前状态
 						ReadWriteStatusHolder.setReadWriteStatus(currentStatus);
+					}
 				} else {
 					logger.debug("Clear Read/Write Status");
+					//执行完之后清理 读写状态
 					ReadWriteStatusHolder.clearReadWriteStatus();
 				}
 			}

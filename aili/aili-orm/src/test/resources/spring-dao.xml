@@ -33,13 +33,6 @@
 			<value><![CDATA[#{meta['dataSource.preferredTestQuery']}]]></value>
 		</property>
 	</bean>
-
-	<bean class="org.hbhk.aili.orm.server.aspect.ReadWriteDataSourceAspect" />
-	<bean id="dataSource" class="org.hbhk.aili.orm.server.datasource.ReadWriteDataSource">
-		<property name="writeDataSource" ref="writeSource" />
-		<property name="readDataSource" ref="readSource" />
-	</bean>
-
 	<!-- 写节点 -->
 	<bean id="writeSource" parent="parentSource">
 		<property name="jdbcUrl">
@@ -53,4 +46,13 @@
 			<value><![CDATA[#{meta['dataSource.url.read']}]]></value>
 		</property>
 	</bean>
+	
+	<bean id="dataSource" class="org.hbhk.aili.orm.server.datasource.ReadWriteDataSource">
+		<property name="writeDataSource" ref="writeSource" />
+		<property name="readDataSource" ref="readSource" />
+	</bean>
+
+	<!--aop代理切换数据源  -->
+	<bean class="org.hbhk.aili.orm.server.aspect.ReadWriteDataSourceAspect" />
+	
 </beans>

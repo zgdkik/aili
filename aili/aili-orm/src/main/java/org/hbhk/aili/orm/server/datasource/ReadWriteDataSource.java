@@ -30,8 +30,10 @@ public class ReadWriteDataSource extends AbstractRoutingDataSource {
 	@Override
 	protected Object determineCurrentLookupKey() {
 		logger.debug("Current LookupKey:" + ReadWriteStatusHolder.getReadWriteStatus());
-		if(ReadWriteStatusHolder.getReadWriteStatus() == null)
+		if(ReadWriteStatusHolder.getReadWriteStatus() == null){
 			return ReadWriteSupport.WRITE;
+		}
+			
 		return ReadWriteStatusHolder.getReadWriteStatus();
 	}
 
