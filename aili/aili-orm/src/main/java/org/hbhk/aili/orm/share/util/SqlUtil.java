@@ -7,9 +7,7 @@ import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.hbhk.aili.orm.server.handler.DefaultNameHandler;
 import org.hbhk.aili.orm.server.handler.INameHandler;
-import org.hbhk.aili.orm.share.model.Delete;
 import org.hbhk.aili.orm.share.model.SqlContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,10 +32,10 @@ public class SqlUtil {
 	 * @return
 	 */
 	public static SqlContext buildInsertSql(Object entity,
-			INameHandler INameHandler) {
+			INameHandler nameHandler) {
 		Class<?> clazz = entity.getClass();
-		String tableName = INameHandler.getTableName(clazz.getSimpleName());
-		String primaryName = INameHandler.getPrimaryName(clazz.getSimpleName());
+		String tableName = nameHandler.getTableName(clazz);
+		String primaryName = nameHandler.getPrimaryName(clazz);
 		StringBuilder sql = new StringBuilder("insert into ");
 		List<Object> params = new ArrayList<Object>();
 		sql.append(tableName);
@@ -53,7 +51,7 @@ public class SqlUtil {
 			if (value == null) {
 				continue;
 			}
-			sql.append(INameHandler.getColumnName(pd.getName()));
+			sql.append(nameHandler.getColumnName(clazz, pd.getName()));
 			args.append("?");
 			params.add(value);
 			sql.append(",");
@@ -80,8 +78,8 @@ public class SqlUtil {
 		Class<?> clazz = entity.getClass();
 		StringBuilder sql = new StringBuilder();
 		List<Object> params = new ArrayList<Object>();
-		String tableName = nameHandler.getTableName(clazz.getSimpleName());
-		String primaryName = nameHandler.getPrimaryName(clazz.getSimpleName());
+		String tableName = nameHandler.getTableName(clazz);
+		String primaryName = nameHandler.getPrimaryName(clazz);
 		// 获取属性信息
 		BeanInfo beanInfo = ClassUtils.getSelfBeanInfo(clazz);
 		PropertyDescriptor[] pds = beanInfo.getPropertyDescriptors();
@@ -95,15 +93,14 @@ public class SqlUtil {
 			if (value == null) {
 				continue;
 			}
-			String columnName = nameHandler.getColumnName(pd.getName());
-			if (primaryName.equalsIgnoreCase(columnName)) {
-				primaryValue = value;
+			String columnName = nameHandler.getColumnName(clazz, pd.getName());
+			if (!primaryName.equalsIgnoreCase(columnName)) {
+				sql.append(columnName);
+				sql.append(" = ");
+				sql.append("?");
+				params.add(value);
+				sql.append(",");
 			}
-			sql.append(columnName);
-			sql.append(" = ");
-			sql.append("?");
-			params.add(value);
-			sql.append(",");
 		}
 		sql.deleteCharAt(sql.length() - 1);
 		sql.append(" where ");
@@ -122,7 +119,8 @@ public class SqlUtil {
 	public static SqlContext buildQueryCondition(Object entity,
 			INameHandler nameHandler) {
 		// 获取属性信息
-		BeanInfo beanInfo = ClassUtils.getSelfBeanInfo(entity.getClass());
+		Class<?> cls = entity.getClass();
+		BeanInfo beanInfo = ClassUtils.getSelfBeanInfo(cls);
 		// PropertyDescriptor[] pds =
 		// BeanUtils.getPropertyDescriptors(entityClass);
 		PropertyDescriptor[] pds = beanInfo.getPropertyDescriptors();
@@ -137,7 +135,7 @@ public class SqlUtil {
 			if (count > 0) {
 				condition.append(" and ");
 			}
-			condition.append(nameHandler.getColumnName(pd.getName()));
+			condition.append(nameHandler.getColumnName(cls, pd.getName()));
 			condition.append(" = ?");
 			params.add(value);
 			count++;

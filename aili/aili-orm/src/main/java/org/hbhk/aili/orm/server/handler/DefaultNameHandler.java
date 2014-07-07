@@ -1,51 +1,82 @@
 package org.hbhk.aili.orm.server.handler;
 
+import java.lang.reflect.Field;
+
+import org.hbhk.aili.orm.server.annotation.Column;
+import org.hbhk.aili.orm.server.annotation.PrimaryKey;
+import org.hbhk.aili.orm.server.annotation.Tabel;
+
 /**
  * 默认名称处理handler
  */
 public class DefaultNameHandler implements INameHandler {
 
-    /** 字段前缀 */
-    private static final String PREFIX     = "t_";
+	/**
+	 * 根据实体名获取表名
+	 */
+	@Override
+	public String getTableName(Class<?> cls) {
+		Tabel tbl = cls.getAnnotation(Tabel.class);
+		String tblName = null;
+		if (tbl != null) {
+			tblName = tbl.value();
+		} else {
+			tblName = cls.getSimpleName();
+		}
+		return tblName;
+	}
 
-    /** 主键后缀 */
-    private static final String PRI_SUFFIX = "_id";
+	/**
+	 * 根据表名获取主键名
+	 */
+	@Override
+	public String getPrimaryName(Class<?> cls) {
+		Field[] fields = cls.getDeclaredFields();
+		PrimaryKey primaryKey = null;
+		boolean brk = true;
+		Field pri_field = null;
+		for (int i = 0; i < fields.length && brk; i++) {
+			pri_field = fields[i];
+			primaryKey = pri_field.getAnnotation(PrimaryKey.class);
+			if (primaryKey != null) {
+				brk = false;
+			}
+		}
+		String pri_id = null;
+		Column column = null;
+		if (primaryKey != null) {
+			column = pri_field.getAnnotation(Column.class);
+			if (column != null) {
+				pri_id = column.value();
+			}else{
+				pri_id = pri_field.getName();
+			}
+		} else{
+			throw new RuntimeException("Entity primarykey must have");
+		}
+		return pri_id;
+	}
 
-    /**
-     * 根据实体名获取表名
-     *
-     * @param entityName
-     * @return
-     */
-    @Override
-    public String getTableName(String entityName) {
-        //Java属性的骆驼命名法转换回数据库下划线“_”分隔的格式
-        return "";
-    }
-
-    /**
-     * 根据表名获取主键名
-     *
-     * @param entityName
-     * @return
-     */
-    @Override
-    public String getPrimaryName(String entityName) {
-        String underlineName = "";
-        //正如前面说到的，数据库列名统一以“_”开始，主键以表名加上“_id” 如user表主键即“_user_id”
-        return PREFIX + underlineName + PRI_SUFFIX;
-    }
-
-    /**
-     * 根据属性名获取列名
-     *
-     * @param fieldName
-     * @return
-     */
-    @Override
-    public String getColumnName(String fieldName) {
-        String underlineName = "";
-        //数据库列名统一以“_”开始
-        return PREFIX + underlineName;
-    }
+	/**
+	 * 根据属性名获取列名
+	 */
+	@Override
+	public String getColumnName(Class<?> cls, String fieldName) {
+		Field[] fields = cls.getDeclaredFields();
+		Column column = null;
+		boolean brk = true;
+		for (int i = 0; i < fields.length && brk; i++) {
+			Field field = fields[i];
+			if (field.getName().equals(fieldName)) {
+				column = field.getAnnotation(Column.class);
+			}
+		}
+		String columnName = null;
+		if (column != null) {
+			columnName = column.value();
+		} else {
+			columnName = fieldName;
+		}
+		return columnName;
+	}
 }
