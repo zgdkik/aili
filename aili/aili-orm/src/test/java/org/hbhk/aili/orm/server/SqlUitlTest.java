@@ -12,11 +12,14 @@ public final class SqlUitlTest {
 		String ss = SqlUtil.buildInsertSql(del, new DefaultNameHandler()).getSql().toString();
 		String q = SqlUtil.buildQueryCondition(del, new DefaultNameHandler()).getSql().toString();
 		String u = SqlUtil.buildUpdateSql(del, new DefaultNameHandler()).getSql().toString();
-		
+		String d = SqlUtil.buildDeleteSql(del, new DefaultNameHandler()).getSql().toString();
+		//
 		System.out.println(ss);
 		
 		System.out.println(q);
 		
 		System.out.println(u);
+		
+		System.out.println(d);
 	}
 }

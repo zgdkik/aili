@@ -23,6 +23,10 @@ public class AppTest {
 		 for (UserInfo userInfo : ss) {
 			System.out.println(userInfo.getUsername());
 		}
+		 UserInfo userInfo = new UserInfo();
+		 userInfo.setId("22");
+		 userInfo.setName("sdfsdf");
+		 t.save(userInfo);
 	}
 
 }

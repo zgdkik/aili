@@ -8,11 +8,15 @@ import java.util.Map;
 
 import javax.sql.DataSource;
 
+import org.hbhk.aili.orm.server.handler.DefaultNameHandler;
+import org.hbhk.aili.orm.server.handler.INameHandler;
 import org.hbhk.aili.orm.server.page.MySqlPageQueryProvider;
 import org.hbhk.aili.orm.server.page.PageQueryProvider;
 import org.hbhk.aili.orm.server.service.IDaoService;
 import org.hbhk.aili.orm.server.surpport.Sort;
 import org.hbhk.aili.orm.share.model.Pagination;
+import org.hbhk.aili.orm.share.model.SqlContext;
+import org.hbhk.aili.orm.share.util.SqlUtil;
 import org.hbhk.aili.orm.share.util.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,10 +34,12 @@ public class DaoService implements IDaoService {
 	protected JdbcTemplate jdbcTemplate;
 
 	private PageQueryProvider pageQueryProvider;
+	private  INameHandler nameHandler;
 
 	@Autowired
 	public void setDataSource(DataSource dataSource) {
 		pageQueryProvider = new MySqlPageQueryProvider();
+		nameHandler = new DefaultNameHandler();
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 
@@ -146,12 +152,15 @@ public class DaoService implements IDaoService {
 
 	@Override
 	public <T> T save(T model) {
-		return null;
+		SqlContext context = SqlUtil.buildInsertSql(model, nameHandler);
+		jdbcTemplate.update(context.getSql().toString(), context.getParams());
+		return model;
 	}
 
 	@Override
 	public <T> void delete(T model) {
-
+		SqlContext context = SqlUtil.buildUpdateSql(model, nameHandler);
+		jdbcTemplate.update(context.getSql().toString(), context.getParams());
 	}
 
 	@Override

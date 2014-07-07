@@ -100,6 +100,48 @@ public class SqlUtil {
 				sql.append("?");
 				params.add(value);
 				sql.append(",");
+			}else{
+				primaryValue= value;
+			}
+		}
+		sql.deleteCharAt(sql.length() - 1);
+		sql.append(" where ");
+		sql.append(primaryName);
+		sql.append(" = ?");
+		params.add(primaryValue);
+		return new SqlContext(sql, primaryName, params);
+	}
+	
+	/**
+	 * 构建更新sql
+	 * 
+	 * @param entity
+	 * @param INameHandler
+	 * @return
+	 */
+	public static SqlContext buildDeleteSql(Object entity,
+			INameHandler nameHandler) {
+		Class<?> clazz = entity.getClass();
+		StringBuilder sql = new StringBuilder();
+		List<Object> params = new ArrayList<Object>();
+		String tableName = nameHandler.getTableName(clazz);
+		String primaryName = nameHandler.getPrimaryName(clazz);
+		// 获取属性信息
+		BeanInfo beanInfo = ClassUtils.getSelfBeanInfo(clazz);
+		PropertyDescriptor[] pds = beanInfo.getPropertyDescriptors();
+
+		sql.append("delete from ");
+		sql.append(tableName);
+		sql.append(" ");
+		Object primaryValue = null;
+		for (PropertyDescriptor pd : pds) {
+			Object value = getReadMethodValue(pd.getReadMethod(), entity);
+			if (value == null) {
+				continue;
+			}
+			String columnName = nameHandler.getColumnName(clazz, pd.getName());
+			if (primaryName.equalsIgnoreCase(columnName)) {
+				primaryValue= value;
 			}
 		}
 		sql.deleteCharAt(sql.length() - 1);
