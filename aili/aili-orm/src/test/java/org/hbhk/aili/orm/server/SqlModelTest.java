@@ -7,9 +7,12 @@ import org.hbhk.aili.orm.server.annotation.Tabel;
 @Tabel("t_test_sql")
 public class SqlModelTest {
 
+	@Column("id")
 	@PrimaryKey
 	private String id;
+	@Column("test_sss")
 	private String sss;
+	@Column("test_qqq")
 	private String qqq;
 
 	public String getSss() {
@@ -35,6 +38,5 @@ public class SqlModelTest {
 	public void setId(String id) {
 		this.id = id;
 	}
-	
 
 }
