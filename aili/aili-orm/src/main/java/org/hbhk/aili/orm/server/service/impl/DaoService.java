@@ -153,14 +153,14 @@ public class DaoService implements IDaoService {
 	@Override
 	public <T> T save(T model) {
 		SqlContext context = SqlUtil.buildInsertSql(model, nameHandler);
-		jdbcTemplate.update(context.getSql().toString(), context.getParams());
+		jdbcTemplate.update(context.getSql().toString(), context.getParams().toArray());
 		return model;
 	}
 
 	@Override
 	public <T> void delete(T model) {
 		SqlContext context = SqlUtil.buildUpdateSql(model, nameHandler);
-		jdbcTemplate.update(context.getSql().toString(), context.getParams());
+		jdbcTemplate.update(context.getSql().toString(), context.getParams().toArray());
 	}
 
 	@Override

@@ -5,6 +5,7 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.hbhk.aili.orm.server.annotation.NativeQuery;
+import org.hbhk.aili.orm.server.annotation.NativeSave;
 import org.hbhk.aili.orm.server.handler.NativeQueryHandler;
 import org.hbhk.aili.orm.server.service.IDaoService;
 import org.springframework.beans.factory.InitializingBean;
@@ -32,10 +33,14 @@ public class QueryAspect implements Ordered, InitializingBean {
 		MethodSignature ms = (MethodSignature) pjp.getSignature();
 		NativeQuery nativeQuery = ms.getMethod().getAnnotation(
 				NativeQuery.class);
+		NativeSave nativeSave = ms.getMethod().getAnnotation(NativeSave.class);
 		if (nativeQuery != null) {
 			return nativeQueryHandler.handleNativeQuery(nativeQuery, pjp);
+		} else if (nativeSave != null) {
+			return nativeQueryHandler.handleNativeSave(nativeSave, pjp);
+			
 		} else {
-			return pjp.proceed(pjp.getArgs());
 		}
+		return pjp.proceed(pjp.getArgs());
 	}
 }

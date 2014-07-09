@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
+import org.hbhk.aili.orm.server.annotation.NativeSave;
 import org.hbhk.aili.orm.server.service.impl.DaoService;
 import org.springframework.jdbc.core.SqlParameter;
 import org.springframework.transaction.annotation.Propagation;
@@ -11,7 +12,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 public interface GenericEntityDao<T, PK extends Serializable> {
+	
 	@Transactional
+	@NativeSave
 	T save(T model);
 
 	@Transactional

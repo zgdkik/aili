@@ -15,6 +15,7 @@ import org.aspectj.lang.reflect.MethodSignature;
 import org.hbhk.aili.orm.server.annotation.ColumnTranslator;
 import org.hbhk.aili.orm.server.annotation.NativeQuery;
 import org.hbhk.aili.orm.server.annotation.NativeQuery.DEFAULT;
+import org.hbhk.aili.orm.server.annotation.NativeSave;
 import org.hbhk.aili.orm.server.annotation.NativeUpdate;
 import org.hbhk.aili.orm.server.aspect.DummyColumnTranslator;
 import org.hbhk.aili.orm.server.mapper.BaseRowMapper;
@@ -152,6 +153,9 @@ public class NativeQueryHandler extends AbstractQueryHandler  {
 		return handleNativeUpdateNative(nativeUpdate, invocation.getThis(), invocation.getMethod(), invocation.getArguments());
 	}
 	
+	public Object handleNativeSave(NativeSave nativeSave, ProceedingJoinPoint pjp){
+		return daoService.save(pjp.getArgs()[0]);
+	}
 	public int handleNativeUpdate(NativeUpdate nativeUpdate, ProceedingJoinPoint pjp){
 		MethodSignature ms = (MethodSignature)pjp.getSignature();
 		return handleNativeUpdateNative(nativeUpdate, pjp.getThis(), ms.getMethod(), pjp.getArgs());

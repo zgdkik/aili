@@ -2,10 +2,14 @@ package org.hbhk.aili.orm.share.model;
 
 import java.io.Serializable;
 
+import org.hbhk.aili.orm.server.annotation.PrimaryKey;
+import org.hbhk.aili.orm.server.annotation.Tabel;
 
+@Tabel("t_aili_user")
 public class UserInfo implements Serializable {
 
 	private static final long serialVersionUID = 54122579931594962L;
+	@PrimaryKey
 	private String id;
 	private int enable;
 	private String password;
