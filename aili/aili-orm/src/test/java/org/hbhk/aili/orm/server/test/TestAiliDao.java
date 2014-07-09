@@ -12,5 +12,6 @@ public interface TestAiliDao extends GenericEntityDao<UserInfo, Integer> {
 
 	@NativeQuery(model = UserInfo.class, value = "testsql")
 	List<UserInfo> create(@QueryParam("id") int id,Page p);
+	
 
 }
