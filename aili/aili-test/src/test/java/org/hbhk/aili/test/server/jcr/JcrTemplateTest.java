@@ -2,7 +2,6 @@ package org.hbhk.aili.test.server.jcr;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.extensions.jcr.JcrTemplate;
 
 public class JcrTemplateTest {
 
@@ -10,8 +9,8 @@ public class JcrTemplateTest {
 		ApplicationContext context = new ClassPathXmlApplicationContext(
 				"jcr-spring.xml");
 
-		JcrTemplate template = context.getBean(JcrTemplate.class);
-		template.addLockToken("df");
+		/*JcrTemplate template = context.getBean(JcrTemplate.class);
+		template.addLockToken("df");*/
 
 	}
 
