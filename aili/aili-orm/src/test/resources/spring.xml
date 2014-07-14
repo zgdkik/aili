@@ -24,8 +24,7 @@
 	 
 	<context:annotation-config />
 	<context:component-scan base-package="org.hbhk.aili.orm.server" />
- <bean id="queryInterceptor" class="org.hbhk.aili.orm.server.aspect.QueryInterceptor" />
-	
+	 <bean id="queryInterceptor" class="org.hbhk.aili.orm.server.aspect.QueryInterceptor" />
 	<bean id="genericDaoProxy" class="org.springframework.aop.framework.ProxyFactoryBean"
 		abstract="true">
 		<!-- 老的aop方式 -->
