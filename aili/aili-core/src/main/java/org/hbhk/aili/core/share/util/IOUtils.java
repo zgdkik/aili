@@ -5,11 +5,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 public class IOUtils {
-	private static Logger log = LogManager.getLogger(IOUtils.class);
+	private static Log log = LogFactory.getLog(IOUtils.class);
 
 	private IOUtils() {
 	}
