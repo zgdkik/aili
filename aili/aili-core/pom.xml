@@ -192,10 +192,10 @@
 			</dependency> <dependency> <groupId>ch.qos.logback</groupId> <artifactId>logback-classic</artifactId> 
 			</dependency> -->
 		<!-- logback e -->
-		<dependency>
+		<!-- <dependency>
 			<groupId>org.lazyluke</groupId>
 			<artifactId>log4jdbc-remix</artifactId>
-		</dependency>
+		</dependency> -->
 		<dependency>
 			<groupId>com.atomikos</groupId>
 			<artifactId>transactions-jdbc</artifactId>
