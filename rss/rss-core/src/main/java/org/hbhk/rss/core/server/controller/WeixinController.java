@@ -19,6 +19,7 @@ import org.marker.weixin.msg.Msg4ImageText;
 import org.marker.weixin.msg.Msg4Text;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 @RequestMapping("/weixin")
@@ -26,7 +27,7 @@ public class WeixinController {
 	// TOKEN 是你在微信平台开发模式中设置的哦
 	public static final String TOKEN = "hbhk_token";
 
-	@RequestMapping("/auth")
+	@RequestMapping(value ="/auth",method=RequestMethod.GET)
 	public void auth(HttpServletRequest request, HttpServletResponse response)
 			throws IOException {
 		String signature = request.getParameter("signature");// 微信加密签名
@@ -58,7 +59,7 @@ public class WeixinController {
 		out.close();
 	}
 
-	@RequestMapping("/dealMsg")
+	@RequestMapping(value ="/auth",method=RequestMethod.POST)
 	public void dealMsg(HttpServletRequest request, HttpServletResponse response)
 			throws IOException {
 		InputStream is = request.getInputStream();
