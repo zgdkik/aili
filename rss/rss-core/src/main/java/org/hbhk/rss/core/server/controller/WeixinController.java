@@ -11,6 +11,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.marker.weixin.DefaultSession;
 import org.marker.weixin.HandleMessageAdapter;
 import org.marker.weixin.MySecurity;
@@ -27,14 +29,16 @@ public class WeixinController {
 	// TOKEN 是你在微信平台开发模式中设置的哦
 	public static final String TOKEN = "hbhk_token";
 
+	private Log  log = LogFactory.getLog(getClass());
 	@RequestMapping(value ="/auth",method=RequestMethod.GET)
 	public void auth(HttpServletRequest request, HttpServletResponse response)
 			throws IOException {
+		
 		String signature = request.getParameter("signature");// 微信加密签名
 		String timestamp = request.getParameter("timestamp");// 时间戳
 		String nonce = request.getParameter("nonce");// 随机数
 		String echostr = request.getParameter("echostr");// 随机字符串
-
+		log.info("accept auth:"+echostr);
 		// 重写totring方法，得到三个参数的拼接字符串
 		List<String> list = new ArrayList<String>(3) {
 			private static final long serialVersionUID = 2621444383666420433L;
@@ -57,6 +61,7 @@ public class WeixinController {
 		}
 		out.flush();
 		out.close();
+		log.info("reply auth:"+echostr);
 	}
 
 	@RequestMapping(value ="/auth",method=RequestMethod.POST)
@@ -64,12 +69,13 @@ public class WeixinController {
 			throws IOException {
 		InputStream is = request.getInputStream();
 		OutputStream os = response.getOutputStream();
+		log.info("start accept msg");
 		final DefaultSession session = DefaultSession.newInstance();
 		session.addOnHandleMessageListener(new HandleMessageAdapter() {
 			@Override
 			public void onTextMsg(Msg4Text msg) {
-				System.out.println("收到微信消息：" + msg.getContent());
-				if ("我是唐小怪".equals(msg.getContent())) {
+				log.info("收到微信消息：" + msg.getContent());
+				if ("hbhk".equals(msg.getContent())) {
 					Msg4Text rmsg = new Msg4Text();
 					rmsg.setFromUserName(msg.getToUserName());
 					rmsg.setToUserName(msg.getFromUserName());
@@ -100,6 +106,7 @@ public class WeixinController {
 		// 必须调用这两个方法
 		// 如果不调用close方法，将会出现响应数据串到其它Servlet中。
 		session.process(is, os);// 处理微信消息
+		log.info("reply msg");
 		session.close();// 关闭Session
 	}
 
