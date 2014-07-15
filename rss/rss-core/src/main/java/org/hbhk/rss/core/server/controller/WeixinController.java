@@ -13,11 +13,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.hbhk.rss.core.shared.consts.UserRequestType;
 import org.marker.weixin.DefaultSession;
 import org.marker.weixin.HandleMessageAdapter;
 import org.marker.weixin.MySecurity;
-import org.marker.weixin.msg.Data4Item;
-import org.marker.weixin.msg.Msg4ImageText;
 import org.marker.weixin.msg.Msg4Text;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -74,31 +73,42 @@ public class WeixinController {
 		session.addOnHandleMessageListener(new HandleMessageAdapter() {
 			@Override
 			public void onTextMsg(Msg4Text msg) {
-				log.info("收到微信消息：" + msg.getContent());
-				if ("hbhk".equals(msg.getContent())) {
-					Msg4Text rmsg = new Msg4Text();
-					rmsg.setFromUserName(msg.getToUserName());
-					rmsg.setToUserName(msg.getFromUserName());
-					rmsg.setContent("你是小乖乖，哈哈!");
-					session.callback(rmsg);
-					return;
+				String msgStr = msg.getContent();
+				//天气预报
+				if(UserRequestType.weather.equals(msgStr)){
+					
 				}
-				// 回复一条消息
-				Data4Item d1 = new Data4Item("hbhk", "测试描述",
-						"http://cms.yl-blog.com/themes/blue/images/logo.png",
-						"cms.yl-blog.com");
-				Data4Item d2 = new Data4Item(
-						"hbhk",
-						"测试描述",
-						"http://www.yl-blog.com/template/ylblog/images/logo.png",
-						"www.yl-blog.com");
-				Msg4ImageText mit = new Msg4ImageText();
-				mit.setFromUserName(msg.getToUserName());
-				mit.setToUserName(msg.getFromUserName());
-				mit.setCreateTime(msg.getCreateTime());
-				mit.addItem(d1);
-				mit.addItem(d2);
-				session.callback(mit);
+				//快递查询
+				if(UserRequestType.weather.equals(msgStr)){
+					
+				}
+				
+				log.info("收到微信消息：" + msg.getContent());
+				Msg4Text rmsg = new Msg4Text();
+				rmsg.setFromUserName(msg.getToUserName());
+				rmsg.setToUserName(msg.getFromUserName());
+				StringBuilder  menu= new StringBuilder();
+				menu.append("欢迎使用hbhk查询系统:因有所有!\n");
+				menu.append("[1].天气预报\n");
+				menu.append("[2].快递查询\n");
+				rmsg.setContent(menu.toString());
+				session.callback(rmsg);
+//				// 回复一条消息
+//				Data4Item d1 = new Data4Item("hbhk", "测试描述",
+//						"http://cms.yl-blog.com/themes/blue/images/logo.png",
+//						"cms.yl-blog.com");
+//				Data4Item d2 = new Data4Item(
+//						"hbhk",
+//						"测试描述",
+//						"http://www.yl-blog.com/template/ylblog/images/logo.png",
+//						"www.yl-blog.com");
+//				Msg4ImageText mit = new Msg4ImageText();
+//				mit.setFromUserName(msg.getToUserName());
+//				mit.setToUserName(msg.getFromUserName());
+//				mit.setCreateTime(msg.getCreateTime());
+//				mit.addItem(d1);
+//				mit.addItem(d2);
+//				session.callback(mit);
 
 			}
 		});
