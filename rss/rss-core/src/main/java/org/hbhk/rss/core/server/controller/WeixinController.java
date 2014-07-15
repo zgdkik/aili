@@ -88,7 +88,7 @@ public class WeixinController {
 				rmsg.setFromUserName(msg.getToUserName());
 				rmsg.setToUserName(msg.getFromUserName());
 				StringBuilder  menu= new StringBuilder();
-				menu.append("欢迎使用hbhk查询系统:因有所有!\n");
+				menu.append("欢迎使用hbhk查询系统:因有所有!回复对应数字进行体验.\n");
 				menu.append("[1].天气预报\n");
 				menu.append("[2].快递查询\n");
 				rmsg.setContent(menu.toString());
