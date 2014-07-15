@@ -84,11 +84,11 @@ public class WeixinController {
 					return;
 				}
 				// 回复一条消息
-				Data4Item d1 = new Data4Item("蘑菇建站系统", "测试描述",
+				Data4Item d1 = new Data4Item("hbhk", "测试描述",
 						"http://cms.yl-blog.com/themes/blue/images/logo.png",
 						"cms.yl-blog.com");
 				Data4Item d2 = new Data4Item(
-						"雨林博客",
+						"hbhk",
 						"测试描述",
 						"http://www.yl-blog.com/template/ylblog/images/logo.png",
 						"www.yl-blog.com");
