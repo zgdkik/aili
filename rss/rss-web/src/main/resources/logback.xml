@@ -6,7 +6,7 @@
 		<file>${user.home}/aili.txt</file>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
 			<!-- rollover daily -->
-			<fileNamePattern>${user.home}/aili-%d{yyyy-MM-dd_HH-mm}.%i.log
+			<fileNamePattern>${user.home}/rss-%d{yyyy-MM-dd_HH-mm}.%i.log
 			</fileNamePattern>
 			<maxHistory>5</maxHistory>
 			<timeBasedFileNamingAndTriggeringPolicy
@@ -51,8 +51,8 @@
 	<logger name="java.sql.ResultSet" level="ERROR">
 		<appender-ref ref="console" />
 	</logger>
-	<root level="ERROR">
-		<!-- <appender-ref ref="file" /> -->
+	<root level="INFO">
+		<appender-ref ref="file" />
 		<appender-ref ref="console" />
 	</root>
 </configuration>
