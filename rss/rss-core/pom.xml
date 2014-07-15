@@ -25,5 +25,10 @@
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.hbhk.weixin</groupId>
+			<artifactId>hbhk-weixin</artifactId>
+			<version>1.0.0</version>
+		</dependency>
 	</dependencies>
 </project>
