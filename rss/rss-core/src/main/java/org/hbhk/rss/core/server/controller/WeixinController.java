@@ -13,11 +13,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.hbhk.rss.core.server.service.IUserService;
+import org.hbhk.rss.core.server.service.IWeatherService;
 import org.hbhk.rss.core.shared.consts.UserRequestType;
 import org.hbhk.rss.weixinapi.server.handle.HandleMessageAdapter;
 import org.hbhk.rss.weixinapi.server.msg.Msg4Text;
 import org.hbhk.rss.weixinapi.server.security.DefaultSession;
 import org.hbhk.rss.weixinapi.server.security.MySecurity;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -28,16 +31,21 @@ public class WeixinController {
 	// TOKEN 是你在微信平台开发模式中设置的哦
 	public static final String TOKEN = "hbhk_token";
 
-	private Log  log = LogFactory.getLog(getClass());
-	@RequestMapping(value ="/auth",method=RequestMethod.GET)
+	@Autowired
+	private IUserService userService;
+	@Autowired
+	private IWeatherService weatherService;
+	private Log log = LogFactory.getLog(getClass());
+
+	@RequestMapping(value = "/auth", method = RequestMethod.GET)
 	public void auth(HttpServletRequest request, HttpServletResponse response)
 			throws IOException {
-		
+
 		String signature = request.getParameter("signature");// 微信加密签名
 		String timestamp = request.getParameter("timestamp");// 时间戳
 		String nonce = request.getParameter("nonce");// 随机数
 		String echostr = request.getParameter("echostr");// 随机字符串
-		log.info("accept auth:"+echostr);
+		log.info("accept auth:" + echostr);
 		// 重写totring方法，得到三个参数的拼接字符串
 		List<String> list = new ArrayList<String>(3) {
 			private static final long serialVersionUID = 2621444383666420433L;
@@ -60,10 +68,10 @@ public class WeixinController {
 		}
 		out.flush();
 		out.close();
-		log.info("reply auth:"+echostr);
+		log.info("reply auth:" + echostr);
 	}
 
-	@RequestMapping(value ="/auth",method=RequestMethod.POST)
+	@RequestMapping(value = "/auth", method = RequestMethod.POST)
 	public void dealMsg(HttpServletRequest request, HttpServletResponse response)
 			throws IOException {
 		InputStream is = request.getInputStream();
@@ -74,41 +82,60 @@ public class WeixinController {
 			@Override
 			public void onTextMsg(Msg4Text msg) {
 				String msgStr = msg.getContent();
-				//天气预报
-				if(UserRequestType.weather.equals(msgStr)){
-					
+				String fromUserName = msg.getFromUserName();
+				String toUserName = msg.getToUserName();
+				String menu = userService.getCurrMenu(fromUserName);
+				if (userService.getCurrMenu(fromUserName) == null) {
+					userService.saveCurrMenu(fromUserName, menu);
+					// 天气预报
+					if (UserRequestType.weather.equals(menu)) {
+						userService.saveCurrMenu(fromUserName, menu);
+						Msg4Text rmsg = weatherService.getBaiduWeatherToXml(msgStr);
+						rmsg.setFromUserName(toUserName);
+						rmsg.setToUserName(fromUserName);
+						session.callback(rmsg);
+					}
+					// 快递查询
+					if (UserRequestType.weather.equals(menu)) {
+						userService.saveCurrMenu(fromUserName, menu);
+					}
+				} else {
+					// 天气预报
+					if (UserRequestType.weather.equals(msgStr)) {
+						userService.saveCurrMenu(fromUserName, msgStr);
+					}
+					// 快递查询
+					if (UserRequestType.weather.equals(msgStr)) {
+						userService.saveCurrMenu(fromUserName, msgStr);
+					}
 				}
-				//快递查询
-				if(UserRequestType.weather.equals(msgStr)){
-					
-				}
-				
+
 				log.info("收到微信消息：" + msg.getContent());
 				Msg4Text rmsg = new Msg4Text();
-				rmsg.setFromUserName(msg.getToUserName());
-				rmsg.setToUserName(msg.getFromUserName());
-				StringBuilder  menu= new StringBuilder();
-				menu.append("欢迎使用hbhk查询系统:因有所有!回复对应数字进行体验.\n");
-				menu.append("[1].天气预报\n");
-				menu.append("[2].快递查询\n");
-				rmsg.setContent(menu.toString());
+				rmsg.setFromUserName(toUserName);
+				rmsg.setToUserName(fromUserName);
+				StringBuilder menus = new StringBuilder();
+				menus.append("欢迎使用hbhk查询系统:因有所有!回复对应数字进行体验.\n");
+				menus.append("[1].天气预报\n");
+				menus.append("[2].快递查询\n");
+				rmsg.setContent(menus.toString());
 				session.callback(rmsg);
-//				// 回复一条消息
-//				Data4Item d1 = new Data4Item("hbhk", "测试描述",
-//						"http://cms.yl-blog.com/themes/blue/images/logo.png",
-//						"cms.yl-blog.com");
-//				Data4Item d2 = new Data4Item(
-//						"hbhk",
-//						"测试描述",
-//						"http://www.yl-blog.com/template/ylblog/images/logo.png",
-//						"www.yl-blog.com");
-//				Msg4ImageText mit = new Msg4ImageText();
-//				mit.setFromUserName(msg.getToUserName());
-//				mit.setToUserName(msg.getFromUserName());
-//				mit.setCreateTime(msg.getCreateTime());
-//				mit.addItem(d1);
-//				mit.addItem(d2);
-//				session.callback(mit);
+				// // 回复一条消息
+				// Data4Item d1 = new Data4Item("hbhk", "测试描述",
+				// "http://cms.yl-blog.com/themes/blue/images/logo.png",
+				// "cms.yl-blog.com");
+				// Data4Item d2 = new Data4Item(
+				// "hbhk",
+				// "测试描述",
+				// "http://www.yl-blog.com/template/ylblog/images/logo.png",
+				// "www.yl-blog.com");
+				// Msg4ImageText mit = new Msg4ImageText();
+				// mit.setFromUserName(msg.getToUserName());
+				// mit.setToUserName(msg.getFromUserName());
+				// mit.setCreateTime(msg.getCreateTime());
+				// mit.addItem(d1);
+				// mit.addItem(d2);
+				// session.callback(mit);
 
 			}
 		});

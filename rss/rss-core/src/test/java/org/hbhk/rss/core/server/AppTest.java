@@ -13,8 +13,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class AppTest{
 	private static ObjectMapper mapper = new ObjectMapper();
 	public static void main(String[] args) throws Exception {
-		String url ="http://api.map.baidu.com/telematics/v3/weather?location=北京&output=json&ak=1rENYOIqG1RIMwnfH5uHS1o9";
-		ResponseContent<String>  responseContent= HttpClientUtil.post(url).send();
+		String url ="http://api.map.baidu.com/telematics/v3/weather?output=json&ak=1rENYOIqG1RIMwnfH5uHS1o9";
+		ResponseContent<String>  responseContent= HttpClientUtil.post(url).param("location", "北京").send();
 		String ss = responseContent.getResult();
 		System.out.println(ss);
 		Writer w = new StringWriter();
