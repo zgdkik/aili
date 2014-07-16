@@ -131,5 +131,6 @@
 	<modules>
 		<module>rss-web</module>
 		<module>rss-core</module>
+		<module>rss-weixinapi</module>
 	</modules>
 </project>
