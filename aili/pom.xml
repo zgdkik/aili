@@ -20,6 +20,7 @@
 		<module>aili-mybatis</module>
 		<module>aili-security</module>
 		<module>aili-test</module>
+		<module>aili-support</module>
 	</modules>
 
 	<properties>
