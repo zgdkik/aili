@@ -15,7 +15,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hbhk.rss.core.server.service.IUserService;
 import org.hbhk.rss.core.server.service.IWeatherService;
-import org.hbhk.rss.core.shared.consts.UserRequestType;
+import org.hbhk.rss.core.shared.consts.UserRequestMenu;
 import org.hbhk.rss.weixinapi.server.handle.HandleMessageAdapter;
 import org.hbhk.rss.weixinapi.server.msg.Msg4Text;
 import org.hbhk.rss.weixinapi.server.security.DefaultSession;
@@ -76,66 +76,59 @@ public class WeixinController {
 			throws IOException {
 		InputStream is = request.getInputStream();
 		OutputStream os = response.getOutputStream();
+
 		log.info("start accept msg");
 		final DefaultSession session = DefaultSession.newInstance();
 		session.addOnHandleMessageListener(new HandleMessageAdapter() {
 			@Override
 			public void onTextMsg(Msg4Text msg) {
 				String msgStr = msg.getContent();
+				log.info("收到微信消息：" + msgStr);
 				String fromUserName = msg.getFromUserName();
 				String toUserName = msg.getToUserName();
 				String menu = userService.getCurrMenu(fromUserName);
-				if (userService.getCurrMenu(fromUserName) == null) {
-					userService.saveCurrMenu(fromUserName, menu);
+				if (UserRequestMenu.menus.contains(msgStr)) {
+					userService.saveCurrMenu(fromUserName, msgStr);
+				}
+				if (UserRequestMenu.menus.contains(msgStr) && menu == null) {
+					Msg4Text rmsg = new Msg4Text();
+					rmsg.setFromUserName(toUserName);
+					rmsg.setToUserName(fromUserName);
+					StringBuilder menus = new StringBuilder();
+					menus.append("欢迎使用hbhk查询系统:因有所有!回复对应数字进行体验.\n");
+					if (UserRequestMenu.weather.equals(msgStr)) {
+						menus.append("[1].天气预报\n");
+						menus.append("请输入城市名称进行查询\n");
+					}else{
+						menus.append("[2].快递查询\n");
+						menus.append("请输入快递公司名称+运单号 例如:申通快递+123456789\n");
+					}
+					rmsg.setContent(menus.toString());
+					return;
+				}
+				if (menu != null && msgStr != menu) {
 					// 天气预报
-					if (UserRequestType.weather.equals(menu)) {
-						userService.saveCurrMenu(fromUserName, menu);
-						Msg4Text rmsg = weatherService.getBaiduWeatherToXml(msgStr);
+					if (UserRequestMenu.weather.equals(menu)) {
+						Msg4Text rmsg = weatherService
+								.getBaiduWeatherToXml(msgStr);
 						rmsg.setFromUserName(toUserName);
 						rmsg.setToUserName(fromUserName);
 						session.callback(rmsg);
 					}
 					// 快递查询
-					if (UserRequestType.weather.equals(menu)) {
-						userService.saveCurrMenu(fromUserName, menu);
+					if (UserRequestMenu.weather.equals(menu)) {
 					}
 				} else {
-					// 天气预报
-					if (UserRequestType.weather.equals(msgStr)) {
-						userService.saveCurrMenu(fromUserName, msgStr);
-					}
-					// 快递查询
-					if (UserRequestType.weather.equals(msgStr)) {
-						userService.saveCurrMenu(fromUserName, msgStr);
-					}
+					Msg4Text rmsg = new Msg4Text();
+					rmsg.setFromUserName(toUserName);
+					rmsg.setToUserName(fromUserName);
+					StringBuilder menus = new StringBuilder();
+					menus.append("欢迎使用hbhk查询系统:因有所有!回复对应数字进行体验.\n");
+					menus.append("[1].天气预报\n");
+					menus.append("[2].快递查询\n");
+					rmsg.setContent(menus.toString());
+					session.callback(rmsg);
 				}
-
-				log.info("收到微信消息：" + msg.getContent());
-				Msg4Text rmsg = new Msg4Text();
-				rmsg.setFromUserName(toUserName);
-				rmsg.setToUserName(fromUserName);
-				StringBuilder menus = new StringBuilder();
-				menus.append("欢迎使用hbhk查询系统:因有所有!回复对应数字进行体验.\n");
-				menus.append("[1].天气预报\n");
-				menus.append("[2].快递查询\n");
-				rmsg.setContent(menus.toString());
-				session.callback(rmsg);
-				// // 回复一条消息
-				// Data4Item d1 = new Data4Item("hbhk", "测试描述",
-				// "http://cms.yl-blog.com/themes/blue/images/logo.png",
-				// "cms.yl-blog.com");
-				// Data4Item d2 = new Data4Item(
-				// "hbhk",
-				// "测试描述",
-				// "http://www.yl-blog.com/template/ylblog/images/logo.png",
-				// "www.yl-blog.com");
-				// Msg4ImageText mit = new Msg4ImageText();
-				// mit.setFromUserName(msg.getToUserName());
-				// mit.setToUserName(msg.getFromUserName());
-				// mit.setCreateTime(msg.getCreateTime());
-				// mit.addItem(d1);
-				// mit.addItem(d2);
-				// session.callback(mit);
 
 			}
 		});
