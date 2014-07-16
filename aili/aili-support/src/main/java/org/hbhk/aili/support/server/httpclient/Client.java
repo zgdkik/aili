@@ -15,7 +15,9 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.hbhk.aili.support.server.httpclient.exception.ClientException;
+import org.hbhk.aili.support.server.httpclient.exception.ExceptionEntity;
 import org.hbhk.aili.support.server.httpclient.exception.ResponseException;
+import org.hbhk.aili.support.server.json.JsonUtil;
 
 public abstract class Client {
 
@@ -97,6 +99,34 @@ public abstract class Client {
 			throw new ResponseException("not found : " + url,
 					HttpStatus.SC_NOT_FOUND);
 		}
+	}
+	
+	/**
+	 * 发送请求，并把返回的JSON字符串转换为对象
+	 * @param parametrized 如果为null，则ResponseContent的result为null
+	 * @param parameterClasses
+	 * @return
+	 * @throws ResponseException
+	 * @throws ClientException
+	 * @since
+	 */
+	@SuppressWarnings("unchecked")
+	public <T> ResponseContent<T> returnJson(Class<?> parametrized, Class<?>... parameterClasses) throws ResponseException, ClientException {
+		ResponseContent<String> content = this.send();
+		
+		assertNotFoundException(content.getStatus(), this.request.getURI().toString());
+		
+		if (content.getStatus() != HttpStatus.SC_OK) {
+			ExceptionEntity entity = JsonUtil.parseJson(content.getResult(), ExceptionEntity.class);
+			throw new ResponseException(content.getStatus(), entity);
+		}
+		
+		ResponseContent<T> result = new ResponseContent<T>();
+		result.setStatus(HttpStatus.SC_OK);
+		if (parametrized != null) {
+			result.setResult((T)JsonUtil.parseJson(content.getResult(), parametrized, parameterClasses));
+		}
+		return result;
 	}
 
 }
