@@ -24,11 +24,11 @@ import org.hbhk.rss.weixinapi.server.msg.Msg4Voice;
 public class DefaultSession extends Session
 {
 
-	private List listeners;
+	private List<HandleMessageListener> listeners;
 
 	private DefaultSession()
 	{
-		listeners = new ArrayList(3);
+		listeners = new ArrayList<HandleMessageListener>(3);
 	}
 
 	public static DefaultSession newInstance()
@@ -49,7 +49,7 @@ public class DefaultSession extends Session
 	public void onTextMsg(Msg4Text msg)
 	{
 		HandleMessageListener currentListener;
-		for (Iterator iterator = listeners.iterator(); iterator.hasNext(); currentListener.onTextMsg(msg))
+		for (Iterator<HandleMessageListener> iterator = listeners.iterator(); iterator.hasNext(); currentListener.onTextMsg(msg))
 			currentListener = (HandleMessageListener)iterator.next();
 
 	}
@@ -57,7 +57,7 @@ public class DefaultSession extends Session
 	public void onImageMsg(Msg4Image msg)
 	{
 		HandleMessageListener currentListener;
-		for (Iterator iterator = listeners.iterator(); iterator.hasNext(); currentListener.onImageMsg(msg))
+		for (Iterator<HandleMessageListener> iterator = listeners.iterator(); iterator.hasNext(); currentListener.onImageMsg(msg))
 			currentListener = (HandleMessageListener)iterator.next();
 
 	}
@@ -65,7 +65,7 @@ public class DefaultSession extends Session
 	public void onEventMsg(Msg4Event msg)
 	{
 		HandleMessageListener currentListener;
-		for (Iterator iterator = listeners.iterator(); iterator.hasNext(); currentListener.onEventMsg(msg))
+		for (Iterator<HandleMessageListener> iterator = listeners.iterator(); iterator.hasNext(); currentListener.onEventMsg(msg))
 			currentListener = (HandleMessageListener)iterator.next();
 
 	}
@@ -73,7 +73,7 @@ public class DefaultSession extends Session
 	public void onLinkMsg(Msg4Link msg)
 	{
 		HandleMessageListener currentListener;
-		for (Iterator iterator = listeners.iterator(); iterator.hasNext(); currentListener.onLinkMsg(msg))
+		for (Iterator<HandleMessageListener> iterator = listeners.iterator(); iterator.hasNext(); currentListener.onLinkMsg(msg))
 			currentListener = (HandleMessageListener)iterator.next();
 
 	}
@@ -81,7 +81,7 @@ public class DefaultSession extends Session
 	public void onLocationMsg(Msg4Location msg)
 	{
 		HandleMessageListener currentListener;
-		for (Iterator iterator = listeners.iterator(); iterator.hasNext(); currentListener.onLocationMsg(msg))
+		for (Iterator<HandleMessageListener> iterator = listeners.iterator(); iterator.hasNext(); currentListener.onLocationMsg(msg))
 			currentListener = (HandleMessageListener)iterator.next();
 
 	}
@@ -89,7 +89,7 @@ public class DefaultSession extends Session
 	public void onErrorMsg(int errorCode)
 	{
 		HandleMessageListener currentListener;
-		for (Iterator iterator = listeners.iterator(); iterator.hasNext(); currentListener.onErrorMsg(errorCode))
+		for (Iterator<HandleMessageListener> iterator = listeners.iterator(); iterator.hasNext(); currentListener.onErrorMsg(errorCode))
 			currentListener = (HandleMessageListener)iterator.next();
 
 	}
@@ -97,7 +97,7 @@ public class DefaultSession extends Session
 	public void onVoiceMsg(Msg4Voice msg)
 	{
 		HandleMessageListener currentListener;
-		for (Iterator iterator = listeners.iterator(); iterator.hasNext(); currentListener.onVoiceMsg(msg))
+		for (Iterator<HandleMessageListener> iterator = listeners.iterator(); iterator.hasNext(); currentListener.onVoiceMsg(msg))
 			currentListener = (HandleMessageListener)iterator.next();
 
 	}
@@ -105,7 +105,7 @@ public class DefaultSession extends Session
 	public void onVideoMsg(Msg4Video msg)
 	{
 		HandleMessageListener currentListener;
-		for (Iterator iterator = listeners.iterator(); iterator.hasNext(); currentListener.onVideoMsg(msg))
+		for (Iterator<HandleMessageListener> iterator = listeners.iterator(); iterator.hasNext(); currentListener.onVideoMsg(msg))
 			currentListener = (HandleMessageListener)iterator.next();
 
 	}
