@@ -36,6 +36,9 @@ public abstract class Client {
 	public static Client post(String url) {
 		return new HttpClientUtil(HttpClients.createDefault(), url);
 	}
+	public static Client get(String url) {
+		return new HttpClientUtil(HttpClients.createDefault(), url);
+	}
 
 	public Client param(String name, String value) {
 		this.params.put(name, value);
