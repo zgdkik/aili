@@ -129,8 +129,8 @@
 	</build>
 
 	<modules>
-		<module>rss-web</module>
-		<module>rss-core</module>
 		<module>rss-weixinapi</module>
+		<module>rss-core</module>
+		<module>rss-web</module>
 	</modules>
 </project>
