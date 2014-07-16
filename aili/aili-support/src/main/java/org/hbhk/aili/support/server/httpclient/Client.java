@@ -128,5 +128,24 @@ public abstract class Client {
 		}
 		return result;
 	}
+	@SuppressWarnings("unchecked")
+	public <T> ResponseContent<T> returnJson(Class<?> parametrized) throws ResponseException, ClientException {
+		ResponseContent<String> content = this.send();
+		
+		assertNotFoundException(content.getStatus(), this.request.getURI().toString());
+		
+		if (content.getStatus() != HttpStatus.SC_OK) {
+			ExceptionEntity entity = JsonUtil.parseJson(content.getResult(), ExceptionEntity.class);
+			throw new ResponseException(content.getStatus(), entity);
+		}
+		
+		ResponseContent<T> result = new ResponseContent<T>();
+		result.setStatus(HttpStatus.SC_OK);
+		if (parametrized != null) {
+			result.setResult((T)JsonUtil.parseJson(content.getResult(), parametrized));
+		}
+		return result;
+	}
+
 
 }

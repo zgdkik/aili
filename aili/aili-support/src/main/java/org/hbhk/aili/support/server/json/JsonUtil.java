@@ -31,4 +31,16 @@ public abstract class JsonUtil {
 		} 
 	}
 	
+	@SuppressWarnings("unchecked")
+	public static <T> T parseJson(String json, Class<?> parametrized) throws ClientException {
+		if (StringUtils.isBlank(json)) {
+			return null;
+		}
+		try {
+			return (T) mapper.readValue(json, parametrized);
+		} catch (Exception e) {
+			throw new ClientException(e.getMessage(), e);
+		} 
+	}
+	
 }
