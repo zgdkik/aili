@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.hbhk.rss.core.server.context.UserContext;
 import org.hbhk.rss.core.server.service.IUserService;
 import org.hbhk.rss.core.server.service.IWeatherService;
 import org.hbhk.rss.core.shared.consts.UserRequestMenu;
@@ -85,55 +86,53 @@ public class WeixinController {
 				String msgStr = msg.getContent();
 				log.info("收到微信消息：" + msgStr);
 				String currUser = msg.getFromUserName();
-				String weixinzhuren = msg.getToUserName();
+				String usermenu = msgStr.trim();
+				if (UserRequestMenu.menus.contains(usermenu)) {
+					userService.saveCurrMenu(currUser, usermenu);
+				}
 				String menu = userService.getCurrMenu(currUser);
-				if (UserRequestMenu.menus.contains(msgStr)) {
-					userService.saveCurrMenu(currUser, msgStr);
-				}
-				if(menu == null){
-					getMainMenu(weixinzhuren, currUser, session);
+
+				if (menu == null) {
+					getMainMenu(session);
 					return;
 				}
-				if (UserRequestMenu.menus.contains(msgStr) && msgStr != menu) {
-					sendMsgInfo("如需选择其他菜单,请输入r返回上一级菜单,e返回主菜单", weixinzhuren, currUser, session);
+				if (UserRequestMenu.menus.contains(usermenu)
+						&& usermenu != menu) {
+					sendMsgInfo("如需选择其他菜单,请输入r返回上一级菜单,e返回主菜单", session);
 					return;
 				}
-				if(msgStr.equals("r")){
-					sendMsgInfo("返回上一级菜单", weixinzhuren, currUser, session);
+				if (usermenu.equals("r")) {
+					sendMsgInfo("返回上一级菜单", session);
 					userService.returnlastMenu(currUser);
 					return;
 				}
-				if(msgStr.equals("e")){
+				if (usermenu.equals("e")) {
 					userService.removeCurrMenu(currUser);
-					getMainMenu(weixinzhuren, currUser, session);
+					getMainMenu(session);
 					return;
 				}
 				if (UserRequestMenu.menus.contains(msgStr)) {
 					StringBuilder menus = new StringBuilder();
-					menus.append("欢迎使用hbhk查询系统:因有所有!回复对应数字进行体验.\n");
+					menus.append("欢迎使用hbhk查询系统:因有所有!\n");
 					if (UserRequestMenu.weather.equals(msgStr)) {
 						menus.append("[1].天气预报\n");
 						menus.append("请输入城市名称进行查询\n");
-					}else{
+					} else {
 						menus.append("[2].快递查询\n");
 						menus.append("请输入快递公司名称+运单号 例如:申通快递+123456789\n");
 					}
-					sendMsgInfo(menus.toString(), weixinzhuren, currUser, session);
+					sendMsgInfo(menus.toString(), session);
 					return;
 				}
 				if (msgStr != menu) {
 					// 天气预报
 					if (UserRequestMenu.weather.equals(menu)) {
-						Msg4Text rmsg = weatherService
-								.getBaiduWeatherToXml(msgStr);
-						rmsg.setFromUserName(weixinzhuren);
-						rmsg.setToUserName(currUser);
-						session.callback(rmsg);
+						weatherService.getBaiduWeatherToXml(msgStr, session);
 					}
 					// 快递查询
 					if (UserRequestMenu.weather.equals(menu)) {
 					}
-				} 
+				}
 
 			}
 		});
@@ -144,23 +143,21 @@ public class WeixinController {
 		log.info("reply msg");
 		session.close();// 关闭Session
 	}
-	
-	private void sendMsgInfo(String msg, String toUserName,
-			String fromUserName, DefaultSession session) {
+
+	private void sendMsgInfo(String msg, DefaultSession session) {
 		Msg4Text rmsg = new Msg4Text();
-		rmsg.setFromUserName(toUserName);
-		rmsg.setToUserName(fromUserName);
+		rmsg.setFromUserName(UserContext.master);
+		rmsg.setToUserName(UserContext.getCurrentContext().getCurrentUserName());
 		rmsg.setContent(msg);
 		session.callback(rmsg);
 	}
-	
-	private void getMainMenu(String toUserName,
-			String fromUserName, DefaultSession session) {
+
+	private void getMainMenu(DefaultSession session) {
 		StringBuilder menus = new StringBuilder();
 		menus.append("欢迎使用hbhk查询系统:因有所有!回复对应数字进行体验.\n");
 		menus.append("[1].天气预报\n");
 		menus.append("[2].快递查询\n");
-		sendMsgInfo(menus.toString(), toUserName, fromUserName, session);
+		sendMsgInfo(menus.toString(), session);
 	}
 
 }

@@ -9,11 +9,14 @@ import org.hbhk.aili.support.server.httpclient.HttpClientUtil;
 import org.hbhk.aili.support.server.httpclient.ResponseContent;
 import org.hbhk.aili.support.server.httpclient.exception.ClientException;
 import org.hbhk.aili.support.server.httpclient.exception.ResponseException;
+import org.hbhk.rss.core.server.context.UserContext;
 import org.hbhk.rss.core.server.service.IWeatherService;
 import org.hbhk.rss.core.shared.vo.Index;
 import org.hbhk.rss.core.shared.vo.WeatherVo;
 import org.hbhk.rss.weixinapi.server.msg.Msg4Text;
+import org.hbhk.rss.weixinapi.server.security.DefaultSession;
 import org.springframework.stereotype.Service;
+
 @Service
 public class WeatherService implements IWeatherService {
 	// ak=1rENYOIqG1RIMwnfH5uHS1o9
@@ -37,26 +40,33 @@ public class WeatherService implements IWeatherService {
 		return null;
 	}
 
-	public Msg4Text getBaiduWeatherToXml(String cityName) {
-		 WeatherVo weatherVo = getBaiduWeather(cityName) ;
-		 Msg4Text imageText = new Msg4Text();
-		 if(weatherVo!=null){
-			 List<Index> indexs= weatherVo.getResults().get(0).getIndex();
-			 StringBuilder sb = new StringBuilder();
-			 String name = weatherVo.getResults().get(0).getCurrentCity();
-			 sb.append("城市:"+name+"\n");
-			 sb.append("时间:"+weatherVo.getDate()+"\n");
-			 sb.append("温度:"+weatherVo.getResults().get(0).getWeather_data().get(0).getTemperature()+"\n");
-			 sb.append("指数说明:\n");
-			 for (int i = 0; i < indexs.size(); i++) {
-				 Index index = indexs.get(i);
-				 sb.append(index.getTipt()+":"+index.getDes()+"\n");
-			 }
-			 imageText.setContent(sb.toString());
-			return imageText;
-		 }
-		 imageText.setContent( "未查询到城市:"+cityName+"天气预报");
-		return imageText;
+	public void getBaiduWeatherToXml(String cityName, DefaultSession session) {
+		WeatherVo weatherVo = getBaiduWeather(cityName);
+		Msg4Text imageText = new Msg4Text();
+		if (weatherVo != null) {
+			List<Index> indexs = weatherVo.getResults().get(0).getIndex();
+			StringBuilder sb = new StringBuilder();
+			String name = weatherVo.getResults().get(0).getCurrentCity();
+			sb.append("城市:" + name + "\n");
+			sb.append("时间:" + weatherVo.getDate() + "\n");
+			sb.append("温度:"
+					+ weatherVo.getResults().get(0).getWeather_data().get(0)
+							.getTemperature() + "\n");
+			sb.append("指数说明:\n");
+			for (int i = 0; i < indexs.size(); i++) {
+				Index index = indexs.get(i);
+				sb.append(index.getTipt() + ":" + index.getDes() + "\n");
+			}
+			imageText.setContent(sb.toString());
+			session.callback(imageText);
+		} else {
+			imageText.setToUserName(UserContext.getCurrentContext()
+					.getCurrentUserName());
+			imageText.setFromUserName(UserContext.master);
+			imageText.setContent("未查询到城市:" + cityName + "天气预报");
+			session.callback(imageText);
+		}
+
 	}
 
 }

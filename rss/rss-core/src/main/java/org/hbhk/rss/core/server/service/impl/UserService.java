@@ -8,19 +8,26 @@ import org.springframework.stereotype.Service;
 public class UserService implements IUserService {
 	private static MemoryCacheTemplet<String> cacheTemplet = new MemoryCacheTemplet<String>();
 
+	private  final String subPrex="->";
 	// menu 1->20->30;
 	public void saveCurrMenu(String user, String menu) {
 		String usermenu = getCurrMenu(user);
 		if (usermenu != null) {
-			usermenu = usermenu + "->" + menu;
+			if(usermenu.substring(usermenu.lastIndexOf(subPrex)+subPrex.length(),usermenu.length()).equals(menu)){
+				return;
+			}
+			usermenu = usermenu + subPrex + menu;
 		} else {
 			usermenu = menu;
 		}
+		
 		cacheTemplet.set(user, usermenu, 1800);
 	}
 
 	public String getCurrMenu(String user) {
-		return cacheTemplet.get(user);
+		String usermenu = getCurrMenu(user);
+		usermenu = usermenu.substring(usermenu.lastIndexOf(subPrex)+subPrex.length(),usermenu.length());
+		return usermenu;
 	}
 
 	public void removeCurrMenu(String user) {
@@ -41,7 +48,7 @@ public class UserService implements IUserService {
 
 	public static void main(String[] args) {
 		String menu = "1->20->30";
-		menu = menu.substring(0, menu.lastIndexOf("->"));
+		menu = menu.substring(menu.lastIndexOf("->")+"->".length(), menu.length());
 		System.out.println(menu);
 	}
 }
