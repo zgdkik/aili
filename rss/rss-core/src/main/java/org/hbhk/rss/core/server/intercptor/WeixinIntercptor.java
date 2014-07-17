@@ -31,11 +31,16 @@ public class WeixinIntercptor extends HandlerInterceptorAdapter {
 	public boolean preHandle(HttpServletRequest request,
 			HttpServletResponse response, Object handler) throws Exception {
 		InputStream is = request.getInputStream();
-		org.w3c.dom.Document document = builder.parse(is);
-		Msg4Head head = new Msg4Head();
-		head.read(document);
-		UserContext.setCurrentUserName(head.getFromUserName());
-		log.info("current user:"+head.getFromUserName());
+		try {
+			org.w3c.dom.Document document = builder.parse(is);
+			Msg4Head head = new Msg4Head();
+			head.read(document);
+			UserContext.setCurrentUserName(head.getFromUserName());
+			UserContext.setCurrentMsg4Head(head);
+			log.info("current user:"+head.getFromUserName());
+		} catch (Exception e) {
+			log.error("解析微信消息头出错",e );
+		}
 		return true;
 	}
 
