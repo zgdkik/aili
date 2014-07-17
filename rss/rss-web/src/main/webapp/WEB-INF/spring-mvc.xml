@@ -77,6 +77,12 @@
 			<bean
 				class="org.hbhk.aili.core.server.interceptor.PerformanceWatchInterceptor" />
 		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<mvc:exclude-mapping path="#{resourceBean.resourcePrefix}/**" />
+			<bean
+				class="org.hbhk.rss.core.server.intercptor.WeixinIntercptor" />
+		</mvc:interceptor>
 	</mvc:interceptors>
 
 	<bean class="jetbrick.template.web.springmvc.JetTemplateViewResolver">
