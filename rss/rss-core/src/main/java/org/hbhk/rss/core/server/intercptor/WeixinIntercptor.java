@@ -93,7 +93,7 @@ public class WeixinIntercptor extends HandlerInterceptorAdapter {
 				log.error("解析InputStream出错", e);
 			}
 		}
-
+		log.info("微信内容："+sb.toString());
 		return sb.toString();
 	}
 
