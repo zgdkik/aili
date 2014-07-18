@@ -22,7 +22,7 @@ public class WeixinTest {
 
 		String url = "http://localhost:8080/rss/weixin/auth.htm";
 		ResponseContent<String> responseContent = HttpClientUtil.post(url)
-				.param(getXMl("2")).sendXml();
+				.param(getXMl("1")).sendXml();
 		System.out.println("1"+responseContent.getResult());
 	}
 	@Test
