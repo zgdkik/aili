@@ -13,6 +13,8 @@ public class WeixinTest {
 		//http://hbhkrss.jd-app.com /weixin/auth.htm?
 		//http://localhost:8080/rss/weixin/auth.htm
 		String url ="http://localhost:8080/rss/weixin/auth.htm";
-		ResponseContent<String>  responseContent= HttpClientUtil.post(url).param("name","hbhk").send();
+		String xml = "<xml><ToUserName><![CDATA[hbhk520]]></ToUserName><FromUserName><![CDATA[1024784402]]></FromUserName> <CreateTime>1348831860</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[this is a test]]></Content><MsgId>1234567890123456</MsgId></xml>";
+		ResponseContent<String>  responseContent= HttpClientUtil.post(url).param(xml).sendXml();
+		System.out.println(responseContent.getResult());
 	}
 }

@@ -40,16 +40,22 @@ public class WeixinIntercptor extends HandlerInterceptorAdapter {
 	@Override
 	public boolean preHandle(HttpServletRequest request,
 			HttpServletResponse response, Object handler) throws Exception {
+		String requestMethod= request.getMethod();
+		if(!requestMethod.equals("POST")){
+			return true;
+		}
 		InputStream is = request.getInputStream();
 		UserContext.setInputStream(is);
 		UserContext  cache =UserContext.getCurrentContext();
 		InputStream logis =cache.getInputStream();
 		InputStream currgis =cache.getInputStream();
+		getUserMsg(logis);
 		try {
 			org.w3c.dom.Document document = builder.parse(currgis);
 			Msg4Head head = new Msg4Head();
 			head.read(document);
 			UserContext.setCurrentUserName(head.getFromUserName());
+			UserContext.setMaster(head.getToUserName());
 			UserContext.setCurrentMsg4Head(head);
 
 			UserMsgLogEntity logEntity = new UserMsgLogEntity();

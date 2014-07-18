@@ -11,7 +11,7 @@ import org.hbhk.rss.weixinapi.server.msg.Msg4Head;
 
 public class UserContext {
 
-	public static final String master = "hbhk520";
+	
 	private static Log log = LogFactory.getLog(UserContext.class);
 	private static ThreadLocal<UserContext> context = new ThreadLocal<UserContext>() {
 		@Override
@@ -19,12 +19,19 @@ public class UserContext {
 			return new UserContext();
 		}
 	};
+	
+	public  String master;
+	
 	private Msg4Head msg4Head;
 
 	private String currentUserName;
 
 	private ByteArrayOutputStream byteArrayOutputStream = null;
 
+	public static void setMaster(String master) {
+		UserContext userContext = getCurrentContext();
+		userContext.master = master;
+	}
 	public static void setInputStream(InputStream inputStream) {
 		UserContext userContext = getCurrentContext();
 		if (inputStream == null) {
@@ -75,9 +82,8 @@ public class UserContext {
 	public Msg4Head getMsg4Head() {
 		return msg4Head;
 	}
-
-	public void setMsg4Head(Msg4Head msg4Head) {
-		this.msg4Head = msg4Head;
+	public String getMaster() {
+		return master;
 	}
 
 }

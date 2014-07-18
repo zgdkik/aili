@@ -146,7 +146,7 @@ public class WeixinController {
 
 	private void sendMsgInfo(String msg, DefaultSession session) {
 		Msg4Text rmsg = new Msg4Text();
-		rmsg.setFromUserName(UserContext.master);
+		rmsg.setFromUserName(UserContext.getCurrentContext().getMaster());
 		rmsg.setToUserName(UserContext.getCurrentContext().getCurrentUserName());
 		rmsg.setContent(msg);
 		session.callback(rmsg);

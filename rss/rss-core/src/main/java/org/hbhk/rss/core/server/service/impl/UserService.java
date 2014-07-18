@@ -33,8 +33,10 @@ public class UserService implements IUserService {
 	}
 
 	public String getCurrMenu(String user) {
-		String usermenu = getCurrMenu(user);
-		usermenu = usermenu.substring(usermenu.lastIndexOf(subPrex)+subPrex.length(),usermenu.length());
+		String usermenu = cacheTemplet.get(user);
+		if(usermenu!=null){
+			usermenu = usermenu.substring(usermenu.lastIndexOf(subPrex)+subPrex.length(),usermenu.length());
+		}
 		return usermenu;
 	}
 

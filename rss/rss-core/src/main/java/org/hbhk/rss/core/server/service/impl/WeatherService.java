@@ -62,7 +62,7 @@ public class WeatherService implements IWeatherService {
 		} else {
 			imageText.setToUserName(UserContext.getCurrentContext()
 					.getCurrentUserName());
-			imageText.setFromUserName(UserContext.master);
+			imageText.setFromUserName(UserContext.getCurrentContext().getMaster());
 			imageText.setContent("未查询到城市:" + cityName + "天气预报");
 			session.callback(imageText);
 		}
