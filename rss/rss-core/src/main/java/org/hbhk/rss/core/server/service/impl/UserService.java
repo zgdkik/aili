@@ -1,7 +1,13 @@
 package org.hbhk.rss.core.server.service.impl;
 
+import java.util.Date;
+
 import org.hbhk.rss.core.server.cache.MemoryCacheTemplet;
+import org.hbhk.rss.core.server.context.UserContext;
+import org.hbhk.rss.core.server.dao.IUserDao;
 import org.hbhk.rss.core.server.service.IUserService;
+import org.hbhk.rss.core.shared.pojo.UserMsgLogEntity;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -9,6 +15,8 @@ public class UserService implements IUserService {
 	private static MemoryCacheTemplet<String> cacheTemplet = new MemoryCacheTemplet<String>();
 
 	private  final String subPrex="->";
+	@Autowired
+	private IUserDao userDao;
 	// menu 1->20->30;
 	public void saveCurrMenu(String user, String menu) {
 		String usermenu = getCurrMenu(user);
@@ -46,9 +54,9 @@ public class UserService implements IUserService {
 		return menu;
 	}
 
-	public static void main(String[] args) {
-		String menu = "1->20->30";
-		menu = menu.substring(menu.lastIndexOf("->")+"->".length(), menu.length());
-		System.out.println(menu);
+	public void saveUserMsgLog(UserMsgLogEntity log) {
+		log.setCreate_time(new Date());
+		log.setUser_name(UserContext.getCurrentContext().getCurrentUserName());
+		userDao.save(log);
 	}
 }

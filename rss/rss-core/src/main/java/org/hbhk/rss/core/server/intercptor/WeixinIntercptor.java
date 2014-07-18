@@ -1,6 +1,9 @@
 package org.hbhk.rss.core.server.intercptor;
 
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,12 +14,19 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hbhk.rss.core.server.context.UserContext;
+import org.hbhk.rss.core.server.service.IUserService;
+import org.hbhk.rss.core.shared.pojo.UserMsgLogEntity;
 import org.hbhk.rss.weixinapi.server.msg.Msg4Head;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 public class WeixinIntercptor extends HandlerInterceptorAdapter {
 
 	private Log log = LogFactory.getLog(getClass());
+
+	@Autowired
+	private IUserService userService;
+
 	private static DocumentBuilder builder;
 	static {
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -32,14 +42,18 @@ public class WeixinIntercptor extends HandlerInterceptorAdapter {
 			HttpServletResponse response, Object handler) throws Exception {
 		InputStream is = request.getInputStream();
 		try {
-			org.w3c.dom.Document document = builder.parse(is);
-			Msg4Head head = new Msg4Head();
-			head.read(document);
-			UserContext.setCurrentUserName(head.getFromUserName());
-			UserContext.setCurrentMsg4Head(head);
-			log.info("current user:"+head.getFromUserName());
+			UserContext.setCurrentUserName("hbhk");
+			UserMsgLogEntity logEntity = new UserMsgLogEntity();
+			logEntity.setMsg(getUserMsg(is));
+			userService.saveUserMsgLog(logEntity);
+			 org.w3c.dom.Document document = builder.parse(is);
+			 Msg4Head head = new Msg4Head();
+			 head.read(document);
+
+			 UserContext.setCurrentMsg4Head(head);
+			 log.info("current user:" + head.getFromUserName());
 		} catch (Exception e) {
-			log.error("解析微信消息头出错",e );
+			log.error("解析微信消息头出错", e);
 		}
 		return true;
 	}
@@ -50,6 +64,22 @@ public class WeixinIntercptor extends HandlerInterceptorAdapter {
 			throws Exception {
 		super.afterCompletion(request, response, handler, ex);
 		UserContext.remove();
+	}
+
+	private String getUserMsg(InputStream is) {
+		InputStreamReader isr = new InputStreamReader(is);
+		BufferedReader br = new BufferedReader(isr);
+		StringBuilder sb = new StringBuilder("");
+		try {
+			String str = null;
+			while ((str = br.readLine()) != null) {
+				sb.append(str);
+			}
+		} catch (IOException e) {
+			log.error("解析微信消息头出错", e);
+		}
+
+		return sb.toString();
 	}
 
 }
