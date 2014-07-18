@@ -64,6 +64,7 @@ public class WeixinIntercptor extends HandlerInterceptorAdapter {
 			log.info("current user:" + head.getFromUserName());
 		} catch (Exception e) {
 			log.error("解析微信消息头出错", e);
+			return false;
 		}
 		return true;
 	}
