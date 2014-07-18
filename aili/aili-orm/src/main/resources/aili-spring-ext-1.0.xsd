@@ -2,7 +2,7 @@
 <xsd:schema xmlns="http://loxia.benjamin.cn/schema/core"
 	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
 	xmlns:beans="http://www.springframework.org/schema/beans"
-	targetNamespace="http://hbhk.aili.org/schema/core"
+	targetNamespace="http://hbhk.aili.org/schema/hbhk"
 	elementFormDefault="qualified"
 	attributeFormDefault="unqualified">
 
