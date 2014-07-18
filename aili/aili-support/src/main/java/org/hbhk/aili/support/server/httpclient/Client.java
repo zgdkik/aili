@@ -23,7 +23,7 @@ public abstract class Client {
 
 	protected Log log = LogFactory.getLog(getClass());
 
-	protected Map<String, String> params;
+	protected Object params;
 
 	protected CloseableHttpClient client;
 
@@ -36,23 +36,42 @@ public abstract class Client {
 	public static Client post(String url) {
 		return new HttpClientUtil(HttpClients.createDefault(), url);
 	}
+	public static Client postXml(String url) {
+		return new HttpClientUtil(HttpClients.createDefault(), url);
+	}
+	public static Client postJson(String url) {
+		return new HttpClientUtil(HttpClients.createDefault(), url);
+	}
 	public static Client get(String url) {
 		return new HttpClientUtil(HttpClients.createDefault(), url);
 	}
 
+	@SuppressWarnings("unchecked")
 	public Client param(String name, String value) {
-		this.params.put(name, value);
+		((Map<String, String>) this.params).put(name, value);
+		return this;
+	}
+	public Client param(String xmlOrJson) {
+		 this.params = xmlOrJson;
 		return this;
 	}
 
-	public Client param(Map<String, String> paramMap) {
+	@SuppressWarnings("unchecked")
+	public Client param(Object paramMap) {
 		if (paramMap != null) {
-			this.params.putAll(paramMap);
+			if(paramMap instanceof Map){
+				((Map<String, String>) this.params).putAll((Map<String,String>) paramMap);
+			}
+			if(paramMap instanceof String){
+				 this.params = paramMap;
+			}
 		}
 		return this;
 	}
 
 	protected abstract void addParams() throws ClientException;
+	protected abstract void addParamsXml() throws ClientException;
+	protected abstract void addParamsJson() throws ClientException;
 
 	public ResponseContent<String> send() throws ClientException {
 		ResponseContent<String> result = null;
@@ -86,6 +105,73 @@ public abstract class Client {
 
 		return result;
 	}
+	
+	public ResponseContent<String> sendXml() throws ClientException {
+		ResponseContent<String> result = null;
+		try {
+			// params
+			this.addParamsXml();
+			// Create a custom response handler
+			ResponseHandler<ResponseContent<String>> responseHandler = new ResponseHandler<ResponseContent<String>>() {
+				public ResponseContent<String> handleResponse(
+						final HttpResponse response)
+						throws ClientProtocolException, IOException {
+					ResponseContent<String> result = new ResponseContent<String>();
+					result.setStatus(response.getStatusLine().getStatusCode());
+					result.setResult(EntityUtils.toString(response.getEntity(),
+							Consts.UTF_8));
+					return result;
+				}
+			};
+
+			if (log.isDebugEnabled()) {
+				if (this.request != null) {
+					log.debug("url:" + this.request.getURI());
+				}
+			}
+			result = this.client.execute(request, responseHandler);
+		} catch (Exception e) {
+			throw new ClientException(e.getMessage(), e);
+		} finally {
+			closeClient(this.client);
+		}
+
+		return result;
+	}
+	
+	public ResponseContent<String> sendJson() throws ClientException {
+		ResponseContent<String> result = null;
+		try {
+			// params
+			this.addParamsJson();
+			// Create a custom response handler
+			ResponseHandler<ResponseContent<String>> responseHandler = new ResponseHandler<ResponseContent<String>>() {
+				public ResponseContent<String> handleResponse(
+						final HttpResponse response)
+						throws ClientProtocolException, IOException {
+					ResponseContent<String> result = new ResponseContent<String>();
+					result.setStatus(response.getStatusLine().getStatusCode());
+					result.setResult(EntityUtils.toString(response.getEntity(),
+							Consts.UTF_8));
+					return result;
+				}
+			};
+
+			if (log.isDebugEnabled()) {
+				if (this.request != null) {
+					log.debug("url:" + this.request.getURI());
+				}
+			}
+			result = this.client.execute(request, responseHandler);
+		} catch (Exception e) {
+			throw new ClientException(e.getMessage(), e);
+		} finally {
+			closeClient(this.client);
+		}
+
+		return result;
+	}
+
 
 	public static void closeClient(CloseableHttpClient client)
 			throws ClientException {
