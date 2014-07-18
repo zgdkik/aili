@@ -11,10 +11,8 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.hbhk.rss.core.server.cache.InputStreamCacher;
 import org.hbhk.rss.core.server.context.UserContext;
 import org.hbhk.rss.core.server.service.IUserService;
 import org.hbhk.rss.core.shared.pojo.UserMsgLogEntity;
@@ -44,9 +42,9 @@ public class WeixinIntercptor extends HandlerInterceptorAdapter {
 			HttpServletResponse response, Object handler) throws Exception {
 		InputStream is = request.getInputStream();
 		UserContext.setInputStream(is);
-		UserContext  cacher =UserContext.getCurrentContext();
-		InputStream logis =cacher.getInputStream();
-		InputStream currgis =cacher.getInputStream();
+		UserContext  cache =UserContext.getCurrentContext();
+		InputStream logis =cache.getInputStream();
+		InputStream currgis =cache.getInputStream();
 		try {
 			org.w3c.dom.Document document = builder.parse(currgis);
 			Msg4Head head = new Msg4Head();
