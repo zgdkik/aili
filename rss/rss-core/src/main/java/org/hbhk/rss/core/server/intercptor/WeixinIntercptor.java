@@ -49,7 +49,6 @@ public class WeixinIntercptor extends HandlerInterceptorAdapter {
 		UserContext  cache =UserContext.getCurrentContext();
 		InputStream logis =cache.getInputStream();
 		InputStream currgis =cache.getInputStream();
-		getUserMsg(logis);
 		try {
 			org.w3c.dom.Document document = builder.parse(currgis);
 			Msg4Head head = new Msg4Head();
