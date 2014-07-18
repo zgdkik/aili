@@ -11,6 +11,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hbhk.rss.core.server.context.UserContext;
@@ -41,16 +42,18 @@ public class WeixinIntercptor extends HandlerInterceptorAdapter {
 	public boolean preHandle(HttpServletRequest request,
 			HttpServletResponse response, Object handler) throws Exception {
 		InputStream is = request.getInputStream();
+		InputStream logis =(InputStream) BeanUtils.cloneBean(is);
+		InputStream currgis =(InputStream) BeanUtils.cloneBean(is);
 		try {
-			UserContext.setCurrentUserName("hbhk");
-			UserMsgLogEntity logEntity = new UserMsgLogEntity();
-			logEntity.setMsg(getUserMsg(is));
-			userService.saveUserMsgLog(logEntity);
-			 org.w3c.dom.Document document = builder.parse(is);
+			 org.w3c.dom.Document document = builder.parse(currgis);
 			 Msg4Head head = new Msg4Head();
 			 head.read(document);
-
+			 UserContext.setCurrentUserName(head.getFromUserName());
 			 UserContext.setCurrentMsg4Head(head);
+			 
+			 UserMsgLogEntity logEntity = new UserMsgLogEntity();
+			 logEntity.setMsg(getUserMsg(logis));
+			 userService.saveUserMsgLog(logEntity);
 			 log.info("current user:" + head.getFromUserName());
 		} catch (Exception e) {
 			log.error("解析微信消息头出错", e);
