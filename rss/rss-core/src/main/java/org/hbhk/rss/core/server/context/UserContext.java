@@ -1,11 +1,18 @@
 package org.hbhk.rss.core.server.context;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.hbhk.rss.weixinapi.server.msg.Msg4Head;
 
 public class UserContext {
 
 	public static final String master = "hbhk520";
-
+	private static Log log = LogFactory.getLog(UserContext.class);
 	private static ThreadLocal<UserContext> context = new ThreadLocal<UserContext>() {
 		@Override
 		protected UserContext initialValue() {
@@ -15,6 +22,33 @@ public class UserContext {
 	private Msg4Head msg4Head;
 
 	private String currentUserName;
+
+	private ByteArrayOutputStream byteArrayOutputStream = null;
+
+	public static void setInputStream(InputStream inputStream) {
+		UserContext userContext = getCurrentContext();
+		if (inputStream == null) {
+			return;
+		}
+		ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+		byte[] buffer = new byte[1024];
+		int len;
+		try {
+			while ((len = inputStream.read(buffer)) > -1) {
+				byteArrayOutputStream.write(buffer, 0, len);
+			}
+		} catch (IOException e) {
+			log.error(e.getMessage(), e);
+		}
+		userContext.byteArrayOutputStream = byteArrayOutputStream;
+	}
+
+	public InputStream getInputStream() {
+		if (byteArrayOutputStream == null) {
+			return null;
+		}
+		return new ByteArrayInputStream(byteArrayOutputStream.toByteArray());
+	}
 
 	public static void setCurrentUserName(String currentUserName) {
 		UserContext userContext = getCurrentContext();

@@ -14,6 +14,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.hbhk.rss.core.server.cache.InputStreamCacher;
 import org.hbhk.rss.core.server.context.UserContext;
 import org.hbhk.rss.core.server.service.IUserService;
 import org.hbhk.rss.core.shared.pojo.UserMsgLogEntity;
@@ -42,19 +43,21 @@ public class WeixinIntercptor extends HandlerInterceptorAdapter {
 	public boolean preHandle(HttpServletRequest request,
 			HttpServletResponse response, Object handler) throws Exception {
 		InputStream is = request.getInputStream();
-		InputStream logis =(InputStream) BeanUtils.cloneBean(is);
-		InputStream currgis =(InputStream) BeanUtils.cloneBean(is);
+		UserContext.setInputStream(is);
+		UserContext  cacher =UserContext.getCurrentContext();
+		InputStream logis =cacher.getInputStream();
+		InputStream currgis =cacher.getInputStream();
 		try {
-			 org.w3c.dom.Document document = builder.parse(currgis);
-			 Msg4Head head = new Msg4Head();
-			 head.read(document);
-			 UserContext.setCurrentUserName(head.getFromUserName());
-			 UserContext.setCurrentMsg4Head(head);
-			 
-			 UserMsgLogEntity logEntity = new UserMsgLogEntity();
-			 logEntity.setMsg(getUserMsg(logis));
-			 userService.saveUserMsgLog(logEntity);
-			 log.info("current user:" + head.getFromUserName());
+			org.w3c.dom.Document document = builder.parse(currgis);
+			Msg4Head head = new Msg4Head();
+			head.read(document);
+			UserContext.setCurrentUserName(head.getFromUserName());
+			UserContext.setCurrentMsg4Head(head);
+
+			UserMsgLogEntity logEntity = new UserMsgLogEntity();
+			logEntity.setMsg(getUserMsg(logis));
+			userService.saveUserMsgLog(logEntity);
+			log.info("current user:" + head.getFromUserName());
 		} catch (Exception e) {
 			log.error("解析微信消息头出错", e);
 		}
@@ -79,7 +82,18 @@ public class WeixinIntercptor extends HandlerInterceptorAdapter {
 				sb.append(str);
 			}
 		} catch (IOException e) {
-			log.error("解析微信消息头出错", e);
+			log.error("解析InputStream出错", e);
+		} finally {
+			try {
+				if (br != null) {
+					br.close();
+				}
+				if (isr != null) {
+					isr.close();
+				}
+			} catch (IOException e) {
+				log.error("解析InputStream出错", e);
+			}
 		}
 
 		return sb.toString();

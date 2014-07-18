@@ -75,7 +75,7 @@ public class WeixinController {
 	@RequestMapping(value = "/auth", method = RequestMethod.POST)
 	public void dealMsg(HttpServletRequest request, HttpServletResponse response)
 			throws IOException {
-		InputStream is = request.getInputStream();
+		InputStream is = UserContext.getCurrentContext().getInputStream();
 		OutputStream os = response.getOutputStream();
 
 		log.info("start accept msg");
