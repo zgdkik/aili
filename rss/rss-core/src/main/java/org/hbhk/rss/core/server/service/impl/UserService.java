@@ -21,10 +21,14 @@ public class UserService implements IUserService {
 	public void saveCurrMenu(String user, String menu) {
 		String usermenu = getCurrMenu(user);
 		if (usermenu != null) {
-			if(usermenu.substring(usermenu.lastIndexOf(subPrex)+subPrex.length(),usermenu.length()).equals(menu)){
-				return;
+			if( usermenu.indexOf(subPrex)>-1){
+				if(usermenu.substring(usermenu.lastIndexOf(subPrex)+subPrex.length(),usermenu.length()).equals(menu)){
+					return;
+				}
 			}
-			usermenu = usermenu + subPrex + menu;
+			if(!menu.equals(usermenu)){
+				usermenu = usermenu + subPrex + menu;
+			}
 		} else {
 			usermenu = menu;
 		}
@@ -34,7 +38,7 @@ public class UserService implements IUserService {
 
 	public String getCurrMenu(String user) {
 		String usermenu = cacheTemplet.get(user);
-		if(usermenu!=null){
+		if(usermenu!=null && usermenu.indexOf(subPrex)>-1){
 			usermenu = usermenu.substring(usermenu.lastIndexOf(subPrex)+subPrex.length(),usermenu.length());
 		}
 		return usermenu;

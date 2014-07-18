@@ -92,12 +92,12 @@ public class WeixinController {
 				}
 				String menu = userService.getCurrMenu(currUser);
 
-				if (menu == null) {
+				if (menu == null || menu.equals("")) {
 					getMainMenu(session);
 					return;
 				}
 				if (UserRequestMenu.menus.contains(usermenu)
-						&& usermenu != menu) {
+						&& !usermenu.equals(menu)) {
 					sendMsgInfo("如需选择其他菜单,请输入r返回上一级菜单,e返回主菜单", session);
 					return;
 				}
