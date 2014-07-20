@@ -1,6 +1,6 @@
-package org.hbhk.rss.core.server.service.impl;
+package org.hbhk.maikkr.core.server.service.impl;
 
-import org.hbhk.rss.core.server.service.IWeatherService;
+import org.hbhk.maikkr.core.server.service.IWeatherService;
 
 public class WeatherService implements IWeatherService {
 	// ak=1rENYOIqG1RIMwnfH5uHS1o9

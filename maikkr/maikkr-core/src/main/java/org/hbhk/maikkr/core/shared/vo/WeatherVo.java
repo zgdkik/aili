@@ -1,4 +1,4 @@
-package org.hbhk.rss.core.shared.vo;
+package org.hbhk.maikkr.core.shared.vo;
 
 public class WeatherVo {
 

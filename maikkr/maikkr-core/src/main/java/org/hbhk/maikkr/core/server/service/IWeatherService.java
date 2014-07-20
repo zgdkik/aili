@@ -1,4 +1,4 @@
-package org.hbhk.rss.core.server.service;
+package org.hbhk.maikkr.core.server.service;
 
 public interface IWeatherService {
 	

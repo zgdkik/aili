@@ -1,4 +1,4 @@
-package org.hbhk.rss.core.shared.consts;
+package org.hbhk.maikkr.core.shared.consts;
 
 public interface UserRequestType {
 	String weather = "1";
