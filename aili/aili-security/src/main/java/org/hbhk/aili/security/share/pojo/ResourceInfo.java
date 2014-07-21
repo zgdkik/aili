@@ -5,8 +5,8 @@ import java.util.List;
 import org.hbhk.aili.orm.server.annotation.Column;
 import org.hbhk.aili.orm.server.annotation.Entity;
 import org.hbhk.aili.orm.server.annotation.JoinColumn;
-import org.hbhk.aili.orm.server.annotation.PrimaryKey;
 import org.hbhk.aili.orm.server.annotation.Tabel;
+import org.hbhk.aili.orm.share.model.BaseInfo;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -14,13 +14,9 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 @JsonInclude(Include.NON_EMPTY)
 @Entity
 @Tabel("t_aili_role")
-public class ResourceInfo implements java.io.Serializable {
+public class ResourceInfo extends BaseInfo {
 
 	private static final long serialVersionUID = 9125685922301392808L;
-	// 节点 id
-	@PrimaryKey
-	@Column("id")
-	private String id;
 	@Column("code")
 	private String code;
 	// 显示文本
@@ -57,13 +53,6 @@ public class ResourceInfo implements java.io.Serializable {
 	@Column("memo")
 	private String memo;
 
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
 
 	public String getCode() {
 		return code;

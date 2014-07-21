@@ -4,17 +4,14 @@ import java.util.Set;
 
 import org.hbhk.aili.orm.server.annotation.Column;
 import org.hbhk.aili.orm.server.annotation.Entity;
-import org.hbhk.aili.orm.server.annotation.PrimaryKey;
 import org.hbhk.aili.orm.server.annotation.Tabel;
+import org.hbhk.aili.orm.share.model.BaseInfo;
 
 @Entity
 @Tabel("t_aili_role")
-public class RoleInfo implements java.io.Serializable {
+public class RoleInfo extends BaseInfo { 
 
 	private static final long serialVersionUID = 4218930427867063297L;
-	@PrimaryKey
-	@Column("id")
-	private String id;
 	@Column("code")
 	private String code;
 	@Column("enable")
@@ -23,13 +20,6 @@ public class RoleInfo implements java.io.Serializable {
 	private String name;
 	private Set<ResourceInfo> resources;
 
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
 
 	public String getCode() {
 		return code;

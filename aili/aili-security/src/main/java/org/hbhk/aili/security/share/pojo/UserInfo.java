@@ -5,7 +5,6 @@ import java.util.Set;
 import org.hbhk.aili.orm.server.annotation.Column;
 import org.hbhk.aili.orm.server.annotation.Entity;
 import org.hbhk.aili.orm.server.annotation.JoinColumn;
-import org.hbhk.aili.orm.server.annotation.PrimaryKey;
 import org.hbhk.aili.orm.server.annotation.Tabel;
 
 @Entity
@@ -13,9 +12,6 @@ import org.hbhk.aili.orm.server.annotation.Tabel;
 public class UserInfo implements java.io.Serializable {
 
 	private static final long serialVersionUID = 54122579931594962L;
-	@PrimaryKey
-	@Column("id")
-	private String id;
 	@Column("enable")
 	private int enable;
 	@Column("password")
@@ -31,14 +27,6 @@ public class UserInfo implements java.io.Serializable {
 	@Column("roles")
 	@JoinColumn
 	private Set<RoleInfo> roles;
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
 
 	public int getEnable() {
 		return enable;
