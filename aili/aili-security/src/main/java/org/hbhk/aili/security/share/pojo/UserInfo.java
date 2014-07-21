@@ -6,10 +6,11 @@ import org.hbhk.aili.orm.server.annotation.Column;
 import org.hbhk.aili.orm.server.annotation.Entity;
 import org.hbhk.aili.orm.server.annotation.JoinColumn;
 import org.hbhk.aili.orm.server.annotation.Tabel;
+import org.hbhk.aili.orm.share.model.BaseInfo;
 
 @Entity
 @Tabel("t_aili_user")
-public class UserInfo implements java.io.Serializable {
+public class UserInfo extends BaseInfo {
 
 	private static final long serialVersionUID = 54122579931594962L;
 	@Column("enable")
