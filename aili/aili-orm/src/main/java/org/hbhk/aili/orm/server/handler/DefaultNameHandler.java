@@ -5,10 +5,12 @@ import java.lang.reflect.Field;
 import org.hbhk.aili.orm.server.annotation.Column;
 import org.hbhk.aili.orm.server.annotation.PrimaryKey;
 import org.hbhk.aili.orm.server.annotation.Tabel;
+import org.springframework.stereotype.Component;
 
 /**
  * 默认名称处理handler
  */
+@Component
 public class DefaultNameHandler implements INameHandler {
 
 	/**
@@ -48,10 +50,10 @@ public class DefaultNameHandler implements INameHandler {
 			column = pri_field.getAnnotation(Column.class);
 			if (column != null) {
 				pri_id = column.value();
-			}else{
+			} else {
 				pri_id = pri_field.getName();
 			}
-		} else{
+		} else {
 			throw new RuntimeException("Entity primarykey must have");
 		}
 		return pri_id;
@@ -68,7 +70,14 @@ public class DefaultNameHandler implements INameHandler {
 		for (int i = 0; i < fields.length && brk; i++) {
 			Field field = fields[i];
 			if (field.getName().equals(fieldName)) {
+				PrimaryKey primaryKey = field.getAnnotation(PrimaryKey.class);
+				if (primaryKey != null) {
+					return null;
+				}
 				column = field.getAnnotation(Column.class);
+				if (column == null) {
+					return null;
+				}
 			}
 		}
 		String columnName = null;

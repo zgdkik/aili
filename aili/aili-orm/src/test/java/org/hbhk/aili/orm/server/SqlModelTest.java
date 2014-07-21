@@ -1,12 +1,17 @@
 package org.hbhk.aili.orm.server;
 
+import java.lang.reflect.Field;
+import java.util.Arrays;
+import java.util.List;
+
 import org.hbhk.aili.orm.server.annotation.Column;
 import org.hbhk.aili.orm.server.annotation.PrimaryKey;
 import org.hbhk.aili.orm.server.annotation.Tabel;
 
 @Tabel("t_test_sql")
-public class SqlModelTest {
+public class SqlModelTest extends BaseInfo {
 
+	private static final long serialVersionUID = 4797694839375226216L;
 	@Column("id")
 	@PrimaryKey
 	private String id;

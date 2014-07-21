@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -41,7 +42,9 @@ public class AutoCreateTable implements InitializingBean {
 		sb.append("CREATE TABLE " + tableName + "(\n");
 		String prikey = nameHandler.getPrimaryName(cls);
 		sb.append(prikey + " varchar(255),\n");
-		Field field[] = cls.getDeclaredFields();
+		List<Field> fields = new ArrayList<Field>();
+		Field field[] = getParentClassFields(fields, cls).toArray(
+				new Field[] {});
 		for (int i = 0; i < field.length; i++) {
 			Field f = field[i];
 			String columnName = nameHandler.getColumnName(cls, f.getName());
@@ -59,6 +62,17 @@ public class AutoCreateTable implements InitializingBean {
 			logger.error("公用方法生成表时错误", e);
 			logger.error("公用方法生成表语句：" + sb.toString());
 		}
+	}
+
+	private List<Field> getParentClassFields(List<Field> fields, Class<?> clazz) {
+		Field[] selffields = clazz.getDeclaredFields();
+		fields.addAll(Arrays.asList(selffields));
+
+		if (clazz.getSuperclass() == null) {
+			return fields;
+		}
+		getParentClassFields(fields, clazz.getSuperclass());
+		return fields;
 	}
 
 	private boolean exits(String tableName) {
