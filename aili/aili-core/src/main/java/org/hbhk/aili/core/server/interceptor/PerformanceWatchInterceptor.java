@@ -31,13 +31,16 @@ public class PerformanceWatchInterceptor extends HandlerInterceptorAdapter {
 			throws Exception {
 		if (usePerformance) {
 			StopWatch stopWatch = stopWatchLocal.get();
-			stopWatch.stop();
-			String currentPath = request.getRequestURI();
-			String queryString = request.getQueryString();
-			queryString = queryString == null ? "" : "?" + queryString;
-			log.info("access url path:" + currentPath + queryString + " |time:"
-					+ stopWatch.getTotalTimeMillis());
-			stopWatchLocal.remove();
+			if(stopWatch!=null){
+				stopWatch.stop();
+				String currentPath = request.getRequestURI();
+				String queryString = request.getQueryString();
+				queryString = queryString == null ? "" : "?" + queryString;
+				log.info("access url path:" + currentPath + queryString + " |time:"
+						+ stopWatch.getTotalTimeMillis());
+				stopWatchLocal.remove();
+			}
+			
 		}
 	}
 
