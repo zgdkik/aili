@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.hbhk.aili.core.server.web.WebApplicationContextHolder;
 import org.hbhk.aili.orm.server.test.TestAiliDao;
-import org.hbhk.aili.orm.share.model.UserInfo;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 

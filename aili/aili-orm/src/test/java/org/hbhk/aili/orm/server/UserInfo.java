@@ -1,4 +1,4 @@
-package org.hbhk.aili.orm.share.model;
+package org.hbhk.aili.orm.server;
 
 import java.io.Serializable;
 
@@ -13,17 +13,17 @@ public class UserInfo implements Serializable {
 	@PrimaryKey
 	@Column("id")
 	private String id;
-	@Column("enable")
+	@Column("id")
 	private int enable;
-	@Column("password")
+	@Column("id")
 	private String password;
-	@Column("username")
+	@Column("id")
 	private String username;
-	@Column("name")
+	@Column("id")
 	private String name;
-	@Column("mail")
+	@Column("id")
 	private String mail;
-	@Column("gender")
+	@Column("id")
 	private String gender;
 
 	public String getId() {
