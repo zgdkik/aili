@@ -230,7 +230,7 @@ public class RedisCacheTemplet<V> implements ICacheTemplet<String, V>,Initializi
 		try {
 			stringRedisTemplate.exec();
 		} catch (Exception e) {
-			log.error(e.getMessage(), e);
+			log.error("redis 链接异常");
 		}
 	}
 	private void  keyNot(String key){
