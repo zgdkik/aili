@@ -11,6 +11,7 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hbhk.aili.core.server.annotation.AnnotationScanning;
@@ -18,6 +19,7 @@ import org.hbhk.aili.orm.server.annotation.Tabel;
 import org.hbhk.aili.orm.server.handler.INameHandler;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
@@ -30,7 +32,11 @@ public class AutoCreateTable implements InitializingBean {
 
 	private JdbcTemplate jdbcTemplate;
 
+	@Value("${autoTablePath}")
+	private String autoTablePath;
+
 	private List<String> tableNames = new ArrayList<String>();
+
 	@Autowired
 	public void setDataSource(DataSource dataSource) {
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
@@ -47,7 +53,7 @@ public class AutoCreateTable implements InitializingBean {
 		for (int i = 0; i < field.length; i++) {
 			Field f = field[i];
 			String columnName = nameHandler.getColumnName(cls, f.getName());
-			if (columnName != null) {
+			if (columnName != null && !columnName.equals(prikey)) {
 				String dbtype = JavaType.getDbType(f.getType());
 				sb.append(columnName + " " + dbtype + ",\n");
 			}
@@ -55,18 +61,17 @@ public class AutoCreateTable implements InitializingBean {
 		sb.append("primary key (" + prikey + ")\n");
 		sb.append(") ENGINE=InnoDB DEFAULT CHARSET=utf8;");
 		try {
-			logger.error("公用方法生成表语句：" + sb.toString());
+			logger.info("自动创建表语句：" + sb.toString());
 			jdbcTemplate.update(sb.toString());
 		} catch (Exception e) {
-			logger.error("公用方法生成表时错误", e);
-			logger.error("公用方法生成表语句：" + sb.toString());
+			logger.error("自动创建表语句时错误", e);
+			logger.error("自动创建表语句时错误：" + sb.toString());
 		}
 	}
 
 	private List<Field> getParentClassFields(List<Field> fields, Class<?> clazz) {
 		Field[] selffields = clazz.getDeclaredFields();
 		fields.addAll(Arrays.asList(selffields));
-
 		if (clazz.getSuperclass() == null) {
 			return fields;
 		}
@@ -80,14 +85,16 @@ public class AutoCreateTable implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		getAllTableNames();
-		List<Class<?>> classes = AnnotationScanning.getInstance()
-				.getAnnotatedClasses(Tabel.class, "classpath*:org.hbhk");
-		if (CollectionUtils.isNotEmpty(classes)) {
-			for (Class<?> class1 : classes) {
-				String tableName = nameHandler.getTableName(class1);
-				if (!exits(tableName)) {
-					createTable(class1, tableName);
+		if (StringUtils.isNotEmpty(autoTablePath)) {
+			getAllTableNames();
+			List<Class<?>> classes = AnnotationScanning.getInstance()
+					.getAnnotatedClasses(Tabel.class, autoTablePath);
+			if (CollectionUtils.isNotEmpty(classes)) {
+				for (Class<?> class1 : classes) {
+					String tableName = nameHandler.getTableName(class1);
+					if (!exits(tableName)) {
+						createTable(class1, tableName);
+					}
 				}
 			}
 		}
