@@ -33,7 +33,7 @@ public class DefaultNameHandler implements INameHandler {
 	 */
 	@Override
 	public String getPrimaryName(Class<?> cls) {
-		Field[] fields = cls.getDeclaredFields();
+		Field[] fields = cls.getSuperclass().getDeclaredFields();
 		PrimaryKey primaryKey = null;
 		boolean brk = true;
 		Field pri_field = null;
