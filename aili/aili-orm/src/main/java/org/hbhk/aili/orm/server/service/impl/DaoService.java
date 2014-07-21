@@ -8,6 +8,7 @@ import java.util.Map;
 
 import javax.sql.DataSource;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.hbhk.aili.orm.server.annotation.SimpleQuery;
 import org.hbhk.aili.orm.server.annotation.SimpleUpdate;
 import org.hbhk.aili.orm.server.handler.DefaultNameHandler;
@@ -298,6 +299,15 @@ public class DaoService implements IDaoService {
 		jdbcTemplate.update(context.getSql().toString(), context.getParams()
 				.toArray());
 		return model;
+	}
+
+	@Override
+	public <T> T getOne(T model, RowMapper<T> rowMapper) {
+		List<T> ts = get(model, rowMapper);
+		if(CollectionUtils.isEmpty(ts)){
+			return null;
+		}
+		return ts.get(0);
 	}
 
 }

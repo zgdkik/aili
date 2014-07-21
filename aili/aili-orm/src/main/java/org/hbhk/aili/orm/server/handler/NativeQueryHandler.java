@@ -202,6 +202,20 @@ public class NativeQueryHandler extends AbstractQueryHandler {
 		RowMapper rowMapper = new CommonBeanRowMapper(clazz, t, new String[] {});
 		return daoService.get(model, rowMapper);
 	}
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public Object handleSimpleQueryOne(ProceedingJoinPoint pjp) {
+		Object model = pjp.getArgs()[0];
+		if (model == null) {
+			return null;
+		}
+		Class<?> clazz = pjp.getArgs()[0].getClass();
+
+		ColumnTranslator t = new UpperCaseColumnTranslator();
+		t.setModelClass(clazz);
+		RowMapper rowMapper = new CommonBeanRowMapper(clazz, t, new String[] {});
+		return daoService.getOne(model, rowMapper);
+	}
+
 
 	public int handleNativeUpdate(NativeUpdate nativeUpdate,
 			ProceedingJoinPoint pjp) {

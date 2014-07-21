@@ -20,6 +20,9 @@ public interface GenericEntityDao<T, PK extends Serializable> {
 
 	@SimpleQuery
 	List<T> get(T model);
+	
+	@SimpleQuery
+	T getOne(T model);
 
 	@Transactional
 	@SimpleUpdate

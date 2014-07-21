@@ -13,7 +13,7 @@ public interface IDaoService {
 	<T> T getByPrimaryKey(Class<T> clazz, Serializable pk);
 
 	<T> List<T> get(T model,RowMapper<T> rowMapper);
-
+	<T> T getOne(T model ,RowMapper<T> rowMapper);
 	<T> T save(T model);
 	<T> T update(T model);
 

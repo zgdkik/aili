@@ -36,6 +36,7 @@ public class QueryAspect implements Ordered, InitializingBean {
 	public Object doQuery(ProceedingJoinPoint pjp) throws Throwable {
 		MethodSignature ms = (MethodSignature) pjp.getSignature();
 		Method method = ms.getMethod();
+		String methodName = method.getName();
 		NativeQuery nativeQuery = method.getAnnotation(NativeQuery.class);
 		NativeSave nativeSave = method.getAnnotation(NativeSave.class);
 		SimpleQuery simpleQuery = method.getAnnotation(SimpleQuery.class);
@@ -46,7 +47,12 @@ public class QueryAspect implements Ordered, InitializingBean {
 		} else if (nativeSave != null) {
 			return nativeQueryHandler.handleNativeSave(nativeSave, pjp);
 		} else if (simpleQuery != null) {
-			return nativeQueryHandler.handleSimpleQuery(pjp);
+			if (methodName.equals("getOne")) {
+				return nativeQueryHandler.handleSimpleQueryOne(pjp);
+			} else {
+				return nativeQueryHandler.handleSimpleQuery(pjp);
+			}
+
 		} else if (simpleUpdate != null) {
 			return nativeQueryHandler.handleSimpleUpdate(pjp);
 		}
