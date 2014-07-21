@@ -38,13 +38,13 @@
  	<aop:aspectj-autoproxy />  
  	<bean class="org.hbhk.aili.orm.server.aspect.QueryAspect"></bean>
  	
-	<context:property-placeholder location="classpath*:jdbc.properties" />
+	<context:property-placeholder location="classpath*:config.properties" />
 	<bean id="dataSource" destroy-method="close"
 		class="org.apache.commons.dbcp.BasicDataSource">
-		<property name="driverClassName" value="${quartz.driverClassName}" />
-		<property name="url" value="${quartz.url}" />
-		<property name="username" value="${quartz.username}" />
-		<property name="password" value="${quartz.password}" />
+		<property name="driverClassName" value="${db.driverClass}" />
+		<property name="url" value="${db.jdbcUrl}" />
+		<property name="username" value="${db.user}" />
+		<property name="password" value="${db.password}" />
 	</bean>
 
 </beans>

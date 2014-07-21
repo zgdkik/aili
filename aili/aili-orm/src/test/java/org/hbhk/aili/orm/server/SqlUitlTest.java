@@ -13,7 +13,7 @@ public final class SqlUitlTest {
 		String q = SqlUtil.buildQueryCondition(del, new DefaultNameHandler()).getSql().toString();
 		String u = SqlUtil.buildUpdateSql(del, new DefaultNameHandler()).getSql().toString();
 		String d = SqlUtil.buildDeleteSql(del, new DefaultNameHandler()).getSql().toString();
-		//
+		String qs = SqlUtil.buildQuerySql(del, new DefaultNameHandler()).getSql().toString();
 		System.out.println(ss);
 		
 		System.out.println(q);
@@ -21,5 +21,7 @@ public final class SqlUitlTest {
 		System.out.println(u);
 		
 		System.out.println(d);
+		
+		System.out.println(qs);
 	}
 }

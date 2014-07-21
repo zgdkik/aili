@@ -200,8 +200,8 @@ public class SqlUtil {
 		StringBuilder querySql = new StringBuilder();
 		List<Object> params = new ArrayList<Object>();
 		String tableName = nameHandler.getTableName(clazz);
-		querySql.append("select *from where ");
-		querySql.append(tableName+" ");
+		querySql.append("select *from ");
+		querySql.append(tableName+" where ");
 		for (PropertyDescriptor pd : pds) {
 			Object value = getReadMethodValue(pd.getReadMethod(), entity);
 			if (value == null) {

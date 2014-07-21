@@ -2,6 +2,7 @@ package org.hbhk.aili.orm.share.model;
 
 import java.io.Serializable;
 
+import org.hbhk.aili.orm.server.annotation.Column;
 import org.hbhk.aili.orm.server.annotation.PrimaryKey;
 import org.hbhk.aili.orm.server.annotation.Tabel;
 
@@ -10,12 +11,19 @@ public class UserInfo implements Serializable {
 
 	private static final long serialVersionUID = 54122579931594962L;
 	@PrimaryKey
+	@Column("id")
 	private String id;
+	@Column("enable")
 	private int enable;
+	@Column("password")
 	private String password;
+	@Column("username")
 	private String username;
+	@Column("name")
 	private String name;
+	@Column("mail")
 	private String mail;
+	@Column("gender")
 	private String gender;
 
 	public String getId() {

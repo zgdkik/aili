@@ -16,10 +16,11 @@ import java.util.Map;
 import java.util.Set;
 
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
 
 import org.apache.commons.beanutils.PropertyUtils;
 import org.hbhk.aili.orm.server.annotation.ColumnTranslator;
+import org.hbhk.aili.orm.server.annotation.JoinColumn;
+import org.hbhk.aili.orm.server.annotation.PrimaryKey;
 import org.springframework.jdbc.core.RowMapper;
 
 public class CommonBeanRowMapper<T> extends BaseRowMapper<T> {
@@ -102,7 +103,7 @@ public class CommonBeanRowMapper<T> extends BaseRowMapper<T> {
 					.getAnnotation(Entity.class) != null ? new JpaEntityColumnTranslator(
 					clazz) : new UpperCaseColumnTranslator(clazz))
 					: translator;
-			//获取实体信息
+			// 获取实体信息
 			BeanInfo beanInfo = Introspector.getBeanInfo(clazz);
 			PropertyDescriptor[] propertyDescriptors = beanInfo
 					.getPropertyDescriptors();
@@ -144,8 +145,7 @@ public class CommonBeanRowMapper<T> extends BaseRowMapper<T> {
 			BeanInfo joinBeanInfo = Introspector.getBeanInfo(p
 					.getPropertyType());
 			for (PropertyDescriptor p1 : joinBeanInfo.getPropertyDescriptors()) {
-				if (p1.getReadMethod()
-						.getAnnotation(javax.persistence.Id.class) != null) {
+				if (p1.getReadMethod().getAnnotation(PrimaryKey.class) != null) {
 					subAttr = p1.getName();
 					subClass = p1.getPropertyType();
 					break;

@@ -5,7 +5,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import org.hbhk.aili.orm.server.aspect.DummyColumnTranslator;
+import org.hbhk.aili.orm.server.mapper.DummyColumnTranslator;
 
 
 /**

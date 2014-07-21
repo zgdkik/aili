@@ -3,7 +3,6 @@ package org.hbhk.aili.orm.server;
 import java.util.List;
 
 import org.hbhk.aili.core.server.web.WebApplicationContextHolder;
-import org.hbhk.aili.orm.server.surpport.Page;
 import org.hbhk.aili.orm.server.test.TestAiliDao;
 import org.hbhk.aili.orm.share.model.UserInfo;
 import org.springframework.context.ApplicationContext;
@@ -25,8 +24,12 @@ public class AppTest {
 //		}
 		 UserInfo userInfo = new UserInfo();
 		 userInfo.setId("22");
-		 userInfo.setName("sdfsdf");
-		 t.save(userInfo);
+		// t.save(userInfo);
+		 List<UserInfo> userInfos=  t.get(userInfo);
+		 System.out.println(userInfos.get(0).getName());
+		 userInfo.setName("uuuuuuu");
+		// t.update(userInfo);
+		 
 	}
 
 }

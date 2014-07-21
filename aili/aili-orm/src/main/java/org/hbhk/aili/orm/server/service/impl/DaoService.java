@@ -8,6 +8,8 @@ import java.util.Map;
 
 import javax.sql.DataSource;
 
+import org.hbhk.aili.orm.server.annotation.SimpleQuery;
+import org.hbhk.aili.orm.server.annotation.SimpleUpdate;
 import org.hbhk.aili.orm.server.handler.DefaultNameHandler;
 import org.hbhk.aili.orm.server.handler.INameHandler;
 import org.hbhk.aili.orm.server.page.MySqlPageQueryProvider;
@@ -34,7 +36,7 @@ public class DaoService implements IDaoService {
 	protected JdbcTemplate jdbcTemplate;
 
 	private PageQueryProvider pageQueryProvider;
-	private  INameHandler nameHandler;
+	private INameHandler nameHandler;
 
 	@Autowired
 	public void setDataSource(DataSource dataSource) {
@@ -153,14 +155,16 @@ public class DaoService implements IDaoService {
 	@Override
 	public <T> T save(T model) {
 		SqlContext context = SqlUtil.buildInsertSql(model, nameHandler);
-		jdbcTemplate.update(context.getSql().toString(), context.getParams().toArray());
+		jdbcTemplate.update(context.getSql().toString(), context.getParams()
+				.toArray());
 		return model;
 	}
 
 	@Override
 	public <T> void delete(T model) {
 		SqlContext context = SqlUtil.buildUpdateSql(model, nameHandler);
-		jdbcTemplate.update(context.getSql().toString(), context.getParams().toArray());
+		jdbcTemplate.update(context.getSql().toString(), context.getParams()
+				.toArray());
 	}
 
 	@Override
@@ -276,6 +280,24 @@ public class DaoService implements IDaoService {
 			boolean withGroupby) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	@SimpleQuery
+	public <T> List<T> get(T mode, RowMapper<T> rowMapper) {
+		SqlContext context = SqlUtil.buildQuerySql(mode, nameHandler);
+		String queryString = context.getSql().toString();
+		List<Object> args = context.getParams();
+		return jdbcTemplate.query(queryString, rowMapper, args.toArray());
+	}
+
+	@Override
+	@SimpleUpdate
+	public <T> T update(T model) {
+		SqlContext context = SqlUtil.buildUpdateSql(model, nameHandler);
+		jdbcTemplate.update(context.getSql().toString(), context.getParams()
+				.toArray());
+		return model;
 	}
 
 }
