@@ -2,16 +2,34 @@ package org.hbhk.aili.security.share.pojo;
 
 import java.util.Set;
 
+import org.hbhk.aili.orm.server.annotation.Column;
+import org.hbhk.aili.orm.server.annotation.Entity;
+import org.hbhk.aili.orm.server.annotation.JoinColumn;
+import org.hbhk.aili.orm.server.annotation.PrimaryKey;
+import org.hbhk.aili.orm.server.annotation.Tabel;
+
+@Entity
+@Tabel("t_aili_user")
 public class UserInfo implements java.io.Serializable {
 
 	private static final long serialVersionUID = 54122579931594962L;
+	@PrimaryKey
+	@Column("id")
 	private String id;
+	@Column("enable")
 	private int enable;
+	@Column("password")
 	private String password;
+	@Column("username")
 	private String username;
+	@Column("name")
 	private String name;
+	@Column("mail")
 	private String mail;
+	@Column("gender")
 	private String gender;
+	@Column("roles")
+	@JoinColumn
 	private Set<RoleInfo> roles;
 
 	public String getId() {

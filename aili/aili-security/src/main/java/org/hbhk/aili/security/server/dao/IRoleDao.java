@@ -1,10 +1,9 @@
 package org.hbhk.aili.security.server.dao;
 
-import org.hbhk.aili.mybatis.server.dao.IAiliDao;
+import org.hbhk.aili.orm.server.dao.GenericEntityDao;
 import org.hbhk.aili.security.share.pojo.RoleInfo;
 
-public interface IRoleDao extends IAiliDao<RoleInfo,String> {
+public interface IRoleDao  extends GenericEntityDao<RoleInfo, String> {
 	
-	public  RoleInfo  getRole(String code);
 
 }

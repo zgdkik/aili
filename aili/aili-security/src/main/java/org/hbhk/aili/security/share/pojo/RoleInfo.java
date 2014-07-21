@@ -2,12 +2,24 @@ package org.hbhk.aili.security.share.pojo;
 
 import java.util.Set;
 
+import org.hbhk.aili.orm.server.annotation.Column;
+import org.hbhk.aili.orm.server.annotation.Entity;
+import org.hbhk.aili.orm.server.annotation.PrimaryKey;
+import org.hbhk.aili.orm.server.annotation.Tabel;
+
+@Entity
+@Tabel("t_aili_role")
 public class RoleInfo implements java.io.Serializable {
 
 	private static final long serialVersionUID = 4218930427867063297L;
+	@PrimaryKey
+	@Column("id")
 	private String id;
+	@Column("code")
 	private String code;
-	private boolean enable;
+	@Column("enable")
+	private int enable;
+	@Column("name")
 	private String name;
 	private Set<ResourceInfo> resources;
 
@@ -27,11 +39,11 @@ public class RoleInfo implements java.io.Serializable {
 		this.code = code;
 	}
 
-	public boolean getEnable() {
+	public int getEnable() {
 		return enable;
 	}
 
-	public void setEnable(boolean enable) {
+	public void setEnable(int enable) {
 		this.enable = enable;
 	}
 

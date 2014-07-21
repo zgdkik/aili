@@ -24,18 +24,22 @@ public class UserService implements IUserService {
 	@Resource
 	private IUserDao userDao;
 
-	@Autowired(required=false)
+	@Autowired(required = false)
 	private LoginLimitCache limitCache;
 
 	@Override
 	public UserInfo getMe(String username) {
-		return userDao.getMe(username);
+		UserInfo u = new UserInfo();
+		u.setUsername(username);
+		return userDao.getOne(u);
 	}
 
 	@Override
 	public boolean login(String username, String password) {
-		getMe(username);
-		UserInfo userInfo = userDao.login(username, password);
+		UserInfo u = new UserInfo();
+		u.setUsername(username);
+		u.setPassword(password);
+		UserInfo userInfo = userDao.getOne(u);
 		if (userInfo != null) {
 			UserContext.setCurrentUser(userInfo);
 			UserContext.setCurrentUserName(username);

@@ -25,13 +25,17 @@ public class UserResourceCache extends CacheSupport<Set<String>> {
 
 	@Override
 	public Set<String> doSet(String key) {
-		UserInfo user = userDao.getMe(key);
+		UserInfo u = new UserInfo();
+		u.setUsername(key);
+		UserInfo user = userDao.getOne(u);
 		Set<String> res = new HashSet<String>();
 		if (user != null && user.getRoles() != null
 				&& user.getRoles().size() > 0) {
 			Set<RoleInfo> roles = user.getRoles();
 			for (RoleInfo roleInfo : roles) {
-				RoleInfo role = roleDao.getRole(roleInfo.getCode());
+				RoleInfo role = new RoleInfo();
+				role.setCode(roleInfo.getCode());
+				role = roleDao.getOne(role);
 				if (role != null) {
 					Set<ResourceInfo> resourceInfos = role.getResources();
 					if (resourceInfos != null && resourceInfos.size() > 0) {
