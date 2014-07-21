@@ -26,6 +26,11 @@
 			<version>${aili-version}</version>
 		</dependency>
 		<dependency>
+			<groupId>org.hbhk.aili</groupId>
+			<artifactId>aili-security</artifactId>
+			<version>${aili-version}</version>
+		</dependency>
+		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>
 		</dependency>
