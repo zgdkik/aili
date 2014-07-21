@@ -31,7 +31,6 @@ public class AutoCreateTable implements InitializingBean {
 	private JdbcTemplate jdbcTemplate;
 
 	private List<String> tableNames = new ArrayList<String>();
-
 	@Autowired
 	public void setDataSource(DataSource dataSource) {
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
