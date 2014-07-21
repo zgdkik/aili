@@ -6,7 +6,7 @@ import java.util.Date;
 import org.hbhk.aili.orm.server.annotation.Column;
 import org.hbhk.aili.orm.server.annotation.PrimaryKey;
 
-public class BaseInfo implements Serializable {
+public abstract class BaseInfo implements Serializable {
 	private static final long serialVersionUID = 5009300140634580156L;
 	@PrimaryKey
 	@Column("id")
