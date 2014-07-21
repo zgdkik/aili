@@ -82,7 +82,7 @@ public class AutoCreateTable implements InitializingBean {
 	public void afterPropertiesSet() throws Exception {
 		getAllTableNames();
 		List<Class<?>> classes = AnnotationScanning.getInstance()
-				.getAnnotatedClasses(Tabel.class, "org.hbhk");
+				.getAnnotatedClasses(Tabel.class, "classpath*:org.hbhk");
 		if (CollectionUtils.isNotEmpty(classes)) {
 			for (Class<?> class1 : classes) {
 				String tableName = nameHandler.getTableName(class1);
