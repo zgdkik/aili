@@ -49,8 +49,6 @@ public class DefaultNameHandler implements INameHandler {
 			} else {
 				pri_id = pri_field.getName();
 			}
-		} else {
-			throw new RuntimeException("Entity primarykey must have");
 		}
 		return pri_id;
 
@@ -63,8 +61,8 @@ public class DefaultNameHandler implements INameHandler {
 	public String getPrimaryName(Class<?> cls) {
 		String pri_id = getPrikey(cls);
 		if (pri_id == null) {
-			while (cls.getSuperclass() == null) {
-				pri_id = getPrimaryName(cls.getSuperclass());
+			if (cls.getSuperclass() != null) {
+				pri_id = getPrikey(cls.getSuperclass());
 			}
 		}
 		if (pri_id == null) {
