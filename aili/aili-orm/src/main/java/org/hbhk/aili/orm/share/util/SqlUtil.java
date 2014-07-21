@@ -100,8 +100,8 @@ public class SqlUtil {
 				sql.append("?");
 				params.add(value);
 				sql.append(",");
-			}else{
-				primaryValue= value;
+			} else {
+				primaryValue = value;
 			}
 		}
 		sql.deleteCharAt(sql.length() - 1);
@@ -111,7 +111,7 @@ public class SqlUtil {
 		params.add(primaryValue);
 		return new SqlContext(sql, primaryName, params);
 	}
-	
+
 	/**
 	 * 构建更新sql
 	 * 
@@ -141,7 +141,7 @@ public class SqlUtil {
 			}
 			String columnName = nameHandler.getColumnName(clazz, pd.getName());
 			if (primaryName.equalsIgnoreCase(columnName)) {
-				primaryValue= value;
+				primaryValue = value;
 			}
 		}
 		sql.deleteCharAt(sql.length() - 1);
@@ -183,6 +183,36 @@ public class SqlUtil {
 			count++;
 		}
 		return new SqlContext(condition, null, params);
+	}
+
+	/**
+	 * 构建查询sql
+	 * 
+	 * @param entity
+	 * @param INameHandler
+	 */
+	public static SqlContext buildQuerySql(Object entity,
+			INameHandler nameHandler) {
+		// 获取属性信息
+		Class<?> clazz = entity.getClass();
+		BeanInfo beanInfo = ClassUtils.getSelfBeanInfo(clazz);
+		PropertyDescriptor[] pds = beanInfo.getPropertyDescriptors();
+		StringBuilder querySql = new StringBuilder();
+		List<Object> params = new ArrayList<Object>();
+		String tableName = nameHandler.getTableName(clazz);
+		querySql.append("select *from where ");
+		querySql.append(tableName+" ");
+		for (PropertyDescriptor pd : pds) {
+			Object value = getReadMethodValue(pd.getReadMethod(), entity);
+			if (value == null) {
+				continue;
+			}
+			params.add(value);
+		}
+		SqlContext sqlContext = buildQueryCondition(entity, nameHandler);
+		StringBuilder sql = sqlContext.getSql();
+		sqlContext.setSql(querySql.append(sql));
+		return sqlContext;
 	}
 
 	/**
