@@ -22,7 +22,7 @@
 }
 
 var jsPATH = __CreateJSPath("boot.js");
-var cssPATH = __CreateJSPath("bootstrap.min.css");
+var cssPATH = jsPATH.replace("scripts","styles");
 //debugger
 mini_debugger = true;   
 //jquery
@@ -31,12 +31,12 @@ document.write('<script src="' + jsPATH + 'jquery/jquery.cookie.js" type="text/j
 document.write('<script src="' + jsPATH + 'jquery-exp.js" type="text/javascript"></sc' + 'ript>');
 //bootstrap
 document.write('<script src="' + jsPATH + 'bootstrap/bootstrap.min.js" type="text/javascript"></script>');
-document.write('<script src="' + jsPATH + 'bootstrap/bootstrapValidator.min.jss" type="text/javascript"></script>');
+document.write('<script src="' + jsPATH + 'bootstrap/bootstrapValidator.min.js" type="text/javascript"></script>');
 //common
 document.write('<script src="' + jsPATH + 'common.js" type="text/javascript"></script>');
 //css
-document.write('<link rel="stylesheet" href="' +cssPATH + 'bootstrap/bootstrap.min.css>"');
-document.write('<link rel="stylesheet" href="' +cssPATH + 'bootstrap/bootstrap-theme.min.css>"');
+document.write('<link rel="stylesheet" href="' +cssPATH + 'bootstrap/bootstrap.min.css" >');
+document.write('<link rel="stylesheet" href="' +cssPATH + 'bootstrap/bootstrap-theme.min.css" >');
 
 ////////////////////////////////////////////////////////////////////////////////////////
 function getCookie(sName) {
