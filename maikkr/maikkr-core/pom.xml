@@ -21,13 +21,13 @@
 			<version>${aili-version}</version>
 		</dependency>
 		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>servlet-api</artifactId>
+			<groupId>org.hbhk.aili</groupId>
+			<artifactId>aili-theme</artifactId>
+			<version>${aili-version}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.hbhk.weixin</groupId>
-			<artifactId>hbhk-weixin</artifactId>
-			<version>1.0.0</version>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
 		</dependency>
 	</dependencies>
 </project>
