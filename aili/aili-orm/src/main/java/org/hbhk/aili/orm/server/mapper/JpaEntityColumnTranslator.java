@@ -7,10 +7,9 @@ import java.beans.PropertyDescriptor;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.persistence.Column;
-import javax.persistence.JoinColumn;
-
+import org.hbhk.aili.orm.server.annotation.Column;
 import org.hbhk.aili.orm.server.annotation.ColumnTranslator;
+import org.hbhk.aili.orm.server.annotation.JoinColumn;
 
 public class JpaEntityColumnTranslator implements ColumnTranslator {
 
@@ -34,7 +33,7 @@ public class JpaEntityColumnTranslator implements ColumnTranslator {
 			for(PropertyDescriptor p: propertyDescriptors){
 				if(p.getReadMethod() == null) continue;
 				if(p.getReadMethod().getAnnotation(Column.class) != null){				
-					attributeMap.put(p.getName(), p.getReadMethod().getAnnotation(Column.class).name());
+					attributeMap.put(p.getName(), p.getReadMethod().getAnnotation(Column.class).value());
 				}else if(p.getReadMethod().getAnnotation(JoinColumn.class) != null){
 					attributeMap.put(p.getName(), p.getReadMethod().getAnnotation(JoinColumn.class).name());
 				}else{

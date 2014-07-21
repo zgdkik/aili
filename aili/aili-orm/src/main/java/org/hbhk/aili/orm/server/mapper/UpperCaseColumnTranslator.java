@@ -7,8 +7,7 @@ import java.beans.PropertyDescriptor;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.persistence.Column;
-
+import org.hbhk.aili.orm.server.annotation.Column;
 import org.hbhk.aili.orm.server.annotation.ColumnTranslator;
 
 public class UpperCaseColumnTranslator implements ColumnTranslator {
@@ -32,7 +31,7 @@ public class UpperCaseColumnTranslator implements ColumnTranslator {
 			    beanInfo.getPropertyDescriptors();
 			for(PropertyDescriptor p: propertyDescriptors){
 				if(p.getReadMethod().getAnnotation(Column.class) != null){				
-					columnMap.put(p.getName(), p.getReadMethod().getAnnotation(Column.class).name());
+					columnMap.put(p.getName(), p.getReadMethod().getAnnotation(Column.class).value());
 				}else{
 					columnMap.put(p.getName(), p.getName().toUpperCase());
 				}

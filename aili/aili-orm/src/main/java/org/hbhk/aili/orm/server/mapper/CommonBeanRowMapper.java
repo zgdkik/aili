@@ -15,10 +15,11 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import javax.persistence.Entity;
+
 
 import org.apache.commons.beanutils.PropertyUtils;
 import org.hbhk.aili.orm.server.annotation.ColumnTranslator;
+import org.hbhk.aili.orm.server.annotation.Entity;
 import org.hbhk.aili.orm.server.annotation.JoinColumn;
 import org.hbhk.aili.orm.server.annotation.PrimaryKey;
 import org.springframework.jdbc.core.RowMapper;
