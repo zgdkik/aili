@@ -3,12 +3,5 @@
 <!DOCTYPE HTML>
 <html lang="zh-cn">
 <head>
-	<link rel="stylesheet" href="${styles}/bootstrap/bootstrap.min.css">
-	<link rel="stylesheet" href="${styles}/bootstrap/bootstrap-theme.min.css">
-	<link rel="stylesheet" href="${styles}/index.css">
-	<script src="${scripts}/jquery/jquery-1.9.1.js"></script>
-	<script src="${scripts}/jquery/jquery.cookie.js"></script>
-	<script src="${scripts}/bootstrap/bootstrap.min.js"></script>
-	<script src="${scripts}/common.js"></script>
-	<script src="${scripts}/index.js"></script>
+	<script src="${scripts}/boot.js"></script>
 </head>
