@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping(SecurityConstant.moduleName)
-public class UserController {
+public class SecurityController {
 
 	@Resource
 	private IUserService userService;
