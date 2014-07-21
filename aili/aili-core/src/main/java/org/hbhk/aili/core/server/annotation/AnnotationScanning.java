@@ -15,8 +15,9 @@ public class AnnotationScanning {
 
 	private AnnotationScanning() {
 	}
-	public static AnnotationScanning getInstance(){
-		if(scanning==null){
+
+	public static AnnotationScanning getInstance() {
+		if (scanning == null) {
 			scanning = new AnnotationScanning();
 		}
 		return scanning;
@@ -24,18 +25,18 @@ public class AnnotationScanning {
 
 	/**
 	 * 获取指定注解的所有类
+	 * 
 	 * @param annotation
 	 * @param scannPackage
 	 * @return
 	 * @throws ClassNotFoundException
 	 */
-	public List<Class<?>> getAnnotatedClasses(Annotation annotation,
+	public List<Class<?>> getAnnotatedClasses(Class<? extends Annotation> annotation,
 			String... scannPackage) throws ClassNotFoundException {
 		// 是否使用默认过滤器true使用
 		ClassPathScanningCandidateComponentProvider packageScan = new ClassPathScanningCandidateComponentProvider(
 				false);
-		packageScan.addIncludeFilter(new AnnotationTypeFilter(annotation
-				.getClass()));
+		packageScan.addIncludeFilter(new AnnotationTypeFilter(annotation));
 		if (scannPackage == null) {
 			return null;
 		}
