@@ -1,6 +1,7 @@
 package org.hbhk.aili.orm.server.surpport;
 
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,22 +27,28 @@ public class JavaType {
 		nums.put(Float.class, "double");
 	}
 	// 日期
-	private static String date = "class java.util.Date";
-	private static String dbdate = "timestamp(20)";
+	private static Map<Class<?>, String> dates = new HashMap<Class<?>, String>();
 	static {
-
+		dates.put(Date.class, "timestamp NULL");
 	}
-
+	//boolean
+	private static Map<Class<?>, String> booleans = new HashMap<Class<?>, String>();
+	static {
+		booleans.put(boolean.class, "int");
+		booleans.put(Boolean.class, "int");
+	}
 	public static String getDbType(Class<?> javaType) {
 		if (strs.containsKey(javaType)) {
 			return strs.get(javaType);
 		}
-
 		if (nums.containsKey(javaType)) {
 			return nums.get(javaType);
 		}
-		if (javaType.getClass().toString().equals(date)) {
-			return dbdate;
+		if (dates.containsKey(javaType)) {
+			return dates.get(javaType);
+		}
+		if (booleans.containsKey(javaType)) {
+			return booleans.get(javaType);
 		}
 		return "varchar(255)";
 
