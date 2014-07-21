@@ -28,12 +28,8 @@ public class DefaultNameHandler implements INameHandler {
 		return tblName;
 	}
 
-	/**
-	 * 根据表名获取主键名
-	 */
-	@Override
-	public String getPrimaryName(Class<?> cls) {
-		Field[] fields = cls.getSuperclass().getDeclaredFields();
+	private String getPrikey(Class<?> cls) {
+		Field[] fields = cls.getDeclaredFields();
 		PrimaryKey primaryKey = null;
 		boolean brk = true;
 		Field pri_field = null;
@@ -54,6 +50,24 @@ public class DefaultNameHandler implements INameHandler {
 				pri_id = pri_field.getName();
 			}
 		} else {
+			throw new RuntimeException("Entity primarykey must have");
+		}
+		return pri_id;
+
+	}
+
+	/**
+	 * 根据表名获取主键名
+	 */
+	@Override
+	public String getPrimaryName(Class<?> cls) {
+		String pri_id = getPrikey(cls);
+		if (pri_id == null) {
+			while (cls.getSuperclass() == null) {
+				pri_id = getPrimaryName(cls.getSuperclass());
+			}
+		}
+		if (pri_id == null) {
 			throw new RuntimeException("Entity primarykey must have");
 		}
 		return pri_id;
