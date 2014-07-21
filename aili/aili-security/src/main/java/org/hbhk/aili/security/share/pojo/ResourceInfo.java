@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @JsonInclude(Include.NON_EMPTY)
 @Entity
-@Tabel("t_aili_role")
+@Tabel("t_aili_resource")
 public class ResourceInfo extends BaseInfo {
 
 	private static final long serialVersionUID = 9125685922301392808L;
