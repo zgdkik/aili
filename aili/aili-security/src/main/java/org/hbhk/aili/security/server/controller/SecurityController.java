@@ -35,7 +35,7 @@ public class SecurityController extends BaseController {
 		return "redirect:/theme/index.htm";
 	}
 
-	@RequestMapping("/login")
+	@RequestMapping("/regist")
 	@SecurityFilter(false)
 	@ResponseBody
 	public ResponseEntity regist(UserInfo user) {
