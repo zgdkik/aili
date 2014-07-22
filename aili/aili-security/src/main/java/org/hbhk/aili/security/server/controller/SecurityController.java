@@ -14,6 +14,7 @@ import org.hbhk.aili.core.share.pojo.ResponseEntity;
 import org.hbhk.aili.security.server.service.IUserService;
 import org.hbhk.aili.security.share.define.SecurityConstant;
 import org.hbhk.aili.security.share.pojo.UserInfo;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,13 +27,23 @@ public class SecurityController extends BaseController {
 	@Resource
 	private IUserService userService;
 
+	@Value("${login_redirect_url}")
+	private String login_redirect_url;
+
+	@Value("${login_url}")
+	private String login_url;
+
 	@RequestMapping("/login")
 	@SecurityFilter(false)
 	public String login(HttpServletResponse response, String username,
 			String password) {
-		// CookieUtil.setCookie("username", username, 10000, response);
-		userService.login(username, password);
-		return "redirect:/theme/index.htm";
+		try {
+			userService.login(username, password);
+			return "redirect:" + login_redirect_url;
+		} catch (BusinessException e) {
+			return "redirect:" + login_url;
+		}
+
 	}
 
 	@RequestMapping("/regist")
