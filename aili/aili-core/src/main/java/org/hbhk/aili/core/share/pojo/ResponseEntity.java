@@ -7,9 +7,10 @@ public class ResponseEntity implements Serializable {
 
 	private boolean success = true;
 	private boolean exception = false;
-	
+
 	private String msg;
 	private Object result;
+	private String dealUrl;
 
 	public boolean isSuccess() {
 		return success;
@@ -41,6 +42,14 @@ public class ResponseEntity implements Serializable {
 
 	public void setResult(Object result) {
 		this.result = result;
+	}
+
+	public String getDealUrl() {
+		return dealUrl;
+	}
+
+	public void setDealUrl(String dealUrl) {
+		this.dealUrl = dealUrl;
 	}
 
 }
