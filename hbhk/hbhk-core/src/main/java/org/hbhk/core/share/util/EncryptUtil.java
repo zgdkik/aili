@@ -21,7 +21,7 @@ public class EncryptUtil {
 		return strDes;
 	}
 
-	public static String encodeSHA(String strSrc) {
+	public static String encodeSHA1(String strSrc) {
 		MessageDigest md = null;
 		String strDes = null;
 		byte bt[] = strSrc.getBytes();
@@ -35,7 +35,7 @@ public class EncryptUtil {
 		return strDes;
 	}
 	
-	public static String encodeSHA_256(String strSrc) {
+	public static String encodeSHA256(String strSrc) {
 		MessageDigest md = null;
 		String strDes = null;
 		byte bt[] = strSrc.getBytes();
