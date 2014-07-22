@@ -27,7 +27,7 @@ $j(document).ready(function() {
 		    		type:"POST",
 		    		data:data,
 		    		success: function(data, textStatus){
-		    			// window.location.href=backMessage.address;
+		    			window.location.href=base+"user/main.htm";
 		    		},
 		    		exception:function(data, textStatus){
 		    			$j("#notExistId").css('display',"block");

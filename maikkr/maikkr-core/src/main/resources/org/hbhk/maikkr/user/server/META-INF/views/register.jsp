@@ -6,7 +6,6 @@
 	<title>买客网-注册</title>
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 	<link href="${styles}/register.css" rel="stylesheet" type="text/css" />
-	<script type="text/javascript" src="${scripts}/ajax.js"></script>
 	<script type="text/javascript" src="${scripts}/register.js"></script>
        <script type="text/javascript">
            //alert("验证码刷新！");

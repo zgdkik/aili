@@ -239,8 +239,7 @@ function click_register(){
 			type:"POST",
 			data:registerMass,
 			success: function(data, textStatus){
-				$j.toast("注册成功");
-				//window.location ="../bloghomepage.html";
+				window.location.href=base+"user/main.htm";
 			},
 			exception:function(data, textStatus){
 				$j.toast(data.msg);

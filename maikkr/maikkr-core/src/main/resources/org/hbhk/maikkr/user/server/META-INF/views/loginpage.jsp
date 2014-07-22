@@ -5,12 +5,8 @@
 <jsp:include page="common.jsp"/>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <title>买客网-微主题,微话题-无尽分享-专为买家分享的网站</title>
-
 <link href="${styles}/login.css" rel="stylesheet" type="text/css" />
-
-<script type="text/javascript" src="${scripts}/ajax.js"></script>
 <script type="text/javascript" src="${scripts}/login.js"></script>
-
 </head>
 <body class="B_login">
 	<div class="w_login">
@@ -59,7 +55,7 @@
 							</div>
 						</div>
 						<div class="form_list">
-							<a href="javascript:void(0)" class="f_btn" onclick="click_btn();"><span
+							<a href="javascript:void(0)" class="f_btn"><span
 								class="f_btn_tip">登录</span></a> <span class="f_no"> 还没有微博？<a
 								class="f_no_tip"
 								href="http://localhost:8080/blog/jsp/register.jsp">立即注册</a>
