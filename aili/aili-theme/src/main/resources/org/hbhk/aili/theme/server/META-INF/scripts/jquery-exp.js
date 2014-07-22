@@ -1,6 +1,6 @@
 (function($){  
     //备份jquery的ajax方法  
-    var _ajax=$j.ajax;  
+    var _ajax=$.ajax;  
     //重写jquery的ajax方法  
     $j.ajax=function(opt){
         //备份opt中error和success方法  
@@ -20,7 +20,7 @@
         }  
           
         //扩展增强处理  
-        var _opt = $j.extend(opt,{
+        var _opt = $.extend(opt,{
             error:function(XMLHttpRequest, textStatus, errorThrown){  
                 //错误方法增强处理  
             	if(opt.error){ 
