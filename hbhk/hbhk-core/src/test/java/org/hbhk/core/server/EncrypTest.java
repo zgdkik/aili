@@ -9,7 +9,7 @@ public class EncrypTest {
 				.toString());
 		System.out.println("Encrypted String:");
 		System.out.println(EncryptUtil.encodeMD5(strSrc));
-		System.out.println(EncryptUtil.encodeSHA(strSrc));
-		System.out.println(EncryptUtil.encodeSHA_256(strSrc));
+		System.out.println(EncryptUtil.encodeSHA1(strSrc));
+		System.out.println(EncryptUtil.encodeSHA256(strSrc));
 	}
 }
