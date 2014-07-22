@@ -10,7 +10,7 @@
         <script type="text/javascript">
             //alert("验证码刷新！");
 	        function refreshimg(){
-	          document.getElementById("virfyCode").src="/blog/virfyServlet?code="+Math.random();
+	          document.getElementById("virfyCode").src="${base}security/validateCode.htm?code="+Math.random();
 	          return true;
 	        }
        </script>
@@ -113,7 +113,7 @@
 									<input type="text" autocomplete="off" maxlength="4" name="virfy"
 										class="w_input virfy_input" id="virfyId" />
 									<a class="code" href="javascript:void(0);">
-										<img alt="" id="virfyCode" src="/blog/virfyServlet"/>
+										<img alt="" id="virfyCode" src="${base}security/validateCode.htm"/>
 									</a>
 									<a class="verify_refresh" title="看不清，换一张" onclick="javascript:refreshimg()" style="cursor: hand"  href="javascript:void(0)"></a>
 								</div>
