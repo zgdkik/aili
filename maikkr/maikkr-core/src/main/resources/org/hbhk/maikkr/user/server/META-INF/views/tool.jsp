@@ -11,7 +11,7 @@
 		<!-- 工具栏 -->
 		<div id="toptitle" style="border-width: 0px;">
 			<a href="/blog/bloghomepage.html"> <img
-				src="${base}images/user/homeblog/top_img01.png"
+				src="${base}images/user/maikkrlogo.jpg"
 				onmouseover="{this.src='${base}images/user/homeblog/top_img02.png';}"
 				onmouseout="{this.src='${base}images/user/homeblog/top_img01.png';}" />
 			</a> <span class="top_span" onclick="showPage('home');"> 
@@ -23,7 +23,7 @@
 			</span> <span class="top_span" style="margin-left: 180px;"> <font
 				class="top_font">游戏</font>
 			</span> <span class="top_span" style="margin-left: 490px; width: 120px;"> <font
-				id="userName" class="top_font"></font>
+				id="userName" class="top_font">hbhk</font>
 			</span> <span id="comment_span" class="top_span"
 				style="margin-left: 610px; height: 45px; width: 50px; z-index: 1200"> <font
 				class="top_font"> <img id="comment_top_img"

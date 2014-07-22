@@ -1,10 +1,10 @@
 $j(document).ready(function() {
 	init();
 	$j(".top_span").mouseover(function() {
-		$j(this).css("background-color", "");
+		$j(this).css("background-color", "#000000");
 	});
 	$j(".top_span").mouseout(function() {
-		$j(this).css("background-color", "#000000");
+		$j(this).css("background-color", "");
 	});
 	$j("#comment_span").mouseover(function() {
 		$j("#comment_span").css("background-color", "#FFFFFF");
