@@ -2,7 +2,7 @@
     //备份jquery的ajax方法  
     var _ajax=$.ajax;  
     //重写jquery的ajax方法  
-    $j.ajax=function(opt){
+    $.ajax=function(opt){
         //备份opt中error和success方法  
         var fn = {  
             error:function(XMLHttpRequest, textStatus, errorThrown){},
