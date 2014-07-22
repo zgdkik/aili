@@ -4,9 +4,11 @@ import java.util.Set;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang3.StringUtils;
 import org.hbhk.aili.cache.server.CacheManager;
 import org.hbhk.aili.cache.server.ICache;
 import org.hbhk.aili.core.server.context.RequestContext;
+import org.hbhk.aili.core.share.ex.BusinessException;
 import org.hbhk.aili.security.server.cache.LoginLimitCache;
 import org.hbhk.aili.security.server.cache.UserResourceCache;
 import org.hbhk.aili.security.server.context.LoginLimitContext;
@@ -77,6 +79,24 @@ public class UserService implements IUserService {
 	@Override
 	public void logout() {
 		UserContext.remove();
+	}
+
+	@Override
+	public UserInfo save(UserInfo user) {
+		if (user == null) {
+			return null;
+		}
+		if (StringUtils.isEmpty(user.getMail())) {
+			throw new BusinessException("邮箱为空");
+		}
+		if (StringUtils.isEmpty(user.getPassword())) {
+			throw new BusinessException("密码为空");
+		}
+		if (StringUtils.isEmpty(user.getName())) {
+			throw new BusinessException("昵称为空");
+		}
+
+		return userDao.save(user);
 	}
 
 }

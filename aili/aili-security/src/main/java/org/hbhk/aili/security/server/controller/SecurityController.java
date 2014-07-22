@@ -8,16 +8,20 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 
 import org.hbhk.aili.core.server.annotation.SecurityFilter;
+import org.hbhk.aili.core.server.web.BaseController;
+import org.hbhk.aili.core.share.ex.BusinessException;
+import org.hbhk.aili.core.share.pojo.ResponseEntity;
 import org.hbhk.aili.security.server.service.IUserService;
 import org.hbhk.aili.security.share.define.SecurityConstant;
 import org.hbhk.aili.security.share.pojo.UserInfo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping(SecurityConstant.moduleName)
-public class SecurityController {
+public class SecurityController extends BaseController {
 
 	@Resource
 	private IUserService userService;
@@ -26,9 +30,21 @@ public class SecurityController {
 	@SecurityFilter(false)
 	public String login(HttpServletResponse response, String username,
 			String password) {
-		//CookieUtil.setCookie("username", username, 10000, response);
+		// CookieUtil.setCookie("username", username, 10000, response);
 		userService.login(username, password);
 		return "redirect:/theme/index.htm";
+	}
+
+	@RequestMapping("/login")
+	@SecurityFilter(false)
+	@ResponseBody
+	public ResponseEntity regist(UserInfo user) {
+		try {
+			userService.save(user);
+			return returnSuccess();
+		} catch (BusinessException e) {
+			return returnException(e.getMessage());
+		}
 	}
 
 	private List<UserInfo> getUserList() {

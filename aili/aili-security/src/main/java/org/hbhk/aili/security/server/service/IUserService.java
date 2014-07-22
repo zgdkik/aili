@@ -8,6 +8,8 @@ public interface IUserService {
 
 	boolean login(String username, String password);
 	
+	UserInfo save(UserInfo user);
+	
 	boolean validate(String url);
 	boolean validate(String username,String url);
 	void logout();
