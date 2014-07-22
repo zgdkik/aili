@@ -38,13 +38,16 @@ public class SecurityController extends BaseController {
 
 	@RequestMapping("/login")
 	@SecurityFilter(false)
-	public String login(HttpServletResponse response, String username,
-			String password) {
+	public ResponseEntity login(HttpServletResponse response, String email,
+			String pwd) {
 		try {
-			userService.login(username, password);
-			return "redirect:" + login_redirect_url;
+			if (userService.login(email, pwd)) {
+				return returnSuccess();
+			} else {
+				return returnException();
+			}
 		} catch (BusinessException e) {
-			return "redirect:" + login_url;
+			return returnException(e.getMessage());
 		}
 
 	}
@@ -52,14 +55,16 @@ public class SecurityController extends BaseController {
 	@RequestMapping("/regist")
 	@SecurityFilter(false)
 	@ResponseBody
-	public ResponseEntity regist(HttpServletRequest request, UserInfo user,String code) {
+	public ResponseEntity regist(HttpServletRequest request, UserInfo user,
+			String code) {
 		try {
-			String scode = (String)request.getSession().getAttribute(UserConstants.VALIDATECODE_SESSION_KEY);
-			if(scode==null){
-				return returnException("验证码不正确");	
+			String scode = (String) request.getSession().getAttribute(
+					UserConstants.VALIDATECODE_SESSION_KEY);
+			if (scode == null) {
+				return returnException("验证码不正确");
 			}
-			if(code!=null && !code.equals(scode)){
-				return returnException("验证码不正确");	
+			if (code != null && !code.equals(scode)) {
+				return returnException("验证码不正确");
 			}
 			userService.save(user);
 			RequestContext.setSessionAttribute(UserConstants.CURRENT_USER_NAME,

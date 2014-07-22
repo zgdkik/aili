@@ -10,6 +10,7 @@ import org.hbhk.aili.cache.server.CacheManager;
 import org.hbhk.aili.cache.server.ICache;
 import org.hbhk.aili.core.server.context.RequestContext;
 import org.hbhk.aili.core.share.ex.BusinessException;
+import org.hbhk.aili.core.share.util.EncryptUtil;
 import org.hbhk.aili.security.server.cache.LoginLimitCache;
 import org.hbhk.aili.security.server.cache.UserResourceCache;
 import org.hbhk.aili.security.server.context.LoginLimitContext;
@@ -41,7 +42,7 @@ public class UserService implements IUserService {
 	@Override
 	public boolean login(String username, String password) {
 		UserInfo u = new UserInfo();
-		u.setUsername(username);
+		u.setMail(username);
 		u.setPassword(password);
 		UserInfo userInfo = userDao.getOne(u);
 		if (userInfo != null) {
@@ -100,6 +101,9 @@ public class UserService implements IUserService {
 		user.setId(UUIDUitl.getUuid());
 		user.setCreateTime(new Date());
 		user.setCreatUser("hbhk");
+		String pwd = user.getPassword();
+		pwd = EncryptUtil.encodeSHA1(pwd);
+		user.setPassword(pwd);
 		return userDao.save(user);
 	}
 
