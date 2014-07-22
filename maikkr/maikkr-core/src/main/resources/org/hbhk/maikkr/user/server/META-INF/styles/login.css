@@ -1,0 +1,349 @@
+
+body,button,input,select,textarea{
+	font:12px/1.125 Arial,Helvetica,sans-serif;
+	_font-family:"SimSun";
+	}
+body,h1,h2,h3,h4,h5,h6,dl,dt,dd,ul,ol,li,th,td,p,blockquote,pre,form,fieldset,legend,input,button,textarea,hr{
+	margin:0; padding:0;}
+table{
+	border-collapse:collapse;border-spacing:0;}
+
+li {
+	float:left;
+    list-style: none outside none;
+}
+fieldset,img{
+	border:0;}
+q:before,q:after{
+	content:'';}
+a:focus,input,textarea{
+	outline-style:none;}
+input[type="text"],input[type="password"],textarea{
+	outline-style:none;-webkit-appearance:none;}
+textarea{resize:none}
+address,caption,cite,code,dfn,em,i,th,var{
+	font-style:normal;font-weight:normal;}
+abbr,acronym {
+	border:0;font-variant:normal;}
+a{text-decoration:none;
+	 color:#808080; }
+	 
+a:hover{
+	color:#0a8cd2;
+	text-decoration:underline;}
+div{
+border:0px solid red;
+}
+body{
+	background-image:url("../../images/user/bgColor.png");
+	background-repeat:repeat;
+}
+.w_login {
+    background: url("../../images/user/bg.png") no-repeat scroll center top transparent;
+}
+.w_login_main{
+    margin: 0 auto;
+    padding: 0px 0;
+    width: 900px;
+}
+.w_l_top{
+    margin: 0 auto;
+    padding: 10px 0;
+    width: 900px;
+}
+.w_top{
+	background: url("../../images/user/maikkrlogo.jpg") no-repeat scroll 0 0 transparent;
+    height: 40px;
+    width: 130px;
+}
+.w_l_c_top{
+    background: url("../../images/user/w_c_top.jpg") no-repeat scroll center bottom transparent;
+    height:200px;
+}
+.w_l_info{
+	 background: url("../../images/user/main_bg.jpg") no-repeat scroll 0 bottom transparent;
+    border-radius: 6px 6px 6px 6px;
+    box-shadow: 0 2px 3px #98B4C4;
+    margin: 0 auto 15px;
+    width: 900px;
+    height:350px;
+}
+.w_l_i_left{
+    
+    float: left;
+    width: 570px;
+    height:295px;
+}
+.w_l_info .left_top{
+	border-bottom: 1px solid #E6E6E6;
+    font-family: "microsoft yahei","Microsoft Yahei";
+    font-size: 24px;
+    font-style: italic;
+    line-height: 32px;
+    margin-right: 2px;
+    padding: 8px 0 8px 30px;
+}
+.left_top_btn{
+	 background: url("../../images/user/btn_red.jpg") no-repeat ;
+     color: #FFFFFF;
+     display: inline-block;
+     font-size: 22px;
+     font-style: normal;
+     height: 30px;
+    line-height: 30px;
+    margin-left: 24px;
+    padding: 2px 0 5px;
+    text-align: center;
+    vertical-align: 0;
+    width: 143px;
+}
+.left_top_btn a:hover{
+    backgroung-position:0 -192px;
+    text-docuration:none;
+}
+
+.w_img{
+	margin:10px;
+	height: 270px;
+    width: 550px;
+    border: 0 none;
+}
+.right_top{
+	 float: right;
+    overflow: hidden;
+    width: 325px;
+}
+.right_form{
+    margin: 48px auto 0;
+    padding-left: 36px;
+    width: 250px;
+}
+.form_list{
+    line-height: 30px;
+    margin: 0 0 15px;
+}
+.f_email{
+	background-image: url("../../images/user/person.jpg");
+	    background-repeat: no-repeat;
+    border: 1px solid #CCCCCC;
+    border-radius: 2px 2px 2px 2px;
+    box-shadow: 1px 1px 1px 0 #EAEAEA inset;
+    color: #808080;
+    height: 28px;
+    padding-left: 40px;
+    padding-right: 5px;
+    vertical-align: middle;
+    width: 165px;
+}
+.f_pwd{
+	background-image:url("../../images/user/pwd.jpg");
+	 background-repeat: no-repeat;
+    border: 1px solid #CCCCCC;
+    border-radius: 2px 2px 2px 2px;
+    box-shadow: 1px 1px 1px 0 #EAEAEA inset;
+    color: #808080;
+    height: 28px;
+    padding-left: 40px;
+    padding-right: 5px;
+    vertical-align: middle;
+    width: 165px;
+}
+
+.w_input{
+    background: none repeat scroll 0 0 transparent;
+    color: #808080;
+    height: 28px;
+    width: 165px;
+    outline-style: none;
+    vertical-align: middle;
+    border:none;
+}
+.f_right{
+    float: right;
+    margin-right: 35px;
+}
+.help_img{
+    background: url("../../images/user/help.jpg") repeat scroll 0 0 transparent;
+    display: inline-block;
+    height: 16px;
+    margin-left: 3px;
+    vertical-align: middle;
+    overflow: hidden;
+    width: 16px;
+}
+.f_btn span{
+    background: url("../../images/user/btn_org.jpg") no-repeat scroll 0 0 transparent;
+    cursor: pointer;
+    display: inline-block;
+    height: 30px;
+    line-height: 29px;
+    padding: 0 0 0 2px;
+     color: #FFFFFF;
+    font-size: 14px;
+    font-weight: bold;
+    min-width: 49px;
+    padding: 0 16px 0 14px;
+    text-align: center;
+}
+.f_btn-tip{
+  min-width: 49px;
+  background-position: right -810px;
+}
+.login_other{
+   margin-top:35px;
+}
+.other{
+padding-left:60px;
+}
+.other_p{
+  color: #595959;
+  margin: 0 0 12px;
+}
+.t_y{
+	
+    background-image: url("../../images/user/tianyi.jpg");
+    background-repeat: no-repeat;
+    display: inline-block;
+    height: 16px;
+    margin-right: 3px;
+    vertical-align: middle;
+    width: 16px;
+}
+.l_t{
+	  background-image: url("../../images/user/liantong.jpg");
+    background-repeat: no-repeat;
+    display: inline-block;
+    height: 16px;
+    margin-right: 3px;
+    vertical-align: middle;
+    width: 16px;
+}
+.s_l_l{
+	  background-image: url("../../images/user/360.jpg");
+    background-repeat: no-repeat;
+    display: inline-block;
+    height: 16px;
+    margin-right: 3px;
+    vertical-align: middle;
+    width: 16px;
+}
+.w_l_info .other li {
+    display: inline;
+    margin-right: 20px;
+}
+.footer{
+	 background: url("../../images/user/footer_top_bg.jpg") no-repeat scroll center top #F7F7F8;
+     padding: 15px 30px 30px;
+    text-align: center;
+    margin-top:-16px;
+}
+.ipad{
+    background: url("../../images/user/ipad.jpg") no-repeat scroll 0 0 transparent;
+    display: inline-block;
+    height: 21px;
+    margin-right: 2px;
+    vertical-align: middle;
+    width: 20px;
+}
+.android{
+  background: url("../../images/user/android.jpg") no-repeat scroll 0 0 transparent;
+    display: inline-block;
+    height: 21px;
+    margin-right: 2px;
+    vertical-align: middle;
+    width: 20px;
+}
+.Windows{
+	  background: url("../../images/user/Windows.jpg") no-repeat scroll 0 0 transparent;
+    display: inline-block;
+    height: 21px;
+    margin-right: 2px;
+    vertical-align: middle;
+    width: 20px;
+}
+.other_phone{
+	background: url("../../images/user/other_phone.jpg") no-repeat scroll 0 0 transparent;
+    display: inline-block;
+    height: 21px;
+    margin-right: 2px;
+    vertical-align: middle;
+    width: 20px;
+}
+.footer .system{
+   margin:5px 0 0px;
+   text-align: center;
+   padding-left:200px;
+}
+.footer .system a {
+    color: #333333;
+}
+.footer .system li {
+    display: inline;
+    margin-right: 20px;
+}
+.footer .help_link {
+    margin: 30px 0 5px;
+}
+.footer .help_link i {
+    margin: 0 10px;
+}
+.S_txt2 {
+    color: #808080;
+}
+.footer .Icp {
+    margin: 0 10px 0 15px;
+}
+.layer{
+    position: absolute;
+    z-index: 9999;
+}
+element.style {
+    display: none;
+    left: 855px;
+    top: 277px;
+    width: 210px;
+}
+.layer .bg{
+	background: url("../../images/user/layer_bg.png") repeat scroll 0 0 transparent;
+    border-radius: 4px 4px 4px 4px;
+    padding: 2px;
+}
+.layer .content{
+    background: none repeat scroll 0 0 #FFFAE1;
+    border: 1px solid #CCCCCC;
+    border-radius: 2px 2px 2px 2px;
+    padding: 5px 20px 5px 5px;
+    position: relative;
+}
+
+.layer .icon_close {
+    position: absolute;
+    right: 6px;
+    top: 6px;
+}
+.icon_close {
+    background-position: -75px -25px;
+}
+.W_ico12 {
+    background-image: url("../../images/user/error.jpg");
+    background-repeat: no-repeat;
+    display: inline-block;
+    height: 12px;
+    width: 12px;
+}
+.layer .tips span {
+    vertical-align: middle;
+}
+.icon_del, .icon_delS {
+    background-position: 0 -50px;
+}
+.layer .arrow_tips {
+    background: url("../../images/user/layer_tips.png") no-repeat scroll 0 0 transparent;
+    bottom: -5px;
+    height: 8px;
+    left: 50%;
+    margin-left: -7px;
+    overflow: hidden;
+    position: absolute;
+    width: 10px;
+}

@@ -1,0 +1,305 @@
+@CHARSET "UTF-8";
+body,button,input,select,textarea{
+	font:12px/1.125 Arial,Helvetica,sans-serif;
+	_font-family:"SimSun";
+	}
+body,h1,h2,h3,h4,h5,h6,dl,dt,dd,ul,ol,li,th,td,p,blockquote,pre,form,fieldset,legend,input,button,textarea,hr{
+	margin:0; padding:0;}
+table{
+	border-collapse:collapse;border-spacing:0;}
+li{
+	list-style:none;}
+fieldset,img{
+	border:0;}
+q:before,q:after{
+	content:'';}
+a:focus,input,textarea{
+	outline-style:none;}
+input[type="text"],input[type="password"],textarea{
+	outline-style:none;-webkit-appearance:none;}
+textarea{resize:none}
+address,caption,cite,code,dfn,em,i,th,var{
+	font-style:normal;font-weight:normal;}
+abbr,acronym {
+	border:0;font-variant:normal;}
+a{text-decoration:none;
+	 color:#0a8cd2; }
+	 
+a:hover{text-decoration:underline;}
+div{
+border:0px solid red;
+}
+body{
+	background-image:url("../../images/user/bgColor.png");
+	background-repeat:repeat;
+}
+
+.w_header_line {
+    background: url("../../images/user/red_line.jpg") repeat-x scroll center 0 transparent;
+    border-bottom: 1px solid #E6F1F9;
+    height: 2px;
+    overflow: hidden;
+}
+.w_register {
+    background: url("../../images/user/bg.png") no-repeat scroll center top transparent;
+}
+.w_main {
+    margin: 0 auto;
+    padding: 0px 0;
+    width: 900px;
+}
+.w_m_top{
+    background: url("../../images/user/bg_reg_wave.png") no-repeat scroll center bottom transparent;
+    height: 164px;
+}
+.w_m_t_name{
+	margin-top:26px;
+}
+.w_m_t_name{
+	
+	background: url("../../images/user/maikkrlogo_top.jpg") no-repeat scroll 0 bottom transparent;
+    height: 100px;
+    margin: 0 auto;
+    width: 278px;
+}
+.w_m_main{
+	background: none repeat scroll 0 0 #FFFFFF;
+    border-radius: 6px 6px 6px 6px;
+    box-shadow: 0 2px 3px #98B4C4;
+    margin: 0 auto 15px;
+    width: 900px;
+    height:500px;
+}
+.w_m_m_one{
+    padding: 24px 0 22px 40px;
+}
+.one_register{
+    border-bottom: 3px solid #FFA00A;
+    color: #333333;
+    display: inline-block;
+    font-size: 22px;
+    line-height: 33px;
+    font-family: "Microsoft Yahei";
+}
+a{
+	text-decoration:none;
+}
+.w_m_m_two:after{
+   display:block;
+   height: 0;
+}
+.w_m_m_t_left{
+    margin: 22px 0 0 20px;
+    padding-bottom: 78px;
+    float: left;
+    width: 600px;
+}
+.w_m_m_t_right{
+    float: right;
+    font-size: 14px;
+    line-height: 22px;
+    margin: 30px 30px 0 0;
+    width: 210px;
+}
+.left_list{
+	margin: 0 0 15px;
+    position: relative;
+    display:block;
+    height: 40px;
+}
+.left_list:after{
+	clear: both;
+    content: ".";
+    display: block;
+    height: 0;
+    visibility: hidden;
+}
+.left_tit{
+    width: 160px;
+    float: left;
+    font-size: 14px;
+    line-height: 30px;
+    text-align: right;
+}
+.left_tit_e{
+	 background: url("../../images/user/email.jpg") no-repeat scroll 0 0 transparent;
+    display: inline-block;
+    height: 23px;
+    margin-right: 9px;
+    vertical-align: middle;
+    width: 20px;
+}
+.w_m_m_two .left_tit i{
+    color: #FF0000;
+    font-family: "SimSun";
+    padding-right: 4px;
+}
+.w_input{
+	 font-size: 14px;
+     width: 193px;
+}
+.w_input{
+    border: 1px solid #CCCCCC;
+    border-radius: 2px 2px 2px 2px;
+    box-shadow: 0 1px 1px 0 #EAEAEA inset;
+    color: #808080;
+    height: 28px;
+    padding: 0 0 0 5px;
+    vertical-align: middle;
+}
+.virfy_input{
+   width:80px;
+   margin-top:-20px;
+}
+.verify_refresh{
+	background: url("../../images/user/refresh.jpg") no-repeat scroll 0 0 transparent;
+    display: inline-block;
+    height: 17px;
+    margin-left: 14px;
+    
+    overflow: hidden;
+    width: 18px;
+     position: absolute;
+    top: 10px;
+}
+.w_m_m_two .left_tips{
+    left: 375px;
+    position: absolute;
+    top: 6px;
+}
+.w_m_m_two .left_tips .notice{
+	line-height: 18px;
+    padding: 0 0 0 20px;
+    text-indent: -20px;
+}
+.w_m_m_two .virfy_bar input.w_input{
+	weight:75px;
+}
+.agreement {
+    margin: 0 0 7px;
+}
+.W_btn_big span {
+    background-position: right -40px;
+    min-width: 35px;
+    overflow: hidden;
+    padding: 0 5px 0 3px;
+    text-align: center;
+    width: 190px;
+}
+.W_btn_big, .W_btn_big span {
+    background: #FFA00A;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 16px;
+    font-weight: bold;
+    height: 40px;
+    line-height: 39px;
+    padding: 0 0 0 2px;
+}
+.noticeImg{
+     background: url("../../images/user/warn.jpg") no-repeat scroll 0 0 transparent;
+    display: inline-block;
+    height: 16px;
+    margin: 0 3px 0 0;
+    overflow: hidden;
+    width: 16px;
+    vertical-align: middle;
+}
+.errorImg{
+    background: url("../../images/user/error.jpg") no-repeat scroll 0 0 transparent;
+    display: inline-block;
+    height: 16px;
+    margin: 0 3px 0 0;
+    overflow: hidden;
+    width: 16px;
+    vertical-align: middle;
+}
+.trueImg{
+    background: url("../../images/user/true.jpg") no-repeat scroll 0 0 transparent;
+    display: inline-block;
+    height: 16px;
+    margin: 0 3px 0 0;
+    overflow: hidden;
+    width: 16px;
+    vertical-align: middle;
+}
+.left_inp{
+    margin-left: 160px;
+}
+.inp{
+    margin-left:160px;
+}
+.w_m_m_t_right .p1 {
+    margin: 0 0 14px;
+    padding: 0 0 6px;
+    word-break: break-all;
+    word-wrap: break-word;
+}
+.w_m_m_t_right .line {
+    border-bottom: 1px dotted #CCCCCC;
+}
+
+.w_m_m_t_right .p2 {
+    font-size: 16px;
+    margin: 0 0 5px;
+}
+.S_txt2 {
+    color: #808080;
+}
+.w_m_m_t_right .p3 {
+    color: #FFA00A;
+    font-weight: bold;
+}
+.w_m_m_t_right .number {
+    font: bold 18px Tahoma;
+}
+.clearfix:after {
+    clear: both;
+    content: ".";
+    display: block;
+    height: 0;
+    visibility: hidden;
+}
+.B_register .footer_nologin {
+    margin: 0 auto;
+    width: 840px;
+}
+.footer_nologin {
+    border-top: 1px solid #E6E6E6;
+    padding: 0 30px 20px;
+}
+.clearfix {
+    display: block;
+}
+.clearfix {
+    display: inline-block;
+}
+
+.footer_nologin p {
+    line-height: 18px;
+    padding: 3px 0 0;
+}
+.footer_nologin .W_ico16 {
+    margin-right: 4px;
+    vertical-align: -3px;
+}
+.ico_weibo {
+    background-position: -350px -125px;
+}
+.W_ico16 {
+    background-image: url("../../images/user/s_blog.jpg");
+    background-repeat: no-repeat;
+    display: inline-block;
+    height: 16px;
+    width: 16px;
+}
+.W_nologin .footer_nologin select {
+    margin-top: 0;
+}
+.help_link{
+	float:left;
+}
+.copy{
+    float:right;
+}

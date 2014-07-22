@@ -11,5 +11,17 @@ public class UserController {
 	public String main() {
 		return "main";
 	}
+	
+	@RequestMapping("/loginpage")
+	public String loginpage() {
+		return "loginpage";
+	}
+	
+	@RequestMapping("/register")
+	public String register() {
+		return "register";
+	}
+	
+	
 
 }
