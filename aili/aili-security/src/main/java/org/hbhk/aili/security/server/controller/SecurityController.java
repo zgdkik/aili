@@ -38,6 +38,7 @@ public class SecurityController extends BaseController {
 
 	@RequestMapping("/login")
 	@SecurityFilter(false)
+	@ResponseBody
 	public ResponseEntity login(HttpServletResponse response, String email,
 			String pwd) {
 		try {
