@@ -1,29 +1,50 @@
 $j(document).ready(function() {
 	init();
 	$j(".top_span").mouseover(function() {
-		$j(this).attr("backgroundColor", "");
+		$j(this).css("background-color", "");
 	});
 	$j(".top_span").mouseout(function() {
-		$j(this).attr("backgroundColor", "#000000");
+		$j(this).css("background-color", "#000000");
 	});
-	$j("#comment_top_img").mouseover(function() {
-		$j("#comment_span").attr("backgroundColor", "#FFFFFF");
+	$j("#comment_span").mouseover(function() {
+		$j("#comment_span").css("background-color", "#FFFFFF");
 		$j("#comment_top").css("display" , 'inline');
 		$j("#comment_top_img").attr("src",getImageSrc("comment_top2.png"));
 	});
 		
-	$j("#comment_top_img").mouseout(function() {
-		$j("#comment_span").attr("backgroundColor", "#FFFFFF");
+	$j("#comment_span").mouseout(function() {
+		$j("#comment_span").css("background-color", "");
 		$j("#comment_top").css("display" , 'none');
 		$j("#comment_top_img").attr("src",getImageSrc("comment_top1.png"));
 	});
 	$j("#userset_span").mouseover(function() {
-		$j("#userset_span").attr("backgroundColor", "#FFFFFF");
+		$j("#userset_span").css("background-color", "#FFFFFF");
 		$j("#userset_top").css("display" , 'inline');
 		$j("#userset_top_img").attr("src",getImageSrc('userset_top1.png'));
 	});
 	$j("#userset_span").mouseout(function() {
-		$j("#userset_span").attr("backgroundColor", "#FFFFFF");
+		$j("#userset_span").css("background-color", "");
+		$j("#userset_top").css("display" , 'none');
+		$j("#userset_top_img").attr("src",getImageSrc('userset_top2.png'));
+	});
+	$j("#comment_top").mouseover(function() {
+		$j("#comment_span").css("background-color", "#FFFFFF");
+		$j("#comment_top").css("display" , 'inline');
+		$j("#comment_top_img").attr("src",getImageSrc("comment_top2.png"));
+	});
+		
+	$j("#comment_top").mouseout(function() {
+		$j("#comment_span").css("background-color", "");
+		$j("#comment_top").css("display" , 'none');
+		$j("#comment_top_img").attr("src",getImageSrc("comment_top1.png"));
+	});
+	$j("#userset_top").mouseover(function() {
+		$j("#userset_span").css("background-color", "#FFFFFF");
+		$j("#userset_top").css("display" , 'inline');
+		$j("#userset_top_img").attr("src",getImageSrc('userset_top1.png'));
+	});
+	$j("#userset_top").mouseout(function() {
+		$j("#userset_span").css("background-color", "");
 		$j("#userset_top").css("display" , 'none');
 		$j("#userset_top_img").attr("src",getImageSrc('userset_top2.png'));
 	});
