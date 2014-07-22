@@ -17,7 +17,7 @@ public class UserCache extends CacheSupport<UserInfo> {
 	@Override
 	public UserInfo doSet(String key) {
 		UserInfo u = new UserInfo();
-		u.setUsername(key);
+		u.setMail(key);
 		return userDao.getOne(u);
 	}
 
