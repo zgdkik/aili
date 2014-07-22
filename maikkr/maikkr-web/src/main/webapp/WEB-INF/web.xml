@@ -48,6 +48,15 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 
+	<filter>
+		<filter-name>appFilter</filter-name>
+		<filter-class>org.hbhk.aili.security.server.filter.AppFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>appFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
 	<servlet>
 		<servlet-name>springmvc</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -81,7 +90,7 @@
 	<listener>
 		<listener-class>jetbrick.template.web.JetWebEngineLoader</listener-class>
 	</listener>
-	
+
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
