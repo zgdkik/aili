@@ -32,7 +32,7 @@ public class AutoCreateTable implements InitializingBean {
 
 	private JdbcTemplate jdbcTemplate;
 
-	@Value("${autoTablePath}")
+	@Value("${autoScanTablePackage}")
 	private String autoTablePath;
 
 	private List<String> tableNames = new ArrayList<String>();
