@@ -1,70 +1,56 @@
-window.onload=processUserName;
- //onload="processUserName();"
-function processUserName(){
-	$("emailId").onfocus=function(){
-		clear($("emailId"));
-		$("nameOrPwdId").style.display="none";
-		$("notExistId").style.display="none";
-	}
-	$("emailId").onblur=function(){
-		validateEmailName($("emailId"));
+$j(document).ready(function() {
+	$j("#emailId").focus(function(){
+		$j("#nameOrPwdId").css('display',"none");
+		$j("#notExistId").css('display',"none");
+	});
+	$j("#emailId").blur(function(){
+		validateEmailName($j("#emailId"));
 		
-	}
-	$("pwdId").onfocus=function(){
-		clear($("pwdId"));
-		$("nameOrPwdId").style.display="none";
-		$("notExistId").style.display="none";
-	}
-	$("pwdId").onblur=function(){
-		validatePwd($("pwdId"));
-	}
-}
+	});
+	$j("#pwdId").focus(function(){
+		$j("#nameOrPwdId").css('display',"none");
+		$j("#notExistId").css('display',"none");
+	});
+	$j("#pwdId").blur(function(){
+		validatePwd($j("#pwdId"));
+	});
+	
+	$j(".f_btn").click(function(){
+		 if($j("#emailId").val()!=""&&$j("#pwdId").val()!=""){
+		    	var url = base+"security/login.htm";
+		    	var data = {
+		        		"email":$j("#emailId").val(),
+		        		"pwd":$j("#pwdId").val()
+		        	};
+		    	$j.ajax({
+		    		url: url,
+		    		type:"POST",
+		    		data:data,
+		    		success: function(data, textStatus){
+		    			// window.location.href=backMessage.address;
+		    		},
+		    		exception:function(data, textStatus){
+		    			$j("#notExistId").css('display',"block");
+		    			$j("#nameOrPwdId").css('display',"block");
+		    		}
+		    	});
+		    	
+		    }else{
+		    	window.location(base+"user/loginpage.htm");
+		    }	
+		
+	});
+});
 function validateEmailName(obj){
-	if(obj.value==""){
-		$("emailId").value="请输入邮箱账号";
+	if(obj.val()==""){
+		$j("#emailId").val("请输入邮箱账号");
 	}
 }
 function validatePwd(obj){
-	if(obj.value==""){
-		$("pwdId").value="请输入密码";
+	if(obj.val()==""){
+		$j("#pwdId").val("请输入密码");
 	}
 }
 
-function click_btn(){
-	//alert("jflkasdjflka");
-    if($("emailId").value!=""&&$("pwdId").value!=""){
-    	var url = "/blog/loginAction.do";
-    	var message = {
-        		"userEmail":$("emailId").value,
-        		"userPwd":$("pwdId").value
-        	};
-    	var  str=JSON.stringify(message);
-    	Ajax.request(url, "POST", str, "TEXT", callback);
-    	
-    }else{
-    	window.location("../jsp/login.jsp");
-    }	
-}
-function callback(text){
-	//alert(text);//这里
-	var backMessage = JSON.parse(text);
-	if(backMessage.loginBack=="NotExist"){
-		
-		$("notExistId").style.display="block";
-		$("nameOrPwdId").style.display="none";
-	}
-	if(backMessage.loginBack=="Error"){
-		$("nameOrPwdId").style.display="block";
-		$("notExistId").style.display="none";
-	}
-	if(backMessage.loginBack=="YES"){
-		window.location.href=backMessage.address;
-//		window.location = "../bloghomepage.html";
-	}
-}
-function clear(obj){
-	obj.value="";
-}
-function $(id){
-	return document.getElementById(id);
-}
+
+
