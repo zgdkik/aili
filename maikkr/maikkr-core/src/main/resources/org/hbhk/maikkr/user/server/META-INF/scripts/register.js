@@ -1,271 +1,264 @@
-window.onload=processUserName;
-// onload="processUserName();"
-function processUserName(){
-	$("emailId").onfocus=function(){
-		claimEmail($("emailId"));
-	}
-	$("pwdId").onfocus=function(){
-		
-		claimPwd($("pwdId"));
-	}
-	$("nameId").onfocus=function(){
-		claimName($("nameId"));
-	}
-	$("virfyId").onfocus=function(){
-		claimVirfy($("virfyId"));
-	}
-	$("emailId").onblur=function(){
-		validateEmail($("emailId"));
-	}
+$j(document).ready(function() {
 	
-    $("pwdId").onblur=function(){
-		validatePwd($("pwdId"));
-	}
-	$("nameId").onblur=function(){
-		validateUserName($("nameId"));
-	}
-	$("virfyId").onblur=function(){
-		validateVirfy($("virfyId"));
-	}
-}
-arr={
+	getId("pwdId").focus(function(){
+		claimEmail(getId("emailId"));
+	});
+	
+	getId("pwdId").focus(function(){
+		claimPwd(getId("pwdId"));
+	});
+	
+	getId("nameId").focus(function(){
+		claimName(getId("nameId"));
+	});
+	getId("virfyId").focus(function(){
+		claimVirfy(getId("virfyId"));
+	});
+	getId("emailId").blur(function(){
+		validateEmail(getId("emailId"));
+	});
+	
+    getId("pwdId").blur(function(){
+		validatePwd(getId("pwdId"));
+    });
+	getId("nameId").blur(function(){
+		//昵称不做验证
+		//validateUserName(getId("nameId"));
+	});
+	getId("virfyId").blur(function(){
+		validateVirfy(getId("virfyId"));
+	});
+});
+var arr={
 		"emailState":"",
 		"pwdState":"",
 		"nameState":"",
 		"virfyState":""
 }
 function claimEmail(obj){
-	clear($("emailId"));
-	$("emailNotice").style.display="block";
-	$("emailError").style.display="none";
-	$("emailTrue").style.display="none";
-	$("emailLogin").style.display="none";
+	//clear(getId("emailId"));
+	getId("emailNotice").css('display',"block");
+	getId("emailError").css('display',"none");
+	getId("emailTrue").css('display',"none");
+	getId("emailLogin").css('display',"none");
 }
 function claimPwd(obj){
-	if(obj.value==""){
-		$("pwdNotice").style.display="block";
-		$("pwdError").style.display="none";
-		$("pwdMedium").style.display="none";
-		$("pwdGood").style.display="none";
+	 var cpwd = obj.val();
+	if(cpwd==""){
+		getId("pwdNotice").css('display',"block");
+		getId("pwdError").css('display',"none");
+		getId("pwdMedium").css('display',"none");
+		getId("pwdGood").css('display',"none");
 		
-	}else if(obj.value.length<6&&obj.value.length>0&&obj.value.length>17){
-		$("pwdNotice").style.display="none";
-		$("pwdError").style.display="block";
-		$("pwdMedium").style.display="none";
-		$("pwdGood").style.display="none";
+	}else if(cpwd.length<6&&cpwd.length>0&&cpwd.length>17){
+		getId("pwdNotice").css('display',"none");
+		getId("pwdError").css('display',"block");
+		getId("pwdMedium").css('display',"none");
+		getId("pwdGood").css('display',"none");
 		return false;
-	}else if(obj.value.length>6&&obj.value.length<12){
-		$("pwdNotice").style.display="none";
-		$("pwdError").style.display="none";
-		$("pwdMedium").style.display="block";
-		$("pwdGood").style.display="none";
+	}else if(cpwd.length>6&&cpwd.length<12){
+		getId("pwdNotice").css('display',"none");
+		getId("pwdError").css('display',"none");
+		getId("pwdMedium").css('display',"block");
+		getId("pwdGood").css('display',"none");
 		return true;
-	}else if(obj.value.length>=12&&obj.value.length<=16){
-		$("pwdNotice").style.display="none";
-		$("pwdError").style.display="none";
-		$("pwdMedium").style.display="none";
-		$("pwdGood").style.display="block";
+	}else if(cpwd.length>=12&&cpwd.length<=16){
+		getId("pwdNotice").css('display',"none");
+		getId("pwdError").css('display',"none");
+		getId("pwdMedium").css('display',"none");
+		getId("pwdGood").css('display',"block");
 		return true;
 	}
 }
 function claimName(obj){
-	$("nameNotice").style.display="block";
-	$("nameError").style.display="none";
-	$("nameNull").style.display="none";
-	$("nameExist").style.display="none";
-	$("nameTrue").style.display="none";
+	getId("nameNotice").css('display',"block");
+	getId("nameError").css('display',"none");
+	getId("nameNull").css('display',"none");
+	getId("nameExist").css('display',"none");
+	getId("nameTrue").css('display',"none");
 	}
 function claimVirfy(){
-	$("virfyNotice").style.display="block";
-	$("virfyNull").style.display="none";
-	$("virfyError").style.display="none";
+	getId("virfyNotice").css('display',"block");
+	getId("virfyNull").css('display',"none");
+	getId("virfyError").css('display',"none");
 	}
 function validateEmail(obj){
-	if(obj.value==""){
-		$("emailNotice").style.display="none";
-		$("emailError").style.display="block";
-		$("emailTrue").style.display="none";
-		$("emailLogin").style.display="none";
+	var mail = obj.val();
+	if(mail==""){
+		getId("emailNotice").css('display',"none");
+		getId("emailError").css('display',"block");
+		getId("emailTrue").css('display',"none");
+		getId("emailLogin").css('display',"none");
 		arr.emailState="false";
-	}else if(isEmail(obj)){
-		checkEmailOut(obj.value);
-	}else if(!isEmail(obj)){
-		$("emailNotice").style.display="none";
-		$("emailError").style.display="block";
-		$("emailTrue").style.display="none";
-		$("emailLogin").style.display="none";
+	}else if(isEmail(mail)){
+		checkEmailOut(mail);
+	}else if(!isEmail(mail)){
+		getId("emailNotice").css('display',"none");
+		getId("emailError").css('display',"block");
+		getId("emailTrue").css('display',"none");
+		getId("emailLogin").css('display',"none");
 		arr.emailState="false";
 	}
 }
 function checkEmailOut(text){
 	//以post的形式把用户输入的邮箱发到后台校验是否已存在
 	//var url = "http://localhost:8080/blog/checkEmailServlet";
-	var url = "../checkEmailAction.do";
+	var url = base+"security/validateEmail.htm";
 	var mess={
-		"userEmail":text
+		"mail":text
 	};
-	var message = JSON.stringify(mess);
+	//var message = JSON.stringify(mess);
 	//调用Ajax方法
-	Ajax.request(url, "POST", message, "TEXT", callback);
+	$j.ajax({
+		url: url,
+		type:"POST",
+		data:mess,
+		success: function(data, textStatus){
+			getId("emailNotice").css('display',"none");
+			getId("emailError").css('display',"none");
+			getId("emailTrue").css('display',"block");
+			getId("emailLogin").css('display',"none");
+			arr.emailState="true";
+		},
+		exception:function(data, textStatus){
+			getId("emailNotice").css('display',"none");
+			getId("emailError").css('display',"none");
+			getId("emailTrue").css('display',"none");
+			getId("emailLogin").css('display',"block");
+			arr.emailState="false";
+		}
+	});
 	
 }
-function callback(text){
-	//将json格式的text转化为js
-	var object = JSON.parse(text);
-	var obj = object.notice;
-	if(obj=="canNot"){
-		$("emailNotice").style.display="none";
-		$("emailError").style.display="none";
-		$("emailTrue").style.display="none";
-		$("emailLogin").style.display="block";
-		arr.emailState="false";
-	}else if(obj=="can"){
-		$("emailNotice").style.display="none";
-		$("emailError").style.display="none";
-		$("emailTrue").style.display="block";
-		$("emailLogin").style.display="none";
-		arr.emailState="true";
-	}
-}
 function validateUserName(obj){
-	if(obj.value==""){
-		$("nameNotice").style.display="none";
-		$("nameError").style.display="none";
-		$("nameNull").style.display="block";
-		$("nameExist").style.display="none";
-		$("nameTrue").style.display="none";
+	var usermail = obj.val();
+	if(usermail==""){
+		getId("nameNotice").css('display',"none");
+		getId("nameError").css('display',"none");
+		getId("nameNull").css('display',"block");
+		getId("nameExist").css('display',"none");
+		getId("nameTrue").css('display',"none");
 		arr.nameState="false";
 	}else{
-		if(obj.value.length<4&&obj.value.length>24){
-			$("nameNotice").style.display="none";
-			$("nameError").style.display="block";
-			$("nameNull").style.display="none";
-			$("nameExist").style.display="none";
-			$("nameTrue").style.display="none";
+		if(usermail.length<4&&usermail.length>24){
+			getId("nameNotice").css('display',"none");
+			getId("nameError").css('display',"block");
+			getId("nameNull").css('display',"none");
+			getId("nameExist").css('display',"none");
+			getId("nameTrue").css('display',"none");
 		}else{
-			for(i=0;i<obj.value.length;i++){
-				var temp = obj.value.toLowerCase();
+			for(i=0;i<usermail.length;i++){
+				var temp = usermail.toLowerCase();
 				var ch = temp.charAt(i);
 				if((ch>='a'&&ch<='z')||(ch>=0&&ch<=9)||(ch=='_')||(ch=='-')){
-					checkNameOut(obj.value);
+					checkEmailOut(usermail);
 				}else{
-					$("nameNotice").style.display="none";
-					$("nameError").style.display="block";
-					$("nameNull").style.display="none";
-					$("nameExist").style.display="none";
-					$("nameTrue").style.display="none";
+					getId("nameNotice").css('display',"none");
+					getId("nameError").css('display',"block");
+					getId("nameNull").css('display',"none");
+					getId("nameExist").css('display',"none");
+					getId("nameTrue").css('display',"none");
 				}
 			}
 		}
 	}
 }
-function checkNameOut(text){
-	//以post的形式把用户输入的邮箱发到后台校验是否已存在
-	var mes={
-	    "userName":text
-	};
-	
-	var message = JSON.stringify(mes);
-	//var url = "http://localhost:8080/blog/checkUserNameServlet";
-	var url = "../checkRegisterNameAction.do";
-	//调用Ajax方法
-	Ajax.request(url, "POST", message, "TEXT", callback2);
-}
+
 function callback2(text){
 	//将json格式的text转化为js
 	var object = JSON.parse(text);
 	var obj = object.notice;
 	if(obj=="canNot"){
-		$("nameNotice").style.display="none";
-		$("nameNull").style.display="none";
-		$("nameExist").style.display="block";
-		$("nameTrue").style.display="none";
+		getId("nameNotice").css('display',"none");
+		getId("nameNull").css('display',"none");
+		getId("nameExist").css('display',"block");
+		getId("nameTrue").css('display',"none");
 		arr.nameState="false";
 	}else if(obj=="can"){
-		$("nameNotice").style.display="none";
-		$("nameNull").style.display="none";
-		$("nameExist").style.display="none";
-		$("nameTrue").style.display="block";
+		getId("nameNotice").css('display',"none");
+		getId("nameNull").css('display',"none");
+		getId("nameExist").css('display',"none");
+		getId("nameTrue").css('display',"block");
 		arr.nameState="true";
 	}
 }
 function validatePwd(obj){
-	if(obj.value==""){
-		$("pwdNotice").style.display="none";
-		$("pwdError").style.display="block";
-		$("pwdMedium").style.display="none";
-		$("pwdGood").style.display="none";
+	var pwd = obj.val();
+	if(pwd==""){
+		getId("pwdNotice").css('display',"none");
+		getId("pwdError").css('display',"block");
+		getId("pwdMedium").css('display',"none");
+		getId("pwdGood").css('display',"none");
 		arr.pwdState="false";
-	}else if(obj.value.length<6&&obj.value.length>0&&obj.value.length>17){
-		$("pwdNotice").style.display="none";
-		$("pwdError").style.display="block";
-		$("pwdMedium").style.display="none";
-		$("pwdGood").style.display="none";
+	}else if(pwd.length<6&&pwd.length>0&&pwd.length>17){
+		getId("pwdNotice").css('display',"none");
+		getId("pwdError").css('display',"block");
+		getId("pwdMedium").css('display',"none");
+		getId("pwdGood").css('display',"none");
 		arr.pwdState="false";
-	}else if(obj.value.length >= 6&&obj.value.length<12){
-		$("pwdNotice").style.display="none";
-		$("pwdError").style.display="none";
-		$("pwdMedium").style.display="block";
-		$("pwdGood").style.display="none";
+	}else if(pwd.length >= 6&&pwd.length<12){
+		getId("pwdNotice").css('display',"none");
+		getId("pwdError").css('display',"none");
+		getId("pwdMedium").css('display',"block");
+		getId("pwdGood").css('display',"none");
 		arr.pwdState="true";
-	}else if(obj.value.length>=12&&obj.value.length<=16){
-		$("pwdNotice").style.display="none";
-		$("pwdError").style.display="none";
-		$("pwdMedium").style.display="none";
-		$("pwdGood").style.display="block";
+	}else if(pwd.length>=12&&pwd.length<=16){
+		getId("pwdNotice").css('display',"none");
+		getId("pwdError").css('display',"none");
+		getId("pwdMedium").css('display',"none");
+		getId("pwdGood").css('display',"block");
 		arr.pwdState="true";
 	}
 }
 function validateVirfy(obj){
-	if(obj.value==""){
-		$("virfyNotice").style.display="none";
-		$("virfyNull").style.display="block";
-		$("virfyError").style.display="none";
+	var code = obj.val();
+	if(code==""){
+		getId("virfyNotice").css('display',"none");
+		getId("virfyNull").css('display',"block");
+		getId("virfyError").css('display',"none");
 		arr.virfyState="false";
-	}else if(obj.value.length==4){
-		$("virfyNotice").style.display="none";
-		$("virfyNull").style.display="none";
-		$("virfyError").style.display="none";
+	}else if(code.length==4){
+		getId("virfyNotice").css('display',"none");
+		getId("virfyNull").css('display',"none");
+		getId("virfyError").css('display',"none");
 		arr.virfyState="true";
 	}
 }
 
 function click_register(){
-	if(arr.nameState && arr.emailState && arr.pwdState && arr.virfyState){
+	if(arr.emailState && arr.pwdState && arr.virfyState){
 	  var registerMass={
-			  "userEmail":$("emailId").value,
-	          "userName":$("nameId").value,
-	          "userPwd":$("pwdId").value,
-	          "virfyCode":$("virfyId").value
+			  "mail":getId("emailId").val(),
+	          "name":getId("nameId").val(),
+	          "password":getId("pwdId").val(),
+	          "code":getId("virfyId").val()
 	  };
-	  var message=JSON.stringify(registerMass);
-	 // var url = "http://localhost:8080/blog/registerServlet";
-	  var url = "../registerAction.do";
-	  Ajax.request(url, "POST", message, "TEXT", result);
+	  var url =  base+"security/regist.htm";
+	  $j.ajax({
+			url: url,
+			type:"POST",
+			data:registerMass,
+			success: function(data, textStatus){
+				$j.toast("注册成功");
+				//window.location ="../bloghomepage.html";
+			},
+			exception:function(data, textStatus){
+				$j.toast(data.msg);
+				getId("virfyNotice").css('display',"none");
+				getId("virfyNull").css('display',"none");
+				getId("virfyError").css('display',"block");
+			}
+		});
 	}
 }
-function result(text){
-	var backText = JSON.parse(text);
-	if(backText.notice=="Not"){
-		$("virfyNotice").style.display="none";
-		$("virfyNull").style.display="none";
-		$("virfyError").style.display="block";
-	}
-	if(backText.notice=="YES"){
-//		window.location.href=backText.address;
-		window.location ="../bloghomepage.html";
-	}
-	
-}
-function $(id){
-	return document.getElementById(id);
+function getId(id){
+	return $j("#"+id);
 }
 
 function clear(obj){
-	obj.value="";
+	obj.val(null);
 }
 function isEmail(str){ 
 	var reg =/^[\w\.-]+?@([\w\-]+\.){1,2}[a-zA-Z]{2,3}$/; 
-	//return str.match(reg);
-	return true;
+	return str.match(reg);
 } 
