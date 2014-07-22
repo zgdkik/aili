@@ -64,7 +64,7 @@
 				<artifactId>tomcat6-maven-plugin</artifactId>
 				<configuration>
 					<path>/maikkr</path>
-					<port>8080</port>
+					<port>8181</port>
 					<warSourceDirectory>${project.build.directory}/webapp</warSourceDirectory>
 				</configuration>
 			</plugin>
