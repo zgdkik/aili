@@ -4,4 +4,7 @@
 <html lang="zh-cn">
 <head>
 	<script src="${scripts}/boot.js"></script>
+	<script type="text/javascript">
+		var $j = jQuery.noConflict();
+	</script>
 </head>
