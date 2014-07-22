@@ -269,30 +269,7 @@ padding-left:60px;
     vertical-align: middle;
     width: 20px;
 }
-.footer .system{
-   margin:5px 0 0px;
-   text-align: center;
-   padding-left:200px;
-}
-.footer .system a {
-    color: #333333;
-}
-.footer .system li {
-    display: inline;
-    margin-right: 20px;
-}
-.footer .help_link {
-    margin: 30px 0 5px;
-}
-.footer .help_link i {
-    margin: 0 10px;
-}
-.S_txt2 {
-    color: #808080;
-}
-.footer .Icp {
-    margin: 0 10px 0 15px;
-}
+
 .layer{
     position: absolute;
     z-index: 9999;

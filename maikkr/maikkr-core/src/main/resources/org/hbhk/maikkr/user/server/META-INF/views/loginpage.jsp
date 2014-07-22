@@ -2,6 +2,7 @@
 <!DOCTYPE HTML>
 <html lang="zh-cn">
 <head>
+<jsp:include page="common.jsp"/>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <title>买客网-微主题,微话题-无尽分享-专为买家分享的网站</title>
 
@@ -79,31 +80,7 @@
 				</div>
 
 			</div>
-			<div class="footer">
-				<!-- <div class="system">
-					<ul>
-						<li><a
-							href="http://m.weibo.com/web/cellphone.php?topnav=1&wvr=4#iphone"><i
-								class="ipad"></i>iPhone/iPad</a></li>
-						<li><a href="#"><i class="android"></i>Android</a></li>
-						<li><a href="#"><i class="Windows"></i>Windows Phone</a></li>
-						<li><a href="#"><i class="other_phone"></i>其他手机端</a></li>
-					</ul>
-				</div> -->
-				<!-- <div class="help_link">
-					<a href="">微博帮助</a><i class="S_txt2">|</i> <a href="">意见反馈</a><i
-						class="S_txt2">|</i> <a href="">微博认证及合作</a><i class="S_txt2">|</i>
-					<a href="">开放平台</a><i class="S_txt2">|</i> <a href="">微博招聘</a><i
-						class="S_txt2">|</i> <a href="">新浪网导航</a><i class="S_txt2">|</i> <select>
-						<option selected="">中文(简体)</option>
-						<option>中文(台湾)</option>
-						<option>中文(香港)</option>
-					</select>
-				</div> -->
-				<p class="S_txt2">
-					Copyright © 1996-2014 SINA HBHK网络技术有限公司
-				</p>
-			</div>
+			<jsp:include page="footer.jsp"/>
 		</div>
 		<div class="layer" id="notExistId"
 			style="margin-left: -170px; top: 277px; left: 855px; width: 210px; display: none">

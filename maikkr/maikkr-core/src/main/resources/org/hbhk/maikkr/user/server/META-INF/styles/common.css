@@ -1,0 +1,30 @@
+.footer{
+	 background: url("../../images/user/footer_top_bg.jpg") no-repeat scroll center top #F7F7F8;
+     padding: 15px 30px 30px;
+    text-align: center;
+    margin-top:-16px;
+}
+.footer .system{
+   margin:5px 0 0px;
+   text-align: center;
+   padding-left:200px;
+}
+.footer .system a {
+    color: #333333;
+}
+.footer .system li {
+    display: inline;
+    margin-right: 20px;
+}
+.footer .help_link {
+    margin: 30px 0 5px;
+}
+.footer .help_link i {
+    margin: 0 10px;
+}
+.S_txt2 {
+    color: #808080;
+}
+.footer .Icp {
+    margin: 0 10px 0 15px;
+}

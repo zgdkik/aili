@@ -2,20 +2,21 @@
 <!DOCTYPE HTML>
 <html lang="zh-cn">
 <head>
-		<title>买客网-注册</title>
-		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-		<link href="${styles}/register.css" rel="stylesheet" type="text/css" />
-		<script type="text/javascript" src="${scripts}/ajax.js"></script>
-		<script type="text/javascript" src="${scripts}/register.js"></script>
-        <script type="text/javascript">
-            //alert("验证码刷新！");
-	        function refreshimg(){
-	          document.getElementById("virfyCode").src="${base}security/validateCode.htm?code="+Math.random();
-	          return true;
-	        }
-       </script>
+	<jsp:include page="common.jsp"/>
+	<title>买客网-注册</title>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<link href="${styles}/register.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="${scripts}/ajax.js"></script>
+	<script type="text/javascript" src="${scripts}/register.js"></script>
+       <script type="text/javascript">
+           //alert("验证码刷新！");
+        function refreshimg(){
+          document.getElementById("virfyCode").src="${base}security/validateCode.htm?code="+Math.random();
+          return true;
+        }
+      </script>
 </head>
-<body class="B_register " >
+<body class="B_register" >
 		<div class="w_header_line"></div>
 		<div class="w_register">
 			<div class="w_main">
@@ -186,29 +187,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="footer_nologin clearfix">
-					<div class="help_link">
-						<p class="S_txt2">
-							Copyright © 1996-2014 SINA HBHK网络技术有限公司
-						</p>
-					</div>
-				<!-- 	<div class="copy">
-						<p class="W_linkb">
-							<select id="pl_content_changeLanguage" action-data="login=0">
-								<option selected="selected" value="zh-cn">
-									中文(简体)
-								</option>
-								<option value="zh-tw">
-									中文(台湾)
-								</option>
-								<option value="zh-hk">
-									中文(香港)
-								</option>
-							</select>
-						</p>
-					</div> -->
-
-				</div>
+				<jsp:include page="footer.jsp"/>
 			</div>
 
 		</div>
