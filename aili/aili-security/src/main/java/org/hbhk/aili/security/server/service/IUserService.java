@@ -5,6 +5,7 @@ import org.hbhk.aili.security.share.pojo.UserInfo;
 public interface IUserService {
 	
 	UserInfo getMe(String username);
+	UserInfo getUserByMail(String mail);
 
 	boolean login(String username, String password);
 	

@@ -1,5 +1,6 @@
 package org.hbhk.aili.security.server.service.impl;
 
+import java.util.Date;
 import java.util.Set;
 
 import javax.annotation.Resource;
@@ -17,6 +18,7 @@ import org.hbhk.aili.security.server.dao.IUserDao;
 import org.hbhk.aili.security.server.service.IUserService;
 import org.hbhk.aili.security.share.define.UserConstants;
 import org.hbhk.aili.security.share.pojo.UserInfo;
+import org.hbhk.aili.security.share.util.UUIDUitl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -95,8 +97,17 @@ public class UserService implements IUserService {
 		if (StringUtils.isEmpty(user.getName())) {
 			throw new BusinessException("昵称为空");
 		}
-
+		user.setId(UUIDUitl.getUuid());
+		user.setCreateTime(new Date());
+		user.setCreatUser("hbhk");
 		return userDao.save(user);
+	}
+
+	@Override
+	public UserInfo getUserByMail(String mail) {
+		UserInfo u = new UserInfo();
+		u.setMail(mail);
+		return userDao.getOne(u);
 	}
 
 }
