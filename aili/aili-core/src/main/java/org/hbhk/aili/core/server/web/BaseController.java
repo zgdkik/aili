@@ -2,7 +2,7 @@ package org.hbhk.aili.core.server.web;
 
 import org.hbhk.aili.core.share.pojo.ResponseEntity;
 
-public class BaseController {
+public abstract class BaseController {
 	public ResponseEntity returnSuccess() {
 		return new ResponseEntity();
 	}
