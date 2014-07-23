@@ -6,7 +6,7 @@ import org.hbhk.aili.orm.server.annotation.Tabel;
 import org.hbhk.aili.orm.share.model.BaseInfo;
 
 @Entity
-@Tabel("t_blog_comment")
+@Tabel("t_mkk_comment")
 public class Comment extends BaseInfo {
 
 	private static final long serialVersionUID = 3846844061131232345L;
