@@ -42,11 +42,11 @@
 					</div>
 					<textarea id="blogText"></textarea>
 					
-					<div  style="border-width:0px;width:540px;height:30px;position:absolute;margin-top: 135px; margin-left: 20px;">
-					  <img title="添加图片" src="${base}images/user/homeblog/uploadpicture.png" >
-					  <span id="picture" style="display:none;width: 20px;height: 30px;margin-top: px;margin-left: 0px;">
-					     <input  width="30px" type="file" id="file" name="myfile" />
-					  </span>
+					<div  style="border-width:0px;width:540px;height:50px;position:absolute;margin-top: 135px; margin-left: 20px;">
+					  <img title="添加图片" id="addImg" src="${base}images/user/homeblog/uploadpicture.png" >
+					  <div id="picture" style="display:none;width: 20px;height: 30px;margin-top: px;margin-left: 0px;">
+					     <input type="file" name="file" id="uploadImg" />
+					  </div>
 						  <input type="button" value="发布"
 						 style="width: 80px; height: 30; margin-left: 480px; margin-top:-30px;" />
 					</div>
