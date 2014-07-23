@@ -25,6 +25,7 @@ public class ModuleInterceptor extends HandlerInterceptorAdapter {
 		RequestMapping requestMapping = m.getBean().getClass()
 				.getAnnotation(RequestMapping.class);
 		String contextPath = request.getContextPath() + "/";
+		request.setAttribute("base", contextPath);
 		if (requestMapping != null && modelAndView != null
 				&& !StringUtils.isEmpty(modelAndView.getViewName())) {
 			String[] modules = requestMapping.value();
@@ -44,7 +45,6 @@ public class ModuleInterceptor extends HandlerInterceptorAdapter {
 				// + ResourceRoot.resourcePrefix + "scripts" + moduleName);
 				// request.setAttribute("styles", contextPath
 				// + ResourceRoot.resourcePrefix + "styles" + moduleName);
-				request.setAttribute("base", contextPath);
 				request.setAttribute("images", contextPath + "images"
 						+ moduleName);
 				request.setAttribute("scripts", contextPath + "scripts"
