@@ -10,8 +10,8 @@ $j(document).ready(function() {
 		$j(this).css("background-color", "#E6E6E6");
 	});
 	
-	$j("#main").click(function() {
-		$j(this).css("scrollTop",0);
+	$j(".returnTop").click(function() {
+		$j("#mian").scrollTop(0);
 	});
 	
 	$j("#bottom_top").mouseout(function() {

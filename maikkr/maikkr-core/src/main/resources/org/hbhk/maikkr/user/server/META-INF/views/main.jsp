@@ -41,6 +41,7 @@
 						<span>500</span>个字
 					</div>
 					<textarea id="blogText"></textarea>
+					
 					<div  style="border-width:0px;width:540px;height:30px;position:absolute;margin-top: 135px; margin-left: 20px;">
 					  <img title="添加图片" src="${base}images/user/homeblog/uploadpicture.png" >
 					  <span id="picture" style="display:none;width: 20px;height: 30px;margin-top: px;margin-left: 0px;">
@@ -92,7 +93,21 @@
 		
 		<!-- 右边部分 -->
 		<div id="ct_right">
-	                  <img  src="${base}images/user/homeblog/right2.png" style="margin-left: 10px;">
+	         <%--  <img  src="${base}images/user/homeblog/right2.png" style="margin-left: 10px;"> --%>
+	          <h3>热门主题</h3>
+	          	<ul>
+	          		<li>热门主题1</li>
+	          		<li>热门主题2</li>
+	          		<li>热门主题3</li>
+	          		<li>热门主题4</li>
+	          	</ul>
+	          <h3>最新主题</h3>
+	          <ul>
+	          		<li>最新主题1</li>
+	          		<li>最新主题2</li>
+	          		<li>最新主题3</li>
+	          		<li>最新主题4</li>
+	          	</ul>   
 		</div>
 		<!-- 返回顶部 -->
 		<div id="bottom_top"  style="position: absolute;width: 20px;height: 80px;margin-top:460px;font-size:12px;
@@ -101,8 +116,10 @@
 		      <center><span class="returnTop">返回顶部</span></center> 
 		</div>
 		<!--底部背景 -->   
-		<div id="ct_bottom"  style="position:absolute;margin-bottom: 0px;margin-top:640px;">
-					  <img src="${base}images/user/image/bottom.jpg">
+		<div id="ct_bottom"  style="margin-bottom: 0px;margin-top:100%;
+			 background-color: white;text-align: center;
+			 background-image: url('${base}images/user/footer_top_bg.jpg');">
+			<span  style="color:#808080;width: 100%" >Copyright © 1996-2014 SINA HBHK网络技术有限公司</span>
 		</div>
 	</div>
 </div>

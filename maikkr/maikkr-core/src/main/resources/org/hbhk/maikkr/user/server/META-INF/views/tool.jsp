@@ -11,15 +11,15 @@
 		<!-- 工具栏 -->
 		<div id="toptitle" style="border-width: 0px;">
 			<a href="/blog/bloghomepage.html"> <img
-				src="${base}images/user/maikkrlogo.jpg"
-				onmouseover="{this.src='${base}images/user/homeblog/top_img02.png';}"
-				onmouseout="{this.src='${base}images/user/homeblog/top_img01.png';}" />
+				src="${base}images/user/homeblog/logo-top2.png"
+				onmouseover="{this.src='${base}images/user/homeblog/logo-top1.png';}"
+				onmouseout="{this.src='${base}images/user/homeblog/logo-top2.png';}" />
 			</a> <span class="top_span" onclick="showPage('home');"> 
 			<font class="top_font">首页</font>
 			</span> <span class="top_span" style="margin-left: 60px;"> <font
 				class="top_font">应用</font>
 			</span> <span class="top_span" style="margin-left: 120px;"> <font
-				class="top_font">微吧</font>
+				class="top_font">微主题</font>
 			</span> <span class="top_span" style="margin-left: 180px;"> <font
 				class="top_font">游戏</font>
 			</span> <span class="top_span" style="margin-left: 490px; width: 120px;"> <font
