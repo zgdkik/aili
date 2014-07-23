@@ -5,7 +5,9 @@
 <head>
 	<script src="${scripts}/boot.js"></script>
 	<link href="${base}uploadify/uploadify.css" rel="stylesheet" type="text/css" />
-	<script type="text/javascript" src="${base}uploadify/jquery.uploadify.min.js"></script>
+	<script type="text/javascript" src="${base}uploadify/jquery.uploadify.js"></script>
+	<link href="${base}uploadify/ajaxfileupload.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="${base}uploadify/ajaxfileupload.js"></script>
 	<script type="text/javascript">
 		var $j = jQuery.noConflict();
 	</script>
