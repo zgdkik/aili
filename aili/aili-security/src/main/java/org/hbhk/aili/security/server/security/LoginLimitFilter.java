@@ -18,11 +18,11 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hbhk.aili.core.server.context.RequestContext;
-import org.hbhk.aili.core.server.web.WebApplicationContextHolder;
 import org.hbhk.aili.core.share.ex.BusinessException;
 import org.hbhk.aili.security.server.cache.LoginLimitCache;
 import org.hbhk.aili.security.server.context.LoginLimitContext;
 import org.hbhk.aili.security.server.context.UserContext;
+import org.hbhk.aili.springmvc.server.web.WebApplicationContextHolder;
 
 public class LoginLimitFilter implements Filter {
 
