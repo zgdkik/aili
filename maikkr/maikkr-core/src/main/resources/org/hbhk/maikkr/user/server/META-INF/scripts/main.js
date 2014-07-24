@@ -37,47 +37,27 @@ $j(document).ready(function() {
 		$j(this).css("display" , 'none');
 	});
 	
-//	$j("#uploadImg").uploadify({
-//			'swf' : base + 'uploadify/uploadify.swf',
-//			'uploader' : '/maikkr/core/upload.htm',
-//			'button_image_url' : base
-//					+ 'images/user/homeblog/uploadpicture.png',
-//			'auto' : true,
-//			'buttonText' : '浏览',
-//			'fileTypeDesc' : '图片',
-//			// 允许上传的文件后缀
-//			'fileTypeExts' : '*.gif; *.jpg; *.png',
-//			'multi' : false,
-//			'width' : 60,
-//			'height' : 20,
-//			'onSelectError' : function() {
-//				$j.toast("每次只能上传一个文件！");
-//			},
-//			'onUploadSuccess' : function(file, data, response) {
-//				$j.toast(data);
-//			}
-//	});	
+	$j("#uploadImg").uploadify({
+			'swf' : base + 'uploadify/uploadify.swf',
+			'uploader' : '/maikkr/core/upload.htm',
+			'button_image_url' : base
+					+ 'images/user/homeblog/uploadpicture.png',
+			'auto' : true,
+			'buttonText' : '浏览',
+			'fileTypeDesc' : '图片',
+			// 允许上传的文件后缀
+			'fileTypeExts' : '*.gif; *.jpg; *.png',
+			'multi' : false,
+			'width' : 60,
+			'height' : 20,
+			'onSelectError' : function() {
+			},
+			'onUploadSuccess' : function(file, data, response) {
+				$j.toast("上传成功");
+			}
+	});	
    
-   $j("#uploadImg").change(function(){
-	    ajaxFileUpload();
-	});
 });
-function ajaxFileUpload() {
-	 $j.ajaxFileUpload({
-         url: '/maikkr/core/upload.htm', //用于文件上传的服务器端请求地址
-         secureuri: false, //是否需要安全协议，一般设置为false
-         fileElementId: 'uploadImg', //文件上传域的ID
-         dataType: 'json', //返回值类型 一般设置为json
-         success: function (data, status){
-      	   $j.toast("每次只能上传一个文件！");
-         },
-         error: function (data, status, e){
-      	   $j.toast("每次只能上传一个文件！");
-         }
-     });
-	
-}
-
 
 function updateImgSize() {
 	 var width=obj.style.width;

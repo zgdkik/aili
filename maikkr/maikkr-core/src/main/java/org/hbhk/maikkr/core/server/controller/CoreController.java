@@ -23,10 +23,10 @@ public class CoreController {
 	@RequestMapping("/upload")
 	@ResponseBody
 	public String upload(HttpServletRequest request,
-			HttpServletResponse response, MultipartFile file)
+			HttpServletResponse response, MultipartFile Filedata)
 			throws IOException {
-		IOUtils.saveFile(file.getInputStream(), "userImages","hbhk",
-				file.getOriginalFilename());
+		IOUtils.saveFile(Filedata.getInputStream(), "userImages","hbhk",
+				Filedata.getOriginalFilename());
 		return "upload";
 	}
 
