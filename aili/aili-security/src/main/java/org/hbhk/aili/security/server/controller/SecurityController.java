@@ -37,7 +37,6 @@ public class SecurityController extends BaseController {
 	private String login_url;
 
 	@RequestMapping("/login")
-	@SecurityFilter(false)
 	@ResponseBody
 	public ResponseEntity login(HttpServletResponse response, String email,
 			String pwd) {
@@ -54,7 +53,6 @@ public class SecurityController extends BaseController {
 	}
 
 	@RequestMapping("/regist")
-	@SecurityFilter(false)
 	@ResponseBody
 	public ResponseEntity regist(HttpServletRequest request, UserInfo user,
 			String code) {
@@ -77,7 +75,6 @@ public class SecurityController extends BaseController {
 	}
 
 	@RequestMapping("/validateEmail")
-	@SecurityFilter(false)
 	@ResponseBody
 	public ResponseEntity getUserByMail(String mail) {
 		try {
