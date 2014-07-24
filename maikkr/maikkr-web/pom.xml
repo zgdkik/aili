@@ -68,7 +68,7 @@
 					<port>8181</port>
 					<uriEncoding>utf-8</uriEncoding>
 					<!-- <ignorePackaging>true</ignorePackaging> -->
-					<!--  <warSourceDirectory>${project.build.directory}/webapp</warSourceDirectory> -->
+					<warSourceDirectory>${project.build.directory}/webapp</warSourceDirectory>
 				</configuration>
 			</plugin>
 			<plugin>

@@ -22,6 +22,11 @@
 		</dependency>
 		<dependency>
 			<groupId>org.hbhk.aili</groupId>
+			<artifactId>aili-spring-mvc</artifactId>
+			<version>${aili-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hbhk.aili</groupId>
 			<artifactId>aili-theme</artifactId>
 			<version>${aili-version}</version>
 		</dependency>

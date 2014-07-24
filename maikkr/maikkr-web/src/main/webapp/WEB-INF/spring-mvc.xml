@@ -49,11 +49,6 @@
 	</mvc:annotation-driven>
 	<!-- 启用基于注解的处理器映射，添加拦截器，类级别的处理器映射 -->
 	<mvc:interceptors>
-		<mvc:interceptor>
-			<mvc:mapping path="/**" />
-			<mvc:exclude-mapping path="#{resourceBean.resourcePrefix}/**" />
-			<bean class="org.hbhk.aili.core.server.deploy.spring.ModuleInterceptor" />
-		</mvc:interceptor>
 		<!-- <mvc:interceptor>
 			<mvc:mapping path="/**" />
 			<mvc:exclude-mapping path="#{resourceBean.resourcePrefix}/**" />
@@ -76,6 +71,16 @@
 			<mvc:exclude-mapping path="#{resourceBean.resourcePrefix}/**" />
 			<bean
 				class="org.hbhk.aili.core.server.interceptor.PerformanceWatchInterceptor" />
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<mvc:exclude-mapping path="#{resourceBean.resourcePrefix}/**" />
+			<bean class="org.hbhk.maikkr.core.server.interceptor.SecurityInterceptor" />
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<mvc:exclude-mapping path="#{resourceBean.resourcePrefix}/**" />
+			<bean class="org.hbhk.aili.core.server.deploy.spring.ModuleInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>
 
