@@ -21,7 +21,6 @@
 		<module>aili-security</module>
 		<module>aili-test</module>
 		<module>aili-support</module>
-		<module>aili-spring-mvc</module>
 		<module>aili-struts-mvc</module>
 	</modules>
 
