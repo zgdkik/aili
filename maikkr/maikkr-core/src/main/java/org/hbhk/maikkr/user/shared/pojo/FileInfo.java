@@ -1,9 +1,9 @@
 package org.hbhk.maikkr.user.shared.pojo;
 
-import org.hbhk.aili.orm.server.BaseInfo;
 import org.hbhk.aili.orm.server.annotation.Column;
 import org.hbhk.aili.orm.server.annotation.Entity;
 import org.hbhk.aili.orm.server.annotation.Tabel;
+import org.hbhk.aili.orm.share.model.BaseInfo;
 
 @Tabel("t_mkk_file")
 @Entity
