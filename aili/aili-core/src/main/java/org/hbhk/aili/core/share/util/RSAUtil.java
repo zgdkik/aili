@@ -176,11 +176,11 @@ public class RSAUtil {
      * @return 解密后的明文 * 
      * @throws Exception 
      */  
-    public static byte[] decrypt(PrivateKey pk, byte[] raw) throws Exception {  
+	public static byte[] decrypt(PrivateKey pk, byte[] raw) throws Exception {  
         try {  
             Cipher cipher = Cipher.getInstance("RSA",  
                     new org.bouncycastle.jce.provider.BouncyCastleProvider());  
-            cipher.init(cipher.DECRYPT_MODE, pk);  
+            cipher.init(Cipher.DECRYPT_MODE, pk);  
             int blockSize = cipher.getBlockSize();  
             ByteArrayOutputStream bout = new ByteArrayOutputStream(64);  
             int j = 0;  
