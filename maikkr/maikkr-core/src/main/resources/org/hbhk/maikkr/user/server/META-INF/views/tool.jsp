@@ -47,9 +47,7 @@
 				<a href="#">账号设置</a><br /><a href="#">模板设置</a>
 			</div>
 			<div id="exist" class="top_span"
-				style="margin-left: 910px; top: 0px; border: 0px;"
-				onclick="removeUser();" onmouseout="updateColor(this,'')"
-				onmouseover="updateColor(this,'#000000')">
+				style="margin-left: 910px; top: 0px; border: 0px;">
 				<font class="top_font">退出</font>
 			</div>
 		</div>
