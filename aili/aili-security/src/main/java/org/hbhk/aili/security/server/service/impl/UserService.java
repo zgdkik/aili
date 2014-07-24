@@ -108,10 +108,11 @@ public class UserService implements IUserService {
 	}
 
 	@Override
-	public UserInfo getUserByMail(String mail) {
-		UserInfo u = new UserInfo();
-		u.setMail(mail);
-		return userDao.getOne(u);
+	public UserInfo getUser(UserInfo user) {
+		if (user == null) {
+			return null;
+		}
+		return userDao.getOne(user);
 	}
 
 }
