@@ -21,6 +21,16 @@
 			<artifactId>aili-core</artifactId>
 			<version>1.0.0-SNAPSHOT</version>
 		</dependency>
+		<!-- ibatis s -->
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis-spring</artifactId>
+		</dependency>
+		<!-- ibatis e -->
 		<dependency>
 			<groupId>commons-beanutils</groupId>
 			<artifactId>commons-beanutils</artifactId>
