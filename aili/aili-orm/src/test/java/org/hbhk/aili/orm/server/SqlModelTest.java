@@ -1,12 +1,9 @@
 package org.hbhk.aili.orm.server;
 
-import java.lang.reflect.Field;
-import java.util.Arrays;
-import java.util.List;
-
 import org.hbhk.aili.orm.server.annotation.Column;
 import org.hbhk.aili.orm.server.annotation.PrimaryKey;
 import org.hbhk.aili.orm.server.annotation.Tabel;
+import org.hbhk.aili.orm.share.model.BaseInfo;
 
 @Tabel("t_test_sql")
 public class SqlModelTest extends BaseInfo {
