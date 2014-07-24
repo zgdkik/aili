@@ -1,14 +1,9 @@
 package org.hbhk.aili.security.server.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.hbhk.aili.core.server.annotation.SecurityFilter;
 import org.hbhk.aili.core.server.context.RequestContext;
 import org.hbhk.aili.core.server.web.BaseController;
 import org.hbhk.aili.core.share.ex.BusinessException;
@@ -17,9 +12,7 @@ import org.hbhk.aili.security.server.service.IUserService;
 import org.hbhk.aili.security.share.define.SecurityConstant;
 import org.hbhk.aili.security.share.define.UserConstants;
 import org.hbhk.aili.security.share.pojo.UserInfo;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -29,13 +22,7 @@ public class SecurityController extends BaseController {
 
 	@Resource
 	private IUserService userService;
-
-	@Value("${login_redirect_url}")
-	private String login_redirect_url;
-
-	@Value("${login_url}")
-	private String login_url;
-
+	
 	@RequestMapping("/login")
 	@ResponseBody
 	public ResponseEntity login(HttpServletResponse response, String email,
@@ -78,7 +65,9 @@ public class SecurityController extends BaseController {
 	@ResponseBody
 	public ResponseEntity getUserByMail(String mail) {
 		try {
-			if (userService.getUserByMail(mail) == null) {
+			UserInfo u = new UserInfo();
+			u.setMail(mail);
+			if (userService.getUser(u) == null) {
 				return returnSuccess();
 			} else {
 				return returnException();
@@ -88,25 +77,22 @@ public class SecurityController extends BaseController {
 		}
 	}
 
-	private List<UserInfo> getUserList() {
-		List<UserInfo> userList = new ArrayList<UserInfo>();
-		for (int i = 0; i < 5; i++) {
-			int number = new Random().nextInt(1000);
+	@RequestMapping("/validateName")
+	@ResponseBody
+	public ResponseEntity getUserByName(String name) {
+		try {
 			UserInfo u = new UserInfo();
-			u.setGender("男" + number);
-			u.setMail(number + "@hbhk.com");
-			u.setName("何波" + number);
-			userList.add(u);
+			u.setName(name);
+			if (userService.getUser(u) == null) {
+				return returnSuccess();
+			} else {
+				return returnException();
+			}
+		} catch (BusinessException e) {
+			return returnException(e.getMessage());
 		}
-		return userList;
-
 	}
 
-	@RequestMapping("/main")
-	@SecurityFilter(false)
-	public String main(ModelMap model) {
-		model.put("userlist", getUserList());
-		return "main";
-	}
+
 
 }
