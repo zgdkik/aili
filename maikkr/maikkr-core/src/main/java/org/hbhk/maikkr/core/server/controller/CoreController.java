@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.hbhk.aili.core.share.util.IOUtils;
+import org.hbhk.aili.security.server.annotation.NeedLogin;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -22,6 +23,7 @@ public class CoreController {
 
 	@RequestMapping("/upload")
 	@ResponseBody
+	@NeedLogin
 	public String upload(HttpServletRequest request,
 			HttpServletResponse response, MultipartFile Filedata)
 			throws IOException {

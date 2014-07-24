@@ -1,5 +1,6 @@
 package org.hbhk.maikkr.user.server.controller;
 
+import org.hbhk.aili.security.server.annotation.NeedLogin;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class UserController {
 
 	@RequestMapping("/main")
+	@NeedLogin
 	public String main() {
 		return "main";
 	}
