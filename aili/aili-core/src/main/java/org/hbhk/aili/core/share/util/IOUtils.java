@@ -1,15 +1,12 @@
 package org.hbhk.aili.core.share.util;
 
 import java.io.Closeable;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.core.io.Resource;
 
 public class IOUtils {
 	private static Log log = LogFactory.getLog(IOUtils.class);
