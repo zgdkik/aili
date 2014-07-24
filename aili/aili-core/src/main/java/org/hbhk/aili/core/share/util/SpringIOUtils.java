@@ -1,4 +1,4 @@
-package org.hbhk.aili.springmvc.shared.util;
+package org.hbhk.aili.core.share.util;
 
 import java.io.File;
 import java.io.IOException;

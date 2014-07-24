@@ -5,13 +5,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.hbhk.aili.core.server.context.RequestContext;
+import org.hbhk.aili.core.server.web.BaseController;
 import org.hbhk.aili.core.share.ex.BusinessException;
 import org.hbhk.aili.core.share.pojo.ResponseEntity;
 import org.hbhk.aili.security.server.service.IUserService;
 import org.hbhk.aili.security.share.define.SecurityConstant;
 import org.hbhk.aili.security.share.define.UserConstants;
 import org.hbhk.aili.security.share.pojo.UserInfo;
-import org.hbhk.aili.springmvc.server.web.BaseController;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;

@@ -19,9 +19,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.hbhk.aili.core.server.web.WebApplicationContextHolder;
 import org.hbhk.aili.security.server.service.IUserService;
 import org.hbhk.aili.security.share.define.UserConstants;
-import org.hbhk.aili.springmvc.server.web.WebApplicationContextHolder;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.util.UrlPathHelper;

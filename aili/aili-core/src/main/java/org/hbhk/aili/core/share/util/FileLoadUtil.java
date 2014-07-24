@@ -1,10 +1,10 @@
-package org.hbhk.aili.springmvc.shared.util;
+package org.hbhk.aili.core.share.util;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
-import org.hbhk.aili.springmvc.server.web.WebApplicationContextHolder;
+import org.hbhk.aili.core.server.web.WebApplicationContextHolder;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 

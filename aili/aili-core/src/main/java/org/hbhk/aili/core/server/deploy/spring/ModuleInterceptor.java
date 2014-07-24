@@ -1,4 +1,4 @@
-package org.hbhk.aili.springmvc.server.interceptor;
+package org.hbhk.aili.core.server.deploy.spring;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

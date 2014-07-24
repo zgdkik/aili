@@ -1,4 +1,4 @@
-package org.hbhk.aili.springmvc.server.web;
+package org.hbhk.aili.core.server.web;
 
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
