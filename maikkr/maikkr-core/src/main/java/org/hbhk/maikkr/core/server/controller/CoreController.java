@@ -5,8 +5,8 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.hbhk.aili.core.share.util.SpringIOUtils;
 import org.hbhk.aili.security.server.annotation.NeedLogin;
-import org.hbhk.aili.springmvc.shared.util.SpringIOUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
