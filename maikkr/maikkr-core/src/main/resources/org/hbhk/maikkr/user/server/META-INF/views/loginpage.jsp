@@ -35,13 +35,13 @@
 						<div class="form_list">
 							<div class="f_email">
 								<input type="text" id="emailId" name="userEmail" class="w_input"
-									value="请输入邮箱账号" />
+									value="1000@qq.com" />
 							</div>
 						</div>
 						<div class="form_list">
 							<div class="f_pwd">
 								<input type="password" id="pwdId" name="userPwd" class="w_input"
-									value="请输入密码" />
+									value="as135246" />
 							</div>
 						</div>
 						<div class="form_list">
