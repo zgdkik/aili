@@ -4,5 +4,5 @@ import org.springframework.web.multipart.MultipartFile;
 
 public interface IFileService {
 
-   void saveFile(MultipartFile Filedata) throws Exception ;
+   String saveFile(MultipartFile Filedata) throws Exception ;
 }
