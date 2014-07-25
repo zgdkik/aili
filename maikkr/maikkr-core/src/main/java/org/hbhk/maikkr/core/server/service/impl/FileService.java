@@ -23,9 +23,16 @@ public class FileService implements IFileService {
 	public String saveFile(MultipartFile Filedata) throws IOException {
 		String originalFilename = Filedata.getOriginalFilename();
 		String user = UserContext.getCurrentContext().getCurrentUserName();
-		String fileName = user + System.currentTimeMillis();
+		user = user.substring(0, user.indexOf("."));
+		String fileName = String.valueOf(System.currentTimeMillis());
 		String sep = System.getProperty("file.separator");
-		String url = path +sep+ user + sep+ fileName;
+		String url = path
+				+ sep
+				+ user
+				+ sep
+				+ fileName
+				+ originalFilename.substring(originalFilename.indexOf("."),
+						originalFilename.length());
 		FileInfo file = new FileInfo();
 		file.setId(UUIDUitl.getUuid());
 		file.setOrigName(originalFilename);
@@ -46,5 +53,4 @@ public class FileService implements IFileService {
 	public void setPath(String path) {
 		this.path = path;
 	}
-
 }
