@@ -39,10 +39,9 @@ $j(document).ready(function() {
 	
 	$j("#uploadImg").uploadify({
 			'swf' : base + 'uploadify/uploadify.swf',
-			'uploader' : '/maikkr/core/upload.htm',
-			'button_image_url' : base
-					+ 'images/user/homeblog/uploadpicture.png',
+			'uploader' :base + 'core/upload.htm',
 			'auto' : true,
+			'buttonImage':base + 'images/user/homeblog/uploadpicture.png',
 			'buttonText' : '浏览',
 			'fileTypeDesc' : '图片',
 			// 允许上传的文件后缀
@@ -51,9 +50,17 @@ $j(document).ready(function() {
 			'width' : 60,
 			'height' : 20,
 			'onSelectError' : function() {
+				$j.toast("支持的文件格式:*.gif; *.jpg; *.png");
 			},
 			'onUploadSuccess' : function(file, data, response) {
-				$j.toast("上传成功");
+				var json = $j.parseJSON(data);
+				if(json.success){
+					$j.toast("上传成功");
+					$j('.imgurl').val(data.result)
+					alert($j('.imgurl').val());
+				}else{
+					$j.toast("上传失败");
+				}
 			}
 	});	
    

@@ -34,20 +34,17 @@
 			<div id="ct_center_home">
 				<div id="home_top">
 					<div id="home_top_top1">
-						有什么新鲜话题或主题告诉大家?
+						有什么新鲜的主题告诉大家?
 					</div>
 					<div id="home_top_top2">
 						发言请遵守社区公约，最多可以输入
 						<span>500</span>个字
 					</div>
-					<textarea id="blogText"></textarea>
-					
-					<div  style="border-width:0px;width:540px;height:50px;position:absolute;margin-top: 135px; margin-left: 20px;">
-					  <img title="添加图片" id="addImg" src="${base}images/user/homeblog/uploadpicture.png" >
-					  <div id="picture" style="display:none;width: 20px;height: 30px;margin-top: px;margin-left: 0px;">
-					     <input type="file" name="file" id="uploadImg" />
-					  </div>
-						  <input type="button" value="发布"
+					<div><label class="labTitle">主题名称:</label><input type="text" name="blogtitle" class="blogTitle"></div>
+					<div><label class="labText">主题内容:</label><textarea id="blogText" class="blogText"></textarea></div>
+					<div  style="border-width:0px;width:540px;height:50px;position:absolute;margin-top: 200px; margin-left: 20px;">
+					  <div id="uploadImg" ></div>
+					  <input type="button" value="发布"
 						 style="width: 80px; height: 30; margin-left: 480px; margin-top:-30px;" />
 					</div>
 				</div>
@@ -56,7 +53,7 @@
 					<!-- 头部信息 -->
 					<div id="home_blog_top">
 						<div style="margin-left: 30px; border-bottom: 0px solid red;">
-							<span><b>微博</b> </span>
+							<span><b>主题</b> </span>
 							<span style="margin-left: 20px;">动态</span>
 						</div>
 						<img  style="margin-left: 20px;" src="${base}images/user/homeblog/blog_main_img1.png">
@@ -70,6 +67,12 @@
 					</div>
 					<!-- 微博内容区 -->
 					<div id="home_blog_main">
+						<ul>
+		          		<li><a>热门主题1</a></li>
+		          		<li><a>热门主题2</a></li>
+		          		<li><a>热门主题3</a></li>
+		          		<li><a>热门主题4</a></li>
+	          			</ul>
 					</div>
 				</div>
 			</div>
@@ -123,5 +126,6 @@
 		</div>
 	</div>
 </div>
+<input type="hidden" class="imgurl"/>
 </body>
 </html>
