@@ -101,6 +101,7 @@
 			<plugin>
 				<groupId>org.apache.tomcat.maven</groupId>
 				<artifactId>tomcat6-maven-plugin</artifactId>
+				<version>2.2</version>
 				<configuration>
 					<path>/aili</path>
 					<port>5416</port>
