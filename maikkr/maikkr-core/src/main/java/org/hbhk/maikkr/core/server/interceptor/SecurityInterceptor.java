@@ -4,9 +4,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
+import org.hbhk.aili.cache.server.CacheManager;
 import org.hbhk.aili.core.server.context.RequestContext;
 import org.hbhk.aili.security.server.annotation.NeedLogin;
+import org.hbhk.aili.security.server.cache.UserCache;
 import org.hbhk.aili.security.share.define.UserConstants;
+import org.hbhk.aili.security.share.pojo.UserInfo;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
@@ -32,6 +35,9 @@ public class SecurityInterceptor extends HandlerInterceptorAdapter {
 			String currentUser = (String) RequestContext.getSession()
 					.getAttribute(UserConstants.CURRENT_USER_NAME);
 			if (StringUtils.isNotEmpty(currentUser)) {
+				request.setAttribute("cuser", currentUser);
+				UserInfo user=	(UserInfo) CacheManager.getInstance().getCache(UserCache.cacheID).get(currentUser);
+				request.setAttribute("cuserName", user.getName());
 				return true;
 			}
 			// 非ajax的请求
