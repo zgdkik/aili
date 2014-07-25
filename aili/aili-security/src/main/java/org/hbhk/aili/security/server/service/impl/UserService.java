@@ -43,9 +43,9 @@ public class UserService implements IUserService {
 	public boolean login(String username, String password) {
 		UserInfo u = new UserInfo();
 		u.setMail(username);
-		u.setPassword(password);
+		String epwd = EncryptUtil.encodeSHA1(password);
 		UserInfo userInfo = userDao.getOne(u);
-		if (userInfo != null) {
+		if (userInfo != null && epwd.equals(userInfo.getPassword())) {
 			UserContext.setCurrentUser(userInfo);
 			UserContext.setCurrentUserName(username);
 			// 设置session
