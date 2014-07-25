@@ -37,7 +37,7 @@ public abstract class CacheSupport<V> extends CacheBase<String, V> {
 	public V get(String key) {
 		V v = null;
 		try {
-			log.info(key);
+			log.debug("缓存key:"+key);
 			if (!cacheTemplet.isExitKey(key)) {
 				v = doSet(key);
 				set(key, v);
