@@ -6,7 +6,7 @@
 <jsp:include page="tool.jsp"/>
 <div id="main" >
 	<div style="background-image: url('${base}images/user/back_img.png');width: 100%;
-		    height: 80%;float: left;z-index: -1;"></div>
+		    height: 100%;float: left;z-index: -1;"></div>
     <div id="center">
 		<!-- 左边部分 -->
 		<div id="ct_left">
@@ -43,9 +43,9 @@
 					<div><label class="labTitle">主题名称:</label><input type="text" name="blogtitle" class="blogTitle"></div>
 					<div><label class="labText">主题内容:</label><textarea id="blogText" class="blogText"></textarea></div>
 					<div  style="border-width:0px;width:540px;height:50px;position:absolute;margin-top: 200px; margin-left: 20px;">
-					  <div id="uploadImg" ></div>
+					  <span  id="uploadImg"></span>
 					  <input type="button" value="发布"
-						 style="width: 80px; height: 30; margin-left: 480px; margin-top:-30px;" />
+						 style="width: 80px; height: 30; margin-left: 460px; margin-top:-30px;" />
 					</div>
 				</div>
 				<!-- 微博主体内容 -->
@@ -119,11 +119,11 @@
 		      <center><span class="returnTop">返回顶部</span></center> 
 		</div>
 		<!--底部背景 -->   
-		<div id="ct_bottom"  style="margin-bottom: 0px;margin-top:100%;
+		<%-- <div id="ct_bottom"  style="margin-bottom: 0px;margin-top:640px;
 			 background-color: white;text-align: center;
 			 background-image: url('${base}images/user/footer_top_bg.jpg');">
 			<span  style="color:#808080;width: 100%" >Copyright © 1996-2014 SINA HBHK网络技术有限公司</span>
-		</div>
+		</div> --%>
 	</div>
 </div>
 <input type="hidden" class="imgurl"/>
