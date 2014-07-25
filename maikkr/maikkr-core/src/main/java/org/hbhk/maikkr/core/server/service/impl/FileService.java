@@ -23,6 +23,8 @@ public class FileService implements IFileService {
 	public String saveFile(MultipartFile Filedata) throws IOException {
 		String originalFilename = Filedata.getOriginalFilename();
 		String user = UserContext.getCurrentContext().getCurrentUserName();
+		FileInfo file = new FileInfo();
+		file.setCreatUser(user);
 		user = user.substring(0, user.indexOf("."));
 		String fileName = String.valueOf(System.currentTimeMillis());
 		String sep = System.getProperty("file.separator");
@@ -33,11 +35,10 @@ public class FileService implements IFileService {
 				+ fileName
 				+ originalFilename.substring(originalFilename.indexOf("."),
 						originalFilename.length());
-		FileInfo file = new FileInfo();
+	
 		file.setId(UUIDUitl.getUuid());
 		file.setOrigName(originalFilename);
 		file.setName(fileName);
-		file.setCreatUser(user);
 		file.setCreateTime(new Date());
 		file.setUrl(url);
 		SpringIOUtils.saveFile(Filedata.getInputStream(), path,
