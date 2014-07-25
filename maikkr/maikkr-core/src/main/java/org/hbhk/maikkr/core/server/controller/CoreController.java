@@ -35,8 +35,8 @@ public class CoreController extends BaseController {
 			HttpServletResponse response, MultipartFile Filedata)
 			throws Exception {
 		try {
-			fileService.saveFile(Filedata);
-			return returnSuccess();
+			Object imgurl = fileService.saveFile(Filedata);
+			return returnSuccess(imgurl);
 		} catch (Exception e) {
 			log.error("save file error", e);
 			return returnException();
