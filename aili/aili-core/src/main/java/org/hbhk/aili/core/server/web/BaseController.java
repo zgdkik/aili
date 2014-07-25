@@ -7,6 +7,21 @@ public abstract class BaseController {
 		return new ResponseEntity();
 	}
 
+	public ResponseEntity returnSuccess(String msg, Object result,
+			String dealUrl) {
+		ResponseEntity response = new ResponseEntity();
+		response.setMsg(msg);
+		response.setResult(result);
+		response.setDealUrl(dealUrl);
+		return response;
+	}
+
+	public ResponseEntity returnSuccess(Object result) {
+		ResponseEntity response = new ResponseEntity();
+		response.setResult(result);
+		return response;
+	}
+
 	public ResponseEntity returnSuccess(String msg) {
 		ResponseEntity response = new ResponseEntity();
 		response.setMsg(msg);
