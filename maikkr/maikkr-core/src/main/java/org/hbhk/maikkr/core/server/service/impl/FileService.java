@@ -20,11 +20,12 @@ public class FileService implements IFileService {
 	@Autowired
 	private IFileDao fileDao;
 
-	public void saveFile(MultipartFile Filedata) throws IOException {
+	public String saveFile(MultipartFile Filedata) throws IOException {
 		String originalFilename = Filedata.getOriginalFilename();
 		String user = UserContext.getCurrentContext().getCurrentUserName();
 		String fileName = user + System.currentTimeMillis();
-		String url = path + user + "/" + fileName;
+		String sep = System.getProperty("file.separator");
+		String url = path +sep+ user + sep+ fileName;
 		FileInfo file = new FileInfo();
 		file.setId(UUIDUitl.getUuid());
 		file.setOrigName(originalFilename);
@@ -35,6 +36,7 @@ public class FileService implements IFileService {
 		SpringIOUtils.saveFile(Filedata.getInputStream(), path,
 				file.getCreatUser(), file.getName());
 		fileDao.save(file);
+		return url;
 	}
 
 	public String getPath() {
