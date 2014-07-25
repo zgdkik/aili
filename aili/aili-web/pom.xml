@@ -107,6 +107,24 @@
 					<warSourceDirectory>${project.build.directory}/webapp</warSourceDirectory>
 				</configuration>
 			</plugin>
+			<!-- 部署到指定的tomcat上 -->
+			<!--
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>tomcat-maven-plugin</artifactId>
+				<version>1.1</version>
+				<configuration>
+					<charset>${project.build.sourceEncoding}</charset>
+					<url>http://localhost:8080/manager</url>
+					<server>tomcat.server</server>
+					<path>/platform</path>
+					<port>8080</port>
+					<warFile>${project.build.directory}/platform.war</warFile>
+					<warSourceDirectory>WebContent</warSourceDirectory>
+					<uriEncoding>${project.build.sourceEncoding}</uriEncoding>
+				</configuration>
+			</plugin>
+ 			-->
 			<!-- <plugin> <groupId>org.jboss.as.plugins</groupId> <artifactId>jboss-as-maven-plugin</artifactId> 
 				<version>7.5.Final</version> <executions> <execution> <phase>install</phase> 
 				<goals> <goal>deploy</goal> </goals> </execution> </executions> </plugin> -->
