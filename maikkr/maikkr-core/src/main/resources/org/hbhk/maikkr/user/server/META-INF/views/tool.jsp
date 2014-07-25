@@ -23,7 +23,7 @@
 			</span> <span class="top_span" style="margin-left: 180px;"> <font
 				class="top_font">游戏</font>
 			</span> <span class="top_span" style="margin-left: 490px; width: 120px;"> <font
-				id="userName" class="top_font">hbhk</font>
+				id="userName" class="top_font">${cuserName}</font>
 			</span> <span id="comment_span" class="top_span"
 				style="margin-left: 610px; height: 45px; width: 50px; z-index: 1200"> <font
 				class="top_font"> <img id="comment_top_img"
