@@ -8,7 +8,6 @@ import javax.annotation.Resource;
 
 import org.hbhk.aili.core.server.annotation.SecurityFilter;
 import org.hbhk.aili.security.server.comparator.ResourceComparator;
-import org.hbhk.aili.security.server.context.UserContext;
 import org.hbhk.aili.security.server.service.IResourceService;
 import org.hbhk.aili.security.share.define.SecurityConstant;
 import org.hbhk.aili.security.share.pojo.ResourceInfo;
@@ -36,14 +35,6 @@ public class LoginController {
 	@RequestMapping("/home")
 	public String home() {
 		return "home4";
-	}
-
-	@RequestMapping("/logout")
-	@SecurityFilter(false)
-	public String logout() {
-		UserContext.remove();
-
-		return "loginpage";
 	}
 
 	@RequestMapping("/error")
@@ -81,16 +72,7 @@ public class LoginController {
 		// mm.add(m);
 		// }
 		// menus.setChildren(mm);
-		ResourceInfo menus = new ResourceInfo();
 		List<ResourceInfo> ress  = new ArrayList<ResourceInfo>();
-//		if (root.equals("re001")) {
-//			menus = resourceService.getResByCode(root);
-//			List<ResourceInfo> ress1 = resourceService.getResByPaCode(root);
-//			menus.setChildren(ress1);
-//			ress.add(menus);
-//		}else{
-//			ress = resourceService.getResByPaCode(root);
-//		}
 		ress = resourceService.getResByPaCode(root);
 		//排序
 		Collections.sort(ress, new ResourceComparator());

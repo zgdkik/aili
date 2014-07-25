@@ -8,6 +8,7 @@ import org.hbhk.aili.core.server.context.RequestContext;
 import org.hbhk.aili.core.server.web.BaseController;
 import org.hbhk.aili.core.share.ex.BusinessException;
 import org.hbhk.aili.core.share.pojo.ResponseEntity;
+import org.hbhk.aili.security.server.context.UserContext;
 import org.hbhk.aili.security.server.service.IUserService;
 import org.hbhk.aili.security.share.define.SecurityConstant;
 import org.hbhk.aili.security.share.define.UserConstants;
@@ -22,7 +23,7 @@ public class SecurityController extends BaseController {
 
 	@Resource
 	private IUserService userService;
-	
+
 	@RequestMapping("/login")
 	@ResponseBody
 	public ResponseEntity login(HttpServletResponse response, String email,
@@ -35,6 +36,19 @@ public class SecurityController extends BaseController {
 			}
 		} catch (BusinessException e) {
 			return returnException(e.getMessage());
+		}
+
+	}
+
+	@RequestMapping("/logout")
+	public String logout() {
+		try {
+			UserContext.remove();
+			RequestContext.getSession().setAttribute(
+					UserConstants.CURRENT_USER_NAME, null);
+			return "redirect:/user/loginpage.htm";
+		} catch (Exception e) {
+			return "redirect:/user/loginpage.htm";
 		}
 
 	}
@@ -92,7 +106,5 @@ public class SecurityController extends BaseController {
 			return returnException(e.getMessage());
 		}
 	}
-
-
 
 }
