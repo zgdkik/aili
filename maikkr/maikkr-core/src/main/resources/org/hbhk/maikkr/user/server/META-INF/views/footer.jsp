@@ -1,9 +1,6 @@
 <%@ page language="java" pageEncoding="UTF-8" info="买客网"%>
 <!DOCTYPE HTML>
 <html lang="zh-cn">
-<head>
-	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-</head>
 <body>
 <div class="footer">
 	<p class="S_txt2">
