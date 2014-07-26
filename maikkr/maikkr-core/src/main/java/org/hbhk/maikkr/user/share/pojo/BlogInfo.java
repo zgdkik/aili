@@ -7,7 +7,7 @@ import org.hbhk.aili.orm.share.model.BaseInfo;
 
 @Entity
 @Tabel("t_mkk_blog")
-public class Blog extends BaseInfo {
+public class BlogInfo extends BaseInfo {
 	private static final long serialVersionUID = -2269793723241795275L;
 	@Column("blogId")
 	private int blogId;// 微博Id
