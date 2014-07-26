@@ -58,7 +58,7 @@
 							<a href="javascript:void(0)" class="f_btn"><span
 								class="f_btn_tip">登录</span></a> <span class="f_no"> 还没有微博？<a
 								class="f_no_tip"
-								href="http://localhost:8080/blog/jsp/register.jsp">立即注册</a>
+								href="${base}user/register.htm">立即注册</a>
 							</span>
 						</div>
 
