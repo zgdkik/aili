@@ -58,15 +58,65 @@ $j(document).ready(function() {
 			var json = $j.parseJSON(data);
 			if (json.success) {
 				$j.toast("上传成功");
-				$j('.imgurl').val(data.result)
-				alert($j('.imgurl').val());
+				$j('.imgurl').val(json.result)
 			} else {
 				$j.toast("上传失败");
 			}
 		}
 	});
 	updateHeight();
+	//显示或隐藏主题 消息收藏
+	$j("#home").click(function() {
+		$j("#home_blog").show();
+		$j("#ct_center_message").hide();
+		$j("#ct_center_collect").hide();
+	});
+	//显示或隐藏主题 消息收藏
+	$j("#message").click(function() {
+		$j("#home_blog").hide();
+		$j("#ct_center_message").show();
+		$j("#ct_center_collect").hide();
+	});
+	//显示或隐藏主题 消息收藏
+	$j("#collect").click(function() {
+		$j("#home_blog").hide();
+		$j("#ct_center_message").hide();
+		$j("#ct_center_collect").show();
+	});
+	//发布主题
+	$j(".sendTheme").click(function() {
+		sendTheme();
+	});
+	
+	
 });
+
+function sendTheme(){
+	var title = $j('.blogTitle').val();
+	var context = $j('.blogText').val();
+	var url = $j('.imgurl').val();
+	//发布主题$j('.imgurl').val()
+	var data={
+			'blogTitle':title,
+			'blogContent':context,
+			'blogLink':url
+		};
+	
+	$j.ajax({
+		url: base+"user/sendTheme.htm",
+		type:"POST",
+		data:data,
+		success: function(data, textStatus){
+			var json = $j.parseJSON(data);
+			var url = $j('.imgurl').val(null);
+			$j.toast(json.msg);
+		},
+		exception:function(data, textStatus){
+			var json = $j.parseJSON(data);
+			$j.toast(json.msg);
+		}
+	});
+};
 
 // 动态改变div高度
 var preHiget;// 上次的高度

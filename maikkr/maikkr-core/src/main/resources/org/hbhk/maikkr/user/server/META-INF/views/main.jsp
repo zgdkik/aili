@@ -44,7 +44,7 @@
 					<div><label class="labText">主题内容:</label><textarea id="blogText" class="blogText"></textarea></div>
 					<div  style="border-width:0px;width:540px;height:50px;position:absolute;margin-top: 200px; margin-left: 20px;">
 					  <span  id="uploadImg"></span>
-					  <input type="button" value="发布"
+					  <input type="button" value="发布" class="sendTheme"
 						 style="width: 80px; height: 30; margin-left: 460px; margin-top:-30px;" />
 					</div>
 				</div>
@@ -67,11 +67,17 @@
 					</div>
 					<!-- 微博内容区 -->
 					<div id="home_blog_main">
-						<ul>
-		          		<li><a>热门主题1</a></li>
-		          		<li><a>热门主题2</a></li>
-		          		<li><a>热门主题3</a></li>
-		          		<li><a>热门主题4</a></li>
+						<ul id="theme_list">
+		          			<li class="theme">
+		          			<img id="head_portrait" height="50px" width="50px" src="${base}images/user/homeblog/friends_img1.png">
+		          			<div>
+		          				<div class="context"></div>
+		          				<div class="imgs">
+		          				<img id="head_portrait" height="50px" width="50px" src="${base}images/user/homeblog/friends_img1.png">
+		          				<img id="head_portrait" height="50px" width="50px" src="${base}images/user/homeblog/friends_img1.png">
+		          				</div>
+		          			</div>
+		          			</li>
 	          			</ul>
 					</div>
 				</div>

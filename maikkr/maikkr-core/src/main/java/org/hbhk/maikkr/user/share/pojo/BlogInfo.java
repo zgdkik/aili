@@ -10,9 +10,11 @@ import org.hbhk.aili.orm.share.model.BaseInfo;
 public class BlogInfo extends BaseInfo {
 	private static final long serialVersionUID = -2269793723241795275L;
 	@Column("blogId")
-	private int blogId;// 微博Id
+	private String blogId;// 微博Id
 	@Column("blogUser")
 	private String blogUser;// 微博用户
+	@Column("blogTitle")
+	private String blogTitle;// 微博内容
 	@Column("blogContent")
 	private String blogContent;// 微博内容
 	@Column("blogCollect")
@@ -24,11 +26,11 @@ public class BlogInfo extends BaseInfo {
 	@Column("blogLink")
 	private String blogLink;// 图片url
 
-	public int getBlogId() {
+	public String getBlogId() {
 		return blogId;
 	}
 
-	public void setBlogId(int blogId) {
+	public void setBlogId(String blogId) {
 		this.blogId = blogId;
 	}
 
@@ -38,6 +40,14 @@ public class BlogInfo extends BaseInfo {
 
 	public void setBlogUser(String blogUser) {
 		this.blogUser = blogUser;
+	}
+
+	public String getBlogTitle() {
+		return blogTitle;
+	}
+
+	public void setBlogTitle(String blogTitle) {
+		this.blogTitle = blogTitle;
 	}
 
 	public String getBlogContent() {

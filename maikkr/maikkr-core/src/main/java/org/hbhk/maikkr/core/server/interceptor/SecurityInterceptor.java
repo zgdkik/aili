@@ -36,7 +36,8 @@ public class SecurityInterceptor extends HandlerInterceptorAdapter {
 					.getAttribute(UserConstants.CURRENT_USER_NAME);
 			if (StringUtils.isNotEmpty(currentUser)) {
 				request.setAttribute("cuser", currentUser);
-				UserInfo user=	(UserInfo) CacheManager.getInstance().getCache(UserCache.cacheID).get(currentUser);
+				UserInfo user = (UserInfo) CacheManager.getInstance()
+						.getCache(UserCache.cacheID).get(currentUser);
 				request.setAttribute("cuserName", user.getName());
 				return true;
 			}
