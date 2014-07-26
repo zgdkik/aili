@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
+import org.hbhk.aili.orm.server.surpport.Page;
 import org.hbhk.aili.orm.server.surpport.Sort;
 import org.hbhk.aili.orm.share.model.Pagination;
 import org.springframework.jdbc.core.RowMapper;
@@ -13,6 +14,7 @@ public interface IDaoService {
 	<T> T getByPrimaryKey(Class<T> clazz, Serializable pk);
 
 	<T> List<T> get(T model,RowMapper<T> rowMapper);
+	<T> List<T> get(T model,Page page ,RowMapper<T> rowMapper );
 	<T> T getOne(T model ,RowMapper<T> rowMapper);
 	<T> T save(T model);
 	<T> T update(T model);

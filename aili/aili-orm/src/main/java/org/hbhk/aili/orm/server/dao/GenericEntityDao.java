@@ -6,8 +6,10 @@ import java.util.Map;
 
 import org.hbhk.aili.orm.server.annotation.NativeSave;
 import org.hbhk.aili.orm.server.annotation.SimpleQuery;
+import org.hbhk.aili.orm.server.annotation.SimpleQueryPage;
 import org.hbhk.aili.orm.server.annotation.SimpleUpdate;
 import org.hbhk.aili.orm.server.service.impl.DaoService;
+import org.hbhk.aili.orm.server.surpport.Page;
 import org.springframework.jdbc.core.SqlParameter;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,7 +22,10 @@ public interface GenericEntityDao<T, PK extends Serializable> {
 
 	@SimpleQuery
 	List<T> get(T model);
-	
+
+	@SimpleQueryPage
+	List<T> get(T model, Page page);
+
 	@SimpleQuery
 	T getOne(T model);
 

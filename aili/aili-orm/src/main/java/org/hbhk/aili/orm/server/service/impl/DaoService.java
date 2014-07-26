@@ -16,6 +16,7 @@ import org.hbhk.aili.orm.server.handler.INameHandler;
 import org.hbhk.aili.orm.server.page.MySqlPageQueryProvider;
 import org.hbhk.aili.orm.server.page.PageQueryProvider;
 import org.hbhk.aili.orm.server.service.IDaoService;
+import org.hbhk.aili.orm.server.surpport.Page;
 import org.hbhk.aili.orm.server.surpport.Sort;
 import org.hbhk.aili.orm.share.model.Pagination;
 import org.hbhk.aili.orm.share.model.SqlContext;
@@ -285,8 +286,8 @@ public class DaoService implements IDaoService {
 
 	@Override
 	@SimpleQuery
-	public <T> List<T> get(T mode, RowMapper<T> rowMapper) {
-		SqlContext context = SqlUtil.buildQuerySql(mode, nameHandler);
+	public <T> List<T> get(T model, RowMapper<T> rowMapper) {
+		SqlContext context = SqlUtil.buildQuerySql(model, nameHandler);
 		String queryString = context.getSql().toString();
 		List<Object> args = context.getParams();
 		return jdbcTemplate.query(queryString, rowMapper, args.toArray());
@@ -308,6 +309,16 @@ public class DaoService implements IDaoService {
 			return null;
 		}
 		return ts.get(0);
+	}
+
+	@Override
+	public <T> List<T> get(T model, Page page, RowMapper<T> rowMapper) {
+		SqlContext context = SqlUtil.buildQuerySql(model, nameHandler);
+		String queryString = context.getSql().toString();
+		//(pageNow-1)*pageSize,pageSize;
+		queryString = queryString+" limit "+page.getStart()+"," +page.getSize();
+		List<Object> args = context.getParams();
+		return jdbcTemplate.query(queryString, rowMapper, args.toArray());
 	}
 
 }
