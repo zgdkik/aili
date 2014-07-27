@@ -3,6 +3,8 @@ package org.hbhk.maikkr.core.server.service.impl;
 import java.io.IOException;
 import java.util.Date;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.hbhk.aili.core.share.util.SpringIOUtils;
 import org.hbhk.aili.security.server.context.UserContext;
 import org.hbhk.aili.security.share.util.UUIDUitl;
@@ -16,7 +18,9 @@ import org.springframework.web.multipart.MultipartFile;
 @Service
 public class FileService implements IFileService {
 
-	private String path = "userImages";
+	private Log log = LogFactory.getLog(getClass());
+
+	private String path = "images/userImages";
 	@Autowired
 	private IFileDao fileDao;
 
@@ -24,25 +28,22 @@ public class FileService implements IFileService {
 		String originalFilename = Filedata.getOriginalFilename();
 		String user = UserContext.getCurrentContext().getCurrentUserName();
 		FileInfo file = new FileInfo();
+		String suffix = originalFilename.substring(
+				originalFilename.indexOf("."), originalFilename.length());
+		log.debug("originalFilename:" + originalFilename + ":" + suffix);
 		file.setCreatUser(user);
-		user = user.substring(0, user.indexOf("."));
+		user = user.substring(0, user.indexOf("@"));
 		String fileName = String.valueOf(System.currentTimeMillis());
 		String sep = System.getProperty("file.separator");
-		String url = path
-				+ sep
-				+ user
-				+ sep
-				+ fileName
-				+ originalFilename.substring(originalFilename.indexOf("."),
-						originalFilename.length());
-	
+		String url = path + sep + user + sep + fileName + suffix;
+
 		file.setId(UUIDUitl.getUuid());
 		file.setOrigName(originalFilename);
 		file.setName(fileName);
 		file.setCreateTime(new Date());
 		file.setUrl(url);
 		SpringIOUtils.saveFile(Filedata.getInputStream(), path,
-				file.getCreatUser(), file.getName());
+				user, fileName + suffix);
 		fileDao.save(file);
 		return url;
 	}

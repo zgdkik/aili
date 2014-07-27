@@ -62,97 +62,14 @@
 						<div style="border-bottom: 2px solid red;margin-left: 65px;width: 510px;
 						     margin-top: -6px;"></div>
 						<div style="margin-top: 10px; margin-left: 20px;">
-							<span  id="blog_contenttop1" onclick="backColor('blog_contenttop1');" >&nbsp;全部&nbsp;</span>
-							<span id="blog_contenttop2" onclick="backColor('blog_contenttop2');"  style="margin-left: 20px;">&nbsp;自己&nbsp;</span>
+							<span  class="blog_contenttop">&nbsp;全部&nbsp;</span>
+							<span class="blog_contenttop" style="margin-left: 20px;">&nbsp;自己&nbsp;</span>
 						</div>
 					</div>
 					<!-- 微博内容区 -->
-					<div id="home_blog_main">
+					<div id="home_blog_main" style="height: auto;">
 						<ul id="theme_list" style="list-style-type:none">
-		          			<li class="theme" style="border:#666 1px solid;height:230px; border-left:0;border-right:0;">
-		          			<div class="vline"><img id="head_portrait" height="50px" width="50px" 
-		          				src="${base}images/user/homeblog/friends_img1.png">
-		          			</div>
-		          			<div class="vline">
-		          				<div class="context">今天心情特别好</div>
-		          				<div class="imgs">
-			          				<img id="head_portrait" height="50px" width="50px" src="${base}images/user/homeblog/friends_img1.png">
-			          				<img id="head_portrait" height="50px" width="50px" src="${base}images/user/homeblog/friends_img1.png">
-		          				</div>
-		          			</div>
-		          			</li>
-		          			<li class="theme" style="height:230px;border:#666 1px solid; border-left:0;border-right:0;">
-			          			<div class="vline"><img id="head_portrait" height="50px" width="50px" 
-		          				src="${base}images/user/homeblog/friends_img1.png">
-		          			</div>
-		          			<div class="vline">
-		          				<div class="context">今天心情特别好</div>
-		          				<div class="imgs">
-			          				<img id="head_portrait" height="50px" width="50px" src="${base}images/user/homeblog/friends_img1.png">
-			          				<img id="head_portrait" height="50px" width="50px" src="${base}images/user/homeblog/friends_img1.png">
-		          				</div>
-		          			</div>
-		          			</li>
-		          				<li class="theme" style="height:230px;border:#666 1px solid; border-left:0;border-right:0;">
-			          			<div class="vline"><img id="head_portrait" height="50px" width="50px" 
-		          				src="${base}images/user/homeblog/friends_img1.png">
-		          			</div>
-		          			<div class="vline">
-		          				<div class="context">今天心情特别好</div>
-		          				<div class="imgs">
-			          				<img id="head_portrait" height="50px" width="50px" src="${base}images/user/homeblog/friends_img1.png">
-			          				<img id="head_portrait" height="50px" width="50px" src="${base}images/user/homeblog/friends_img1.png">
-		          				</div>
-		          			</div>
-		          			</li>
-		          				<li class="theme" style="height:230px;border:#666 1px solid; border-left:0;border-right:0;">
-			          			<div class="vline"><img id="head_portrait" height="50px" width="50px" 
-		          				src="${base}images/user/homeblog/friends_img1.png">
-		          			</div>
-		          			<div class="vline">
-		          				<div class="context">今天心情特别好</div>
-		          				<div class="imgs">
-			          				<img id="head_portrait" height="50px" width="50px" src="${base}images/user/homeblog/friends_img1.png">
-			          				<img id="head_portrait" height="50px" width="50px" src="${base}images/user/homeblog/friends_img1.png">
-		          				</div>
-		          			</div>
-		          			</li>
-		          				<li class="theme" style="height:230px;border:#666 1px solid; border-left:0;border-right:0;">
-			          			<div class="vline"><img id="head_portrait" height="50px" width="50px" 
-		          				src="${base}images/user/homeblog/friends_img1.png">
-		          			</div>
-		          			<div class="vline">
-		          				<div class="context">今天心情特别好</div>
-		          				<div class="imgs">
-			          				<img id="head_portrait" height="50px" width="50px" src="${base}images/user/homeblog/friends_img1.png">
-			          				<img id="head_portrait" height="50px" width="50px" src="${base}images/user/homeblog/friends_img1.png">
-		          				</div>
-		          			</div>
-		          			</li>
-		          				<li class="theme" style="height:230px;border:#666 1px solid; border-left:0;border-right:0;">
-			          			<div class="vline"><img id="head_portrait" height="50px" width="50px" 
-		          				src="${base}images/user/homeblog/friends_img1.png">
-		          			</div>
-		          			<div class="vline">
-		          				<div class="context">今天心情特别好</div>
-		          				<div class="imgs">
-			          				<img id="head_portrait" height="50px" width="50px" src="${base}images/user/homeblog/friends_img1.png">
-			          				<img id="head_portrait" height="50px" width="50px" src="${base}images/user/homeblog/friends_img1.png">
-		          				</div>
-		          			</div>
-		          			</li>
-		          				<li class="theme" style="height:230px;border:#666 1px solid; border-left:0;border-right:0;">
-			          			<div class="vline"><img id="head_portrait" height="50px" width="50px" 
-		          				src="${base}images/user/homeblog/friends_img1.png">
-		          			</div>
-		          			<div class="vline">
-		          				<div class="context">今天心情特别好</div>
-		          				<div class="imgs">
-			          				<img id="head_portrait" height="50px" width="50px" src="${base}images/user/homeblog/friends_img1.png">
-			          				<img id="head_portrait" height="50px" width="50px" src="${base}images/user/homeblog/friends_img1.png">
-		          				</div>
-		          			</div>
-		          			</li>
+		          		
 	          			</ul>
 					</div>
 			</div>

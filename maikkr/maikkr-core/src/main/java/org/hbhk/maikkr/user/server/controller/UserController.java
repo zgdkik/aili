@@ -44,6 +44,8 @@ public class UserController extends BaseController {
 	@ResponseBody
 	public ResponseEntity getPageTheme(BlogInfo blog, Page page) {
 		try {
+			page.setStart(0);
+			page.setSize(10);
 			Object result = blogService.getBlogPage(blog, page);
 			return returnSuccess(result);
 		} catch (Exception e) {
