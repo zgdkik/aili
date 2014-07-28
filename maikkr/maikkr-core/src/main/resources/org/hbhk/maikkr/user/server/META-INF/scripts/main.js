@@ -59,7 +59,12 @@ $j(document).ready(function() {
 			if (json.success) {
 				$j.toast("上传成功");
 				var img = $j('.imgurl').val();
-				$j('.imgurl').val(img+","+json.result)
+				if(img!=null &&img!=""){
+					$j('.imgurl').val(img+","+json.result)
+				}else{
+					$j('.imgurl').val(json.result)
+				}
+				
 			} else {
 				$j.toast("上传失败");
 			}
@@ -146,8 +151,8 @@ function loadTheme() {
       			var context='<div class="vline"><div class="context">'+item.blogContent+'</div><div class="context_imgs">';
       			if(imgurl!=null && imgurl!=""){
       				var imgs = imgurl.split(",");
-      				for ( var i = 0; i < imgs.length; i++) {
-      					var img ='<img id="context_img" height="100px" width="100px" src="'+ base + imgs[i]+'">';
+      				for ( var j = 0; j < imgs.length; j++) {
+      					var img ='<img id="context_img" height="100px" width="100px" src="'+ base + imgs[j]+'">';
       					context =context +img;
 					}
       			}

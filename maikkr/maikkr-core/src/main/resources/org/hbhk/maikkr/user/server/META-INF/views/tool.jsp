@@ -16,13 +16,19 @@
 				onmouseout="{this.src='${base}images/user/homeblog/logo-top2.png';}" />
 			</a> <span class="top_span" onclick="showPage('home');"> 
 			<font class="top_font">首页</font>
+			<!-- </span> <span class="top_span" style="margin-left: 60px;"> <font
+				class="top_font">应用</font> -->
 			</span> <span class="top_span" style="margin-left: 60px;"> <font
-				class="top_font">应用</font>
-			</span> <span class="top_span" style="margin-left: 120px;"> <font
 				class="top_font">微主题</font>
-			</span> <span class="top_span" style="margin-left: 180px;"> <font
+			</span> 
+			<span class="top_span" style="margin-left: 120px;"> <font
 				class="top_font">游戏</font>
-			</span> <span class="top_span" style="margin-left: 490px; width: 120px;"> <font
+			</span>
+			<span class="box" style="margin-left: 200px;"> 
+				<input type="text" class="pmbb search"/>
+  				<input type="submit" value="搜索"  class="pmbb btnSearch"/>
+  			</span>
+			<span class="top_span" style="margin-left: 490px; width: 120px;"> <font
 				id="userName" class="top_font">${cuserName}</font>
 			</span> <span id="comment_span" class="top_span"
 				style="margin-left: 610px; height: 45px; width: 50px; z-index: 1200"> <font
