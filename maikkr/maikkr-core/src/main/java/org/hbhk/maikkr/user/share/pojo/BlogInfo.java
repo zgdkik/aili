@@ -25,6 +25,8 @@ public class BlogInfo extends BaseInfo {
 	private int blogReview;// 评论次数
 	@Column("blogLink")
 	private String blogLink;// 图片url
+	
+	private String userHeadImg;
 
 	public String getBlogId() {
 		return blogId;
@@ -89,5 +91,14 @@ public class BlogInfo extends BaseInfo {
 	public void setBlogLink(String blogLink) {
 		this.blogLink = blogLink;
 	}
+
+	public String getUserHeadImg() {
+		return userHeadImg;
+	}
+
+	public void setUserHeadImg(String userHeadImg) {
+		this.userHeadImg = userHeadImg;
+	}
+	
 
 }
