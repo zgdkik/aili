@@ -9,9 +9,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public abstract class JsonUtil {
 
 	private static ObjectMapper mapper = new ObjectMapper();
-	
+
 	/**
 	 * 把json字符串转换为对象
+	 * 
 	 * @param json
 	 * @param parametrized
 	 * @param parameterClasses
@@ -19,20 +20,23 @@ public abstract class JsonUtil {
 	 * @throws ClientException
 	 * @since
 	 */
-	public static <T> T parseJson(String json, Class<?> parametrized, Class<?>... parameterClasses) throws ClientException {
+	public static <T> T parseJson(String json, Class<?> parametrized,
+			Class<?>... parameterClasses) throws ClientException {
 		if (StringUtils.isBlank(json)) {
 			return null;
 		}
 		try {
-			JavaType jt = mapper.getTypeFactory().constructParametricType(parametrized, parameterClasses);
+			JavaType jt = mapper.getTypeFactory().constructParametricType(
+					parametrized, parameterClasses);
 			return mapper.readValue(json, jt);
 		} catch (Exception e) {
 			throw new ClientException(e.getMessage(), e);
-		} 
+		}
 	}
-	
+
 	@SuppressWarnings("unchecked")
-	public static <T> T parseJson(String json, Class<?> parametrized) throws ClientException {
+	public static <T> T parseJson(String json, Class<?> parametrized)
+			throws ClientException {
 		if (StringUtils.isBlank(json)) {
 			return null;
 		}
@@ -40,7 +44,18 @@ public abstract class JsonUtil {
 			return (T) mapper.readValue(json, parametrized);
 		} catch (Exception e) {
 			throw new ClientException(e.getMessage(), e);
-		} 
+		}
 	}
-	
+
+	@SuppressWarnings("unchecked")
+	public static <T> T toJson(Object obj) throws ClientException {
+		if (obj == null) {
+			return null;
+		}
+		try {
+			return (T) mapper.writeValueAsString(obj);
+		} catch (Exception e) {
+			throw new ClientException(e.getMessage(), e);
+		}
+	}
 }
