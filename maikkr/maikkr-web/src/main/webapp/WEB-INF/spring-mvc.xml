@@ -31,8 +31,8 @@
 		use-default-filters="false">
 		<context:include-filter type="annotation"
 			expression="org.springframework.stereotype.Controller" />
-		<context:include-filter type="annotation"
-			expression="org.springframework.web.bind.annotation.ControllerAdvice" />
+		<!-- <context:include-filter type="annotation"
+			expression="org.springframework.web.bind.annotation.ControllerAdvice" /> -->
 	</context:component-scan>
 
 	<mvc:annotation-driven content-negotiation-manager="contentNegotiationManager">
@@ -109,21 +109,6 @@
 			</value>
 		</property>
 	</bean>
-	<!-- 异常处理 -->
-	<bean id="exceptionResolver"
-		class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
-		<property name="defaultErrorView">
-			<value>/framework/error/error</value> <!-- 接受界面 -->
-		</property>
-		<property name="defaultStatusCode">
-			<value>500</value> <!-- 错误类型 -->
-		</property>
-		<property name="warnLogCategory"> <!--记录日志处理 -->
-			<value>org.springframework.web.servlet.handler.SimpleMappingExceptionResolver
-			</value>
-		</property>
-	</bean>
-
 	<bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<!-- 指定所上传文件的总大小不能超过200KB。注意maxUploadSize属性的限制不是针对单个文件，而是所有文件的容量之和 -->
@@ -146,5 +131,9 @@
 		</property>
 		<property name="cacheSeconds" value="-1" />
 	</bean> -->
-
+	<!-- 异常处理 -->
+	<bean class="org.hbhk.maikkr.core.server.interceptor.ExceptionResolver">
+		<property name="error404"  value="error404.html"/>
+		<property name="excption"  value="error404.html"/>
+	</bean>
 </beans>   
