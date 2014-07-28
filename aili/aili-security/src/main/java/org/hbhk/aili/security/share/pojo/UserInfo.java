@@ -19,6 +19,8 @@ public class UserInfo extends BaseInfo {
 	private String password;
 	@Column("username")
 	private String username;
+	@Column("userHeadImg")
+	private String userHeadImg;
 	@Column("name")
 	private String name;
 	@Column("mail")
@@ -83,6 +85,13 @@ public class UserInfo extends BaseInfo {
 
 	public void setGender(String gender) {
 		this.gender = gender;
+	}
+
+	public String getUserHeadImg() {
+		return userHeadImg;
+	}
+	public void setUserHeadImg(String userHeadImg) {
+		this.userHeadImg = userHeadImg;
 	}
 
 }
