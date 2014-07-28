@@ -36,16 +36,12 @@
 	</context:component-scan>
 
 	<mvc:annotation-driven content-negotiation-manager="contentNegotiationManager">
-		<!-- <mvc:message-converters register-defaults="false">
-			<bean class="org.springframework.http.converter.xml.MarshallingHttpMessageConverter">
-				<constructor-arg ref="xstreamMarshaller" />
-			</bean>
-			<bean class="com.deppon.ula.module.core.converter.JsonHttpMessageConverter">
-				<property name="enableFieldsEntityFilter" value="true" />
-				<property name="enableNullToEmptybean" value="true" />
-			</bean>
+		 <mvc:message-converters register-defaults="false">
+			<!-- <bean class="org.springframework.http.converter.xml.MarshallingHttpMessageConverter">
+			</bean> -->
+			<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>
 			<bean class="org.springframework.http.converter.StringHttpMessageConverter" />
-		</mvc:message-converters> -->
+		</mvc:message-converters>
 	</mvc:annotation-driven>
 	<!-- 启用基于注解的处理器映射，添加拦截器，类级别的处理器映射 -->
 	<mvc:interceptors>
@@ -106,6 +102,7 @@
 			<value>
 				json=application/json
 				xml=application/xml
+				text=text/json  
 			</value>
 		</property>
 	</bean>
