@@ -29,8 +29,8 @@ public class UserService implements IUserService {
 	@Resource
 	private IUserDao userDao;
 
-	private String defaultHead="images/security/default_head.png";
-	
+	private String defaultHead = "images/security/default_head.png";
+
 	@Autowired(required = false)
 	private LoginLimitCache limitCache;
 
@@ -126,5 +126,4 @@ public class UserService implements IUserService {
 		this.defaultHead = defaultHead;
 	}
 
-	
 }
