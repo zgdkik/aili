@@ -1,6 +1,5 @@
 package org.hbhk.aili.security.server.controller;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -13,6 +12,9 @@ import org.hbhk.aili.security.server.service.IUserService;
 import org.hbhk.aili.security.share.define.SecurityConstant;
 import org.hbhk.aili.security.share.define.UserConstants;
 import org.hbhk.aili.security.share.pojo.UserInfo;
+import org.hbhk.aili.support.server.email.IEmailService;
+import org.hbhk.aili.support.server.email.impl.EmailInfo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -21,8 +23,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping(SecurityConstant.moduleName)
 public class SecurityController extends BaseController {
 
-	@Resource
+	@Autowired
 	private IUserService userService;
+
+	@Autowired
+	private IEmailService emailService;
 
 	@RequestMapping("/login")
 	@ResponseBody
@@ -69,9 +74,15 @@ public class SecurityController extends BaseController {
 			userService.save(user);
 			RequestContext.setSessionAttribute(UserConstants.CURRENT_USER_NAME,
 					user.getMail());
+			EmailInfo emailInfo = new EmailInfo();
+			emailInfo.setSubject("买客网用户注册");
+			String info = "恭喜您成功注册！您的用户名为：" + user.getMail();
+			emailInfo.setContext(info);
+			emailInfo.setEmail(user.getMail());
+			emailService.sendEmail(emailInfo);
 			return returnSuccess();
-		} catch (BusinessException e) {
-			return returnException(e.getMessage());
+		} catch (Exception e) {
+			return returnException("注册失败");
 		}
 	}
 
