@@ -73,7 +73,7 @@
 		</property>
 	</bean>
 	<!-- 缓存支持 -->
-	<bean class="org.hbhk.aili.cache.server.CacheSupport<V>">
+	<bean class="org.hbhk.aili.cache.server.CacheSupport">
 		<property name="cacheTemplet" ref="memoryCacheTemplet"/>
 		<property name="expire" value="360000"/>
 	</bean>
