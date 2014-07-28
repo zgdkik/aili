@@ -8,6 +8,7 @@ import org.hbhk.maikkr.user.server.service.IBlogService;
 import org.hbhk.maikkr.user.share.pojo.BlogInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -47,6 +48,22 @@ public class UserController extends BaseController {
 			page.setStart(0);
 			page.setSize(10);
 			Object result = blogService.getBlogPage(blog, page);
+			return returnSuccess(result);
+		} catch (Exception e) {
+			return returnException(e.getMessage());
+		}
+	}
+
+	@RequestMapping("/{user}/{url}")
+	@ResponseBody
+	public ResponseEntity getTheme(@PathVariable("user") String user,
+			@PathVariable("url") String url) {
+		try {
+			String blogUrl = user + url+".htm";
+			BlogInfo blog = new BlogInfo();
+			blog.setBlogUser(user);
+			blog.setBlogUrl(blogUrl);
+			Object result = blogService.getBlog(blog);
 			return returnSuccess(result);
 		} catch (Exception e) {
 			return returnException(e.getMessage());

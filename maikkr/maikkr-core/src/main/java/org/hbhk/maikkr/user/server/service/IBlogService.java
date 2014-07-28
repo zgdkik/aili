@@ -9,5 +9,7 @@ public interface IBlogService {
 	BlogInfo save(BlogInfo blog);
 
 	Pagination<BlogInfo> getBlogPage(BlogInfo blog, Page page);
+	
+	BlogInfo getBlog(BlogInfo blog);
 
 }

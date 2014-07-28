@@ -27,10 +27,13 @@ public class BlogService implements IBlogService {
 	public BlogInfo save(BlogInfo blog) {
 		String id = UUIDUitl.getUuid();
 		blog.setId(id);
-		blog.setBlogUser(UserContext.getCurrentContext().getCurrentUserName());
+		String user = UserContext.getCurrentContext().getCurrentUserName();
+		blog.setBlogUser(user);
 		blog.setCreateTime(new Date());
-		blog.setCreatUser(UserContext.getCurrentContext().getCurrentUserName());
+		blog.setCreatUser(user);
 		blog.setBlogId(id);
+		user = user.substring(0, user.indexOf("@"));
+		blog.setBlogUrl(user+"/"+System.currentTimeMillis()+".htm");
 		blogDao.save(blog);
 		return blog;
 	}
@@ -49,6 +52,10 @@ public class BlogService implements IBlogService {
 		}
 		pagination.setItems(blogDao.get(blog, page));
 		return pagination;
+	}
+
+	public BlogInfo getBlog(BlogInfo blog) {
+		return blogDao.getOne(blog);
 	}
 
 }

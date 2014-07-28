@@ -14,7 +14,7 @@ public class BlogInfo extends BaseInfo {
 	@Column("blogUser")
 	private String blogUser;// 微博用户
 	@Column("blogTitle")
-	private String blogTitle;// 微博内容
+	private String blogTitle;// 微博标题
 	@Column("blogContent")
 	private String blogContent;// 微博内容
 	@Column("blogCollect")
@@ -25,7 +25,9 @@ public class BlogInfo extends BaseInfo {
 	private int blogReview;// 评论次数
 	@Column("blogLink")
 	private String blogLink;// 图片url
-	
+	//主题url
+	@Column("blogUrl")
+	private String blogUrl;
 	private String userHeadImg;
 
 	public String getBlogId() {
@@ -99,6 +101,13 @@ public class BlogInfo extends BaseInfo {
 	public void setUserHeadImg(String userHeadImg) {
 		this.userHeadImg = userHeadImg;
 	}
-	
 
+	public String getBlogUrl() {
+		return blogUrl;
+	}
+
+	public void setBlogUrl(String blogUrl) {
+		this.blogUrl = blogUrl;
+	}
+	
 }

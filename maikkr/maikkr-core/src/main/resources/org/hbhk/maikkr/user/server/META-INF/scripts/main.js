@@ -48,7 +48,7 @@ $j(document).ready(function() {
 		'fileTypeDesc' : '图片',
 		// 允许上传的文件后缀
 		'fileTypeExts' : '*.gif; *.jpg; *.png',
-		'multi' : false,
+		'multi' : true,
 		'width' : 60,
 		'height' : 20,
 		'onSelectError' : function() {
@@ -58,7 +58,8 @@ $j(document).ready(function() {
 			var json = $j.parseJSON(data);
 			if (json.success) {
 				$j.toast("上传成功");
-				$j('.imgurl').val(json.result)
+				var img = $j('.imgurl').val();
+				$j('.imgurl').val(img+","+json.result)
 			} else {
 				$j.toast("上传失败");
 			}
@@ -135,17 +136,23 @@ function loadTheme() {
 			for ( var i = 0; i < items.length; i++) {
 				var item = items[i];
 				// 设置头像
-				var imgurl = base + item.blogLink;
+				var headimg = base + item.userHeadImg;
+				var imgurl =item.blogLink;
+				 
 				var li='<li class="theme" style="border:#666 1px solid;height:230px; border-left:0;border-right:0;">'
 				var head ='<div class="vline"><img id="head_portrait" height="50px" width="50px" '+
-				'src="'+imgurl+'"></div>';
+				'src="'+headimg+'"></div>';
+				var title='<div class="vline"><div class="context"><a href="">'+item.blogTitle+'</a></div>';
       			var context='<div class="vline"><div class="context">'+item.blogContent+'</div><div class="context_imgs">';
-      			if(item.blogLink!=null && item.blogLink!=""){
-      				var img ='<img id="context_img" height="50px" width="50px" src="'+imgurl+'">';
-      				context =context +img;
+      			if(imgurl!=null && imgurl!=""){
+      				var imgs = imgurl.split(",");
+      				for ( var i = 0; i < imgs.length; i++) {
+      					var img ='<img id="context_img" height="100px" width="100px" src="'+ base + imgs[i]+'">';
+      					context =context +img;
+					}
       			}
       			context=context+"</div></div>";
-				li=li+head+context+'</li>'
+				li=li+head+title+context+'</li>'
 				theme_list.append(li);
 				theme_list.trigger("create");
 			}
