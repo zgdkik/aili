@@ -18,7 +18,9 @@ import org.apache.commons.logging.LogFactory;
 import org.hbhk.aili.support.server.email.IEmailService;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.stereotype.Component;
 
+@Component
 public class EmailService implements IEmailService {
 
 	private Log log = LogFactory.getLog(getClass());
@@ -108,7 +110,7 @@ public class EmailService implements IEmailService {
 
 		helper.setSubject(email.getSubject()); // 主题
 		// String htmlText = getMailText(content); // 使用模板生成html邮件内容
-		String info ="恭喜您成功注册！您的用户名为："+email.getEmail();
+		String info = "恭喜您成功注册！您的用户名为：" + email.getEmail();
 		helper.setText(info, true); // 邮件内容，注意加参数true，表示启用html格式
 		sender.send(msg); // 发送邮件
 	}
