@@ -5,8 +5,8 @@ import java.io.IOException;
 import javax.mail.MessagingException;
 
 import org.hbhk.aili.core.server.web.WebApplicationContextHolder;
-import org.hbhk.aili.support.server.email.EmailInfo;
 import org.hbhk.aili.support.server.email.IEmailService;
+import org.hbhk.aili.support.server.email.impl.EmailInfo;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
