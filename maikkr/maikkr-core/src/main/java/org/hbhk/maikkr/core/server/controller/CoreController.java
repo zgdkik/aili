@@ -28,6 +28,11 @@ public class CoreController extends BaseController {
 		return "main";
 	}
 
+	@RequestMapping("/error")
+	public String error() {
+		return "error";
+	}
+
 	@RequestMapping("/upload")
 	@ResponseBody
 	@NeedLogin
