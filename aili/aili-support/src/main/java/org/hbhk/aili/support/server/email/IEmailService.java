@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.mail.MessagingException;
 
+import org.hbhk.aili.support.server.email.impl.EmailInfo;
+
 public interface IEmailService {
 
 	/**

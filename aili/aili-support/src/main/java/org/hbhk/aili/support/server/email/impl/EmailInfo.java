@@ -1,4 +1,4 @@
-package org.hbhk.aili.support.server.email;
+package org.hbhk.aili.support.server.email.impl;
 
 import java.io.Serializable;
 

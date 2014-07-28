@@ -15,7 +15,6 @@ import jetbrick.template.ResourceNotFoundException;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.hbhk.aili.support.server.email.EmailInfo;
 import org.hbhk.aili.support.server.email.IEmailService;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
