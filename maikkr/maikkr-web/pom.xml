@@ -79,7 +79,7 @@
 				<configuration>
 					<path>/maikkr</path>
 					<port>8181</port>
-					<warSourceDirectory>${project.build.directory}/webapp</warSourceDirectory>
+					<!-- <warSourceDirectory>${project.build.directory}/webapp</warSourceDirectory> -->
 				</configuration>
 			</plugin>
 			<plugin>
