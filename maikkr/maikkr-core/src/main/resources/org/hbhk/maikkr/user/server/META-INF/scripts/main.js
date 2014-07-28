@@ -41,7 +41,7 @@ $j(document).ready(function() {
 
 	$j("#uploadImg").uploadify({
 		'swf' : base + 'uploadify/uploadify.swf',
-		'uploader' : base + 'core/upload.htm',
+		'uploader' : base + 'core/upload.htm;jsessionid='+seesionid,
 		'auto' : true,
 		'buttonImage' : base + 'images/user/homeblog/file-upload.png',
 		'buttonText' : '浏览',

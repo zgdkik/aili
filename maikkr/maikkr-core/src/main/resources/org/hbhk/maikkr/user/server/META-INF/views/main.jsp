@@ -2,6 +2,9 @@
 <jsp:include page="common.jsp"/>
 <link href="${styles}/main.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="${scripts}/main.js"></script>
+<script type="text/javascript">
+ var seesionid="${pageContext.session.id}";
+</script>
 <body>
 <jsp:include page="tool.jsp"/>
 <div id="main" >
