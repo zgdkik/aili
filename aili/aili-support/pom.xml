@@ -16,6 +16,11 @@
 	</properties>
 	<dependencies>
 		<dependency>
+			<artifactId>aili-core</artifactId>
+			<groupId>org.hbhk.aili</groupId>
+			<version>${aili-version}</version>
+		</dependency>
+		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpclient</artifactId>
 			<version>4.3.4</version>
@@ -41,6 +46,9 @@
 			<artifactId>jackson-databind</artifactId>
 			<version>2.3.0</version>
 		</dependency>
-
+		<dependency>
+			<groupId>com.github.subchen</groupId>
+			<artifactId>jetbrick-template</artifactId>
+		</dependency>
 	</dependencies>
 </project>

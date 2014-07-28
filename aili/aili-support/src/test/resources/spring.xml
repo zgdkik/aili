@@ -17,10 +17,10 @@
 			http://www.springframework.org/schema/aop/spring-aop.xsd">
 
 	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
-		<property name="host" value="smtp.163.com" />
+		<property name="host" value="smtp.sina.com" />
 		<property name="port" value="25" />
-		<property name="username" value="maikkr2014@163.com" />
-		<property name="password" value="m123456" />
+		<property name="username" value="hbhk888918@sina.com" />
+		<property name="password" value="as135246" />
 		<property name="javaMailProperties">
 			<props>
 				<prop key="mail.smtp.auth">true</prop>
@@ -30,6 +30,7 @@
 	</bean>
 	<bean id="emailService" class="org.hbhk.aili.support.server.email.impl.EmailService">
 		<property name="sender" ref="mailSender"/>
-		<property name="from" value="maikkr2014@163.com"/>
+		<property name="from" value="hbhk888918@sina.com"/>
 	</bean>
+
 </beans>
