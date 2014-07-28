@@ -107,11 +107,9 @@ public class EmailService implements IEmailService {
 		MimeMessageHelper helper = new MimeMessageHelper(msg, true, "utf-8");
 		helper.setTo(email.getEmail()); // 邮件接收地址
 		helper.setFrom(from); // 邮件发送地址,这里必须和xml里的邮件地址相同一致
-
 		helper.setSubject(email.getSubject()); // 主题
 		// String htmlText = getMailText(content); // 使用模板生成html邮件内容
-		String info = "恭喜您成功注册！您的用户名为：" + email.getEmail();
-		helper.setText(info, true); // 邮件内容，注意加参数true，表示启用html格式
+		helper.setText(email.getContext(), true); // 邮件内容，注意加参数true，表示启用html格式
 		sender.send(msg); // 发送邮件
 	}
 
