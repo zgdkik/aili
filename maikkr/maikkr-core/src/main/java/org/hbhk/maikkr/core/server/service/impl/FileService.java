@@ -12,6 +12,7 @@ import org.hbhk.maikkr.core.server.dao.IFileDao;
 import org.hbhk.maikkr.core.server.service.IFileService;
 import org.hbhk.maikkr.user.share.pojo.FileInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -20,6 +21,7 @@ public class FileService implements IFileService {
 
 	private Log log = LogFactory.getLog(getClass());
 
+	@Value("${filepath}")
 	private String path = "images/userImages";
 	@Autowired
 	private IFileDao fileDao;

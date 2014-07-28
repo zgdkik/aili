@@ -50,7 +50,7 @@ public class BlogService implements IBlogService {
 				blogInfos.get(i).setUserHeadImg(user.getUserHeadImg());
 			}
 		}
-		pagination.setItems(blogDao.get(blog, page));
+		pagination.setItems(blogInfos);
 		return pagination;
 	}
 
