@@ -16,6 +16,8 @@ import jetbrick.template.ResourceNotFoundException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hbhk.aili.support.server.email.IEmailService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
@@ -24,17 +26,10 @@ import org.springframework.stereotype.Component;
 public class EmailService implements IEmailService {
 
 	private Log log = LogFactory.getLog(getClass());
-	protected JavaMailSender sender;
-
-	private String from;
-
-	public JavaMailSender getSender() {
-		return sender;
-	}
-
-	public void setSender(JavaMailSender sender) {
-		this.sender = sender;
-	}
+	@Autowired
+	protected JavaMailSender mailSender;
+	@Value("toFromEmail")
+	private String toFromEmail;
 
 	/**
 	 * 发送带模板的单个html格式邮件
@@ -102,39 +97,31 @@ public class EmailService implements IEmailService {
 	@Override
 	public void sendEmail(EmailInfo email) throws MessagingException,
 			ResourceNotFoundException, IOException {
-		MimeMessage msg = sender.createMimeMessage();
+		MimeMessage msg = mailSender.createMimeMessage();
 		// 设置utf-8或GBK编码，否则邮件会有乱码，true表示为multipart邮件
 		MimeMessageHelper helper = new MimeMessageHelper(msg, true, "utf-8");
 		helper.setTo(email.getEmail()); // 邮件接收地址
-		helper.setFrom(from); // 邮件发送地址,这里必须和xml里的邮件地址相同一致
+		helper.setFrom(toFromEmail); // 邮件发送地址,这里必须和xml里的邮件地址相同一致
 		helper.setSubject(email.getSubject()); // 主题
 		// String htmlText = getMailText(content); // 使用模板生成html邮件内容
 		helper.setText(email.getContext(), true); // 邮件内容，注意加参数true，表示启用html格式
-		sender.send(msg); // 发送邮件
+		mailSender.send(msg); // 发送邮件
 	}
 
 	@Override
 	public void sendBatchEmail(List<EmailInfo> emails)
 			throws MessagingException {
 		for (EmailInfo email : emails) {
-			MimeMessage msg = sender.createMimeMessage();
+			MimeMessage msg = mailSender.createMimeMessage();
 			// 设置utf-8或GBK编码，否则邮件会有乱码，true表示为multipart邮件
 			MimeMessageHelper helper = new MimeMessageHelper(msg, true, "utf-8");
 			helper.setTo(email.getEmail()); // 邮件接收地址
-			helper.setFrom(from); // 邮件发送地址,这里必须和xml里的邮件地址相同一致
+			helper.setFrom(toFromEmail); // 邮件发送地址,这里必须和xml里的邮件地址相同一致
 			helper.setSubject(email.getSubject()); // 主题
 			// String htmlText = getMailText(content); // 使用模板生成html邮件内容
 			helper.setText(email.getContext(), true); // 邮件内容，注意加参数true，表示启用html格式
-			sender.send(msg); // 发送邮件
+			mailSender.send(msg); // 发送邮件
 		}
-	}
-
-	public String getFrom() {
-		return from;
-	}
-
-	public void setFrom(String from) {
-		this.from = from;
 	}
 
 	public String setContext(String msg) throws ResourceNotFoundException,
