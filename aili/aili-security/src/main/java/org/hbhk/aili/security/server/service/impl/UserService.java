@@ -29,6 +29,8 @@ public class UserService implements IUserService {
 	@Resource
 	private IUserDao userDao;
 
+	private String defaultHead="images/security/default_head.png";
+	
 	@Autowired(required = false)
 	private LoginLimitCache limitCache;
 
@@ -100,7 +102,8 @@ public class UserService implements IUserService {
 		}
 		user.setId(UUIDUitl.getUuid());
 		user.setCreateTime(new Date());
-		user.setCreatUser(UserContext.getCurrentContext().getCurrentUserName());
+		user.setCreatUser("hbhk");
+		user.setUserHeadImg(defaultHead);
 		String pwd = user.getPassword();
 		pwd = EncryptUtil.encodeSHA1(pwd);
 		user.setPassword(pwd);
@@ -115,4 +118,13 @@ public class UserService implements IUserService {
 		return userDao.getOne(user);
 	}
 
+	public String getDefaultHead() {
+		return defaultHead;
+	}
+
+	public void setDefaultHead(String defaultHead) {
+		this.defaultHead = defaultHead;
+	}
+
+	
 }
