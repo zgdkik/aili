@@ -131,5 +131,6 @@
 	<modules>
 		<module>maikkr-web</module>
 		<module>maikkr-core</module>
+		<module>maikkr-backend</module>
 	</modules>
 </project>
