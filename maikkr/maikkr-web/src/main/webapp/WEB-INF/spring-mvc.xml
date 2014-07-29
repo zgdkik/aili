@@ -76,6 +76,11 @@
 		<mvc:interceptor>
 			<mvc:mapping path="/**" />
 			<mvc:exclude-mapping path="#{resourceBean.resourcePrefix}/**" />
+			<bean class="org.hbhk.maikkr.backend.server.interceptor.AdminIntercptor" />
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<mvc:exclude-mapping path="#{resourceBean.resourcePrefix}/**" />
 			<bean class="org.hbhk.aili.core.server.deploy.spring.ModuleInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>
