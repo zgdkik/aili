@@ -19,6 +19,10 @@ public class AdminService implements IAdminService {
 	private IAdminDao adminDao;
 
 	public AdminInfo get(AdminInfo admin) {
+		return adminDao.getOne(admin);
+	}
+	
+	public AdminInfo login(AdminInfo admin) {
 		AdminInfo a = adminDao.getOne(admin);
 		if (a == null) {
 			return null;

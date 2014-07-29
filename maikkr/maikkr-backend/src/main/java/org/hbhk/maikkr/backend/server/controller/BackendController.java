@@ -34,7 +34,7 @@ public class BackendController extends BaseController {
 	@ResponseBody
 	public ResponseEntity login(AdminInfo admin) {
 		try {
-			if (adminService.get(admin) == null) {
+			if (adminService.login(admin) == null) {
 				return returnException("用户名或密码错误");
 			} else {
 				RequestContext.getSession().setAttribute(
