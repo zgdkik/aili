@@ -17,10 +17,13 @@ public class AdminService implements IAdminService {
 
 	@Autowired
 	private IAdminDao adminDao;
-	
+
 	public AdminInfo get(AdminInfo admin) {
 		AdminInfo a = adminDao.getOne(admin);
-		if(a.getPwd().equals(admin.getPwd())){
+		if (a == null) {
+			return null;
+		}
+		if (a.getPwd().equals(admin.getPwd())) {
 			return a;
 		}
 		return null;
