@@ -10,4 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/backend")
 public class BackendController extends BaseController {
 
+	@RequestMapping("loginpage")
+	public String loginpage() {
+		return "login";
+
+	}
 }

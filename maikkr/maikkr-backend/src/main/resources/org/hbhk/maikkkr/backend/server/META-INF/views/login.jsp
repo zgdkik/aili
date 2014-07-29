@@ -4,20 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>买客网后台管理登陆</title>
 <link href="${styles}/login.css" rel="stylesheet" type="text/css" />
-<style type="text/css">
-<!--
-*{overflow:hidden; font-size:9pt;}
-body {
-	margin-left: 0px;
-	margin-top: 0px;
-	margin-right: 0px;
-	margin-bottom: 0px;
-	background-image: url(images/bg.gif);
-	background-repeat: repeat-x;
-}
--->
-</style></head>
-
+</head>
 <body>
 <table width="100%"  height="100%" border="0" cellspacing="0" cellpadding="0">
   <tr>
@@ -35,12 +22,12 @@ body {
                   <tr>
                     <td width="40" height="50"><img  src="${images}/user.gif" width="30" height="30"></td>
                     <td width="38" height="50">用户</td>
-                    <td width="242" height="50"><input type="text" name="textfield" id="textfield" style="width:164px; height:32px; line-height:34px; background:url(images/inputbg.gif) repeat-x; border:solid 1px #d1d1d1; font-size:9pt; font-family:Verdana, Geneva, sans-serif;"></td>
+                    <td width="242" height="50"><input type="text" name="textfield" id="textfield" class="inputbg" style="width:164px; height:32px; line-height:34px;  border:solid 1px #d1d1d1; font-size:9pt; font-family:Verdana, Geneva, sans-serif;"></td>
                   </tr>
                   <tr>
                     <td height="50"><img src="${images}/password.gif" width="28" height="32"></td>
                     <td height="50">密码</td>
-                    <td height="50"><input type="password" name="textfield2" id="textfield2" style="width:164px; height:32px; line-height:34px; background:url(images/inputbg.gif) repeat-x; border:solid 1px #d1d1d1; font-size:9pt; "></td>
+                    <td height="50"><input type="password"  class="inputbg" name="textfield2" id="textfield2" style="width:164px; height:32px; line-height:34px; border:solid 1px #d1d1d1; font-size:9pt; "></td>
                   </tr>
                   <tr>
                     <td height="40">&nbsp;</td>
