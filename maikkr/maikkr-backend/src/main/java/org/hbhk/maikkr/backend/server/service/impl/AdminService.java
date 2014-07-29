@@ -1,7 +1,9 @@
 package org.hbhk.maikkr.backend.server.service.impl;
 
+import org.hbhk.maikkr.backend.server.dao.IAdminDao;
 import org.hbhk.maikkr.backend.server.service.IAdminService;
 import org.hbhk.maikkr.backend.shared.pojo.AdminInfo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -13,7 +15,14 @@ import org.springframework.stereotype.Service;
 @Service
 public class AdminService implements IAdminService {
 
+	@Autowired
+	private IAdminDao adminDao;
+	
 	public AdminInfo get(AdminInfo admin) {
+		AdminInfo a = adminDao.getOne(admin);
+		if(a.getPwd().equals(admin.getPwd())){
+			return a;
+		}
 		return null;
 	}
 
