@@ -8,5 +8,6 @@
 	<script type="text/javascript" src="${base}uploadify/jquery.uploadify.js"></script>
 	<script type="text/javascript">
 		var $j = jQuery.noConflict();
+		 var base="${base}";
 	</script>
 </head>
