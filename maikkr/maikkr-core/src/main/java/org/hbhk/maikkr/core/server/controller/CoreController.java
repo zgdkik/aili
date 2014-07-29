@@ -7,8 +7,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.hbhk.aili.core.server.annotation.NeedLogin;
 import org.hbhk.aili.core.server.web.BaseController;
-import org.hbhk.aili.security.server.annotation.NeedLogin;
 import org.hbhk.aili.support.server.json.JsonUtil;
 import org.hbhk.maikkr.core.server.service.IFileService;
 import org.springframework.beans.factory.annotation.Autowired;

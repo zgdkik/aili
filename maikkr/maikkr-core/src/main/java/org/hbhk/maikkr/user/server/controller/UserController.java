@@ -1,9 +1,9 @@
 package org.hbhk.maikkr.user.server.controller;
 
+import org.hbhk.aili.core.server.annotation.NeedLogin;
 import org.hbhk.aili.core.server.web.BaseController;
 import org.hbhk.aili.core.share.pojo.ResponseEntity;
 import org.hbhk.aili.orm.server.surpport.Page;
-import org.hbhk.aili.security.server.annotation.NeedLogin;
 import org.hbhk.maikkr.user.server.service.IBlogService;
 import org.hbhk.maikkr.user.share.pojo.BlogInfo;
 import org.springframework.beans.factory.annotation.Autowired;
