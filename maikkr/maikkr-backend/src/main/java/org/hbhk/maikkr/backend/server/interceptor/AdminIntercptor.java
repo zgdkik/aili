@@ -4,8 +4,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
-import org.hbhk.aili.core.server.annotation.NeedLogin;
 import org.hbhk.aili.core.server.context.RequestContext;
+import org.hbhk.maikkr.backend.server.annotation.NeedLogin;
 import org.hbhk.maikkr.backend.server.service.IAdminService;
 import org.hbhk.maikkr.backend.shared.pojo.AdminConstants;
 import org.hbhk.maikkr.backend.shared.pojo.AdminInfo;
@@ -26,7 +26,7 @@ public class AdminIntercptor extends HandlerInterceptorAdapter {
 		if (!(handler instanceof HandlerMethod)) {
 			return false;
 		}
-		//只拦截后台url
+		// 只拦截后台url
 		String requestUrl = request.getServletPath();
 		if (!requestUrl.startsWith("/backend")) {
 			return true;
