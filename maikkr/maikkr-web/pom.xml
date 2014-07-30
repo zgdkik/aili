@@ -20,6 +20,11 @@
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
+			<groupId>org.hbhk.maikkr</groupId>
+			<artifactId>maikkr-backend</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
 			<groupId>p6spy</groupId>
 			<artifactId>p6spy</artifactId>
 			<version>2.1.0</version>
