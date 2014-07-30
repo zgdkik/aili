@@ -30,6 +30,24 @@ public class BackendController extends BaseController {
 		return "main";
 	}
 
+	@RequestMapping("top")
+	@NeedLogin
+	public String top() {
+		return "top";
+	}
+
+	@RequestMapping("left")
+	@NeedLogin
+	public String left() {
+		return "left";
+	}
+
+	@RequestMapping("mainfra")
+	@NeedLogin
+	public String mainfra() {
+		return "mainfra";
+	}
+
 	@RequestMapping("login")
 	@ResponseBody
 	public ResponseEntity login(AdminInfo admin) {

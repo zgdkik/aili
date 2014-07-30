@@ -1,23 +1,23 @@
 .lbg {
-	background: url(../../images/backend/lbg.gif)
+	background: url(../../images/backend/login/lbg.gif)
 }
 .login01 {
-	background: url(../../images/backend/login01.jpg)
+	background: url(../../images/backend/login/login01.jpg)
 }
 .login02 {
-	background: url(../../images/backend/login02.jpg)
+	background: url(../../images/backend/login/login02.jpg)
 }
 .login03 {
-	background: url(../../images/backend/login03.jpg)
+	background: url(../../images/backend/login/login03.jpg)
 }
 .login04 {
-	background: url(../../images/backend/login04.jpg)
+	background: url(../../images/backend/login/login04.jpg)
 }
 .login05 {
-	background: url(../../images/backend/inputbg.gif)
+	background: url(../../images/backend/login/inputbg.gif)
 }
 
 .inputbg{
-	background: url(../../images/backend/inputbg.gif) repeat-x;
+	background: url(../../images/backend/login/inputbg.gif) repeat-x;
 }
 
