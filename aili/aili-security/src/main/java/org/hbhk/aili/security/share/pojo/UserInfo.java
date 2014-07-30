@@ -25,6 +25,8 @@ public class UserInfo extends BaseInfo {
 	private String name;
 	@Column("mail")
 	private String mail;
+	@Column("remail")
+	private String remail;
 	@Column("gender")
 	private String gender;
 	@Column("roles")
@@ -90,8 +92,17 @@ public class UserInfo extends BaseInfo {
 	public String getUserHeadImg() {
 		return userHeadImg;
 	}
+
 	public void setUserHeadImg(String userHeadImg) {
 		this.userHeadImg = userHeadImg;
+	}
+
+	public String getRemail() {
+		return remail;
+	}
+
+	public void setRemail(String remail) {
+		this.remail = remail;
 	}
 
 }
