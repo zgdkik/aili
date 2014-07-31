@@ -32,12 +32,18 @@ document.write('<script src="' + jsPATH + 'jquery-exp.js" type="text/javascript"
 //bootstrap
 document.write('<script src="' + jsPATH + 'bootstrap/bootstrap.min.js" type="text/javascript"></script>');
 document.write('<script src="' + jsPATH + 'bootstrap/bootstrapValidator.min.js" type="text/javascript"></script>');
+//fancybox
+document.write('<script src="' + jsPATH + 'fancybox/jquery.fancybox.js" type="text/javascript"></script>');
+document.write('<script src="' + jsPATH + 'fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>');
+//鼠标移动
+document.write('<script src="' + jsPATH + 'jquery/jquery.mousewheel-3.0.6.pack.js" type="text/javascript"></script>');
 //common
 document.write('<script src="' + jsPATH + 'common.js" type="text/javascript"></script>');
 //css
 document.write('<link rel="stylesheet" href="' +cssPATH + 'bootstrap/bootstrap.min.css" >');
 document.write('<link rel="stylesheet" href="' +cssPATH + 'bootstrap/bootstrap-theme.min.css" >');
-
+//fancybox css
+document.write('<link rel="stylesheet" href="' +jsPATH + 'fancybox/jquery.fancybox.css" >');
 ////////////////////////////////////////////////////////////////////////////////////////
 function getCookie(sName) {
     var aCookie = document.cookie.split("; ");
