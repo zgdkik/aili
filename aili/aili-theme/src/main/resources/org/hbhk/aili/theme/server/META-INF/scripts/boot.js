@@ -44,10 +44,14 @@ document.write('<link rel="stylesheet" href="' +cssPATH + 'bootstrap/bootstrap.m
 document.write('<link rel="stylesheet" href="' +cssPATH + 'bootstrap/bootstrap-theme.min.css" >');
 //fancybox css
 document.write('<link rel="stylesheet" href="' +jsPATH + 'fancybox/jquery.fancybox.css" >');
+//jquery ui
+document.write('<link rel="stylesheet" href="' +jsPATH + 'jqueryui/jquery-ui.min.css" >');
+document.write('<script src="' + jsPATH + 'jqueryui/jquery-ui.min.js" type="text/javascript"></script>');
 //jqgrid
+document.write('<link rel="stylesheet" href="' +jsPATH + 'jqgrid/ui.jqgrid.css" >');
 document.write('<script src="' + jsPATH + 'jqgrid/i18n/grid.locale-en.js" type="text/javascript"></script>');
 document.write('<script src="' + jsPATH + 'jqgrid/jquery.jqGrid.min.js" type="text/javascript"></script>');
-document.write('<link rel="stylesheet" href="' +jsPATH + 'jqgrid/ui.jqgrid.css" >');
+
 ////////////////////////////////////////////////////////////////////////////////////////
 function getCookie(sName) {
     var aCookie = document.cookie.split("; ");
