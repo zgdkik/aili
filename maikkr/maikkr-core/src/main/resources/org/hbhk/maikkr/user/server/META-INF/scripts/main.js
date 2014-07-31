@@ -57,7 +57,7 @@ $j(document).ready(function() {
 		'onUploadStart':function(){
 			var img = $j('.imgurl').val();
 			var imgs = img.split(",");
-			if(imgs.length>=){
+			if(imgs.length>=5){
 				$j.toast("一个主题最多五张图片");
 				return false;
 			}else{
@@ -115,6 +115,8 @@ $j(document).ready(function() {
 		$j(this).css("background-color","")
 	});
 	updateHeight();
+	//显示放大图片
+	$j('.fancybox').fancybox();
 });
 
 function sendTheme(){
@@ -162,11 +164,14 @@ function loadTheme() {
 				'src="'+headimg+'"></div>';
 				var title='<div class="vline"><div class="context"><a href="">'+item.blogTitle+'</a></div>';
       			var context='<div class="vline"><div class="context">'+item.blogContent+'</div><div class="context_imgs">';
+      			var imggroup= item.blogUrl;
       			if(imgurl!=null && imgurl!=""){
       				var imgs = imgurl.split(",");
       				for ( var j = 0; j < imgs.length; j++) {
-      					var img ='<img id="context_img" height="100px" width="100px" src="'+ base + imgs[j]+'">';
-      					context =context +img;
+      					var imgurl = base + imgs[j];
+      					var preImg = '<a class="fancybox" href="'+imgurl+'" data-fancybox-group="'+imggroup+'">'
+      					var img ='<img id="context_img" height="100px" width="100px" src="'+imgurl+'"></a>';
+      					context =context +preImg+img;
 					}
       			}
       			context=context+"</div></div>";
