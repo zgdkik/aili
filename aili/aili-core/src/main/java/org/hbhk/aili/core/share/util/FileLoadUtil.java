@@ -22,7 +22,7 @@ public final class FileLoadUtil {
 			String fileName) throws IOException {
 		PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
 		Resource[] resources = resolver.getResources("classpath*:org/hbhk/**/"
-				+ moduleName + "/server/META-INF/" + fileName);
+				+ moduleName + "/**/server/META-INF/**/" + fileName);
 		return resources;
 	}
 
@@ -42,7 +42,7 @@ public final class FileLoadUtil {
 			String fileName) throws FileNotFoundException, IOException {
 		PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
 		Resource[] resources = resolver.getResources("classpath*:org/hbhk/**/"
-				+ moduleName + "/server/META-INF/" + fileName);
+				+ moduleName + "/**/server/META-INF/**/" + fileName);
 		if (resources == null || resources.length < 1) {
 			throw new FileNotFoundException("file '" + fileName
 					+ "' not found in this module");
