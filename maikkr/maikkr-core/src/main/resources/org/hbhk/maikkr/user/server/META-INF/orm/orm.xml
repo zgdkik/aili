@@ -6,9 +6,9 @@
 			select *from t_mkk_blog blog where
 				blog.status=1
 				#if(q!="")
-					or blog.blogTitle LIKE '${q}'
+					and (blog.blogTitle LIKE '${q}'
 					or blog.blogContent LIKE '${q}'
-					or blog.blogUser LIKE '${q}'
+					or blog.blogUser LIKE '${q}')
 				#end
 		</sql>
 	</select>

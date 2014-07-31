@@ -201,9 +201,13 @@ function search(q) {
 		type : "POST",
 		data:{'q':q},
 		success : function(data, textStatus) {
-			var items = data.result.items;
+			var items = data.result;
 			var theme_list = $j("#theme_list");
 			theme_list.empty();
+			if(items== null ||items.length==0){
+				updateHeight();
+				return;
+			}
 			for ( var i = 0; i < items.length; i++) {
 				var item = items[i];
 				// 设置头像
