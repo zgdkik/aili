@@ -43,6 +43,7 @@ $j(document).ready(function() {
 		'swf' : base + 'uploadify/uploadify.swf',
 		'uploader' : base + 'core/upload.htm;jsessionid='+seesionid,
 		'auto' : true,
+		'simUploadLimit':5,
 		'buttonImage' : base + 'images/user/homeblog/file-upload.png',
 		'buttonText' : '浏览',
 		'fileTypeDesc' : '图片',
@@ -51,6 +52,18 @@ $j(document).ready(function() {
 		'multi' : true,
 		'width' : 60,
 		'height' : 20,
+		'uploadLimit':5,
+		'queueSizeLimit':5,
+		'onUploadStart':function(){
+			var img = $j('.imgurl').val();
+			var imgs = img.split(",");
+			if(imgs.length>=){
+				$j.toast("一个主题最多五张图片");
+				return false;
+			}else{
+				return true;
+			}
+		},
 		'onSelectError' : function() {
 			$j.toast("支持的文件格式:*.gif; *.jpg; *.png");
 		},
