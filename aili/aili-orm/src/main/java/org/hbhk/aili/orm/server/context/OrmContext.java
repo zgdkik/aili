@@ -19,7 +19,7 @@ import org.hbhk.aili.orm.share.util.PropertiesUtil;
 public class OrmContext {
 
 	private static Map<String, Object> context = new ConcurrentHashMap<String, Object>();
-	private static String path = "orm.auotscan.path";
+	private static String path = "orm.auotscan.module";
 	private static String filename = "orm.auotscan.filename";
 
 	public static void init() throws IOException {
