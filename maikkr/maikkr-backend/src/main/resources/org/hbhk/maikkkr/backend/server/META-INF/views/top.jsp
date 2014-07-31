@@ -21,8 +21,8 @@ body {
   <tr>
     <td height="59" background="${images}/main/top.gif"><table width="99%" border="0" cellspacing="0" cellpadding="0">
       <tr>
-        <td width="1%"><a href="http://www.mycodes.net/admin-templates/" target="_blank"><img src="${images}/main/logo.gif" width="557" height="59" border="0" /></a></td>
-        <td width="64%" align="right" style="font-size:12px;vertical-align:bottom;">&copy; 2009 <a href="http://www.mycodes.net/admin-templates/" style="color:#0099FF;text-decoration:none;">www.mycodes.net</a> QQ:123456 Email:123456@qq.com</td>
+        <td width="1%"><a href="http://www.mycodes.net/admin-templates/" target="_blank"><img src="${images}/main/logo.png" width="557" height="59" border="0" /></a></td>
+        <td width="64%" align="right" style="font-size:12px;vertical-align:bottom;">&copy; 2014 <a href="http://www.maikkr.com" style="color:#0099FF;text-decoration:none;">买客网</a></td>
       </tr>
     </table></td>
   </tr>
