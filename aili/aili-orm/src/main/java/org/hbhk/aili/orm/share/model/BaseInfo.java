@@ -19,6 +19,8 @@ public abstract class BaseInfo implements Serializable {
 	private String updateUser;
 	@Column("updateTime")
 	private Date updateTime;
+	@Column("status")
+	private int status = 1;
 
 	public String getId() {
 		return id;
@@ -60,4 +62,11 @@ public abstract class BaseInfo implements Serializable {
 		this.updateTime = updateTime;
 	}
 
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
 }
