@@ -16,45 +16,33 @@ import java.util.List;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.hbhk.aili.core.share.util.FileLoadUtil;
+import org.springframework.core.io.Resource;
 
 public class FileScanUtil {
 
 	private Log log = LogFactory.getLog(getClass());
 
-	public List<String> scanBeansXml(String dirPath, String filename)
+	public List<String> scanBeansXml(String moduleName, String filename)
 			throws IOException {
-		Enumeration<URL> urls = null;
-		if (StringUtils.isEmpty(dirPath)) {
-			if (StringUtils.isNotEmpty(filename)) {
-				urls = FileScanUtil.class.getClass().getClassLoader()
-						.getResources(filename);
-			} else {
-				ClassLoader loader = FileScanUtil.class.getClass().getClassLoader();
-				if (loader == null) {
-					urls = ClassLoader.getSystemResources("orm.xml");
-				} else {
-					urls = loader.getResources(dirPath);
-				}
-			}
+		Resource[] resources = null;
+		if (StringUtils.isNotEmpty(filename)) {
+			resources = FileLoadUtil.getResourcesForClasspath(moduleName,
+					filename);
 		} else {
-			ClassLoader loader = FileScanUtil.class.getClass().getClassLoader();
-			if (loader == null) {
-				urls = ClassLoader.getSystemResources(dirPath);
-			} else {
-				urls = loader.getResources(dirPath);
-			}
+			resources = FileLoadUtil.getResourcesForClasspath(moduleName,
+					"orm.xml");
 		}
 		List<String> beansXml = new ArrayList<String>();
-		while (urls.hasMoreElements()) {
-			// 获取下一个元素
-			URL url = urls.nextElement();
+		for (Resource res : resources) {
+			URL url = res.getURL();
 			if (url == null) {
-				throw new IOException(dirPath + "找不到");
+				throw new IOException(moduleName + "找不到");
 			}
-
 			String protocol = url.getProtocol();
 			log.debug("protocol:" + protocol);
 			if (protocol.equals("jar")) {
@@ -66,7 +54,7 @@ public class FileScanUtil {
 					JarEntry entry = jarEntrys.nextElement();
 					// 简单的判断路径，如果想做到想Spring，Ant-Style格式的路径匹配需要用到正则。
 					String name = entry.getName();
-					if (!name.startsWith(dirPath) || entry.isDirectory()) {
+					if (!name.startsWith("org/hbhk") || entry.isDirectory()) {
 						continue;
 					}
 					// if (!name.endsWith("orm.xml")) {
@@ -88,12 +76,11 @@ public class FileScanUtil {
 
 				}
 			} else if (protocol.equals("file")) {
-
 				String filePath = URLDecoder.decode(url.getFile(), "UTF-8");
 				readFileContext(filePath, beansXml, filename);
-
 			}
 		}
+
 		return beansXml;
 
 	}
@@ -127,10 +114,8 @@ public class FileScanUtil {
 
 	private List<String> readFileContext(String filePath, List<String> fileStr,
 			final String filename) throws IOException {
-
 		// 获取此包的目录 建立一个File
 		File dir = new File(filePath);
-
 		// 如果不存在或者 也不是目录就直接返回
 		if (!dir.exists() || !dir.isDirectory()) {
 			// log.warn("用户定义包名 " + packageName + " 下没有任何文件");
@@ -153,31 +138,8 @@ public class FileScanUtil {
 			if (file.isDirectory()) {
 				readFileContext(file.getAbsolutePath(), fileStr, filename);
 			} else {
-				InputStream is = null;
-				InputStreamReader isr = null;
-				BufferedReader br = null;
-				try {
-					is = new FileInputStream(file);
-					isr = new InputStreamReader(is, "utf8");
-					br = new BufferedReader(isr);
-					StringBuilder context = new StringBuilder();
-					String line;
-					while ((line = br.readLine()) != null) {
-						context.append(line + "\t\n");
-					}
-					fileStr.add(context.toString());
-				} finally {
-					if (br != null) {
-						br.close();
-					}
-					if (isr != null) {
-						isr.close();
-					}
-					if (is != null) {
-						is.close();
-					}
-				}
-
+				String str = FileUtils.readFileToString(file, "utf8");
+				fileStr.add(str);
 			}
 		}
 		return fileStr;
