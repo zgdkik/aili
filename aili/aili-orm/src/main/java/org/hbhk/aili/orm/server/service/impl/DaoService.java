@@ -198,7 +198,7 @@ public class DaoService implements IDaoService {
 	public <T> List<T> findByNativeQuery(String queryString, Object[] params,
 			Sort[] sorts, int start, final int pageSize,
 			final RowMapper<T> rowMapper) {
-		if(start==-1&& pageSize==-1){
+		if (start == -1 && pageSize == -1) {
 			return (List<T>) jdbcTemplate.query(queryString, rowMapper);
 		}
 		queryString = pageQueryProvider.getPagableQuery(queryString, start,
@@ -308,7 +308,7 @@ public class DaoService implements IDaoService {
 	@Override
 	public <T> T getOne(T model, RowMapper<T> rowMapper) {
 		List<T> ts = get(model, rowMapper);
-		if(CollectionUtils.isEmpty(ts)){
+		if (CollectionUtils.isEmpty(ts)) {
 			return null;
 		}
 		return ts.get(0);
@@ -318,8 +318,9 @@ public class DaoService implements IDaoService {
 	public <T> List<T> get(T model, Page page, RowMapper<T> rowMapper) {
 		SqlContext context = SqlUtil.buildQuerySql(model, nameHandler);
 		String queryString = context.getSql().toString();
-		//(pageNow-1)*pageSize,pageSize;
-		queryString = queryString+" limit "+page.getStart()+"," +page.getSize();
+		// (pageNow-1)*pageSize,pageSize;
+		queryString = queryString + " limit " + page.getStart() + ","
+				+ page.getSize();
 		List<Object> args = context.getParams();
 		return jdbcTemplate.query(queryString, rowMapper, args.toArray());
 	}
