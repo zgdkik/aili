@@ -33,7 +33,7 @@ public class BlogService implements IBlogService {
 		blog.setCreatUser(user);
 		blog.setBlogId(id);
 		user = user.substring(0, user.indexOf("@"));
-		blog.setBlogUrl(user+"/"+System.currentTimeMillis()+".htm");
+		blog.setBlogUrl(user + "/" + System.currentTimeMillis() + ".htm");
 		blogDao.save(blog);
 		return blog;
 	}
@@ -56,6 +56,15 @@ public class BlogService implements IBlogService {
 
 	public BlogInfo getBlog(BlogInfo blog) {
 		return blogDao.getOne(blog);
+	}
+
+	public List<BlogInfo> search(String q) {
+		if (q == null) {
+			q = "";
+		} else {
+			q = "%" + q + "%";
+		}
+		return blogDao.search(q);
 	}
 
 }

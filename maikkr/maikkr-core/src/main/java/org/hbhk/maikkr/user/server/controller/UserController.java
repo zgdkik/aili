@@ -55,6 +55,16 @@ public class UserController extends BaseController {
 		}
 	}
 
+	@RequestMapping("/search")
+	@ResponseBody
+	public ResponseEntity search(String q) {
+		try {
+			Object result = blogService.search(q);
+			return returnSuccess(result);
+		} catch (Exception e) {
+			return returnException(e.getMessage());
+		}
+	}
 	@RequestMapping("/{user}/{url}")
 	public String getTheme(@PathVariable("user") String user,
 			@PathVariable("url") String url, Model model) {

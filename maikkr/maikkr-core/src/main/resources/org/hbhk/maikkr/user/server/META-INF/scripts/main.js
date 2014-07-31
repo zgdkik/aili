@@ -107,6 +107,14 @@ $j(document).ready(function() {
 		sendTheme();
 	});
 	
+	$j(".btnSearch").click(function() {
+		var q = $j('.search').val();
+		if(q==null || q==""){
+			return;
+		}
+		search(q);
+	});
+	
 	//发布主题
 	$j(".blog_contenttop").mouseover(function() {
 		$j(this).css("background-color","#E6E6E6")
@@ -187,6 +195,48 @@ function loadTheme() {
 	});
 };
 
+function search(q) {
+	$j.ajax({
+		url : base + "user/search.htm",
+		type : "POST",
+		data:{'q':q},
+		success : function(data, textStatus) {
+			var items = data.result.items;
+			var theme_list = $j("#theme_list");
+			theme_list.empty();
+			for ( var i = 0; i < items.length; i++) {
+				var item = items[i];
+				// 设置头像
+				var headimg = base + item.userHeadImg;
+				var imgurl =item.blogLink;
+				 
+				var li='<li class="theme" style="border:#666 1px solid;height:230px; border-left:0;border-right:0;">'
+				var head ='<div class="vline"><img id="head_portrait" height="50px" width="50px" '+
+				'src="'+headimg+'"></div>';
+				var title='<div class="vline"><div class="context"><a href="">'+item.blogTitle+'</a></div>';
+      			var context='<div class="vline"><div class="context">'+item.blogContent+'</div><div class="context_imgs">';
+      			var imggroup= item.blogUrl;
+      			if(imgurl!=null && imgurl!=""){
+      				var imgs = imgurl.split(",");
+      				for ( var j = 0; j < imgs.length; j++) {
+      					var imgurl = base + imgs[j];
+      					var preImg = '<a class="fancybox" href="'+imgurl+'" data-fancybox-group="'+imggroup+'">'
+      					var img ='<img id="context_img" height="100px" width="100px" src="'+imgurl+'"></a>';
+      					context =context +preImg+img;
+					}
+      			}
+      			context=context+"</div></div>";
+				li=li+head+title+context+'</li>'
+				theme_list.append(li);
+				theme_list.trigger("create");
+			}
+			updateHeight();
+		},
+		exception : function(data, textStatus) {
+			$j.toast("加载主题失败,请重新刷新!");
+		}
+	});
+};
 // 动态改变div高度
 var preHiget;// 上次的高度
 var difference;
