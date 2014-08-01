@@ -6,6 +6,8 @@ import org.hbhk.aili.core.server.annotation.NeedLogin;
 import org.hbhk.aili.core.server.web.BaseController;
 import org.hbhk.aili.core.share.pojo.ResponseEntity;
 import org.hbhk.aili.orm.server.surpport.Page;
+import org.hbhk.aili.security.server.service.IUserService;
+import org.hbhk.aili.security.share.pojo.UserInfo;
 import org.hbhk.maikkr.user.server.service.IBlogService;
 import org.hbhk.maikkr.user.share.pojo.BlogInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +23,9 @@ public class UserController extends BaseController {
 	private Log log = LogFactory.getLog(getClass());
 	@Autowired
 	private IBlogService blogService;
-
+	@Autowired
+	private IUserService userService;
+	
 	@RequestMapping("/main")
 	@NeedLogin
 	public String main() {
@@ -84,6 +88,20 @@ public class UserController extends BaseController {
 		} catch (Exception e) {
 			log.error("getTheme", e);
 			return "redirect:/core/error.htm";
+		}
+	}
+	
+	@RequestMapping("/getUser")
+	@ResponseBody
+	public UserInfo getUser(String email) {
+		try {
+			UserInfo user = new UserInfo();
+			user.setMail(email);
+			user = userService.getUser(user);
+			return user;
+		} catch (Exception e) {
+			log.error("getUser", e);
+			return null;
 		}
 	}
 
