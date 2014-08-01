@@ -56,7 +56,7 @@ public class SecurityController extends BaseController {
 					UserConstants.CURRENT_USER_NAME, null);
 			return "redirect:/user/loginpage.htm";
 		} catch (Exception e) {
-			log.error("login", e);
+			log.error("logout", e);
 			return "redirect:/user/loginpage.htm";
 		}
 
@@ -86,7 +86,7 @@ public class SecurityController extends BaseController {
 			emailService.sendEmail(emailInfo);
 			return returnSuccess();
 		} catch (Exception e) {
-			log.error("login", e);
+			log.error("regist", e);
 			return returnException("注册失败");
 		}
 	}
@@ -103,7 +103,7 @@ public class SecurityController extends BaseController {
 				return returnException();
 			}
 		} catch (Exception e) {
-			log.error("login", e);
+			log.error("getUserByMail", e);
 			return returnException(e.getMessage());
 		}
 	}
@@ -120,7 +120,7 @@ public class SecurityController extends BaseController {
 				return returnException();
 			}
 		} catch (Exception e) {
-			log.error("login", e);
+			log.error("getUserByName", e);
 			return returnException(e.getMessage());
 		}
 	}
