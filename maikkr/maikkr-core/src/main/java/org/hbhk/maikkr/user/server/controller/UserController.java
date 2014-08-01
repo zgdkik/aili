@@ -6,6 +6,7 @@ import org.hbhk.aili.core.server.annotation.NeedLogin;
 import org.hbhk.aili.core.server.web.BaseController;
 import org.hbhk.aili.core.share.pojo.ResponseEntity;
 import org.hbhk.aili.orm.server.surpport.Page;
+import org.hbhk.aili.security.server.context.UserContext;
 import org.hbhk.aili.security.server.service.IUserService;
 import org.hbhk.aili.security.share.pojo.UserInfo;
 import org.hbhk.maikkr.core.server.event.UpdateBlogHitsEvent;
@@ -82,7 +83,7 @@ public class UserController extends BaseController {
 		try {
 			String blogUrl = user + "/" + url + ".htm";
 			BlogInfo blog = new BlogInfo();
-			blog.setBlogUser(user);
+			blog.setBlogUser(UserContext.getCurrentContext().getCurrentUserName());
 			blog.setBlogUrl(blogUrl);
 			model.addAttribute("theme", blogService.getBlog(blog));
 			//修改对应主题的点击数供最热查询
