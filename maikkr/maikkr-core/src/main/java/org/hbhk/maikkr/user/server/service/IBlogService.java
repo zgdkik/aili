@@ -15,4 +15,6 @@ public interface IBlogService {
 	BlogInfo getBlog(BlogInfo blog);
 
 	List<BlogInfo> search(String q);
+	
+	BlogInfo updateBlogHit(String blogId);
 }

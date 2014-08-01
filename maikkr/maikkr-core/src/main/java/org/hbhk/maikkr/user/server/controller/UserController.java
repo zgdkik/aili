@@ -84,6 +84,7 @@ public class UserController extends BaseController {
 			blog.setBlogUser(user);
 			blog.setBlogUrl(blogUrl);
 			model.addAttribute("theme", blogService.getBlog(blog));
+			//修改对应主题的点击数供最热查询
 			return "comment";
 		} catch (Exception e) {
 			log.error("getTheme", e);

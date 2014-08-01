@@ -23,6 +23,8 @@ public class BlogInfo extends BaseInfo {
 	private int blogForward;// 转发次数
 	@Column("blogReview")
 	private int blogReview;// 评论次数
+	@Column("blogHit")
+	private int blogHit;// 热度次数
 	@Column("blogLink")
 	private String blogLink;// 图片url
 	//主题url
@@ -108,6 +110,14 @@ public class BlogInfo extends BaseInfo {
 
 	public void setBlogUrl(String blogUrl) {
 		this.blogUrl = blogUrl;
+	}
+
+	public int getBlogHit() {
+		return blogHit;
+	}
+
+	public void setBlogHit(int blogHit) {
+		this.blogHit = blogHit;
 	}
 	
 }
