@@ -3,9 +3,10 @@ package org.hbhk.aili.security.server.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.hbhk.aili.core.server.context.RequestContext;
 import org.hbhk.aili.core.server.web.BaseController;
-import org.hbhk.aili.core.share.ex.BusinessException;
 import org.hbhk.aili.core.share.pojo.ResponseEntity;
 import org.hbhk.aili.security.server.context.UserContext;
 import org.hbhk.aili.security.server.service.IUserService;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping(SecurityConstant.moduleName)
 public class SecurityController extends BaseController {
 
+	private Log log = LogFactory.getLog(getClass());
 	@Autowired
 	private IUserService userService;
 
@@ -39,7 +41,8 @@ public class SecurityController extends BaseController {
 			} else {
 				return returnException();
 			}
-		} catch (BusinessException e) {
+		} catch (Exception e) {
+			log.error("login", e);
 			return returnException(e.getMessage());
 		}
 
@@ -53,6 +56,7 @@ public class SecurityController extends BaseController {
 					UserConstants.CURRENT_USER_NAME, null);
 			return "redirect:/user/loginpage.htm";
 		} catch (Exception e) {
+			log.error("login", e);
 			return "redirect:/user/loginpage.htm";
 		}
 
@@ -82,6 +86,7 @@ public class SecurityController extends BaseController {
 			emailService.sendEmail(emailInfo);
 			return returnSuccess();
 		} catch (Exception e) {
+			log.error("login", e);
 			return returnException("注册失败");
 		}
 	}
@@ -97,7 +102,8 @@ public class SecurityController extends BaseController {
 			} else {
 				return returnException();
 			}
-		} catch (BusinessException e) {
+		} catch (Exception e) {
+			log.error("login", e);
 			return returnException(e.getMessage());
 		}
 	}
@@ -113,7 +119,8 @@ public class SecurityController extends BaseController {
 			} else {
 				return returnException();
 			}
-		} catch (BusinessException e) {
+		} catch (Exception e) {
+			log.error("login", e);
 			return returnException(e.getMessage());
 		}
 	}
