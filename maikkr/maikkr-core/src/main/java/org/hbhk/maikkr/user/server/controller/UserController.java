@@ -1,5 +1,7 @@
 package org.hbhk.maikkr.user.server.controller;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.hbhk.aili.core.server.annotation.NeedLogin;
 import org.hbhk.aili.core.server.web.BaseController;
 import org.hbhk.aili.core.share.pojo.ResponseEntity;
@@ -16,7 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping("/user")
 public class UserController extends BaseController {
-
+	private Log log = LogFactory.getLog(getClass());
 	@Autowired
 	private IBlogService blogService;
 
@@ -38,6 +40,7 @@ public class UserController extends BaseController {
 			blogService.save(blog);
 			return returnSuccess("发布成功!");
 		} catch (Exception e) {
+			log.error("sendTheme", e);
 			return returnException(e.getMessage());
 		}
 	}
@@ -51,6 +54,7 @@ public class UserController extends BaseController {
 			Object result = blogService.getBlogPage(blog, page);
 			return returnSuccess(result);
 		} catch (Exception e) {
+			log.error("getPageTheme", e);
 			return returnException(e.getMessage());
 		}
 	}
@@ -62,9 +66,11 @@ public class UserController extends BaseController {
 			Object result = blogService.search(q);
 			return returnSuccess(result);
 		} catch (Exception e) {
+			log.error("search", e);
 			return returnException(e.getMessage());
 		}
 	}
+
 	@RequestMapping("/{user}/{url}")
 	public String getTheme(@PathVariable("user") String user,
 			@PathVariable("url") String url, Model model) {
@@ -76,6 +82,7 @@ public class UserController extends BaseController {
 			model.addAttribute("theme", blogService.getBlog(blog));
 			return "comment";
 		} catch (Exception e) {
+			log.error("getTheme", e);
 			return "redirect:/core/error.htm";
 		}
 	}
