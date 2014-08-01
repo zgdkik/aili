@@ -1,8 +1,14 @@
 package org.hbhk.aili.core.server.web;
 
 import org.hbhk.aili.core.share.pojo.ResponseEntity;
+import org.springframework.web.context.WebApplicationContext;
 
 public abstract class BaseController {
+
+	public WebApplicationContext getWebApplicationContext() {
+		return WebApplicationContextHolder.getWebApplicationContext();
+	}
+
 	public ResponseEntity returnSuccess() {
 		return new ResponseEntity();
 	}
