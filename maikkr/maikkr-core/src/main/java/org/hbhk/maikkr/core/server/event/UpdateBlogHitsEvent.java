@@ -16,7 +16,11 @@ public class UpdateBlogHitsEvent extends ApplicationEvent {
 	public UpdateBlogHitsEvent(String blogId) {
 		super(blogId);
 		this.blogId = blogId;
-		blogService.updateBlogHit(blogId);
+
+	}
+
+	public void updateBlogHit() {
+		blogService.updateBlogHit(this.blogId);
 	}
 
 	public String getBlogId() {

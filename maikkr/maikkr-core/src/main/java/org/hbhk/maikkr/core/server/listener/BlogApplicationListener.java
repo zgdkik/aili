@@ -17,7 +17,9 @@ public class BlogApplicationListener implements
 
 		if (event instanceof UpdateBlogHitsEvent) {
 			UpdateBlogHitsEvent blogHitsEvent = (UpdateBlogHitsEvent) event;
+			blogHitsEvent.updateBlogHit();
 			log.info("主题热度更新:" + blogHitsEvent.getBlogId());
+			
 		}
 	}
 
