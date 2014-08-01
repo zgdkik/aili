@@ -36,6 +36,12 @@ public class BackendController extends BaseController {
 		return "top";
 	}
 
+	@RequestMapping("bloglist")
+	@NeedLogin
+	public String bloglist() {
+		return "bloglist";
+	}
+
 	@RequestMapping("left")
 	@NeedLogin
 	public String left() {

@@ -135,7 +135,7 @@ body {
 					<tr>
 						<td width="9%" height="20"><img id="xiaotu17"
 							src="${images}/main/ico06.gif" width="8" height="12" /></td>
-						<td width="91%"><a href="sendxiaoxi.htm" target="mainFrame"
+						<td width="91%"><a href="${base}backend/bloglist.htm" target="mainFrame"
 							class="left-font03" onClick="tupian('17');">主题列表</a></td>
 					</tr>
 				</table> 

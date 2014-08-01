@@ -3,6 +3,7 @@ $j(document).ready(function() {
 	$j("#list").jqGrid({
         datatype: "local",
         height: 250,
+        width:1000,
         colNames:['编号','用户名', '性别', '邮箱', 'QQ','手机号','出生日期'],
         colModel:[
                 {name:'id',index:'id', width:60, sorttype:"int"},
