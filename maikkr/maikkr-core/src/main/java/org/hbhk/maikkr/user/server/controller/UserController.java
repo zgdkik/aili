@@ -8,6 +8,7 @@ import org.hbhk.aili.core.share.pojo.ResponseEntity;
 import org.hbhk.aili.orm.server.surpport.Page;
 import org.hbhk.aili.security.server.service.IUserService;
 import org.hbhk.aili.security.share.pojo.UserInfo;
+import org.hbhk.maikkr.core.server.event.UpdateBlogHitsEvent;
 import org.hbhk.maikkr.user.server.service.IBlogService;
 import org.hbhk.maikkr.user.share.pojo.BlogInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,6 +86,8 @@ public class UserController extends BaseController {
 			blog.setBlogUrl(blogUrl);
 			model.addAttribute("theme", blogService.getBlog(blog));
 			//修改对应主题的点击数供最热查询
+			UpdateBlogHitsEvent blogHitsEvent = new UpdateBlogHitsEvent(blogUrl); 
+			getWebApplicationContext().publishEvent(blogHitsEvent);
 			return "comment";
 		} catch (Exception e) {
 			log.error("getTheme", e);
