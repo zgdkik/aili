@@ -16,5 +16,5 @@ public interface IBlogService {
 
 	List<BlogInfo> search(String q);
 	
-	BlogInfo updateBlogHit(String blogId);
+	void updateBlogHit(String blogId);
 }

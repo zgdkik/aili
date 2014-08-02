@@ -12,5 +12,11 @@
 				#end
 		</sql>
 	</select>
+	<update id="updateBlogsHit">
+			<sql>
+			update t_mkk_blog set blogHit = blogHit+1
+				 WHERE blogUrl = '${blogUrl}';
+			</sql>
+	</update>
 
 </orm>

@@ -43,7 +43,19 @@
 						发言请遵守社区公约，最多可以输入
 						<span>500</span>个字
 					</div>
-					<div><label class="labTitle">主题名称:</label><input type="text" name="blogtitle" class="blogTitle"></div>
+					<div><label class="labTitle">主题名称:</label>
+					<!-- <input type="text" name="blogtitle" class="blogTitle"> -->
+					<div  class="blogTitle"  style="position:relative;"> 
+				        <span style="margin-left:100px;width:18px;overflow:hidden;"> 
+				            <select style="width:300px;height:30px;margin-left:-100px" onchange="this.parentNode.nextSibling.value=this.value"> 
+				            <option value="1">我的QQ空间</option> 
+				            <option value="2">我的CSDN博客</option> 
+				            <option value="3">我的猫扑博客</option> 
+				            </select>
+				        </span>
+				        <input name="box" style="width:270px;height:30px;position:absolute;left:0px;"> 
+				    </div>
+					</div>
 					<div><label class="labText">主题内容:</label><textarea id="blogText" class="blogText"></textarea></div>
 					<div  style="border-width:0px;width:540px;height:50px;position:absolute;margin-top: 200px; margin-left: 20px;">
 					  <span  id="uploadImg"></span>

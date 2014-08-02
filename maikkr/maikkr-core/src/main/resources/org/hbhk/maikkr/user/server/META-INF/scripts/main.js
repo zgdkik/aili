@@ -125,11 +125,29 @@ $j(document).ready(function() {
 	updateHeight();
 	//显示放大图片
 	$j('.fancybox').fancybox();
+	
+	$j('#theme-select').change(function(){ 
+		var themeName  = $j(this).children('option:selected').text();
+		$j('#theme-select-text').val(themeName);
+	});
+	
+	$j("#theme-select-text").blur(function(){
+	    //检查自定义主题名称是否存在
+	 });
 });
 
 function sendTheme(){
-	var title = $j('.blogTitle').val();
+	var title = $j('#theme-select-text').val();
+	if(title==null || title==""){
+		$j.toast("请输入或选择主题!");
+		return ;
+	}
+	
 	var context = $j('.blogText').val();
+	if(context==null || context==""){
+		$j.toast("请输入你想说的主题内容!");
+		return ;
+	}
 	var url = $j('.imgurl').val();
 	//发布主题$j('.imgurl').val()
 	var data={

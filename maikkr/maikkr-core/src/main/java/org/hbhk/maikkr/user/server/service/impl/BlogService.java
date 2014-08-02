@@ -67,13 +67,8 @@ public class BlogService implements IBlogService {
 		return blogDao.search(q);
 	}
 
-	public BlogInfo updateBlogHit(String blogUrl) {
-		BlogInfo blog = new BlogInfo();
-		blog.setBlogUrl(blogUrl);
-		blog = blogDao.getOne(blog);
-		blog.setBlogHit(blog.getBlogHit() + 1);
-		blogDao.update(blog);
-		return blog;
+	public void updateBlogHit(String blogUrl) {
+		blogDao.updateBlogsHit(blogUrl);
 	}
 
 }
