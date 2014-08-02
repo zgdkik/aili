@@ -75,6 +75,12 @@ public class SecurityController extends BaseController {
 			if (code != null && !code.equals(scode)) {
 				return returnException("验证码不正确");
 			}
+			// 验证用户是否存在
+			UserInfo u = new UserInfo();
+			u.setMail(user.getMail());
+			if (userService.getUser(u) != null) {
+				return returnException("该邮箱已被注册，请直接登录");
+			}
 			userService.save(user);
 			RequestContext.setSessionAttribute(UserConstants.CURRENT_USER_NAME,
 					user.getMail());
