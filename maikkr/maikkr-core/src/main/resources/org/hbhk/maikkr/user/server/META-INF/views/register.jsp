@@ -113,7 +113,7 @@
 									<input type="text" autocomplete="off" maxlength="4" name="virfy"
 										class="w_input virfy_input" id="virfyId" />
 									<a class="code" href="javascript:void(0);">
-										<img alt="" id="virfyCode" src="${base}security/validateCode.htm"/>
+										<img alt="" id="virfyCode" onclick="javascript:refreshimg()" src="${base}security/validateCode.htm"/>
 									</a>
 									<a class="verify_refresh" title="看不清，换一张" onclick="javascript:refreshimg()" style="cursor: hand"  href="javascript:void(0)"></a>
 								</div>
@@ -147,15 +147,15 @@
 								<!-- 
 									<div class="inp verify">
 										<p class="agreement">
-											<a href="/signup/v5/protocol" target="_blank">新浪微博服务使用协议</a>
+											<a href="/signup/v5/protocol" target="_blank"></a>
 										</p>
 										<p class="agreement">
-											<a href="/signup/v5/privacy" target="_blank">新浪微博个人信息保护政策</a>
+											<a href="/signup/v5/privacy" target="_blank"></a>
 										</p>
 										<p class="agreement">
 											<a
 												href="http://news.sina.com.cn/c/2012-12-29/051425921660.shtml"
-												target="_blank">全国人大常委会关于加强网络信息保护的决定</a>
+												target="_blank"></a>
 										</p>
 									</div> -->
 							</div>
@@ -178,7 +178,7 @@
 								作为登录密码发送至：
 							</p>
 							<p class="p3">
-								<span class="number">1069 009 088</span>
+								<span class="number">15821999948</span>
 							</p>
 							<p class="S_txt2">
 								即可注册成功。
