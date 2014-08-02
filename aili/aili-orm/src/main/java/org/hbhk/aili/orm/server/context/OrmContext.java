@@ -7,6 +7,8 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.hbhk.aili.orm.server.convertor.OrmConvertor;
 import org.hbhk.aili.orm.share.model.Delete;
 import org.hbhk.aili.orm.share.model.Insert;
@@ -18,6 +20,7 @@ import org.hbhk.aili.orm.share.util.PropertiesUtil;
 
 public class OrmContext {
 
+	private static Log log = LogFactory.getLog(OrmContext.class);
 	private static Map<String, Object> context = new ConcurrentHashMap<String, Object>();
 	private static String path = "orm.auotscan.module";
 	private static String filename = "orm.auotscan.filename";
@@ -68,10 +71,12 @@ public class OrmContext {
 			try {
 				init();
 			} catch (IOException e) {
+				log.error("orm error", e);
 				throw new RuntimeException(e);
 			}
 		}
 		String sql = (String) context.get(id);
+		
 		return sql;
 
 	}

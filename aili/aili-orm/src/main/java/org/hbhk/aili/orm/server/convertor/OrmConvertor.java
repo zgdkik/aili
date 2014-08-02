@@ -14,11 +14,15 @@ import javax.xml.stream.FactoryConfigurationError;
 import javax.xml.transform.stream.StreamSource;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.hbhk.aili.orm.share.model.ObjectFactory;
 import org.hbhk.aili.orm.share.model.Orm;
 import org.hbhk.aili.orm.share.util.JAXBContextUtil;
 
 public class OrmConvertor {
+	
+	private static Log log = LogFactory.getLog(OrmConvertor.class);
 	/** The Constant CLZZ. */
 	private static final Class<Orm> CLZZ = Orm.class;
 
@@ -41,6 +45,7 @@ public class OrmConvertor {
 					stream), CLZZ);
 			return element.getValue();
 		} catch (JAXBException e) {
+			log.error("解析orm文件出错", e);
 			throw new RuntimeException(e);
 		}
 	}
@@ -63,10 +68,13 @@ public class OrmConvertor {
 			stringWriter.flush();
 			return stringWriter.toString();
 		} catch (PropertyException e) {
+			log.error("解析orm文件出错", e);
 			throw new RuntimeException(e);
 		} catch (FactoryConfigurationError e) {
+			log.error("解析orm文件出错", e);
 			throw new RuntimeException(e);
 		} catch (JAXBException e) {
+			log.error("解析orm文件出错", e);
 			throw new RuntimeException(e);
 		}
 	}
