@@ -28,7 +28,7 @@ public class EmailService implements IEmailService {
 	private Log log = LogFactory.getLog(getClass());
 	@Autowired
 	protected JavaMailSender mailSender;
-	@Value("toFromEmail")
+	@Value("${toFromEmail}")
 	private String toFromEmail;
 
 	/**
