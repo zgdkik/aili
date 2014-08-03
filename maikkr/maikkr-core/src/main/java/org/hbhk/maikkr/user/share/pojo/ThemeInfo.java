@@ -12,6 +12,8 @@ public class ThemeInfo extends BaseInfo {
 	private static final long serialVersionUID = -2472442979674900507L;
 	@Column("name")
 	private String name;
+	@Column("type")
+	private String type;
 
 	public String getName() {
 		return name;
@@ -19,6 +21,14 @@ public class ThemeInfo extends BaseInfo {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 }

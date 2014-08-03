@@ -112,3 +112,6 @@ body {
 	font-size: 14px;
 	color: gray;
 }
+#ct_right a{
+	text-decoration:none;
+}

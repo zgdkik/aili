@@ -1,4 +1,5 @@
 <%@ page language="java" pageEncoding="UTF-8" info="买客网"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE HTML>
 <html lang="zh-cn">
 <head>
@@ -10,7 +11,7 @@
 	<div id="top">
 		<!-- 工具栏 -->
 		<div id="toptitle" style="border-width: 0px;">
-			<a href="/blog/bloghomepage.html"> <img
+			<a href="${base}user/main.htm"> <img
 				src="${base}images/user/homeblog/logo-top2.png"
 				onmouseover="{this.src='${base}images/user/homeblog/logo-top1.png';}"
 				onmouseout="{this.src='${base}images/user/homeblog/logo-top2.png';}" />
@@ -40,23 +41,32 @@
 					src="${base}images/user/homeblog/userset_top1.png" /></font>
 			</span>
 			<div id="comment_top" 
-				style="position: absolute; width: 80px; height: 90px; margin-left: 559px; 
+				style="position: absolute; width: 80px; height: 40px; margin-left: 559px; 
 				border: 1px solid gray; background-color: #FFFFFF; z-index: 1100; margin-top: 35px; 
 				display: none; line-height: 1.5; font-size: 13px; padding: 10px;"
 				>
-				<a>查看评论</a><br /> <a>查看共同评论</a><br /> <a>查看@我</a>
+				<a>查看评论</a>
 			</div>
 			<div id="userset_top"
-				style="position: absolute; width: 80px; height: 60px; margin-left: 619px; 
+				style="position: absolute; width: 80px; height: 40px; margin-left: 619px; 
 				border: 1px solid gray; background-color: #FFFFFF; z-index: 1100; margin-top: 35px; 
 				display: none; line-height: 1.5; font-size: 13px; padding: 10px;">
-				<a href="#">账号设置</a><br /><a href="#">模板设置</a>
+				<a href="#">账号设置</a>
 			</div>
-			<div id="exist" class="top_span"
-				style="margin-left: 910px; top: 0px; border: 0px;">
-				<a target="_top" class="" href="${base}security/logout.htm">
-				<font class="top_font" >退出</font></a>
-			</div>
+			<c:if test="${cuser != null}">
+				<div id="exist" class="top_span"
+					style="margin-left: 910px; top: 0px; border: 0px;">
+					<a target="_top" class="" href="${base}security/logout.htm">
+					<font class="top_font" >退出</font></a>
+				</div>
+			</c:if>
+			<c:if test="${cuser == null}">
+				<div id="login" class="top_span"
+					style="margin-left: 910px; top: 0px; border: 0px;">
+					<a target="_top" class="" href="${base}user/loginpage.htm">
+					<font class="top_font" >登陆</font></a>
+				</div>
+			</c:if>
 		</div>
 	</div>
 </body>

@@ -1,5 +1,8 @@
 package org.hbhk.maikkr.user.server.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hbhk.aili.core.server.annotation.NeedLogin;
@@ -11,7 +14,9 @@ import org.hbhk.aili.security.server.service.IUserService;
 import org.hbhk.aili.security.share.pojo.UserInfo;
 import org.hbhk.maikkr.core.server.event.UpdateBlogHitsEvent;
 import org.hbhk.maikkr.user.server.service.IBlogService;
+import org.hbhk.maikkr.user.server.service.IThemeService;
 import org.hbhk.maikkr.user.share.pojo.BlogInfo;
+import org.hbhk.maikkr.user.share.pojo.ThemeInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,9 +32,10 @@ public class UserController extends BaseController {
 	private IBlogService blogService;
 	@Autowired
 	private IUserService userService;
-	
+	@Autowired
+	private IThemeService themeService;
+
 	@RequestMapping("/main")
-	@NeedLogin
 	public String main() {
 		return "mainnew";
 	}
@@ -41,6 +47,7 @@ public class UserController extends BaseController {
 
 	@RequestMapping("/sendTheme")
 	@ResponseBody
+	@NeedLogin
 	public ResponseEntity sendTheme(BlogInfo blog) {
 		try {
 			blogService.save(blog);
@@ -83,11 +90,12 @@ public class UserController extends BaseController {
 		try {
 			String blogUrl = user + "/" + url + ".htm";
 			BlogInfo blog = new BlogInfo();
-			blog.setBlogUser(UserContext.getCurrentContext().getCurrentUserName());
+			blog.setBlogUser(UserContext.getCurrentContext()
+					.getCurrentUserName());
 			blog.setBlogUrl(blogUrl);
 			model.addAttribute("theme", blogService.getBlog(blog));
-			//修改对应主题的点击数供最热查询
-			UpdateBlogHitsEvent blogHitsEvent = new UpdateBlogHitsEvent(blogUrl); 
+			// 修改对应主题的点击数供最热查询
+			UpdateBlogHitsEvent blogHitsEvent = new UpdateBlogHitsEvent(blogUrl);
 			getWebApplicationContext().publishEvent(blogHitsEvent);
 			return "comment";
 		} catch (Exception e) {
@@ -95,7 +103,7 @@ public class UserController extends BaseController {
 			return "redirect:/core/error.htm";
 		}
 	}
-	
+
 	@RequestMapping("/getUser")
 	@ResponseBody
 	public UserInfo getUser(String email) {
@@ -118,6 +126,46 @@ public class UserController extends BaseController {
 	@RequestMapping("/test")
 	public String test() {
 		return "main";
+	}
+
+	@RequestMapping("/saveTheme")
+	@ResponseBody
+	@NeedLogin
+	public ResponseEntity saveTheme(ThemeInfo theme) {
+		try {
+			String user = UserContext.getCurrentContext().getCurrentUserName();
+			if (user != null) {
+				theme.setCreatUser(user);
+				if (themeService.get(theme) == null) {
+					themeService.save(theme);
+				}
+			}
+			return returnSuccess();
+		} catch (Exception e) {
+			log.error("saveTheme", e);
+			return returnException();
+		}
+
+	}
+
+	@RequestMapping("/loadUserTheme")
+	@ResponseBody
+	public ResponseEntity loadUserTheme() {
+		try {
+			List<ThemeInfo> themeInfos = new ArrayList<ThemeInfo>();
+			for (int i = 0; i < 5; i++) {
+				ThemeInfo t = new ThemeInfo();
+				t.setName("theme" + i);
+				t.setType("user_type" + i);
+				themeInfos.add(t);
+			}
+			themeService.loadUserTheme();
+			return returnSuccess(themeInfos);
+		} catch (Exception e) {
+			log.error("loadUserTheme", e);
+			return returnSuccess(new ArrayList<ThemeInfo>());
+		}
+
 	}
 
 }

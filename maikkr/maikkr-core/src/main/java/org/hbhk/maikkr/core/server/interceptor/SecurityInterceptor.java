@@ -31,14 +31,16 @@ public class SecurityInterceptor extends HandlerInterceptorAdapter {
 			needLogin = method.getMethod().getDeclaringClass()
 					.getAnnotation(NeedLogin.class);
 		}
+		String currentUser = (String) RequestContext.getSession()
+				.getAttribute(UserConstants.CURRENT_USER_NAME);
+		request.setAttribute("cuser", currentUser);
+		if(StringUtils.isNotEmpty(currentUser)){
+			UserInfo user = (UserInfo) CacheManager.getInstance()
+					.getCache(UserCache.cacheID).get(currentUser);
+			request.setAttribute("cuserName", user.getName());
+		}
 		if (needLogin != null) {
-			String currentUser = (String) RequestContext.getSession()
-					.getAttribute(UserConstants.CURRENT_USER_NAME);
 			if (StringUtils.isNotEmpty(currentUser)) {
-				request.setAttribute("cuser", currentUser);
-				UserInfo user = (UserInfo) CacheManager.getInstance()
-						.getCache(UserCache.cacheID).get(currentUser);
-				request.setAttribute("cuserName", user.getName());
 				return true;
 			}
 			// 非ajax的请求

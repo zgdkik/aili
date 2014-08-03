@@ -17,10 +17,10 @@ var seesionid="${pageContext.session.id}";
 				<img id="home_img" style="margin-top: 5px;margin-left: 20px;" src="${base}images/user/homeblog/home_back1.png">
 				<span style="margin-top: 5px;margin-left: 10px;font-size:  14px;color: #445522;">主题</span>
 			</div>
-			<div id="message" class="left_class" >
+			<%-- <div id="message" class="left_class" >
 				<img  id="message_img" style="margin-top: 5px;margin-left: 20px;"src="${base}images/user/homeblog/message_back1.png">
 				<span style="margin-top: 5px;margin-left: 10px;font-size:  14px;color: #445522;">消息</span>
-			</div>
+			</div> --%>
 			<div id="collect" class="left_class">
 				<img id="collect_img" style="margin-top: 5px;margin-left: 20px;" src="${base}images/user/homeblog/collect_back1.png">
 				<span style="margin-top: 5px;margin-left: 10px;font-size:  14px;color: #445522;">收藏</span>
@@ -50,9 +50,6 @@ var seesionid="${pageContext.session.id}";
 					<div  class="blogTitle"  style="position:relative;"> 
 				        <span style="margin-left:100px;width:18px;overflow:hidden;"> 
 				            <select id="theme-select" style="width:300px;height:30px;margin-left:-100px" onchange="this.parentNode.nextSibling.value=this.value"> 
-				            <option value="1">我的QQ空间</option> 
-				            <option value="2">我的CSDN博客</option> 
-				            <option value="3">我的猫扑博客</option> 
 				            </select>
 				        </span>
 				        <input name="box" id="theme-select-text" style="width:270px;height:30px;position:absolute;left:0px;"> 
@@ -106,6 +103,34 @@ var seesionid="${pageContext.session.id}";
 			</div>
 			</div>
 		</div>
+		<!-- 右边部分 -->
+		<div id="ct_right" style="margin-left: 750px;">
+			<div id="userInfo" style="height: 145px;border-bottom-width: 2px;
+			width: 230px;display: block;">
+			<a style="">
+			 <img style="border-bottom-style: solid;border-bottom-width: 1px;"
+			 id="head_portrait_right" height="80px" width="80px" 
+			 src="/maikkr/images/security/default_head.png">
+			</a>
+			<a style="display: inline-block;overflow: hidden;font-size: 16px;font-weight: bold;word-wrap: break-word;color: black;" >${cuserName}</a>
+			<ul  style="margin: 20px 20px;display: block;">
+   			<li style="display: block;float: left;margin: 0 5px 0 0;padding: 0 5px 0 0;border-right-width: 1px;border-right-style: solid;border-color: #e6e6e6;">
+   			<a href="" ><strong style="display: block;margin: 0 0 4px;font-weight: 400;line-height: 15px;font-family: tahoma;" 
+   			 node-type="theme">72</strong><span>主题</span></a></li>
+   			 <li style="display: block; float: left;margin: 0 5px 0 0;padding: 0 5px 0 0;border-right-width: 1px;border-right-style: solid;border-color: #e6e6e6;" >
+         	<a href=""><strong style="display: block;margin: 0 0 4px;font-weight: 400;line-height: 15px;font-family: tahoma;" 
+         	node-type="attention">42</strong><span>关注 </span></a></li>
+    		</ul>
+			</div>
+			<div style="margin-top: 3px">
+	          	<ul class="nav nav-pills nav-stacked">
+	          		<li class="active"><a>主题推荐</a></li>
+	          		<li><a href="#">热门主题</a></li>
+	          		<li><a href="#">最新主题</a></li>
+	          	</ul>
+	         </div>
+		</div>
+		
 		
 	</div>
 </div>

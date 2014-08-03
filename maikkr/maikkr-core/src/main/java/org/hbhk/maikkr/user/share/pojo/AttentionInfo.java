@@ -14,11 +14,13 @@ public class AttentionInfo extends BaseInfo {
 	private String user;
 	@Column("attentionUser")
 	private String attentionUser;
-	
+
 	@Column("theme")
 	private String theme;
 	@Column("themeUser")
 	private String themeUser;
+	@Column("type")
+	private String type;
 
 	public String getUser() {
 		return user;
@@ -50,6 +52,14 @@ public class AttentionInfo extends BaseInfo {
 
 	public void setThemeUser(String themeUser) {
 		this.themeUser = themeUser;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 }

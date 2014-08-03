@@ -123,6 +123,8 @@ $j(document).ready(function() {
 		$j(this).css("background-color","")
 	});
 	updateHeight();
+	//加载用户主题
+	loadUserTheme();
 	//显示放大图片
 	$j('.fancybox').fancybox();
 	
@@ -133,10 +135,45 @@ $j(document).ready(function() {
 	
 	$j("#theme-select-text").blur(function(){
 	    //检查自定义主题名称是否存在
+		var theme = $j('#theme-select-text').val();
+		if(theme==null || theme==""){
+			return ;
+		}
+		if(UserContext.user!=null && UserContext.user!=""){
+			$j.ajax({
+				url: base+"user/saveTheme.htm",
+				type:"POST",
+				data:{'name':theme,'type':'user_type'},
+				success: function(data, textStatus){
+				},
+				exception:function(data, textStatus){
+				}
+			});
+		}
 	 });
 });
-
+//加载用户主题
+function loadUserTheme() {
+	$j.ajax({
+		url : base + "user/loadUserTheme.htm",
+		type : "POST",
+		success : function(data, textStatus) {
+			var result = data.result;
+			for (var i = 0; i < result.length; i++) {
+				$j('#theme-select').append("<option value='"+result[i].type+"'>"
+						+result[i].name+"</option>"); 
+			}
+		},
+		exception : function(data, textStatus) {
+		}
+	});
+};
 function sendTheme(){
+	
+	if(UserContext.user==null || UserContext.user==""){
+		$j.toast("你需要登陆才能发布主题!");
+		return ;
+	}
 	var title = $j('#theme-select-text').val();
 	if(title==null || title==""){
 		$j.toast("请输入或选择主题!");

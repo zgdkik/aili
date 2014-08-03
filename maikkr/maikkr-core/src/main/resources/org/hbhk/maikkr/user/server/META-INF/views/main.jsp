@@ -47,10 +47,8 @@
 					<!-- <input type="text" name="blogtitle" class="blogTitle"> -->
 					<div  class="blogTitle"  style="position:relative;"> 
 				        <span style="margin-left:100px;width:18px;overflow:hidden;"> 
-				            <select style="width:300px;height:30px;margin-left:-100px" onchange="this.parentNode.nextSibling.value=this.value"> 
-				            <option value="1">我的QQ空间</option> 
-				            <option value="2">我的CSDN博客</option> 
-				            <option value="3">我的猫扑博客</option> 
+				            <select style="width:300px;height:30px;margin-left:-100px" > 
+				          	
 				            </select>
 				        </span>
 				        <input name="box" style="width:270px;height:30px;position:absolute;left:0px;"> 
