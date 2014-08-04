@@ -6,7 +6,20 @@
 	<artifactId>aili</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
-
+	<name>aili</name>
+	<url>http://maven.apache.org</url>
+	<licenses></licenses>
+	<scm>
+		<url>http://www.hbhk520.com</url>
+		<connection>http://www.hbhk520.com</connection>
+	</scm>
+	<developers>
+		<developer>
+			<id>HBHK</id>
+			<email>1024784402@qq.com</email>
+			<name>HBHK</name>
+		</developer>
+	</developers>
 	<modules>
 		<module>aili-core</module>
 		<module>aili-cache</module>
@@ -497,7 +510,6 @@
 			<uniqueVersion>false</uniqueVersion>
 		</snapshotRepository>
 	</distributionManagement>
-
 	<profiles>
 		<profile>
 			<id>product</id>
@@ -510,6 +522,33 @@
 			<properties>
 				<hbhk-release-version>1.0.3</hbhk-release-version>
 			</properties>
+		</profile>
+		<profile>
+			<id>release-sign-artifacts</id>
+			<activation>
+				<property>
+					<name>performRelease</name>
+					<value>true</value>
+				</property>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-gpg-plugin</artifactId>
+						<version>1.1</version>
+						<executions>
+							<execution>
+								<id>sign-artifacts</id>
+								<phase>verify</phase>
+								<goals>
+									<goal>sign</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
 		</profile>
 	</profiles>
 	<build>
@@ -555,8 +594,16 @@
 				<version>2.9.1</version>
 				<configuration>
 					<encoding>UTF-8</encoding>
-					<aggregate>true</aggregate> 
+					<aggregate>true</aggregate>
 				</configuration>
+				<executions>
+					<execution>
+						<id>attach-javadocs</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 		<pluginManagement>
