@@ -117,9 +117,14 @@ public class FileAsStringUtil {
 		// 获取此包的目录 建立一个File
 		File dir = new File(filePath);
 		// 如果不存在或者 也不是目录就直接返回
-		if (!dir.exists() || !dir.isDirectory()) {
+		if (!dir.exists()) {
 			// log.warn("用户定义包名 " + packageName + " 下没有任何文件");
 			return null;
+		}
+		if(!dir.isDirectory()){
+			String str = FileUtils.readFileToString(dir, "utf8");
+			fileStr.add(str);
+			return  fileStr;
 		}
 		// 如果存在 就获取包下的所有文件 包括目录
 		File[] dirfiles = dir.listFiles(new FileFilter() {
