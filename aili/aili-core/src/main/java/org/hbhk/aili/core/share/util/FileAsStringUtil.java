@@ -3,7 +3,6 @@ package org.hbhk.aili.core.share.util;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileFilter;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -20,7 +19,6 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.hbhk.aili.core.share.util.FileLoadUtil;
 import org.springframework.core.io.Resource;
 
 public class FileAsStringUtil {
@@ -121,10 +119,10 @@ public class FileAsStringUtil {
 			// log.warn("用户定义包名 " + packageName + " 下没有任何文件");
 			return null;
 		}
-		if(!dir.isDirectory()){
+		if (!dir.isDirectory()) {
 			String str = FileUtils.readFileToString(dir, "utf8");
 			fileStr.add(str);
-			return  fileStr;
+			return fileStr;
 		}
 		// 如果存在 就获取包下的所有文件 包括目录
 		File[] dirfiles = dir.listFiles(new FileFilter() {
