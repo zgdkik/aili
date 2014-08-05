@@ -2,7 +2,7 @@ package org.hbhk.aili.orm.server;
 
 import java.util.List;
 
-import org.hbhk.aili.orm.share.util.FileAsStringUtil;
+import org.hbhk.aili.core.share.util.FileAsStringUtil;
 
 public class FileScanUtilTest {
 	
