@@ -23,7 +23,7 @@
 	</developers>
 	<modules>
 		<module>aili-core</module>
-		<!-- <module>aili-cache</module>
+		<module>aili-cache</module>
 		<module>aili-i18n</module>
 		<module>aili-job</module>
 		<module>aili-orm</module>
@@ -35,7 +35,7 @@
 		<module>aili-security</module>
 		<module>aili-test</module>
 		<module>aili-support</module>
-		<module>aili-struts-mvc</module> -->
+		<module>aili-struts-mvc</module>
 	</modules>
 
 	<properties>
