@@ -69,7 +69,6 @@ public class ExeclModelConvertor {
 		List<Object> results = new ArrayList<Object>();
 		for (int i = 1; i < sheet.getRows(); i++) {
 			Object t = getModelInstance(model.getClazz().trim());
-
 			BeanWrapper bw = new BeanWrapperImpl(t);
 			for (int j = 0; j < sheet.getColumns(); j++) {
 				String excelTitleName = sheet.getCell(j, 0).getContents()
@@ -89,22 +88,21 @@ public class ExeclModelConvertor {
 					Date date = null;
 					if (dateType != null && dateType.equalsIgnoreCase("Date")) {
 						String dateFormat = property.getFormat();
-						if (StringUtils.isNotEmpty(dateFormat)) {
-							SimpleDateFormat sdf = new SimpleDateFormat(
-									dateFormat);
-							try {
-								date = sdf.parse(value);
-							} catch (ParseException e) {
-								log.error("getModel", e);
-								throw new RuntimeException(e);
-							}
+						if (StringUtils.isEmpty(dateFormat)) {
+							dateFormat = "yyyy-MM-dd HH:mm:ss";
+						}
+						SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
+						try {
+							date = sdf.parse(value);
+						} catch (ParseException e) {
+							log.error("getModel", e);
+							throw new RuntimeException(e);
 						}
 					}
-
-					if (date == null) {
-						bw.setPropertyValue(property.getName(), value);
-					} else {
+					if (date != null) {
 						bw.setPropertyValue(property.getName(), date);
+					} else {
+						bw.setPropertyValue(property.getName(), value);
 					}
 				}
 
