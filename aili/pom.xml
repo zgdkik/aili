@@ -23,7 +23,7 @@
 	</developers>
 	<modules>
 		<module>aili-core</module>
-		<module>aili-cache</module>
+		<!-- <module>aili-cache</module>
 		<module>aili-i18n</module>
 		<module>aili-job</module>
 		<module>aili-orm</module>
@@ -35,7 +35,7 @@
 		<module>aili-security</module>
 		<module>aili-test</module>
 		<module>aili-support</module>
-		<module>aili-struts-mvc</module>
+		<module>aili-struts-mvc</module> -->
 	</modules>
 
 	<properties>
@@ -503,7 +503,7 @@
 	<distributionManagement>
 		<repository>
 			<id>releases</id>
-			<url>file://F:\mvn-repo\releases</url>
+			<url>file://E:\aili-repo\releases</url>
 		</repository>
 		<!-- <repository> <id>releases</id> <url>http://localhost:8081/nexus/content/repositories/releases</url> 
 			<uniqueVersion>false</uniqueVersion> </repository> <snapshotRepository> <id>snapshots</id> 
@@ -557,26 +557,26 @@
 				<artifactId>maven-deploy-plugin</artifactId>
 				<version>2.8.1</version>
 				<configuration>
-					<altDeploymentRepository>releases::default::file://F:\mvn-repo\releases</altDeploymentRepository>
+					<altDeploymentRepository>releases::default::file://E:\aili-repo\releases\releases</altDeploymentRepository>
 				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>com.github.github</groupId>
 				<artifactId>site-maven-plugin</artifactId>
-				<version>0.8</version>
+				<version>0.9</version>
 				<configuration>
 					<!-- git commit message -->
 					<message>Maven artifacts for ${project.version}</message>
 					<!-- disable webpage processing -->
 					<noJekyll>true</noJekyll>
-					<outputDirectory>F:\mvn-repo\releases</outputDirectory>
+					<outputDirectory>E:\aili-repo\releases</outputDirectory>
 					<branch>refs/heads/master</branch>
 					<merge>true</merge>
 					<includes>
 						<include>**/*</include>
 					</includes>
 					<!-- github repo name -->
-					<repositoryName>aili-repo</repositoryName>
+					<repositoryName>hbhk-repo</repositoryName>
 					<!-- github username -->
 					<repositoryOwner>hbhk</repositoryOwner>
 				</configuration>
