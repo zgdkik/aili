@@ -9,13 +9,13 @@ import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.hbhk.aili.core.share.util.FileAsStringUtil;
 import org.hbhk.aili.orm.server.convertor.OrmConvertor;
 import org.hbhk.aili.orm.share.model.Delete;
 import org.hbhk.aili.orm.share.model.Insert;
 import org.hbhk.aili.orm.share.model.Orm;
 import org.hbhk.aili.orm.share.model.Select;
 import org.hbhk.aili.orm.share.model.Update;
-import org.hbhk.aili.orm.share.util.FileScanUtil;
 import org.hbhk.aili.orm.share.util.PropertiesUtil;
 
 public class OrmContext {
@@ -26,7 +26,7 @@ public class OrmContext {
 	private static String filename = "orm.auotscan.filename";
 
 	public static void init() throws IOException {
-		FileScanUtil scanUtil = new FileScanUtil();
+		FileAsStringUtil scanUtil = new FileAsStringUtil();
 		OrmConvertor convertor = new OrmConvertor();
 
 		List<String> orms = scanUtil.scanBeansXml(

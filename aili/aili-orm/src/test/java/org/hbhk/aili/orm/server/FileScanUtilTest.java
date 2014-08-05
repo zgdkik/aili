@@ -2,12 +2,12 @@ package org.hbhk.aili.orm.server;
 
 import java.util.List;
 
-import org.hbhk.aili.orm.share.util.FileScanUtil;
+import org.hbhk.aili.orm.share.util.FileAsStringUtil;
 
 public class FileScanUtilTest {
 	
 	public static void main(String[] args) throws Exception {
-		FileScanUtil f = new FileScanUtil();
+		FileAsStringUtil f = new FileAsStringUtil();
 		// List<String> paths = f.getFilePath("org/hbhk/");
 		// System.out.println(paths.size());
 		String dirPath = "org/hbhk/aili";
