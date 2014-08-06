@@ -29,10 +29,7 @@ public final class FileLoadUtil {
 	
 	public static Resource getResourceForClasspath(String moduleName,String fileName)
 			throws IOException {
-		PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
-		Resource resource = resolver.getResource("classpath*:org/hbhk/**/"
-				+ moduleName + "/**/server/META-INF/**/" + fileName);
-		return resource;
+		return getResourcesForClasspath(moduleName, fileName)[0];
 	}
 
 	/**
