@@ -26,10 +26,12 @@ public final class FileLoadUtil {
 		return resources;
 	}
 
-	public static Resource getResourcesForClasspath(String fileName)
+	
+	public static Resource getResourceForClasspath(String moduleName,String fileName)
 			throws IOException {
 		PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
-		Resource resource = resolver.getResource("classpath*:" + fileName);
+		Resource resource = resolver.getResource("classpath*:org/hbhk/**/"
+				+ moduleName + "/**/server/META-INF/**/" + fileName);
 		return resource;
 	}
 
