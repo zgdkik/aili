@@ -66,7 +66,6 @@ public class SecurityInterceptor extends HandlerInterceptorAdapter {
 	public void postHandle(HttpServletRequest request,
 			HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
-		super.postHandle(request, response, handler, modelAndView);
 		String currentUser = (String) RequestContext.getSession().getAttribute(
 				UserConstants.CURRENT_USER_NAME);
 		request.setAttribute("cuser", currentUser);
@@ -79,12 +78,14 @@ public class SecurityInterceptor extends HandlerInterceptorAdapter {
 			request.setAttribute("tc", tc);
 			request.setAttribute("ac", ac);
 			user.setPassword(null);
-			request.setAttribute("user", user);
+			request.setAttribute("userInfo", user);
 		} else {
 			request.setAttribute("tc", 0);
 			request.setAttribute("ac", 0);
-			request.setAttribute("user", null);
+			request.setAttribute("userInfo", null);
+			request.setAttribute("cuserName", null);
 		}
+		super.postHandle(request, response, handler, modelAndView);
 	}
 
 }

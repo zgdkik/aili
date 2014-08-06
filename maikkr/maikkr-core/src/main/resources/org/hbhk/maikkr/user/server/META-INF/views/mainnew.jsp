@@ -13,10 +13,10 @@ var seesionid="${pageContext.session.id}";
 		    height: 100%;float: left;z-index: -1;"></div> --%>
     <div id="center" >
 		<!-- 左边部分 -->
-		<div id="ct_left">
+			<div id="ct_left">
 			<div id="home" class="left_class">
 				<img id="home_img" style="margin-top: 5px;margin-left: 20px;" src="${base}images/user/homeblog/home_back1.png">
-				<span style="margin-top: 5px;margin-left: 10px;font-size:  14px;color: #445522;">主题</span>
+				<span style="margin-top: 5px;margin-left: 10px;font-size:  14px;color: #445522;"><a href="${base}user/main.htm">主题</a></span>
 			</div>
 			<%-- <div id="message" class="left_class" >
 				<img  id="message_img" style="margin-top: 5px;margin-left: 20px;"src="${base}images/user/homeblog/message_back1.png">
@@ -24,12 +24,12 @@ var seesionid="${pageContext.session.id}";
 			</div> --%>
 			<div id="collect" class="left_class">
 				<img id="collect_img" style="margin-top: 5px;margin-left: 20px;" src="${base}images/user/homeblog/collect_back1.png">
-				<span style="margin-top: 5px;margin-left: 10px;font-size:  14px;color: #445522;">收藏</span>
+				<span style="margin-top: 5px;margin-left: 10px;font-size:  14px;color: #445522;"><a href="${base}user/collect.htm">收藏</a></span>
 			</div>
 			<div class="left_class">
 				<img id="collect_img" style="margin-top: 5px;margin-left: 20px;" src="${base}images/user/homeblog/friends_img1.png">
 				<span  style="margin-top: 5px;margin-left: 10px;">
-				<a style="color:#333333;text-decoration:none;font-size:  14px;color: #445522;" href="/blog/relationCenter.html">好友管理</a></span>
+				<a style="color:#333333;text-decoration:none;font-size:  14px;color: #445522;" href="${base}user/friends.htm">好友管理</a></span>
 			</div>
 		</div>
 		<!--  -->
@@ -109,15 +109,15 @@ var seesionid="${pageContext.session.id}";
 			<div id="userInfo" style="height: 145px;border-bottom-width: 2px;
 			width: 230px;display: block;">
 			<a>
-			 <c:if test="${user == null}">
+			 <c:if test="${userInfo == null}">
 				 <img style="border-bottom-style: solid;border-bottom-width: 1px;"
 				 id="head_portrait_right" height="80px" width="80px" 
 				 src="/maikkr/images/security/default_head.png">
 			 </c:if>
-			 <c:if test="${user != null}">
+			 <c:if test="${userInfo != null}">
 				 <img style="border-bottom-style: solid;border-bottom-width: 1px;"
 				 id="head_portrait_right" height="80px" width="80px" 
-				 src="${base}${user.userHeadImg}">
+				 src="${base}${userInfo.userHeadImg}">
 			 </c:if>
 			</a>
 			<a style="display: inline-block;overflow: hidden;font-size: 16px;font-weight: bold;word-wrap: break-word;color: black;" >${cuserName}</a>
@@ -133,8 +133,8 @@ var seesionid="${pageContext.session.id}";
 			<div style="margin-top: 3px">
 	          	<ul class="nav nav-pills nav-stacked">
 	          		<li class="active"><a>主题推荐</a></li>
-	          		<li><a href="#">热门主题</a></li>
-	          		<li><a href="#">最新主题</a></li>
+	          		<li><a href="${base}user/newhit.htm">热门主题</a></li>
+	          		<li><a href="${base}user/newest.htm">最新主题</a></li>
 	          	</ul>
 	         </div>
 		</div>

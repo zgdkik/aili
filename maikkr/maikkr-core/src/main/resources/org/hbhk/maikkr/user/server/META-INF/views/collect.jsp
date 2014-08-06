@@ -13,7 +13,7 @@ var seesionid="${pageContext.session.id}";
 		    height: 100%;float: left;z-index: -1;"></div> --%>
     <div id="center" >
 		<!-- 左边部分 -->
-			<div id="ct_left">
+		<div id="ct_left">
 			<div id="home" class="left_class">
 				<img id="home_img" style="margin-top: 5px;margin-left: 20px;" src="${base}images/user/homeblog/home_back1.png">
 				<span style="margin-top: 5px;margin-left: 10px;font-size:  14px;color: #445522;"><a href="${base}user/main.htm">主题</a></span>

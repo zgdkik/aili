@@ -45,6 +45,36 @@ public class UserController extends BaseController {
 		return "mainnew";
 	}
 
+	@RequestMapping("/newhit")
+	public String newhit(Model model) {
+		return "newhit";
+	}
+
+	@RequestMapping("/newest")
+	public String newest(Model model) {
+		return "newest";
+	}
+
+	@RequestMapping("/msg")
+	public String msg(Model model) {
+		return "msg";
+	}
+
+	@RequestMapping("/set")
+	public String set(Model model) {
+		return "setting";
+	}
+
+	@RequestMapping("/collect")
+	public String collect(Model model) {
+		return "collect";
+	}
+
+	@RequestMapping("/friends")
+	public String friends(Model model) {
+		return "friends";
+	}
+
 	@RequestMapping("/loginpage")
 	public String loginpage() {
 		return "loginpage";

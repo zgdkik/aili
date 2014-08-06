@@ -45,13 +45,13 @@
 				border: 1px solid gray; background-color: #FFFFFF; z-index: 1100; margin-top: 35px; 
 				display: none; line-height: 1.5; font-size: 13px; padding: 10px;"
 				>
-				<a>查看评论</a>
+				<a href="${base}user/msg.htm">查看消息</a>
 			</div>
 			<div id="userset_top"
 				style="position: absolute; width: 80px; height: 40px; margin-left: 619px; 
 				border: 1px solid gray; background-color: #FFFFFF; z-index: 1100; margin-top: 35px; 
 				display: none; line-height: 1.5; font-size: 13px; padding: 10px;">
-				<a href="#">账号设置</a>
+				<a href="${base}user/set.htm">账号设置</a>
 			</div>
 			<c:if test="${cuser != null}">
 				<div id="exist" class="top_span"
