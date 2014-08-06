@@ -34,7 +34,7 @@
 		<attribute name="default" type="string" use="optional" />
 		<attribute name="isConvertable" type="string" use="optional" />
 		<attribute name="format" type="string" use="optional" />
-		
+		<attribute name="width" type="string" use="optional" />
 	</complexType>
 	<complexType name="map">
 		<sequence>

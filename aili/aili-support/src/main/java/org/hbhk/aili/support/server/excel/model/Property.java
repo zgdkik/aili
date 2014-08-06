@@ -64,7 +64,8 @@ public class Property {
     protected String isConvertable;
     @XmlAttribute(name = "format")
     protected String format;
-
+    @XmlAttribute(name = "width")
+    private String width;
     /**
      * 获取map属性的值。
      * 
@@ -280,5 +281,14 @@ public class Property {
     public void setFormat(String value) {
         this.format = value;
     }
+
+	public String getWidth() {
+		return width;
+	}
+
+	public void setWidth(String width) {
+		this.width = width;
+	}
+    
 
 }

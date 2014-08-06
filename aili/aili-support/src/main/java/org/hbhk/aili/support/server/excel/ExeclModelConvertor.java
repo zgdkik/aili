@@ -181,12 +181,6 @@ public class ExeclModelConvertor {
 			log.error("model2ExcelToFile", e);
 			throw new RuntimeException(e);
 		}
-		try {
-			resource.getURL().getProtocol();
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
 		File excelFile = null;
 		try {
 			excelFile = resource.getFile();
@@ -212,7 +206,12 @@ public class ExeclModelConvertor {
 		for (Property property : properties) {
 			int column = Integer.parseInt(property.getColumn());
 			try {
-				wsheet.setColumnView(column - 1, 40);
+				String width = property.getWidth();
+				if (StringUtils.isEmpty(width)) {
+					wsheet.setColumnView(column - 1, Integer.parseInt(width));
+				} else {
+					wsheet.setColumnView(column - 1, 30);
+				}
 				wsheet.addCell(new Label(column - 1, 0, property
 						.getExcelTitleName(), format1));
 			} catch (RowsExceededException e) {
