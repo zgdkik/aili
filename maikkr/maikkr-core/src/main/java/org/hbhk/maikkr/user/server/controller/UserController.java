@@ -36,7 +36,7 @@ public class UserController extends BaseController {
 	private IThemeService themeService;
 
 	@RequestMapping("/main")
-	public String main() {
+	public String main(Model model) {
 		return "mainnew";
 	}
 

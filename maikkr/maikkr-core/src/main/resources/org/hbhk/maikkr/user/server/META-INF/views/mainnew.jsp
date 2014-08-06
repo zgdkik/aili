@@ -1,4 +1,5 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="common.jsp"/>
 <link href="${styles}/mainnew.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="${scripts}/main.js"></script>
@@ -107,19 +108,26 @@ var seesionid="${pageContext.session.id}";
 		<div id="ct_right" style="margin-left: 750px;">
 			<div id="userInfo" style="height: 145px;border-bottom-width: 2px;
 			width: 230px;display: block;">
-			<a style="">
-			 <img style="border-bottom-style: solid;border-bottom-width: 1px;"
-			 id="head_portrait_right" height="80px" width="80px" 
-			 src="/maikkr/images/security/default_head.png">
+			<a>
+			 <c:if test="${user == null}">
+				 <img style="border-bottom-style: solid;border-bottom-width: 1px;"
+				 id="head_portrait_right" height="80px" width="80px" 
+				 src="/maikkr/images/security/default_head.png">
+			 </c:if>
+			 <c:if test="${user != null}">
+				 <img style="border-bottom-style: solid;border-bottom-width: 1px;"
+				 id="head_portrait_right" height="80px" width="80px" 
+				 src="${base}${user.userHeadImg}">
+			 </c:if>
 			</a>
 			<a style="display: inline-block;overflow: hidden;font-size: 16px;font-weight: bold;word-wrap: break-word;color: black;" >${cuserName}</a>
 			<ul  style="margin: 20px 20px;display: block;">
    			<li style="display: block;float: left;margin: 0 5px 0 0;padding: 0 5px 0 0;border-right-width: 1px;border-right-style: solid;border-color: #e6e6e6;">
    			<a href="" ><strong style="display: block;margin: 0 0 4px;font-weight: 400;line-height: 15px;font-family: tahoma;" 
-   			 node-type="theme">72</strong><span>主题</span></a></li>
+   			 node-type="theme">${tc}</strong><span>主题</span></a></li>
    			 <li style="display: block; float: left;margin: 0 5px 0 0;padding: 0 5px 0 0;border-right-width: 1px;border-right-style: solid;border-color: #e6e6e6;" >
          	<a href=""><strong style="display: block;margin: 0 0 4px;font-weight: 400;line-height: 15px;font-family: tahoma;" 
-         	node-type="attention">42</strong><span>关注 </span></a></li>
+         	node-type="attention">${ac}</strong><span>关注 </span></a></li>
     		</ul>
 			</div>
 			<div style="margin-top: 3px">

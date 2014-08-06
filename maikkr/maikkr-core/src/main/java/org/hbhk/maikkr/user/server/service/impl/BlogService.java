@@ -12,8 +12,10 @@ import org.hbhk.aili.security.server.cache.UserCache;
 import org.hbhk.aili.security.server.context.UserContext;
 import org.hbhk.aili.security.share.pojo.UserInfo;
 import org.hbhk.aili.security.share.util.UUIDUitl;
+import org.hbhk.maikkr.user.server.dao.IAttentionDao;
 import org.hbhk.maikkr.user.server.dao.IBlogDao;
 import org.hbhk.maikkr.user.server.service.IBlogService;
+import org.hbhk.maikkr.user.share.pojo.AttentionInfo;
 import org.hbhk.maikkr.user.share.pojo.BlogInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +25,9 @@ public class BlogService implements IBlogService {
 
 	@Autowired
 	private IBlogDao blogDao;
+
+	@Autowired
+	private IAttentionDao attentionDao;
 
 	public BlogInfo save(BlogInfo blog) {
 		String id = UUIDUitl.getUuid();
@@ -69,6 +74,28 @@ public class BlogService implements IBlogService {
 
 	public void updateBlogHit(String blogUrl) {
 		blogDao.updateBlogsHit(blogUrl);
+	}
+
+	public int getUserThemeCount() {
+		BlogInfo blog = new BlogInfo();
+		String user = UserContext.getCurrentContext().getCurrentUserName();
+		blog.setBlogUser(user);
+		List<BlogInfo> blogs = blogDao.get(blog);
+		if (CollectionUtils.isNotEmpty(blogs)) {
+			return blogs.size();
+		}
+		return 0;
+	}
+
+	public int getUserAttentionCount() {
+		AttentionInfo att = new AttentionInfo();
+		String user = UserContext.getCurrentContext().getCurrentUserName();
+		att.setCreatUser(user);
+		List<AttentionInfo> atts = attentionDao.get(att);
+		if (CollectionUtils.isNotEmpty(atts)) {
+			return atts.size();
+		}
+		return 0;
 	}
 
 }

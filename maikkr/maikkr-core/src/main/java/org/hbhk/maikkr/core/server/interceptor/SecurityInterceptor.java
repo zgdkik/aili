@@ -10,12 +10,17 @@ import org.hbhk.aili.core.server.context.RequestContext;
 import org.hbhk.aili.security.server.cache.UserCache;
 import org.hbhk.aili.security.share.define.UserConstants;
 import org.hbhk.aili.security.share.pojo.UserInfo;
+import org.hbhk.maikkr.user.server.service.IBlogService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 public class SecurityInterceptor extends HandlerInterceptorAdapter {
 
 	private String loginUrl = "/user/loginpage.htm";
+
+	@Autowired
+	private IBlogService blogService;
 
 	@Override
 	public boolean preHandle(HttpServletRequest request,
@@ -31,13 +36,23 @@ public class SecurityInterceptor extends HandlerInterceptorAdapter {
 			needLogin = method.getMethod().getDeclaringClass()
 					.getAnnotation(NeedLogin.class);
 		}
-		String currentUser = (String) RequestContext.getSession()
-				.getAttribute(UserConstants.CURRENT_USER_NAME);
+		String currentUser = (String) RequestContext.getSession().getAttribute(
+				UserConstants.CURRENT_USER_NAME);
 		request.setAttribute("cuser", currentUser);
-		if(StringUtils.isNotEmpty(currentUser)){
+		if (StringUtils.isNotEmpty(currentUser)) {
 			UserInfo user = (UserInfo) CacheManager.getInstance()
 					.getCache(UserCache.cacheID).get(currentUser);
 			request.setAttribute("cuserName", user.getName());
+			int tc = blogService.getUserThemeCount();
+			int ac = blogService.getUserAttentionCount();
+			request.setAttribute("tc", tc);
+			request.setAttribute("ac", ac);
+			user.setPassword(null);
+			request.setAttribute("user", user);
+		} else {
+			request.setAttribute("tc", 0);
+			request.setAttribute("ac", 0);
+			request.setAttribute("user", null);
 		}
 		if (needLogin != null) {
 			if (StringUtils.isNotEmpty(currentUser)) {
