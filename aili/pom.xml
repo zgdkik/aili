@@ -23,7 +23,7 @@
 	</developers>
 	<modules>
 		<module>aili-core</module>
-		<module>aili-cache</module>
+		<!-- <module>aili-cache</module>
 		<module>aili-i18n</module>
 		<module>aili-job</module>
 		<module>aili-orm</module>
@@ -35,7 +35,7 @@
 		<module>aili-security</module>
 		<module>aili-test</module>
 		<module>aili-support</module>
-		<module>aili-struts-mvc</module>
+		<module>aili-struts-mvc</module> -->
 	</modules>
 
 	<properties>
@@ -52,6 +52,7 @@
 		<wro4j-minimize>false</wro4j-minimize>
 		<memcached-version>3.4.0</memcached-version>
 		<github.global.server>github</github.global.server>
+		<aili-deploy>snapshots</aili-deploy>
 	</properties>
 	<dependencyManagement>
 		<dependencies>
@@ -550,6 +551,12 @@
 				</plugins>
 			</build>
 		</profile>
+		<profile>
+			<id>aili-release</id>
+			<properties>
+				<aili-deploy>releases</aili-deploy>
+			</properties>
+		</profile>
 	</profiles>
 	<build>
 		<plugins>
@@ -557,7 +564,7 @@
 				<artifactId>maven-deploy-plugin</artifactId>
 				<version>2.8.1</version>
 				<configuration>
-					<altDeploymentRepository>releases::default::file://E:\aili-repo\releases\releases</altDeploymentRepository>
+					<altDeploymentRepository>releases::default::file://E:\aili-repo\${aili-deploy}\${aili-deploy}</altDeploymentRepository>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -569,14 +576,14 @@
 					<message>Maven artifacts for ${project.version}</message>
 					<!-- disable webpage processing -->
 					<noJekyll>true</noJekyll>
-					<outputDirectory>E:\aili-repo\releases</outputDirectory>
+					<outputDirectory>E:\aili-repo\${aili-deploy}</outputDirectory>
 					<branch>refs/heads/master</branch>
 					<merge>true</merge>
 					<includes>
 						<include>**/*</include>
 					</includes>
 					<!-- github repo name -->
-					<repositoryName>hbhk-repo</repositoryName>
+					<repositoryName>aili-repo</repositoryName>
 					<!-- github username -->
 					<repositoryOwner>hbhk</repositoryOwner>
 				</configuration>
