@@ -13,6 +13,7 @@ import org.hbhk.aili.security.share.pojo.UserInfo;
 import org.hbhk.maikkr.user.server.service.IBlogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.method.HandlerMethod;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 public class SecurityInterceptor extends HandlerInterceptorAdapter {
@@ -38,22 +39,6 @@ public class SecurityInterceptor extends HandlerInterceptorAdapter {
 		}
 		String currentUser = (String) RequestContext.getSession().getAttribute(
 				UserConstants.CURRENT_USER_NAME);
-		request.setAttribute("cuser", currentUser);
-		if (StringUtils.isNotEmpty(currentUser)) {
-			UserInfo user = (UserInfo) CacheManager.getInstance()
-					.getCache(UserCache.cacheID).get(currentUser);
-			request.setAttribute("cuserName", user.getName());
-			int tc = blogService.getUserThemeCount();
-			int ac = blogService.getUserAttentionCount();
-			request.setAttribute("tc", tc);
-			request.setAttribute("ac", ac);
-			user.setPassword(null);
-			request.setAttribute("user", user);
-		} else {
-			request.setAttribute("tc", 0);
-			request.setAttribute("ac", 0);
-			request.setAttribute("user", null);
-		}
 		if (needLogin != null) {
 			if (StringUtils.isNotEmpty(currentUser)) {
 				return true;
@@ -74,10 +59,32 @@ public class SecurityInterceptor extends HandlerInterceptorAdapter {
 				response.sendError(900);
 				return false;
 			}
-
 		}
-
 		return true;
+	}
+	@Override
+	public void postHandle(HttpServletRequest request,
+			HttpServletResponse response, Object handler,
+			ModelAndView modelAndView) throws Exception {
+		super.postHandle(request, response, handler, modelAndView);
+		String currentUser = (String) RequestContext.getSession().getAttribute(
+				UserConstants.CURRENT_USER_NAME);
+		request.setAttribute("cuser", currentUser);
+		if (StringUtils.isNotEmpty(currentUser)) {
+			UserInfo user = (UserInfo) CacheManager.getInstance()
+					.getCache(UserCache.cacheID).get(currentUser);
+			request.setAttribute("cuserName", user.getName());
+			int tc = blogService.getUserThemeCount();
+			int ac = blogService.getUserAttentionCount();
+			request.setAttribute("tc", tc);
+			request.setAttribute("ac", ac);
+			user.setPassword(null);
+			request.setAttribute("user", user);
+		} else {
+			request.setAttribute("tc", 0);
+			request.setAttribute("ac", 0);
+			request.setAttribute("user", null);
+		}
 	}
 
 }

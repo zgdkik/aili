@@ -13,9 +13,12 @@ import org.hbhk.aili.security.server.context.UserContext;
 import org.hbhk.aili.security.server.service.IUserService;
 import org.hbhk.aili.security.share.pojo.UserInfo;
 import org.hbhk.maikkr.core.server.event.UpdateBlogHitsEvent;
+import org.hbhk.maikkr.user.server.service.IAttentionService;
 import org.hbhk.maikkr.user.server.service.IBlogService;
 import org.hbhk.maikkr.user.server.service.IThemeService;
+import org.hbhk.maikkr.user.share.pojo.AttentionInfo;
 import org.hbhk.maikkr.user.share.pojo.BlogInfo;
+import org.hbhk.maikkr.user.share.pojo.CommentInfo;
 import org.hbhk.maikkr.user.share.pojo.ThemeInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,6 +37,8 @@ public class UserController extends BaseController {
 	private IUserService userService;
 	@Autowired
 	private IThemeService themeService;
+	@Autowired
+	private IAttentionService attentionService;
 
 	@RequestMapping("/main")
 	public String main(Model model) {
@@ -164,6 +169,33 @@ public class UserController extends BaseController {
 		} catch (Exception e) {
 			log.error("loadUserTheme", e);
 			return returnSuccess(new ArrayList<ThemeInfo>());
+		}
+
+	}
+
+	@RequestMapping("/attenUser")
+	@ResponseBody
+	@NeedLogin
+	public ResponseEntity attenUser(AttentionInfo atten) {
+		try {
+			attentionService.save(atten);
+			return returnSuccess();
+		} catch (Exception e) {
+			log.error("attenUser", e);
+			return returnException();
+		}
+
+	}
+
+	@RequestMapping("/sendComment")
+	@ResponseBody
+	@NeedLogin
+	public ResponseEntity sendComment(CommentInfo comm) {
+		try {
+			return returnSuccess();
+		} catch (Exception e) {
+			log.error("attenUser", e);
+			return returnException();
 		}
 
 	}
