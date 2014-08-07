@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.hbhk.aili.cache.server.CacheManager;
 import org.hbhk.aili.cache.server.ICache;
 import org.hbhk.aili.orm.server.surpport.Page;
@@ -23,6 +25,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class BlogService implements IBlogService {
 
+	private Log log = LogFactory.getLog(getClass());
 	@Autowired
 	private IBlogDao blogDao;
 
@@ -51,8 +54,13 @@ public class BlogService implements IBlogService {
 					.getCache(UserCache.cacheID);
 			for (int i = 0; i < blogInfos.size(); i++) {
 				String blogUser = blogInfos.get(i).getBlogUser();
-				UserInfo user = userCache.get(blogUser);
-				blogInfos.get(i).setUserHeadImg(user.getUserHeadImg());
+				try {
+					UserInfo user = userCache.get(blogUser);
+					blogInfos.get(i).setUserHeadImg(user.getUserHeadImg());
+				} catch (Exception e) {
+					 log.error("加载用户失败", e);
+				}
+				
 			}
 		}
 		pagination.setItems(blogInfos);

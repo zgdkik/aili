@@ -35,10 +35,61 @@ var seesionid="${pageContext.session.id}";
 		</div>
 		<!--  -->
 		<div id="ct_center" >
-			<div id="userTheme"></div>
-			<div id="userComment"></div>
-			<div id="fckEditor">
-				<textarea class="ckeditor" name="editorText"></textarea>
+			<div id="userTheme" style="width: 600px;">
+				<h1 style="margin-left: 25px"><a>asdasd</a></h1>
+				<div style="margin-left: 25px;margin-right: 25px">
+					asdasd<br>
+				asdasd<br>
+				asdasd<br>
+					asdasd<br>
+				asdasd<br>
+				asdasd<br>
+				asdasd<br>
+					asdasd<br>
+				asdasd<br>
+				asdasd<br>
+				asdasd<br>
+					asdasd<br>
+				asdasd<br>
+				asdasd<br>
+				asdasd<br>
+					asdasd<br>
+				asdasd<br>
+				asdasd<br>
+				asdasd<br>
+					asdasd<br>
+				asdasd<br>
+				asdasd<br>
+				
+				</div>
+			
+			</div>
+			<h1 style="border-bottom:1px solid #D9D9D9; height:1px; margin-left: 2px;margin-right: 2px"></h1>
+			<div id="thmenInfo" style="height: 20px;">
+				<a style="margin-left: 100px">热度 ${theme.blogHit}</a>
+				 <a style="margin-left: 10px">评论 ${theme.blogReview}</a>
+				 <a style="margin-left: 10px">收藏  ${theme.blogCollect}</a>
+			</div>
+			<h1 style="border-bottom:1px solid #D9D9D9; height:1px; margin-left: 2px;margin-right: 2px"></h1>
+			<div id="userComment" style="width: 600px;">
+			<div style="margin-left: 25px;margin-right: 25px">
+					asdasd<br>
+				asdasd<br>
+				asdasd<br>
+					asdasd<br>
+				asdasd<br>
+				asdasd<br>
+				asdasd<br>
+					asdasd<br>
+				asdasd<br>
+				asdasd<br>
+				</div>
+			</div>
+			<h1 style="border-bottom:1px solid #D9D9D9; height:1px; margin-left: 2px;margin-right: 2px"></h1>
+			<div id="fckEditor" style="border:1px solid #4B1717;width: 550px;margin-left: 25px;" >
+				<span style="margin-left: 100px;font-size: 25px;font-weight: bold;">说出你的看法?</span>
+				<textarea  id="editorText" style="width: 400px; margin-left: 75px;height: 150px;" ></textarea>
+				<input style="margin-left: 400px;margin-bottom: 10px;margin-top: 10px" type="button" value="发表评论" id="sendComment" title="发表评论">
 			</div>
 		</div>
 		<!-- 右边部分 -->

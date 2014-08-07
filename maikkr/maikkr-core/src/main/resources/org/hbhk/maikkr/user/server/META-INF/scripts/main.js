@@ -218,8 +218,12 @@ function loadTheme() {
 			theme_list.empty();
 			for ( var i = 0; i < items.length; i++) {
 				var item = items[i];
+				var userHeadImg = item.userHeadImg;
+				if(userHeadImg==null || userHeadImg==""){
+					userHeadImg ="images/security/default_head.png";
+				}
 				// 设置头像
-				var headimg = base + item.userHeadImg;
+				var headimg = base + userHeadImg;
 				var imgurl =item.blogLink;
 				 
 				var li='<li class="theme" style="border:#666 1px solid;height:230px; border-left:0;border-right:0;">'

@@ -44,30 +44,16 @@ function loadTheme() {
 		}
 	});
 };
-
-// 动态改变div高度
-var preHiget;// 上次的高度
-var difference;
-function updateHeight(a) {
+function updateHeight() {
 	var height = get("main").scrollHeight;
-	if (a == 1) {
-		preHiget = height - difference - 160;
-		$j("#center").css("height", preHiget);
-		$j("#ct_left").css("height", preHiget - 10);
-		$j("#ct_right").css("height", preHiget);
-		$j("#ct_bottom").css("margin-top", preHiget + 30);
-	} else if (a == 2) {
-		$j("#center").css("height",800);
-		$j("#ct_left").css("height", 800 - 10);
-		$j("#ct_right").css("height", 800);
-		$j("#ct_bottom").css("marginTop", 800);
-	} else {
-		$j("#center").css("height" , height);
-		$j("#ct_left").css("height ",height - 10);
-		$j("#ct_right").css("height" , height);
-		$j("#ct_bottom").css("marginTop" , height + 30);
-		difference = height - preHiget;
+	var ct_center = $j("#ct_center").outerHeight();
+	if(height < ct_center){
+		height = ct_center;
 	}
+	$j("#center").css("height" , height);
+	$j("#ct_left").css("height ",height - 10);
+	$j("#ct_right").css("height" , height);
+	//$j("#ct_bottom").css("marginTop" , height + 30);
 }
 
 function get(id){
