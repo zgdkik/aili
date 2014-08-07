@@ -4,12 +4,12 @@ import java.util.List;
 
 public interface ICommonService<T> {
 
-	T save(T o);
+	T save(T model);
 
-	T update(T o);
+	T update(T model);
 
-	List<T> get(T o);
+	List<T> get(T model);
 
-	T getOne(T o);
+	T getOne(T model);
 
 }
