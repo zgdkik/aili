@@ -47,6 +47,7 @@ public class BackendController extends BaseController {
 	public String userlist() {
 		return "userlist";
 	}
+
 	@RequestMapping("left")
 	@NeedLogin
 	public String left() {
@@ -72,6 +73,17 @@ public class BackendController extends BaseController {
 			}
 		} catch (Exception e) {
 			return returnException("系统异常");
+		}
+	}
+
+	@RequestMapping("regist")
+	@ResponseBody
+	public ResponseEntity regist(AdminInfo admin) {
+		try {
+			adminService.regist(admin);
+			return returnSuccess();
+		} catch (Exception e) {
+			return returnException("添加失败");
 		}
 	}
 
