@@ -2,13 +2,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="common.jsp"/>
 <link href="${styles}/comment.css" rel="stylesheet" type="text/css" />
+<script src="${scripts}/fckeditor/ckeditor.js"></script>
 <script type="text/javascript" src="${scripts}/comment.js"></script>
 <script type="text/javascript">
 var seesionid="${pageContext.session.id}";
 </script>
 <body>
 <jsp:include page="tool.jsp"/>
-<div id="main" >
+<div id="main">
 	<%-- <div style="background-image: url('${base}images/user/back_img.png');width: 100%;
 		    height: 100%;float: left;z-index: -1;"></div> --%>
     <div id="center" >
@@ -34,7 +35,11 @@ var seesionid="${pageContext.session.id}";
 		</div>
 		<!--  -->
 		<div id="ct_center" >
-			
+			<div id="userTheme"></div>
+			<div id="userComment"></div>
+			<div id="fckEditor">
+				<textarea class="ckeditor" name="editorText"></textarea>
+			</div>
 		</div>
 		<!-- 右边部分 -->
 		<div id="ct_right" style="margin-left: 750px;">
