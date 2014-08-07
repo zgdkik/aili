@@ -78,10 +78,11 @@ public class BackendController extends BaseController {
 
 	@RequestMapping("regist")
 	@ResponseBody
+	@NeedLogin
 	public ResponseEntity regist(AdminInfo admin) {
 		try {
 			adminService.regist(admin);
-			return returnSuccess();
+			return returnSuccess("添加成功");
 		} catch (Exception e) {
 			return returnException("添加失败");
 		}
