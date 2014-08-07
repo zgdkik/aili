@@ -36,7 +36,7 @@ var seesionid="${pageContext.session.id}";
 		<!--  -->
 		<div id="ct_center" >
 			<div id="userTheme" style="width: 600px;">
-				<h1 style="margin-left: 25px"><a>asdasd</a></h1>
+				<h1 style="margin-left: 25px"><a href="${base}user/${theme.blogUrl}">asdasd</a></h1>
 				<div style="margin-left: 25px;margin-right: 25px">
 					asdasd<br>
 				asdasd<br>
