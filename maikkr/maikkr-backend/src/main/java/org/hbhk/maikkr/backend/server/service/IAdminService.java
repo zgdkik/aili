@@ -11,4 +11,5 @@ public interface IAdminService {
 	AdminInfo get(AdminInfo admin);
 
 	AdminInfo login(AdminInfo admin);
+	AdminInfo regist(AdminInfo admin);
 }

@@ -1,5 +1,8 @@
 package org.hbhk.maikkr.backend.server.service.impl;
 
+import java.util.Date;
+
+import org.hbhk.aili.core.share.util.EncryptUtil;
 import org.hbhk.maikkr.backend.server.dao.IAdminDao;
 import org.hbhk.maikkr.backend.server.service.IAdminService;
 import org.hbhk.maikkr.backend.shared.pojo.AdminInfo;
@@ -21,8 +24,10 @@ public class AdminService implements IAdminService {
 	public AdminInfo get(AdminInfo admin) {
 		return adminDao.getOne(admin);
 	}
-	
+
 	public AdminInfo login(AdminInfo admin) {
+		String pwd = EncryptUtil.encodeSHA1(admin.getPwd());
+		admin.setPwd(pwd);
 		AdminInfo a = adminDao.getOne(admin);
 		if (a == null) {
 			return null;
@@ -31,6 +36,15 @@ public class AdminService implements IAdminService {
 			return a;
 		}
 		return null;
+	}
+
+	public AdminInfo regist(AdminInfo admin) {
+		String id = "admin_" + System.currentTimeMillis();
+		admin.setId(id);
+		admin.setCreatUser("admin");
+		admin.setCreateTime(new Date());
+		admin.setPwd(EncryptUtil.encodeSHA1(admin.getPwd()));
+		return adminDao.save(admin);
 	}
 
 }
