@@ -130,6 +130,6 @@ var seesionid="${pageContext.session.id}";
 		
 	</div>
 </div>
-<input type="hidden" class="imgurl"/>
+<input type="hidden" id="blogId" value="${theme.id}"/>
 </body>
 </html>

@@ -83,7 +83,10 @@ $j(document).ready(function() {
 			}
 		}
 	});
-	loadTheme();
+	$j(window).scroll( function() { 
+		loadTheme();
+	});
+	
 	//显示或隐藏主题 消息收藏
 	$j("#home").click(function() {
 		$j("#home_blog").show();
@@ -207,52 +210,62 @@ function sendTheme(){
 		}
 	});
 };
-
+//定义一个总的高度变量
+var totalheight = 0;
+//设置加载最多次数  
+var maxnum = 5;
+var num = 1;  
 function loadTheme() {
-	$j.ajax({
-		url : base + "user/getPageTheme.htm",
-		type : "POST",
-		success : function(data, textStatus) {
-			var items = data.result.items;
-			var theme_list = $j("#theme_list");
-			theme_list.empty();
-			for ( var i = 0; i < items.length; i++) {
-				var item = items[i];
-				var userHeadImg = item.userHeadImg;
-				if(userHeadImg==null || userHeadImg==""){
-					userHeadImg ="images/security/default_head.png";
-				}
-				// 设置头像
-				var headimg = base + userHeadImg;
-				var imgurl =item.blogLink;
-				 
-				var li='<li class="theme" style="border:#666 1px solid;height:230px; border-left:0;border-right:0;">'
-				var head ='<div class="vline"><img id="head_portrait" height="50px" width="50px" '+
-				'src="'+headimg+'"></div>';
-				var burl = base+"user/"+item.blogUrl;
-				var title='<div class="vline"><div class="context"><a href="'+burl+'">'+item.blogTitle+'</a></div>';
-      			var context='<div class="vline"><div class="context">'+item.blogContent+'</div><div class="context_imgs">';
-      			var imggroup= item.blogUrl;
-      			if(imgurl!=null && imgurl!=""){
-      				var imgs = imgurl.split(",");
-      				for ( var j = 0; j < imgs.length; j++) {
-      					var imgurl = base + imgs[j];
-      					var preImg = '<a class="fancybox" href="'+imgurl+'" data-fancybox-group="'+imggroup+'">'
-      					var img ='<img id="context_img" height="100px" width="100px" src="'+imgurl+'"></a>';
-      					context =context +preImg+img;
+	//浏览器的高度加上滚动条的高度 
+	totalheight = parseFloat($j(window).height()) + parseFloat($j(window).scrollTop());
+	//当文档的高度小于或者等于总的高度的时候，开始动态加载数据
+	if ($j(document).height() <= totalheight && num <= maxnum){
+		$j.ajax({
+			url : base + "user/getPageTheme.htm",
+			type : "POST",
+			data:{'pageNum':num},
+			success : function(data, textStatus) {
+				var items = data.result.items;
+				var theme_list = $j("#theme_list");
+				theme_list.empty();
+				for ( var i = 0; i < items.length; i++) {
+					var item = items[i];
+					var userHeadImg = item.userHeadImg;
+					if(userHeadImg==null || userHeadImg==""){
+						userHeadImg ="images/security/default_head.png";
 					}
-      			}
-      			context=context+"</div></div>";
-				li=li+head+title+context+'</li>'
-				theme_list.append(li);
-				theme_list.trigger("create");
+					// 设置头像
+					var headimg = base + userHeadImg;
+					var imgurl =item.blogLink;
+					 
+					var li='<li class="theme" style="border:#666 1px solid;height:230px; border-left:0;border-right:0;">'
+					var head ='<div class="vline"><img id="head_portrait" height="50px" width="50px" '+
+					'src="'+headimg+'"></div>';
+					var burl = base+"user/"+item.blogUrl;
+					var title='<div class="vline"><div class="context"><a href="'+burl+'">'+item.blogTitle+'</a></div>';
+	      			var context='<div class="vline"><div class="context">'+item.blogContent+'</div><div class="context_imgs">';
+	      			var imggroup= item.blogUrl;
+	      			if(imgurl!=null && imgurl!=""){
+	      				var imgs = imgurl.split(",");
+	      				for ( var j = 0; j < imgs.length; j++) {
+	      					var imgurl = base + imgs[j];
+	      					var preImg = '<a class="fancybox" href="'+imgurl+'" data-fancybox-group="'+imggroup+'">'
+	      					var img ='<img id="context_img" height="100px" width="100px" src="'+imgurl+'"></a>';
+	      					context =context +preImg+img;
+						}
+	      			}
+	      			context=context+"</div></div>";
+					li=li+head+title+context+'</li>'
+					theme_list.append(li);
+					theme_list.trigger("create");
+				}
+				updateHeight();
+			},
+			exception : function(data, textStatus) {
+				$j.toast("加载主题失败,请重新刷新!");
 			}
-			updateHeight();
-		},
-		exception : function(data, textStatus) {
-			$j.toast("加载主题失败,请重新刷新!");
-		}
-	});
+		});
+	}
 };
 
 function search(q) {
@@ -303,28 +316,12 @@ function search(q) {
 	});
 };
 // 动态改变div高度
-var preHiget;// 上次的高度
-var difference;
-function updateHeight(a) {
+function updateHeight() {
 	var height = get("main").scrollHeight;
-	if (a == 1) {
-		preHiget = height - difference - 160;
-		$j("#center").css("height", preHiget);
-		$j("#ct_left").css("height", preHiget - 10);
-		$j("#ct_right").css("height", preHiget);
-		$j("#ct_bottom").css("margin-top", preHiget + 30);
-	} else if (a == 2) {
-		$j("#center").css("height",800);
-		$j("#ct_left").css("height", 800 - 10);
-		$j("#ct_right").css("height", 800);
-		$j("#ct_bottom").css("marginTop", 800);
-	} else {
-		$j("#center").css("height" , height);
-		$j("#ct_left").css("height ",height - 10);
-		$j("#ct_right").css("height" , height);
-		$j("#ct_bottom").css("marginTop" , height + 30);
-		difference = height - preHiget;
-	}
+	$j("#center").css("height" , height);
+	$j("#ct_left").css("height ",height - 10);
+	$j("#ct_right").css("height" , height);
+	//$j("#ct_bottom").css("marginTop" , height + 30);
 }
 
 function get(id){

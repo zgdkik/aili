@@ -3,6 +3,7 @@ package org.hbhk.maikkr.user.server.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hbhk.aili.core.server.annotation.NeedLogin;
@@ -15,6 +16,7 @@ import org.hbhk.aili.security.share.pojo.UserInfo;
 import org.hbhk.maikkr.core.server.event.UpdateBlogHitsEvent;
 import org.hbhk.maikkr.user.server.service.IAttentionService;
 import org.hbhk.maikkr.user.server.service.IBlogService;
+import org.hbhk.maikkr.user.server.service.ICommentService;
 import org.hbhk.maikkr.user.server.service.IThemeService;
 import org.hbhk.maikkr.user.share.pojo.AttentionInfo;
 import org.hbhk.maikkr.user.share.pojo.BlogInfo;
@@ -39,6 +41,8 @@ public class UserController extends BaseController {
 	private IThemeService themeService;
 	@Autowired
 	private IAttentionService attentionService;
+	@Autowired
+	private ICommentService commentService;
 
 	@RequestMapping("/main")
 	public String main(Model model) {
@@ -95,10 +99,18 @@ public class UserController extends BaseController {
 
 	@RequestMapping("/getPageTheme")
 	@ResponseBody
-	public ResponseEntity getPageTheme(BlogInfo blog, Page page) {
+	public ResponseEntity getPageTheme(BlogInfo blog, int pageNum) {
 		try {
-			page.setStart(0);
-			page.setSize(10);
+			Page page = new Page();
+			page.setSize(8);
+			if (pageNum > 5) {
+				pageNum = 5;
+			}
+			if (pageNum == 1) {
+				page.setStart(0);
+			} else {
+				page.setStart(8 * pageNum);
+			}
 			Object result = blogService.getBlogPage(blog, page);
 			return returnSuccess(result);
 		} catch (Exception e) {
@@ -222,9 +234,40 @@ public class UserController extends BaseController {
 	@NeedLogin
 	public ResponseEntity sendComment(CommentInfo comm) {
 		try {
+			if (commentService.save(comm) == null) {
+				return returnException();
+			}
 			return returnSuccess();
 		} catch (Exception e) {
-			log.error("attenUser", e);
+			log.error("sendComment", e);
+			return returnException();
+		}
+
+	}
+
+	@RequestMapping("/loadComment")
+	@ResponseBody
+	public ResponseEntity loadComment(String blogId, int pageNum) {
+		try {
+			if (StringUtils.isEmpty(blogId)) {
+				return returnException();
+			}
+			CommentInfo model = new CommentInfo();
+			model.setBlogId(blogId);
+			Page page = new Page();
+			page.setSize(8);
+			if (pageNum > 5) {
+				pageNum = 5;
+			}
+			if (pageNum == 1) {
+				page.setStart(0);
+			} else {
+				page.setStart(8 * pageNum);
+			}
+			Object result = commentService.get(model, page);
+			return returnSuccess(result);
+		} catch (Exception e) {
+			log.error("loadComment", e);
 			return returnException();
 		}
 
