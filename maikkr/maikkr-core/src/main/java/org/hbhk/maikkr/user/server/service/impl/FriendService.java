@@ -5,7 +5,8 @@ import java.util.List;
 import org.hbhk.aili.orm.server.surpport.Page;
 import org.hbhk.maikkr.user.server.service.IFriendService;
 import org.hbhk.maikkr.user.share.pojo.FriendInfo;
-
+import org.springframework.stereotype.Service;
+@Service
 public class FriendService  implements IFriendService{
 
 	public FriendInfo save(FriendInfo o) {

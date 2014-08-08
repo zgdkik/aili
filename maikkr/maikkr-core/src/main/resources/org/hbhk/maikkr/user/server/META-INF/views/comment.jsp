@@ -100,7 +100,7 @@ var seesionid="${pageContext.session.id}";
 			 <c:if test="${userInfo eq null}">
 				 <img style="border-bottom-style: solid;border-bottom-width: 1px;"
 				 id="head_portrait_right" height="80px" width="80px" 
-				 src="/maikkr/images/security/default_head.png">
+				 src="${base}images/security/default_head.png">
 			 </c:if>
 			 <c:if test="${userInfo ne null}">
 				 <img style="border-bottom-style: solid;border-bottom-width: 1px;"

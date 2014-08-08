@@ -10,7 +10,9 @@ import org.hbhk.maikkr.user.server.dao.ICommentDao;
 import org.hbhk.maikkr.user.server.service.ICommentService;
 import org.hbhk.maikkr.user.share.pojo.CommentInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class CommentService implements ICommentService {
 
 	@Autowired
