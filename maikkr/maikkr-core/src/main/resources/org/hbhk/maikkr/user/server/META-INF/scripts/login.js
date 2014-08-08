@@ -36,7 +36,7 @@ $j(document).ready(function() {
 		    	});
 		    	
 		    }else{
-		    	window.location(base+"user/loginpage.htm");
+		    	window.location.href=base+"user/loginpage.htm";
 		    }	
 		
 	});
