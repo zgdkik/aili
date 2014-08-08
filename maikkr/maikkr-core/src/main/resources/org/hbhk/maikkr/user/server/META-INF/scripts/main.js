@@ -55,6 +55,10 @@ $j(document).ready(function() {
 		'uploadLimit':5,
 		'queueSizeLimit':5,
 		'onUploadStart':function(){
+			if(UserContext.user==null || UserContext.user==""){
+				$j.toast("你需要登陆才能上传图片!");
+				return false;
+			}
 			var img = $j('.imgurl').val();
 			var imgs = img.split(",");
 			if(imgs.length>=5){
