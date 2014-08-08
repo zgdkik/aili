@@ -23,7 +23,8 @@
 		location="/scripts/" />
 	<mvc:resources mapping="#{resourceBean.resourcePrefix}/styles/**"
 		location="/styles/" />
-
+	<mvc:resources mapping="#{resourceBean.resourcePrefix}/files/**"
+		location="/files/" />
 	<!-- 异常统一处理 -->
 	<bean class="org.hbhk.aili.core.server.ex.GlobalExceptionController" />
 	<!-- 扫描所有的controller -->
