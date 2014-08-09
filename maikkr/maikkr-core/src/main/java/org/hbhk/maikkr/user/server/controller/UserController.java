@@ -16,10 +16,12 @@ import org.hbhk.aili.security.share.pojo.UserInfo;
 import org.hbhk.maikkr.core.server.event.UpdateBlogHitsEvent;
 import org.hbhk.maikkr.user.server.service.IAttentionService;
 import org.hbhk.maikkr.user.server.service.IBlogService;
+import org.hbhk.maikkr.user.server.service.ICollectService;
 import org.hbhk.maikkr.user.server.service.ICommentService;
 import org.hbhk.maikkr.user.server.service.IThemeService;
 import org.hbhk.maikkr.user.share.pojo.AttentionInfo;
 import org.hbhk.maikkr.user.share.pojo.BlogInfo;
+import org.hbhk.maikkr.user.share.pojo.CollectInfo;
 import org.hbhk.maikkr.user.share.pojo.CommentInfo;
 import org.hbhk.maikkr.user.share.pojo.ThemeInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +45,9 @@ public class UserController extends BaseController {
 	private IAttentionService attentionService;
 	@Autowired
 	private ICommentService commentService;
-
+	@Autowired
+	private ICollectService collectService;
+	
 	@RequestMapping("/main.htm")
 	public String main(Model model) {
 		return "index";
@@ -267,6 +271,22 @@ public class UserController extends BaseController {
 		} catch (Exception e) {
 			log.error("loadComment", e);
 			return returnException();
+		}
+
+	}
+	
+	@RequestMapping("/collectComment.htm")
+	@ResponseBody
+	@NeedLogin
+	public ResponseEntity collectComment(CollectInfo comm) {
+		try {
+			if (collectService.save(comm) == null) {
+				return returnException();
+			}
+			return returnSuccess();
+		} catch (Exception e) {
+			log.error("collect", e);
+			return returnException(e.getMessage());
 		}
 
 	}

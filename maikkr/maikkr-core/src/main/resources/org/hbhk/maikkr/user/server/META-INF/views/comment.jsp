@@ -6,7 +6,9 @@
 <script src="${scripts}/fckeditor/ckeditor.js"></script>
 <script type="text/javascript" src="${scripts}/comment.js"></script>
 <script type="text/javascript">
-var seesionid="${pageContext.session.id}";
+ var seesionid="${pageContext.session.id}";
+ var url ="${theme.blogUrl}"; 
+ var name = "${theme.blogTitle}";
 </script>
 <body>
 <jsp:include page="tool.jsp"/>
@@ -59,7 +61,7 @@ var seesionid="${pageContext.session.id}";
 			<div id="thmenInfo" style="height: 20px;">
 				<a style="margin-left: 100px">热度 ${theme.blogHit}</a>
 				 <a style="margin-left: 10px">评论 ${theme.blogReview}</a>
-				 <a style="margin-left: 10px">收藏  ${theme.blogCollect}</a>
+				 <a style="margin-left: 10px"><span id="collect">收藏 ${theme.blogCollect}</span></a>
 			</div>
 			<h1 style="border-bottom:1px solid #D9D9D9; height:1px; margin-left: 2px;margin-right: 2px"></h1>
 			<div  style="width: 600px;">

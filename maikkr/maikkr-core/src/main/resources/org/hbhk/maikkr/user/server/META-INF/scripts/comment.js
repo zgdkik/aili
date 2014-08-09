@@ -37,6 +37,25 @@ $j(document).ready(function() {
 		loadComment();
 	}); 
 	//updateHeight();
+	$j("body").on('click',"#collect",function(){
+		if(UserContext.user==null || UserContext.user==""){
+			$j.toast("你需要登陆才能收藏!");
+			return ;
+		}
+		var blogId = $j("#blogId").val();
+		$j.ajax({
+			url : base + "user/collectComment.htm",
+			type : "POST",
+			data:{'url':url,'name':name,'blogId':blogId},
+			success : function(data, textStatus) {
+				$j.toast("评论成功");
+			},
+			exception : function(data, textStatus) {
+				$j.toast(data.msg);
+			}
+		});
+		
+	});
 });
 
 function current(d){ 
