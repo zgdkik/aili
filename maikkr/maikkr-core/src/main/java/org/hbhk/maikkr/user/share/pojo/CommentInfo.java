@@ -17,7 +17,9 @@ public class CommentInfo extends BaseInfo {
 	private String commentConcent;// 评论内容
 	@Column("commentUser")
 	private String commentUser;// 评论人
-
+	@Column("commentHeadImg")
+    private String commentHeadImg;
+    
 	public String getBlogId() {
 		return blogId;
 	}
@@ -42,4 +44,13 @@ public class CommentInfo extends BaseInfo {
 		this.commentUser = commentUser;
 	}
 
+	public String getCommentHeadImg() {
+		return commentHeadImg;
+	}
+
+	public void setCommentHeadImg(String commentHeadImg) {
+		this.commentHeadImg = commentHeadImg;
+	}
+
+	
 }

@@ -79,11 +79,13 @@ public class SecurityInterceptor extends HandlerInterceptorAdapter {
 			request.setAttribute("ac", ac);
 			user.setPassword(null);
 			request.setAttribute("userInfo", user);
+			request.setAttribute("head", user.getUserHeadImg());
 		} else {
 			request.setAttribute("tc", 0);
 			request.setAttribute("ac", 0);
 			request.setAttribute("userInfo", null);
 			request.setAttribute("cuserName", null);
+			request.setAttribute("head", null);
 		}
 		super.postHandle(request, response, handler, modelAndView);
 	}

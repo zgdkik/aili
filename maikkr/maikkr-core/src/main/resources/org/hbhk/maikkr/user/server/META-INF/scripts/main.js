@@ -77,9 +77,9 @@ $j(document).ready(function() {
 				$j.toast("上传成功");
 				var img = $j('.imgurl').val();
 				if(img!=null &&img!=""){
-					$j('.imgurl').val(img+","+json.result)
+					$j('.imgurl').val(img+","+json.result);
 				}else{
-					$j('.imgurl').val(json.result)
+					$j('.imgurl').val(json.result);
 				}
 				
 			} else {
@@ -87,7 +87,8 @@ $j(document).ready(function() {
 			}
 		}
 	});
-	$j(window).scroll( function() { 
+	loadTheme();
+	$j("#main").scroll( function() { 
 		loadTheme();
 	});
 	
@@ -124,10 +125,10 @@ $j(document).ready(function() {
 	
 	//发布主题
 	$j(".blog_contenttop").mouseover(function() {
-		$j(this).css("background-color","#E6E6E6")
+		$j(this).css("background-color","#E6E6E6");
 	});
 	$j(".blog_contenttop").mouseout(function() {
-		$j(this).css("background-color","")
+		$j(this).css("background-color","");
 	});
 	updateHeight();
 	//加载用户主题
@@ -205,7 +206,7 @@ function sendTheme(){
 		type:"POST",
 		data:data,
 		success: function(data, textStatus){
-			var url = $j('.imgurl').val(null);
+			$j('.imgurl').val(null);
 			loadTheme();
 			$j.toast(data.msg);
 		},
@@ -221,7 +222,7 @@ var maxnum = 5;
 var num = 1;  
 function loadTheme() {
 	//浏览器的高度加上滚动条的高度 
-	totalheight = parseFloat($j(window).height()) + parseFloat($j(window).scrollTop());
+	totalheight = parseFloat($j("#main").height());
 	//当文档的高度小于或者等于总的高度的时候，开始动态加载数据
 	if ($j(document).height() <= totalheight && num <= maxnum){
 		$j.ajax({
@@ -229,9 +230,10 @@ function loadTheme() {
 			type : "POST",
 			data:{'pageNum':num},
 			success : function(data, textStatus) {
+				num++;
 				var items = data.result.items;
 				var theme_list = $j("#theme_list");
-				theme_list.empty();
+				//theme_list.empty();
 				for ( var i = 0; i < items.length; i++) {
 					var item = items[i];
 					var userHeadImg = item.userHeadImg;
@@ -242,7 +244,7 @@ function loadTheme() {
 					var headimg = base + userHeadImg;
 					var imgurl =item.blogLink;
 					 
-					var li='<li class="theme" style="border:#666 1px solid;height:230px; border-left:0;border-right:0;">'
+					var li='<li class="theme" style="border:#666 1px solid;height:230px; border-left:0;border-right:0;">';
 					var head ='<div class="vline"><img id="head_portrait" height="50px" width="50px" '+
 					'src="'+headimg+'"></div>';
 					var burl = base+"user/"+item.blogUrl;
@@ -253,13 +255,13 @@ function loadTheme() {
 	      				var imgs = imgurl.split(",");
 	      				for ( var j = 0; j < imgs.length; j++) {
 	      					var imgurl = base + imgs[j];
-	      					var preImg = '<a class="fancybox" href="'+imgurl+'" data-fancybox-group="'+imggroup+'">'
+	      					var preImg = '<a class="fancybox" href="'+imgurl+'" data-fancybox-group="'+imggroup+'">';
 	      					var img ='<img id="context_img" height="100px" width="100px" src="'+imgurl+'"></a>';
 	      					context =context +preImg+img;
 						}
 	      			}
 	      			context=context+"</div></div>";
-					li=li+head+title+context+'</li>'
+					li=li+head+title+context+'</li>';
 					theme_list.append(li);
 					theme_list.trigger("create");
 				}
@@ -291,7 +293,7 @@ function search(q) {
 				var headimg = base + item.userHeadImg;
 				var imgurl =item.blogLink;
 				 
-				var li='<li class="theme" style="border:#666 1px solid;height:230px; border-left:0;border-right:0;">'
+				var li='<li class="theme" style="border:#666 1px solid;height:230px; border-left:0;border-right:0;">';
 				var head ='<div class="vline"><img id="head_portrait" height="50px" width="50px" '+
 				'src="'+headimg+'"></div>';
 				var burl = base+"user/"+item.blogUrl;
@@ -302,13 +304,13 @@ function search(q) {
       				var imgs = imgurl.split(",");
       				for ( var j = 0; j < imgs.length; j++) {
       					var imgurl = base + imgs[j];
-      					var preImg = '<a class="fancybox" href="'+imgurl+'" data-fancybox-group="'+imggroup+'">'
+      					var preImg = '<a class="fancybox" href="'+imgurl+'" data-fancybox-group="'+imggroup+'">';
       					var img ='<img id="context_img" height="100px" width="100px" src="'+imgurl+'"></a>';
       					context =context +preImg+img;
 					}
       			}
       			context=context+"</div></div>";
-				li=li+head+title+context+'</li>'
+				li=li+head+title+context+'</li>';
 				theme_list.append(li);
 				theme_list.trigger("create");
 			}

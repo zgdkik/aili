@@ -46,7 +46,7 @@ public class UserController extends BaseController {
 
 	@RequestMapping("/main.htm")
 	public String main(Model model) {
-		return "mainnew";
+		return "index";
 	}
 
 	@RequestMapping("/newhit.htm")
@@ -102,14 +102,14 @@ public class UserController extends BaseController {
 	public ResponseEntity getPageTheme(BlogInfo blog, int pageNum) {
 		try {
 			Page page = new Page();
-			page.setSize(8);
+			page.setSize(2);
 			if (pageNum > 5) {
 				pageNum = 5;
 			}
 			if (pageNum == 1) {
 				page.setStart(0);
 			} else {
-				page.setStart(8 * pageNum);
+				page.setStart(2 * pageNum);
 			}
 			Object result = blogService.getBlogPage(blog, page);
 			return returnSuccess(result);
@@ -137,8 +137,6 @@ public class UserController extends BaseController {
 		try {
 			String blogUrl = user + "/" + url + ".htm";
 			BlogInfo blog = new BlogInfo();
-			blog.setBlogUser(UserContext.getCurrentContext()
-					.getCurrentUserName());
 			blog.setBlogUrl(blogUrl);
 			model.addAttribute("theme", blogService.getBlog(blog));
 			// 修改对应主题的点击数供最热查询

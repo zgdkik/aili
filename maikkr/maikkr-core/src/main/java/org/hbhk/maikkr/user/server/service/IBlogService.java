@@ -17,7 +17,7 @@ public interface IBlogService {
 	List<BlogInfo> search(String q);
 	
 	void updateBlogHit(String blogId);
-	
+	void updateBlogComment(String blogId);
 	int getUserThemeCount();
 	int getUserAttentionCount();
 }

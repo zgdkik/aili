@@ -5,8 +5,10 @@ import java.util.List;
 
 import org.hbhk.aili.orm.server.surpport.Page;
 import org.hbhk.aili.security.server.context.UserContext;
+import org.hbhk.aili.security.share.pojo.UserInfo;
 import org.hbhk.aili.security.share.util.UUIDUitl;
 import org.hbhk.maikkr.user.server.dao.ICommentDao;
+import org.hbhk.maikkr.user.server.service.IBlogService;
 import org.hbhk.maikkr.user.server.service.ICommentService;
 import org.hbhk.maikkr.user.share.pojo.CommentInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,16 +19,20 @@ public class CommentService implements ICommentService {
 
 	@Autowired
 	private ICommentDao commentDao;
+	@Autowired
+	private IBlogService blogService;
 
 	public CommentInfo save(CommentInfo comm) {
 		if (comm == null) {
 			return null;
 		}
-		String user = UserContext.getCurrentContext().getCurrentUserName();
-		comm.setCreatUser(user);
+		UserInfo user = UserContext.getCurrentContext().getCurrentUser();
+		comm.setCreatUser(user.getMail());
 		comm.setId(UUIDUitl.getUuid());
 		comm.setCreateTime(new Date());
-		comm.setCommentUser(user);
+		comm.setCommentUser(user.getMail());
+		comm.setCommentHeadImg(user.getUserHeadImg());
+		blogService.updateBlogComment(comm.getBlogId());
 		return commentDao.save(comm);
 	}
 

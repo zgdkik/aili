@@ -40,6 +40,9 @@ public class BlogService implements IBlogService {
 		blog.setCreateTime(new Date());
 		blog.setCreatUser(user);
 		blog.setBlogId(id);
+		blog.setBlogHit(0);
+		blog.setBlogReview(0);
+		blog.setBlogCollect(0);
 		user = user.substring(0, user.indexOf("@"));
 		blog.setBlogUrl(user + "/" + System.currentTimeMillis() + ".htm");
 		blogDao.save(blog);
@@ -58,9 +61,9 @@ public class BlogService implements IBlogService {
 					UserInfo user = userCache.get(blogUser);
 					blogInfos.get(i).setUserHeadImg(user.getUserHeadImg());
 				} catch (Exception e) {
-					 log.error("加载用户失败", e);
+					log.error("加载用户失败", e);
 				}
-				
+
 			}
 		}
 		pagination.setItems(blogInfos);
@@ -104,6 +107,15 @@ public class BlogService implements IBlogService {
 			return atts.size();
 		}
 		return 0;
+	}
+
+	public void updateBlogComment(String blogId) {
+		BlogInfo blog = new BlogInfo();
+		blog.setId(blogId);
+		BlogInfo b = blogDao.getOne(blog);
+		blog.setBlogReview(b.getBlogReview() + 1);
+		blogDao.update(blog);
+
 	}
 
 }
