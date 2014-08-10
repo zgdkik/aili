@@ -27,7 +27,11 @@ $j(document).ready(function() {
 		    		type:"POST",
 		    		data:data,
 		    		success: function(data, textStatus){
-		    			window.location.href=base+"user/main.htm";
+		    			if(returnUrl!=null && returnUrl!=""){
+				    		window.location.href=returnUrl;
+				    	}else{
+				    		window.location.href=base+"user/main.htm";
+				    	}
 		    		},
 		    		exception:function(data, textStatus){
 		    			$j("#notExistId").css('display',"block");

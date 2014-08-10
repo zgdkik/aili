@@ -7,6 +7,9 @@
 <title>买客网-微主题,微话题-无尽分享-专为买家分享的网站</title>
 <link href="${styles}/login.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="${scripts}/login.js"></script>
+<script type="text/javascript">
+	var returnUrl = '${returnUrl}';
+</script>
 </head>
 <body class="B_login">
 	<div class="w_login">

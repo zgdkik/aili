@@ -3,10 +3,13 @@ package org.hbhk.maikkr.user.server.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hbhk.aili.core.server.annotation.NeedLogin;
+import org.hbhk.aili.core.server.context.RequestContext;
 import org.hbhk.aili.core.server.web.BaseController;
 import org.hbhk.aili.core.share.pojo.ResponseEntity;
 import org.hbhk.aili.orm.server.surpport.Page;
@@ -84,7 +87,9 @@ public class UserController extends BaseController {
 	}
 
 	@RequestMapping("/loginpage.htm")
-	public String loginpage() {
+	public String loginpage(HttpServletRequest request) {
+		String returnUrl = (String) RequestContext.getSession().getAttribute("returnUrl");
+		 request.setAttribute("returnUrl", returnUrl);
 		return "loginpage";
 	}
 
