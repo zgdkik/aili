@@ -68,19 +68,17 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>springmvc</servlet-name>
-		<url-pattern>/</url-pattern>
+		<url-pattern>/user/main</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>springmvc</servlet-name>
+		<url-pattern>*.htm</url-pattern>
 	</servlet-mapping>
 
 	<mime-mapping>
 		<extension>ico</extension>
 		<mime-type>image/vnd.microsoft.icon</mime-type>
 	</mime-mapping>
-
-	<resource-ref>
-		<res-ref-name>jdbc/hbhkds</res-ref-name>
-		<res-type>javax.sql.DataSource</res-type>
-		<res-auth>Container</res-auth>
-	</resource-ref>
 	<!-- 加载jetbrick-template配置 -->
 	<!-- 默认从 classpath 根目录下面查找 jetbrick-template.properties -->
 	<!-- <context-param> -->
@@ -92,7 +90,7 @@
 	</listener>
 
 	<welcome-file-list>
-		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>user/main</welcome-file>
 	</welcome-file-list>
 	<error-page>
 		<error-code>404</error-code>

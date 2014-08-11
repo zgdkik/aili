@@ -16,15 +16,13 @@
 
 	<!-- 约定优于配置，约定优于配置 -->
 
-	<!-- 配置静态资源，直接映射到对应的文件夹，不被DispatcherServlet处理-->
-	<mvc:resources mapping="#{resourceBean.resourcePrefix}/images/**"
-		location="/images/" cache-period="31556926"/>
-	<mvc:resources mapping="#{resourceBean.resourcePrefix}/scripts/**"
-		location="/scripts/" />
-	<mvc:resources mapping="#{resourceBean.resourcePrefix}/styles/**"
-		location="/styles/" />
-	<mvc:resources mapping="#{resourceBean.resourcePrefix}/files/**"
-		location="/files/" />
+	<!-- 配置静态资源，直接映射到对应的文件夹，不被DispatcherServlet处理 -->
+	<mvc:resources mapping="/images/**" location="/images/" />
+	<mvc:resources mapping="/scripts/**" location="/scripts/" />
+	<mvc:resources mapping="/styles/**" location="/styles/" />
+	<mvc:resources mapping="/styles/**" location="/styles/" />
+	<mvc:resources mapping="/uploadify/**" location="/uploadify/" />
+	<mvc:resources mapping="/error/**" location="/error/" />
 	<!-- 异常统一处理 -->
 	<bean class="org.hbhk.aili.core.server.ex.GlobalExceptionController" />
 	<!-- 扫描所有的controller -->
@@ -32,37 +30,30 @@
 		use-default-filters="false">
 		<context:include-filter type="annotation"
 			expression="org.springframework.stereotype.Controller" />
-		<!-- <context:include-filter type="annotation"
-			expression="org.springframework.web.bind.annotation.ControllerAdvice" /> -->
+		<!-- <context:include-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice" 
+			/> -->
 	</context:component-scan>
 
-	<mvc:annotation-driven content-negotiation-manager="contentNegotiationManager">
-		 <mvc:message-converters register-defaults="false">
-			<!-- <bean class="org.springframework.http.converter.xml.MarshallingHttpMessageConverter">
-			</bean> -->
-			<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>
+	<mvc:annotation-driven
+		content-negotiation-manager="contentNegotiationManager">
+		<mvc:message-converters register-defaults="false">
+			<!-- <bean class="org.springframework.http.converter.xml.MarshallingHttpMessageConverter"> 
+				</bean> -->
+			<bean
+				class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" />
 			<bean class="org.springframework.http.converter.StringHttpMessageConverter" />
 		</mvc:message-converters>
 	</mvc:annotation-driven>
 	<!-- 启用基于注解的处理器映射，添加拦截器，类级别的处理器映射 -->
 	<mvc:interceptors>
-		<!-- <mvc:interceptor>
-			<mvc:mapping path="/**" />
-			<mvc:exclude-mapping path="#{resourceBean.resourcePrefix}/**" />
-			<bean class="org.hbhk.aili.security.server.security.SecurityInterceptor" />
-		</mvc:interceptor> -->
-		<!-- 	
-		<mvc:interceptor>
-			<mvc:mapping path="/**" />
-			<mvc:exclude-mapping path="#{resourceBean.resourcePrefix}/**" />
-			<bean class="org.hbhk.aili.security.server.security.LoginLimitInterceptor" />
-		</mvc:interceptor>
-		<mvc:interceptor>
-			<mvc:mapping path="/**" />
-			<mvc:exclude-mapping path="#{resourceBean.resourcePrefix}/**" />
-			<bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor" />
-		</mvc:interceptor> 
-		-->
+		<!-- <mvc:interceptor> <mvc:mapping path="/**" /> <mvc:exclude-mapping 
+			path="#{resourceBean.resourcePrefix}/**" /> <bean class="org.hbhk.aili.security.server.security.SecurityInterceptor" 
+			/> </mvc:interceptor> -->
+		<!-- <mvc:interceptor> <mvc:mapping path="/**" /> <mvc:exclude-mapping 
+			path="#{resourceBean.resourcePrefix}/**" /> <bean class="org.hbhk.aili.security.server.security.LoginLimitInterceptor" 
+			/> </mvc:interceptor> <mvc:interceptor> <mvc:mapping path="/**" /> <mvc:exclude-mapping 
+			path="#{resourceBean.resourcePrefix}/**" /> <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor" 
+			/> </mvc:interceptor> -->
 		<mvc:interceptor>
 			<mvc:mapping path="/**" />
 			<mvc:exclude-mapping path="#{resourceBean.resourcePrefix}/**" />
@@ -88,10 +79,10 @@
 
 	<bean class="jetbrick.template.web.springmvc.JetTemplateViewResolver">
 		<property name="prefix" value="/WEB-INF/views/"></property>
-        <property name="suffix" value=".jhtml" />
-        <property name="contentType" value="text/html; charset=UTF-8" />
-        <property name="order" value="8888" />
-    </bean>
+		<property name="suffix" value=".jhtml" />
+		<property name="contentType" value="text/html; charset=UTF-8" />
+		<property name="order" value="8888" />
+	</bean>
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/views/"></property>
@@ -108,7 +99,7 @@
 			<value>
 				json=application/json
 				xml=application/xml
-				text=text/json  
+				text=text/json
 			</value>
 		</property>
 	</bean>
@@ -121,22 +112,15 @@
 	</bean>
 
 	<!--spring 国际化 -->
-	<!-- <bean id="localeResolver"
-		class="org.springframework.web.servlet.i18n.SessionLocaleResolver" />
-	<bean id="messageSource"
-		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
-		<property name="basenames">
-			<list>
-				配置语言文件的地址的默认配置文件,在这里我是message_zh_CN.properties
-				<value>classpath:org/hbhk/module/framework/server/META-INF/messages/message_zh_CN
-				</value>
-			</list>
-		</property>
-		<property name="cacheSeconds" value="-1" />
-	</bean> -->
+	<!-- <bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver" 
+		/> <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource"> 
+		<property name="basenames"> <list> 配置语言文件的地址的默认配置文件,在这里我是message_zh_CN.properties 
+		<value>classpath:org/hbhk/module/framework/server/META-INF/messages/message_zh_CN 
+		</value> </list> </property> <property name="cacheSeconds" value="-1" /> 
+		</bean> -->
 	<!-- 异常处理 -->
 	<bean class="org.hbhk.maikkr.core.server.interceptor.ExceptionResolver">
-		<property name="error404"  value="error404.html"/>
-		<property name="excption"  value="error404.html"/>
+		<property name="error404" value="error404.html" />
+		<property name="excption" value="error404.html" />
 	</bean>
 </beans>   
