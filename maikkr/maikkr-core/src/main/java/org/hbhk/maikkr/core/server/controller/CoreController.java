@@ -24,17 +24,17 @@ public class CoreController extends BaseController {
 	@Autowired
 	private IFileService fileService;
 
-	@RequestMapping("/main.htm")
+	@RequestMapping("/main")
 	public String main() {
 		return "main";
 	}
 
-	@RequestMapping("/error.htm")
+	@RequestMapping("/error")
 	public String error() {
 		return "error";
 	}
 
-	@RequestMapping("/upload.htm")
+	@RequestMapping("/upload")
 	@NeedLogin
 	public void upload(HttpServletRequest request,
 			HttpServletResponse response, MultipartFile Filedata)

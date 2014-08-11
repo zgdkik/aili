@@ -51,49 +51,49 @@ public class UserController extends BaseController {
 	@Autowired
 	private ICollectService collectService;
 	
-	@RequestMapping("/main.htm")
+	@RequestMapping("/main")
 	public String main(Model model) {
 		return "index";
 	}
 
-	@RequestMapping("/newhit.htm")
+	@RequestMapping("/newhit")
 	public String newhit(Model model) {
 		return "newhit";
 	}
 
-	@RequestMapping("/newest.htm")
+	@RequestMapping("/newest")
 	public String newest(Model model) {
 		return "newest";
 	}
 
-	@RequestMapping("/msg.htm")
+	@RequestMapping("/msg")
 	public String msg(Model model) {
 		return "msg";
 	}
 
-	@RequestMapping("/set.htm")
+	@RequestMapping("/set")
 	public String set(Model model) {
 		return "setting";
 	}
 
-	@RequestMapping("/collect.htm")
+	@RequestMapping("/collect")
 	public String collect(Model model) {
 		return "collect";
 	}
 
-	@RequestMapping("/friends.htm")
+	@RequestMapping("/friends")
 	public String friends(Model model) {
 		return "friends";
 	}
 
-	@RequestMapping("/loginpage.htm")
+	@RequestMapping("/loginpage")
 	public String loginpage(HttpServletRequest request) {
 		String returnUrl = (String) RequestContext.getSession().getAttribute("returnUrl");
 		 request.setAttribute("returnUrl", returnUrl);
 		return "loginpage";
 	}
 
-	@RequestMapping("/sendTheme.htm")
+	@RequestMapping("/sendTheme")
 	@ResponseBody
 	@NeedLogin
 	public ResponseEntity sendTheme(BlogInfo blog) {
@@ -106,7 +106,7 @@ public class UserController extends BaseController {
 		}
 	}
 
-	@RequestMapping("/getPageTheme.htm")
+	@RequestMapping("/getPageTheme")
 	@ResponseBody
 	public ResponseEntity getPageTheme(BlogInfo blog, int pageNum) {
 		try {
@@ -128,7 +128,7 @@ public class UserController extends BaseController {
 		}
 	}
 
-	@RequestMapping("/search.htm")
+	@RequestMapping("/search")
 	@ResponseBody
 	public ResponseEntity search(String q) {
 		try {
@@ -140,11 +140,11 @@ public class UserController extends BaseController {
 		}
 	}
 
-	@RequestMapping("/{user}/{url}.htm")
+	@RequestMapping("/{user}/{url}")
 	public String getTheme(@PathVariable("user") String user,
 			@PathVariable("url") String url, Model model) {
 		try {
-			String blogUrl = user + "/" + url + ".htm";
+			String blogUrl = user + "/" + url + "";
 			BlogInfo blog = new BlogInfo();
 			blog.setBlogUrl(blogUrl);
 			model.addAttribute("theme", blogService.getBlog(blog));
@@ -154,11 +154,11 @@ public class UserController extends BaseController {
 			return "comment";
 		} catch (Exception e) {
 			log.error("getTheme", e);
-			return "redirect:/core/error.htm";
+			return "redirect:/core/error";
 		}
 	}
 
-	@RequestMapping("/getUser.htm")
+	@RequestMapping("/getUser")
 	@ResponseBody
 	public UserInfo getUser(String email) {
 		try {
@@ -172,17 +172,17 @@ public class UserController extends BaseController {
 		}
 	}
 
-	@RequestMapping("/register.htm")
+	@RequestMapping("/register")
 	public String register() {
 		return "register";
 	}
 
-	@RequestMapping("/test.htm")
+	@RequestMapping("/test")
 	public String test() {
 		return "main";
 	}
 
-	@RequestMapping("/saveTheme.htm")
+	@RequestMapping("/saveTheme")
 	@ResponseBody
 	@NeedLogin
 	public ResponseEntity saveTheme(ThemeInfo theme) {
@@ -202,7 +202,7 @@ public class UserController extends BaseController {
 
 	}
 
-	@RequestMapping("/loadUserTheme.htm")
+	@RequestMapping("/loadUserTheme")
 	@ResponseBody
 	public ResponseEntity loadUserTheme() {
 		try {
@@ -222,7 +222,7 @@ public class UserController extends BaseController {
 
 	}
 
-	@RequestMapping("/attenUser.htm")
+	@RequestMapping("/attenUser")
 	@ResponseBody
 	@NeedLogin
 	public ResponseEntity attenUser(AttentionInfo atten) {
@@ -236,7 +236,7 @@ public class UserController extends BaseController {
 
 	}
 
-	@RequestMapping("/sendComment.htm")
+	@RequestMapping("/sendComment")
 	@ResponseBody
 	@NeedLogin
 	public ResponseEntity sendComment(CommentInfo comm) {
@@ -252,7 +252,7 @@ public class UserController extends BaseController {
 
 	}
 
-	@RequestMapping("/loadComment.htm")
+	@RequestMapping("/loadComment")
 	@ResponseBody
 	public ResponseEntity loadComment(String blogId, int pageNum) {
 		try {
@@ -280,7 +280,7 @@ public class UserController extends BaseController {
 
 	}
 	
-	@RequestMapping("/collectComment.htm")
+	@RequestMapping("/collectComment")
 	@ResponseBody
 	@NeedLogin
 	public ResponseEntity collectComment(CollectInfo comm) {
