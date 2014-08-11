@@ -144,7 +144,7 @@ public class UserController extends BaseController {
 	public String getTheme(@PathVariable("user") String user,
 			@PathVariable("url") String url, Model model) {
 		try {
-			String blogUrl = user + "/" + url + "";
+			String blogUrl = user + "/" + url + ".htm";
 			BlogInfo blog = new BlogInfo();
 			blog.setBlogUrl(blogUrl);
 			model.addAttribute("theme", blogService.getBlog(blog));
