@@ -12,6 +12,7 @@ import org.hbhk.aili.core.server.annotation.NeedLogin;
 import org.hbhk.aili.core.server.context.RequestContext;
 import org.hbhk.aili.core.server.web.BaseController;
 import org.hbhk.aili.core.share.pojo.ResponseEntity;
+import org.hbhk.aili.core.share.util.EncryptUtil;
 import org.hbhk.aili.orm.server.surpport.Page;
 import org.hbhk.aili.security.server.context.UserContext;
 import org.hbhk.aili.security.server.service.IUserService;
@@ -50,7 +51,7 @@ public class UserController extends BaseController {
 	private ICommentService commentService;
 	@Autowired
 	private ICollectService collectService;
-	
+
 	@RequestMapping("/main")
 	public String main(Model model) {
 		return "index";
@@ -88,8 +89,9 @@ public class UserController extends BaseController {
 
 	@RequestMapping("/loginpage")
 	public String loginpage(HttpServletRequest request) {
-		String returnUrl = (String) RequestContext.getSession().getAttribute("returnUrl");
-		 request.setAttribute("returnUrl", returnUrl);
+		String returnUrl = (String) RequestContext.getSession().getAttribute(
+				"returnUrl");
+		request.setAttribute("returnUrl", returnUrl);
 		return "loginpage";
 	}
 
@@ -279,7 +281,7 @@ public class UserController extends BaseController {
 		}
 
 	}
-	
+
 	@RequestMapping("/collectComment")
 	@ResponseBody
 	@NeedLogin
@@ -294,6 +296,58 @@ public class UserController extends BaseController {
 			return returnException(e.getMessage());
 		}
 
+	}
+
+	@RequestMapping("/updateHeadImg")
+	@ResponseBody
+	@NeedLogin
+	public ResponseEntity updateHeadImg(String url) {
+		try {
+			UserInfo user = new UserInfo();
+			user.setUserHeadImg(url);
+			userService.update(user);
+			return returnSuccess();
+		} catch (Exception e) {
+			log.error("updateHeadImg", e);
+			return returnException(e.getMessage());
+		}
+	}
+
+	@RequestMapping("/updateNickname")
+	@ResponseBody
+	@NeedLogin
+	public ResponseEntity updateNickname(String nickname) {
+		try {
+			UserInfo user = new UserInfo();
+			user.setName(nickname);
+			userService.update(user);
+			return returnSuccess();
+		} catch (Exception e) {
+			log.error("updateHeadImg", e);
+			return returnException(e.getMessage());
+		}
+	}
+
+	@RequestMapping("/updatePwd")
+	@ResponseBody
+	@NeedLogin
+	public ResponseEntity updatePwd(String pwd, String rpwd) {
+		try {
+			rpwd = EncryptUtil.encodeSHA1(rpwd);
+			String username= UserContext.getCurrentContext().getCurrentUserName();
+			String password = userService.getMe(username).getPassword();
+			if (!rpwd.equals(password)) {
+				return returnException("原始密码不正确!");
+			}
+			UserInfo user = new UserInfo();
+			pwd = EncryptUtil.encodeSHA1(pwd);
+			user.setPassword(pwd);
+			userService.update(user);
+			return returnSuccess();
+		} catch (Exception e) {
+			log.error("updatePwd", e);
+			return returnException(e.getMessage());
+		}
 	}
 
 }
