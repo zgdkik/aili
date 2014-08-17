@@ -25,6 +25,7 @@ $j(document).ready(function() {
 				userComment.append(li+head+content+l);
 				userComment.trigger("create"); 
 				updateHeight();
+				window.location.reload();
 			},
 			exception : function(data, textStatus) {
 				$j.toast("评论失败");
