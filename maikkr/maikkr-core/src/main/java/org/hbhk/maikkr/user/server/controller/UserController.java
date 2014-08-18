@@ -73,20 +73,28 @@ public class UserController extends BaseController {
 	}
 
 	@RequestMapping("/set")
+	@NeedLogin
 	public String set(Model model) {
 		return "setting";
 	}
 
 	@RequestMapping("/collect")
+	@NeedLogin
 	public String collect(Model model) {
 		return "collect";
 	}
 
 	@RequestMapping("/friends")
+	@NeedLogin
 	public String friends(Model model) {
 		return "friends";
 	}
-
+	
+	@RequestMapping("/forget")
+	public String forget(Model model) {
+		return "forget";
+	}
+	
 	@RequestMapping("/loginpage")
 	public String loginpage(HttpServletRequest request) {
 		String returnUrl = (String) RequestContext.getSession().getAttribute(

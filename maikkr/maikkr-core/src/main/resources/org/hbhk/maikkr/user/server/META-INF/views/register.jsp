@@ -28,14 +28,12 @@
 					</div>
 					<div class="w_m_m_two">
 						<div class="w_m_m_t_left">
-						<form action="/blog/registerServlet" method="post" name="form">
-						
 							<div class="left_list">
 								<div class="left_tit">
 									<span class="left_tit_e"></span><i>*</i>邮箱:
 								</div>
 								<div class="left_inp">
-									<input type="text" autocomplete="off" name="userEmail" class="w_input" value="请输入您的常用邮箱"
+									<input type="text" autocomplete="off" name="userEmail" class="w_input" placeholder="请输入您的常用邮箱" 
 										id="emailId" />
 								</div>
 								<div class="left_tips">
@@ -49,7 +47,7 @@
 										<span class="trueImg" ></span>
 									</p>
 									<p class="notice" id="emailLogin" style="display:none">
-										<span class="noticeImg" ></span><font color="#E64141" size="-1px">该邮箱已被注册，请</font><font color="#0a8cd2" size="-1px"><a href="http://localhost:8080/blog/jsp/login.jsp">直接登录</a></font>
+										<span class="noticeImg" ></span><font color="#E64141" size="-1px">该邮箱已被注册，请</font><font color="#0a8cd2" size="-1px"><a href="${base}user/loginpage.htm">直接登录</a></font>
 									</p>
 								</div>
 							</div>
@@ -142,7 +140,6 @@
 									</div>
 							    </div>
 							</div>
-							</form>
 							<div class="left_list">
 								<!-- 
 									<div class="inp verify">
