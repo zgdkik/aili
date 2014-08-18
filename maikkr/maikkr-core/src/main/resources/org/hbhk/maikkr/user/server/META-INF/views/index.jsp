@@ -7,7 +7,7 @@
 var seesionid="${pageContext.session.id}";
 </script>
 <body>
-<jsp:include page="tool.jsp"/>
+<jsp:include page="indexTool.jsp"/>
 <div id="main" >
 	<%-- <div style="background-image: url('${base}images/user/back_img.png');width: 100%;
 		    height: 100%;float: left;z-index: -1;"></div> --%>

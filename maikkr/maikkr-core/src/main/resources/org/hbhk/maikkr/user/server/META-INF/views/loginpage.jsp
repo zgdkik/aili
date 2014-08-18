@@ -50,7 +50,7 @@
 						<div class="form_list">
 							<div class="f_help">
 								<div class="f_right">
-									<a href="http://localhost:8080/blog/jsp/backpwd.jsp"
+									<a href="${base}user/forget.htm"
 										class="f_reght_btn">忘记密码</a>
 								</div>
 								<input type="checkbox" checked="checked" />下次自动登录 <a

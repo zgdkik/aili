@@ -71,10 +71,16 @@
 				</div>
 			</div>
 			<h1 style="border-bottom:1px solid #D9D9D9; height:1px; margin-left: 2px;margin-right: 2px"></h1>
-			<div id="fckEditor" style="border:1px solid #4B1717;width: 550px;margin-left: 25px;" >
-				<span style="margin-left: 100px;font-size: 25px;font-weight: bold;">说出你的看法?</span>
-				<textarea  id="editorText" style="width: 400px; margin-left: 75px;height: 150px;" ></textarea>
+			<div id="fckEditor" style="width: 550px;margin-left: 25px;" >
+			<div class="panel panel-info">
+			   <div class="panel-heading">
+			      <h3 class="panel-title">说出你的看法?</h3>
+			   </div>
+			   <div class="panel-body">
+			   <textarea  id="editorText" style="width: 400px; margin-left: 75px;height: 150px;" ></textarea>
 				<input style="margin-left: 400px;margin-bottom: 10px;margin-top: 10px" type="button" value="发表评论" id="sendComment" title="发表评论">
+				</div>
+			</div>
 			</div>
 		</div>
 		<!-- 右边部分 -->

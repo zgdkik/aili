@@ -25,6 +25,10 @@
 			<span class="top_span" style="margin-left: 120px;"> <font
 				class="top_font">游戏</font>
 			</span>
+			<span class="box" style="margin-left: 200px;"> 
+				<input type="text" class="pmbb search"/>
+  				<input type="submit" value="搜索"  class="pmbb btnSearch"/>
+  			</span>
 			<span class="top_span" style="margin-left: 490px; width: 120px;"> <font
 				id="userName" class="top_font">${cuserName}</font>
 			</span> <span id="comment_span" class="top_span"
