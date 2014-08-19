@@ -117,3 +117,43 @@ function updateHeight() {
 	$j("#ct_right").css("height" , height);
 	//$j("#ct_bottom").css("marginTop" , height + 30);
 };
+function  getbdText(){
+	 var text = "标题["+name+"]";
+	 text = text+"  内容:"+context;
+	 return text;
+}
+
+function  getbdPic(){
+	var src = $j("#context_img").attr("src");
+	if(src==null || src==""){
+		return "";
+	}
+	var picurl = host+src;
+	return picurl;
+}
+window._bd_share_config = {
+		common : {
+			bdText : getbdText(),	
+			bdDesc : name,	
+			bdUrl : url, 	
+			bdPic : getbdPic()
+		},
+		share : [{
+			"bdSize" : 16
+		}],
+		slide : [{	   
+			bdImg : 0,
+			bdPos : "right",
+			bdTop : 100
+		}],
+		image : [{
+			viewType : 'list',
+			viewPos : 'top',
+			viewColor : 'black',
+			viewSize : '16',
+			viewList : ['qzone','tsina','huaban','tqq','renren']
+		}],
+		selectShare : [{
+			"bdselectMiniList" : ['qzone','tqq','kaixin001','bdxc','tqf']
+		}]
+	}

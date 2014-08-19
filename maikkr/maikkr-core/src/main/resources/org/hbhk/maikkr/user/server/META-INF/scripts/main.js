@@ -248,8 +248,8 @@ function loadTheme() {
 					var head ='<div class="vline"><img id="head_portrait" height="50px" width="50px" '+
 					'src="'+headimg+'"></div>';
 					var burl = base+"user/"+item.blogUrl;
-					var title='<div class="vline"><div class="context"><a href="'+burl+'">'+item.blogTitle+'</a></div>';
-	      			var context='<div class="vline"><div class="context">'+item.blogContent+'</div><div class="context_imgs">';
+					var title='<div class="vline" style="margin-left: 10px;"><div class="context"><a  href="'+burl+'" title="'+item.blogTitle+'">'+item.blogTitle+'</a></div>';
+	      			var context='<div class="vline" ><div class="context">'+item.blogContent+'</div><div class="context_imgs">';
 	      			var imggroup= item.blogUrl;
 	      			if(imgurl!=null && imgurl!=""){
 	      				var imgs = imgurl.split(",");

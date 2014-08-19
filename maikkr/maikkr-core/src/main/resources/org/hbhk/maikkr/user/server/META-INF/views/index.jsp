@@ -1,11 +1,16 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="common.jsp"/>
-<link href="${styles}/mainnew.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="${scripts}/main.js"></script>
-<script type="text/javascript">
-var seesionid="${pageContext.session.id}";
-</script>
+<head>
+	<title>买客买家网</title>
+	<meta name ="keywords" content="买客买家网,买客,买家,无尽分享,交流">
+	<meta name ="description" content="买客买家网,买客,买家,无尽分享,交流">
+	<link href="${styles}/mainnew.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="${scripts}/main.js"></script>
+	<script type="text/javascript">
+		var seesionid="${pageContext.session.id}";
+	</script>
+</head>
 <body>
 <jsp:include page="indexTool.jsp"/>
 <div id="main" >
