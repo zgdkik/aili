@@ -49,7 +49,7 @@ $j(document).ready(function() {
 			type : "POST",
 			data:{'url':url,'name':name,'blogId':blogId},
 			success : function(data, textStatus) {
-				$j.toast("评论成功");
+				$j.toast("收藏成功");
 			},
 			exception : function(data, textStatus) {
 				$j.toast(data.msg);
