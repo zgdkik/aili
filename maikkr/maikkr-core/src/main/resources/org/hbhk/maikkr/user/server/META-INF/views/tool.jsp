@@ -15,10 +15,8 @@
 				src="${base}images/user/homeblog/logo-top2.png"
 				onmouseover="{this.src='${base}images/user/homeblog/logo-top1.png';}"
 				onmouseout="{this.src='${base}images/user/homeblog/logo-top2.png';}" />
-			</a> <span class="top_span" onclick="showPage('home');"> 
+			</a> <span class="top_span"> 
 			<font class="top_font">首页</font>
-			<!-- </span> <span class="top_span" style="margin-left: 60px;"> <font
-				class="top_font">应用</font> -->
 			</span> <span class="top_span" style="margin-left: 60px;"> <font
 				class="top_font">微主题</font>
 			</span> 
