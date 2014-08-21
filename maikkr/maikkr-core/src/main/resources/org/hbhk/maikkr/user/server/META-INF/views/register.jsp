@@ -24,7 +24,7 @@
 				</div>
 				<div class="w_m_main">
 					<div class="w_m_m_one">
-						<a class="one_register" href="javascript:void(0);">个人注册</a>
+						<a class="one_register" style="text-decoration: none;" href="javascript:void(0);">个人注册</a>
 					</div>
 					<div class="w_m_m_two">
 						<div class="w_m_m_t_left">
