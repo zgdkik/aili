@@ -233,10 +233,12 @@ function click_register(){
 	          "password":getId("pwdId").val(),
 	          "code":getId("virfyId").val()
 	  };
+	  $j(".W_btn_big").attr("disabled",true);
 	  var url =  base+"security/regist.htm";
 	  $j.ajax({
 			url: url,
 			type:"POST",
+			async:false,
 			data:registerMass,
 			success: function(data, textStatus){
 				getId("emailId").val(null);
@@ -244,12 +246,14 @@ function click_register(){
 		        getId("pwdId").val(null);
 		        getId("virfyId").val(null);
 				window.location.href=base+"user/main.htm";
+				$j(".W_btn_big").attr("disabled",false);
 			},
 			exception:function(data, textStatus){
 				$j.toast(data.msg);
 				getId("virfyNotice").css('display',"none");
 				getId("virfyNull").css('display',"none");
 				getId("virfyError").css('display',"block");
+				$j(".W_btn_big").attr("disabled",false);
 			}
 		});
 	}
