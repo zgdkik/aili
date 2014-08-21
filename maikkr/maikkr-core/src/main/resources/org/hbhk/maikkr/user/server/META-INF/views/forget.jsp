@@ -3,8 +3,7 @@
 <jsp:include page="common.jsp"/>
 <html>
 <head>
-<script type="text/javascript">
-</script>
+<script type="text/javascript" src="${scripts}/forget.js"></script>
 </head>
 <body>
 <jsp:include page="tool.jsp"/>
@@ -20,7 +19,7 @@
 	   </div>
 	   <div class="form-group">
 	      <label>绑定邮箱</label>
-	      <input type="text" class="form-control" id="name"  placeholder="请输入绑定邮箱">
+	      <input type="text" class="form-control" id="email"  placeholder="请输入绑定邮箱">
 	   </div>
 	   <div class="form-group" >
 	       <button type="button" class="btn btn-default">提交</button>

@@ -78,6 +78,7 @@ public class UserController extends BaseController {
 	@RequestMapping("/set")
 	@NeedLogin
 	public String set(Model model) {
+		model.addAttribute("uc", UserContext.getCurrentContext().getCurrentUser());
 		return "setting";
 	}
 
@@ -332,10 +333,11 @@ public class UserController extends BaseController {
 	@RequestMapping("/updateNickname")
 	@ResponseBody
 	@NeedLogin
-	public ResponseEntity updateNickname(String nickname) {
+	public ResponseEntity updateNickname(String nickname,String email) {
 		try {
 			UserInfo user = new UserInfo();
 			user.setName(nickname);
+			user.setRemail(email);
 			userService.update(user);
 			return returnSuccess();
 		} catch (Exception e) {

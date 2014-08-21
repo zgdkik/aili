@@ -36,8 +36,9 @@ var seesionid="${pageContext.session.id}";
 			 <h3 style="color: blue;">基本信息</h3>
 			 <h3 style="border-bottom:1px solid #D9D9D9; height:1px; margin-left: 2px;margin-right: 2px"></h3>
 			 <div align="left" style="margin-left: 30px">
-			 	<span>账号</span><input type="text" style="width: 200px;margin-left: 10px" value="${cuser}" disabled="disabled"><br>
-			 	<span>昵称</span><input type="text" class="nickname" style="width: 200px;margin-left: 10px;margin-top: 5px" value="${cuserName}">
+			 	<span style="margin-right: 28px">账号</span><input type="text" style="width: 200px;margin-left: 10px" value="${cuser}" disabled="disabled"><br>
+			 	<span style="margin-right: 28px">昵称</span><input type="text" class="nickname" style="width: 200px;margin-left: 10px;margin-top: 5px" value="${cuserName}"><br>
+			 	<span>绑定邮箱</span><input type="text" class="email" placeholder="方便找回你的密码" style="width: 200px;margin-left: 10px;margin-top: 5px" value="${uc.remail}">
 			 </div>
 			  <h3 style="border-bottom:1px solid #D9D9D9; height:1px; margin-left: 2px;margin-right: 2px"></h3>
 			 <div>

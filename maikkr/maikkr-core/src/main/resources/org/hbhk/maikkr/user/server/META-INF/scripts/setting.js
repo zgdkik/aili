@@ -3,26 +3,6 @@ $j(document).ready(function() {
 		$j("#bottom_top").css("marginTop",$j('#main')
 			.css("scrollTop")+ document.body.offsetHeight - 180);
 	});
-	$j("#sendComment").click(function(){
-		if(UserContext.user==null || UserContext.user==""){
-			$j.toast("你需要登陆才能发表评论!");
-			return ;
-		}
-		var editorText  = $j("#editorText").val();
-		var blogId = $j("#blogId").val();
-		$j.ajax({
-			url : base + "user/sendComment.htm",
-			type : "POST",
-			data:{'commentConcent':editorText,'blogId':blogId},
-			success : function(data, textStatus) {
-				$j.toast("评论成功");
-				
-			},
-			exception : function(data, textStatus) {
-				$j.toast("评论失败");
-			}
-			});
-	});
 	updateHeight();
 	$j(window).resize(function() { 
 		updateHeight();
@@ -104,11 +84,16 @@ function updateNickname() {
 		$j.toast("昵称为空");
 		return;
 	}
+	var email = $j('.email').val();
+	if(email==null || email==""){
+		$j.toast("昵称为空");
+		return;
+	}
 	$j.ajax({
 		url : base + "user/updateNickname.htm",
 		type : "POST",
 		async : false, 
-		data:{'nickname':nickname},
+		data:{'nickname':nickname,"email":email},
 		success : function(data, textStatus) {
 			$j.toast("修改成功");
 			window.location.reload();
