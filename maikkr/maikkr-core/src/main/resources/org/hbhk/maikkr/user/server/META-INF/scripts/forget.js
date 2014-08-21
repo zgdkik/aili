@@ -16,11 +16,17 @@ function queryUser() {
 		$j.toast("邮箱为空");
 		return;
 	}
+	
+	var code = $j('#code').val();
+	if(code==null || code==""){
+		$j.toast("验证码为空");
+		return;
+	}
 	$j.ajax({
 		url : base + "user/findPwd.htm",
 		type : "POST",
 		async : false, 
-		data:{'user':nickname,"email":email},
+		data:{'user':nickname,"email":email,"code":code},
 		success : function(data, textStatus) {
 			$j.toast(data.msg);
 		},
