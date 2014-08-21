@@ -3,7 +3,7 @@
 <html lang="zh-cn">
 <head>
 	<jsp:include page="common.jsp"/>
-	<title>买客网-注册</title>
+	<title>买客买家网-注册</title>
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 	<link href="${styles}/register.css" rel="stylesheet" type="text/css" />
 	<script type="text/javascript" src="${scripts}/register.js"></script>
@@ -38,7 +38,7 @@
 								</div>
 								<div class="left_tips">
 									<p class="notice"  id="emailNotice" style="display:none">
-										<span class="noticeImg" ></span><font color="#808080" size="-1px">您填写的邮箱将作为买客网登陆名</font>
+										<span class="noticeImg" ></span><font color="#808080" size="-1px">您填写的邮箱将作为买客买家网登陆名</font>
 										</p>
 									<p class="notice" id="emailError" style="display:none">
 										<span  class="errorImg" ></span><font color="#E64141" size="-1px">请输入正确的邮箱地址</font>
