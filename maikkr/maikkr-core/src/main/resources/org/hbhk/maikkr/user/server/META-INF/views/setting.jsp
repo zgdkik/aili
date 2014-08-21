@@ -11,23 +11,23 @@ var seesionid="${pageContext.session.id}";
 <div id="main" >
     <div id="center" >
 		<!-- 左边部分 -->
-				<div id="ct_left">
-			<div id="home" class="left_class">
-				<img id="home_img" style="margin-top: 5px;margin-left: 20px;" src="${base}images/user/homeblog/home_back1.png">
-				<span style="margin-top: 5px;margin-left: 10px;font-size:  14px;color: #445522;"><a class="removeLie" href="${base}user/main.htm">主题</a></span>
+			<div id="ct_left">
+			<div  class="left_class" type="1">
+				<img id="home_img" style="margin-top: 5px;margin-left: 20px;" src="${base}images/user/touxiang.png">
+				<span style="margin-top: 5px;margin-left: 10px;font-size:  14px;color: #445522;">
+				<a style="color:#333333;text-decoration:none;font-size:14px;color:#445522;"  href="javascript:void(0)">基本信息</a>
+				</span>
 			</div>
-			<%-- <div id="message" class="left_class" >
-				<img  id="message_img" style="margin-top: 5px;margin-left: 20px;"src="${base}images/user/homeblog/message_back1.png">
-				<span style="margin-top: 5px;margin-left: 10px;font-size:  14px;color: #445522;">消息</span>
-			</div> --%>
-			<div id="collect" class="left_class">
-				<img id="collect_img" style="margin-top: 5px;margin-left: 20px;" src="${base}images/user/homeblog/collect_back1.png">
-				<span style="margin-top: 5px;margin-left: 10px;font-size:  14px;color: #445522;"><a class="removeLie" href="${base}user/collect.htm">收藏</a></span>
+			<div class="left_class" type="2">
+				<img id="collect_img" style="margin-top: 5px;margin-left: 20px;" src="${base}images/user/touxiang1.png">
+				<span style="margin-top: 5px;margin-left: 10px;font-size:  14px;color: #445522;">
+				<a style="color:#333333;text-decoration:none;font-size:14px;color:#445522;" href="javascript:void(0)" >修改头像</a>
+				</span>
 			</div>
-			<div class="left_class">
-				<img id="collect_img" style="margin-top: 5px;margin-left: 20px;" src="${base}images/user/homeblog/friends_img1.png">
-				<span  style="margin-top: 5px;margin-left: 10px;font-size:  14px;color: #445522;">
-				<a class="removeLie" href="${base}user/friends.htm">好友管理</a></span>
+			<div class="left_class"  type="3">
+				<img id="collect_img" style="margin-top: 5px;margin-left: 20px;" src="${base}images/user/touxiang3.png">
+				<span  style="margin-top: 5px;margin-left: 10px;">
+				<a style="color:#333333;text-decoration:none;font-size:14px;color:#445522;" href="javascript:void(0)">修改密码</a></span>
 			</div>
 		</div>
 		<!--  -->
@@ -110,8 +110,6 @@ var seesionid="${pageContext.session.id}";
 	          	</ul>
 	         </div>
 		</div>
-		
-		
 	</div>
 </div>
 <input type="hidden" class="imgurl"/>
