@@ -3,6 +3,7 @@ package org.hbhk.maikkr.user.server.controller;
 import java.io.IOException;
 
 import javax.mail.MessagingException;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -10,6 +11,7 @@ import org.hbhk.aili.core.server.web.BaseController;
 import org.hbhk.aili.core.share.pojo.ResponseEntity;
 import org.hbhk.aili.core.share.util.EncryptUtil;
 import org.hbhk.aili.security.server.service.IUserService;
+import org.hbhk.aili.security.share.define.UserConstants;
 import org.hbhk.aili.security.share.pojo.UserInfo;
 import org.hbhk.aili.support.server.email.IEmailService;
 import org.hbhk.aili.support.server.email.impl.EmailInfo;
@@ -27,16 +29,26 @@ public class CommonController extends BaseController {
 	private IUserService userService;
 	@Autowired
 	private IEmailService emailService;
+
 	@RequestMapping("/findPwd")
 	@ResponseBody
-	public ResponseEntity findPwd(String user, String email) {
+	public ResponseEntity findPwd(HttpServletRequest request, String user,
+			String email, String code) {
+		String scode = (String) request.getSession().getAttribute(
+				UserConstants.VALIDATECODE_SESSION_KEY);
+		if (scode == null) {
+			return returnException("验证码不正确");
+		}
+		if (!scode.equals(code)) {
+			return returnException("验证码不正确");
+		}
 		UserInfo quser = new UserInfo();
 		quser.setMail(user);
 		if (userService.getUser(quser) == null) {
 			return returnException("用户名不存在");
 		}
 		quser.setRemail(email);
-		if ((quser=userService.getUser(quser)) == null) {
+		if ((quser = userService.getUser(quser)) == null) {
 			return returnException("用户名与绑定邮箱不一致");
 		}
 		UserInfo puser = new UserInfo();
@@ -47,7 +59,8 @@ public class CommonController extends BaseController {
 		EmailInfo qemail = new EmailInfo();
 		qemail.setSubject("买客买家网-密码找回");
 		qemail.setEmail(email);
-		qemail.setContext("你的用户名["+user+"]重置密码:123456\r"+"官网地址:www.maikkr.com");
+		qemail.setContext("你的用户名[" + user + "]重置密码:123456\r"
+				+ "官网地址:www.maikkr.com");
 		try {
 			emailService.sendEmail(qemail);
 		} catch (MessagingException e) {
