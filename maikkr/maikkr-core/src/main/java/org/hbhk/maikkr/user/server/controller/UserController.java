@@ -134,6 +134,9 @@ public class UserController extends BaseController {
 			} else {
 				page.setStart(2 * pageNum);
 			}
+			List<String> sorts = new ArrayList<String>();
+			sorts.add("createTime desc");
+			page.setSorts(sorts);
 			Object result = blogService.getBlogPage(blog, page);
 			return returnSuccess(result);
 		} catch (Exception e) {
@@ -290,6 +293,9 @@ public class UserController extends BaseController {
 			} else {
 				page.setStart(8 * pageNum);
 			}
+			List<String> sorts = new ArrayList<String>();
+			sorts.add("createTime asc");
+			page.setSorts(sorts);
 			Object result = commentService.get(model, page);
 			return returnSuccess(result);
 		} catch (Exception e) {

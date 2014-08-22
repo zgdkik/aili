@@ -80,7 +80,8 @@ public class SecurityInterceptor extends HandlerInterceptorAdapter {
 			request.setAttribute("ac", ac);
 			user.setPassword(null);
 			request.setAttribute("userInfo", user);
-			request.setAttribute("head", user.getUserHeadImg());
+			String head =  user.getUserHeadImg();
+			request.setAttribute("head",head);
 		} else {
 			request.setAttribute("tc", 0);
 			request.setAttribute("ac", 0);
@@ -99,5 +100,11 @@ public class SecurityInterceptor extends HandlerInterceptorAdapter {
 			request.getSession().setAttribute("returnUrl", strBackUrl);
 		}
 		super.postHandle(request, response, handler, modelAndView);
+	}
+	
+	public static void main(String[] args) {
+		String ss = "files/userImages\\a1024784402\\a1408253331514.jpg";
+		System.out.println(ss);
+		System.out.println(ss.replaceAll("\\\\", "/"));
 	}
 }
