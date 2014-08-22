@@ -16,15 +16,15 @@ $j(document).ready(function() {
 			data:{'commentConcent':editorText,'blogId':blogId},
 			success : function(data, textStatus) {
 				$j.toast("评论成功");
-				var userComment =$j("#userComment");
-				var li = '<li>';
-				var head ='<div class="vline"><img height="50px" width="50px" src="'+base+UserContext.head+'">'+
-				UserContext.user+'时间:'+current(new Date())+'</div>';
-				var content ='<div class="vline"><div class="context">'+editorText+'</div></div> </li>'
-				var l='<h1 style="border-bottom:1px solid #D9D9D9; height:1px; margin-left: 2px;margin-right: 2px"></h1>';
-				userComment.append(li+head+content+l);
-				userComment.trigger("create"); 
-				updateHeight();
+//				var userComment =$j("#userComment");
+//				var li = '<li>';
+//				var head ='<div class="vline"><img height="50px" width="50px" src="'+base+UserContext.head+'">'+
+//				UserContext.user+'时间:'+current(new Date())+'</div>';
+//				var content ='<div class="vline"><div class="context">'+editorText+'</div></div> </li>'
+//				var l='<h1 style="border-bottom:1px solid #D9D9D9; height:1px; margin-left: 2px;margin-right: 2px"></h1>';
+//				userComment.append(li+head+content+l);
+//				userComment.trigger("create"); 
+				//updateHeight();
 				window.location.reload();
 			},
 			exception : function(data, textStatus) {

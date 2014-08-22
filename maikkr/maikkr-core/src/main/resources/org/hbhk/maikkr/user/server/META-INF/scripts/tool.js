@@ -6,6 +6,10 @@ $j(document).ready(function() {
 	$j(".top_span").mouseout(function() {
 		$j(this).css("background-color", "");
 	});
+	
+	$j(".index").on('click',function() {
+		window.location.href="http://"+host;
+	});
 	$j("#comment_span").mouseover(function() {
 		$j("#comment_span").css("background-color", "#FFFFFF");
 		$j("#comment_top").css("display" , 'inline');

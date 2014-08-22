@@ -245,7 +245,7 @@ function click_register(){
 		        getId("nameId").val(null);
 		        getId("pwdId").val(null);
 		        getId("virfyId").val(null);
-				window.location.href=base+"user/main.htm";
+				window.location.href="http://"+host;
 				$j(".W_btn_big").attr("disabled",false);
 			},
 			exception:function(data, textStatus){
