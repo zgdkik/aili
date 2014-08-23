@@ -86,38 +86,7 @@ function loadTheme() {
 					return;
 				}
 				var theme_list = $j("#theme_list");
-				//theme_list.empty();
-				for ( var i = 0; i < items.length; i++) {
-					var item = items[i];
-					var userHeadImg = item.userHeadImg;
-					if(userHeadImg==null || userHeadImg==""){
-						userHeadImg ="images/security/default_head.png";
-					}
-					// 设置头像
-					var headimg = base + userHeadImg;
-					var imgurl =item.blogLink;
-					 
-					var li='<li class="theme" style="border:#666 1px solid;width:535px;height:230px; border-left:0;border-right:0;">';
-					var head ='<div class="vline"><img id="head_portrait" height="50px" width="50px" '+
-					'src="'+headimg+'"></div>';
-					var burl = base+"user/"+item.blogUrl;
-					var title='<div class="vline" style="margin-left: 10px;"><div class="context"><a  href="'+burl+'" title="'+item.blogTitle+'">'+item.blogTitle+'</a></div>';
-	      			var context='<div class="vline" ><div class="context">'+item.blogContent+'</div><div class="context_imgs">';
-	      			var imggroup= item.blogUrl;
-	      			if(imgurl!=null && imgurl!=""){
-	      				var imgs = imgurl.split(",");
-	      				for ( var j = 0; j < imgs.length; j++) {
-	      					var imgurl = base + imgs[j];
-	      					var preImg = '<a class="fancybox" href="'+imgurl+'" data-fancybox-group="'+imggroup+'">';
-	      					var img ='<img id="context_img" height="100px" width="100px" src="'+imgurl+'"></a>';
-	      					context =context +preImg+img;
-						}
-	      			}
-	      			context=context+"</div></div>";
-					li=li+head+title+context+'</li>';
-					theme_list.append(li);
-					theme_list.trigger("create");
-				}
+				loadThemes(items,theme_list);
 				if(items!=null && items.length!=0 ){
 					updateHeight();
 				}
@@ -142,37 +111,7 @@ function search(q) {
 				updateHeight();
 				return;
 			}
-			for ( var i = 0; i < items.length; i++) {
-				var item = items[i];
-				var userHeadImg = item.userHeadImg;
-				if(userHeadImg==null || userHeadImg==""){
-					userHeadImg ="images/security/default_head.png";
-				}
-				// 设置头像
-				var headimg = base + userHeadImg;
-				var imgurl =item.blogLink;
-				 
-				var li='<li class="theme" style="border:#666 1px solid;width:535px;height:230px; border-left:0;border-right:0;">';
-				var head ='<div class="vline"><img id="head_portrait" height="50px" width="50px" '+
-				'src="'+headimg+'"></div>';
-				var burl = base+"user/"+item.blogUrl;
-				var title='<div class="vline" style="margin-left: 10px;"><div class="context"><a  href="'+burl+'" title="'+item.blogTitle+'">'+item.blogTitle+'</a></div>';
-      			var context='<div class="vline" ><div class="context">'+item.blogContent+'</div><div class="context_imgs">';
-      			var imggroup= item.blogUrl;
-      			if(imgurl!=null && imgurl!=""){
-      				var imgs = imgurl.split(",");
-      				for ( var j = 0; j < imgs.length; j++) {
-      					var imgurl = base + imgs[j];
-      					var preImg = '<a class="fancybox" href="'+imgurl+'" data-fancybox-group="'+imggroup+'">';
-      					var img ='<img id="context_img" height="100px" width="100px" src="'+imgurl+'"></a>';
-      					context =context +preImg+img;
-					}
-      			}
-      			context=context+"</div></div>";
-				li=li+head+title+context+'</li>';
-				theme_list.append(li);
-				theme_list.trigger("create");
-			}
+			loadThemes(items,theme_list);
 			if(items!=null && items.length!=0 ){
 				updateHeight();
 			}
