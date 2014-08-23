@@ -18,5 +18,10 @@
 				 WHERE blogUrl = '${blogUrl}';
 			</sql>
 	</update>
-
+	<select id="loadUserThemeType">
+		<sql>
+			select *from t_mkk_theme  t
+			 WHERE t.creatUser='${cuser}' OR t.type='${type}';
+		</sql>
+	</select>
 </orm>

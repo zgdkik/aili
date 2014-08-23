@@ -228,14 +228,7 @@ public class UserController extends BaseController {
 	@ResponseBody
 	public ResponseEntity loadUserTheme() {
 		try {
-			List<ThemeInfo> themeInfos = new ArrayList<ThemeInfo>();
-			for (int i = 0; i < 5; i++) {
-				ThemeInfo t = new ThemeInfo();
-				t.setName("theme" + i);
-				t.setType("user_type" + i);
-				themeInfos.add(t);
-			}
-			themeService.loadUserTheme();
+			List<ThemeInfo> themeInfos = themeService.loadUserThemeType();
 			return returnSuccess(themeInfos);
 		} catch (Exception e) {
 			log.error("loadUserTheme", e);

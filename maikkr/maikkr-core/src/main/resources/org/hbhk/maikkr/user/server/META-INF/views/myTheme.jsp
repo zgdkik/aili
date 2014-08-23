@@ -6,7 +6,9 @@
 	<meta name ="keywords" content="买客买家网,买客,买家,无尽分享,交流">
 	<meta name ="description" content="买客买家网,买客,买家,无尽分享,交流">
 	<link href="${styles}/mainnew.css" rel="stylesheet" type="text/css" />
-	<script type="text/javascript" src="${scripts}/main.js"></script>
+	<link href="${styles}/backTop.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="${scripts}/myTheme.js"></script>
+	<script type="text/javascript" src="${scripts}/backTop.js"></script>
 	<script type="text/javascript">
 		var seesionid="${pageContext.session.id}";
 	</script>
@@ -14,8 +16,6 @@
 <body>
 <jsp:include page="indexTool.jsp"/>
 <div id="main" >
-	<%-- <div style="background-image: url('${base}images/user/back_img.png');width: 100%;
-		    height: 100%;float: left;z-index: -1;"></div> --%>
     <div id="center" >
 		<!-- 左边部分 -->
 				<div id="ct_left">
@@ -39,74 +39,14 @@
 		</div>
 		<!--  -->
 		<div id="ct_center" >
-			<!-- 首页 -->
-			<div id="ct_center_home">
-				<div id="home_top">
-					<div class="info">
-						<div id="home_top_top1">
-							有什么新鲜的主题告诉大家?
-						</div>
-						<div id="home_top_top2">
-							发言请遵守社区公约，最多可以输入
-							<span>500</span>个字
-						</div>
-					</div>
-					<div style="float:left; "><label class="labTitle">输入或选择你喜欢的主题?分享你的生活经验!</label>
-					<!-- <input type="text" name="blogtitle" class="blogTitle"> -->
-					<div  class="blogTitle"  style="position:relative;"> 
-				        <span style="margin-left:100px;width:18px;overflow:hidden;"> 
-				            <select id="theme-select" style="width:300px;height:30px;margin-left:-100px" onchange="this.parentNode.nextSibling.value=this.value"> 
-				            </select>
-				        </span>
-				        <input name="box" id="theme-select-text" style="width:270px;height:30px;position:absolute;left:0px;"> 
-				    </div>
-					</div>
-					<div style="float:left;"><textarea id="blogText" class="blogText"></textarea></div>
-					<div  style="border-width:0px;float:left;margin-left: 110px">
-						<div id="uploadImg"></div>
-					</div>
-					<div  style="float:left;">
-					  	<input type="button" value="发布" class="sendTheme" style="width: 80px; height: 30;margin-left: 450px" />
-					</div>
+				<!-- 微博主体内容 -->
+			<div id="home_blog" style="float:left;">
+				<!-- 微博内容区 -->
+				<div id="home_blog_main" style="height: auto;">
+					<ul id="theme_list" style="list-style-type:none">
+	          		
+          			</ul>
 				</div>
-						<!-- 微博主体内容 -->
-				<div id="home_blog" style="float:left;">
-					<!-- 头部信息 -->
-					<div id="home_blog_top">
-						<div style="margin-left: 30px; border-bottom: 0px solid red;">
-							<span><a style="font-size:16px;">主题</a> </span>
-						</div>
-						<img  style="margin-left: 20px;" src="${base}images/user/homeblog/blog_main_img1.png">
-						<div style="border-bottom: 2px solid red;margin-left: 65px;width: 510px;
-						     margin-top: -6px;"></div>
-						<div style="margin-top: 10px; margin-left: 20px;">
-							<span  class="blog_contenttop">&nbsp;全部&nbsp;</span>
-							<span class="blog_contenttop" style="margin-left: 20px;">&nbsp;自己&nbsp;</span>
-						</div>
-					</div>
-					<!-- 微博内容区 -->
-					<div id="home_blog_main" style="height: auto;">
-						<ul id="theme_list" style="list-style-type:none">
-		          		
-	          			</ul>
-					</div>
-			</div>
-					<!--消息-->
-			<div id="ct_center_message" style="float:left;display: none;">
-			   <div style=" font-size:16px;width: 560px;height:30px;margin:20px;border-bottom: 2px solid red;">
-			       <a>@我的主题</a> <a>@我的评论的</a>
-			    </div>
-			    <div id="ct_center_message_main" style=" width: 600px;margin-top:50px;">
-				</div>
-			</div>
-			<!-- 收藏 -->
-			<div id="ct_center_collect"  style="display: none;float:left;">
-			    <div style="width: 560px;height:30px;margin:20px;border-bottom: 2px solid red;">
-			       <a style="font-size:16px;">我的收藏</a>
-			     </div>
-			    <div id="ct_center_collect_main" style="width: 600px;margin-top:50px;">
-				</div>
-			</div>
 			</div>
 		</div>
 		<!-- 右边部分 -->
@@ -147,6 +87,7 @@
 		
 	</div>
 </div>
+<p id="back-to-top"><a href="#top"><span></span>返回顶部</a></p>
 <input type="hidden" class="imgurl"/>
 </body>
 </html>

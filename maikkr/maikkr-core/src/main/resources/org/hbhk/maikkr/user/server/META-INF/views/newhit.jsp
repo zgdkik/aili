@@ -16,7 +16,7 @@ var seesionid="${pageContext.session.id}";
 				<div id="ct_left">
 			<div id="home" class="left_class">
 				<img id="home_img" style="margin-top: 5px;margin-left: 20px;" src="${base}images/user/homeblog/home_back1.png">
-				<span style="margin-top: 5px;margin-left: 10px;font-size:  14px;color: #445522;"><a class="removeLie" href="${base}user/main.htm">主题</a></span>
+				<span style="margin-top: 5px;margin-left: 10px;font-size:  14px;color: #445522;"><a class="removeLie" href="${base}user/myTheme.htm">我的主题</a></span>
 			</div>
 			<%-- <div id="message" class="left_class" >
 				<img  id="message_img" style="margin-top: 5px;margin-left: 20px;"src="${base}images/user/homeblog/message_back1.png">

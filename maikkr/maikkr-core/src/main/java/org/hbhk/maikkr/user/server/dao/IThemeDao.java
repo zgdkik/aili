@@ -1,5 +1,9 @@
 package org.hbhk.maikkr.user.server.dao;
 
+import java.util.List;
+
+import org.hbhk.aili.orm.server.annotation.NativeQuery;
+import org.hbhk.aili.orm.server.annotation.QueryParam;
 import org.hbhk.aili.orm.server.dao.GenericEntityDao;
 import org.hbhk.maikkr.user.share.pojo.ThemeInfo;
 
@@ -9,4 +13,7 @@ import org.hbhk.maikkr.user.share.pojo.ThemeInfo;
 
 public interface IThemeDao extends GenericEntityDao<ThemeInfo, String> {
 
+	@NativeQuery(model = ThemeInfo.class,value="loadUserThemeType")
+	List<ThemeInfo> loadUserThemeType(@QueryParam("cuser") String cuser,
+			@QueryParam("type") String type);
 }

@@ -29,7 +29,7 @@
 				<div id="ct_left">
 			<div id="home" class="left_class">
 				<img id="home_img" style="margin-top: 5px;margin-left: 20px;" src="${base}images/user/homeblog/home_back1.png">
-				<span style="margin-top: 5px;margin-left: 10px;font-size:  14px;color: #445522;"><a class="removeLie" href="${base}user/main.htm">主题</a></span>
+				<span style="margin-top: 5px;margin-left: 10px;font-size:  14px;color: #445522;"><a class="removeLie" href="${base}user/myTheme.htm">我的主题</a></span>
 			</div>
 			<%-- <div id="message" class="left_class" >
 				<img  id="message_img" style="margin-top: 5px;margin-left: 20px;"src="${base}images/user/homeblog/message_back1.png">
@@ -61,7 +61,7 @@
 				 <div class="vline"><div class="context">${theme.blogContent}</div></div>
 				 <div class="context_imgs" align="center">
 				 <c:forTokens items="${theme.blogLink}" delims="," var="imgurl">
-				  <img id="context_img"  src="${base}${imgurl}"><br>
+				  <img id="context_img" style="margin-bottom: 5px" width="250" height="250"   src="${base}${imgurl}"><br>
 				 </c:forTokens>
                  </div>
                  </li>
@@ -141,6 +141,7 @@
 	<a class="bds_more" data-cmd="more">更多</a>
 	<a class="bds_count" data-cmd="count"></a>
 </div>
+<p id="back-to-top"><a href="#top"><span></span>返回顶部</a></p>
 <input type="hidden" id="blogId" value="${theme.id}"/>
 </body>
 </html>

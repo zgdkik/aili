@@ -11,5 +11,5 @@ import org.hbhk.maikkr.user.share.pojo.ThemeInfo;
 public interface IThemeService {
 	ThemeInfo save(ThemeInfo theme);
 	ThemeInfo get(ThemeInfo theme);
-	List<ThemeInfo> loadUserTheme();
+	List<ThemeInfo> loadUserThemeType();
 }

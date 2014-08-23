@@ -27,8 +27,13 @@ public class ThemeService implements IThemeService {
 		return themeDao.save(theme);
 	}
 
-	public List<ThemeInfo> loadUserTheme() {
-		return null;
+	public List<ThemeInfo> loadUserThemeType() {
+		String cuser = UserContext.getCurrentContext().getCurrentUserName();
+//		ThemeInfo theme= new ThemeInfo();
+//		theme.setCreatUser(cuser);
+//		theme.setType("common");
+//		return themeDao.get(theme);
+		return themeDao.loadUserThemeType(cuser, "common");
 	}
 
 	public ThemeInfo get(ThemeInfo theme) {

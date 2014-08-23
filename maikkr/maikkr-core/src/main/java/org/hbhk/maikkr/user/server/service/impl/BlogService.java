@@ -118,4 +118,8 @@ public class BlogService implements IBlogService {
 
 	}
 
+	public BlogInfo update(BlogInfo blog) {
+		return blogDao.update(blog);
+	}
+
 }

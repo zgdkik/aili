@@ -11,13 +11,18 @@ public interface IBlogService {
 	BlogInfo save(BlogInfo blog);
 
 	Pagination<BlogInfo> getBlogPage(BlogInfo blog, Page page);
-	
+
 	BlogInfo getBlog(BlogInfo blog);
 
+	BlogInfo update(BlogInfo blog);
+
 	List<BlogInfo> search(String q);
-	
+
 	void updateBlogHit(String blogId);
+
 	void updateBlogComment(String blogId);
+
 	int getUserThemeCount();
+
 	int getUserAttentionCount();
 }
