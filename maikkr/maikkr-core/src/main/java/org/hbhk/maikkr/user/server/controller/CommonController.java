@@ -110,6 +110,7 @@ public class CommonController extends BaseController {
 	}
 
 	@RequestMapping("/myTheme")
+	@NeedLogin
 	public String myTheme() {
 		return "myTheme";
 	}
@@ -128,6 +129,56 @@ public class CommonController extends BaseController {
 			return returnException();
 		}
 
+	}
+	
+	@RequestMapping(value = "/newhit", params = { "pageNum" })
+	@ResponseBody
+	public ResponseEntity newhit(BlogInfo blog, int pageNum) {
+		try {
+			Page page = new Page();
+			page.setSize(10);
+			if (pageNum > 20) {
+				pageNum = 20;
+			}
+			if (pageNum == 1) {
+				page.setStart(0);
+			} else {
+				page.setStart(2 * pageNum);
+			}
+			List<String> sorts = new ArrayList<String>();
+			sorts.add("blogHit desc");
+			page.setSorts(sorts);
+			Object result = blogService.getBlogPage(blog, page);
+			return returnSuccess(result);
+		} catch (Exception e) {
+			log.error("getPageTheme", e);
+			return returnException(e.getMessage());
+		}
+	}
+	
+	@RequestMapping(value = "/newest", params = { "pageNum" })
+	@ResponseBody
+	public ResponseEntity newest(BlogInfo blog, int pageNum) {
+		try {
+			Page page = new Page();
+			page.setSize(10);
+			if (pageNum > 20) {
+				pageNum = 20;
+			}
+			if (pageNum == 1) {
+				page.setStart(0);
+			} else {
+				page.setStart(2 * pageNum);
+			}
+			List<String> sorts = new ArrayList<String>();
+			sorts.add("createTime desc");
+			page.setSorts(sorts);
+			Object result = blogService.getBlogPage(blog, page);
+			return returnSuccess(result);
+		} catch (Exception e) {
+			log.error("getPageTheme", e);
+			return returnException(e.getMessage());
+		}
 	}
 
 }

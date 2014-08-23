@@ -1,5 +1,7 @@
 package org.hbhk.maikkr.core.server.interceptor;
 
+import java.net.URI;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -90,14 +92,27 @@ public class SecurityInterceptor extends HandlerInterceptorAdapter {
 			request.setAttribute("head", null);
 		}
 		String returnUrl = request.getServletPath();
+		int port = request.getServerPort();
 		String strBackUrl = "http://" + request.getServerName() // 服务器地址
-				+ ":" + request.getServerPort() // 端口号
+				+ ":" + (port!=80?port:"") // 端口号
 				+ request.getContextPath() // 项目名称
 				+ request.getServletPath(); // 请求页面或其他地址
 		if (!loginUrl.equals(returnUrl) && !returnUrl.endsWith(".jsp")
 				&& modelAndView != null && modelAndView.getViewName() != null
 				&& !returnUrl.equals("/security/logout.htm")) {
-			request.getSession().setAttribute("returnUrl", strBackUrl);
+			if("/user/main".equals(returnUrl)){
+				URI uri = new URI(strBackUrl); 
+				String host ="http://"+uri.getHost();
+				if(host.equals("localhost")||host.startsWith("127")){
+					if(port!=80){
+						host = host +":"+uri.getPort();
+					}
+				}
+				request.getSession().setAttribute("returnUrl", host);
+			}else{
+				request.getSession().setAttribute("returnUrl", strBackUrl);
+			}
+			
 		}
 		super.postHandle(request, response, handler, modelAndView);
 	}

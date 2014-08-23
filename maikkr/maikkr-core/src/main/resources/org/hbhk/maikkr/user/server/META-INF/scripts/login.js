@@ -30,7 +30,7 @@ $j(document).ready(function() {
 		    			if(returnUrl!=null && returnUrl!=""){
 				    		window.location.href=returnUrl;
 				    	}else{
-				    		window.location.href=base+"user/main.htm";
+				    		window.location.href="http://"+host;
 				    	}
 		    		},
 		    		exception:function(data, textStatus){

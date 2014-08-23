@@ -2,13 +2,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="common.jsp"/>
 <head>
-	<title>买客买家网</title>
+	<title>买客买家网-我的主题</title>
 	<meta name ="keywords" content="买客买家网,买客,买家,无尽分享,交流">
 	<meta name ="description" content="买客买家网,买客,买家,无尽分享,交流">
 	<link href="${styles}/mainnew.css" rel="stylesheet" type="text/css" />
-	<link href="${styles}/backTop.css" rel="stylesheet" type="text/css" />
 	<script type="text/javascript" src="${scripts}/myTheme.js"></script>
-	<script type="text/javascript" src="${scripts}/backTop.js"></script>
 	<script type="text/javascript">
 		var seesionid="${pageContext.session.id}";
 	</script>
@@ -43,6 +41,8 @@
 			<div id="home_blog" style="float:left;">
 				<!-- 微博内容区 -->
 				<div id="home_blog_main" style="height: auto;">
+				<h3 style="color: blue;">我的主题</h3>
+			 		<h3 style="border-bottom:1px solid #D9D9D9; height:1px; margin-left: 2px;margin-right: 2px"></h3>
 					<ul id="theme_list" style="list-style-type:none">
 	          		
           			</ul>
