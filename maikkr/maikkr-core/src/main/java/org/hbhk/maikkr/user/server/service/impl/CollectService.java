@@ -24,13 +24,12 @@ public class CollectService implements ICollectService {
 	private IBlogDao blogDao;
 
 	public CollectInfo save(CollectInfo model) {
-		if(collectDao.getOne(model)!=null){
+		if (collectDao.getOne(model) != null) {
 			throw new BusinessException("你已经收藏!");
 		}
 		model.setId(UUIDUitl.getUuid());
 		model.setCreateTime(new Date());
-		model.setUpdateUser(UserContext.getCurrentContext()
-				.getCurrentUserName());
+		model.setCreatUser(UserContext.getCurrentContext().getCurrentUserName());
 		BlogInfo blog = new BlogInfo();
 		blog.setId(model.getBlogId());
 		BlogInfo b = blogDao.getOne(blog);
@@ -40,19 +39,23 @@ public class CollectService implements ICollectService {
 	}
 
 	public CollectInfo update(CollectInfo model) {
-		return null;
+		CollectInfo c = getOne(model);
+		model.setId(c.getId());
+		model.setUpdateTime(new Date());
+		model.setStatus(2);
+		return collectDao.update(model);
 	}
 
 	public CollectInfo getOne(CollectInfo model) {
-		return null;
+		return collectDao.getOne(model);
 	}
 
 	public List<CollectInfo> get(CollectInfo model) {
-		return null;
+		return collectDao.get(model);
 	}
 
 	public List<CollectInfo> get(CollectInfo model, Page page) {
-		return null;
+		return collectDao.get(model, page);
 	}
 
 }

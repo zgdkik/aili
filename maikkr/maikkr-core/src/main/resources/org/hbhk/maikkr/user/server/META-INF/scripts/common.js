@@ -8,6 +8,47 @@ $j(document).ready(function(){
 			$j(this).addClass('notNull'); 
 		}
 	});
+	$j('body').on("click",".collect_t",function(){
+		if(UserContext.user==null || UserContext.user==""){
+			$j.toast("你需要登陆才能收藏!");
+			return ;
+		}
+		var blogId= $j(this).attr("tid");
+		var name = $j(this).attr("tname");
+		var url =  $j(this).attr("turl");
+		$j.ajax({
+			url : base + "user/collectComment.htm",
+			type : "POST",
+			data:{'url':url,'name':name,'blogId':blogId},
+			success : function(data, textStatus) {
+				$j.toast("收藏成功");
+			},
+			exception : function(data, textStatus) {
+				$j.toast(data.msg);
+			}
+		});
+	});
+	
+	$j('body').on("click",".care_user",function(){
+		if(UserContext.user==null || UserContext.user==""){
+			$j.toast("你需要登陆才能关注!");
+			return ;
+		}
+		var user= $j(this).attr("tuser");
+		$j.ajax({
+			url : base + "user/care.htm",
+			type : "POST",
+			data:{'user':user},
+			success : function(data, textStatus) {
+				$j.toast("关注成功");
+			},
+			exception : function(data, textStatus) {
+				$j.toast(data.msg);
+			}
+		});
+	});
+	
+	
 });
 function validate(){
 	var  flag = true;
@@ -32,7 +73,7 @@ function loadThemes(items,theme_list){
 		var headimg = base + userHeadImg;
 		var imgurl =item.blogLink;
 		 
-		var li='<li class="theme" style="border:#666 1px solid;width:535px;height:230px; border-left:0;border-right:0;">';
+		var li='<li class="theme" style="border-bottom:#666 1px solid;width:535px;height:230px; border-left:0;border-right:0;">';
 		var head ='<div class="vline"><img id="head_portrait" height="50px" width="50px" '+
 		'src="'+headimg+'"></div>';
 		var burl = base+"user/"+item.blogUrl;
@@ -49,10 +90,11 @@ function loadThemes(items,theme_list){
 			}
 			}
 			context=context+"</div></div>";
-			var oper = '<a tid ="'+item.id+'" class="blog_del" style="margin-left: 10px;float: right;text-decoration: none;" href="javascript:void(0)">收藏</a>';
-			var coper = '<a tid ="'+item.id+'" class="blog_del" style="float: right;text-decoration: none;" href="javascript:void(0)">关注</a>';
+			var oper = '<a tid ="'+item.id+'" tname="'+item.blogTitle+'" turl ="'+"http://"+host+burl+'"   tuser ="'+item.blogUser+'"  class="blog_del collect_t" style="margin-left: 10px;float: right;text-decoration: none;" href="javascript:void(0)">收藏</a>';
+			var coper = '<a tid ="'+item.id+'" tuser ="'+item.blogUser+'" class="blog_del care_user" style="float: right;text-decoration: none;" href="javascript:void(0)">关注</a>';
 		li=li+head+oper+coper+title+context+'</li>';
 		theme_list.append(li);
 		theme_list.trigger("create");
 	}
 };
+

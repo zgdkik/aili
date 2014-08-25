@@ -21,7 +21,11 @@ import org.hbhk.aili.security.share.pojo.UserInfo;
 import org.hbhk.aili.support.server.email.IEmailService;
 import org.hbhk.aili.support.server.email.impl.EmailInfo;
 import org.hbhk.maikkr.user.server.service.IBlogService;
+import org.hbhk.maikkr.user.server.service.ICareService;
+import org.hbhk.maikkr.user.server.service.ICollectService;
 import org.hbhk.maikkr.user.share.pojo.BlogInfo;
+import org.hbhk.maikkr.user.share.pojo.CareInfo;
+import org.hbhk.maikkr.user.share.pojo.CollectInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,6 +42,10 @@ public class CommonController extends BaseController {
 	private IEmailService emailService;
 	@Autowired
 	private IBlogService blogService;
+	@Autowired
+	private ICareService careService;
+	@Autowired
+	private ICollectService collectService;
 
 	@RequestMapping("/findPwd")
 	@ResponseBody
@@ -130,7 +138,7 @@ public class CommonController extends BaseController {
 		}
 
 	}
-	
+
 	@RequestMapping(value = "/newhit", params = { "pageNum" })
 	@ResponseBody
 	public ResponseEntity newhit(BlogInfo blog, int pageNum) {
@@ -155,7 +163,7 @@ public class CommonController extends BaseController {
 			return returnException(e.getMessage());
 		}
 	}
-	
+
 	@RequestMapping(value = "/newest", params = { "pageNum" })
 	@ResponseBody
 	public ResponseEntity newest(BlogInfo blog, int pageNum) {
@@ -181,4 +189,62 @@ public class CommonController extends BaseController {
 		}
 	}
 
+	@RequestMapping(value = "/care")
+	@ResponseBody
+	@NeedLogin
+	public ResponseEntity care(String user) {
+		try {
+			CareInfo care = new CareInfo();
+			care.setCareUser(user);
+			careService.save(care);
+			return returnSuccess();
+		} catch (Exception e) {
+			log.error("care", e);
+			return returnException(e.getMessage());
+		}
+	}
+
+	@RequestMapping(value = "/loadCollects", params = { "pageNum" })
+	@ResponseBody
+	@NeedLogin
+	public ResponseEntity loadCollects(int pageNum) {
+		try {
+			Page page = new Page();
+			page.setSize(10);
+			if (pageNum > 20) {
+				pageNum = 20;
+			}
+			if (pageNum == 1) {
+				page.setStart(0);
+			} else {
+				page.setStart(2 * pageNum);
+			}
+			List<String> sorts = new ArrayList<String>();
+			sorts.add("createTime desc");
+			page.setSorts(sorts);
+			CollectInfo collect = new CollectInfo();
+			collect.setCreatUser(UserContext.getCurrentContext()
+					.getCurrentUserName());
+			Object result = collectService.get(collect, page);
+			return returnSuccess(result);
+		} catch (Exception e) {
+			log.error("loadCollects", e);
+			return returnException(e.getMessage());
+		}
+	}
+
+	@RequestMapping(value = "/delCollect")
+	@ResponseBody
+	@NeedLogin
+	public ResponseEntity delCollect(String id) {
+		try {
+			CollectInfo model = new CollectInfo();
+			model.setBlogId(id);
+			collectService.update(model);
+			return returnSuccess();
+		} catch (Exception e) {
+			log.error("delCollect", e);
+			return returnException(e.getMessage());
+		}
+	}
 }

@@ -1,19 +1,22 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="common.jsp"/>
-<link href="${styles}/comment.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="${scripts}/comment.js"></script>
-<script type="text/javascript">
-var seesionid="${pageContext.session.id}";
-</script>
+<head>
+	<title>买客买家网-我的收藏</title>
+	<meta name ="keywords" content="买客买家网,买客,买家,无尽分享,交流">
+	<meta name ="description" content="买客买家网,买客,买家,无尽分享,交流">
+	<link href="${styles}/mainnew.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="${scripts}/collect.js"></script>
+	<script type="text/javascript">
+		var seesionid="${pageContext.session.id}";
+	</script>
+</head>
 <body>
-<jsp:include page="tool.jsp"/>
+<jsp:include page="indexTool.jsp"/>
 <div id="main" >
-	<%-- <div style="background-image: url('${base}images/user/back_img.png');width: 100%;
-		    height: 100%;float: left;z-index: -1;"></div> --%>
     <div id="center" >
 		<!-- 左边部分 -->
-		<div id="ct_left">
+				<div id="ct_left">
 			<div id="home" class="left_class">
 				<img id="home_img" style="margin-top: 5px;margin-left: 20px;" src="${base}images/user/homeblog/home_back1.png">
 				<span style="margin-top: 5px;margin-left: 10px;font-size:  14px;color: #445522;"><a class="removeLie" href="${base}user/myTheme.htm">我的主题</a></span>
@@ -34,19 +37,29 @@ var seesionid="${pageContext.session.id}";
 		</div>
 		<!--  -->
 		<div id="ct_center" >
-			
+				<!-- 微博主体内容 -->
+			<div id="home_blog" style="float:left;">
+				<!-- 微博内容区 -->
+				<div id="home_blog_main" style="height: auto;">
+					<h3 style="color: blue;">我的收藏</h3>
+			 		<h3 style="border-bottom:1px solid #D9D9D9; height:1px; margin-left: 2px;margin-right: 2px"></h3>
+					<ul id="theme_list" style="list-style-type:none">
+	          		
+          			</ul>
+				</div>
+			</div>
 		</div>
 		<!-- 右边部分 -->
 		<div id="ct_right" style="margin-left: 750px;">
 			<div id="userInfo" style="height: 145px;border-bottom-width: 2px;
 			width: 230px;display: block;">
 			<a>
-			 <c:if test="${userInfo eq null}">
+			 <c:if test="${userInfo == null}">
 				 <img style="border-bottom-style: solid;border-bottom-width: 1px;"
 				 id="head_portrait_right" height="80px" width="80px" 
 				 src="${base}images/security/default_head.png">
 			 </c:if>
-			 <c:if test="${userInfo ne null}">
+			 <c:if test="${userInfo != null}">
 				 <img style="border-bottom-style: solid;border-bottom-width: 1px;"
 				 id="head_portrait_right" height="80px" width="80px" 
 				 src="${base}${userInfo.userHeadImg}">
@@ -74,6 +87,7 @@ var seesionid="${pageContext.session.id}";
 		
 	</div>
 </div>
+<p id="back-to-top"><a href="#top"><span></span>返回顶部</a></p>
 <input type="hidden" class="imgurl"/>
 </body>
 </html>

@@ -63,22 +63,6 @@ $j(document).ready(function() {
 	//显示放大图片
 	$j('.fancybox').fancybox();
 	
-	$j("body").on("click",'.blog_del',function(){ 
-		var tid = $j(this).attr("tid");
-		$j.ajax({
-			url : base + "user/delTheme.htm",
-			type : "POST",
-			data:{'tid':tid},
-			success : function(data, textStatus) {
-				$j.toast("删除成功");
-				window.location.reload();
-			},
-			exception : function(data, textStatus) {
-				$j.toast("删除失败,请重新刷新页面");
-			}
-		});
-	});
-	
 });
 //定义一个总的高度变量
 var totalheight = 0;
@@ -91,18 +75,18 @@ function loadTheme() {
 	//当文档的高度小于或者等于总的高度的时候，开始动态加载数据
 	if ($j(document).height() <= totalheight && num < maxnum){
 		$j.ajax({
-			url : base + "user/newhit.htm",
+			url : base + "user/loadCollects.htm",
 			type : "POST",
 			data:{'pageNum':num},
 			success : function(data, textStatus) {
 				num++;
-				var items = data.result.items;
+				var items = data.result;
 				if(items==null ||items.length==0 ){
 					num=20;
 					return;
 				}
 				var theme_list = $j("#theme_list");
-				loadThemes(items,theme_list);
+				loadColletThemes(items,theme_list);
 				if(items!=null && items.length!=0 ){
 					updateHeight();
 				}
@@ -150,3 +134,15 @@ function updateHeight() {
 function get(id){
 	return document.getElementById(id);
 }
+function loadColletThemes(items,theme_list){
+	for ( var i = 0; i < items.length; i++) {
+		var item = items[i];
+		var li='<li class="theme" style="border-bottom:#666 1px solid;width:535px;height:50px; border-left:0;border-right:0;">';
+		var burl = item.url;
+		var title='<div class="vline" style="margin-left: 10px;"><div class="context"><a  href="'+burl+'" title="'+item.name+'">'+item.name+'</a></div>';
+		var oper = '<a tid ="'+item.blogId+'" class="collect_blog_del" style="margin-left: 10px;float: right;text-decoration: none;" href="javascript:void(0)">删除</a>';
+		li=li+oper+title+'</li>';
+		theme_list.append(li);
+		theme_list.trigger("create");
+	}
+};
