@@ -247,4 +247,39 @@ public class CommonController extends BaseController {
 			return returnException(e.getMessage());
 		}
 	}
+
+	@RequestMapping(value = "/myCare", params = { "pageNum" })
+	@ResponseBody
+	@NeedLogin
+	public ResponseEntity myCare(int pageNum) {
+		try {
+			Page page = new Page();
+			page.setSize(5);
+			if (pageNum > 20) {
+				pageNum = 20;
+			}
+			if (pageNum == 1) {
+				page.setStart(0);
+			} else {
+				page.setStart(2 * pageNum);
+			}
+			List<String> sorts = new ArrayList<String>();
+			sorts.add("createTime desc");
+			page.setSorts(sorts);
+			CareInfo model = new CareInfo();
+			String user = UserContext.getCurrentContext().getCurrentUserName();
+			model.setCreatUser(user);
+			Object result = careService.get(model, page);
+			return returnSuccess(result);
+		} catch (Exception e) {
+			log.error("myCare", e);
+			return returnException(e.getMessage());
+		}
+	}
+
+	@RequestMapping("/myCare")
+	@NeedLogin
+	public String myCare() {
+		return "myCare";
+	}
 }

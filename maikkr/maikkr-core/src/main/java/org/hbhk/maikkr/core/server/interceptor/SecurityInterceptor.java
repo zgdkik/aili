@@ -13,6 +13,7 @@ import org.hbhk.aili.security.server.cache.UserCache;
 import org.hbhk.aili.security.share.define.UserConstants;
 import org.hbhk.aili.security.share.pojo.UserInfo;
 import org.hbhk.maikkr.user.server.service.IBlogService;
+import org.hbhk.maikkr.user.server.service.ICareService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -24,6 +25,8 @@ public class SecurityInterceptor extends HandlerInterceptorAdapter {
 
 	@Autowired
 	private IBlogService blogService;
+	@Autowired
+	private ICareService careService;
 
 	@Override
 	public boolean preHandle(HttpServletRequest request,
@@ -77,9 +80,10 @@ public class SecurityInterceptor extends HandlerInterceptorAdapter {
 					.getCache(UserCache.cacheID).get(currentUser);
 			request.setAttribute("cuserName", user.getName());
 			int tc = blogService.getUserThemeCount();
-			int ac = blogService.getUserAttentionCount();
+			//int ac = blogService.getUserAttentionCount();
+			int careCount =  careService.myCareCount();
 			request.setAttribute("tc", tc);
-			request.setAttribute("ac", ac);
+			request.setAttribute("ac", careCount);
 			user.setPassword(null);
 			request.setAttribute("userInfo", user);
 			String head =  user.getUserHeadImg();
@@ -90,6 +94,7 @@ public class SecurityInterceptor extends HandlerInterceptorAdapter {
 			request.setAttribute("userInfo", null);
 			request.setAttribute("cuserName", null);
 			request.setAttribute("head", null);
+			request.setAttribute("careCount",0);
 		}
 		String returnUrl = request.getServletPath();
 		int port = request.getServerPort();

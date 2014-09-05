@@ -16,26 +16,8 @@
 <div id="main" >
     <div id="center" >
 		<!-- 左边部分 -->
-				<div id="ct_left">
-			<div id="home" class="left_class">
-				<img id="home_img" style="margin-top: 5px;margin-left: 20px;" src="${base}images/user/homeblog/home_back1.png">
-				<span style="margin-top: 5px;margin-left: 10px;font-size:  14px;color: #445522;"><a class="removeLie" href="${base}user/myTheme.htm">我的主题</a></span>
-			</div>
-			<%-- <div id="message" class="left_class" >
-				<img  id="message_img" style="margin-top: 5px;margin-left: 20px;"src="${base}images/user/homeblog/message_back1.png">
-				<span style="margin-top: 5px;margin-left: 10px;font-size:  14px;color: #445522;">消息</span>
-			</div> --%>
-			<div id="collect" class="left_class">
-				<img id="collect_img" style="margin-top: 5px;margin-left: 20px;" src="${base}images/user/homeblog/collect_back1.png">
-				<span style="margin-top: 5px;margin-left: 10px;font-size:  14px;color: #445522;"><a class="removeLie" href="${base}user/collect.htm">收藏</a></span>
-			</div>
-			<div class="left_class">
-				<img id="collect_img" style="margin-top: 5px;margin-left: 20px;" src="${base}images/user/homeblog/friends_img1.png">
-				<span  style="margin-top: 5px;margin-left: 10px;font-size:  14px;color: #445522;">
-				<a class="removeLie" href="${base}user/friends.htm">好友管理</a></span>
-			</div>
-		</div>
-		<!--  -->
+		<jsp:include page="left.jsp"/>
+		<!-- 中间 -->
 		<div id="ct_center" >
 				<!-- 微博主体内容 -->
 			<div id="home_blog" style="float:left;">
