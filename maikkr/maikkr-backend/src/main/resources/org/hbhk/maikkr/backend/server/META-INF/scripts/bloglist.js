@@ -7,12 +7,12 @@ $j(document).ready(function() {
         colNames:['编号','用户名', '性别', '邮箱', 'QQ','手机号','出生日期'],
         colModel:[
                 {name:'id',index:'id', width:60, sorttype:"int"},
-                {name:'userName',index:'userName', width:90},
-                {name:'gender',index:'gender', width:90},
-                {name:'email',index:'email', width:125,sorttype:"string"},
-                {name:'QQ',index:'QQ', width:100},                
-                {name:'mobilePhone',index:'mobilePhone', width:120},                
-                {name:'birthday',index:'birthday', width:100, sorttype:"date"}                
+                {name:'userName',index:'userName', editable:true,  width:90,},
+                {name:'gender',index:'gender', editable:true,  width:90},
+                {name:'email',index:'email',editable:true,   width:125,sorttype:"string"},
+                {name:'QQ',index:'QQ',editable:true,   width:100},                
+                {name:'mobilePhone',index:'mobilePhone',editable:true,   width:120},                
+                {name:'birthday',index:'birthday', editable:true,  width:100, sorttype:"date"}                
         ],
         sortname:'id',
         sortorder:'asc',
@@ -21,7 +21,7 @@ $j(document).ready(function() {
         rowList:[10,20,30],
         pager:"#gridPager",
         caption: "第一个jqGrid例子"
-	}).navGrid('#pager2',{edit:true,add:false,del:true});
+	}).navGrid('#pager2',{edit:true,add:true,del:true});
 	
 	 var mydata = [
 	                {id:"1",userName:"polaris",gender:"男",email:"fef@163.com",QQ:"33334444",mobilePhone:"13223423424",birthday:"1985-10-01"},

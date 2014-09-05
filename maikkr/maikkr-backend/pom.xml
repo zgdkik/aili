@@ -17,14 +17,9 @@
 	</properties>
 	<dependencies>
 		<dependency>
-			<groupId>org.hbhk.aili</groupId>
-			<artifactId>aili-core</artifactId>
-			<version>${aili-version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.hbhk.aili</groupId>
-			<artifactId>aili-orm</artifactId>
-			<version>${aili-version}</version>
+			<artifactId>maikkr-core</artifactId>
+			<groupId>org.hbhk.maikkr</groupId>
+			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>javax.servlet</groupId>
