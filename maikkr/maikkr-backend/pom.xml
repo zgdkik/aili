@@ -20,6 +20,12 @@
 			<artifactId>maikkr-core</artifactId>
 			<groupId>org.hbhk.maikkr</groupId>
 			<version>0.0.1-SNAPSHOT</version>
+			<exclusions>
+				<exclusion>
+				<artifactId>aili-theme</artifactId>
+				<groupId>org.hbhk.aili</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>javax.servlet</groupId>

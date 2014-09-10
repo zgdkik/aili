@@ -1,5 +1,5 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
-<jsp:include page="/theme/common.htm" />
+<jsp:include page="common.jsp" />
 <link href="${styles}/bloglist.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="${scripts}/bloglist.js"></script>
 <body>

@@ -1,11 +1,10 @@
 package org.hbhk.maikkr.backend.server.controller;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
 import org.hbhk.aili.core.server.web.BaseController;
+import org.hbhk.aili.orm.server.intercptor.QueryBeanParam;
+import org.hbhk.aili.orm.server.page.bean.QueryBean;
 import org.hbhk.aili.orm.share.model.Pagination;
+import org.hbhk.aili.security.server.service.IUserService;
 import org.hbhk.aili.security.share.pojo.UserInfo;
 import org.hbhk.maikkr.backend.server.annotation.NeedLogin;
 import org.hbhk.maikkr.backend.server.service.IAdminService;
@@ -21,28 +20,13 @@ public class UserListController extends BaseController {
 
 	@Autowired
 	private IAdminService adminService;
-
+	@Autowired
+	private IUserService userService;
 	@RequestMapping("/userDatas")
 	@ResponseBody
-	public Pagination<UserInfo> userList() {
-		Pagination<UserInfo> page = new Pagination<UserInfo>();
-		List<UserInfo> users = new ArrayList<UserInfo>();
-		for (int i = 0; i < 50; i++) {
-			UserInfo user = new UserInfo();
-			user.setName("name"+i);
-			user.setMail("email"+i);
-			user.setRemail("remail"+i);
-			user.setCreateTime(new Date());
-			user.setUpdateTime(new Date());
-			user.setStatus(1);
-			users.add(user);
-			
-		}
-		page.setItems(users);
-		page.setCurrentPage(1);
-		page.setTotalPages(10);
-		page.setCount(50);
-		return page;
+	public Pagination<UserInfo> userList(@QueryBeanParam QueryBean queryBean) {
+		
+		return userService.queryUsersByPage(queryBean.getPage(), null, queryBean.getParaMap());
 	}
 
 }

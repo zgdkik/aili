@@ -1,5 +1,5 @@
 ﻿<%@ page language="java" pageEncoding="UTF-8" info="买客网"%>
-<jsp:include page="/theme/common.htm"/>
+<jsp:include page="common.jsp"/>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>买客网后台管理登陆</title>
@@ -23,12 +23,12 @@
                   <tr>
                     <td width="40" height="50"><img  src="${images}/login/user.gif" width="30" height="30"></td>
                     <td width="38" height="50">用户</td>
-                    <td width="242" height="50"><input type="text" name="textfield" id="email" class="inputbg" style="width:164px; height:32px; line-height:34px;  border:solid 1px #d1d1d1; font-size:9pt; font-family:Verdana, Geneva, sans-serif;"></td>
+                    <td width="242" height="50"><input type="text" value="hbhk" name="textfield" id="email" class="inputbg" style="width:164px; height:32px; line-height:34px;  border:solid 1px #d1d1d1; font-size:9pt; font-family:Verdana, Geneva, sans-serif;"></td>
                   </tr>
                   <tr>
                     <td height="50"><img src="${images}/login/password.gif" width="28" height="32"></td>
                     <td height="50">密码</td>
-                    <td height="50"><input type="password"  class="inputbg" name="textfield2" id="pwd" style="width:164px; height:32px; line-height:34px; border:solid 1px #d1d1d1; font-size:9pt; "></td>
+                    <td height="50"><input type="password" value="123456" class="inputbg" name="textfield2" id="pwd" style="width:164px; height:32px; line-height:34px; border:solid 1px #d1d1d1; font-size:9pt; "></td>
                   </tr>
                   <tr>
                     <td height="40">&nbsp;</td>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<orm xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.hbhk.org/orm/sql"
+	xsi:schemaLocation="http://www.hbhk.org/orm/sql orm.xsd">
+	<select id="queryUsersByPage">
+		<sql>
+			select *from t_aili_user  where
+				1=1 
+				#if(mail!=null)
+				 and mail =${mail};
+				#end
+				#if(name!=null)
+					and  name =${name};
+				#end
+		</sql>
+	</select>
+
+</orm>
