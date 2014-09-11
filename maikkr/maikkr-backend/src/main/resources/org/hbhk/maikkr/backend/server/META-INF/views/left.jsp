@@ -108,7 +108,7 @@ body {
 					<tr>
 						<td width="9%" height="21"><img id="xiaotu21"
 							src="${images}/main/ico06.gif" width="8" height="12" /></td>
-						<td width="91%"><a href="${base}backend/adminlist.htm target="mainFrame"
+						<td width="91%"><a href="${base}backend/adminlist.htm" target="mainFrame"
 							class="left-font03" onClick="tupian('21');">系统用户管理</a></td>
 					</tr>
 				</table>
