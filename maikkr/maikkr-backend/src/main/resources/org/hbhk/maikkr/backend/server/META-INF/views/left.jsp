@@ -70,7 +70,7 @@ body {
 									<td width="25%" rowspan="2"><img
 										src="${images}/main/ico02.gif" width="35" height="35" /></td>
 									<td width="75%" height="22" class="left-font01">您好，<span
-										class="left-font02">king</span></td>
+										class="left-font02">${cuserName}</span></td>
 								</tr>
 								<tr>
 									<td height="22" class="left-font01">[&nbsp;<a
@@ -103,19 +103,13 @@ body {
 						<td width="9%" height="20"><img id="xiaotu20"
 							src="${images}/main/ico06.gif" width="8" height="12" /></td>
 						<td width="91%"><a href="${base}backend/userlist.htm" target="mainFrame"
-							class="left-font03" onClick="tupian('20');">用户列表</a></td>
+							class="left-font03" onClick="tupian('20');">用户管理</a></td>
 					</tr>
 					<tr>
 						<td width="9%" height="21"><img id="xiaotu21"
 							src="${images}/main/ico06.gif" width="8" height="12" /></td>
-						<td width="91%"><a href="listrenwu.htm" target="mainFrame"
-							class="left-font03" onClick="tupian('21');">用户新增</a></td>
-					</tr>
-					<tr>
-						<td width="9%" height="21"><img id="xiaotu21"
-							src="${images}/main/ico06.gif" width="8" height="12" /></td>
-						<td width="91%"><a href="listrenwu.htm" target="mainFrame"
-							class="left-font03" onClick="tupian('21');">系统用户列表</a></td>
+						<td width="91%"><a href="${base}backend/adminlist.htm target="mainFrame"
+							class="left-font03" onClick="tupian('21');">系统用户管理</a></td>
 					</tr>
 				</table>
 				<!--  用户管理结束    --> 
@@ -142,13 +136,13 @@ body {
 						<td width="9%" height="20"><img id="xiaotu17"
 							src="${images}/main/ico06.gif" width="8" height="12" /></td>
 						<td width="91%"><a href="${base}backend/bloglist.htm" target="mainFrame"
-							class="left-font03" onClick="tupian('17');">主题列表</a></td>
+							class="left-font03" onClick="tupian('17');">主题管理</a></td>
 					</tr>
 					<tr>
 						<td width="9%" height="20"><img id="xiaotu17"
 							src="${images}/main/ico06.gif" width="8" height="12" /></td>
-						<td width="91%"><a href="${base}backend/bloglist.htm" target="mainFrame"
-							class="left-font03" onClick="tupian('17');">评论列表</a></td>
+						<td width="91%"><a href="${base}backend/commentList.htm" target="mainFrame"
+							class="left-font03" onClick="tupian('17');">评论管理</a></td>
 					</tr>
 				</table> 
 				<!--  主题结束    -->

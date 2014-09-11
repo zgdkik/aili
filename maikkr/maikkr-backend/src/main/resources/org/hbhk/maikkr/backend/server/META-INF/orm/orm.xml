@@ -5,11 +5,11 @@
 		<sql>
 			select *from t_aili_user  where
 				1=1 
-				#if(mail!=null)
-				 and mail =${mail};
+				#if(mail)
+				 and mail ='${mail}'
 				#end
-				#if(name!=null)
-					and  name =${name};
+				#if(name)
+					and  name ='${name}'
 				#end
 		</sql>
 	</select>

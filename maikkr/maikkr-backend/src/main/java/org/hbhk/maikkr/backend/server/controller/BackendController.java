@@ -48,6 +48,18 @@ public class BackendController extends BaseController {
 		return "userlist";
 	}
 
+	@RequestMapping("commentList")
+	@NeedLogin
+	public String commentList() {
+		return "commentList";
+	}
+
+	@RequestMapping("adminlist")
+	@NeedLogin
+	public String adminlist() {
+		return "adminlist";
+	}
+
 	@RequestMapping("left")
 	@NeedLogin
 	public String left() {
