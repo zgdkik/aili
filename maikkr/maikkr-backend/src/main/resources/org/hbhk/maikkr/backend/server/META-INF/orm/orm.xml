@@ -6,10 +6,10 @@
 			select *from t_aili_user where
 			status !=2
 			#if(mail)
-			and mail ='${mail}'
+			and mail like '%${mail}%'
 			#end
 			#if(name)
-			and name ='${name}'
+			and name like '%${name}%'
 			#end
 		</sql>
 	</select>
@@ -18,13 +18,13 @@
 			select * from t_be_admin where
 			status !=2
 			#if(email)
-			and email = '${email}'
+			and email like '%${email}%'
 			#end
 			#if(name)
-			and name = '${name}'
+			and name like '%${name}%'
 			#end
 			#if(retrieveEmail)
-			and retrieveEmail = '${retrieveEmail}'
+			and retrieveEmail like '%${retrieveEmail}%'
 			#end
 		</sql>
 	</select>
@@ -52,16 +52,16 @@
 				from t_mkk_comment com LEFT JOIN t_mkk_blog blog
 			  on com.blogId = blog.id 
 			WHERE blog.status !=2 and  com.status !=2 
-			#if(blogTitle)
-				com.commentUser LIKE '%${blogTitle}%'
+			#if(commentUser)
+				and com.commentUser  LIKE '%${commentUser}%'
 			#end
-			#if(blogTitle)
+			#if(commentConcent)
 				and com.commentConcent  LIKE '%${commentConcent}%'
 			#end
 			#if(blogTitle)
 				and blog.blogTitle LIKE '%${blogTitle}%'
 			#end
-			#if(blogTitle)
+			#if(blogUser)
 				and blog.blogUser LIKE '%${blogUser}%'
 			#end	
 		</sql>
