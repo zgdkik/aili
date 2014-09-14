@@ -89,7 +89,7 @@
 			      <h3 class="panel-title">说出你的看法?</h3>
 			   </div>
 			   <div class="panel-body">
-			   <textarea  id="editorText" style="width: 400px; margin-left: 75px;height: 150px;" ></textarea>
+			   <textarea  id="editorText" style="width: 400px; margin-left: 75px;height: 150px;resize:none;" ></textarea>
 				<input style="margin-left: 400px;margin-bottom: 10px;margin-top: 10px" type="button" value="发表评论" id="sendComment" title="发表评论">
 				</div>
 			</div>
