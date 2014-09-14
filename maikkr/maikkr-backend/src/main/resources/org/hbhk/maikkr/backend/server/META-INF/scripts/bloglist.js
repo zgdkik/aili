@@ -1,22 +1,24 @@
 $j(document).ready(function() {
 	var tblw=$j(".tbl-list").width()-15;
 	$j("#list").jqGrid({
-        url:base+"backend/userDatas.htm",
-        editurl:base+"security/addUser.htm",
+        url:base+"backend/queryThemesByPage.htm",
+        editurl:base+"backend/editBlog.htm",
         datatype: "json",
 		height: 'auto',
 		width:tblw,
         mtype: 'POST',  
-        colNames:['id','pwd','用户名', '姓名', '认证邮箱', '创建日期','修改时间','状态'],
+        colNames:['id','用户','标题', '内容', '主题链接','主题热度','收藏次数','评论次数', '创建日期','状态'],
         colModel:[
                 {name:'id', hidden:true,editable: true },
-                {name:'password', hidden:true,editable: true },
-                {name:'mail',index:'mail', width:60,editable: true },
-                {name:'name',index:'name', width:90,editable: true },
-                {name:'remail',index:'remail', width:90,editable: true },
-                {name:'createTime',index:'createTime', width:125,formatter:'date',formatoptions: {srcformat:'u',newformat:'Y-m-d H:i:s'},search:false},
-                {name:'updateTime',index:'updateTime', width:100,formatter:'date',formatoptions: {srcformat:'u',newformat:'Y-m-d H:i:s'},search:false},                
-                {name:'status',index:'status', width:120,search:false,formatter: "select", editoptions:{value:"0:无效;1:有效;2:删除"}}       
+                {name:'blogUser',index:'blogUser', width:100},
+                {name:'blogTitle',index:'blogTitle', width:100 },
+                {name:'blogContent',index:'blogContent', width:200},
+                {name:'blogUrl',index:'blogUrl', width:100,search:false},
+                {name:'blogHit',index:'blogHit', width:50,search:false},
+                {name:'blogCollect',index:'blogCollect', width:50,search:false},
+                {name:'blogReview',index:'blogReview', width:50,search:false},
+                {name:'createTime',index:'createTime', width:100,formatter:customDateFmatter,search:false},
+                {name:'status',index:'status', width:30,search:false,formatter: "select", editoptions:{value:"0:无效;1:有效;2:删除"}}       
         ],
         prmNames : {
  		   page:"page.start", // 表示请求页码的参数名称
@@ -35,7 +37,7 @@ $j(document).ready(function() {
         rowNum:10,
         rowList:[10,20,30],
         pager:"#gridPager",
-        caption: "用户列表"
-	}).navGrid('#gridPager', { add: true, edit: false, del: true,search:true,refresh:true });
+        caption: "主题列表"
+	}).navGrid('#gridPager', { add: false, edit: false, del: true,search:true,refresh:true });
 
 });

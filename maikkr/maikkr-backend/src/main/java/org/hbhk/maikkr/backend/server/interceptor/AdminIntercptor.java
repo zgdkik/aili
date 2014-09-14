@@ -43,11 +43,13 @@ public class AdminIntercptor extends HandlerInterceptorAdapter {
 			String currentUser = (String) RequestContext.getSession()
 					.getAttribute(AdminConstants.adminkey);
 			if (StringUtils.isNotEmpty(currentUser)) {
-				request.setAttribute("cuser", currentUser);
+				request.setAttribute("becuser", currentUser);
 				AdminInfo admin = new AdminInfo();
 				admin.setEmail(currentUser);
-				AdminInfo user = adminService.get(admin);
-				request.setAttribute("cuserName", user.getName());
+				AdminInfo user = adminService.getOne(admin);
+				if(user!=null){
+					request.setAttribute("becuserName", user.getName());
+				}
 				return true;
 			}
 			// 非ajax的请求

@@ -70,11 +70,11 @@ body {
 									<td width="25%" rowspan="2"><img
 										src="${images}/main/ico02.gif" width="35" height="35" /></td>
 									<td width="75%" height="22" class="left-font01">您好，<span
-										class="left-font02">${cuserName}</span></td>
+										class="left-font02">${becuserName}</span></td>
 								</tr>
 								<tr>
 									<td height="22" class="left-font01">[&nbsp;<a
-										href="../login.html" target="_top" class="left-font01">退出</a>&nbsp;]
+										href="${base}backend/logout.htm" target="_top" class="left-font01">退出</a>&nbsp;]
 									</td>
 								</tr>
 							</table>

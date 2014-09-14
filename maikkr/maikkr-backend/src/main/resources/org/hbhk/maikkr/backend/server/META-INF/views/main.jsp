@@ -1,10 +1,10 @@
 <%@ page language="java" pageEncoding="UTF-8" info="买客网"%>
 <jsp:include page="common.jsp" />
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>买客网后台管理系统</title>
+<title>买客买家网后台管理系统</title>
 <script type="text/javascript" src="${scripts}/main.js"></script>
 </head>
 

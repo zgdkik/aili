@@ -1,6 +1,13 @@
 package org.hbhk.maikkr.backend.server.dao;
 
+import java.util.Map;
+
+import org.hbhk.aili.orm.server.annotation.NativeQuery;
+import org.hbhk.aili.orm.server.annotation.QueryParam;
 import org.hbhk.aili.orm.server.dao.GenericEntityDao;
+import org.hbhk.aili.orm.server.surpport.Page;
+import org.hbhk.aili.orm.server.surpport.Sort;
+import org.hbhk.aili.orm.share.model.Pagination;
 import org.hbhk.maikkr.backend.shared.pojo.AdminInfo;
 
 /**
@@ -8,5 +15,8 @@ import org.hbhk.maikkr.backend.shared.pojo.AdminInfo;
  */
 
 public interface IAdminDao extends GenericEntityDao<AdminInfo, String> {
+	@NativeQuery(model = AdminInfo.class, value = "queryAdminsByPage")
+	Pagination<AdminInfo> queryAdminsByPage(Page page, Sort sort,
+			@QueryParam Map<String, Object> params);
 
 }

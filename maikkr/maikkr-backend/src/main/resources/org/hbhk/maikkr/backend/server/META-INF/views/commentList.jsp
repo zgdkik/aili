@@ -1,11 +1,11 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <jsp:include page="common.jsp" />
 <link href="${styles}/userlist.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="${scripts}/bloglist.js"></script>
+<script type="text/javascript" src="${scripts}/commentlist.js"></script>
 <body>
 	<div class="panel panel-success">
 		<div class="panel-heading">
-			<h3 class="panel-title">主题管理</h3>
+			<h3 class="panel-title">评论管理</h3>
 		</div>
 		<div  class="panel-body tbl-list">
 			<div align="center" style="height: auto;">

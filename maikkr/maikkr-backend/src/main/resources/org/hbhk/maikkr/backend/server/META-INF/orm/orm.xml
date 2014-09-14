@@ -3,15 +3,67 @@
 	xsi:schemaLocation="http://www.hbhk.org/orm/sql orm.xsd">
 	<select id="queryUsersByPage">
 		<sql>
-			select *from t_aili_user  where
-				1=1 
-				#if(mail)
-				 and mail ='${mail}'
+			select *from t_aili_user where
+			status !=2
+			#if(mail)
+			and mail ='${mail}'
+			#end
+			#if(name)
+			and name ='${name}'
+			#end
+		</sql>
+	</select>
+	<select id="queryAdminsByPage">
+		<sql>
+			select * from t_be_admin where
+			status !=2
+			#if(email)
+			and email = '${email}'
+			#end
+			#if(name)
+			and name = '${name}'
+			#end
+			#if(retrieveEmail)
+			and retrieveEmail = '${retrieveEmail}'
+			#end
+		</sql>
+	</select>
+	
+	<select id="queryBlogsByPage">
+		<sql>
+			select *from t_mkk_blog blog where
+				blog.status !=2
+				#if(blogTitle)
+					and blog.blogTitle LIKE '%${blogTitle}%'
 				#end
-				#if(name)
-					and  name ='${name}'
+				#if(blogContent)
+					and blog.blogContent LIKE '%${blogContent}%'
+				#end
+				#if(blogUser)
+					and blog.blogUser LIKE '%${blogUser}%'
 				#end
 		</sql>
 	</select>
-
+	
+	<select id="queryBlogGroupsByPage">
+		<sql>
+			SELECT com.id,com.commentUser,com.commentConcent,
+				com.createTime,blog.blogTitle,blog.blogUser 
+				from t_mkk_comment com LEFT JOIN t_mkk_blog blog
+			  on com.blogId = blog.id 
+			WHERE blog.status !=2 and  com.status !=2 
+			#if(blogTitle)
+				com.commentUser LIKE '%${blogTitle}%'
+			#end
+			#if(blogTitle)
+				and com.commentConcent  LIKE '%${commentConcent}%'
+			#end
+			#if(blogTitle)
+				and blog.blogTitle LIKE '%${blogTitle}%'
+			#end
+			#if(blogTitle)
+				and blog.blogUser LIKE '%${blogUser}%'
+			#end	
+		</sql>
+	</select>
 </orm>

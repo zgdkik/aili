@@ -24,6 +24,12 @@ public class BackendController extends BaseController {
 		return "login";
 	}
 
+	@RequestMapping("logout")
+	public String logout() {
+		RequestContext.getSession().setAttribute(AdminConstants.adminkey, null);
+		return "login";
+	}
+
 	@RequestMapping("main")
 	@NeedLogin
 	public String main() {
