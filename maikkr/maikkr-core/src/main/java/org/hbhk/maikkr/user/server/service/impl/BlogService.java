@@ -19,8 +19,12 @@ import org.hbhk.aili.security.share.util.UUIDUitl;
 import org.hbhk.maikkr.user.server.dao.IAttentionDao;
 import org.hbhk.maikkr.user.server.dao.IBlogDao;
 import org.hbhk.maikkr.user.server.service.IBlogService;
+import org.hbhk.maikkr.user.server.service.ICareService;
+import org.hbhk.maikkr.user.server.service.IMsgInfoService;
 import org.hbhk.maikkr.user.share.pojo.AttentionInfo;
 import org.hbhk.maikkr.user.share.pojo.BlogInfo;
+import org.hbhk.maikkr.user.share.pojo.CareInfo;
+import org.hbhk.maikkr.user.share.pojo.MsgInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,6 +37,11 @@ public class BlogService implements IBlogService {
 
 	@Autowired
 	private IAttentionDao attentionDao;
+	
+	@Autowired
+	private ICareService careService;
+	@Autowired
+	private IMsgInfoService msgInfoService;
 
 	public BlogInfo save(BlogInfo blog) {
 		String id = UUIDUitl.getUuid();
@@ -48,6 +57,21 @@ public class BlogService implements IBlogService {
 		user = user.substring(0, user.indexOf("@"));
 		blog.setBlogUrl(user + "/" + System.currentTimeMillis() + ".htm");
 		blogDao.save(blog);
+		//查询是否被关注
+		CareInfo care = new CareInfo();
+		care.setCareUser(UserContext.getCurrentContext().getCurrentUserName());
+		List<CareInfo> cares = careService.get(care);
+		if(CollectionUtils.isNotEmpty(cares)){
+			for (CareInfo careInfo : cares) {
+				MsgInfo msg = new MsgInfo();
+				msg.setSendUser(user);
+				msg.setReceiveUser(careInfo.getCreatUser());
+				msg.setType("user_type");
+				msg.setMsg("您关注的用户发表了新的主题:"+blog.getBlogTitle());
+				msg.setUrl(blog.getBlogUrl());
+				msgInfoService.save(msg);
+			}
+		}
 		return blog;
 	}
 

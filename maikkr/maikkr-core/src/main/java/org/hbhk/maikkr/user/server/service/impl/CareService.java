@@ -40,10 +40,7 @@ public class CareService implements ICareService {
 	}
 
 	public List<CareInfo> get(CareInfo model) {
-		String user = UserContext.getCurrentContext().getCurrentUserName();
-		model.setCreatUser(user);
 		List<CareInfo> careInfos = careDao.get(model);
-
 		return careInfos;
 	}
 
