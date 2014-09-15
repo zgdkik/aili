@@ -2,6 +2,7 @@ package org.hbhk.maikkr.user.server.service.impl;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.logging.Log;
@@ -9,6 +10,7 @@ import org.apache.commons.logging.LogFactory;
 import org.hbhk.aili.cache.server.CacheManager;
 import org.hbhk.aili.cache.server.ICache;
 import org.hbhk.aili.orm.server.surpport.Page;
+import org.hbhk.aili.orm.server.surpport.Sort;
 import org.hbhk.aili.orm.share.model.Pagination;
 import org.hbhk.aili.security.server.cache.UserCache;
 import org.hbhk.aili.security.server.context.UserContext;
@@ -119,7 +121,14 @@ public class BlogService implements IBlogService {
 	}
 
 	public BlogInfo update(BlogInfo blog) {
+		blog.setUpdateTime(new Date());
+		blog.setUpdateUser("admin");
 		return blogDao.update(blog);
+	}
+
+	public Pagination<BlogInfo> queryBlogsByPage(Page page, Sort sort,
+			Map<String, Object> params) {
+		return blogDao.queryBlogsByPage(page, sort, params);
 	}
 
 }
