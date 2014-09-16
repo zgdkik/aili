@@ -63,22 +63,6 @@ $j(document).ready(function() {
 	//显示放大图片
 	$j('.fancybox').fancybox();
 	
-	$j("body").on("click",'.blog_del',function(){ 
-		var tid = $j(this).attr("tid");
-		$j.ajax({
-			url : base + "user/delTheme.htm",
-			type : "POST",
-			data:{'tid':tid},
-			success : function(data, textStatus) {
-				$j.toast("删除成功");
-				window.location.reload();
-			},
-			exception : function(data, textStatus) {
-				$j.toast("删除失败,请重新刷新页面");
-			}
-		});
-	});
-	
 });
 //定义一个总的高度变量
 var totalheight = 0;
