@@ -6,10 +6,10 @@
 			select *from t_aili_user where
 			status !=2
 			#if(mail)
-			and mail like '%${mail}%'
+			and mail like :mail
 			#end
 			#if(name)
-			and name like '%${name}%'
+			and name like :name
 			#end
 		</sql>
 	</select>
@@ -18,13 +18,13 @@
 			select * from t_be_admin where
 			status !=2
 			#if(email)
-			and email like '%${email}%'
+			and email like :email
 			#end
 			#if(name)
-			and name like '%${name}%'
+			and name like :name
 			#end
 			#if(retrieveEmail)
-			and retrieveEmail like '%${retrieveEmail}%'
+			and retrieveEmail like :retrieveEmail
 			#end
 		</sql>
 	</select>
@@ -34,13 +34,13 @@
 			select *from t_mkk_blog blog where
 				blog.status !=2
 				#if(blogTitle)
-					and blog.blogTitle LIKE '%${blogTitle}%'
+					and blog.blogTitle LIKE :blogTitle
 				#end
 				#if(blogContent)
-					and blog.blogContent LIKE '%${blogContent}%'
+					and blog.blogContent LIKE :blogContent
 				#end
 				#if(blogUser)
-					and blog.blogUser LIKE '%${blogUser}%'
+					and blog.blogUser LIKE :blogUser
 				#end
 		</sql>
 	</select>
@@ -53,16 +53,16 @@
 			  on com.blogId = blog.id 
 			WHERE blog.status !=2 and  com.status !=2 
 			#if(commentUser)
-				and com.commentUser  LIKE '%${commentUser}%'
+				and com.commentUser  LIKE :commentUser
 			#end
 			#if(commentConcent)
-				and com.commentConcent  LIKE '%${commentConcent}%'
+				and com.commentConcent  LIKE :commentConcent
 			#end
 			#if(blogTitle)
-				and blog.blogTitle LIKE '%${blogTitle}%'
+				and blog.blogTitle LIKE :blogTitle
 			#end
 			#if(blogUser)
-				and blog.blogUser LIKE '%${blogUser}%'
+				and blog.blogUser LIKE :blogUser
 			#end	
 		</sql>
 	</select>
