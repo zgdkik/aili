@@ -111,8 +111,9 @@
 		</div>
 		<!-- 右边部分 -->
 		<jsp:include page="right.jsp"/>
-s		
+		<jsp:include page="footer.jsp"/>
 	</div>
+	
 </div>
 <input type="hidden" class="imgurl"/>
 </body>

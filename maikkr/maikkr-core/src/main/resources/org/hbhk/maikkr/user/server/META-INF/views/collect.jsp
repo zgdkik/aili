@@ -51,7 +51,7 @@
 		</div>
 		<!-- 右边部分 -->
 		<jsp:include page="right.jsp"/>
-		
+		<jsp:include page="footer.jsp"/>
 	</div>
 </div>
 <p id="back-to-top"><a href="#top"><span></span>返回顶部</a></p>

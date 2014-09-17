@@ -39,7 +39,7 @@ var seesionid="${pageContext.session.id}";
 		</div>
 		<!-- 右边部分 -->
 		<jsp:include page="right.jsp"/>
-		
+		<jsp:include page="footer.jsp"/>
 	</div>
 </div>
 <input type="hidden" class="imgurl"/>

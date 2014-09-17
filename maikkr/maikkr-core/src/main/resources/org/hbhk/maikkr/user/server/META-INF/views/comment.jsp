@@ -97,7 +97,7 @@
 		</div>
 		<!-- 右边部分 -->
 		<jsp:include page="right.jsp"/>
-		
+		<jsp:include page="footer.jsp"/>
 	</div>
 </div>
 <div class="bdsharebuttonbox" data-tag="share_1">
