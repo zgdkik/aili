@@ -73,7 +73,7 @@ function loadThemes(items,theme_list){
 		var headimg = base + userHeadImg;
 		var imgurl =item.blogLink;
 		 
-		var li='<li class="theme" style="border-bottom:#666 1px solid;width:535px;height:230px; border-left:0;border-right:0;">';
+		var li='<li class="theme" style="border-bottom:#666 1px solid;width:535px;height:100px; border-left:0;border-right:0;">';
 		var head ='<div class="vline"><img id="head_portrait" height="50px" width="50px" '+
 		'src="'+headimg+'"></div>';
 		var burl = base+"user/"+item.blogUrl;

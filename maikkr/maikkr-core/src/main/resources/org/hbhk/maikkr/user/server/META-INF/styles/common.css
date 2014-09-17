@@ -2,12 +2,11 @@
 	background: url("../../images/user/footer_top_bg.jpg") no-repeat scroll
 		center top #F7F7F8;
 	padding: 15px 30px 30px;
-	text-align: center;
-	margin-top: -16px;
 }
 
 .S_txt2 {
 	color: #808080;
+	margin-left: 240px
 }
 .notNull{
 	border: solid 1px #FA0606;
