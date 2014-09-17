@@ -83,11 +83,6 @@ public class UserController extends BaseController {
 		return "collect";
 	}
 
-	@RequestMapping("/friends")
-	@NeedLogin
-	public String friends(Model model) {
-		return "friends";
-	}
 	
 	@RequestMapping("/forget")
 	public String forget(Model model) {

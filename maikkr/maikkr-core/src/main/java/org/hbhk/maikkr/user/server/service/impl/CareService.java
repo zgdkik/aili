@@ -32,6 +32,9 @@ public class CareService implements ICareService {
 	}
 
 	public CareInfo update(CareInfo model) {
+		model.setUpdateTime(new Date());
+		String user = UserContext.getCurrentContext().getCurrentUserName();
+		model.setUpdateUser(user);
 		return careDao.update(model);
 	}
 

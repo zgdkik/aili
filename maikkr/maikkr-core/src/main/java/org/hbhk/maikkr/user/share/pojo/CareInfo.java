@@ -12,7 +12,7 @@ public class CareInfo extends BaseInfo {
 
 	@Column("careUser")
 	private String careUser;
-
+	
 	public String getCareUser() {
 		return careUser;
 	}
