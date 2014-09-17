@@ -10,9 +10,9 @@ $j(document).ready(function() {
         colNames:['id','用户名', '姓名', '认证邮箱', '创建日期','修改时间','状态'],
         colModel:[
                 {name:'id', hidden:true},
-                {name:'mail',index:'mail', width:60,editable: true,required:true },
-                {name:'name',index:'name', width:90,editable: true ,required:true},
-                {name:'remail',index:'remail', width:90,editable: true,required:true },
+                {name:'mail',index:'q_sl_mail', width:60,editable: true,required:true },
+                {name:'name',index:'q_sl_name', width:90,editable: true ,required:true},
+                {name:'remail',index:'q_sl_remail', width:90,editable: true,required:true },
                 {name:'createTime',index:'createTime', width:125,formatter:customDateFmatter,search:false},
                 {name:'updateTime',index:'updateTime', width:100,formatter:customDateFmatter,search:false},                
                 {name:'status',index:'status', width:120,search:false,formatter: "select", editoptions:{value:"0:无效;1:有效;2:删除"}}       

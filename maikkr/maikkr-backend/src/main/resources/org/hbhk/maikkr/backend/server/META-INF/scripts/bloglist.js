@@ -10,9 +10,9 @@ $j(document).ready(function() {
         colNames:['id','用户','标题', '内容', '主题链接','主题热度','收藏次数','评论次数', '创建日期','状态'],
         colModel:[
                 {name:'id', hidden:true,editable: true },
-                {name:'blogUser',index:'blogUser', width:100},
-                {name:'blogTitle',index:'blogTitle', width:100 },
-                {name:'blogContent',index:'blogContent', width:200},
+                {name:'blogUser',index:'q_sl_blogUser', width:100},
+                {name:'blogTitle',index:'q_sl_blogTitle', width:100 },
+                {name:'blogContent',index:'q_sl_blogContent', width:200},
                 {name:'blogUrl',index:'blogUrl', width:100,search:false},
                 {name:'blogHit',index:'blogHit', width:50,search:false},
                 {name:'blogCollect',index:'blogCollect', width:50,search:false},

@@ -10,11 +10,11 @@ $j(document).ready(function() {
         colNames:['id','评论用户','评论内容', '评论时间','主题用户','主题标题'],
         colModel:[
                 {name:'id', hidden:true,editable: true },
-                {name:'commentUser',index:'commentUser', width:100},
-                {name:'commentConcent',index:'commentConcent', width:200 },
+                {name:'commentUser',index:'q_sl_commentUser', width:100},
+                {name:'commentConcent',index:'q_sl_commentConcent', width:200 },
                 {name:'createTime',index:'createTime', width:100,search:false,formatter:customDateFmatter},
-                {name:'blogUser',index:'blogUser', width:100},
-                {name:'blogTitle',index:'blogTitle', width:100}
+                {name:'blogUser',index:'q_sl_blogUser', width:100},
+                {name:'blogTitle',index:'q_sl_blogTitle', width:100}
         ],
         grouping:true,
         groupingView : {

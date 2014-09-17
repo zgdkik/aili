@@ -7,13 +7,13 @@ $j(document).ready(function() {
 		height: 'auto',
 		width:tblw,
         mtype: 'POST',  
-        colNames:['id','用户名','pwd', '姓名', '认证邮箱', '创建日期','修改时间','状态'],
+        colNames:['id','用户名','密码', '姓名', '认证邮箱', '创建日期','修改时间','状态'],
         colModel:[
                 {name:'id', hidden:true },
-                {name:'email',index:'email', width:60,editable: true,required:true },
+                {name:'email',index:'q_sl_email', width:60,editable: true,required:true },
                 {name:'pwd',index:'pwd', hidden:true, width:90,editable: true,required:true,editrules:{edithidden:true}},
-                {name:'name',index:'name', width:90,editable: true,required:true },
-                {name:'retrieveEmail',index:'retrieveEmail', width:90,editable: true,required:true },
+                {name:'name',index:'q_sl_name', width:90,editable: true,required:true },
+                {name:'retrieveEmail',index:'q_sl_retrieveEmail', width:90,editable: true,required:true },
                 {name:'createTime',index:'createTime', width:125,formatter:customDateFmatter,search:false},
                 {name:'updateTime',index:'updateTime', width:100,formatter:customDateFmatter,search:false},                
                 {name:'status',index:'status', width:120,search:false,formatter: "select", editoptions:{value:"0:无效;1:有效;2:删除"}}       
