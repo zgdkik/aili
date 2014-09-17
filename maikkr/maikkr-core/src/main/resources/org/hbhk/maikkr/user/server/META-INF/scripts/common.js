@@ -47,7 +47,21 @@ $j(document).ready(function(){
 			}
 		});
 	});
-	
+	 var duilian = $j("div.duilian");
+	 var duilian_close = $j("a.duilian_close");
+	 
+	 var window_w = $j(window).width();
+	 if(window_w>1000){
+		 duilian.show();
+		}
+	 $j("#main").scroll(function(){
+	     var scrollTop = $j("#main").scrollTop();
+	     duilian.stop().animate({top:scrollTop+100});
+	 });
+	 duilian_close.click(function(){
+	     $j(this).parent().hide();
+	     return false;
+	 });
 	
 });
 function validate(){

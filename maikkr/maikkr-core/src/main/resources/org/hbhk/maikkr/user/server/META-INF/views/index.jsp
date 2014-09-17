@@ -117,5 +117,6 @@
 </div>
 <p id="back-to-top"><a href="#top"><span></span>返回顶部</a></p>
 <input type="hidden" class="imgurl"/>
+<jsp:include page="ad.jsp"/>
 </body>
 </html>
