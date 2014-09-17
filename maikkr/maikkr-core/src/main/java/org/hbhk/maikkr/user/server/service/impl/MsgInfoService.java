@@ -52,6 +52,8 @@ public class MsgInfoService implements IMsgInfoService {
 	}
 
 	public List<MsgInfo> get(MsgInfo model, Page page) {
+		String user  = UserContext.getCurrentContext().getCurrentUserName();
+		model.setReceiveUser(user);
 		return msgInfoDao.get(model, page);
 	}
 

@@ -70,11 +70,6 @@ public class UserController extends BaseController {
 		return "newest";
 	}
 
-	@RequestMapping("/msg")
-	public String msg(Model model) {
-		return "msg";
-	}
-
 	@RequestMapping("/set")
 	@NeedLogin
 	public String set(Model model) {

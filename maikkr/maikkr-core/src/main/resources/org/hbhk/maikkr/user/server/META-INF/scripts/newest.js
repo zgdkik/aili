@@ -52,7 +52,6 @@ $j(document).ready(function() {
 		search(q);
 	});
 	
-	//发布主题
 	$j(".blog_contenttop").mouseover(function() {
 		$j(this).css("background-color","#E6E6E6");
 	});

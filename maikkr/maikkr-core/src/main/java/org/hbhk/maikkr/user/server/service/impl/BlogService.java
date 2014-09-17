@@ -9,6 +9,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hbhk.aili.cache.server.CacheManager;
 import org.hbhk.aili.cache.server.ICache;
+import org.hbhk.aili.core.server.context.RequestContext;
 import org.hbhk.aili.orm.server.surpport.Page;
 import org.hbhk.aili.orm.server.surpport.Sort;
 import org.hbhk.aili.orm.share.model.Pagination;
@@ -67,7 +68,9 @@ public class BlogService implements IBlogService {
 				msg.setSendUser(user);
 				msg.setReceiveUser(careInfo.getCreatUser());
 				msg.setType("user_type");
-				msg.setMsg("您关注的用户发表了新的主题:"+blog.getBlogTitle());
+				String cpath = RequestContext.getRequest().getContextPath();
+				String turl = "<a href='"+cpath+blog.getBlogUrl()+"'>"+blog.getBlogTitle()+"</a>";
+				msg.setMsg("您关注的用户发表了新的主题:"+turl);
 				msg.setUrl(blog.getBlogUrl());
 				msgInfoService.save(msg);
 			}

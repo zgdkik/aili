@@ -13,6 +13,7 @@ import org.hbhk.maikkr.user.server.service.IMsgInfoService;
 import org.hbhk.maikkr.user.share.pojo.MsgInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -24,6 +25,14 @@ public class MsgController extends BaseController {
 	@Autowired
 	private IMsgInfoService msgInfoService;
 
+	
+	@RequestMapping("/msg")
+	public String msg(Model model) {
+		MsgInfo msg = new MsgInfo();
+		model.addAttribute("msgList", msgInfoService.get(msg));
+		return "msg";
+	}
+	
 	@RequestMapping("/msgList")
 	@ResponseBody
 	public List<MsgInfo> msgList(MsgInfo msg, Page page) {
