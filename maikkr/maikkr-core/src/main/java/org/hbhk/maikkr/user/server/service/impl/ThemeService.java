@@ -3,6 +3,7 @@ package org.hbhk.maikkr.user.server.service.impl;
 import java.util.Date;
 import java.util.List;
 
+import org.hbhk.aili.orm.server.surpport.Page;
 import org.hbhk.aili.security.server.context.UserContext;
 import org.hbhk.aili.security.share.util.UUIDUitl;
 import org.hbhk.maikkr.user.server.dao.IThemeDao;
@@ -22,7 +23,7 @@ public class ThemeService implements IThemeService {
 
 	public ThemeInfo save(ThemeInfo theme) {
 		theme.setCreateTime(new Date());
-		theme.setCreatUser(UserContext.getCurrentContext().getCurrentUserName());
+		theme.setCreatUser("admin");
 		theme.setId(UUIDUitl.getUuid());
 		return themeDao.save(theme);
 	}
@@ -36,8 +37,22 @@ public class ThemeService implements IThemeService {
 		return themeDao.loadUserThemeType(cuser, "common");
 	}
 
-	public ThemeInfo get(ThemeInfo theme) {
-		return themeDao.getOne(theme);
+	public List<ThemeInfo> get(ThemeInfo theme) {
+		return themeDao.get(theme);
+	}
+
+	public ThemeInfo update(ThemeInfo model) {
+		model.setUpdateTime(new Date());
+		model.setUpdateUser("admin");
+		return themeDao.update(model);
+	}
+
+	public ThemeInfo getOne(ThemeInfo model) {
+		return themeDao.getOne(model);
+	}
+
+	public List<ThemeInfo> get(ThemeInfo model, Page page) {
+		return themeDao.get(model, page);
 	}
 
 }
