@@ -75,7 +75,7 @@ public class ThemeController extends BaseController {
 	 * @param user
 	 * @return
 	 */
-	@RequestMapping("/editAdmin")
+	@RequestMapping("/editTheme")
 	@ResponseBody
 	public ResponseEntity editAdmin(String oper, ThemeInfo theme) {
 		try {
