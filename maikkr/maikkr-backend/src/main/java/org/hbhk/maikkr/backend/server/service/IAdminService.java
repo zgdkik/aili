@@ -7,6 +7,7 @@ import org.hbhk.aili.orm.server.surpport.Sort;
 import org.hbhk.aili.orm.share.model.Pagination;
 import org.hbhk.maikkr.backend.shared.pojo.AdminInfo;
 import org.hbhk.maikkr.user.server.service.ICommonService;
+import org.hbhk.maikkr.user.share.pojo.ThemeInfo;
 
 /**
  * Service接口开发规范 
@@ -20,4 +21,7 @@ public interface IAdminService extends ICommonService<AdminInfo> {
 
 	Pagination<AdminInfo> queryAdminsByPage(Page page, Sort sort,
 			Map<String, Object> params);
+	
+	Pagination<ThemeInfo> queryCommsByPage(Page page, Sort sort,
+			 Map<String, Object> params);
 }

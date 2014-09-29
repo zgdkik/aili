@@ -14,6 +14,7 @@ import org.hbhk.maikkr.backend.server.dao.IAdminDao;
 import org.hbhk.maikkr.backend.server.service.IAdminService;
 import org.hbhk.maikkr.backend.shared.pojo.AdminConstants;
 import org.hbhk.maikkr.backend.shared.pojo.AdminInfo;
+import org.hbhk.maikkr.user.share.pojo.ThemeInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -72,13 +73,16 @@ public class AdminService implements IAdminService {
 	}
 
 	public List<AdminInfo> get(AdminInfo model, Page page) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	public List<AdminInfo> get(AdminInfo model) {
-		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public Pagination<ThemeInfo> queryCommsByPage(Page page, Sort sort,
+			Map<String, Object> params) {
+		return adminDao.queryCommsByPage(page, sort, params);
 	}
 
 }

@@ -111,6 +111,12 @@ body {
 						<td width="91%"><a href="${base}backend/adminlist.htm" target="mainFrame"
 							class="left-font03" onClick="tupian('21');">系统用户管理</a></td>
 					</tr>
+					<tr>
+						<td width="9%" height="21"><img id="xiaotu21"
+							src="${images}/main/ico06.gif" width="8" height="12" /></td>
+						<td width="91%"><a href="${base}backend/loglist.htm" target="mainFrame"
+							class="left-font03" onClick="tupian('21');">用户登陆日志管理</a></td>
+					</tr>
 				</table>
 				<!--  用户管理结束    --> 
 				<!--  主题管理   -->
@@ -143,6 +149,13 @@ body {
 							src="${images}/main/ico06.gif" width="8" height="12" /></td>
 						<td width="91%"><a href="${base}backend/commentList.htm" target="mainFrame"
 							class="left-font03" onClick="tupian('17');">评论管理</a></td>
+					</tr>
+					
+					<tr>
+						<td width="9%" height="20"><img id="xiaotu17"
+							src="${images}/main/ico06.gif" width="8" height="12" /></td>
+						<td width="91%"><a href="${base}backend/commonList.htm" target="mainFrame"
+							class="left-font03" onClick="tupian('17');">通用主题管理</a></td>
 					</tr>
 				</table> 
 				<!--  主题结束    -->

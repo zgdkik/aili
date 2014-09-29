@@ -66,4 +66,26 @@
 			#end	
 		</sql>
 	</select>
+	
+	<select id="queryLogsByPage">
+		<sql>
+			select *from t_aili_login_log where
+			status !=2
+			#if(user)
+			and user like :user
+			#end
+			
+		</sql>
+	</select>
+	
+	<select id="queryCommsByPage">
+		<sql>
+			select *from t_mkk_theme where
+			status !=2
+			#if(name)
+			and name like :name
+			#end
+			
+		</sql>
+	</select>
 </orm>
