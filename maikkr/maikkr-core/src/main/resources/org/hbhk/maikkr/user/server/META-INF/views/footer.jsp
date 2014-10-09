@@ -3,7 +3,7 @@
 <body>
 <div class="footer">
 	<p class="S_txt2">
-		Copyright © 1996-2014 SINA HBHK网络技术有限公司
+	<a href="${base}">${siteInfo.title}</a>  Copyright © 2014-2015 备案号  沪ICP备14038776号
 	</p>
 </div>
 </body>

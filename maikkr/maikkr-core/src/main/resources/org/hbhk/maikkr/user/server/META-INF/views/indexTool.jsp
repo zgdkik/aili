@@ -3,6 +3,9 @@
 <!DOCTYPE HTML>
 <html lang="zh-cn">
 <head>
+	<title>${siteInfo.title}</title>
+	<meta name ="keywords" content="${siteInfo.keywords}">
+	<meta name ="description" content="${siteInfo.description}">
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 	<link href="${styles}/tool.css" rel="stylesheet" type="text/css" />
 	<script type="text/javascript" src="${scripts}/tool.js"></script>

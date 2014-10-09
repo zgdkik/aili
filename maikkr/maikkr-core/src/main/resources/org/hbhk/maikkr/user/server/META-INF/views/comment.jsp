@@ -3,9 +3,9 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <jsp:include page="common.jsp"/>
 <head>
-	<title>买客买家网-${theme.blogTitle}</title>
-	<meta name ="keywords" content="${theme.blogTitle},买客买家网,买客,买家">
-	<meta name ="description" content="${theme.blogTitle},买客买家网,买客,买家">
+	<title>${siteInfo.title}-${theme.blogTitle}</title>
+	<meta name ="keywords" content="${theme.blogTitle},${siteInfo.keywords}">
+	<meta name ="description" content="${theme.blogTitle},${siteInfo.description}">
 	<link href="${styles}/comment.css" rel="stylesheet" type="text/css" />
 	<script type="text/javascript">
 	 var host = window.location.host;

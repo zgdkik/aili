@@ -2,9 +2,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="common.jsp"/>
 <head>
-	<title>买客买家网</title>
-	<meta name ="keywords" content="买客买家网,买客,买家,无尽分享,交流">
-	<meta name ="description" content="买客买家网,买客,买家,无尽分享,交流">
+	<title>${siteInfo.title}</title>
+	<meta name ="keywords" content="${siteInfo.keywords}">
+	<meta name ="description" content="${siteInfo.description}">
 	<link href="${styles}/mainnew.css" rel="stylesheet" type="text/css" />
 	<script type="text/javascript" src="${scripts}/main.js"></script>
 	<script type="text/javascript">

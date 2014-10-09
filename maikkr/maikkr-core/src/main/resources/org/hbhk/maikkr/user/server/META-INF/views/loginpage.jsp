@@ -4,7 +4,7 @@
 <head>
 <jsp:include page="common.jsp"/>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-<title>买客网-微主题,微话题-无尽分享-专为买家分享的网站</title>
+<title>${siteInfo.title}</title>
 <link href="${styles}/login.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="${scripts}/login.js"></script>
 <script type="text/javascript">

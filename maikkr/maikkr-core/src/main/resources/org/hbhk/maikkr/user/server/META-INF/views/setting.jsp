@@ -1,11 +1,15 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="common.jsp"/>
+<html>
+<head>
+<title>${siteInfo.title}-信息设置</title>
 <link href="${styles}/comment.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="${scripts}/setting.js"></script>
 <script type="text/javascript">
 var seesionid="${pageContext.session.id}";
 </script>
+</head>
 <body>
 <jsp:include page="tool.jsp"/>
 <div id="main" >

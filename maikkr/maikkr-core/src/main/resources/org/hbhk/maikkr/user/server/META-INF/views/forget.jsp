@@ -3,9 +3,7 @@
 <jsp:include page="common.jsp"/>
 <html>
 <head>
-	<title>密码找回-买客买家网</title>
-	<meta name ="keywords" content="买客买家网,买客,买家,无尽分享,交流">
-	<meta name ="description" content="买客买家网,买客,买家,无尽分享,交流">
+	<title>${siteInfo.title}-密码找回</title>
 	<script type="text/javascript" src="${scripts}/forget.js"></script>
 	<script type="text/javascript">
         function refreshimg(){

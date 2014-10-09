@@ -2,9 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="common.jsp"/>
 <head>
-	<title>买客买家网-我的主题</title>
-	<meta name ="keywords" content="买客买家网,买客,买家,无尽分享,交流">
-	<meta name ="description" content="买客买家网,买客,买家,无尽分享,交流">
+	<title>${siteInfo.title}-我的主题</title>
 	<link href="${styles}/mainnew.css" rel="stylesheet" type="text/css" />
 	<script type="text/javascript" src="${scripts}/myTheme.js"></script>
 	<script type="text/javascript">
@@ -12,7 +10,7 @@
 	</script>
 </head>
 <body>
-<jsp:include page="indexTool.jsp"/>
+<jsp:include page="tool.jsp"/>
 <div id="main" >
     <div id="center" >
 		<!-- 左边部分 -->

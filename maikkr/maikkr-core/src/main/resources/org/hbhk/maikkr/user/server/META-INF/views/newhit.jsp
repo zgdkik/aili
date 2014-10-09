@@ -2,9 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="common.jsp"/>
 <head>
-	<title>买客买家网-热门主题</title>
-	<meta name ="keywords" content="买客买家网,买客,买家,无尽分享,交流">
-	<meta name ="description" content="买客买家网,买客,买家,无尽分享,交流">
+	<title>${siteInfo.title}-热门主题</title>
 	<link href="${styles}/mainnew.css" rel="stylesheet" type="text/css" />
 	<script type="text/javascript" src="${scripts}/newhit.js"></script>
 	<script type="text/javascript">

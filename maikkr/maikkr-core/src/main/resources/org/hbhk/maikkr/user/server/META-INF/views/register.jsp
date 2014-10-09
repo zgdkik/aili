@@ -3,7 +3,7 @@
 <html lang="zh-cn">
 <head>
 	<jsp:include page="common.jsp"/>
-	<title>买客买家网-注册</title>
+	<title>${siteInfo.title}-注册</title>
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 	<link href="${styles}/register.css" rel="stylesheet" type="text/css" />
 	<script type="text/javascript" src="${scripts}/register.js"></script>
