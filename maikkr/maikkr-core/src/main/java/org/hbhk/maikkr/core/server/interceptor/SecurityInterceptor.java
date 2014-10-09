@@ -12,6 +12,8 @@ import org.hbhk.aili.core.server.context.RequestContext;
 import org.hbhk.aili.security.server.cache.UserCache;
 import org.hbhk.aili.security.share.define.UserConstants;
 import org.hbhk.aili.security.share.pojo.UserInfo;
+import org.hbhk.maikkr.core.server.service.ISiteInfoService;
+import org.hbhk.maikkr.core.shared.pojo.SiteInfo;
 import org.hbhk.maikkr.user.server.service.IBlogService;
 import org.hbhk.maikkr.user.server.service.ICareService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +29,10 @@ public class SecurityInterceptor extends HandlerInterceptorAdapter {
 	private IBlogService blogService;
 	@Autowired
 	private ICareService careService;
+	@Autowired
+	private ISiteInfoService siteInfoService;
+	
+	public static SiteInfo siteInfo = null;
 
 	@Override
 	public boolean preHandle(HttpServletRequest request,
@@ -72,6 +78,15 @@ public class SecurityInterceptor extends HandlerInterceptorAdapter {
 	public void postHandle(HttpServletRequest request,
 			HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
+		//设置网站信息
+		if(siteInfo==null){
+			SiteInfo site = new SiteInfo();
+			site.setStatus(1);
+			siteInfo = siteInfoService.getOne(site);
+		}
+		
+		request.setAttribute("siteInfo", siteInfo);
+		
 		String currentUser = (String) RequestContext.getSession().getAttribute(
 				UserConstants.CURRENT_USER_NAME);
 		request.setAttribute("cuser", currentUser);
