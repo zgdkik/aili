@@ -7,8 +7,9 @@ import org.hbhk.aili.orm.server.intercptor.QueryBeanParam;
 import org.hbhk.aili.orm.server.page.bean.QueryBean;
 import org.hbhk.aili.orm.share.model.Pagination;
 import org.hbhk.maikkr.backend.server.annotation.NeedLogin;
-import org.hbhk.maikkr.backend.server.service.ISiteInfoService;
-import org.hbhk.maikkr.backend.shared.pojo.SiteInfo;
+import org.hbhk.maikkr.core.server.interceptor.SecurityInterceptor;
+import org.hbhk.maikkr.core.server.service.ISiteInfoService;
+import org.hbhk.maikkr.core.shared.pojo.SiteInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -45,7 +46,7 @@ public class SiteController extends BaseController {
 	 */
 	@RequestMapping("/editSite")
 	@ResponseBody
-	public ResponseEntity editAdmin(String oper, SiteInfo theme) {
+	public ResponseEntity editSite(String oper, SiteInfo theme) {
 		try {
 			if (oper.equals("del")) {
 				theme.setStatus(2);
@@ -57,6 +58,7 @@ public class SiteController extends BaseController {
 			if (oper.equals("edit")) {
 				siteInfoService.update(theme);
 			}
+			SecurityInterceptor.siteInfo = null;
 			return returnSuccess();
 		} catch (BusinessException e) {
 			return returnException(e.getMessage());
