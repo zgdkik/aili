@@ -62,6 +62,22 @@ $j(document).ready(function() {
 	updateHeight();
 	//显示放大图片
 	$j('.fancybox').fancybox();
+	$j("body").on("click",".collect_blog_del",function(){
+		var me = $j(this);
+		var bid = me.attr("tid");
+		$j.ajax({
+			url : base + "user/delCollect.htm",
+			type : "POST",
+			data:{'id':bid},
+			success : function(data, textStatus) {
+				$j.toast("删除成功");
+				me.parent().remove();
+			},
+			exception : function(data, textStatus) {
+				$j.toast("删除失败");
+			}
+		});
+	});
 	
 });
 //定义一个总的高度变量

@@ -53,8 +53,8 @@
 									<a href="${base}user/forget.htm"
 										class="f_reght_btn">忘记密码</a>
 								</div>
-								<input type="checkbox" checked="checked" />下次自动登录 <a
-									class="help_img" href="#"></a>
+								<!-- <input type="checkbox" checked="checked" />下次自动登录 <a
+									class="help_img" href="#"></a> -->
 							</div>
 						</div>
 						<div class="form_list">
