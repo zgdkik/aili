@@ -42,6 +42,7 @@ public class CollectService implements ICollectService {
 		CollectInfo c = getOne(model);
 		model.setId(c.getId());
 		model.setUpdateTime(new Date());
+		model.setBlogId(null);
 		model.setStatus(2);
 		return collectDao.update(model);
 	}
