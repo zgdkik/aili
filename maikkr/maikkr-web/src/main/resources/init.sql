@@ -1,0 +1,2 @@
+INSERT INTO `t_be_admin` VALUES ('1', 'admin', 'admin', '7c4a8d09ca3762af61e59520943dc26494f8941b', 'mikkr@mikkr.com', 'admin', '2014-09-09 18:58:36', 'admin', '2014-09-11 20:40:13', '1');
+INSERT INTO `t_be_site` VALUES ('2d011a377f954952a18d0e6b0499da9b', '米客网', '米客,惠生活', '米客,惠生活', 'admin', '2014-10-12 17:46:32', null, null, '1');
