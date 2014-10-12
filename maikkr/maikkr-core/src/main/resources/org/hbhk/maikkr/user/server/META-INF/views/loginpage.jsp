@@ -24,7 +24,7 @@
 			<div class="w_l_info">
 				<div class="w_l_i_left">
 					<div class="left_top">
-						还没有买客网账号？现在加入 <a
+						还没有${siteinfo.title}账号？现在加入 <a
 							href="${base}user/register.htm"
 							class="left_top_btn">立即注册</a>
 					</div>

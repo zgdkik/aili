@@ -157,30 +157,6 @@
 									</div> -->
 							</div>
 						</div>
-						<div class="w_m_m_t_right">
-							<p class="p1 line">
-								已有帐号，
-								<a href="${base}user/loginpage.htm" action-type="btn_login">直接登录»</a>
-							</p>
-							<p class="p2">
-								手机快速注册
-							</p>
-							<p class="S_txt2">
-								编辑短信：
-							</p>
-							<p class="p3">
-								<span class="number">6-16</span>位数字
-							</p>
-							<p class="S_txt2">
-								作为登录密码发送至：
-							</p>
-							<p class="p3">
-								<span class="number">15821999948</span>
-							</p>
-							<p class="S_txt2">
-								即可注册成功。
-							</p>
-						</div>
 					</div>
 				</div>
 				<jsp:include page="footer.jsp"/>

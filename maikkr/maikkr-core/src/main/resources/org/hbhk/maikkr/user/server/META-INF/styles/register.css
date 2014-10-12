@@ -50,7 +50,7 @@ body{
 }
 .w_m_top{
     background: url("../../images/user/bg_reg_wave.png") no-repeat scroll center bottom transparent;
-    height: 115px;
+    height: 50px;
 }
 .w_m_t_name{
 	margin-top:26px;
@@ -58,7 +58,7 @@ body{
 .w_m_t_name{
 	
 	background: url("../../images/user/maikkrlogo_top.png") no-repeat scroll 0 bottom transparent;
-    height: 100px;
+    height: 40px;
     margin: 0 auto;
     width: 278px;
 }

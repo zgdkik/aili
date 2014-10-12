@@ -28,6 +28,9 @@ $j(document).ready(function() {
 	getId("virfyId").blur(function(){
 		validateVirfy(getId("virfyId"));
 	});
+	$j(".w_m_t_name").click(function(){
+		window.location.href=base;
+	});
 });
 var arr={
 		"emailState":"",
