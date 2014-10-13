@@ -175,7 +175,7 @@ function search(q) {
       			if(imgurl!=null && imgurl!=""){
       				var imgs = imgurl.split(",");
       				for ( var j = 0; j < imgs.length; j++) {
-      					var imgurl = base + imgs[j];
+      					var imgurl = file_server + imgs[j];
       					var preImg = '<a class="fancybox" href="'+imgurl+'" data-fancybox-group="'+imggroup+'">';
       					var img ='<img id="context_img" height="100px" width="100px" src="'+imgurl+'"></a>';
       					context =context +preImg+img;

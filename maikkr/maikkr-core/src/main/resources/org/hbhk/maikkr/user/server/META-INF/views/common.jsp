@@ -9,4 +9,5 @@
 <script type="text/javascript" src="${base}scripts/user/backTop.js"></script>
 <script type="text/javascript">
 	var host = window.location.host;
+	var file_server="${file_server}";
 </script>

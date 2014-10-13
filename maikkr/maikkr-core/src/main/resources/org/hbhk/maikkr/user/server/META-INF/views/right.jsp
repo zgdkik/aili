@@ -21,7 +21,7 @@
 			 <c:if test="${userInfo != null}">
 				 <img style="border-bottom-style: solid;border-bottom-width: 1px;"
 				 id="head_portrait_right" height="80px" width="80px" 
-				 src="${base}${userInfo.userHeadImg}">
+				 src="${file_server}${userInfo.userHeadImg}">
 			 </c:if>
 			</a>
 			<a style="display: inline-block;overflow: hidden;font-size: 16px;font-weight: bold;word-wrap: break-word;color: black;" >${cuserName}</a>

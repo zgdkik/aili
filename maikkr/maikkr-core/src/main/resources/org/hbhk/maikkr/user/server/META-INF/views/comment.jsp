@@ -56,14 +56,42 @@
 				 <img id="head_portrait" height="50px" width="50px" 
 				 src="${base}${theme.userHeadImg}">${theme.blogUser} <span style="float: right;">时间:<c:out value="${date}"/></span> </div>
 				 <div class="vline"><div class="context">
-				 <a href="${base}user/${theme.blogUrl}" title="${theme.blogTitle}">
-				 <h3 style="margin-left: 25px">${theme.blogTitle}</h3></a></div></div>
-				 <div class="vline"><div class="context">${theme.blogContent}</div></div>
-				 <div class="context_imgs" align="center">
-				 <c:forTokens items="${theme.blogLink}" delims="," var="imgurl">
+				 <a href="${base}user/${theme.blogUrl}" title="${theme.blogTitle}" style="margin-left: 25px;font-size: 27px">
+				 ${theme.blogTitle}</a></div></div>
+				 <div class="context_imgs">
+				<%--  <c:forTokens items="${theme.blogLink}" delims="," var="imgurl">
 				  <img id="context_img" style="margin-bottom: 5px" width="250" height="250"   src="${base}${imgurl}"><br>
-				 </c:forTokens>
+				 </c:forTokens> --%>
+				 <div class="carousel slide" id="carousel-666394">
+				<ol class="carousel-indicators">
+					<c:forTokens items="${theme.blogLink}" varStatus="status" delims="," var="imgurl">
+					  <c:if test="${status.first}">
+						<li class="active" data-slide-to="${status.index}" data-target="#carousel-666394">
+						</li>
+					  </c:if>
+					   <c:if test="${status.first == false}">
+						<li  data-slide-to="${status.index}" data-target="#carousel-666394">
+						</li>
+					  </c:if>
+					</c:forTokens>
+				</ol>
+					<div class="carousel-inner">
+					 <c:forTokens items="${theme.blogLink}" varStatus="status" delims="," var="imgurl">
+					  <c:if test="${status.first}">
+						<div class="item active">
+							<img alt="" src="${file_server}${imgurl}" />
+						</div>
+						</c:if>
+						 <c:if test="${status.first == false}">
+							<div class="item">
+								<img alt="" src="${file_server}${imgurl}" />
+							</div>
+					  </c:if>
+					</c:forTokens>
+					</div> <a data-slide="prev" href="#carousel-666394" class="left carousel-control">‹</a> <a data-slide="next" href="#carousel-666394" class="right carousel-control">›</a>
+				</div>
                  </div>
+                  <div class="vline"><div class="context">${theme.blogContent}</div></div>
                  </li>
 				 </ul>
 				</div>

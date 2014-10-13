@@ -87,7 +87,7 @@ function loadThemes(items,theme_list){
 		var headimg = base + userHeadImg;
 		var imgurl =item.blogLink;
 		 
-		var li='<li class="theme" style="border-bottom:#666 1px solid;width:535px;height:100px; border-left:0;border-right:0;">';
+		var li='<li class="theme" style="border-bottom:#666 1px solid;width:535px;height:230px; border-left:0;border-right:0;">';
 		var head ='<div class="vline"><img id="head_portrait" height="50px" width="50px" '+
 		'src="'+headimg+'"></div>';
 		var burl = base+"user/"+item.blogUrl;
@@ -97,7 +97,7 @@ function loadThemes(items,theme_list){
 			if(imgurl!=null && imgurl!=""){
 				var imgs = imgurl.split(",");
 				for ( var j = 0; j < imgs.length; j++) {
-					var imgurl = base + imgs[j];
+					var imgurl = file_server + imgs[j];
 					var preImg = '<a class="fancybox" href="'+imgurl+'" data-fancybox-group="'+imggroup+'">';
 					var img ='<img id="context_img" height="100px" width="100px" src="'+imgurl+'"></a>';
 					context =context +preImg+img;

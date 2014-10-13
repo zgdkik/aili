@@ -22,7 +22,7 @@ public class FileService implements IFileService {
 	private Log log = LogFactory.getLog(getClass());
 
 	@Value("${filepath}")
-	private String path = "images/userImages";
+	private String path;
 	@Autowired
 	private IFileDao fileDao;
 
@@ -37,7 +37,7 @@ public class FileService implements IFileService {
 		user = "m"+user.substring(0, user.indexOf("@"));
 		String fileName = "m"+String.valueOf(System.currentTimeMillis());
 		String sep = System.getProperty("file.separator");
-		String url = path + sep + user + sep + fileName + suffix;
+		String url = sep + user + sep + fileName + suffix;
 
 		file.setId(UUIDUitl.getUuid());
 		file.setOrigName(originalFilename);
