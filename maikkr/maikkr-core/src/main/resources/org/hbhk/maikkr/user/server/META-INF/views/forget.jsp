@@ -39,5 +39,6 @@
 	  </div>
 	</div>
    </div>
+   <jsp:include page="tongji.jsp"/>
 </body>
 </html>

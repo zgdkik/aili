@@ -80,11 +80,13 @@ function loadThemes(items,theme_list){
 	for ( var i = 0; i < items.length; i++) {
 		var item = items[i];
 		var userHeadImg = item.userHeadImg;
+		var headimg;
 		if(userHeadImg==null || userHeadImg==""){
-			userHeadImg ="images/security/default_head.png";
+			userHeadImg =base+"images/security/default_head.png";
+		}else{
+			headimg = file_server + userHeadImg;
 		}
 		// 设置头像
-		var headimg = base + userHeadImg;
 		var imgurl =item.blogLink;
 		 
 		var li='<li class="theme" style="border-bottom:#666 1px solid;width:535px;height:230px; border-left:0;border-right:0;">';

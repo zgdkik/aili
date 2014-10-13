@@ -47,5 +47,6 @@
 	</div>
 </div>
 <input type="hidden" class="imgurl"/>
+<jsp:include page="tongji.jsp"/>
 </body>
 </html>

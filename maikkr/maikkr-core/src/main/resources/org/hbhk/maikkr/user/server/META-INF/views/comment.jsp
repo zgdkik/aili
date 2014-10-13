@@ -54,7 +54,7 @@
 				 <fmt:formatDate var="date" value="${theme.createTime}" pattern="yyyy-MM-dd HH:mm:ss" type="time"></fmt:formatDate>
 				 <div class="vline">
 				 <img id="head_portrait" height="50px" width="50px" 
-				 src="${base}${theme.userHeadImg}">${theme.blogUser} <span style="float: right;">时间:<c:out value="${date}"/></span> </div>
+				 src="${file_server}${theme.userHeadImg}">${theme.blogUser} <span style="float: right;">时间:<c:out value="${date}"/></span> </div>
 				 <div class="vline"><div class="context">
 				 <a href="${base}user/${theme.blogUrl}" title="${theme.blogTitle}" style="margin-left: 25px;font-size: 27px">
 				 ${theme.blogTitle}</a></div></div>
@@ -140,5 +140,6 @@
 </div>
 <p id="back-to-top"><a href="#top"><span></span>返回顶部</a></p>
 <input type="hidden" id="blogId" value="${theme.id}"/>
+<jsp:include page="tongji.jsp"/>
 </body>
 </html>

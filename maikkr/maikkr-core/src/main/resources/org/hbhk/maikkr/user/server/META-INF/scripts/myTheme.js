@@ -106,11 +106,12 @@ function loadTheme() {
 				for ( var i = 0; i < items.length; i++) {
 					var item = items[i];
 					var userHeadImg = item.userHeadImg;
+					var headimg;
 					if(userHeadImg==null || userHeadImg==""){
-						userHeadImg ="images/security/default_head.png";
+						headimg =base+"images/security/default_head.png";
+					}else{
+						 headimg = file_server + userHeadImg;
 					}
-					// 设置头像
-					var headimg = base + userHeadImg;
 					var imgurl =item.blogLink;
 					 
 					var li='<li class="theme" style="border-bottom:#666 1px solid;width:535px;height:230px; border-left:0;border-right:0;">';
@@ -123,7 +124,7 @@ function loadTheme() {
 	      			if(imgurl!=null && imgurl!=""){
 	      				var imgs = imgurl.split(",");
 	      				for ( var j = 0; j < imgs.length; j++) {
-	      					var imgurl = base + imgs[j];
+	      					var imgurl = file_server + imgs[j];
 	      					var preImg = '<a class="fancybox" href="'+imgurl+'" data-fancybox-group="'+imggroup+'">';
 	      					var img ='<img id="context_img" height="100px" width="100px" src="'+imgurl+'"></a>';
 	      					context =context +preImg+img;
