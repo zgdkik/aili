@@ -36,13 +36,16 @@
 
 	<mvc:annotation-driven
 		content-negotiation-manager="contentNegotiationManager">
-		<mvc:message-converters register-defaults="false">
-			<!-- <bean class="org.springframework.http.converter.xml.MarshallingHttpMessageConverter"> 
-				</bean> -->
+		<mvc:argument-resolvers>
+			<bean class="org.hbhk.aili.orm.server.intercptor.QueryBeanModelMethodProcessor"/>  
+		</mvc:argument-resolvers>
+		<!-- <mvc:message-converters register-defaults="false">
+			<bean class="org.springframework.http.converter.xml.MarshallingHttpMessageConverter"> 
+				</bean>
 			<bean
 				class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" />
 			<bean class="org.springframework.http.converter.StringHttpMessageConverter" />
-		</mvc:message-converters>
+		</mvc:message-converters> -->
 	</mvc:annotation-driven>
 	<!-- 启用基于注解的处理器映射，添加拦截器，类级别的处理器映射 -->
 	<mvc:interceptors>
