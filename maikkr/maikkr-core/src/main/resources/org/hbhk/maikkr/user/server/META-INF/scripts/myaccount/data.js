@@ -110,3 +110,52 @@ function uploadheadImg(imgurl) {
 	});
 };
 
+function updateNickname() {
+	var nickname = $j('.nickname').val();
+	if(nickname==null || nickname==""){
+		$j.toast("昵称为空");
+		return;
+	}
+	var email = $j('.email').val();
+	if(email==null || email==""){
+		$j.toast("昵称为空");
+		return;
+	}
+	$.ailiAjax({
+		url : base + "user/updateNickname.htm",
+		type : "POST",
+		async : false, 
+		data:{'nickname':nickname,"email":email},
+		success : function(data, textStatus) {
+			$j.toast("修改成功");
+			window.location.reload();
+		},
+		exception : function(data, textStatus) {
+			$j.toast("修改失败");
+		}
+		});
+};
+function updatePwd() {
+	var rpwd= $j('#rpwd').val();
+	var pwd= $j('#pwd').val();
+	var cpwd= $j('#cpwd').val();
+	if(validate()==false){
+		return ;
+	}
+	if(pwd!=cpwd){
+		$j.toast("两次密码不一致");
+	}
+	$.ailiAjax({
+		url : base + "user/updatePwd.htm",
+		type : "POST",
+		async : false, 
+		data:{'pwd':pwd,'rpwd':rpwd},
+		success : function(data, textStatus) {
+			$j.toast("修改成功");
+		},
+		exception : function(data, textStatus) {
+			$j.toast("修改失败");
+		}
+		});
+};
+
