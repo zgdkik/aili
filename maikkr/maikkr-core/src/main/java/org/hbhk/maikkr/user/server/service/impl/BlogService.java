@@ -55,7 +55,6 @@ public class BlogService implements IBlogService {
 		blog.setBlogHit(0);
 		blog.setBlogReview(0);
 		blog.setBlogCollect(0);
-		user = user.substring(0, user.indexOf("@"));
 		blog.setBlogUrl(user + "/" + System.currentTimeMillis() + ".htm");
 		blogDao.save(blog);
 		//查询是否被关注

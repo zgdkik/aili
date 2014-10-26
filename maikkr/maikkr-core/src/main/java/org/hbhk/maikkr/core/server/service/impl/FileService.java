@@ -34,7 +34,6 @@ public class FileService implements IFileService {
 				originalFilename.indexOf("."), originalFilename.length());
 		log.debug("originalFilename:" + originalFilename + ":" + suffix);
 		file.setCreatUser(user);
-		user = "m"+user.substring(0, user.indexOf("@"));
 		String fileName = "m"+String.valueOf(System.currentTimeMillis());
 		String sep = System.getProperty("file.separator");
 		String url = sep + user + sep + fileName + suffix;

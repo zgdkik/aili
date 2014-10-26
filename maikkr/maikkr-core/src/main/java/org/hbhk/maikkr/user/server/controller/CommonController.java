@@ -282,4 +282,14 @@ public class CommonController extends BaseController {
 	public String myCare() {
 		return "myCare";
 	}
+	
+	@RequestMapping("/aboutus")
+	public String aboutus() {
+		return "aboutus";
+	}
+	
+	@RequestMapping("/jyh")
+	public String jyh() {
+		return "hui";
+	}
 }

@@ -1,5 +1,7 @@
 package org.hbhk.maikkr.user.share.pojo;
 
+import java.util.Date;
+
 import org.hbhk.aili.orm.server.annotation.Column;
 import org.hbhk.aili.orm.server.annotation.Entity;
 import org.hbhk.aili.orm.server.annotation.Tabel;
@@ -27,78 +29,131 @@ public class BlogInfo extends BaseInfo {
 	private Integer blogHit;// 热度次数
 	@Column("blogLink")
 	private String blogLink;// 图片url
-	//主题url
+	// 主题url
 	@Column("blogUrl")
 	private String blogUrl;
 	private String userHeadImg;
+	@Column("carType")
+	private String carType;
+	@Column("plannTime")
+	private Date plannTime;
+	@Column("area")
+	private String area;
+
 	public String getBlogId() {
 		return blogId;
 	}
+
 	public void setBlogId(String blogId) {
 		this.blogId = blogId;
 	}
+
 	public String getBlogUser() {
 		return blogUser;
 	}
+
 	public void setBlogUser(String blogUser) {
 		this.blogUser = blogUser;
 	}
+
 	public String getBlogTitle() {
 		return blogTitle;
 	}
+
 	public void setBlogTitle(String blogTitle) {
 		this.blogTitle = blogTitle;
 	}
+
 	public String getBlogContent() {
 		return blogContent;
 	}
+
 	public void setBlogContent(String blogContent) {
 		this.blogContent = blogContent;
 	}
+
 	public Integer getBlogCollect() {
 		return blogCollect;
 	}
+
 	public void setBlogCollect(Integer blogCollect) {
 		this.blogCollect = blogCollect;
 	}
+
 	public Integer getBlogForward() {
 		return blogForward;
 	}
+
 	public void setBlogForward(Integer blogForward) {
 		this.blogForward = blogForward;
 	}
+
 	public Integer getBlogReview() {
 		return blogReview;
 	}
+
 	public void setBlogReview(Integer blogReview) {
 		this.blogReview = blogReview;
 	}
+
 	public Integer getBlogHit() {
 		return blogHit;
 	}
+
 	public void setBlogHit(Integer blogHit) {
 		this.blogHit = blogHit;
 	}
+
 	public String getBlogLink() {
 		return blogLink;
 	}
+
 	public void setBlogLink(String blogLink) {
 		this.blogLink = blogLink;
 	}
+
 	public String getBlogUrl() {
 		return blogUrl;
 	}
+
 	public void setBlogUrl(String blogUrl) {
 		this.blogUrl = blogUrl;
 	}
+
 	public String getUserHeadImg() {
 		return userHeadImg;
 	}
+
 	public void setUserHeadImg(String userHeadImg) {
 		this.userHeadImg = userHeadImg;
 	}
+
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	
+
+	public String getCarType() {
+		return carType;
+	}
+
+	public void setCarType(String carType) {
+		this.carType = carType;
+	}
+
+	public Date getPlannTime() {
+		return plannTime;
+	}
+
+	public void setPlannTime(Date plannTime) {
+		this.plannTime = plannTime;
+	}
+
+	public String getArea() {
+		return area;
+	}
+
+	public void setArea(String area) {
+		this.area = area;
+	}
+
 }

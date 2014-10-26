@@ -1,6 +1,7 @@
 package org.hbhk.maikkr.user.server.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,6 +22,7 @@ import org.hbhk.aili.security.server.context.UserContext;
 import org.hbhk.aili.security.server.service.IUserService;
 import org.hbhk.aili.security.share.pojo.UserInfo;
 import org.hbhk.maikkr.core.server.event.UpdateBlogHitsEvent;
+import org.hbhk.maikkr.core.shared.util.AreaUtils;
 import org.hbhk.maikkr.user.server.service.IAttentionService;
 import org.hbhk.maikkr.user.server.service.IBlogService;
 import org.hbhk.maikkr.user.server.service.ICollectService;
@@ -34,6 +36,8 @@ import org.hbhk.maikkr.user.share.pojo.ThemeInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.ServletRequestDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -56,8 +60,36 @@ public class UserController extends BaseController {
 	private ICollectService collectService;
 
 	@RequestMapping("/main")
-	public String main(Model model) {
+	public String main(Model model, Integer pageNum, BlogInfo blog) {
+		model.addAttribute("ps", AreaUtils.getProvinces());
+		// 获取车型
+		List<ThemeInfo> themeInfos = themeService.loadUserThemeType();
+		model.addAttribute("carType", themeInfos);
+		model.addAttribute("bs", getThemes(blog, pageNum));
+		if(pageNum==null){
+			model.addAttribute("pageNum",1);
+		}else{
+			model.addAttribute("pageNum",pageNum);
+		}
+		
 		return "index";
+	}
+
+	List<BlogInfo> getThemes(BlogInfo blog, Integer pageNum) {
+		Page page = new Page();
+		page.setSize(2);
+		if (pageNum==null || pageNum == 1 ) {
+			page.setStart(0);
+		} else {
+			page.setStart(2 * pageNum);
+		}
+		List<String> sorts = new ArrayList<String>();
+		sorts.add("createTime desc");
+		page.setSorts(sorts);
+		List<BlogInfo> result = blogService.getBlogPage(blog, page).getItems();
+
+		return result;
+
 	}
 
 	@RequestMapping("/newhit")
@@ -73,7 +105,9 @@ public class UserController extends BaseController {
 	@RequestMapping("/set")
 	@NeedLogin
 	public String set(Model model) {
-		model.addAttribute("uc", UserContext.getCurrentContext().getCurrentUser());
+		model.addAttribute("uc", UserContext.getCurrentContext()
+				.getCurrentUser());
+		model.addAttribute("ps", AreaUtils.getProvinces());
 		return "setting";
 	}
 
@@ -83,12 +117,11 @@ public class UserController extends BaseController {
 		return "collect";
 	}
 
-	
 	@RequestMapping("/forget")
 	public String forget(Model model) {
 		return "forget";
 	}
-	
+
 	@RequestMapping("/loginpage")
 	public String loginpage(HttpServletRequest request) {
 		String returnUrl = (String) RequestContext.getSession().getAttribute(
@@ -154,9 +187,10 @@ public class UserController extends BaseController {
 			String blogUrl = user + "/" + url + ".htm";
 			BlogInfo blog = new BlogInfo();
 			blog.setBlogUrl(blogUrl);
-			blog =  blogService.getBlog(blog);
+			blog = blogService.getBlog(blog);
 			String username = blog.getBlogUser();
-			ICache<String, UserInfo>  userc= CacheManager.getInstance().getCache(UserCache.cacheID);
+			ICache<String, UserInfo> userc = CacheManager.getInstance()
+					.getCache(UserCache.cacheID);
 			UserInfo userinfo = userc.get(username);
 			blog.setUserHeadImg(userinfo.getUserHeadImg());
 			model.addAttribute("theme", blog);
@@ -322,7 +356,7 @@ public class UserController extends BaseController {
 	@RequestMapping("/updateNickname")
 	@ResponseBody
 	@NeedLogin
-	public ResponseEntity updateNickname(String nickname,String email) {
+	public ResponseEntity updateNickname(String nickname, String email) {
 		try {
 			UserInfo user = new UserInfo();
 			user.setName(nickname);
@@ -341,7 +375,8 @@ public class UserController extends BaseController {
 	public ResponseEntity updatePwd(String pwd, String rpwd) {
 		try {
 			rpwd = EncryptUtil.encodeSHA1(rpwd);
-			String username= UserContext.getCurrentContext().getCurrentUserName();
+			String username = UserContext.getCurrentContext()
+					.getCurrentUserName();
 			String password = userService.getMe(username).getPassword();
 			if (!rpwd.equals(password)) {
 				return returnException("原始密码不正确!");
@@ -355,6 +390,13 @@ public class UserController extends BaseController {
 			log.error("updatePwd", e);
 			return returnException(e.getMessage());
 		}
+	}
+
+	@InitBinder
+	protected void initBinder(HttpServletRequest request,
+			ServletRequestDataBinder binder) throws Exception {
+		// 对于需要转换为Date类型的属性，使用DateEditor进行处理
+		binder.registerCustomEditor(Date.class, new DateEditor());
 	}
 
 }
