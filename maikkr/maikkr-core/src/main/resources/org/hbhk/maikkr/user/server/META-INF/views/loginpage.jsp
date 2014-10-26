@@ -1,118 +1,129 @@
-<%@ page language="java" pageEncoding="UTF-8" info="买客网"%>
-<!DOCTYPE HTML>
-<html lang="zh-cn">
+<%@ page language="java" pageEncoding="UTF-8" info="米客网"%>
+<jsp:include page="common.jsp" />
+<!DOCTYPE html>
+<html>
 <head>
-<jsp:include page="common.jsp"/>
-<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-<title>${siteInfo.title}</title>
-<link href="${styles}/login.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="${scripts}/login.js"></script>
-<script type="text/javascript">
-	var returnUrl = '${returnUrl}';
-</script>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>${siteInfo.title}-用户登陆</title>
+<meta name="keywords" content="sports, recreation, outdoor">
+<meta name="description" content="sports, recreation, outdoor">
+<link href="${scripts}/login/styles.css" type="text/css"
+	rel="stylesheet" />
+<script src="${scripts}/login/data.js"></script>
 </head>
-<body class="B_login">
-	<div class="w_login">
-		<div class="w_l_top">
-			<div class="w_top"></div>
-		</div>
-		<div class="w_login_main">
+<body>
+	<div id="base" class="">
 
-			<div class="w_l_context">
-				<div class="w_l_c_top"></div>
+		<!-- Unnamed (Shape) -->
+		<div id="u0" class="ax_shape">
+			<img id="u0_img" class="img " src="${images}/login/u0.png" />
+			<!-- Unnamed () -->
+			<div id="u1" class="text">
+				<p>
+					<span>&nbsp;</span>
+				</p>
 			</div>
-			<div class="w_l_info">
-				<div class="w_l_i_left">
-					<div class="left_top">
-						还没有${siteinfo.title}账号？现在加入 <a
-							href="${base}user/register.htm"
-							class="left_top_btn">立即注册</a>
-					</div>
-					<div class="left_next">
-						<img class="w_img" src="${images}/w_left.png" />
-					</div>
-				</div>
-				<div class="right_top">
-					<div class="right_form">
-
-						<div class="form_list">
-							<div class="f_email">
-								<input type="text" id="emailId" name="userEmail" class="w_input"
-									value="1024784402@qq.com" />
-							</div>
-						</div>
-						<div class="form_list">
-							<div class="f_pwd">
-								<input type="password" id="pwdId" name="userPwd" class="w_input"
-									value="as135246" />
-							</div>
-						</div>
-						<div class="form_list">
-							<div class="f_help">
-								<div class="f_right">
-									<a href="${base}user/forget.htm"
-										class="f_reght_btn">忘记密码</a>
-								</div>
-								<!-- <input type="checkbox" checked="checked" />下次自动登录 <a
-									class="help_img" href="#"></a> -->
-							</div>
-						</div>
-						<div class="form_list">
-							<a href="javascript:void(0)" class="f_btn"><span
-								class="f_btn_tip">登录</span></a> <span class="f_no"> 还没有账号？<a
-								class="f_no_tip"
-								href="${base}user/register.htm">立即注册</a>
-							</span>
-						</div>
-
-					</div>
-					<div class="login_other">
-						<div class="other">
-							<p class="other_p">使用其他账号登录</p>
-							<ul>
-								<li><a href="#" class="tiannyi"><span class="t_y"></span>QQ</a></li>
-								<li><a href="#" class="liantong"><span class="l_t"></span>新浪微博</a></li>
-								<li><a href="#" class="360"><span class="s_l_l"></span>腾讯微博</a></li>
-							</ul>
-						</div>
-					</div>
-				</div>
-
-			</div>
-			<jsp:include page="footer.jsp"/>
 		</div>
-		<div class="layer" id="notExistId"
-			style="margin-left: -170px; top: 277px; left: 855px; width: 210px; display: none">
-			<div class="bg">
-				<div class="content">
-					<a class="W_ico12 icon_close" href="javascript:void(0)"></a>
-					<p class="tips">
-						<span class="icon_delS"></span>
-						该账号不存在&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; <a
-							href="http://localhost:8080/blog/jsp/register.jsp">立即注册</a>
+
+		<!-- Unnamed (Shape) -->
+		<div id="u2" class="ax_shape">
+			<img id="u2_img" class="img " src="${images}/reg/u2.png" />
+			<!-- Unnamed () -->
+			<div id="u3" class="text">
+				<p>
+					<span>&nbsp;</span>
+				</p>
+			</div>
+		</div>
+
+		<!-- Unnamed (Shape) -->
+		<div id="u4" class="ax_paragraph">
+			<img id="u4_img" class="img " src="${images}/transparent.gif" />
+			<!-- Unnamed () -->
+			<div id="u5" class="text">
+				<p>
+					<span>用户名:</span>
+				</p>
+			</div>
+		</div>
+
+		<!-- userName2 (Text Field) -->
+		<div id="u6" class="ax_text_field" data-label="userName2">
+			<input id="u6_input" class="email" title="请输入您注册的邮箱" type="text" value="1024784402@qq.com" />
+		</div>
+
+		<!-- Unnamed (Shape) -->
+		<div id="u7" class="ax_paragraph">
+			<img id="u7_img" class="img " src="${images}/transparent.gif" />
+			<!-- Unnamed () -->
+			<div id="u8" class="text">
+				<p>
+					<span>密码:</span><span>：</span>
+				</p>
+			</div>
+		</div>
+
+		<!-- userEmail2 (Text Field) -->
+		<div id="u9" class="ax_text_field" data-label="userEmail2">
+			<input id="u9_input" class="password" type="password" title="请输入密码" value="as135246" />
+		</div>
+		
+		<!-- Unnamed (Checkbox) -->
+		<div id="u13" class="ax_checkbox" style="top:400px">
+			<label for="u13_input"> <!-- Unnamed () -->
+				<div id="u14" class="text">
+					<p>
+						<span>记住密码</span>
 					</p>
 				</div>
-				<div class="arrow arrow_tips"></div>
+			</label> <input id="u13_input" type="checkbox" value="checkbox" checked />
+		</div>
+
+		<!-- Unnamed (Shape) -->
+		<div id="u15" class="ax_paragraph"  style="top:400px">
+			<img id="u15_img" class="img " src="${images}/transparent.gif" />
+			<!-- Unnamed () -->
+			<div id="u16" class="text">
+				<p>
+					<span style="text-decoration: underline;">忘记密码？</span>
+				</p>
 			</div>
 		</div>
-		<div class="layer" id="nameOrPwdId"
-			style="margin-left: -170px; width: 215px; left: 855px; top: 277px; display: none"
-			node-type="outer">
-			<div class="bg">
-				<div class="content" node-type="inner">
-					<a class="W_ico12 icon_close" onclick="return false;"
-						node-type="close" action-type="common_layer_errtip_close"
-						href="javascript:void(0)"></a>
-					<p class="tips" node-type="msg">
-						<span class="icon_delS"></span>
-						用户名或密码错误&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; <a target="_blank"
-							href="http://help.weibo.com/faq/q/85/12606#12606">查看帮助</a>
-					</p>
-				</div>
-				<div class="arrow arrow_tips" node-type="arrow" style="left: 86px;"></div>
+
+		<!-- Unnamed (Shape) -->
+		<div id="u17" class="ax_shape" style="top:450px">
+			<img id="u17_img" class="img login" src="${images}/reg/u26.png" />
+			<!-- Unnamed () -->
+			<div id="u18" class="text">
+				<p>
+					<span>&nbsp;</span>
+				</p>
 			</div>
 		</div>
+
+		<!-- Unnamed (Shape) -->
+		<div id="u19" class="ax_paragraph login"  style="top:455px">
+			<img id="u19_img" class="img"  src="${images}/transparent.gif" />
+			<!-- Unnamed () -->
+			<div id="u20" class="text">
+				<p>
+					<span >登录</span>
+				</p>
+			</div>
+		</div>
+
+		<!-- Unnamed (Shape) -->
+		<div id="u21" class="ax_paragraph" style="top:500px">
+			<img id="u21_img" class="img " src="${images}/transparent.gif" />
+			<!-- Unnamed () -->
+			<div id="u22" class="text">
+				<p>
+					<span style="text-decoration: underline;"><a href="${base}user/register.htm">我要注册</a></span>
+				</p>
+			</div>
+		</div>
+		<jsp:include page="footer.jsp" />
+		<jsp:include page="header.jsp" />
 	</div>
-	<jsp:include page="tongji.jsp"/>
 </body>
 </html>

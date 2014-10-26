@@ -1,116 +1,62 @@
-$j(document).ready(function(){
-	$j('.non-empty').focus(function(){
-		$j(this).removeClass('notNull'); 
-	});
-	$j('.non-empty').blur(function(){
-		var val= $j(this).val();
-		if(val==null || val==""){
-			$j(this).addClass('notNull'); 
-		}
-	});
-	$j('body').on("click",".collect_t",function(){
-		if(UserContext.user==null || UserContext.user==""){
-			$j.toast("你需要登陆才能收藏!");
-			return ;
-		}
-		var blogId= $j(this).attr("tid");
-		var name = $j(this).attr("tname");
-		var url =  $j(this).attr("turl");
-		$j.ajax({
-			url : base + "user/collectComment.htm",
-			type : "POST",
-			data:{'url':url,'name':name,'blogId':blogId},
-			success : function(data, textStatus) {
-				$j.toast("收藏成功");
-			},
-			exception : function(data, textStatus) {
-				$j.toast(data.msg);
-			}
-		});
-	});
-	
-	$j('body').on("click",".care_user",function(){
-		if(UserContext.user==null || UserContext.user==""){
-			$j.toast("你需要登陆才能关注!");
-			return ;
-		}
-		var user= $j(this).attr("tuser");
-		$j.ajax({
-			url : base + "user/care.htm",
-			type : "POST",
-			data:{'user':user},
-			success : function(data, textStatus) {
-				$j.toast("关注成功");
-			},
-			exception : function(data, textStatus) {
-				$j.toast(data.msg);
-			}
-		});
-	});
-	 var duilian = $j("div.duilian");
-	 var duilian_close = $j("a.duilian_close");
-	 
-	 var window_w = $j(window).width();
-	 if(window_w>1000){
-		 duilian.show();
-		}
-	 $j("#main").scroll(function(){
-	     var scrollTop = $j("#main").scrollTop();
-	     duilian.stop().animate({top:scrollTop+100});
-	 });
-	 duilian_close.click(function(){
-	     $j(this).parent().hide();
-	     return false;
-	 });
-	
-});
-function validate(){
-	var  flag = true;
-	$j('.non-empty').each(function(){
-		var val= $j(this).val();
-		if(val==null || val==""){
-			$j(this).addClass('notNull'); 
-			flag = false;
-		}
-	});
-	return flag;
+function tips(selector,msg){
+	$(selector).attr("title",msg);
+	var tips = $(selector).tooltip({
+	      position: {
+	        my: "left top",
+	        at: "right+5 top-5"
+	      }
+	    });
+	tips.tooltip("open");
+	setTimeout(function(){
+		tips.tooltip("destroy");
+		$(selector).removeAttr("title");
+	},3000);
 };
-
-function loadThemes(items,theme_list){
-	for ( var i = 0; i < items.length; i++) {
-		var item = items[i];
-		var userHeadImg = item.userHeadImg;
-		var headimg;
-		if(userHeadImg==null || userHeadImg==""){
-			userHeadImg =base+"images/security/default_head.png";
-		}else{
-			headimg = file_server + userHeadImg;
-		}
-		// 设置头像
-		var imgurl =item.blogLink;
-		 
-		var li='<li class="theme" style="border-bottom:#666 1px solid;width:535px;height:230px; border-left:0;border-right:0;">';
-		var head ='<div class="vline"><img id="head_portrait" height="50px" width="50px" '+
-		'src="'+headimg+'"></div>';
-		var burl = base+"user/"+item.blogUrl;
-		var title='<div class="vline" style="margin-left: 10px;"><div class="context"><a style="font-size: 27px;" href="'+burl+'" title="'+item.blogTitle+'">'+item.blogTitle+'</a></div>';
-			var context='<div class="vline" ><div class="context">'+item.blogContent+'</div><div class="context_imgs">';
-			var imggroup= item.blogUrl;
-			if(imgurl!=null && imgurl!=""){
-				var imgs = imgurl.split(",");
-				for ( var j = 0; j < imgs.length; j++) {
-					var imgurl = file_server + imgs[j];
-					var preImg = '<a class="fancybox" href="'+imgurl+'" data-fancybox-group="'+imggroup+'">';
-					var img ='<img id="context_img" height="100px" width="100px" src="'+imgurl+'"></a>';
-					context =context +preImg+img;
-			}
-			}
-			context=context+"</div></div>";
-			var oper = '<a tid ="'+item.id+'" tname="'+item.blogTitle+'" turl ="'+"http://"+host+burl+'"   tuser ="'+item.blogUser+'"  class="blog_del collect_t" style="margin-left: 10px;float: right;text-decoration: none;" href="javascript:void(0)">收藏</a>';
-			var coper = '<a tid ="'+item.id+'" tuser ="'+item.blogUser+'" class="blog_del care_user" style="float: right;text-decoration: none;" href="javascript:void(0)">关注</a>';
-		li=li+head+oper+coper+title+context+'</li>';
-		theme_list.append(li);
-		theme_list.trigger("create");
+function checkEmpty(selector,msg){
+	var val= $(selector).val();
+	if(val==null || val==""){
+		tips(selector,msg);
+		return false;
 	}
+	return true;
+}
+
+function allTips(obj,msg){
+	obj.attr("title",msg);
+	var tips = obj.tooltip({
+	      position: {
+	        my: "left top",
+	        at: "right+5 top-5"
+	      }
+	    });
+	tips.tooltip("open");
+	setTimeout(function(){
+		tips.tooltip("destroy");
+		obj.removeAttr("title");
+	},3000);
 };
+function checkALlEmpty(selector,msg){
+	var obj = $(selector);
+	for(var i = 0; i < obj.length; i++){
+		var me  = obj.eq(i);
+		var val= me.val();
+		if(val== null || val==""){
+			allTips(me,msg);
+			return false;
+		}
+	}
+	return true;
+}
+$(document).ready(function(){
+	$("body").on("click",".home",function(){
+		window.location.href="http://"+host;
+	});
+	$("body").on("click",".jhs",function(){
+		window.location.href="http://"+host+"/user/jyh.htm";
+	});
+	$("body").on("click",".about",function(){
+		window.location.href="http://"+host+"/user/aboutus.htm";
+	});
+});
+
 
