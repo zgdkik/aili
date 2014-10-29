@@ -3,14 +3,36 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-	<title>${siteInfo.title}-用户注册</title>
-    <link href="${scripts}/mytheme/styles.css" type="text/css" rel="stylesheet"/>
-    <script src="${scripts}/mytheme/data.js"></script>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>${siteInfo.title}-用户注册</title>
+<link href="${scripts}/mytheme/styles.css" type="text/css"
+	rel="stylesheet" />
+<script src="${scripts}/mytheme/data.js"></script>
+<style type="text/css">
+.lrborder {
+	border-left: 1px solid #F2F2F2;
+	border-right: 1px solid #F2F2F2;
+}
+</style>
 </head>
-  <body>
-  <jsp:include page="header.jsp" />
+<body>
+	<jsp:include page="header.jsp" />
+	<!-- 中间部分 -->
+	<div class="row-fluid" style="min-height: 500px">
+		<div class="span1" style="margin-left: 60px;"></div>
 
-  <jsp:include page="footer.jsp" />
-  </body>
+		<div class="span2 lrborder" style="margin-left: 0px;">
+			<jsp:include page="menu.jsp" />
+		</div>
+		<div class="span6" style="margin-left: 0px;">
+			<a style="width: 100px">内容部分</a>
+		</div>
+
+		<div class="span2 lrborder" style="margin-left: 0px;">头像</div>
+
+		<div class="span1"></div>
+	</div>
+	</div>
+	<jsp:include page="footer.jsp" />
+</body>
 </html>

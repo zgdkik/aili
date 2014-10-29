@@ -21,6 +21,8 @@
 <script src="${scripts}/jquery-ui.js"></script>
 <%-- <script src="${scripts}/jquery-ui-1.8.10.custom.min.js"></script> --%>
 <script src="${scripts}/jquery-exp.js"></script>
+<link href="${styles}/bootstrap-combined.min.css" type="text/css" rel="stylesheet" />
+<script src="${scripts}/bootstrap.min.js"></script>
 <script src="${scripts}/chosen.jquery.js"></script>
 <script src="${scripts}/axure/axQuery.js"></script>
 <script src="${scripts}/axure/globals.js"></script>
