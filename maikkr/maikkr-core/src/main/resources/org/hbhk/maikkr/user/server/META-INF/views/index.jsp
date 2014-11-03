@@ -90,7 +90,7 @@
 					</div>
 				</div>
 				<div style="float: left;">
-					<input class="fb" type="button"
+					<input class="sendTheme" type="button"
 						style="margin-top: 110px;margin-left: 50px;width: 150px;height: 30px;background-image: url('${images}/fb.png');">
 				</div>
 			</div>

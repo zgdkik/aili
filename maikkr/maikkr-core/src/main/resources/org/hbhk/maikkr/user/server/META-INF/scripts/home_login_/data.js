@@ -137,10 +137,8 @@ $(document).ready(function() {
 			window.location.href = base+"?pageNum="+num;
 		}
 	});
-	//margin; border;border-top ;border-bottom;
-	$("body").find("#hx").css("margin",null).css("border",null)
-	.css("border-top",null).css("border-bottom",null)
-	$("body").on("click",".fb",function(){
+	
+	$("body").on("click",".sendTheme",function(){
 	 var car =  $("#u94_input option:selected").text();
 	 var date =  $("#u186_input").val()
 	 var area =  $("#u99_input option:selected").text();
