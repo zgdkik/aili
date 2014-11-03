@@ -4,8 +4,12 @@
         var readyStart = (new Date()).getTime();
 
         //this is because the page id is not formatted as a guid
-        var pageId = $ax.pageData.page.packageId;
-
+        var pageId = null;
+        try {
+        	pageId = $ax.pageData.page.packageId;
+		} catch (e) {
+			return;
+		}
         var pageData = {
             id: pageId,
             pageName: $ax.pageData.page.name,

@@ -28,7 +28,7 @@
 	font-family: '宋体 Regular', '宋体';
 	font-weight: 400;
 	font-style: normal;
-	text-decoration: underline;
+	text-decoration:none ;
 	color: #000000;
 	text-align: center;
 }
@@ -56,6 +56,12 @@
 				<c:if test="${cuser == null}">
 					<a href="${base}user/register.htm" style="margin-left: 30px;"><span
 						class="user">注册</span></a>
+				</c:if>
+				<c:if test="${cuser != null}">
+					<a class="user" style="margin-left: 30px;" href="${base}security/logout.htm">退出</a>
+				</c:if>
+				<c:if test="${cuser == null}">
+					<a class="user" style="margin-left: 30px;" href="${base}user/loginpage.htm">登陆</a>
 				</c:if>
 			</div>
 			<div class="span1"></div>

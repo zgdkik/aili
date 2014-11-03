@@ -1,11 +1,13 @@
 package org.hbhk.maikkr.user.share.pojo;
 
 import java.util.Date;
+import java.util.List;
 
 import org.hbhk.aili.orm.server.annotation.Column;
 import org.hbhk.aili.orm.server.annotation.Entity;
 import org.hbhk.aili.orm.server.annotation.Tabel;
 import org.hbhk.aili.orm.share.model.BaseInfo;
+import org.hbhk.aili.security.share.pojo.UserInfo;
 
 @Entity
 @Tabel("t_mkk_blog")
@@ -39,6 +41,10 @@ public class BlogInfo extends BaseInfo {
 	private Date plannTime;
 	@Column("area")
 	private String area;
+	
+	private List<UserInfo> careList;
+	
+	private List<CommentInfo> commentList;
 
 	public String getBlogId() {
 		return blogId;
@@ -151,9 +157,22 @@ public class BlogInfo extends BaseInfo {
 	public String getArea() {
 		return area;
 	}
-
 	public void setArea(String area) {
 		this.area = area;
 	}
+	public List<UserInfo> getCareList() {
+		return careList;
+	}
+	public void setCareList(List<UserInfo> careList) {
+		this.careList = careList;
+	}
 
+	public List<CommentInfo> getCommentList() {
+		return commentList;
+	}
+
+	public void setCommentList(List<CommentInfo> commentList) {
+		this.commentList = commentList;
+	}
+	
 }

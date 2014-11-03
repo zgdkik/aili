@@ -25,11 +25,13 @@ import org.hbhk.maikkr.core.server.event.UpdateBlogHitsEvent;
 import org.hbhk.maikkr.core.shared.util.AreaUtils;
 import org.hbhk.maikkr.user.server.service.IAttentionService;
 import org.hbhk.maikkr.user.server.service.IBlogService;
+import org.hbhk.maikkr.user.server.service.ICareService;
 import org.hbhk.maikkr.user.server.service.ICollectService;
 import org.hbhk.maikkr.user.server.service.ICommentService;
 import org.hbhk.maikkr.user.server.service.IThemeService;
 import org.hbhk.maikkr.user.share.pojo.AttentionInfo;
 import org.hbhk.maikkr.user.share.pojo.BlogInfo;
+import org.hbhk.maikkr.user.share.pojo.CareInfo;
 import org.hbhk.maikkr.user.share.pojo.CollectInfo;
 import org.hbhk.maikkr.user.share.pojo.CommentInfo;
 import org.hbhk.maikkr.user.share.pojo.ThemeInfo;
@@ -59,26 +61,81 @@ public class UserController extends BaseController {
 	@Autowired
 	private ICollectService collectService;
 
+	@Autowired
+	private ICareService careService;
+
 	@RequestMapping("/main")
 	public String main(Model model, Integer pageNum, BlogInfo blog) {
 		model.addAttribute("ps", AreaUtils.getProvinces());
 		// 获取车型
 		List<ThemeInfo> themeInfos = themeService.loadUserThemeType();
 		model.addAttribute("carType", themeInfos);
-		model.addAttribute("bs", getThemes(blog, pageNum));
-		if(pageNum==null){
-			model.addAttribute("pageNum",1);
-		}else{
-			model.addAttribute("pageNum",pageNum);
+		List<BlogInfo> bs = getThemes(blog, pageNum);
+		for (BlogInfo b : bs) {
+			CareInfo care = new CareInfo();
+			care.setCareUser(b.getBlogUser());
+			List<CareInfo> careList = careService.get(care);
+			List<UserInfo> userList = new ArrayList<UserInfo>();
+			if (careList != null) {
+				for (int i = 0; i < careList.size(); i++) {
+					if (i == 10) {
+						break;
+					}
+					UserInfo user = userService.getMe(careList.get(i)
+							.getCreatUser());
+					userList.add(user);
+				}
+			}
+			b.setCareList(userList);
+
+			List<CommentInfo> result = getComments(b.getBlogId(), 1);
+			if(result==null){
+				result = new ArrayList<CommentInfo>();
+			}
+			b.setCommentList(result);
 		}
-		
+		model.addAttribute("bs", bs);
+		if (pageNum == null) {
+			model.addAttribute("pageNum", 1);
+		} else {
+			model.addAttribute("pageNum", pageNum);
+		}
+
 		return "index";
+	}
+
+	private List<CommentInfo> getComments(String blogId, int pageNum) {
+		try {
+			if (StringUtils.isEmpty(blogId)) {
+				return null;
+			}
+			CommentInfo model = new CommentInfo();
+			model.setBlogId(blogId);
+			Page page = new Page();
+			page.setSize(1);
+			if (pageNum > 5) {
+				pageNum = 5;
+			}
+			if (pageNum == 1) {
+				page.setStart(0);
+			} else {
+				page.setStart(8 * pageNum);
+			}
+			List<String> sorts = new ArrayList<String>();
+			sorts.add("createTime asc");
+			page.setSorts(sorts);
+			List<CommentInfo> result = commentService.get(model, page);
+			return result;
+		} catch (Exception e) {
+			log.error("loadComment", e);
+			return null;
+		}
 	}
 
 	List<BlogInfo> getThemes(BlogInfo blog, Integer pageNum) {
 		Page page = new Page();
-		page.setSize(2);
-		if (pageNum==null || pageNum == 1 ) {
+		page.setSize(10);
+		if (pageNum == null || pageNum == 1) {
 			page.setStart(0);
 		} else {
 			page.setStart(2 * pageNum);

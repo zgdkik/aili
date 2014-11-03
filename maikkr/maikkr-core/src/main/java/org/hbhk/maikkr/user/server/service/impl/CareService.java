@@ -21,10 +21,10 @@ public class CareService implements ICareService {
 	private ICareDao careDao;
 
 	public CareInfo save(CareInfo model) {
+		model.setCreatUser(UserContext.getCurrentContext().getCurrentUserName());
 		if (careDao.getOne(model) != null) {
 			throw new BusinessException("你已经关注了此用户");
 		}
-		model.setCreatUser(UserContext.getCurrentContext().getCurrentUserName());
 		model.setCreateTime(new Date());
 		model.setId(UUIDUitl.getUuid());
 
