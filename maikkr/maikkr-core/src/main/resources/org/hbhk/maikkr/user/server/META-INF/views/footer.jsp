@@ -30,5 +30,5 @@
 		<div class="span2" style="margin-left: 0px;"></div>
 		<div class="span1"></div>
 	</div>
-	<p id="back-to-top"><a><span></span>返回顶部</a></p>
+	<p id="back-to-top"><a href="#"><span></span>返回顶部</a></p>
 </div>

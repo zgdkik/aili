@@ -63,7 +63,7 @@
 						class="title">${theme.blogUser}发布时间:<c:out value="${date}" /></span>
 				</div>
 			</div>
-			<div class="comment" style="border-bottom: 1px solid #999999;">
+			<div style="border-bottom: 1px solid #999999;">
 				<div style="margin-left: 10px" class="dxx">
 					<label class="theme-font">喜欢车型:${theme.carType}</label>
 					<label
@@ -71,13 +71,21 @@
 							value="${theme.plannTime}" /></label> 
 						<label class="theme-font">所在地区:${theme.area}</label>
 				</div>
-
 			</div>
-			<div class="content" style="background-color: #F2F2F2;">
+			<c:forEach items="${comments}" var="c">
+				<fmt:formatDate var="time" value="${theme.createTime}"
+					pattern="yyyy-MM-dd HH:mm:ss" type="time"></fmt:formatDate>
+				<div style="border: 1px solid gray; margin-top: 3px;font-size: 16px;">
+					<div style="font-family: '宋体 Bold', '宋体';font-weight: 700;font-style: normal;"><img width="50px" height="50px" alt="" src="${file_server}${c.commentHeadImg}"> 
+					 <span>${c.commentUser}</span> ${time}</div>
+					 <div style="border: 1px solid ;margin-left:5px;margin-right:5px;margin-bottom:5px; word-wrap:break-word; background-color: #F2F2F2"><xmp>${c.commentConcent}</xmp></div>
+				</div>
+			</c:forEach>
+			<div class="content" style="margin-top:3px; background-color: #F2F2F2;border: 1px solid gray; ">
 				<div class="panel panel-info">
 				   <div class="panel-body">
 				    <textarea placeholder="请输入评论内容"   id="editorText" style="width: 400px; margin-left: 20%;height: 120px;resize:none;margin-top: 10px" ></textarea>
-					<input style="margin-left: 400px;margin-bottom: 10px;margin-top: 10px" type="button" value="发表评论" id="sendComment" title="发表评论">
+					<input style="background-color:#FEB252; margin-left: 400px;margin-bottom: 10px;margin-top: 10px" type="button" value="发表评论" id="sendComment" title="发表评论">
 					</div>
 				</div>
 			
@@ -91,5 +99,6 @@
 		<div class="span1"></div>
 	</div>
 	<jsp:include page="footer.jsp" />
+	<input type="hidden" id="blogId" value="${theme.id}"/>
 </body>
 </html>

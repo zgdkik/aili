@@ -77,6 +77,7 @@ public class UserController extends BaseController {
 			List<CareInfo> careList = careService.get(care);
 			List<UserInfo> userList = new ArrayList<UserInfo>();
 			if (careList != null) {
+				b.setCareCount(careList.size());
 				for (int i = 0; i < careList.size(); i++) {
 					if (i == 10) {
 						break;
@@ -88,7 +89,7 @@ public class UserController extends BaseController {
 			}
 			b.setCareList(userList);
 
-			List<CommentInfo> result = getComments(b.getBlogId(), 1);
+			List<CommentInfo> result = getComments(b.getBlogId(), 1,1);
 			if(result==null){
 				result = new ArrayList<CommentInfo>();
 			}
@@ -104,7 +105,7 @@ public class UserController extends BaseController {
 		return "index";
 	}
 
-	private List<CommentInfo> getComments(String blogId, int pageNum) {
+	private List<CommentInfo> getComments(String blogId, int pageNum,int size) {
 		try {
 			if (StringUtils.isEmpty(blogId)) {
 				return null;
@@ -112,7 +113,7 @@ public class UserController extends BaseController {
 			CommentInfo model = new CommentInfo();
 			model.setBlogId(blogId);
 			Page page = new Page();
-			page.setSize(1);
+			page.setSize(size);
 			if (pageNum > 5) {
 				pageNum = 5;
 			}
@@ -250,7 +251,11 @@ public class UserController extends BaseController {
 					.getCache(UserCache.cacheID);
 			UserInfo userinfo = userc.get(username);
 			blog.setUserHeadImg(userinfo.getUserHeadImg());
+			
+			List<CommentInfo> commentInfos = getComments(blog.getBlogId(), 1, 10);
+			model.addAttribute("comments", commentInfos);
 			model.addAttribute("theme", blog);
+			
 			// 修改对应主题的点击数供最热查询
 			UpdateBlogHitsEvent blogHitsEvent = new UpdateBlogHitsEvent(blogUrl);
 			getWebApplicationContext().publishEvent(blogHitsEvent);

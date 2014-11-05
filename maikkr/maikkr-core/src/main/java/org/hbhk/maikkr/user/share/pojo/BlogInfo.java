@@ -41,10 +41,12 @@ public class BlogInfo extends BaseInfo {
 	private Date plannTime;
 	@Column("area")
 	private String area;
-	
+
 	private List<UserInfo> careList;
-	
+
 	private List<CommentInfo> commentList;
+
+	private Integer careCount;
 
 	public String getBlogId() {
 		return blogId;
@@ -157,12 +159,15 @@ public class BlogInfo extends BaseInfo {
 	public String getArea() {
 		return area;
 	}
+
 	public void setArea(String area) {
 		this.area = area;
 	}
+
 	public List<UserInfo> getCareList() {
 		return careList;
 	}
+
 	public void setCareList(List<UserInfo> careList) {
 		this.careList = careList;
 	}
@@ -174,5 +179,13 @@ public class BlogInfo extends BaseInfo {
 	public void setCommentList(List<CommentInfo> commentList) {
 		this.commentList = commentList;
 	}
-	
+
+	public Integer getCareCount() {
+		return careCount;
+	}
+
+	public void setCareCount(Integer careCount) {
+		this.careCount = careCount;
+	}
+
 }

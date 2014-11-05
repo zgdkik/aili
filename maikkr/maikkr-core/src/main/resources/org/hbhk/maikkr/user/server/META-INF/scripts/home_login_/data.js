@@ -139,36 +139,41 @@ $(document).ready(function() {
 	});
 	
 	$("body").on("click",".sendTheme",function(){
-	 var car =  $("#u94_input option:selected").text();
-	 var date =  $("#u186_input").val()
-	 var area =  $("#u99_input option:selected").text();
-	 if(checkEmpty("#u94_input","请选择或输入您需要的车型")==false){
-		 return;
-	 }
-	 if(checkEmpty("#u186_input","请选择计划时间")==false){
-		 return;
-	 }
-	 if(checkEmpty("#u99_input","请选择地区")==false){
-		 return;
-	 }
-	 var url = base+"user/sendTheme.htm";
-   	 var data = {
-       		"carType":car,
-       		"plannTime":date,
-       		"area":area
-       	};
-   	 $.ailiAjax({
-   		url: url,
-   		type:"POST",
-   		data:data,
-   		success: function(data, textStatus){
-   			tips("#u297","发布成功");
-   			window.location.reload();
-   		},
-   		exception:function(data, textStatus){
-   			tips("#u297","发布失败");
-   		}
-   	 });
+		 var me = $(this);
+		 if(UserContext.user==null || UserContext.user==""){
+			ctips(me,"你需要登陆才能发表评论!");
+			return ;
+		 }
+		 var car =  $("#u94_input option:selected").text();
+		 var date =  $("#u186_input").val()
+		 var area =  $("#u99_input option:selected").text();
+		 if(checkEmpty("#u94_input","请选择或输入您需要的车型")==false){
+			 return;
+		 }
+		 if(checkEmpty("#u186_input","请选择计划时间")==false){
+			 return;
+		 }
+		 if(checkEmpty("#u99_input","请选择地区")==false){
+			 return;
+		 }
+		 var url = base+"user/sendTheme.htm";
+	   	 var data = {
+	       		"carType":car,
+	       		"plannTime":date,
+	       		"area":area
+	       	};
+	   	 $.ailiAjax({
+	   		url: url,
+	   		type:"POST",
+	   		data:data,
+	   		success: function(data, textStatus){
+	   			tips("#u297","发布成功");
+	   			window.location.reload();
+	   		},
+	   		exception:function(data, textStatus){
+	   			tips("#u297","发布失败");
+	   		}
+	   	 });
 	 });
 	 //关注
 	

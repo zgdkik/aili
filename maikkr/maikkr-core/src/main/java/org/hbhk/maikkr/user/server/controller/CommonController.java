@@ -7,6 +7,7 @@ import java.util.List;
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hbhk.aili.core.server.annotation.NeedLogin;
@@ -23,11 +24,14 @@ import org.hbhk.aili.support.server.email.impl.EmailInfo;
 import org.hbhk.maikkr.user.server.service.IBlogService;
 import org.hbhk.maikkr.user.server.service.ICareService;
 import org.hbhk.maikkr.user.server.service.ICollectService;
+import org.hbhk.maikkr.user.server.service.ICommentService;
 import org.hbhk.maikkr.user.share.pojo.BlogInfo;
 import org.hbhk.maikkr.user.share.pojo.CareInfo;
 import org.hbhk.maikkr.user.share.pojo.CollectInfo;
+import org.hbhk.maikkr.user.share.pojo.CommentInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -46,6 +50,9 @@ public class CommonController extends BaseController {
 	private ICareService careService;
 	@Autowired
 	private ICollectService collectService;
+
+	@Autowired
+	private ICommentService commentService;
 
 	@RequestMapping("/findPwd")
 	@ResponseBody
@@ -119,7 +126,40 @@ public class CommonController extends BaseController {
 
 	@RequestMapping("/myTheme")
 	@NeedLogin
-	public String myTheme() {
+	public String myTheme(Model model, Integer pageNum, BlogInfo blog) {
+		blog.setBlogUser(UserContext.getCurrentContext().getCurrentUserName());
+		List<BlogInfo> bs = getThemes(blog, pageNum);
+		for (BlogInfo b : bs) {
+			CareInfo care = new CareInfo();
+			care.setCareUser(b.getBlogUser());
+			List<CareInfo> careList = careService.get(care);
+			List<UserInfo> userList = new ArrayList<UserInfo>();
+			if (careList != null) {
+				b.setCareCount(careList.size());
+				for (int i = 0; i < careList.size(); i++) {
+					if (i == 10) {
+						break;
+					}
+					UserInfo user = userService.getMe(careList.get(i)
+							.getCreatUser());
+					userList.add(user);
+				}
+			}
+			b.setCareList(userList);
+
+			List<CommentInfo> result = getComments(b.getBlogId(), 1, 1);
+			if (result == null) {
+				result = new ArrayList<CommentInfo>();
+			}
+			b.setCommentList(result);
+		}
+		model.addAttribute("bs", bs);
+		if (pageNum == null) {
+			model.addAttribute("pageNum", 1);
+		} else {
+			model.addAttribute("pageNum", pageNum);
+		}
+
 		return "myTheme";
 	}
 
@@ -279,17 +319,110 @@ public class CommonController extends BaseController {
 
 	@RequestMapping("/myCare")
 	@NeedLogin
-	public String myCare() {
+	public String myCare(Integer pageNum, Model model) {
+
+		String user = UserContext.getCurrentContext().getCurrentUserName();
+		CareInfo care = new CareInfo();
+		care.setCreatUser(user);
+		List<CareInfo> careList = careService.get(care);
+		List<BlogInfo> all = new ArrayList<BlogInfo>();
+		List<String> careUsers = new ArrayList<String>();
+		if (careList != null) {
+			for (CareInfo c : careList) {
+				String cuser =c.getCareUser();
+				if(careUsers.contains(cuser)){
+					continue;
+				}
+				careUsers.add(cuser);
+				BlogInfo blog = new BlogInfo();
+				blog.setBlogUser(c.getCareUser());
+				List<BlogInfo> bs = getThemes(blog, pageNum);
+				all.addAll(bs);
+			}
+		}
+		for (BlogInfo b : all) {
+			List<UserInfo> userList = new ArrayList<UserInfo>();
+			if (careList != null) {
+				b.setCareCount(careList.size());
+				for (int i = 0; i < careList.size(); i++) {
+					if (i == 10) {
+						break;
+					}
+					UserInfo users = userService.getMe(careList.get(i)
+							.getCreatUser());
+					userList.add(users);
+				}
+			}
+			b.setCareList(userList);
+			List<CommentInfo> result = getComments(b.getBlogId(), 1, 1);
+			if (result == null) {
+				result = new ArrayList<CommentInfo>();
+			}
+			b.setCommentList(result);
+		}
+		
+		
+		model.addAttribute("bs", all);
+		if (pageNum == null) {
+			model.addAttribute("pageNum", 1);
+		} else {
+			model.addAttribute("pageNum", pageNum);
+		}
 		return "myCare";
 	}
-	
+
 	@RequestMapping("/aboutus")
 	public String aboutus() {
 		return "aboutus";
 	}
-	
+
 	@RequestMapping("/jyh")
 	public String jyh() {
 		return "hui";
+	}
+
+	List<BlogInfo> getThemes(BlogInfo blog, Integer pageNum) {
+		Page page = new Page();
+		page.setSize(10);
+		if (pageNum == null || pageNum == 1) {
+			page.setStart(0);
+		} else {
+			page.setStart(2 * pageNum);
+		}
+		List<String> sorts = new ArrayList<String>();
+		sorts.add("createTime desc");
+		page.setSorts(sorts);
+		List<BlogInfo> result = blogService.getBlogPage(blog, page).getItems();
+
+		return result;
+
+	}
+
+	private List<CommentInfo> getComments(String blogId, int pageNum, int size) {
+		try {
+			if (StringUtils.isEmpty(blogId)) {
+				return null;
+			}
+			CommentInfo model = new CommentInfo();
+			model.setBlogId(blogId);
+			Page page = new Page();
+			page.setSize(size);
+			if (pageNum > 5) {
+				pageNum = 5;
+			}
+			if (pageNum == 1) {
+				page.setStart(0);
+			} else {
+				page.setStart(8 * pageNum);
+			}
+			List<String> sorts = new ArrayList<String>();
+			sorts.add("createTime asc");
+			page.setSorts(sorts);
+			List<CommentInfo> result = commentService.get(model, page);
+			return result;
+		} catch (Exception e) {
+			log.error("loadComment", e);
+			return null;
+		}
 	}
 }

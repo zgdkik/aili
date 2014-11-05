@@ -104,4 +104,9 @@ $(document).ready(function() {
 		var me = $(this);
 		window.location.href=me.attr("burl");
 	});
+	
+	$('body').on("click",".mycare",function(){
+		var me = $(this);
+		window.location.href= base+"user/myCare.htm"
+	});
 });

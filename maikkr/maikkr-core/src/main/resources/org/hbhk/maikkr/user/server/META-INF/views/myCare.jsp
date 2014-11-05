@@ -1,4 +1,4 @@
-﻿<%@ page language="java" pageEncoding="UTF-8" info="米客网"%>
+<%@ page language="java" pageEncoding="UTF-8" info="米客网"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <jsp:include page="common.jsp" />
@@ -6,12 +6,12 @@
 <html>
 <head>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<title>${siteInfo.title}-我的主题</title>
+<title>${siteInfo.title}-我的关注</title>
 <link href="${scripts}/mytheme/styles.css" type="text/css"
 	rel="stylesheet" />
 <link href="${scripts}/home_login_/styles.css" type="text/css"
 	rel="stylesheet" />
-<script src="${scripts}/mytheme/data.js"></script>
+<script src="${scripts}/myjoin/data.js"></script>
 <style type="text/css">
 .lrborder {
 	border-left: 1px solid #F2F2F2;
@@ -64,8 +64,8 @@
 							src="${file_server}${b.userHeadImg}">
 					</div>
 					<div style="float: left; margin-left: 5x">
-						<%-- <label style="margin-left: 10px"><a href="${base}user/${b.blogUrl}"
-							style="text-decoration: none;">${b.blogUser}的主题</a></label> --%>
+						 <label style="margin-left: 10px"><a href="${base}user/${b.blogUrl}"
+							style="text-decoration: none;">${b.blogUser}的主题</a></label> 
 						<div style="margin-left: 10px" class="dxx">
 							<label class="theme-font">喜欢车型:${b.carType}</label><label
 								class="theme-font">计划时间:<fmt:formatDate
@@ -101,7 +101,7 @@
 							</div>
 						</div>
 						<div>
-							<img tid="${b.id}" class="blog_del" style="float: right;" title="删除" alt="删除" width="20px" height="20px" src="${images}/mytheme/image_u318.png">
+							<img tid="${b.blogUser}" class="blog_del" style="float: right;" title="删除" alt="删除" width="20px" height="20px" src="${images}/mytheme/image_u318.png">
 						</div>
 					</div>
 					<HR id="hx" style="margin; border;border-top ;border-bottom;" width="100%" color="#FF6600">

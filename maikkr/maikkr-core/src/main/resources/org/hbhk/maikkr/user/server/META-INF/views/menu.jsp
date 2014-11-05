@@ -16,7 +16,7 @@
 <ul class="menu" style="">
 	<li class="fb home" >首页</li>
 	<li class="fb myTheme">我的主题</li>
-	<li class="fb">我的关注</li>
+	<li class="fb mycare">我的关注</li>
 	<li class="fb">收藏</li>
-	<li class="fb">好友</li>
+	<!-- <li class="fb">好友</li> -->
 </ul>

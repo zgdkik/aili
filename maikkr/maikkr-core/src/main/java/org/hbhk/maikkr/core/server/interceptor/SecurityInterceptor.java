@@ -1,6 +1,8 @@
 package org.hbhk.maikkr.core.server.interceptor;
 
 import java.net.URI;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,6 +27,12 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 public class SecurityInterceptor extends HandlerInterceptorAdapter {
 
 	private String loginUrl = "/user/loginpage.htm";
+	
+	private static List<String> nourls = new ArrayList<String>();
+	static{
+		nourls.add("/user/loginpage.htm");
+		nourls.add("/user/register.htm");
+	}
 
 	@Autowired
 	private IBlogService blogService;
@@ -66,6 +74,7 @@ public class SecurityInterceptor extends HandlerInterceptorAdapter {
 				} else {
 					response.sendRedirect(request.getContextPath() + loginUrl);
 				}
+				request.getSession().setAttribute("returnUrl", request.getServletPath());
 				return false;
 			} else {
 				response.sendError(900);
@@ -113,13 +122,14 @@ public class SecurityInterceptor extends HandlerInterceptorAdapter {
 			request.setAttribute("head", null);
 			request.setAttribute("careCount", 0);
 		}
-		String returnUrl = request.getServletPath();
+		
 		int port = request.getServerPort();
 		String strBackUrl = "http://" + request.getServerName() // 服务器地址
 				+ ":" + (port != 80 ? port : "") // 端口号
 				+ request.getContextPath() // 项目名称
 				+ request.getServletPath(); // 请求页面或其他地址
-		if (!loginUrl.equals(returnUrl) && !returnUrl.endsWith(".jsp")
+		String returnUrl = request.getServletPath();
+		if (!nourls.contains(returnUrl) && !returnUrl.endsWith(".jsp")
 				&& modelAndView != null && modelAndView.getViewName() != null
 				&& !returnUrl.equals("/security/logout.htm")) {
 			if ("/user/main".equals(returnUrl)) {

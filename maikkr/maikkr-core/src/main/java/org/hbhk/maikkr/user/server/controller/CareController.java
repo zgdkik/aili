@@ -31,12 +31,15 @@ public class CareController extends BaseController {
 	
 	@RequestMapping("/editCare")
 	@ResponseBody
-	public ResponseEntity editCare(String id) {
+	public ResponseEntity editCare(String user) {
 		try {
 			CareInfo care = new CareInfo();
-			care.setId(id);
-			care.setStatus(2);
-			careService.update(care);
+			care.setCareUser(user);
+			care = careService.getOne(care);
+			CareInfo delcare = new CareInfo();
+			delcare.setId(care.getId());
+			delcare.setStatus(2);
+			careService.update(delcare);
 			return returnSuccess();
 		} catch (BusinessException e) {
 			log.error("editCare", e);

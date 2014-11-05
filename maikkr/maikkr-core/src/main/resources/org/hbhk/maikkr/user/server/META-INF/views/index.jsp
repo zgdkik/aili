@@ -20,6 +20,11 @@
 	min-height: 1000px;
 }
 
+.lrborder-h {
+	border-left: 1px solid #F2F2F2;
+	border-right: 1px solid #F2F2F2;
+}
+
 .daoyu {
 	font-family: '宋体 Bold', '宋体';
 	font-weight: 700;
@@ -66,7 +71,7 @@
 				<p style="height: 10px"></p>
 				<p>一起买车,与小伙伴分享互动!</p>
 			</div>
-			<div class="theme" style="">
+			<div class="theme lrborder-h" style="">
 				<div style="float: left; margin-left: 50px">
 					<div style="margin-top: 10px">
 						<span>选择车型:</span> <select id="u94_input"
@@ -110,7 +115,7 @@
 						</div>
 						<div style="margin-left: 10px" class="dxx">
 							<div>
-								<span class="pl" style="height: 25px; width: 50px">关注(${b.blogCollect})</span>
+								<span class="pl" style="height: 25px; width: 50px">关注(${b.careCount})</span>
 								<img tuser="${b.blogUser}" class="care_user" style="margin-left: 5px" width="50px" height="25px"
 									src="${images}/home_login_/gz.png">
 							</div>
@@ -129,7 +134,7 @@
 							<div class="pltext">
 							  <c:forEach items="${b.commentList}" var="comm">
 									<p>
-										<span>${comm.commentUser}:</span>
+										<span>${comm.commentUser}用户说:</span>
 									</p>
 									<p>
 										<span>${comm.commentConcent}</span>
@@ -138,9 +143,8 @@
 							</div>
 						</div>
 					</div>
-
+					<HR id="hx" style="margin; border;border-top ;border-bottom;" width="100%" color="#FF6600">
 				</div>
-				<HR id="hx" style="margin; border;border-top ;border-bottom;" width="100%" color="#FF6600">
 			</c:forEach>
 		</div>
 
