@@ -1,7 +1,7 @@
 $j(document).ready(function() {
 	var tblw=$j(".tbl-list").width()-15;
 	$j("#list").jqGrid({
-        url:base+"backend/queryCommsByPage.htm",
+        url:base+"backend/queryCommThemesByPage.htm",
         editurl:base+"backend/editTheme.htm",
         datatype: "json",
 		height: 'auto',
