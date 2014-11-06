@@ -14,6 +14,7 @@
 	var name = "${theme.carType}";
 	var context = "${theme.plannTime}";
 	var area = "${theme.area}";
+	var bdPic="${file_server}${theme.userHeadImg}";
 	with (document)
 		0[(getElementsByTagName('head')[0] || body)
 				.appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='
@@ -65,11 +66,12 @@
 			</div>
 			<div style="border-bottom: 1px solid #999999;">
 				<div style="margin-left: 10px" class="dxx">
+					<img tid="${theme.id}" class="collect" style="float: right;" title="删除" alt="删除" width="20px" height="20px" src="${images}/mytheme/u316.png">
 					<label class="theme-font">喜欢车型:${theme.carType}</label>
-					<label
-						class="theme-font">计划时间:<fmt:formatDate
+					<label class="theme-font">计划时间:<fmt:formatDate
 							value="${theme.plannTime}" /></label> 
-						<label class="theme-font">所在地区:${theme.area}</label>
+					<label class="theme-font">所在地区:${theme.area}</label>
+					
 				</div>
 			</div>
 			<c:forEach items="${comments}" var="c">

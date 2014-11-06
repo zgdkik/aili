@@ -29,22 +29,22 @@ $(document).ready(function() {
 //	$("#main").scroll( function() { 
 //		loadComment();
 //	}); 
-	$("body").on('click',"#collect",function(){
+	$("body").on('click',".collect",function(){
 		var me =$(this);
 		if(UserContext.user==null || UserContext.user==""){
 			ctips(me,"你需要登陆才能收藏!");
 			return ;
 		}
-		var blogId = $("#blogId").val();
-		$.ajax({
+		var blogId = me.attr("tid");
+		$.ailiAjax({
 			url : base + "user/collectComment.htm",
 			type : "POST",
 			data:{'url':url,'name':name,'blogId':blogId},
 			success : function(data, textStatus) {
-				$.toast("收藏成功");
+				ctips(me,"收藏成功");
 			},
 			exception : function(data, textStatus) {
-				$.toast(data.msg);
+				ctips(me,data.msg);
 			}
 		});
 		
@@ -123,19 +123,14 @@ function  getbdText(){
 }
 
 function  getbdPic(){
-	var src = $("#context_img").attr("src");
-	if(typeof(src)=='undefined'|| src==null || src==""){
-		return "";
-	}
-	var picurl ="http://"+host+ $("#context_img").attr("src");
-	return picurl;
+	return $("#head_portrait").attr("src");
 }
 window._bd_share_config = {
 		common : {
 			bdText : getbdText(),	
 			bdDesc : name,	
 			bdUrl : url, 	
-			bdPic : "http://"+host+ $("#context_img").attr("src")
+			bdPic : bdPic
 		},
 		share : [{
 			"bdSize" : 16
