@@ -109,4 +109,8 @@ $(document).ready(function() {
 		var me = $(this);
 		window.location.href= base+"user/myCare.htm"
 	});
+	$('body').on("click",".collect-href",function(){
+		var me = $(this);
+		window.location.href= base+"user/collect.htm"
+	});
 });

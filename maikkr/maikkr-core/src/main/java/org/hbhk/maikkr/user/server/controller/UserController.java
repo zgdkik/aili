@@ -169,11 +169,6 @@ public class UserController extends BaseController {
 		return "setting";
 	}
 
-	@RequestMapping("/collect")
-	@NeedLogin
-	public String collect(Model model) {
-		return "collect";
-	}
 
 	@RequestMapping("/forget")
 	public String forget(Model model) {

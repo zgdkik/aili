@@ -425,4 +425,35 @@ public class CommonController extends BaseController {
 			return null;
 		}
 	}
+	
+	@RequestMapping("/collect")
+	@NeedLogin
+	public String collect(Model model,Integer pageNum) {
+		
+		List<String> sorts = new ArrayList<String>();
+		sorts.add("createTime desc");
+		Page page = new Page();
+		page.setSorts(sorts);
+		page.setSize(10);
+		CollectInfo collect = new CollectInfo();
+		collect.setCreatUser(UserContext.getCurrentContext()
+				.getCurrentUserName());
+		List<CollectInfo> result = collectService.get(collect, page);
+		List<BlogInfo> all = new ArrayList<BlogInfo>();
+		if(result != null){
+			for (CollectInfo c : result) {
+				BlogInfo q = new BlogInfo();
+				q.setId(c.getBlogId());
+				q = blogService.getBlog(q);
+				all.add(q);
+			}
+		}
+		model.addAttribute("bs", all);
+		if (pageNum == null) {
+			model.addAttribute("pageNum", 1);
+		} else {
+			model.addAttribute("pageNum", pageNum);
+		}
+		return "collect";
+	}
 }
