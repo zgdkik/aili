@@ -250,7 +250,8 @@ public class UserController extends BaseController {
 			ICache<String, UserInfo> userc = CacheManager.getInstance()
 					.getCache(UserCache.cacheID);
 			UserInfo userinfo = userc.get(username);
-			blog.setUserHeadImg(userinfo.getUserHeadImg());
+			String img = userinfo.getUserHeadImg().replaceAll("\\\\", "/");
+			blog.setUserHeadImg(img);
 			
 			List<CommentInfo> commentInfos = getComments(blog.getBlogId(), 1, 10);
 			model.addAttribute("comments", commentInfos);
