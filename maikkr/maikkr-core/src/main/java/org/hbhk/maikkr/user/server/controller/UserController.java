@@ -414,11 +414,12 @@ public class UserController extends BaseController {
 	@RequestMapping("/updateNickname")
 	@ResponseBody
 	@NeedLogin
-	public ResponseEntity updateNickname(String nickname, String email) {
+	public ResponseEntity updateNickname(String nickname, String email,String area) {
 		try {
 			UserInfo user = new UserInfo();
-			user.setName(nickname);
-			user.setRemail(email);
+			user.setNickName(nickname);
+			user.setName(email);
+			user.setArea(area);
 			userService.update(user);
 			return returnSuccess();
 		} catch (Exception e) {

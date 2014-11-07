@@ -26,33 +26,30 @@ return _creator();
 
 $(document).ready(function() {
 	 $("body").on("click",".edit",function(){
+		 var me  = $(this);
 		 var email =  $(".email").val()
 		 var nick =  $(".nickname").val()
 		 var area =  $(".area").val()
 		 if(checkALlEmpty(".required","必填项")==false){
 			 return;
 		 }
-		 var url = base+"security/login.htm";
+		 var url = base + "user/updateNickname.htm";
    	     var data = {
        		"name":email,
-       		"nickName":nickname,
-       		 "area":area
+       		"nickname":nick,
+       		"area":area
        	};
-   	 $.ailiAjax({
-   		url: url,
-   		type:"POST",
-   		data:data,
-   		success: function(data, textStatus){
-   			if(returnUrl!=null && returnUrl!=""){
-		    		window.location.href=returnUrl;
-		    	}else{
-		    		window.location.href="http://"+host;
-		    	}
-   		},
-   		exception:function(data, textStatus){
-   			tips("#u17","用户名或密码错误");
-   		}
-   	 });
+	   	$.ailiAjax({
+	   		url: url,
+	   		type:"POST",
+	   		data:data,
+	   		success: function(data, textStatus){
+	   			ctips(me,"修改成功");
+	   		},
+	   		exception:function(data, textStatus){
+	   			ctips(me,"修改失败");
+	   		}
+	   	 });
 	 });
 	 
 	 $("#u51").uploadify({

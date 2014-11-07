@@ -104,6 +104,10 @@ public class SecurityInterceptor extends HandlerInterceptorAdapter {
 		if (StringUtils.isNotEmpty(currentUser)) {
 			UserInfo user = (UserInfo) CacheManager.getInstance()
 					.getCache(UserCache.cacheID).get(currentUser);
+			String nickName =user.getNickName();
+			if(nickName != null){
+				request.setAttribute("cuser", nickName);
+			}
 			request.setAttribute("cuserName", user.getName());
 			int tc = blogService.getUserThemeCount();
 			// int ac = blogService.getUserAttentionCount();
