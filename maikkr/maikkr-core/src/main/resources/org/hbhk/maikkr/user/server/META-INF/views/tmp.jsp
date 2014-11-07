@@ -1,4 +1,6 @@
 ﻿<%@ page language="java" pageEncoding="UTF-8" info="米客网"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <jsp:include page="common.jsp" />
 <!DOCTYPE html>
 <html>
