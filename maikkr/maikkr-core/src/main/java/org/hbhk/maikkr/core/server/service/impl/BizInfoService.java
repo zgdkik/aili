@@ -12,6 +12,7 @@ import org.hbhk.maikkr.core.server.dao.IBizInfoDao;
 import org.hbhk.maikkr.core.server.service.IBizInfoService;
 import org.hbhk.maikkr.core.shared.pojo.BizInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -20,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
  *
  */
 @Transactional
+@Service
 public class BizInfoService implements IBizInfoService {
 
 	@Autowired
@@ -35,7 +37,6 @@ public class BizInfoService implements IBizInfoService {
 	 * @param sorts 
 	 * @return
 	 */
-	
 	public Pagination<BizInfo> findEffectBizInfoListByQueryMapWithPage(Page page,Sort[] sorts,Map<String, Object> paraMap){
 		return bizInfoDao.findEffectBizInfoListByQueryMapWithPage(page,sorts,paraMap);
 	}
