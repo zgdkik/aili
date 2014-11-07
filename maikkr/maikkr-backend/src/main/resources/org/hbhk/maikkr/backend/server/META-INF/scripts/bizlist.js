@@ -11,9 +11,9 @@ $j(document).ready(function() {
         colModel:[
                 {name:'id', hidden:true ,editable: true },
                 {name:'name',index:'q_sl_name', width:60,editable: true,required:true },
-                {name:'favorable',index:'q_sl_favorable', width:90,editable: true,required:true },
-                {name:'contactWay',index:'q_sl_contactWay', width:90,editable: true,required:true },
-                {name:'location',index:'q_sl_location', width:90,editable: true,required:true },
+                {name:'favorable',index:'q_sl_favorable',edittype:'textarea', width:90,editable: true,required:true },
+                {name:'contactWay',index:'q_sl_contactWay',edittype:'textarea', width:90,editable: true,required:true },
+                {name:'location',index:'q_sl_location',edittype:'textarea', width:90,editable: true,required:true },
                 {name:'createTime',index:'createTime', width:125,formatter:customDateFmatter,search:false},
                 {name:'updateTime',index:'updateTime', width:100,formatter:customDateFmatter,search:false},                
                 {name:'status',index:'status', width:120,search:false,formatter: "select", editoptions:{value:"0:无效;1:有效;2:删除"}}       
