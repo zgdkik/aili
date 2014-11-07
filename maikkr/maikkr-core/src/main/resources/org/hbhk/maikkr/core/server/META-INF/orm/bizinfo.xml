@@ -7,19 +7,19 @@
 			select * from t_mkk_biz where status=1
 					
 	       				#if(name)
-	       					and name = :name
+	       					and name like :name
 	       				#end
 
 	       				#if(favorable)
-	       					and favorable = :favorable
+	       					and favorable like :favorable
 	       				#end
 
 	       				#if(contactWay)
-	       					and contactWay = :contactWay
+	       					and contactWay like :contactWay
 	       				#end
 
 	       				#if(location)
-	       					and location = :location
+	       					and location like :location
 	       				#end
 		</sql>
 	</select>
