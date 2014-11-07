@@ -382,7 +382,7 @@ var seesionid = "${pageContext.session.id}";
 			<!-- Unnamed () -->
 			<div id="u62" class="text">
 				<p>
-					<span><input type="button" value="修改"></span><span>&gt;&gt;</span>
+					<input type="button" value="修改">
 				</p>
 			</div>
 		</div>

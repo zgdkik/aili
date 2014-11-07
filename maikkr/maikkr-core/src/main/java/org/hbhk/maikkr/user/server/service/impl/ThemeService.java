@@ -2,8 +2,11 @@ package org.hbhk.maikkr.user.server.service.impl;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.hbhk.aili.orm.server.surpport.Page;
+import org.hbhk.aili.orm.server.surpport.Sort;
+import org.hbhk.aili.orm.share.model.Pagination;
 import org.hbhk.aili.security.server.context.UserContext;
 import org.hbhk.aili.security.share.util.UUIDUitl;
 import org.hbhk.maikkr.user.server.dao.IThemeDao;
@@ -53,6 +56,11 @@ public class ThemeService implements IThemeService {
 
 	public List<ThemeInfo> get(ThemeInfo model, Page page) {
 		return themeDao.get(model, page);
+	}
+
+	public Pagination<ThemeInfo> findThemeInfoListByQueryMapWithPage(Page page,
+			Sort[] sorts, Map<String, Object> paraMap) {
+		return themeDao.findThemeInfoListByQueryMapWithPage(page, sorts, paraMap);
 	}
 
 }

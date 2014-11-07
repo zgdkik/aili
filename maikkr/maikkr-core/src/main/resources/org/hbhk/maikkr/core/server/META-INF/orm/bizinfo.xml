@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<orm xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.hbhk.org/orm/sql"
+	xsi:schemaLocation="http://www.hbhk.org/orm/sql orm.xsd">
+
+	<select id="BizInfo.findEffectBizInfoListByQueryMapWithPage">
+		<sql>
+			select * from t_mkk_biz where status=1
+					
+	       				#if(name)
+	       					and name = :name
+	       				#end
+
+	       				#if(favorable)
+	       					and favorable = :favorable
+	       				#end
+
+	       				#if(contactWay)
+	       					and contactWay = :contactWay
+	       				#end
+
+	       				#if(location)
+	       					and location = :location
+	       				#end
+		</sql>
+	</select>
+	
+</orm>
+

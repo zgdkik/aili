@@ -50,7 +50,7 @@
 		<!-- userName2 (Text Field) -->
 		<div id="u6" class="ax_text_field" data-label="userName2">
 			<input id="u6_input" class="email" title="请输入您注册的邮箱" type="text"
-				value="1024784402@qq.com" />
+				value="" />
 		</div>
 
 		<!-- Unnamed (Shape) -->
@@ -67,7 +67,7 @@
 		<!-- userEmail2 (Text Field) -->
 		<div id="u9" class="ax_text_field" data-label="userEmail2">
 			<input id="u9_input" class="password" type="password" title="请输入密码"
-				value="as135246" />
+				value="" />
 		</div>
 
 		<!-- Unnamed (Checkbox) -->
