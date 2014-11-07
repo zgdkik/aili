@@ -21,6 +21,8 @@ import org.hbhk.aili.security.share.define.UserConstants;
 import org.hbhk.aili.security.share.pojo.UserInfo;
 import org.hbhk.aili.support.server.email.IEmailService;
 import org.hbhk.aili.support.server.email.impl.EmailInfo;
+import org.hbhk.maikkr.core.server.service.IBizInfoService;
+import org.hbhk.maikkr.core.shared.pojo.BizInfo;
 import org.hbhk.maikkr.user.server.service.IBlogService;
 import org.hbhk.maikkr.user.server.service.ICareService;
 import org.hbhk.maikkr.user.server.service.ICollectService;
@@ -53,6 +55,8 @@ public class CommonController extends BaseController {
 
 	@Autowired
 	private ICommentService commentService;
+	@Autowired
+	private IBizInfoService bizInfoService;
 
 	@RequestMapping("/findPwd")
 	@ResponseBody
@@ -377,7 +381,13 @@ public class CommonController extends BaseController {
 	}
 
 	@RequestMapping("/jyh")
-	public String jyh() {
+	public String jyh(Model model) {
+		BizInfo biz = new BizInfo();
+		Page page = new Page();
+		page.setStart(0);
+		page.setSize(10);
+	 	List<BizInfo> bizs =  bizInfoService.get(biz,page);
+	 	model.addAttribute("bizs", bizs);
 		return "hui";
 	}
 
