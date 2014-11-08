@@ -12,6 +12,7 @@ public class BlogGroupInfo implements Serializable {
 	private Date createTime;
 	private String blogTitle;
 	private String blogUser;
+	private String carType;
 	public String getId() {
 		return id;
 	}
@@ -48,7 +49,11 @@ public class BlogGroupInfo implements Serializable {
 	public void setBlogUser(String blogUser) {
 		this.blogUser = blogUser;
 	}
-	
-	
+	public String getCarType() {
+		return carType;
+	}
+	public void setCarType(String carType) {
+		this.carType = carType;
+	}
 	
 }
