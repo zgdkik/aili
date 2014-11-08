@@ -75,7 +75,7 @@ public class CommonController extends BaseController {
 		if (userService.getUser(quser) == null) {
 			return returnException("用户名不存在");
 		}
-		quser.setRemail(email);
+		quser.setName(email);
 		if ((quser = userService.getUser(quser)) == null) {
 			return returnException("用户名与绑定邮箱不一致");
 		}
@@ -85,10 +85,10 @@ public class CommonController extends BaseController {
 		puser.setPassword(pwd);
 		userService.update(puser);
 		EmailInfo qemail = new EmailInfo();
-		qemail.setSubject("买客买家网-密码找回");
+		qemail.setSubject("米客网-密码找回");
 		qemail.setEmail(email);
 		qemail.setContext("你的用户名[" + user + "]重置密码:123456\r"
-				+ "官网地址:www.maikkr.com");
+				+ "官网地址:www.mikkr.com");
 		try {
 			emailService.sendEmail(qemail);
 		} catch (MessagingException e) {
