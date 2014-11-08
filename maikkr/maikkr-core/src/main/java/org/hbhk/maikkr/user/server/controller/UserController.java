@@ -70,7 +70,7 @@ public class UserController extends BaseController {
 		// 获取车型
 		List<ThemeInfo> themeInfos = themeService.loadUserThemeType();
 		model.addAttribute("carType", themeInfos);
-		List<BlogInfo> bs = getThemes(blog, pageNum);
+		List<BlogInfo> bs = getThemes(blog, pageNum, 10);
 		for (BlogInfo b : bs) {
 			CareInfo care = new CareInfo();
 			care.setCareUser(b.getBlogUser());
@@ -89,8 +89,8 @@ public class UserController extends BaseController {
 			}
 			b.setCareList(userList);
 
-			List<CommentInfo> result = getComments(b.getBlogId(), 1,1);
-			if(result==null){
+			List<CommentInfo> result = getComments(b.getBlogId(), 1, 1);
+			if (result == null) {
 				result = new ArrayList<CommentInfo>();
 			}
 			b.setCommentList(result);
@@ -105,7 +105,7 @@ public class UserController extends BaseController {
 		return "index";
 	}
 
-	private List<CommentInfo> getComments(String blogId, int pageNum,int size) {
+	private List<CommentInfo> getComments(String blogId, int pageNum, int size) {
 		try {
 			if (StringUtils.isEmpty(blogId)) {
 				return null;
@@ -120,7 +120,7 @@ public class UserController extends BaseController {
 			if (pageNum == 1) {
 				page.setStart(0);
 			} else {
-				page.setStart(8 * pageNum);
+				page.setStart(2 * pageNum);
 			}
 			List<String> sorts = new ArrayList<String>();
 			sorts.add("createTime asc");
@@ -133,9 +133,9 @@ public class UserController extends BaseController {
 		}
 	}
 
-	List<BlogInfo> getThemes(BlogInfo blog, Integer pageNum) {
+	List<BlogInfo> getThemes(BlogInfo blog, Integer pageNum, int size) {
 		Page page = new Page();
-		page.setSize(10);
+		page.setSize(size);
 		if (pageNum == null || pageNum == 1) {
 			page.setStart(0);
 		} else {
@@ -169,7 +169,6 @@ public class UserController extends BaseController {
 		return "setting";
 	}
 
-
 	@RequestMapping("/forget")
 	public String forget(Model model) {
 		return "forget";
@@ -198,27 +197,39 @@ public class UserController extends BaseController {
 
 	@RequestMapping("/getPageTheme")
 	@ResponseBody
-	public ResponseEntity getPageTheme(BlogInfo blog, int pageNum) {
+	public ResponseEntity getPageTheme(BlogInfo blog, Integer pageNum) {
 		try {
-			Page page = new Page();
-			page.setSize(2);
-			if (pageNum > 5) {
-				pageNum = 5;
+			// 获取车型
+			List<BlogInfo> bs = getThemes(blog, pageNum, 5);
+			for (BlogInfo b : bs) {
+				CareInfo care = new CareInfo();
+				care.setCareUser(b.getBlogUser());
+				List<CareInfo> careList = careService.get(care);
+				List<UserInfo> userList = new ArrayList<UserInfo>();
+				if (careList != null) {
+					b.setCareCount(careList.size());
+					for (int i = 0; i < careList.size(); i++) {
+						if (i == 10) {
+							break;
+						}
+						UserInfo user = userService.getMe(careList.get(i)
+								.getCreatUser());
+						userList.add(user);
+					}
+				}
+				b.setCareList(userList);
+				List<CommentInfo> result = getComments(b.getBlogId(), 1, 1);
+				if (result == null) {
+					result = new ArrayList<CommentInfo>();
+				}
+				b.setCommentList(result);
 			}
-			if (pageNum == 1) {
-				page.setStart(0);
-			} else {
-				page.setStart(2 * pageNum);
-			}
-			List<String> sorts = new ArrayList<String>();
-			sorts.add("createTime desc");
-			page.setSorts(sorts);
-			Object result = blogService.getBlogPage(blog, page);
-			return returnSuccess(result);
+			return returnSuccess(bs);
 		} catch (Exception e) {
-			log.error("getPageTheme", e);
-			return returnException(e.getMessage());
+			log.error("获取主题失败", e);
+			return returnException();
 		}
+
 	}
 
 	@RequestMapping("/search")
@@ -247,11 +258,12 @@ public class UserController extends BaseController {
 			UserInfo userinfo = userc.get(username);
 			String img = userinfo.getUserHeadImg().replaceAll("\\\\", "/");
 			blog.setUserHeadImg(img);
-			
-			List<CommentInfo> commentInfos = getComments(blog.getBlogId(), 1, 10);
+
+			List<CommentInfo> commentInfos = getComments(blog.getBlogId(), 1,
+					10);
 			model.addAttribute("comments", commentInfos);
 			model.addAttribute("theme", blog);
-			
+
 			// 修改对应主题的点击数供最热查询
 			UpdateBlogHitsEvent blogHitsEvent = new UpdateBlogHitsEvent(blogUrl);
 			getWebApplicationContext().publishEvent(blogHitsEvent);
@@ -338,6 +350,9 @@ public class UserController extends BaseController {
 	@NeedLogin
 	public ResponseEntity sendComment(CommentInfo comm) {
 		try {
+			if(comm.getCommentConcent()!=null && comm.getCommentConcent().length()>300){
+				return returnException("评论字数不能超过300字");
+			}
 			if (commentService.save(comm) == null) {
 				return returnException();
 			}
@@ -414,7 +429,8 @@ public class UserController extends BaseController {
 	@RequestMapping("/updateNickname")
 	@ResponseBody
 	@NeedLogin
-	public ResponseEntity updateNickname(String nickname, String email,String area) {
+	public ResponseEntity updateNickname(String nickname, String email,
+			String area) {
 		try {
 			UserInfo user = new UserInfo();
 			user.setNickName(nickname);
