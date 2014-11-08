@@ -12,7 +12,7 @@ $j(document).ready(function() {
                 {name:'id', hidden:true,editable: true },
                 {name:'user',index:'q_sl_user', width:100},
                 {name:'createTime',index:'createTime', width:100,formatter:customDateFmatter,search:false},
-                {name:'id',index:'ip', width:200,search:false},
+                {name:'ip',index:'ip', width:200,search:false},
                 {name:'status',index:'status', width:30,search:false,formatter: "select", editoptions:{value:"0:无效;1:有效;2:删除"}}       
         ],
         prmNames : {

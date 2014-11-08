@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>买客买家网后台管理系统</title>
+<title>米客网后台管理系统</title>
 <script type="text/javascript" src="${scripts}/main.js"></script>
 </head>
 

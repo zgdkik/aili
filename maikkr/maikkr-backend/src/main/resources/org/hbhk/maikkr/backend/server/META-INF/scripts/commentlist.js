@@ -7,18 +7,18 @@ $j(document).ready(function() {
 		height: 'auto',
 		width:tblw,
         mtype: 'POST',  
-        colNames:['id','评论用户','评论内容', '评论时间','主题用户','主题标题'],
+        colNames:['id','评论用户','评论内容', '评论时间','主题用户','车型'],
         colModel:[
                 {name:'id', hidden:true,editable: true },
                 {name:'commentUser',index:'q_sl_commentUser', width:100},
                 {name:'commentConcent',index:'q_sl_commentConcent', width:200 },
                 {name:'createTime',index:'createTime', width:100,search:false,formatter:customDateFmatter},
                 {name:'blogUser',index:'q_sl_blogUser', width:100},
-                {name:'blogTitle',index:'q_sl_blogTitle', width:100}
+                {name:'carType',index:'q_sl_carType', width:100}
         ],
         grouping:true,
         groupingView : {
-        groupField : ['blogUser','blogTitle'],//分组属性
+        groupField : ['blogUser','carType'],//分组属性
         groupColumnShow : [true,true],//是否显示分组列
         groupText : ['<b>{0} - {1} 条记录</b>'],//表头显示数据(每组中包含的数据量)
         groupCollapse :false,//加载数据时是否只显示分组的组信息

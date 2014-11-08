@@ -48,7 +48,7 @@
 	<select id="queryBlogGroupsByPage">
 		<sql>
 			SELECT com.id,com.commentUser,com.commentConcent,
-				com.createTime,blog.blogTitle,blog.blogUser 
+				com.createTime,blog.carType,blog.blogUser 
 				from t_mkk_comment com LEFT JOIN t_mkk_blog blog
 			  on com.blogId = blog.id 
 			WHERE blog.status !=2 and  com.status !=2 
@@ -59,7 +59,7 @@
 				and com.commentConcent  LIKE :commentConcent
 			#end
 			#if(blogTitle)
-				and blog.blogTitle LIKE :blogTitle
+				and blog.carType LIKE :carType
 			#end
 			#if(blogUser)
 				and blog.blogUser LIKE :blogUser
@@ -70,10 +70,11 @@
 	<select id="queryLogsByPage">
 		<sql>
 			select *from t_aili_login_log where
-			status !=2
+			status !=2 
 			#if(user)
 			and user like :user
 			#end
+			order by createTime desc
 			
 		</sql>
 	</select>
