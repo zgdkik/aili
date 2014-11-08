@@ -142,7 +142,7 @@ $(document).ready(function() {
 	$("body").on("click",".sendTheme",function(){
 		 var me = $(this);
 		 if(UserContext.user==null || UserContext.user==""){
-			ctips(me,"你需要登陆才能发表评论!");
+			ctips(me,"你需要登陆才能发表主题");
 			return ;
 		 }
 		 var car =  $("#u94_input").val();
@@ -177,6 +177,90 @@ $(document).ready(function() {
 	   	 });
 	 });
 	 //关注
-	
+	//加载主题
+	$(window).scroll( function() { 
+		loadTheme();
+	});
 	
 });
+
+//定义一个总的高度变量
+var totalheight = 0;
+//设置加载最多次数  
+var maxnum = 8;
+var num = 3;  
+function loadTheme() {
+	//浏览器的高度加上滚动条的高度 
+	totalheight = 200+parseFloat($(window).height())+ parseFloat($(window).scrollTop());
+	//当文档的高度小于或者等于总的高度的时候，开始动态加载数据
+	if ($(document).height() <= totalheight && num <= maxnum){
+		$.ailiAjax({
+			url : base + "user/getPageTheme.htm",
+			type : "POST",
+			data:{'pageNum':num},
+			success : function(data, textStatus) {
+				num++;
+				var items = data.result;
+				loadThemes(items);
+			},
+			exception : function(data, textStatus) {
+				$.toast("加载主题失败,请重新刷新!");
+			}
+		});
+	}
+};
+
+function loadThemes(items){
+	if(items==null){
+		return;
+	}
+	var themes = $(".dxxh:last");
+	for ( var i = 0; i < items.length; i++) {
+		var b = items[i];
+		var tmp = $(".dxxh-tmp");
+		var theme = tmp.clone(true).addClass("dxxh").removeClass("dxxh-tmp").show();
+		theme.find(".ttitle").attr("href",base+"user/"+b.blogUrl);
+		theme.find(".ttitle").html(b.blogUser+"的主题");
+		theme.find(".ttype").html("喜欢车型:"+b.carType);
+		theme.find(".ttime").html("计划时间:"+current(b.plannTime));
+		theme.find(".tarea").html("所在地区:"+b.area);
+		theme.find(".gz").html("关注("+b.careCount+")");
+		theme.find(".care_user").attr("tuser",b.blogUser);
+		var gzh = b.careList;
+		if(gzh!=null){
+			var gzTmp =theme.find(".gz-h");
+			for ( var j = 0; j < gzh.length; j++) {
+				var user = gzh[j];
+				if(j==0){
+					gzTmp.attr("src",file_server+user.userHeadImg)
+				}else{
+					var c = gzTmp.clone(true);
+					c.attr("src",file_server+user.userHeadImg)
+					gzTmp.after(c);
+				}
+			}
+		}
+		theme.find(".pl-user").html("评论("+b.blogReview+")");
+		theme.find(".user-commemt").attr("burl",base+"user/"+b.blogUrl)
+		
+		var commentList = b.commentList;
+		if(commentList!=null){
+			for ( var k = 0; k < commentList.length; k++) {
+				var comm = commentList[k];
+				theme.find(".comm-user").html(comm.commentUser+"用户说:");
+				theme.find(".comm-text").html(comm.commentConcent);
+			}
+		}
+		
+		themes.after(theme);
+	}
+};
+
+function current(time){ 
+	var d = new Date(time);
+	var str=''; 
+	str +=d.getFullYear()+'-'; //获当前年份 
+	str +=d.getMonth()+1+'-'; //获取当前月份（0——11） 
+	str +=d.getDate()+' '; 
+	return str;
+} 

@@ -69,7 +69,7 @@
 		<div class="span2 lrborder" style="margin-left: 0px;">
 			<jsp:include page="menu.jsp" />
 		</div>
-		<div class="span6" style="margin-left: 0px;">
+		<div class="span6" style="margin-left: 0px;border-left: 1px solid #F2F2F2; border-right: 1px solid #F2F2F2; ">
 			<div class="daoyu" style="">
 				<p style="height: 10px"></p>
 				<p>一起买车,与小伙伴分享互动!</p>
@@ -109,38 +109,39 @@
 							src="${file_server}${b.userHeadImg}">
 					</div>
 					<div style="float: left; margin-left: 5x">
-						<label style="margin-left: 10px"><a href="${base}user/${b.blogUrl}"
+						<label style="margin-left: 10px"><a class="ttitle" href="${base}user/${b.blogUrl}"
 							style="text-decoration: none;">${b.blogUser}的主题</a></label>
 						<div style="margin-left: 10px" class="dxx">
-							<label class="theme-font">喜欢车型:${b.carType}</label><label
-								class="theme-font">计划时间:<fmt:formatDate
-									value="${b.plannTime}" /></label> <label class="theme-font">所在地区:${b.area}</label>
+							<label class="theme-font ttype">喜欢车型:${b.carType}</label><label
+								class="theme-font ttime"  >计划时间:<fmt:formatDate
+									value="${b.plannTime}" /></label> 
+								<label class="theme-font  tarea">所在地区:${b.area}</label>
 						</div>
 						<div style="margin-left: 10px" class="dxx">
 							<div>
-								<span class="pl" style="height: 25px; width: 50px">关注(${b.careCount})</span>
+								<span class="pl gz" style="height: 25px; width: 50px">关注(${b.careCount})</span>
 								<img tuser="${b.blogUser}" class="care_user" style="margin-left: 5px" width="50px" height="25px"
 									src="${images}/home_login_/gz.png">
 							</div>
 							<div style="margin-top: 5px">
 								<c:forEach items="${b.careList}" var="user">
-									<img width="30px" height="30px" src="${file_server}${user.userHeadImg}">
+									<img width="30px" class="gz-h" height="30px" src="${file_server}${user.userHeadImg}">
 								</c:forEach>
 							</div>
 						</div>
 						<div  style="margin-bottom: 5px;margin-left: 10px">
 							<div>
-								<span class="pl" style="height: 25px; width: 50px">评论(${b.blogReview})</span>
+								<span class="pl pl-user" style="height: 25px; width: 50px">评论(${b.blogReview})</span>
 								<img class="user-commemt" burl="${base}user/${b.blogUrl}" style="margin-left: 5px" width="50px" height="25px"
 									src="${images}/home_login_/pl.jpg">
 							</div>
 							<div class="pltext">
 							  <c:forEach items="${b.commentList}" var="comm">
 									<p>
-										<span>${comm.commentUser}用户说:</span>
+										<span class="comm-user" >${comm.commentUser}用户说:</span>
 									</p>
 									<p>
-										<span>${comm.commentConcent}</span>
+										<span class="comm-text" >${comm.commentConcent}</span>
 									</p>
 							  </c:forEach>
 							</div>
@@ -158,6 +159,48 @@
 		<div class="span1"></div>
 	</div>
 	<jsp:include page="footer.jsp" />
-	<jsp:include page="ad.jsp" />
+	<%-- <jsp:include page="ad.jsp" /> --%>
+	
+<div  class="dxxh-tmp" style="margin-top: 5px; margin-left: 3px;display: none;">
+	<div style="float: left; margin-top: 3px;">
+		<img width="50px" height="50px"
+			src="">
+	</div>
+	<div style="float: left; margin-left: 5x">
+		<label style="margin-left: 10px"><a class="ttitle" href=""
+			style="text-decoration: none;"></a></label>
+		<div style="margin-left: 10px" class="dxx">
+			<label class="theme-font ttype">喜欢车型:</label><label
+				class="theme-font ttime"  >计划时间:</label> 
+				<label class="theme-font  tarea">所在地区:</label>
+		</div>
+		<div style="margin-left: 10px" class="dxx">
+			<div>
+				<span class="pl gz" style="height: 25px; width: 50px">关注()</span>
+				<img tuser="" class="care_user" style="margin-left: 5px" width="50px" height="25px"
+					src="${images}/home_login_/gz.png">
+			</div>
+			<div style="margin-top: 5px">
+				<img width="30px" class="gz-h" height="30px" src="">
+			</div>
+		</div>
+		<div  style="margin-bottom: 5px;margin-left: 10px">
+			<div>
+				<span class="pl pl-user" style="height: 25px; width: 50px">评论()</span>
+				<img class="user-commemt" burl="" style="margin-left: 5px" width="50px" height="25px"
+					src="${images}/home_login_/pl.jpg">
+			</div>
+			<div class="pltext">
+				<p>
+					<span class="comm-user" ></span>
+				</p>
+				<p>
+					<span class="comm-text" ></span>
+				</p>
+			</div>
+		</div>
+	</div>
+	<HR id="hx" style="margin; border;border-top ;border-bottom;" width="100%" color="#FF6600">
+</div>
 </body>
 </html>
