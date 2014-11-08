@@ -40,8 +40,13 @@ $("body").on("click",".reg",function(){
 		 return ;
 	 }
 	 if(pwd1 != pwd2){
-		 tips(".email","邮箱格式不正确");
+		 tips(".email","两次密码不一致");
 		 return;
+	 }
+	 if(pwd1.length<6){
+		 tips(".reg","密码至少要6位");
+		 return;
+		 
 	 }
 	 if(isEmail(email)==false){
 		 tips(".email","邮箱格式不正确");

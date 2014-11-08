@@ -105,9 +105,10 @@ $(document).ready(function() {
 	$.datepicker.setDefaults($.datepicker.regional['zh-CN']); 
 
 	$('#u186_input').datepicker();
-	
+	$("#u94_input").editableSelect({type:'select'});
+	$("#u94_input").css("height","30px")
 	$('#u99_input').chosen({no_results_text: "没有匹配结果"});
-	$('#u94_input').chosen({no_results_text: "没有匹配结果"});
+	//$('#u94_input').chosen({no_results_text: "没有匹配结果"});
 	
 	var ph = "";
 	for(var i = 0; i < 6; i++) {
@@ -144,7 +145,7 @@ $(document).ready(function() {
 			ctips(me,"你需要登陆才能发表评论!");
 			return ;
 		 }
-		 var car =  $("#u94_input option:selected").text();
+		 var car =  $("#u94_input").val();
 		 var date =  $("#u186_input").val()
 		 var area =  $("#u99_input option:selected").text();
 		 if(checkEmpty("#u94_input","请选择或输入您需要的车型")==false){

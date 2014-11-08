@@ -85,7 +85,7 @@
 		<div id="u15" class="ax_paragraph" style="top: 400px">
 			<img id="u15_img" class="img " src="${images}/transparent.gif" />
 			<!-- Unnamed () -->
-			<div id="u16" class="text">
+			<div id="u16" class="text forget-pwd">
 				<p>
 					<span style="text-decoration: underline;">忘记密码？</span>
 				</p>

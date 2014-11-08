@@ -7,6 +7,9 @@
 <head>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <title>${siteInfo.title}</title>
+<link href="${scripts}/editselect/jquery.editable-select.css" type="text/css"
+	rel="stylesheet" />
+<script src="${scripts}/editselect/jquery.editable-select.js"></script>
 <link href="${scripts}/home_login_/styles.css" type="text/css"
 	rel="stylesheet" />
 <script src="${scripts}/home_login_/data.js"></script>
@@ -75,9 +78,9 @@
 				<div style="float: left; margin-left: 50px">
 					<div style="margin-top: 10px">
 						<span>选择车型:</span> <select id="u94_input"
-							style="width: 200px; height: 30px">
+							style="width: 210px; height: 30px">
 							<c:forEach items="${carType}" var="c">
-								<option value="${c.id}">${c.name}</option>
+								<option value="${c.name}">${c.id}</option>
 							</c:forEach>
 						</select>
 					</div>

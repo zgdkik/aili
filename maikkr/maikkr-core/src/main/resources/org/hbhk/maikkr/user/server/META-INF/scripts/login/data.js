@@ -61,5 +61,8 @@ $(document).ready(function() {
     		}
     	 });
 	 });
-	
+	 
+	 $("body").on("click",".forget-pwd",function(){
+		 window.location.href=base+"user/forget.htm"
+	 });
 });
