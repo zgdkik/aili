@@ -49,6 +49,9 @@
 	</dependencies>
 
 	<build>
+		<filters>
+			<filter>src/main/filters/config-${env}.properties</filter>
+		</filters>
 		<resources>
 			<resource>
 				<directory>src/main/resources</directory>
@@ -64,35 +67,34 @@
 			</resource>
 		</resources>
 		<plugins>
-		<!-- 	<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>tomcat-maven-plugin</artifactId>
-				<version>1.1</version>
-				<configuration>
-					<server>mytomcat</server>
-					<url>http://localhost:8181/manager/html</url>
-					<path>/maikkr</path>
-					<uriEncoding>utf-8</uriEncoding>
-					<ignorePackaging>true</ignorePackaging>
-					<warSourceDirectory>${project.build.directory}/webapp</warSourceDirectory>
-				</configuration>
-			</plugin> -->
+			<!-- <plugin> <groupId>org.codehaus.mojo</groupId> <artifactId>tomcat-maven-plugin</artifactId> 
+				<version>1.1</version> <configuration> <server>mytomcat</server> <url>http://localhost:8181/manager/html</url> 
+				<path>/maikkr</path> <uriEncoding>utf-8</uriEncoding> <ignorePackaging>true</ignorePackaging> 
+				<warSourceDirectory>${project.build.directory}/webapp</warSourceDirectory> 
+				</configuration> </plugin> -->
 			<plugin>
 				<groupId>org.apache.tomcat.maven</groupId>
 				<artifactId>tomcat6-maven-plugin</artifactId>
 				<version>2.2</version>
 				<configuration>
 					<path>/</path>
-					<port>8181</port>
-					<!-- <warSourceDirectory>${project.build.directory}/webapp</warSourceDirectory> -->
+					<port>80</port>
+					<warSourceDirectory>${project.build.directory}/webapp</warSourceDirectory> 
 				</configuration>
 			</plugin>
+
+			<!-- <plugin> <groupId>org.codehaus.mojo</groupId> <artifactId>tomcat-maven-plugin</artifactId> 
+				<version>1.1</version> <configuration> <charset>${project.build.sourceEncoding}</charset> 
+				<url>http://180.153.42.55/manager</url> <server>tomcat.server</server> <path>/mikkr</path> 
+				<port>80</port> <warFile>${project.build.directory}/mikkr.war</warFile> <warSourceDirectory>WebContent</warSourceDirectory> 
+				<uriEncoding>${project.build.sourceEncoding}</uriEncoding> </configuration> 
+				</plugin> -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
 				<version>2.1.1</version>
 				<configuration>
-					<warName>maikkr</warName>
+					<warName>mikkr</warName>
 				</configuration>
 			</plugin>
 		</plugins>
