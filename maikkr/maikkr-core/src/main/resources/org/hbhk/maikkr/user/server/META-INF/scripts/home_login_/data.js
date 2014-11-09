@@ -226,7 +226,7 @@ function loadThemes(items){
 		theme.find(".tarea").html("所在地区:"+b.area);
 		theme.find(".gz").html("关注("+b.careCount+")");
 		theme.find(".care_user").attr("tuser",b.blogUser);
-		theme.find(".user-header").attr("src",file_server+b.userHeadImg);
+		theme.find(".user-head").attr("src",file_server+b.userHeadImg);
 		var gzh = b.careList;
 		if(gzh!=null){
 			var gzTmp =theme.find(".gz-h");

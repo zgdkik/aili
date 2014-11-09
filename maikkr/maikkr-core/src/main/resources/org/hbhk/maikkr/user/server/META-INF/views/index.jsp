@@ -163,7 +163,7 @@
 	
 <div  class="dxxh-tmp" style="margin-top: 5px; margin-left: 3px;display: none;">
 	<div style="float: left; margin-top: 3px;">
-		<img width="50px" height="50px" class="user-header"
+		<img width="50px" height="50px" class="user-head"
 			src="">
 	</div>
 	<div style="float: left; margin-left: 5x">
