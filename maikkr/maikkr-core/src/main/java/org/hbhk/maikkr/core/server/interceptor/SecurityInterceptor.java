@@ -11,7 +11,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.hbhk.aili.cache.server.CacheManager;
 import org.hbhk.aili.core.server.annotation.NeedLogin;
 import org.hbhk.aili.core.server.context.RequestContext;
-import org.hbhk.aili.orm.share.util.PropertiesUtil;
+import org.hbhk.aili.core.share.util.PropertiesUtil;
 import org.hbhk.aili.security.server.cache.UserCache;
 import org.hbhk.aili.security.share.define.UserConstants;
 import org.hbhk.aili.security.share.pojo.UserInfo;
