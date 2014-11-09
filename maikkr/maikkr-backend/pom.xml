@@ -13,19 +13,12 @@
 	<name>maikkr-backend</name>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<aili-version>1.0.0-SNAPSHOT</aili-version>
 	</properties>
 	<dependencies>
 		<dependency>
 			<artifactId>maikkr-core</artifactId>
 			<groupId>org.hbhk.maikkr</groupId>
 			<version>0.0.1-SNAPSHOT</version>
-			<exclusions>
-				<exclusion>
-				<artifactId>aili-theme</artifactId>
-				<groupId>org.hbhk.aili</groupId>
-				</exclusion>
-			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>javax.servlet</groupId>
