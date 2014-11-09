@@ -11,6 +11,7 @@
 	<url>http://maven.apache.org</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<aili-version>1.1.0</aili-version>
 	</properties>
 
 	<dependencyManagement>
@@ -29,12 +30,12 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
-	<!-- <repositories>
+	<repositories>
 		<repository>
-			<id>aili-snapshots</id>
-			<url>https://github.com/hbhk/aili-repo/raw/master/snapshots</url>
+			<id>aili-repo</id>
+			<url>https://github.com/hbhk/aili-repo/raw/master/releases</url>
 		</repository>
-	</repositories> -->
+	</repositories>
 	<build>
 		<plugins>
 			<plugin>
@@ -134,7 +135,6 @@
 	</build>
 
 	<modules>
-		<module>maikkr-web</module>
 		<module>maikkr-core</module>
 		<module>maikkr-backend</module>
 	</modules>
