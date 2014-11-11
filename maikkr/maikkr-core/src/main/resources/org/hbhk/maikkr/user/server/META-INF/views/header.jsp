@@ -38,7 +38,7 @@
 	<div class="row-fluid" style="height: 60px;">
 		<div class="row-fluid">
 			<div class="span1" style="margin-left: 60px;"></div>
-			<div class="span2" style="background-color: blue; margin-left: 0px;">
+			<div class="span2" style="margin-left: 0px;">
 				<img style="height: 58px; width: 250px"
 					src="${images}/home_login_/home_logo.png">
 			</div>
