@@ -13,6 +13,7 @@
 	font-size: 18px;
 	text-align: center;
 	width: 100px;
+	text-decoration: none;
 }
 
 .header .share {
@@ -73,13 +74,13 @@
 		<div class="span1" style="margin-left: 60px;"></div>
 
 		<div class="span2" style="margin-left: 0px;">
-			<p class="share" style="height: 1px;">&nbsp;</p>
-			<a class="home"  style="margin-left: 20px">首页</a> 
-			<a class="jhs" style="margin-left: 40px">聚优惠</a>
+			<p class="share"  style="height: 1px;">&nbsp;</p>
+			<a class="home" href="${base}"  style="margin-left: 20px">首页</a> 
+			<a class="jhs" href="${base}user/jyh.htm"  style="margin-left: 40px">聚优惠</a>
 		</div>
 		<div class="span6" style="margin-left: 0px;">
 			<p class="share" style="height: 1px;">&nbsp;</p>
-			<a class="about" >关于我们</a>
+			<a class="about" href="${base}user/aboutus.htm"  >关于我们</a>
 		</div>
 
 		<div class="span2" style="margin-left: 0px;"></div>
