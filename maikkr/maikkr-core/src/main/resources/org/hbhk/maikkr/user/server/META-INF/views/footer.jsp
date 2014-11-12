@@ -14,7 +14,7 @@
 
 <div class="footer">
 	<div class="row-fluid" style="height: 80px; background-color: #F2F2F2">
-		<div class="span1" style="margin-left: 60px;"></div>
+		<div class="span1" style="margin-left: 60px;"><jsp:include page="tongji.jsp" /></div>
 		<div class="span2" style="margin-left: 0px;"></div>
 		<div class="span6" style="margin-left: 0px;">
 			<div class="row-fluid">
@@ -29,7 +29,7 @@
 
 		</div>
 		<div class="span2" style="margin-left: 0px;"></div>
-		<div class="span1"><jsp:include page="tongji.jsp" /></div>
+		<div class="span1"></div>
 	</div>
 	<p id="back-to-top"><a href="#"><span></span>返回顶部</a></p>
 	
