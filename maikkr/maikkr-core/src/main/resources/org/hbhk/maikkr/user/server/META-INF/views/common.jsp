@@ -9,8 +9,8 @@
 <link rel="shortcut icon" href="${base}favicon.png">
 <link rel="Bookmark" href="${base}favicon.png">
 <meta name="apple-mobile-web-app-capable" content="yes" />
-<meta name="keywords" content="sports, recreation, outdoor">
-<meta name="description" content="sports, recreation, outdoor">
+<meta name="keywords" content="${siteInfo.keywords}">
+<meta name="description" content="${siteInfo.description}">
 <link href="${styles}/jquery-ui.css" type="text/css" rel="stylesheet" />
 <%-- <link href="${styles}/jquery-ui-themes.css" type="text/css" rel="stylesheet" /> --%>
 <link href="${styles}/axure_rp_page.css" type="text/css"
