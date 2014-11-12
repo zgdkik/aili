@@ -1,4 +1,5 @@
-<%@ page language="java" pageEncoding="UTF-8" info="买客网"%>
+<%@ page language="java" pageEncoding="UTF-8" info="米客网"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <style type="text/css">
 .footer .copyright {
 	font-family: 'Arial Normal', 'Arial';
@@ -31,4 +32,5 @@
 		<div class="span1"></div>
 	</div>
 	<p id="back-to-top"><a href="#"><span></span>返回顶部</a></p>
+	<jsp:include page="tongji.jsp" />
 </div>
