@@ -105,8 +105,11 @@ $(document).ready(function() {
 	$.datepicker.setDefaults($.datepicker.regional['zh-CN']); 
 
 	$('#u186_input').datepicker();
-	$("#u94_input").editableSelect({type:'select'});
-	$("#u94_input").css("height","30px")
+	$(".carType-select").change(function(){
+		var me = $(this);
+		var type = me.parent().find("input");
+		type.val(me.find("option:selected").text());
+	});
 	$('#u99_input').chosen({no_results_text: "没有匹配结果"});
 	//$('#u94_input').chosen({no_results_text: "没有匹配结果"});
 	

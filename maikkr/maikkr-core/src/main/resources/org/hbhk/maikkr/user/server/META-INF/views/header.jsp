@@ -22,7 +22,6 @@
 	font-style: normal;
 	font-size: 20px;
 	color: #666666;
-	margin-left: 30px;
 }
 
 .header .user {
@@ -39,11 +38,11 @@
 	<div class="row-fluid" style="height: 60px;">
 		<div class="row-fluid">
 			<div class="span1" style="margin-left: 60px;"></div>
-			<div class="span2" style="margin-left: 0px;">
-				<img style="height: 58px; width: 250px"
-					src="${images}/home_login_/home_logo.png">
+			<div class="span3" style="margin-left: 0px;">
+				 <img style="height: 58px; width: 255px;"
+					src="${images}/mikrr-logo.jpg">
 			</div>
-			<div class="span6" style="margin-left: 0px;">
+			<div class="span5" style="margin-left: 0px;">
 				<p class="share">&nbsp;</p>
 				<span class="share">汽车主题分享社区</span>
 			</div>
@@ -62,7 +61,7 @@
 					<a class="user" style="margin-left: 30px;" href="${base}security/logout.htm">退出</a>
 				</c:if>
 				<c:if test="${cuser == null}">
-					<a class="user" style="margin-left: 30px;" href="${base}user/loginpage.htm">登陆</a>
+					<a class="user" style="margin-left: 30px;" href="${base}user/loginpage.htm">登录</a>
 				</c:if>
 			</div>
 			<div class="span1"></div>
@@ -73,16 +72,16 @@
 		style="background-color: #F2F2F2; height: 40px;">
 		<div class="span1" style="margin-left: 60px;"></div>
 
-		<div class="span2" style="margin-left: 0px;">
+		<div class="span8" style="margin-left: 0px;">
 			<p class="share"  style="height: 1px;">&nbsp;</p>
-			<a class="home" href="${base}"  style="margin-left: 20px">首页</a> 
-			<a class="jhs" href="${base}user/jyh.htm"  style="margin-left: 40px">聚优惠</a>
+			<div >
+			<a class="home" href="${base}"  style="margin-left: 30px">首页</a> 
+			<a class="jhs" href="${base}user/jyh.htm"  style="margin-left: 30px">聚优惠</a>
+			<a class="about" href="${base}user/aboutus.htm" style="margin-left: 30px" >关于我们</a>
+			</div>
 		</div>
-		<div class="span6" style="margin-left: 0px;">
-			<p class="share" style="height: 1px;">&nbsp;</p>
-			<a class="about" href="${base}user/aboutus.htm"  >关于我们</a>
-		</div>
-
+		<!-- <div class="span2" style="margin-left: 0px;">
+		</div> -->
 		<div class="span2" style="margin-left: 0px;"></div>
 
 		<div class="span1"></div>

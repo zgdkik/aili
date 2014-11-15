@@ -86,8 +86,8 @@
 			<div class="content" style="margin-top:3px; background-color: #F2F2F2;border: 1px solid gray; ">
 				<div class="panel panel-info">
 				   <div class="panel-body">
-				    <textarea placeholder="请输入评论内容"   id="editorText" style="width: 400px; margin-left: 20%;height: 120px;resize:none;margin-top: 10px" ></textarea>
-					<input style="background-color:#FEB252; margin-left: 400px;margin-bottom: 10px;margin-top: 10px" type="button" value="发表评论" id="sendComment" title="发表评论">
+				    <textarea placeholder="请输入评论内容"   id="editorText" style="width: 60%; margin-left: 20%;height: 120px;resize:none;margin-top: 10px" ></textarea>
+					<input style="background-color:#FEB252;border:0; margin-left: 60%;margin-bottom: 10px;margin-top: 10px" type="button" value="发表评论" id="sendComment" title="发表评论">
 					</div>
 				</div>
 			

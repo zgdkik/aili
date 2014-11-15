@@ -30,13 +30,8 @@
 	height: 150px;
 	font-size: 20px;
 }
-.hhrx {
-	width: 600px;
-	border: 1px dashed;
-}
 
 .dxx {
-	border-bottom: 1px dashed #000;
 	width: 500px
 }
 .dxxh {
@@ -56,12 +51,15 @@
 		</div>
 		<div class="span6 lrborder" style="margin-left: 0px;">
 			<c:forEach items="${bs}" var="b">
-				<div   class="dxxh blog" style="margin-top: 5px; margin-left: 3px">
+				<div   class="dxxh blog" style="margin-top: 5px;float:left; margin-left: 3px;width: 100%">
 					<div style="float: left; margin-top: 3px;">
 						<img width="50px" height="50px"
 							src="${file_server}${b.userHeadImg}">
 					</div>
 					<div style="float: left; margin-left: 5x">
+						<div>
+							<img tid="${b.id}" class="collect_blog_del" style="float: right;" title="删除" alt="删除" width="20px" height="20px" src="${images}/mytheme/image_u318.png">
+						</div>
 						 <label style="margin-left: 10px"><a href="${base}user/${b.blogUrl}"
 							style="text-decoration: none;">${b.blogUser}的主题</a></label> 
 						<div style="margin-left: 10px" class="dxx">
@@ -69,12 +67,7 @@
 								class="theme-font">计划时间:<fmt:formatDate
 									value="${b.plannTime}" /></label> <label class="theme-font">所在地区:${b.area}</label>
 						</div>
-			
-						<div>
-							<img tid="${b.id}" class="collect_blog_del" style="float: right;" title="删除" alt="删除" width="20px" height="20px" src="${images}/mytheme/image_u318.png">
-						</div>
 					</div>
-					<HR id="hx" style="margin; border;border-top ;border-bottom;" width="100%" color="#FF6600">
 				</div>
 				
 			</c:forEach>
