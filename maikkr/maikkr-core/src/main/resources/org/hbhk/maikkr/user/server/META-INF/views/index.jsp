@@ -70,11 +70,11 @@
 			<jsp:include page="menu.jsp" />
 		</div>
 		<div class="span6" style="margin-left: 0px;border-left: 1px solid #F2F2F2; border-right: 1px solid #F2F2F2; ">
-			<div class="daoyu" style="">
+			<div class="daoyu" style="width: 100%">
 				<p style="height: 10px"></p>
 				<p>一起买车,与小伙伴分享互动!</p>
 			</div>
-			<div class="theme lrborder-h" style="">
+			<div class="theme lrborder-h" style="width: 100%">
 				<div style="float: left; margin-left: 50px">
 					<div style="margin-top: 10px">
 						<span>选择车型:</span> <select id="u94_input"
@@ -102,8 +102,9 @@
 						style="margin-top: 110px;margin-left: 50px;width: 150px;height: 30px;background-image: url('${images}/fb.png');">
 				</div>
 			</div>
+		<div class="dxxh"  style="width: 100%" >
 			<c:forEach items="${bs}" var="b">
-				<div   class="dxxh" style="margin-top: 5px; margin-left: 3px">
+				<div class="dxxh"  style="margin-top: 5px; float: left;margin-left: 3px;width: 100%">
 					<div style="float: left; margin-top: 3px;">
 						<img width="50px" height="50px"
 							src="${file_server}${b.userHeadImg}">
@@ -147,9 +148,10 @@
 							</div>
 						</div>
 					</div>
-					<HR id="hx" style="margin; border;border-top ;border-bottom;" width="100%" color="#FF6600">
 				</div>
+			
 			</c:forEach>
+			</div>
 		</div>
 
 		<div class="span2 lrborder" style="margin-left: 0px;">
@@ -161,7 +163,7 @@
 	<jsp:include page="footer.jsp" />
 	<%-- <jsp:include page="ad.jsp" /> --%>
 	
-<div  class="dxxh-tmp" style="margin-top: 5px; margin-left: 3px;display: none;">
+<div  class="dxxh-tmp" style="margin-top: 5px; float: left;margin-left: 3px;display: none;width: 100%">
 	<div style="float: left; margin-top: 3px;">
 		<img width="50px" height="50px" class="user-head"
 			src="">
@@ -200,7 +202,6 @@
 			</div>
 		</div>
 	</div>
-	<HR id="hx" style="margin; border;border-top ;border-bottom;" width="100%" color="#FF6600">
 </div>
 </body>
 </html>
