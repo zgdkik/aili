@@ -455,6 +455,8 @@ public class CommonController extends BaseController {
 				BlogInfo q = new BlogInfo();
 				q.setId(c.getBlogId());
 				q = blogService.getBlog(q);
+				UserInfo user = userService.getMe(q.getBlogUser());
+				q.setUserHeadImg(user.getUserHeadImg());
 				all.add(q);
 			}
 		}
