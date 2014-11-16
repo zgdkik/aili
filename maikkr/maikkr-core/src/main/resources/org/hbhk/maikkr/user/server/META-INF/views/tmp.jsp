@@ -27,7 +27,10 @@
 			<jsp:include page="menu.jsp" />
 		</div>
 		<div class="span6" style="margin-left: 0px;">
-			<a style="width: 100px">内容部分</a>
+			<div class="center-body" style="width: 100%">
+			
+			
+			</div>
 		</div>
 
 		<div class="span2 lrborder" style="margin-left: 0px;">
