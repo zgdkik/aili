@@ -33,6 +33,16 @@ public class MsgController extends BaseController {
 		return "msg";
 	}
 	
+	@RequestMapping("/sendMsg")
+	@ResponseBody
+	public ResponseEntity sendMsg(Model model,String msg,String user) {
+		MsgInfo msgInfo = new MsgInfo();
+		msgInfo.setMsg(msg);
+		msgInfo.setReceiveUser(user);
+		msgInfoService.save(msgInfo);
+		return returnSuccess();
+	}
+	
 	@RequestMapping("/msgList")
 	@ResponseBody
 	public List<MsgInfo> msgList(MsgInfo msg, Page page) {
@@ -46,6 +56,7 @@ public class MsgController extends BaseController {
 			MsgInfo msg = new MsgInfo();
 			msg.setId(id);
 			msg.setIsRead(1);
+			msg.setStatus(2);
 			msgInfoService.update(msg);
 			return returnSuccess();
 		} catch (BusinessException e) {

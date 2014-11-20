@@ -9,8 +9,17 @@ import org.hbhk.aili.orm.share.model.BaseInfo;
 @Tabel("t_mkk_friend")
 public class FriendInfo extends BaseInfo {
 
-	private static final long serialVersionUID = 3846844061131232345L;
+	private static final long serialVersionUID = 7230893185745055864L;
+	
 	@Column("friendUser")
-	private String friendUser;// 评论人
+	private String friendUser;
+	
+	public String getFriendUser() {
+		return friendUser;
+	}
+	public void setFriendUser(String friendUser) {
+		this.friendUser = friendUser;
+	}
+	
 
 }

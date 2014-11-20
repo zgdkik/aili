@@ -19,8 +19,6 @@
 </style>
 <ul class="menu" style="">
 	<li class="fb home"><a href="${base}">首页</a></li>
-	<li class="fb myTheme"><a href="${base}user/myTheme.htm">我的主题</a></li>
-	<li class="fb mycare"><a href="${base}user/myCare.htm">我的关注</a></li>
-	<li class="fb collect-href"><a href="${base}user/collect.htm">收藏</a></li>
- 	<li class="fb friends"><a href="${base}user/friends.htm">私信</a></li>
+	<li class="fb mymsg"><a href="javascript:void()" title="我的私信">我的私信</a></li>
+	<li class="fb sendmsg"><a href="javascript:void()" title="发送私信">发送私信</a></li>
 </ul>

@@ -22,11 +22,11 @@ public class CareController extends BaseController {
 	@Autowired
 	private ICareService careService;
 	
-	@RequestMapping("/friends")
+	@RequestMapping("/cares")
 	public String msg(Model model) {
 		CareInfo care = new CareInfo();
 		model.addAttribute("careList", careService.get(care));
-		return "friends";
+		return "cares";
 	}
 	
 	@RequestMapping("/editCare")
