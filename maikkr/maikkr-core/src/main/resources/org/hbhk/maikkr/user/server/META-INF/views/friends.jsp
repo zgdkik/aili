@@ -9,9 +9,12 @@
 <title>${siteInfo.title}-用户注册</title>
 <script src="${scripts}/friends.js"></script>
 <style type="text/css">
-.lrborder {
-	border-left: 1px solid #F2F2F2;
-	border-right: 1px solid #F2F2F2;
+.font-label {
+	font-family: '宋体 Bold', '宋体';
+	font-weight: 700;
+	font-style: normal;
+	font-size: 20px;
+	color: #666666;
 }
 </style>
 </head>
@@ -25,31 +28,35 @@
 			<jsp:include page="msg.jsp" />
 		</div>
 		<div class="span6" style="margin-left: 0px;">
-			<div class="center-body" style="width: 100%;border: 1px solid  #EF5C00;float: left;">
-				<div class="my-msg" style="width: 100%;">
+			<div class="center-body"
+				style="width: 100%; border: 1px solid #EF5C00; float: left;background-color: #B4CDE6;">
+				<div class="my-msg" style="width: 100%">
 					<table class="table">
-						<caption style="background-color: #B4CDE6;font-size: 20px;height: 30px;padding-top: 5px;" >我的私信</caption>
+						<caption
+							style="background-color: #B4CDE6; font-size: 20px; height: 30px; padding-top: 5px;">我的私信</caption>
 						<thead>
 							<tr>
 								<th width="30%">发送人</th>
-								<th  width="60%">内容</th>
-								<th  width="10%">操作</th>
+								<th width="60%">内容</th>
+								<th width="10%">操作</th>
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach items="${msgs}" var="msg" >
+							<c:forEach items="${msgs}" var="msg">
 								<tr>
 									<th width="30%">${msg.sendUser}</th>
-									<th  width="60%">${msg.msg}</th>
-									<th  width="10%"><a  msgid="${msg.id}" class="del-msg" href="javascript:void()" title="我的私信">删除</a></th>
+									<th width="60%">${msg.msg}</th>
+									<th width="10%"><a msgid="${msg.id}" class="del-msg"
+										href="javascript:void()" title="我的私信">删除</a></th>
 								</tr>
 							</c:forEach>
 						</tbody>
 					</table>
 				</div>
-				<div class="send-msg" style="display: none; width: 100%;">
-					<div  style="width: 100%;float: left;background-color: #B4CDE6;">
-						<label style="width: 50px;width: 50px;float: left;margin-left: 20%">收信人</label>
+				<div class="send-msg" style="display: none; width: 100%;margin-top: 10px">
+					<div style="width: 100%; float: left; background-color: #B4CDE6;">
+						<label class="font-label"
+							style="width: 50px; width: 50px; float: left; margin-left: 20%;font-size: 15px;">收信人</label>
 						<select class="receive-user" style="float: left;">
 							<c:forEach items="${fs}" var="f">
 								<c:if test="${f.nickName != null}">
@@ -58,18 +65,21 @@
 								<c:if test="${f.nickName == null}">
 									<option value="${f.mail}">${f.mail}</option>
 								</c:if>
-								
+
 							</c:forEach>
-							
+
 						</select>
 					</div>
-					<div  style="width: 100%;float: left;background-color: #B4CDE6;">
-					   <label style="width: 50px;width: 50px;float: left;margin-left: 20%">内 &nbsp;&nbsp;容</label>
-					   <textarea rows="" class="msg-content" cols="" style="width: 50%;float: left;resize:none;height: 150px;"></textarea>	
+					<div style="width: 100%; float: left; background-color: #B4CDE6;">
+						<label class="font-label"
+							style="width: 50px; width: 50px; float: left; margin-left: 20%;font-size: 15px;">内容</label>
+						<textarea rows="" class="msg-content" cols=""
+							style="width: 50%; float: left; resize: none; height: 150px;"></textarea>
 					</div>
-					<div  style="width: 100%;float: left;">
-						<input type="button" value="发送" class="msg-send" style="margin-bottom:5px; margin-left: 40%;background-color: #EF5C00;border: 0;margin-top: 5px;font-size: 30px;width: 70px;height: 40px">
-					</div>   
+					<div style="width: 100%; float: left;">
+						<input type="button" value="发送" class="msg-send font-label"
+							style="margin-bottom: 5px; margin-left: 40%; background-color: #EF5C00; border: 0; margin-top: 5px; width: 70px; height: 40px">
+					</div>
 				</div>
 			</div>
 		</div>

@@ -1,4 +1,5 @@
 $(document).ready(function() {
+	$('.receive-user').chosen({no_results_text: "没有匹配结果"});
 	$(".msg-send").click(function() {
 		var me = $(this);
 		var msg = $(".msg-content").val();
