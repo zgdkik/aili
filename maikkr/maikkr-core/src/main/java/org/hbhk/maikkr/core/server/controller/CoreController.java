@@ -43,7 +43,7 @@ public class CoreController extends BaseController {
 			throws Exception {
 		PrintWriter out = response.getWriter();
 		try {
-			Object imgurl = fileService.saveFile(Filedata);
+			Object imgurl = fileService.saveFile(Filedata,50,50);
 			String json = JsonUtil.toJson(returnSuccess(imgurl));
 			out.write(json);
 		} catch (Exception e) {

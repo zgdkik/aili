@@ -51,22 +51,26 @@
 			</div>
 			<div class="bizs jyhc">
 				<c:forEach items="${bizs}" var="biz">
-				<div class="biz" style="margin-top: 20px">
+				<div class="biz" style="margin-top: 20px;width: 100%">
 					<div style="border-bottom: 1px solid #FF9900;width: 200px">
 						<span>商家名称:</span><span>${biz.name}</span>
 					</div>
-					<div class="biz-text" style="margin-top: 10px">
-						<div>
-							<label>优惠:</label>
-							<xmp>${biz.favorable}</xmp>
+					<div class="biz-text" style="margin-top: 10px;float: left;width: 100%;">
+						<div style="width: 80%;float: left;">
+							<div>
+								<label>优惠:</label>
+								<xmp>${biz.favorable}</xmp>
+							</div>
+							<div style="margin-top: 10px">
+								<span>联系方式:${biz.contactWay}</span>
+							</div>
+							<div style="margin-top: 10px">
+								<span>地址:${biz.location}</span>
+							</div>
 						</div>
-						<div style="margin-top: 10px">
-							<span>联系方式:${biz.contactWay}</span>
-						</div>
-						<div style="margin-top: 10px">
-							<span>地址:${biz.location}</span>
-						</div>
+						<div style="width: 20%;float: left; margin-top: 10px" ><img style="margin-right:10px;float: right;margin-bottom: 10px" alt="" width="150" height="150" src="${file_server}${biz.imgUrl}"> </div>
 					</div>
+						
 				</div>
 				</c:forEach>
 			</div>
