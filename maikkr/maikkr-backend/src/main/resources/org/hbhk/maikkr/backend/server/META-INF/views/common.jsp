@@ -6,6 +6,7 @@
 	<script src="${scripts}/boot.js"></script>
 	<script type="text/javascript">
 		var $j = jQuery.noConflict();
-		 var base="${base}";
+		var base="${base}";
+		var file_server= "${file_server}";
 	</script>
 </head>

@@ -36,6 +36,16 @@ $j(document).ready(function() {
         rowList:[10,20,30],
         pager:"#gridPager",
         caption: "系统用户列表"
-	}).navGrid('#gridPager', { add: true, edit: true, del: true,search:true,refresh:true });
-
+	}).navGrid('#gridPager', {
+		add: true,
+		addtext:'新增',
+		edit: true,
+		edittext:'修改',
+		del: true,
+		deltext: '删除',
+		search:true,
+		searchtext:'查询',
+		refresh:true ,
+		refresh:'刷新'
+		});
 });

@@ -39,6 +39,17 @@ $j(document).ready(function() {
         rowList:[10,20,30],
         pager:"#gridPager",
         caption: "主题列表"
-	}).navGrid('#gridPager', { add: false, edit: false, del: true,search:true,refresh:true });
+	}).navGrid('#gridPager', {
+		add: false,
+		addtext:'新增',
+		edit: false,
+		edittext:'修改',
+		del: true,
+		deltext: '删除',
+		search:true,
+		searchtext:'查询',
+		refresh:true ,
+		refresh:'刷新'
+		});
 
 });
