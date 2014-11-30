@@ -52,6 +52,7 @@
 			<div class="bizs jyhc">
 				<c:forEach items="${bizs}" var="biz">
 				<div class="biz" style="margin-top: 20px;width: 100%">
+					<div style="width: 100%; margin-top: 10px" ><img style="" alt="" width="150" height="150" src="${file_server}${biz.imgUrl}"> </div>
 					<div style="border-bottom: 1px solid #FF9900;width: 200px">
 						<span>商家名称:</span><span>${biz.name}</span>
 					</div>
@@ -68,7 +69,7 @@
 								<span>地址:${biz.location}</span>
 							</div>
 						</div>
-						<div style="width: 20%;float: left; margin-top: 10px" ><img style="margin-right:10px;float: right;margin-bottom: 10px" alt="" width="150" height="150" src="${file_server}${biz.imgUrl}"> </div>
+					
 					</div>
 						
 				</div>
