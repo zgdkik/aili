@@ -51,9 +51,9 @@
 			</div>
 			<div class="bizs jyhc">
 				<c:forEach items="${bizs}" var="biz">
-				<div class="biz" style="margin-top: 20px;width: 100%">
-					<div style="width: 100%; margin-top: 10px" ><img style="" alt="" width="150" height="150" src="${file_server}${biz.imgUrl}"> </div>
-					<div style="border-bottom: 1px solid #FF9900;width: 200px">
+				<div class="biz" style=";width: 100%">
+					<div style="width: 100%;" ><img style="width: 100%;height: 200px;margin-top: 10px" alt="${biz.name}" src="${file_server}${biz.imgUrl}"> </div>
+					<div style="border-bottom: 1px solid #FF9900;">
 						<span>商家名称:</span><span>${biz.name}</span>
 					</div>
 					<div class="biz-text" style="margin-top: 10px;float: left;width: 100%;">
