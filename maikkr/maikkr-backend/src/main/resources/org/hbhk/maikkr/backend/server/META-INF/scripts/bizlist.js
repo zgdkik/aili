@@ -77,7 +77,7 @@ function optFormatter(cellvalue, options, rowdata){
 }
 
 function imgFormatter(cellvalue, options, rowdata){
-	var opt = '<a href="'+file_server+cellvalue+'" target="view_window"><img src="'+file_server+cellvalue+'"></a>';
+	var opt = '<a href="'+file_server+cellvalue+'" target="view_window"><img style="width:100px;height: 100px;" src="'+file_server+cellvalue+'"></a>';
     return opt;
 }
 

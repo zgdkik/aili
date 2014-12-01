@@ -80,7 +80,7 @@ public class BizController extends BaseController {
 			throws Exception {
 		PrintWriter out = response.getWriter();
 		try {
-			String imgurl = fileService.saveFile(filedata,100,100);
+			String imgurl = fileService.saveFile(filedata);
 			BizInfo biz = new BizInfo();
 			biz.setId(id);
 			biz.setImgUrl(imgurl);
