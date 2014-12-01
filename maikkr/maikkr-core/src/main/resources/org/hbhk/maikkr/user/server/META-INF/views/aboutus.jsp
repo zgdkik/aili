@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<title>${siteInfo.title}-用户登陆</title>
+<title>${siteInfo.title}-关于我们</title>
 <link href="${scripts}/aboutus/styles.css" type="text/css"
 	rel="stylesheet" />
 <script src="${scripts}/aboutus/data.js"></script>
@@ -213,7 +213,7 @@
 					<!-- Unnamed () -->
 					<div id="u37" class="text">
 						<p>
-							<span style="text-decoration: underline;">${cuser}</span>
+							<span style="">${cuser}</span>
 						</p>
 					</div>
 				</div>
@@ -225,10 +225,10 @@
 					<div id="u39" class="text">
 						<p>
 						<c:if test="${cuser != null}">
-							<a href="${base}user/set.htm" style="text-decoration: none;" ><span style="text-decoration: underline;">帐号设置</span></a>
+							<a href="${base}user/set.htm" style="text-decoration: none;" ><span style="">帐号设置</span></a>
 						</c:if>
 						<c:if test="${cuser == null}">
-							<a href="${base}user/register.htm" style="text-decoration: none;" ><span style="text-decoration: underline;">注册</span></a>
+							<a href="${base}user/register.htm" style="text-decoration: none;" ><span style="">注册</span></a>
 						</c:if>
 						</p>
 					</div>
@@ -244,7 +244,7 @@
 								<a href="${base}security/logout.htm">退出</a>
 								</c:if>
 								<c:if test="${cuser == null}">
-								<a href="${base}user/loginpage.htm">登陆</a>
+								<a href="${base}user/loginpage.htm">登录</a>
 							</c:if>
 						</p>
 					</div>
@@ -404,10 +404,11 @@
 			<!-- Unnamed () -->
 			<div id="u67" class="text">
 				<p>
-					<span>邮箱：</span>
+					<span>邮箱：3128701406@qq.com  QQ:3128701406</span>
 				</p>
 			</div>
 		</div>
+		
 
 		<!-- Unnamed (Image) -->
 		<div id="u68" class="ax_image">

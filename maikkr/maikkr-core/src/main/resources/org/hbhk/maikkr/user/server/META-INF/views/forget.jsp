@@ -42,7 +42,7 @@
 </style>
 <script type="text/javascript">
         function refreshimg(){
-          document.getElementById("virfyCode").src="${base}security/validateCode.htm?code="+Math.random();
+          document.getElementById("virfyCode").src="${base}core/getRandcode.htm?code="+Math.random();
           return true;
         }
     </script>
@@ -77,7 +77,7 @@
 							<tr>
 								<td><span>验证码:</span></td>
 								<td><input id="code"  type="text">
-								 <img alt="" id="virfyCode" onclick="javascript:refreshimg()" src="${base}security/validateCode.htm"/>
+								 <img alt="" id="virfyCode" onclick="javascript:refreshimg()" src="${base}core/getRandcode.htm"/>
 								</td>
 							</tr>
 						</table>

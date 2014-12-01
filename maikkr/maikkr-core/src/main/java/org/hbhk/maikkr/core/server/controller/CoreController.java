@@ -11,6 +11,7 @@ import org.hbhk.aili.core.server.annotation.NeedLogin;
 import org.hbhk.aili.core.server.web.BaseController;
 import org.hbhk.aili.support.server.json.JsonUtil;
 import org.hbhk.maikkr.core.server.service.IFileService;
+import org.hbhk.maikkr.core.shared.util.RandomValidateCodeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,8 +29,6 @@ public class CoreController extends BaseController {
 	public String main() {
 		return "main";
 	}
-
-	
 
 	@RequestMapping("/error")
 	public String error() {
@@ -54,5 +53,10 @@ public class CoreController extends BaseController {
 			out.close();
 		}
 
+	}
+	@RequestMapping("/getRandcode")
+	public void getRandcode(HttpServletRequest request,
+			HttpServletResponse response){
+		RandomValidateCodeUtil.getRandcode(request, response);
 	}
 }

@@ -9,7 +9,7 @@
 <script src="${scripts}/reg/data.js"></script>
 <script type="text/javascript">
 function refreshimg(){
-    document.getElementById("virfyCode").src="${base}security/validateCode.htm?code="+Math.random();
+    document.getElementById("virfyCode").src="${base}core/getRandcode.htm?code="+Math.random();
     return true;
   }
 </script>
@@ -118,20 +118,20 @@ function refreshimg(){
 		<div id="u18" class="ax_text_field" data-label="checkCode">
 			<input id="u18_input" type="text" class="code required" value="" />
 			<a class="code" href="javascript:void(0);" style="margin-left: 190px;">
-				<img  style="height: 30px" id="virfyCode" onclick="javascript:refreshimg()" src="${base}security/validateCode.htm"/>
+				<img  style="height: 30px" id="virfyCode" onclick="javascript:refreshimg()" src="${base}core/getRandcode.htm"/>
 			</a>
 		</div>
 
 		<!-- Unnamed (Checkbox) -->
-		<div id="u19" class="ax_checkbox">
-			<label for="u19_input"> <!-- Unnamed () -->
+	   <!-- <div id="u19" class="ax_checkbox">
+			<label for="u19_input"> Unnamed ()
 				<div id="u20" class="text">
 					<p>
 						<span>我接受注册协议</span>
 					</p>
 				</div>
 			</label> <input id="u19_input" type="checkbox" value="checkbox" />
-		</div>
+		</div> -->
 
 		<!-- Unnamed (Shape) -->
 		<div id="u21" class="ax_paragraph">
@@ -139,7 +139,8 @@ function refreshimg(){
 			<!-- Unnamed () -->
 			<div id="u22" class="text">
 				<p>
-					<span style="text-decoration: underline;"><a href="${base}user/loginpage.htm">登陆</a></span>
+					<span style="text-decoration: underline;">
+					<a href="${base}user/loginpage.htm" style="text-decoration: none;">登录</a></span>
 				</p>
 			</div>
 		</div>
