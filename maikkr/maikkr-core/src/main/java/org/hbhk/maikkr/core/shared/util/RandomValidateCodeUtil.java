@@ -71,7 +71,7 @@ public class RandomValidateCodeUtil {
 			randomString = drowString(g, randomString, i);
 		}
 		session.removeAttribute(UserConstants.VALIDATECODE_SESSION_KEY);
-		session.setAttribute(UserConstants.VALIDATECODE_SESSION_KEY, randomString);
+		session.setAttribute(UserConstants.VALIDATECODE_SESSION_KEY, randomString.toLowerCase());
 		logger.debug("验证码:"+randomString);
 		g.dispose();
 		try {

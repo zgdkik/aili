@@ -37,7 +37,6 @@
 .find {
 	width: 100px;
 	height: 30px;
-	margin-left: 42%;
 }
 </style>
 <script type="text/javascript">
@@ -56,14 +55,14 @@
 		<div class="span2 lrborder" style="margin-left: 0px;"></div>
 		<div class="span6" style="margin-left: 0px;">
 
-			<div class="forget" style="margin-top: 30px;">
-				<div class="f-top">
+			<div class="forget" style="margin-top: 30px;float: left;width: 100%">
+				<div class="f-top" style="float: left;width: 100%">
 					<div
 						style="background-color: #F2F2F2; width: 100px; height: 40px; padding-top: 10px;">
 						<div>忘记密码</div>
 					</div>
 				</div>
-				<div class="f-body">
+				<div class="f-body" style="float: left;width: 100%">
 					<div style="margin-top: 50px;">
 						<table>
 							<tr>
@@ -82,11 +81,11 @@
 							</tr>
 						</table>
 					</div>
-					<div style="margin-bottom: 50px;margin-top: 30px;">
-						<input class="find" type="button" value="找回密码" style="width: 100px;background-color: #FF9900;">
-					</div>
 				</div>
-
+				<div style="margin-bottom: 50px;margin-top: 30px;width: 100%;float: left;">
+						<input type="button" class="find" value="找回密码" style="background-image: url('/images/user/reg/u26.png');
+						border: 0;width:180px;margin-left: 37%;height: 40px;font-size: 20px;color: #FFFFFF;"> 
+				</div>
 			</div>
 		</div>
 		<div class="span2 lrborder" style="margin-left: 0px;"></div>

@@ -57,6 +57,10 @@ public class SecurityInterceptor extends HandlerInterceptorAdapter {
 			needLogin = method.getMethod().getDeclaringClass()
 					.getAnnotation(NeedLogin.class);
 		}
+		String code = request.getParameter("code");
+		if(code != null){
+			request.setAttribute("code", code.toLowerCase());
+		}
 		String currentUser = (String) RequestContext.getSession().getAttribute(
 				UserConstants.CURRENT_USER_NAME);
 		if (needLogin != null) {
