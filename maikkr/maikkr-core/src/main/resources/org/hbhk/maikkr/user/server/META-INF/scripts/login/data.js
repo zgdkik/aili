@@ -12,13 +12,13 @@
 	      }
 	    });
 	var user = $.cookie("mikke_user");
+	var pwd =  $.cookie("mikke_pwd")
 	if(user != null && user!=""){
 		$(".rememberme").attr("checked","checked");
+		$(".email").val(user)
+		$(".password").val(pwd)
 	}
-	var pwd =  $.cookie("mikke_pwd")
-	$(".email").val(user)
-	$(".password").val(pwd)
-	 $("body").on("click",".login",function(){
+	$("body").on("click",".login",function(){
 		 var email =  $(".email").val()
 		 var pwd =  $(".password").val()
 		 if(email=="" || pwd==""){
