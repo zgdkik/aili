@@ -53,7 +53,7 @@ function refreshimg(){
 			<div class="lrborder" style="width: 100%; float: left;">
 				<div class="setting-font" style="">
 					<div
-						style="margin-left: 3px; background-color: #F2F2F2; width: 30%;float: left;">欢迎登录</div>
+						style="margin-left: 3px; background-color: #F2F2F2; width: 30%;float: left;">欢迎注册</div>
 					<div
 						style="float: right;margin-right: 5px;">
 						<span style="font-weight: normal;">我已注册,</span>
