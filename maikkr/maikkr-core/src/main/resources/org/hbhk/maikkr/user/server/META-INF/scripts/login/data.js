@@ -12,7 +12,7 @@
 	      }
 	    });
 	var user = $.cookie("mikke_user");
-	if(user != null){
+	if(user != null && user!=""){
 		$(".rememberme").attr("checked","checked");
 	}
 	var pwd =  $.cookie("mikke_pwd")
@@ -41,8 +41,8 @@
     				$.cookie("mikke_user",email);
     				$.cookie("mikke_pwd",pwd)
     			}else{
-    				$.cookie("mikke_user",null);
-    				$.cookie("mikke_pwd",null)
+    				$.cookie("mikke_user","");
+    				$.cookie("mikke_pwd","")
     			}
     			if(returnUrl!=null && returnUrl!=""){
 		    		window.location.href=returnUrl;
