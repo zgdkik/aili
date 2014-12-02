@@ -11,7 +11,13 @@
 	    	  }
 	      }
 	    });
-
+	var user = $.cookie("mikke_user");
+	if(user != null){
+		$(".rememberme").attr("checked","checked");
+	}
+	var pwd =  $.cookie("mikke_pwd")
+	$(".email").val(user)
+	$(".password").val(pwd)
 	 $("body").on("click",".login",function(){
 		 var email =  $(".email").val()
 		 var pwd =  $(".password").val()
@@ -24,11 +30,20 @@
         		"email":email,
         		"pwd":pwd
         	};
+    	 
     	 $.ailiAjax({
     		url: url,
     		type:"POST",
     		data:data,
     		success: function(data, textStatus){
+    			var rm = $(".rememberme").attr("checked");
+    			if(rm){
+    				$.cookie("mikke_user",email);
+    				$.cookie("mikke_pwd",pwd)
+    			}else{
+    				$.cookie("mikke_user",null);
+    				$.cookie("mikke_pwd",null)
+    			}
     			if(returnUrl!=null && returnUrl!=""){
 		    		window.location.href=returnUrl;
 		    	}else{

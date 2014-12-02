@@ -36,6 +36,7 @@
 	margin-top: 5px;
 }
 </style>
+<script src="${scripts}/login/jquery.cookie.js"></script>
 <script src="${scripts}/login/data.js"></script>
 </head>
 <body>
@@ -70,7 +71,7 @@
 				<div class="" style="font-weight: 700;">
 					<div style="height: 40px; width: 100%; margin-top: 5px;">
 						<div class="checkbox"  style="float: left;margin-left: 35%;">
-							<label> <input type="checkbox" > 记住密码
+							<label> <input type="checkbox" class="rememberme" > 记住密码
 							</label>
 						</div>
 						<div style="float: left;margin-left: 5%;margin-right: 35%;text-decoration: underline;">
