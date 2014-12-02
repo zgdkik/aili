@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<title>${siteInfo.title}-用户信息</title>
+<title>${siteInfo.title}-用户登陆</title>
 <style type="text/css">
 .lrborder {
 	border: 1px solid #999999;
@@ -32,7 +32,7 @@
 .setting-font1 input {
 	height: 30px;
 	float: left;
-	width: 200px;
+	width: 30%;
 	margin-top: 5px;
 }
 </style>
@@ -74,7 +74,7 @@
 							<label> <input type="checkbox" class="rememberme" > 记住密码
 							</label>
 						</div>
-						<div style="float: left;margin-left: 5%;margin-right: 35%;text-decoration: underline;">
+						<div style="float: left;margin-left: 5%;text-decoration: underline;">
 							<a href="javascript:void(0)" class="forget-pwd">忘记密码?</a>
 						</div>
 					</div>

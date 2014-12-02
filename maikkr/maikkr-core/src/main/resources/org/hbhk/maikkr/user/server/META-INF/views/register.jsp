@@ -31,7 +31,7 @@
 .setting-font1 input {
 	height: 30px;
 	float: left;
-	width: 200px;
+	width: 30%;
 }
 </style>
 <script src="${scripts}/reg/data.js"></script>
@@ -96,12 +96,10 @@ function refreshimg(){
 				
 				<div class="setting-font1"
 					style="font-weight: 700;margin-top: 10px;">
-					<div style="height: 40px; width: 100%;float: left;">
+					<div style="height: 40px; width: 100%;">
 						<div
 							style="width: 80px; float: left; height: 40px; line-height: 40px; margin-left: 25%;">验证码:</div>
-						<div style="float: left;">
-						<input type="text" class="code required" title="请输入验证码" style="">
-						</div>
+						<input type="text" class="code required" title="请输入验证码" style="width: 30%">
 						<div style="float: left;">
 						<img style="height: 30px;" id="virfyCode" onclick="javascript:refreshimg()" src="${base}core/getRandcode.htm">
 						</div>
