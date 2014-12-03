@@ -37,6 +37,7 @@
 	color: #FFFFFF;
 	text-align: left;
 	height: 90px;
+	line-height: 90px;
 }
 
 .theme {
@@ -70,7 +71,6 @@
 		</div>
 		<div class="span6" style="margin-left: 0px;border-left: 1px solid #F2F2F2; border-right: 1px solid #F2F2F2; ">
 			<div class="daoyu" style="width: 100%;">
-				<p style="height: 10px"></p>
 				<p>一起买车,与小伙伴分享互动!</p>
 			</div>
 			<div class="theme lrborder-h" style="width: 100%">
@@ -100,8 +100,10 @@
 					</div>
 				</div>
 				<div style="padding-bottom: 2%;padding-top: 2%;" >
-					<input class="sendTheme" type="button"
-						style="margin-left: 60%;width: 23%;height: 30px;background-image: url('${images}/fb.png');border:0;">
+					<input class="sendTheme" type="button" value="发布"
+						style="color: #FFFFFF; margin-left: 60%;width: 23%;
+						height: 30px;background-image: url('${images}/reg/u26.png');
+						border:0;font-size: 20px;">
 				</div>
 			</div>
 		<div class="dxxh"  style="width: 100%" >

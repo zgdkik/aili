@@ -11,8 +11,6 @@
 	font-weight: 400;
 	font-style: normal;
 	font-size: 18px;
-	text-align: center;
-	width: 100px;
 	text-decoration: none;
 }
 
@@ -28,62 +26,61 @@
 	font-family: '宋体 Regular', '宋体';
 	font-weight: 400;
 	font-style: normal;
-	text-decoration:none ;
+	text-decoration: none;
 	color: #000000;
 	text-align: center;
 }
 </style>
 
-<div class="header">
-	<div class="row-fluid" style="height: 60px;">
-		<div class="row-fluid">
+<div class="header" style="float: left; width: 100%">
+		<div class="row-fluid"  style="height: 60px;line-height: 60px;width: 100%;float: left;">
 			<div class="span1" style="margin-left: 60px;"></div>
-			<div class="span3" style="margin-left: 0px;">
-				 <img style="height: 58px; width: 255px;"
-					src="${images}/mikrr-logo.jpg">
-			</div>
-			<div class="span5" style="margin-left: 0px;">
-				<p class="share">&nbsp;</p>
-				<span class="share">汽车主题分享社区</span>
-			</div>
-			<div class="span2" style="margin-left: 0px;">
-				<p class="share">&nbsp;</p>
-				<span class="user">${cuser}</span>
-				<c:if test="${cuser != null}">
-					<a href="${base}user/set.htm" style="margin-left: 30px;"><span
-						class="user">账号设置</span></a>
-				</c:if>
-				<c:if test="${cuser == null}">
-					<a href="${base}user/register.htm" style="margin-left: 30px;"><span
-						class="user">注册</span></a>
-				</c:if>
-				<c:if test="${cuser != null}">
-					<a class="user" style="margin-left: 30px;" href="${base}security/logout.htm">退出</a>
-				</c:if>
-				<c:if test="${cuser == null}">
-					<a class="user" style="margin-left: 30px;" href="${base}user/loginpage.htm">登录</a>
-				</c:if>
+			<div class="span10" style="margin-left: 0px; float: left;">
+				<div class=""
+					style="margin-left: 0px; float: left; width: 20%; max-width: 260px;">
+					<img style="height: 58px; width: 258px;"
+						src="${images}/mikrr-logo.jpg">
+				</div>
+				<div class=""
+					style="margin-left: 20px; float: left; line-height: 60px;">
+					<span class="share">汽车主题分享社区</span>
+				</div>
+				<div class=""
+					style="margin-left: 0px; float: right; line-height: 60px;">
+					<span class="user">${cuser}</span>
+					<c:if test="${cuser != null}">
+						<a href="${base}user/set.htm" style="margin-left: 30px;"><span
+							class="user">账号设置</span></a>
+					</c:if>
+					<c:if test="${cuser == null}">
+						<a href="${base}user/register.htm" style="margin-left: 30px;"><span
+							class="user">注册</span></a>
+					</c:if>
+					<c:if test="${cuser != null}">
+						<a class="user" style="margin-left: 30px;"
+							href="${base}security/logout.htm">退出</a>
+					</c:if>
+					<c:if test="${cuser == null}">
+						<a class="user" style="margin-left: 30px;"
+							href="${base}user/loginpage.htm">登录</a>
+					</c:if>
+				</div>
 			</div>
 			<div class="span1"></div>
 
 		</div>
-	</div>
-	<div class="row-fluid header-b"
-		style="background-color: #F2F2F2; height: 40px;">
-		<div class="span1" style="margin-left: 60px;"></div>
 
-		<div class="span8" style="margin-left: 0px;">
-			<p class="share"  style="height: 1px;">&nbsp;</p>
-			<div >
-			<a class="home" href="${base}"  style="margin-left: 30px">首页</a> 
-			<a class="jhs" href="${base}user/jyh.htm"  style="margin-left: 30px">聚优惠</a>
-			<a class="about" href="${base}user/aboutus.htm" style="margin-left: 30px" >关于我们</a>
+		<div class="row-fluid header-b"  style="background-color: #F2F2F2;height: 40px;line-height: 40px;width: 100%;float: left;">
+			<div class="span1" style="margin-left: 60px;"></div>
+			<div class="span10" style="margin-left: 0px; float: left;">
+				<div >
+				<a class="home" href="${base}"  style="margin-left: 30px">首页</a> 
+				<a class="jhs" href="${base}user/jyh.htm"  style="margin-left: 30px">聚优惠</a>
+				<a class="about" href="${base}user/aboutus.htm" style="margin-left: 30px" >关于我们</a>
+				</div>
 			</div>
-		</div>
-		<!-- <div class="span2" style="margin-left: 0px;">
-		</div> -->
-		<div class="span2" style="margin-left: 0px;"></div>
+			<div class="span1"></div>
 
-		<div class="span1"></div>
-	</div>
+		</div>
+
 </div>
