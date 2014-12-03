@@ -14,7 +14,7 @@
 	var name = "${theme.carType}";
 	var context = "${theme.plannTime}";
 	var area = "${theme.area}";
-	var bdPic="${file_server}${theme.userHeadImg}";
+	var bdPic = "${file_server}${theme.userHeadImg}";
 	with (document)
 		0[(getElementsByTagName('head')[0] || body)
 				.appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='
@@ -43,12 +43,24 @@
 	font-size: 20px;
 	color: #000000;
 }
+
+.fbpl {
+	border: 0;
+	margin-left: 60%;
+	margin-bottom: 10px;
+	height:30px;
+	margin-top: 10px;
+	background-image: url('${images}/reg/u26.png');
+	font-size: 20px;
+	color: white;
+	width: 20%;
+}
 </style>
 </head>
 <body>
 	<jsp:include page="header.jsp" />
 	<!-- 中间部分 -->
-	<div class="row-fluid" style="min-height: 500px">
+	<div class="row-fluid" style="min-height: 600px">
 		<div class="span1" style="margin-left: 60px;"></div>
 
 		<div class="span2 lrborder" style="margin-left: 0px;">
@@ -66,31 +78,42 @@
 			</div>
 			<div style="border-bottom: 1px solid #999999;">
 				<div style="margin-left: 10px" class="dxx">
-					<img tid="${theme.id}" class="collect" style="float: right;" title="收藏" alt="收藏" width="20px" height="20px" src="${images}/mytheme/u316.png">
-					<label class="theme-font">喜欢车型:${theme.carType}</label>
+					<img tid="${theme.id}" class="collect" style="float: right;"
+						title="收藏" alt="收藏" width="20px" height="20px"
+						src="${images}/mytheme/u316.png"> <label class="theme-font">喜欢车型:${theme.carType}</label>
 					<label class="theme-font">计划时间:<fmt:formatDate
-							value="${theme.plannTime}" /></label> 
-					<label class="theme-font">所在地区:${theme.area}</label>
-					
+							value="${theme.plannTime}" /></label> <label class="theme-font">所在地区:${theme.area}</label>
+
 				</div>
 			</div>
 			<c:forEach items="${comments}" var="c">
 				<fmt:formatDate var="time" value="${theme.createTime}"
 					pattern="yyyy-MM-dd HH:mm:ss" type="time"></fmt:formatDate>
-				<div style="border: 1px solid gray; margin-top: 3px;font-size: 16px;">
-					<div style="font-family: '宋体 Bold', '宋体';font-weight: 700;font-style: normal;"><img width="50px" height="50px" alt="" src="${file_server}${c.commentHeadImg}"> 
-					 <span>${c.commentUser}</span> ${time}</div>
-					 <div style="border: 1px solid ;margin-left:5px;margin-right:5px;margin-bottom:5px; word-wrap:break-word; background-color: #F2F2F2"><xmp>${c.commentConcent}</xmp></div>
-				</div>
-			</c:forEach>
-			<div class="content" style="margin-top:3px; background-color: #F2F2F2;border: 1px solid gray; ">
-				<div class="panel panel-info">
-				   <div class="panel-body">
-				    <textarea placeholder="请输入评论内容"   id="editorText" style="width: 60%; margin-left: 20%;height: 120px;resize:none;margin-top: 10px" ></textarea>
-					<input style="background-color:#FEB252;border:0; margin-left: 60%;margin-bottom: 10px;margin-top: 10px" type="button" value="发表评论" id="sendComment" title="发表评论">
+				<div
+					style="border: 1px solid gray; margin-top: 3px; font-size: 16px;">
+					<div
+						style="font-family: '宋体 Bold', '宋体'; font-weight: 700; font-style: normal;">
+						<img width="50px" height="50px" alt=""
+							src="${file_server}${c.commentHeadImg}"> <span>${c.commentUser}</span>
+						${time}
+					</div>
+					<div
+						style="border: 1px solid; margin-left: 5px; margin-right: 5px; margin-bottom: 5px; word-wrap: break-word; background-color: #F2F2F2">
+						<xmp>${c.commentConcent}</xmp>
 					</div>
 				</div>
-			
+			</c:forEach>
+			<div class="content"
+				style="margin-top: 20px; background-color: #F2F2F2; width: 100%;">
+				<div class="panel panel-info">
+					<div class="panel-body">
+						<textarea placeholder="请输入评论内容" id="editorText"
+							style="width: 60%; margin-left: 20%; height: 120px; resize: none; margin-top: 10px"></textarea>
+						<input style="width: 20%" type="button" class="fbpl" value="发表评论" id="sendComment"
+							title="发表评论">
+					</div>
+				</div>
+
 			</div>
 		</div>
 
@@ -101,6 +124,6 @@
 		<div class="span1"></div>
 	</div>
 	<jsp:include page="footer.jsp" />
-	<input type="hidden" id="blogId" value="${theme.id}"/>
+	<input type="hidden" id="blogId" value="${theme.id}" />
 </body>
 </html>
