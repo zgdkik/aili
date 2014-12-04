@@ -45,26 +45,6 @@
 					style="margin-left: 20px; float: left; line-height: 60px;">
 					<span class="share">汽车主题分享社区</span>
 				</div>
-				<div class="user-info"
-					style="margin-left: 0px; float: right; line-height: 60px;">
-					<span class="user">${cuser}</span>
-					<c:if test="${cuser != null}">
-						<a href="${base}user/set.htm" style="margin-left: 30px;"><span
-							class="user">账号设置</span></a>
-					</c:if>
-					<c:if test="${cuser == null}">
-						<a href="${base}user/register.htm" style="margin-left: 30px;"><span
-							class="user">注册</span></a>
-					</c:if>
-					<c:if test="${cuser != null}">
-						<a class="user" style="margin-left: 30px;"
-							href="${base}security/logout.htm">退出</a>
-					</c:if>
-					<c:if test="${cuser == null}">
-						<a class="user" style="margin-left: 30px;"
-							href="${base}user/loginpage.htm">登录</a>
-					</c:if>
-				</div>
 			</div>
 			<div class="span1"></div>
 

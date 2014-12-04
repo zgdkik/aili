@@ -73,7 +73,7 @@
 	$("body").on("click",".sendTheme",function(){
 		 var me = $(this);
 		 if(UserContext.user==null || UserContext.user==""){
-			ctips(me,"你需要登陆才能发表主题");
+			ctips(me,"你需要登录才能发表主题");
 			return ;
 		 }
 		 var car =  $("#u94_input").val();
@@ -100,7 +100,7 @@
 	   		data:data,
 	   		success: function(data, textStatus){
 	   			tips("#u297","发布成功");
-	   			window.location.reload();
+	   			window.location.href=base+"user/myTheme.htm";
 	   		},
 	   		exception:function(data, textStatus){
 	   			tips("#u297","发布失败");

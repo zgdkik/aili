@@ -43,7 +43,7 @@ function refreshimg(){
 </script>
 </head>
 <body>
-	<jsp:include page="header.jsp" />
+	<jsp:include page="header-nouser.jsp" />
 	<!-- 中间部分 -->
 	<div class="row-fluid" style="min-height: 500px">
 		<div class="span1" style="margin-left: 60px;"></div>

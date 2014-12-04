@@ -36,7 +36,7 @@
     		type:"POST",
     		data:data,
     		success: function(data, textStatus){
-    			var rm = $(".rememberme").attr("checked");
+    			var rm = $(".rememberme").get(0).checked;
     			if(rm){
     				$.cookie("mikke_user",email);
     				$.cookie("mikke_pwd",pwd)

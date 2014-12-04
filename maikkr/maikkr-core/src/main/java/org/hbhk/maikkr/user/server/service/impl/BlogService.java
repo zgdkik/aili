@@ -68,7 +68,7 @@ public class BlogService implements IBlogService {
 				msg.setReceiveUser(careInfo.getCreatUser());
 				msg.setType("user_type");
 				String cpath = RequestContext.getRequest().getContextPath();
-				String turl = "<a href='"+cpath+blog.getBlogUrl()+"'>"+blog.getBlogTitle()+"</a>";
+				String turl = "<a href='"+cpath+blog.getBlogUrl()+"'>"+blog.getCarType()+"</a>";
 				msg.setMsg("您关注的用户发表了新的主题:"+turl);
 				msg.setUrl(blog.getBlogUrl());
 				msgInfoService.save(msg);

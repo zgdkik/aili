@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<title>${siteInfo.title}-用户注册</title>
+<title>${siteInfo.title}-用户私信</title>
 <script src="${scripts}/friends.js"></script>
 <style type="text/css">
 .font-label {
@@ -14,7 +14,10 @@
 	font-weight: 700;
 	font-style: normal;
 	font-size: 20px;
-	color: #666666;
+}
+.msg-send{
+	color: white;
+	background-image: url("${images}/reg/u26.png");
 }
 </style>
 </head>
@@ -29,7 +32,7 @@
 		</div>
 		<div class="span6" style="margin-left: 0px;">
 			<div class="center-body"
-				style="width: 100%; border: 1px solid #EF5C00; float: left;background-color: #B4CDE6;">
+				style="width: 100%; float: left;">
 				<div class="my-msg" style="width: 100%">
 					<table class="table">
 						<caption
@@ -53,10 +56,10 @@
 						</tbody>
 					</table>
 				</div>
-				<div class="send-msg" style="display: none; width: 100%;margin-top: 10px">
-					<div style="width: 100%; float: left; background-color: #B4CDE6;">
+				<div class="send-msg" style="display: none; width: 100%;margin-top: 10px;border: 1px solid #999999;float: left;">
+					<div style="width: 100%; float: left; margin-top: 10px;">
 						<label class="font-label"
-							style="width: 50px; width: 50px; float: left; margin-left: 20%;font-size: 15px;">收信人</label>
+							style="width: 70px; float: left; margin-left: 20%;font-size: 15px;">收信人:</label>
 						<select class="receive-user" style="float: left;">
 							<c:forEach items="${fs}" var="f">
 								<c:if test="${f.nickName != null}">
@@ -70,15 +73,15 @@
 
 						</select>
 					</div>
-					<div style="width: 100%; float: left; background-color: #B4CDE6;">
+					<div style="width: 100%; float: left;">
 						<label class="font-label"
-							style="width: 50px; width: 50px; float: left; margin-left: 20%;font-size: 15px;">内容</label>
+							style="width: 70px; float: left; margin-left: 20%;font-size: 15px;">内  容:</label>
 						<textarea rows="" class="msg-content" cols=""
 							style="width: 50%; float: left; resize: none; height: 150px;"></textarea>
 					</div>
 					<div style="width: 100%; float: left;">
 						<input type="button" value="发送" class="msg-send font-label"
-							style="margin-bottom: 5px; margin-left: 40%; background-color: #EF5C00; border: 0; margin-top: 5px; width: 70px; height: 40px">
+							style="margin-bottom: 10px; margin-left: 60%; background-color: #EF5C00; border: 0; margin-top: 5px; width: 50px; height: 30px">
 					</div>
 				</div>
 			</div>

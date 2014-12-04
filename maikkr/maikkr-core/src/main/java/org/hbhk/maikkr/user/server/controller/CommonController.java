@@ -105,7 +105,7 @@ public class CommonController extends BaseController {
 	public ResponseEntity myTheme(BlogInfo blog, int pageNum) {
 		try {
 			Page page = new Page();
-			page.setSize(5);
+			page.setSize(20);
 			if (pageNum > 20) {
 				pageNum = 20;
 			}
