@@ -46,14 +46,14 @@
 
 .fbpl {
 	border: 0;
-	margin-left: 60%;
+	margin-left: 80%;
 	margin-bottom: 10px;
 	height:30px;
-	margin-top: 10px;
+	margin-top: 5px;
 	background-image: url('${images}/reg/u26.png');
 	font-size: 20px;
 	color: white;
-	width: 20%;
+	min-width: 50px;
 }
 </style>
 </head>
@@ -70,13 +70,13 @@
 			<div class="ctheme">
 				<fmt:formatDate var="date" value="${theme.createTime}"
 					pattern="yyyy-MM-dd HH:mm:ss" type="time"></fmt:formatDate>
-				<div style="border-bottom: 1px solid #999999;">
+				<div style="border-bottom: 1px solid #EFEFEF;">
 					<img id="head_portrait" height="50px" width="50px"
 						src="${file_server}${theme.userHeadImg}"> <span
 						class="title">${theme.blogUser}发布时间:<c:out value="${date}" /></span>
 				</div>
 			</div>
-			<div style="border-bottom: 1px solid #999999;">
+			<div style="border-bottom: 1px solid #EFEFEF;">
 				<div style="margin-left: 10px" class="dxx">
 					<img tid="${theme.id}" class="collect" style="float: right;"
 						title="收藏" alt="收藏" width="20px" height="20px"
@@ -86,11 +86,25 @@
 
 				</div>
 			</div>
+			
+			<div class="content"
+				style="margin-top: 20px; width: 100%;">
+				<div class="panel panel-info">
+					<div class="panel-body">
+						<textarea placeholder="请输入评论内容" id="editorText"
+							style="width: 80%; margin-left: 10%; height: 80px; resize: none; margin-top: 10px"></textarea>
+						<input style="width: 30px" type="button" class="fbpl" value="评论" id="sendComment"
+							title="评论">
+					</div>
+				</div>
+
+			</div>
+			<div style="border-top:1px solid #EFEFEF;width: 100%">
 			<c:forEach items="${comments}" var="c">
 				<fmt:formatDate var="time" value="${theme.createTime}"
 					pattern="yyyy-MM-dd HH:mm:ss" type="time"></fmt:formatDate>
 				<div
-					style="border: 1px solid gray; margin-top: 3px; font-size: 16px;">
+					style="margin-top: 3px; font-size: 16px;border-bottom: 1px solid #EFEFEF;margin-top: 5px; ">
 					<div
 						style="font-family: '宋体 Bold', '宋体'; font-weight: 700; font-style: normal;">
 						<img width="50px" height="50px" alt=""
@@ -98,22 +112,11 @@
 						${time}
 					</div>
 					<div
-						style="border: 1px solid; margin-left: 5px; margin-right: 5px; margin-bottom: 5px; word-wrap: break-word; background-color: #F2F2F2">
+						style="margin-left: 50px; margin-right: 5px; margin-bottom: 5px; word-wrap: break-word; background-color: #F2F2F2">
 						<xmp>${c.commentConcent}</xmp>
 					</div>
 				</div>
 			</c:forEach>
-			<div class="content"
-				style="margin-top: 20px; background-color: #F2F2F2; width: 100%;">
-				<div class="panel panel-info">
-					<div class="panel-body">
-						<textarea placeholder="请输入评论内容" id="editorText"
-							style="width: 60%; margin-left: 20%; height: 120px; resize: none; margin-top: 10px"></textarea>
-						<input style="width: 20%" type="button" class="fbpl" value="发表评论" id="sendComment"
-							title="发表评论">
-					</div>
-				</div>
-
 			</div>
 		</div>
 

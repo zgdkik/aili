@@ -10,6 +10,10 @@ $(document).ready(function() {
 			ctips(me,"请输入评论内容");
 			return ;
 		}
+		if(editorText.length>150){
+			ctips(me,"评论内容最多150个字");
+			return ;
+		}
 		var blogId = $("#blogId").val();
 		$.ailiAjax({
 			url : base + "user/sendComment.htm",
