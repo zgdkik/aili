@@ -38,8 +38,8 @@
     		success: function(data, textStatus){
     			var rm = $(".rememberme").get(0).checked;
     			if(rm){
-    				$.cookie("mikke_user",email);
-    				$.cookie("mikke_pwd",pwd)
+    				$.cookie("mikke_user",email,{expires:100});
+    				$.cookie("mikke_pwd",pwd,{expires:100})
     			}else{
     				$.cookie("mikke_user","");
     				$.cookie("mikke_pwd","")
