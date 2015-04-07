@@ -19,7 +19,7 @@
 				</property>
 			</activation>
 			<properties>
-				<aili-release-version>1.0.1</aili-release-version>
+				<aili-version>1.0.1</aili-version>
 			</properties>
 		</profile>
 	</profiles>

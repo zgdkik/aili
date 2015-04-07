@@ -19,7 +19,7 @@
 				</property>
 			</activation>
 			<properties>
-				<hbhk-release-version>1.0.1</hbhk-release-version>
+				<aili-version>1.0.1</aili-version>
 			</properties>
 		</profile>
 	</profiles>
