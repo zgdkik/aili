@@ -11,7 +11,7 @@
 	</properties>
 	<profiles>
 		<profile>
-			<id>product</id>
+			<id>prd</id>
 			<activation>
 				<property>
 					<name>release</name>
