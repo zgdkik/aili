@@ -156,10 +156,6 @@ public class UserService implements IUserService, UserDetailsService {
 		return userDao.update(user);
 	}
 
-	@Override
-	public UserInfo getOne(UserInfo model) {
-		return null;
-	}
 
 	@Override
 	public List<UserInfo> get(UserInfo model) {
@@ -171,6 +167,18 @@ public class UserService implements IUserService, UserDetailsService {
 			throws UsernameNotFoundException {
         UserDetailsVo user = userDao.findUserDetailsVo(username);
 		return user;
+	}
+
+	@Override
+	public UserInfo getById(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<UserInfo> get(Map<String, Object> params) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 

@@ -9,7 +9,7 @@ import org.hbhk.aili.security.share.model.LoginLogInfo;
  * @author  何波
  *
  */
-public interface ILoginLogInfoService extends ICommonService<LoginLogInfo> {
+public interface ILoginLogInfoService extends IBizBaseService<Long,LoginLogInfo> {
 
 
 	
