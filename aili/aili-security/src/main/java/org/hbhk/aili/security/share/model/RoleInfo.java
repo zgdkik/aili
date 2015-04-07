@@ -1,7 +1,5 @@
 package org.hbhk.aili.security.share.model;
 
-import java.util.Set;
-
 import org.hbhk.aili.mybatis.server.annotation.Column;
 import org.hbhk.aili.mybatis.server.annotation.Table;
 import org.hbhk.aili.mybatis.share.model.BizBaseModel;
@@ -19,7 +17,6 @@ public class RoleInfo extends BizBaseModel {
 	@Column("type")
 	private String type;
 
-	private Set<String> resourceCodes;
 
 	public String getCode() {
 		return code;
@@ -37,13 +34,6 @@ public class RoleInfo extends BizBaseModel {
 		this.name = name;
 	}
 
-	public Set<String> getResourceCodes() {
-		return resourceCodes;
-	}
-
-	public void setResourceCodes(Set<String> resourceCodes) {
-		this.resourceCodes = resourceCodes;
-	}
 
 	public String getType() {
 		return type;

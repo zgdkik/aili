@@ -34,9 +34,6 @@ public class ResourceInfo extends BizBaseModel {
 	@Column("cls")
 	private String cls;
 
-	// 子节点
-	private Set<String> childrenCodes;
-
 	// 备注
 	@Column("memo")
 	private String memo;
@@ -105,12 +102,5 @@ public class ResourceInfo extends BizBaseModel {
 		this.cls = cls;
 	}
 
-	public Set<String> getChildrenCodes() {
-		return childrenCodes;
-	}
-
-	public void setChildrenCodes(Set<String> childrenCodes) {
-		this.childrenCodes = childrenCodes;
-	}
 
 }

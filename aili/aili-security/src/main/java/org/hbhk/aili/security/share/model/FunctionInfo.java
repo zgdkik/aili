@@ -18,8 +18,8 @@ public class FunctionInfo extends BizBaseModel {
 	@Column("text")
 	private String text;
 
-	@Column("resource_code")
-	private String resourceCode;
+	@Column("res_code")
+	private String resCode;
 	// 显示 顺序
 	@Column("priority")
 	private int priority;
@@ -70,12 +70,13 @@ public class FunctionInfo extends BizBaseModel {
 		this.memo = memo;
 	}
 
-	public String getResourceCode() {
-		return resourceCode;
+	public String getResCode() {
+		return resCode;
 	}
 
-	public void setResourceCode(String resourceCode) {
-		this.resourceCode = resourceCode;
+	public void setResCode(String resCode) {
+		this.resCode = resCode;
 	}
+
 
 }
