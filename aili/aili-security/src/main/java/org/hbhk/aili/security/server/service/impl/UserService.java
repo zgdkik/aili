@@ -135,13 +135,6 @@ public class UserService implements IUserService, UserDetailsService {
 		return userDao.getById(user.getId()+"");
 	}
 
-	public String getDefaultHead() {
-		return defaultHead;
-	}
-
-	public void setDefaultHead(String defaultHead) {
-		this.defaultHead = defaultHead;
-	}
 
 	@Override
 	public int update(UserInfo user) {
