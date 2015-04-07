@@ -1,7 +1,5 @@
 package org.hbhk.aili.security.share.model;
 
-import java.util.Set;
-
 import org.hbhk.aili.mybatis.server.annotation.Column;
 import org.hbhk.aili.mybatis.server.annotation.Table;
 import org.hbhk.aili.mybatis.share.model.BizBaseModel;
