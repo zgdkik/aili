@@ -89,7 +89,7 @@ public class QueryPageAspect {
 			Page page = getPage(args);
 			Sort[] sorts = getSorts(args);
 			params.put("page.sorts", sorts);
-			RowBounds rowBounds = new RowBounds(page.getPageNum(),page.getPageSize());
+			RowBounds rowBounds = new RowBounds(page.getStart(),page.getPageSize());
 			List<Object> list = session.selectList(statement, params,rowBounds);
 			
 			Pagination<Object> pagination = new Pagination<Object>();
