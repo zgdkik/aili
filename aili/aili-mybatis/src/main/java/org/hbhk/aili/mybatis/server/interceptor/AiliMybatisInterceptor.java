@@ -72,13 +72,15 @@ public class AiliMybatisInterceptor implements Interceptor {
 		MappedStatement newMs = copyFromMappedStatement(ms,
 				new BoundSqlSqlSource(newBoundSql), gnericInterfaceType);
 		queryArgs[0] = newMs;
-		//清除threadLocal数据
-		if(dealmethod.contains(methodName)){
-			GnericInterfaceTypeContext.remove();
+		try {
+			//解决分页一种方式,不再aop里面再调用查询
+			return invocation.proceed();
+		} finally {
+			//清除threadLocal数据
+			if(dealmethod.contains(methodName)){
+				GnericInterfaceTypeContext.remove();
+			}
 		}
-		//解决分页一种方式,不再aop里面再调用查询
-		return invocation.proceed();
-		
 	}
 
 	private Class<?> getGenericInterfaces(String className) throws Exception {
