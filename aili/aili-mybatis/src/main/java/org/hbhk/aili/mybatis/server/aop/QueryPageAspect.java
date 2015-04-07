@@ -29,7 +29,6 @@ import org.hbhk.aili.mybatis.share.util.MybatisSqlHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.Ordered;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
@@ -44,7 +43,7 @@ import org.springframework.stereotype.Component;
  */
 @Aspect
 @Component
-public class QueryPageAspect implements Ordered {
+public class QueryPageAspect {
 
 	protected static final Logger logger = LoggerFactory.getLogger(QueryPageAspect.class);
 	@Autowired
@@ -57,9 +56,6 @@ public class QueryPageAspect implements Ordered {
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 
-	public int getOrder() {
-		return 20;
-	}
 	@Around("this(org.hbhk.aili.mybatis.server.dao.IBaseDao)")
 	//@Around("execution(* org.hbhk.*.*.server.dao.*.*(..))")
 	public Object doQuery(ProceedingJoinPoint pjp) throws Throwable {
