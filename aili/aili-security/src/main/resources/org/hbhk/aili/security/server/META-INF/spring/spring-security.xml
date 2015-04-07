@@ -44,4 +44,4 @@
 	<beans:bean id="bcryptPasswordEncoder"
 		class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"></beans:bean>
 
-</beans>
+</beans:beans>
