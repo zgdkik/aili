@@ -1,7 +1,5 @@
 package org.hbhk.aili.core.share.util;
 
-import java.util.Arrays;
-
 import javassist.ClassPool;
 import javassist.CtClass;
 import javassist.CtMethod;
@@ -12,21 +10,6 @@ import javassist.bytecode.LocalVariableAttribute;
 import javassist.bytecode.MethodInfo;
   
 public class JavaParamsUtil {  
-  
-    public static void main(String[] args1) throws Exception {  
-        // 匹配静态方法  
-        String[] paramNames = getMethodParamNames(JavaParamsUtil.class, "main", String[].class);  
-        System.out.println(Arrays.toString(paramNames));  
-        // 匹配实例方法  
-        paramNames = getMethodParamNames(JavaParamsUtil.class, "foo", String.class);  
-        System.out.println(Arrays.toString(paramNames));  
-        // 自由匹配任一个重名方法  
-        paramNames = getMethodParamNames(JavaParamsUtil.class, "getMethodParamNames");  
-        System.out.println(Arrays.toString(paramNames));  
-        // 匹配特定签名的方法  
-        paramNames = getMethodParamNames(JavaParamsUtil.class, "getMethodParamNames", Class.class, String.class);  
-        System.out.println(Arrays.toString(paramNames));  
-    }  
   
     /** 
      * 获取方法参数名称，按给定的参数类型匹配方法 
@@ -95,11 +78,5 @@ public class JavaParamsUtil {
         }
         return paramNames;  
     }  
-  
-  
-    static void foo() {  
-    }  
-  
-    void foo(String bar) {  
-    }  
+   
 }  
