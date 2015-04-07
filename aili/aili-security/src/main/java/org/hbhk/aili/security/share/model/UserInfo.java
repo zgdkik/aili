@@ -8,6 +8,9 @@ import org.hbhk.aili.mybatis.share.model.BizBaseModel;
 public class UserInfo extends BizBaseModel {
 
 	private static final long serialVersionUID = 54122579931594962L;
+	@Column("user_code")
+	private String userCode;
+	
 	@Column("user_name")
 	private String userName;
 
@@ -85,6 +88,14 @@ public class UserInfo extends BizBaseModel {
 
 	public void setUserHead(String userHead) {
 		this.userHead = userHead;
+	}
+
+	public String getUserCode() {
+		return userCode;
+	}
+
+	public void setUserCode(String userCode) {
+		this.userCode = userCode;
 	}
 
 }

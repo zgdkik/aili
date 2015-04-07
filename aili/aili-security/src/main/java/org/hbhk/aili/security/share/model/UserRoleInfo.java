@@ -6,15 +6,15 @@ import org.hbhk.aili.mybatis.share.model.BaseModel;
 
 @Table("t_aili_user_role")
 public class UserRoleInfo extends BaseModel {
-	
+
 	private static final long serialVersionUID = 3957210246592405024L;
 
 	/**
 	 * 角色编码
 	 */
-	@Column("user_name")
-	private String userName;
-	
+	@Column("user_code")
+	private String userCode;
+
 	/**
 	 * 角色编码
 	 */
@@ -24,15 +24,17 @@ public class UserRoleInfo extends BaseModel {
 	public String getRoleCode() {
 		return roleCode;
 	}
+
 	public void setRoleCode(String roleCode) {
 		this.roleCode = roleCode;
 	}
-	public String getUserName() {
-		return userName;
+
+	public String getUserCode() {
+		return userCode;
 	}
-	public void setUserName(String userName) {
-		this.userName = userName;
+
+	public void setUserCode(String userCode) {
+		this.userCode = userCode;
 	}
-	
-	
+
 }
