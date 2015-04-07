@@ -1,0 +1,125 @@
+package org.hbhk.${projectName}.${moduleName}.server.service.impl;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import java.util.List;
+import java.util.Map;
+import java.util.Date;
+import org.hbhk.aili.orm.server.surpport.Page;
+import org.hbhk.aili.orm.server.surpport.Sort;
+import org.hbhk.aili.orm.share.model.Pagination;
+import org.hbhk.aili.orm.server.surpport.Page;
+import ${entityPackagName};
+import org.hbhk.${projectName}.${moduleName}.server.service.I${entityName}Service;
+import org.hbhk.${projectName}.${moduleName}.server.dao.I${entityName}Dao;
+import org.hbhk.aili.orm.share.util.UUIDUitl;
+ <#assign daovar =  "${fname[0]?lower_case}${fname[1..]}Dao" />
+/**
+ * @author  ${authName}
+ *
+ */
+@Transactional
+@Service 
+public class ${fname}Service implements I${fname}Service {
+
+	private  Logger log = LoggerFactory.getLogger(${entityName}Service.class);
+	@Autowired
+	private I${entityName}Dao ${daovar};
+
+
+	/**
+	 * 保存${entityName}
+	 */
+	public ${entityName} save(${entityName} model){
+		model.setCreateTime(new Date());
+		return ${daovar}.save(model);
+	}
+	
+	/**
+	 *修改${entityName}
+	 */
+	public ${entityName} update(${entityName} model){
+		model.setUpdateTime(new Date());
+		return ${daovar}.update(model);
+	}
+	
+	
+	public ${entityName} getOne(${entityName} model){
+		return ${daovar}.getOne(model);
+	}
+	
+	public List<${entityName}> get(${entityName} model){
+		return ${daovar}.get(model);
+	}
+	
+	public List<${entityName}> get(${entityName} model,Page page){
+		return ${daovar}.get(model,page);
+	}
+	/**
+	 * 通过id获取${entityName}
+	 * 
+	 */
+	public ${entityName} findById(Long id){
+		${entityName} model = new ${entityName}();
+		return ${daovar}.getOne(model);
+	}
+
+	/**
+	 * 获取所有${entityName}列表
+	 * @return
+	 */
+	public List<${entityName}> findAllList(){
+	
+		return ${daovar}.findAllList();
+	}
+	
+	/**
+	 * 通过ids获取${entityName}列表
+	 * @param ids
+	 * @return
+	 */
+	public List<${entityName}> findListByIds(List<Long> ids){
+	
+		return ${daovar}.findListByIds(ids);
+	}
+	
+	<#if lifecycle !="">
+	
+	/**
+	 * 通过ids批量启用或禁用${entityName}
+	 * 设置${lifecycle} =0 或 1
+	 * @param ids
+	 * @return
+	 */
+	public int updateStatusByIds(List<Long> ids,Integer state){
+		return ${daovar}.updateStatusByIds(ids,state);
+	}
+	
+	</#if>
+	
+		/**
+	 * 通过参数map获取${entityName}列表
+	 * @param paraMap
+	 * @return
+	 */
+	List<${entityName}> findListByQueryMap(Map<String, Object> paraMap){
+		return ${daovar}.findListByQueryMap(paraMap);
+	}
+	
+	/**
+	 * 分页获取${entityName}列表
+	 * @param start
+	 * @param size
+	 * @param paraMap
+	 * @param sorts 
+	 * @return
+	 */
+	Pagination<${entityName}> findListByQueryMapWithPage(Page page,Sort[] sorts,Map<String, Object> paraMap){
+		return ${daovar}.findListByQueryMapWithPage(page,sorts,paraMap);
+	}
+	
+	
+}
