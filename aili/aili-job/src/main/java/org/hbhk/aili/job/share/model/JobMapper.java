@@ -1,4 +1,4 @@
-package org.hbhk.aili.job.share.pojo;
+package org.hbhk.aili.job.share.model;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

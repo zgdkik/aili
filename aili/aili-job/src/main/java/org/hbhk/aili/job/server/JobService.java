@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang.time.DateFormatUtils;
-import org.hbhk.aili.job.share.pojo.JobInfo;
+import org.hbhk.aili.job.share.model.JobInfo;
 import org.quartz.CronScheduleBuilder;
 import org.quartz.CronTrigger;
 import org.quartz.Job;

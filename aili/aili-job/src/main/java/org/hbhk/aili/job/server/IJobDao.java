@@ -2,7 +2,7 @@ package org.hbhk.aili.job.server;
 
 import java.util.List;
 
-import org.hbhk.aili.job.share.pojo.JobInfo;
+import org.hbhk.aili.job.share.model.JobInfo;
 
 
 public interface IJobDao {

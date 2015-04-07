@@ -1,4 +1,4 @@
-package org.hbhk.aili.job.share.pojo;
+package org.hbhk.aili.job.share.model;
 
 
 public class JobInfo {
