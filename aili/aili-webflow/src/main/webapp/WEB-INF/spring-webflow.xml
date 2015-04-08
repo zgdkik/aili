@@ -10,7 +10,8 @@
 		flow-builder-services="flowBuilderServices" >
 		<!-- <webflow:flow-location-pattern value="/**/*-flow.xml" /> -->
 		 <webflow:flow-location path="/WEB-INF/flows/viewCart-flow.xml" id="viewCart"/> 
-		  <webflow:flow-location path="/WEB-INF/flows/addToCart-flow.xml" id="addToCart"/>
+		 <webflow:flow-location path="/WEB-INF/flows/viewCart-flow.xml" id="index"/> 
+		 <webflow:flow-location path="/WEB-INF/flows/addToCart-flow.xml" id="addToCart"/>
 	</webflow:flow-registry>
 
 	<!-- Executes flows: the entry point into the Spring Web Flow system -->
@@ -28,6 +29,7 @@
 		<property name="mappings">
 			<value>
 				/viewCart=flowController
+				/index=flowController
 			</value>
 		</property>
 	</bean>

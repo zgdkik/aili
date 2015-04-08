@@ -26,7 +26,7 @@
 		<transition on="returnToIndex" to="returnToIndex">
 		</transition>
 	</view-state>
-	<end-state id="returnToIndex" view="externalRedirect:servletRelative:/WEB-INF/views/index.jsp">
+	<end-state id="returnToIndex" view="externalRedirect:/index">
 	</end-state>
 	
 </flow>
