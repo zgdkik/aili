@@ -37,7 +37,7 @@ public class I18nJspMainTest {
 	 *	role.=修改
 	 * 
 	 */
-	public static final String HEAD_STRING = "aili.i18n.";
+	public static final String HEAD_STRING = "role.edit.";
 	
 	
 	@Test
