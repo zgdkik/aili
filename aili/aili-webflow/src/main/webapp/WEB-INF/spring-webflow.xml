@@ -17,19 +17,21 @@
 		<!-- <webflow:flow-execution-listeners> <webflow:listener ref="securityFlowExecutionListener" 
 			/> </webflow:flow-execution-listeners> -->
 	</webflow:flow-executor>
-	<!-- <bean id="viewMappings"
+	<bean id="viewMappings"
 		class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
 		<property name="defaultHandler">
-			UrlFilenameViewController 会将 "/index" 这样的请求映射成名为 "index" 的视图
+			<!-- UrlFilenameViewController 会将 "/index" 这样的请求映射成名为 "index" 的视图 -->
 			<bean class="org.springframework.web.servlet.mvc.UrlFilenameViewController" />
 		</property>
-	</bean> -->
-	<bean id="mvcViewFactoryCreator" class="org.springframework.webflow.mvc.builder.MvcViewFactoryCreator">
-		<!-- <property name="viewResolvers">
-			<list>
-				<ref bean="viewResolver" />
-			</list>
-		</property> -->
+	</bean>
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/views/"></property>
+		<property name="suffix" value=".jsp"></property>
+	</bean>
+	<bean id="mvcViewFactoryCreator"
+		class="org.springframework.webflow.mvc.builder.MvcViewFactoryCreator">
+		<property name="viewResolvers" ref="viewResolver" />
 	</bean>
 	<!-- Plugs in a custom creator for Web Flow views -->
 	<webflow:flow-builder-services id="flowBuilderServices"
