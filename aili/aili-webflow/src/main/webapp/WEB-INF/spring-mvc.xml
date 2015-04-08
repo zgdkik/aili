@@ -27,19 +27,10 @@
 			expression="org.springframework.web.bind.annotation.ControllerAdvice" />
 	</context:component-scan>
 
-	<bean
+	<bean id="viewResolver" 
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/views/"></property>
 		<property name="suffix" value=".jsp"></property>
-		<property name="order" value="9999" />
-	</bean>
-
-	<bean id="viewMappings"
-		class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
-		<property name="defaultHandler">
-			<!-- UrlFilenameViewController 会将 "/index" 这样的请求映射成名为 "index" 的视图 -->
-			<bean class="org.springframework.web.servlet.mvc.UrlFilenameViewController" />
-		</property>
 	</bean>
 
 </beans>   
