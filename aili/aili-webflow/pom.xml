@@ -65,7 +65,7 @@
 				<artifactId>tomcat6-maven-plugin</artifactId>
 				<version>2.2</version>
 				<configuration>
-					<path>/webflow</path>
+					<path>/</path>
 					<port>5416</port>
 				</configuration>
 			</plugin>

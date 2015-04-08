@@ -24,9 +24,12 @@
 			<bean class="org.springframework.web.servlet.mvc.UrlFilenameViewController" />
 		</property>
 	</bean> -->
-	<bean id="mvcViewFactoryCreator"
-		class="org.springframework.webflow.mvc.builder.MvcViewFactoryCreator">
-		<property name="viewResolvers" ref="viewResolver" />
+	<bean id="mvcViewFactoryCreator" class="org.springframework.webflow.mvc.builder.MvcViewFactoryCreator">
+		<!-- <property name="viewResolvers">
+			<list>
+				<ref bean="viewResolver" />
+			</list>
+		</property> -->
 	</bean>
 	<!-- Plugs in a custom creator for Web Flow views -->
 	<webflow:flow-builder-services id="flowBuilderServices"
