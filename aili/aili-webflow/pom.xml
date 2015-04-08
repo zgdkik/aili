@@ -17,6 +17,11 @@
 		<webflow.version>2.4.0.RELEASE</webflow.version>
 	</properties>
 	<dependencies>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
 		<!-- 日志 -->
 		<dependency>
 			<groupId>log4j</groupId>
