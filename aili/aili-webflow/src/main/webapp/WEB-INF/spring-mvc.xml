@@ -20,11 +20,9 @@
 	<mvc:resources mapping="/styles/**" location="/styles/" />
 
 	<!-- 扫描所有的controller -->
-	<context:component-scan base-package="org.hbhk.**.server.controller">
+	<context:component-scan base-package="org.hbhk.aili.webflow.server.controller">
 		<context:include-filter type="annotation"
 			expression="org.springframework.stereotype.Controller" />
-		<context:include-filter type="annotation"
-			expression="org.springframework.web.bind.annotation.ControllerAdvice" />
 	</context:component-scan>
 
 	<bean id="viewResolver" 
