@@ -6,8 +6,6 @@ package org.hbhk.aili.i18n.server.support.file.handler;
 import java.io.FileWriter;
 
 /**
- * @author xianze.zhang
- * @creattime 2013-6-21
  */
 public abstract class AbstractExtractStringToFile extends AbstractCharFileHandler{
 

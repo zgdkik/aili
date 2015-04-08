@@ -7,8 +7,6 @@ import java.io.FileWriter;
 import java.util.Map;
 
 /**
- * @author xianze.zhang
- * @creattime 2013-6-21
  */
 public abstract class AbstractChangeStringToFile extends AbstractCharFileHandler{
 

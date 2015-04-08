@@ -11,8 +11,6 @@ import org.slf4j.LoggerFactory;
 
 
 /**
- * @author xianze.zhang
- *@creattime 2013-7-4
  */
 public class ThroughFile{
 	private static final Logger	log	= LoggerFactory.getLogger(ThroughFile.class);
