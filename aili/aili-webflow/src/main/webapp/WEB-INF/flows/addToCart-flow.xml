@@ -1,20 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <flow xmlns="http://www.springframework.org/schema/webflow"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/webflow
- http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
-	<var name="mycart" class="org.hbhk.aili.webflow.share.model.Cart" />
+	xsi:schemaLocation="http://www.springframework.org/schema/webflow 
+    http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
 	<on-start>
-		<set name="conversationScope.cart" value="mycart"></set>
+		<set name="requestScope.productId" value="requestParameters.productId" />
 	</on-start>
-	<view-state id="viewCart" view="viewCart">
-		<on-render>
-			<evaluate expression="productService.getProducts()" result="viewScope.products" />
-		</on-render>
-		<transition on="submit" to="viewOrder" />
-		<transition on="addToCart" to="addProductToCart" />
-	</view-state>
-	<subflow-state id="addProductToCart" subflow="addToCart">
-		<transition on="productAdded" to="viewCart" />
-	</subflow-state>
+	<action-state id="addToCart">
+		<evaluate expression="cart.addItem(productService.getProduct(productId))" />
+		<transition to="productAdded" />
+	</action-state>
+	<end-state id="productAdded" />
 </flow>

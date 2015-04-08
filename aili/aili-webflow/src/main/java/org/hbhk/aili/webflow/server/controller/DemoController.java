@@ -17,7 +17,7 @@ public class DemoController implements InitializingBean {
 	}
 	
 	@RequestMapping(value = {"/viewCart" })
-	public String viewCart() {
+	public String viewCart(Integer productId) {
 		return "viewCart";
 	}
 	

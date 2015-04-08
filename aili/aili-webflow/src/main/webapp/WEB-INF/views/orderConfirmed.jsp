@@ -6,7 +6,8 @@
 <title>HBHK</title>
 </head>
 <body>
-	<h1>View Cart</h1>
-	<a href="${flowExecutionUrl}&_eventId=submit">Submit</a>
+	<h1>Order Confirmed</h1>
+	<a href="${flowExecutionUrl}&_eventId=returnToIndex">Return to
+		index</a>
 </body>
 </html>

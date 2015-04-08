@@ -5,10 +5,12 @@
            http://www.springframework.org/schema/webflow-config
            http://www.springframework.org/schema/webflow-config/spring-webflow-config.xsd">
 
-	<!-- The registry of executable flow definitions -->
+	<!-- The registry of executable flow definitions base-path="/WEB-INF/flows"-->
 	<webflow:flow-registry id="flowRegistry"
-		flow-builder-services="flowBuilderServices" base-path="/WEB-INF/flows">
-		<webflow:flow-location-pattern value="/**/*-flow.xml" />
+		flow-builder-services="flowBuilderServices" >
+		<!-- <webflow:flow-location-pattern value="/**/*-flow.xml" /> -->
+		 <webflow:flow-location path="/WEB-INF/flows/viewCart-flow.xml" id="viewCart"/> 
+		  <webflow:flow-location path="/WEB-INF/flows/addToCart-flow.xml" id="addToCart"/>
 	</webflow:flow-registry>
 
 	<!-- Executes flows: the entry point into the Spring Web Flow system -->
@@ -22,6 +24,11 @@
 		<property name="defaultHandler">
 			<!-- UrlFilenameViewController 会将 "/index" 这样的请求映射成名为 "index" 的视图 -->
 			<bean class="org.springframework.web.servlet.mvc.UrlFilenameViewController" />
+		</property>
+		<property name="mappings">
+			<value>
+				/viewCart=flowController
+			</value>
 		</property>
 	</bean>
 	<bean id="viewResolver"
