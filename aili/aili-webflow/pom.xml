@@ -11,6 +11,7 @@
 	<artifactId>aili-webflow</artifactId>
 	<version>${aili-version}</version>
 	<name>aili-job</name>
+	<packaging>war</packaging>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<webflow.version>2.4.0.RELEASE</webflow.version>
@@ -48,4 +49,19 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat6-maven-plugin</artifactId>
+				<version>2.2</version>
+				<configuration>
+					<path>/webflow</path>
+					<port>5416</port>
+				</configuration>
+			</plugin>
+		</plugins>
+
+
+	</build>
 </project>
