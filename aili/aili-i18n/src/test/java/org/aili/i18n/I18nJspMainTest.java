@@ -1,6 +1,7 @@
 package org.aili.i18n;
 
 import org.hbhk.aili.i18n.server.support.I18nJspMain;
+import org.junit.Test;
 
 public class I18nJspMainTest {
 	/**
@@ -25,7 +26,7 @@ public class I18nJspMainTest {
 	 * 已经有的国际化属性文件，程序会验证在国际化属性文件中已经有的中文，不进行重复提取，一般不需要修改
 	 * 
 	 */
-	private static final String	PROPER_FILE = "i18n/message";
+	private static final String	PROPER_FILE = "i18n/message/aili";
 	/**
 	 * 生成的临时属性文件的前缀
 	 * 例如：
@@ -36,10 +37,15 @@ public class I18nJspMainTest {
 	 *	role.=修改
 	 * 
 	 */
-	public static final String HEAD_STRING = ".aili.i18n.";
+	public static final String HEAD_STRING = "aili.i18n.";
 	
-	public static void main(String[] args) throws Exception {
+	
+	@Test
+	public void collectChinese() throws Exception {
 		I18nJspMain.getInstance(PROPER_FILE).collectChinese(I18N_FILE,WORK_PATH,TEMP_FILE,HEAD_STRING);
-		//I18nJspMain.getInstance(PROPER_FILE).pushCodeTojsp(I18N_FILE,WORK_PATH,TEMP_FILE,BAK_DIR);
+	}
+	@Test
+	public void pushCodeTojsp() throws Exception {
+		I18nJspMain.getInstance(PROPER_FILE).pushCodeTojsp(I18N_FILE,WORK_PATH,TEMP_FILE,BAK_DIR);
 	}
 }

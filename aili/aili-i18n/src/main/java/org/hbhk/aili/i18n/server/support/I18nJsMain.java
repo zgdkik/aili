@@ -13,7 +13,6 @@ import org.aspectj.util.FileUtil;
 import org.hbhk.aili.i18n.server.support.file.handler.change.ChangeChineseToNpsI18n;
 import org.hbhk.aili.i18n.server.support.file.handler.extract.ExtractJsChineseStringToJsFile;
 import org.hbhk.aili.i18n.server.support.file.through.ThroughFile;
-import org.junit.Test;
 
 
 
@@ -67,7 +66,6 @@ public class I18nJsMain{
 	 * 提取js中的中文
 	 * @throws Exception
 	 */
-	@Test
 	public void extractJsChinese() throws Exception{
 		File f = new File(WORK_PATH+TEMP_FILE);
 		f.delete();
@@ -83,7 +81,6 @@ public class I18nJsMain{
 	 * 将中文替换成nps.i18n("")
 	 * @throws Exception
 	 */
-	@Test
 	public void pushCodeToJs() throws Exception{
 		
 		File iFile = new File(I18N_FILE);
