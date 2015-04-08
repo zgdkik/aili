@@ -9,15 +9,11 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 
 /**
  * 字符类型的文件处理类
  */
 public abstract class AbstractCharFileHandler implements FileHandler{
-	private static final Logger	log	= LoggerFactory.getLogger(AbstractCharFileHandler.class);
 	
 	public static final String ENTER_LINE = "\r\n";
 	protected BufferedReader fileReader;

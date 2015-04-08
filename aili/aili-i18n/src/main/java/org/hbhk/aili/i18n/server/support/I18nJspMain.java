@@ -87,6 +87,7 @@ public class I18nJspMain{
 		return checkMap;
 	}
 	
+	@SuppressWarnings("resource")
 	private Map<String,String> getPropertiesMap(String wp,String tf) throws Exception{
 		Map<String, String>	propertiesMap = getCheckMap();
 		BufferedReader in = new BufferedReader(new FileReader(wp+tf));
