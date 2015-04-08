@@ -1,6 +1,3 @@
-/**
- * 
- */
 package org.hbhk.aili.i18n.server.support;
 
 import java.io.BufferedReader;
@@ -39,6 +36,18 @@ public class I18nJspMain{
 	public static void main(String[] args) throws Exception{
 	
 	}
+	/**
+	 * 
+	* @author 何波
+	* @Description: 收集jsp文件中中中文
+	* @param i18nFile 资源文件所在目录
+	* @param path 生成的国际化文件目录
+	* @param tempFile 临时文件名称
+	* @param i18nPrefix 国际化前缀
+	* @throws Exception   
+	* void   
+	* @throws
+	 */
 	public void collectChinese(String i18nFile,String path,String tempFile, String i18nPrefix) throws Exception{
 		File f = new File(path+tempFile);
 		f.delete();
@@ -50,6 +59,18 @@ public class I18nJspMain{
 		through.setDefaultFileHandler(extract);
 		through.throughFileAndHandle(new File(i18nFile));
 	}
+	/**
+	 * 
+	* @author 何波
+	* @Description:讲收集中文国际化文件放回jsp文件中
+	* @param i18nFile  资源文件所在目录
+	* @param path 生成的国际化文件目录
+	* @param tempFile  临时文件名称
+	* @param bakDir 备份文件目录
+	* @throws Exception   
+	* void   
+	* @throws
+	 */
 	public void pushCodeTojsp(String i18nFile,String path,String tempFile,String bakDir) throws Exception{
 		
 		File iFile = new File(i18nFile);
