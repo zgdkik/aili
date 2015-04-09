@@ -18,16 +18,14 @@ import org.hbhk.aili.mybatis.share.util.SqlUtil;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 
 /**
  * 
  * @Description: mybatis增强处理
  * @author 何波
  * @date 2015年3月11日 上午10:05:24 
- *
+ *@Component
  */
-@Component
 public class DynamicSqlTemplate implements InitializingBean {
 
 	@Autowired(required=false)
