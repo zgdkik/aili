@@ -11,7 +11,7 @@
 	<select id="getCustomPagination" parameterType="HashMap"
 		resultType="org.hbhk.aili.mybatis.server.UserInfo1">
 		select* from t_aili_user where name= #{name}
-		<!--  数字时 之判断非空-->
+		<!--  数字时 只判断非空-->
 		<if test="status!=null" >
 			and status =  #{status}
 		</if>
