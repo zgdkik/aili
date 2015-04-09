@@ -9,7 +9,7 @@
 	</listener>
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>/WEB-INF/spring.xml,/WEB-INF/spring-webflow.xml</param-value>
+		<param-value>/WEB-INF/spring.xml</param-value>
 	</context-param>
 	<filter>
 		<filter-name>characterEncoding</filter-name>
