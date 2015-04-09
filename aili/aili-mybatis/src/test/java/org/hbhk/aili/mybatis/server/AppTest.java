@@ -118,7 +118,7 @@ public class AppTest {
 			query.setName("hbhk");
 			query.setStatus(0);
 			BeanToMapUtil.convert(query, params);
-			params.put("status", 1);
+			params.put("status", 0);
 			Page page = new Page();
 			page.setPageNum(2);
 			page.setPageSize(2);
