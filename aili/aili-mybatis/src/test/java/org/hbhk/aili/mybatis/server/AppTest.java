@@ -24,7 +24,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:spring.xml" })
+@ContextConfiguration(locations = { "classpath:spring-dao.xml" })
 @Transactional
 public class AppTest {
 
@@ -38,6 +38,7 @@ public class AppTest {
 			log.info("1111111111");
 			Map<String, Object> params = new HashMap<String, Object>();
 			UserInfo query = new UserInfo();
+			query.setStatus(0);
 			// query.setName("111asdas");
 			BeanToMapUtil.convert(query, params);
 			Long s = System.currentTimeMillis();
@@ -115,15 +116,20 @@ public class AppTest {
 			UserInfo query = new UserInfo();
 			// query.setId(1l);
 			query.setName("hbhk");
+			query.setStatus(0);
 			BeanToMapUtil.convert(query, params);
+			params.put("status", 1);
 			Page page = new Page();
 			page.setPageNum(2);
 			page.setPageSize(2);
 			Pagination<UserInfo1> user = userDao.getCustomPagination(params,
 					page,new Sort("name"));
-			for (UserInfo1 iterable_element : user.getDatas()) {
-				System.out.println("id:" + iterable_element.getId());
+			if(user!=null){
+				for (UserInfo1 iterable_element : user.getDatas()) {
+					System.out.println("id:" + iterable_element.getId());
+				}
 			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
