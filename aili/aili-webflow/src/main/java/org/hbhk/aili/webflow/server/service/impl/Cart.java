@@ -34,14 +34,13 @@ public class Cart implements Serializable {
 			cartItem.setQuantity(item.getQuantity()+1);
 			Map<String, Object> params = new HashMap<String, Object>();
 			params.put("pid", id);
-			List<CartItem> cis = cartDao.get(params);
-			cartItem.setId(cis.get(0).getId());
-			cartDao.update(cartItem);
+			cartItem.setId(1);
+			cartDao.save(cartItem);
 			item.increaseQuantity();
 		}else{
 			map.put(id, new CartItem(product, 1));
 			cartItem.setQuantity(1);
-			cartDao.insert(cartItem);
+			cartDao.save(cartItem);
 		}
 	
 	}
