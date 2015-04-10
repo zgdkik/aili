@@ -48,7 +48,16 @@ public class OffsetLimitInterceptor implements Interceptor {
 	void processIntercept(final Object[] queryArgs) {
         // queryArgs = query(MappedStatement ms, Object parameter, RowBounds rowBounds, ResultHandler resultHandler)
         MappedStatement ms = (MappedStatement) queryArgs[mappedStatementIndex];
-        Map<String, Object>  parameter = (Map<String, Object>) queryArgs[parameterIndex];
+        Object queryParam = queryArgs[parameterIndex];
+        Map<String, Object>  parameterMap =null;
+        Object  parameter =null;
+        boolean flag = false;
+        if(queryParam instanceof Map){
+        	  parameterMap = (Map<String, Object>) queryParam;
+        	  flag= true;
+        }else{
+        	  parameter = queryParam;
+        }
         final RowBounds rowBounds = (RowBounds) queryArgs[rowboundsIndex];
         int offset = rowBounds.getOffset();
         int limit = rowBounds.getLimit();
@@ -56,9 +65,9 @@ public class OffsetLimitInterceptor implements Interceptor {
         if (dialect.supportsLimit() && (offset != RowBounds.NO_ROW_OFFSET || limit != RowBounds.NO_ROW_LIMIT)) {
             BoundSql boundSql = ms.getBoundSql(parameter);
             String sql = boundSql.getSql().trim();
-            if(parameter.get("page.sorts") != null){
+            if(flag && parameterMap.get("page.sorts") != null){
            	 //排序处理
-               Sort[] sorts= (Sort[]) parameter.get("page.sorts");
+               Sort[] sorts= (Sort[]) parameterMap.get("page.sorts");
                if(sorts.length>0){
                	sql=sql+" order by "+Sort.toSortStr(sorts);
                }
