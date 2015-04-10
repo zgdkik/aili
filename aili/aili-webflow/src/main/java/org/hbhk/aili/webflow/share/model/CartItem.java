@@ -13,7 +13,7 @@ public class CartItem extends BaseModel {
 	private int quantity;
 
 	@Column("pid")
-	private Integer pid;
+	private Long pid;
 
 	public CartItem() {
 	}
@@ -47,11 +47,11 @@ public class CartItem extends BaseModel {
 		this.quantity = quantity;
 	}
 
-	public Integer getPid() {
+	public Long getPid() {
 		return pid;
 	}
 
-	public void setPid(Integer pid) {
+	public void setPid(Long pid) {
 		this.pid = pid;
 	}
 

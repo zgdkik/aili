@@ -10,7 +10,9 @@ import org.hbhk.aili.webflow.server.service.ICart;
 import org.hbhk.aili.webflow.share.model.CartItem;
 import org.hbhk.aili.webflow.share.model.Product;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 @Service
+@Transactional
 public class Cart implements ICart,Serializable {
 
 	private static final long serialVersionUID = 9099554025362726284L;
@@ -24,13 +26,14 @@ public class Cart implements ICart,Serializable {
 	public void addItem(Product product) {
 		Long id = product.getId();
 		CartItem item = map.get(id);
-		CartItem cartItem = new CartItem();
 		if (item != null){
-			cartItem.setQuantity(item.getQuantity()+1);
+			item.setQuantity(item.getQuantity()+1);
 			item.increaseQuantity();
 		}else{
-			map.put(id, new CartItem(product, 1));
+			CartItem cartItem = new CartItem(product,1);
+			cartItem.setPid(product.getId());
 			cartItem.setQuantity(1);
+			map.put(id, cartItem);
 		}
 	
 	}
@@ -41,4 +44,6 @@ public class Cart implements ICart,Serializable {
 			total += item.getProduct().getPrice() * item.getQuantity();
 		return total;
 	}
+
+	
 }

@@ -5,8 +5,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.hbhk.aili.webflow.server.dao.ICartDao;
 import org.hbhk.aili.webflow.server.dao.ProductDao;
 import org.hbhk.aili.webflow.server.service.IProductService;
+import org.hbhk.aili.webflow.share.model.CartItem;
 import org.hbhk.aili.webflow.share.model.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +22,9 @@ public class ProductService implements IProductService, Serializable {
 
 	@Autowired
 	private ProductDao productDao;
+	
+	@Autowired
+	private ICartDao dao;
 
 	public ProductService() {
 		products.put(1, new Product(1, "Bulldog", 1000));
@@ -38,4 +43,11 @@ public class ProductService implements IProductService, Serializable {
 		return productDao.getById(productId);
 	}
 
+	@Override
+	public void save(List<CartItem> cartItems) {
+		for (CartItem cartItem : cartItems) {
+			dao.insert(cartItem);
+		}
+		
+	}
 }
