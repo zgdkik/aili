@@ -173,6 +173,9 @@ public class DynamicSqlTemplate implements InitializingBean {
 		StringBuilder sql = new StringBuilder();
 		sql.append("select *from ");
 		sql.append(getTableName() +" ");
+		if(params==null){
+			return sql.toString();
+		}
 		Set<String>  keys = params.keySet();
 		if(keys.size() > 0){
 			ModelInfo tableInfo = tabs.get(getKey());
@@ -206,6 +209,9 @@ public class DynamicSqlTemplate implements InitializingBean {
 		StringBuilder sql = new StringBuilder();
 		sql.append("select *from ");
 		sql.append(getTableName() +" ");
+		if(params==null){
+			return sql.toString();
+		}
 		Set<String>  keys = params.keySet();
 		Map<String, Object> newParams =new HashMap<String, Object>(); 
 		for (String key : keys) {
