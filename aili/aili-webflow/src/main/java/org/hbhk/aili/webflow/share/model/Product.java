@@ -1,37 +1,24 @@
 package org.hbhk.aili.webflow.share.model;
 
-import java.io.Serializable;
+import org.hbhk.aili.mybatis.server.annotation.Column;
+import org.hbhk.aili.mybatis.server.annotation.Table;
+import org.hbhk.aili.mybatis.share.model.BaseModel;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-import org.hibernate.annotations.GenericGenerator;
-@Entity
-@Table(name = "t_flow_product")
-public class Product implements Serializable {
+@Table("t_flow_product")
+public class Product  extends BaseModel {
 
 	private static final long serialVersionUID = -2027021562412577102L;
-	@Column(name = "id")
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY) 
-	@GenericGenerator(name = "persistenceGenerator", strategy = "increment") 
-	private int id;
-	@Column(name = "description")
+	@Column("description")
 	private String description;
-	@Column(name = "name")
+	@Column("name")
 	private String name;
-	@Column(name = "price")
+	@Column("price")
 	private int price;
 
 	public Product() {
 	}
 
 	public Product(int id, String description, int price) {
-		this.id = id;
 		this.description = description;
 		this.price = price;
 	}
@@ -50,14 +37,6 @@ public class Product implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	public String getDescription() {

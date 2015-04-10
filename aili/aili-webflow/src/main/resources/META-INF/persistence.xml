@@ -8,6 +8,7 @@
 
         <class>org.hbhk.aili.webflow.share.model.CartItem</class>
 		<class>org.hbhk.aili.webflow.share.model.Product</class>
+		<class>org.hbhk.aili.webflow.server.service.impl.Cart</class>
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
             <property name="hibernate.hbm2ddl.auto" value="update"/>

@@ -1,31 +1,18 @@
 package org.hbhk.aili.webflow.share.model;
 
-import java.io.Serializable;
+import org.hbhk.aili.mybatis.server.annotation.Column;
+import org.hbhk.aili.mybatis.server.annotation.Table;
+import org.hbhk.aili.mybatis.share.model.BaseModel;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-import org.hibernate.annotations.GenericGenerator;
-
-@Entity
-@Table(name = "t_flow_test")
-public class CartItem implements Serializable {
+@Table("t_flow_test")
+public class CartItem extends BaseModel {
 	private static final long serialVersionUID = 8388627124326126637L;
 	
-	@Column(name = "id")
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY) 
-	@GenericGenerator(name = "persistenceGenerator", strategy = "increment") 
-	private Integer id;
 	private Product product;
-	@Column(name = "quantity")
+	@Column( "quantity")
 	private int quantity;
 
-	@Column(name = "pid")
+	@Column("pid")
 	private Integer pid;
 
 	public CartItem() {
@@ -68,12 +55,5 @@ public class CartItem implements Serializable {
 		this.pid = pid;
 	}
 
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
 
 }
