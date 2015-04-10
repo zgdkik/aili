@@ -20,6 +20,7 @@
 		<!-- <webflow:flow-execution-listeners> <webflow:listener ref="securityFlowExecutionListener" 
 			/> </webflow:flow-execution-listeners> -->
 	</webflow:flow-executor>
+	<!--  这个视图解析器一定要在webflow配置文件里面 -->
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/views/"></property>
