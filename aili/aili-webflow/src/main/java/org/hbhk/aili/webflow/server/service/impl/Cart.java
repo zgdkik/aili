@@ -1,5 +1,6 @@
 package org.hbhk.aili.webflow.server.service.impl;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -10,8 +11,9 @@ import org.hbhk.aili.webflow.share.model.CartItem;
 import org.hbhk.aili.webflow.share.model.Product;
 import org.springframework.stereotype.Service;
 @Service
-public class Cart implements ICart {
+public class Cart implements ICart,Serializable {
 
+	private static final long serialVersionUID = 9099554025362726284L;
 	private Map<Long, CartItem> map = new HashMap<Long, CartItem>();
 	
 
