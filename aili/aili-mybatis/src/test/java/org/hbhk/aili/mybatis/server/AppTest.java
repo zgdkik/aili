@@ -31,7 +31,11 @@ public class AppTest {
 	private Log log = LogFactory.getLog(getClass());
 	@Autowired
 	IUserDao userDao;
-
+	@Test
+	public void test3() throws Exception {
+		UserInfo t = new UserInfo();
+		userDao.insert(t);
+	}
 	@Test
 	public void test() {
 		try {
