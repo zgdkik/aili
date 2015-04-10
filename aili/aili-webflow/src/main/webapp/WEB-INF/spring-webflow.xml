@@ -45,7 +45,6 @@
 		<property name="mappings">
 			<value>
 				/viewCart=flowController
-				/index=flowController
 			</value>
 		</property>
 	</bean>
