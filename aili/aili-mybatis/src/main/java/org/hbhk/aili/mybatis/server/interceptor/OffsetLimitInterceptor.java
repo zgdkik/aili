@@ -57,16 +57,14 @@ public class OffsetLimitInterceptor implements Interceptor {
         }
         Map<String, Object>  parameterMap =null;
         Object  parameter =null;
-        boolean flag = false;
         if(queryParam instanceof Map){
         	  parameterMap = (Map<String, Object>) queryParam;
-        	  flag= true;
         }else{
         	  parameter = queryParam;
         }
         BoundSql boundSql = ms.getBoundSql(parameter);
         String sql = boundSql.getSql().trim();
-        if(flag && parameterMap.get("page.sorts") != null){
+        if(parameterMap != null && parameterMap.get("page.sorts") != null){
        	 //排序处理
            Sort[] sorts= (Sort[]) parameterMap.get("page.sorts");
            if(sorts.length>0){
