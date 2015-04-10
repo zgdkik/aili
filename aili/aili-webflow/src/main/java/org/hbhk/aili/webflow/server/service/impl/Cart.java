@@ -9,10 +9,6 @@ import java.util.Map;
 import org.hbhk.aili.webflow.server.service.ICart;
 import org.hbhk.aili.webflow.share.model.CartItem;
 import org.hbhk.aili.webflow.share.model.Product;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-@Service
-@Transactional
 public class Cart implements ICart,Serializable {
 
 	private static final long serialVersionUID = 9099554025362726284L;
