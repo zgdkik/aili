@@ -49,6 +49,12 @@ public class OffsetLimitInterceptor implements Interceptor {
         // queryArgs = query(MappedStatement ms, Object parameter, RowBounds rowBounds, ResultHandler resultHandler)
         MappedStatement ms = (MappedStatement) queryArgs[mappedStatementIndex];
         Object queryParam = queryArgs[parameterIndex];
+        final RowBounds rowBounds = (RowBounds) queryArgs[rowboundsIndex];
+        int offset = rowBounds.getOffset();
+        int limit = rowBounds.getLimit();
+        if (!(dialect.supportsLimit() && (offset != RowBounds.NO_ROW_OFFSET || limit != RowBounds.NO_ROW_LIMIT))) {
+        	return;
+        }
         Map<String, Object>  parameterMap =null;
         Object  parameter =null;
         boolean flag = false;
@@ -58,37 +64,31 @@ public class OffsetLimitInterceptor implements Interceptor {
         }else{
         	  parameter = queryParam;
         }
-        final RowBounds rowBounds = (RowBounds) queryArgs[rowboundsIndex];
-        int offset = rowBounds.getOffset();
-        int limit = rowBounds.getLimit();
-
-        if (dialect.supportsLimit() && (offset != RowBounds.NO_ROW_OFFSET || limit != RowBounds.NO_ROW_LIMIT)) {
-            BoundSql boundSql = ms.getBoundSql(parameter);
-            String sql = boundSql.getSql().trim();
-            if(flag && parameterMap.get("page.sorts") != null){
-           	 //排序处理
-               Sort[] sorts= (Sort[]) parameterMap.get("page.sorts");
-               if(sorts.length>0){
-               	sql=sql+" order by "+Sort.toSortStr(sorts);
-               }
+        BoundSql boundSql = ms.getBoundSql(parameter);
+        String sql = boundSql.getSql().trim();
+        if(flag && parameterMap.get("page.sorts") != null){
+       	 //排序处理
+           Sort[] sorts= (Sort[]) parameterMap.get("page.sorts");
+           if(sorts.length>0){
+           	sql=sql+" order by "+Sort.toSortStr(sorts);
            }
-            if (dialect.supportsLimitOffset()) {
-                sql = dialect.getLimitString(sql, offset, limit);
-                offset = RowBounds.NO_ROW_OFFSET;
-            } else {
-                sql = dialect.getLimitString(sql, 0, limit);
-            }
-            limit = RowBounds.NO_ROW_LIMIT;
-
-            queryArgs[rowboundsIndex] = new RowBounds(offset, limit);
-           
-            BoundSql newBoundSql =
-                new BoundSql(ms.getConfiguration(), sql, boundSql.getParameterMappings(), boundSql.getParameterObject());
-            // 将原有的BoundSql中的MetaParameter复制到新的BoundSql中
-            copyMetaParameters(boundSql, newBoundSql);
-            MappedStatement newMs = copyFromMappedStatement(ms, new BoundSqlSqlSource(newBoundSql));
-            queryArgs[mappedStatementIndex] = newMs;
         }
+        if (dialect.supportsLimitOffset()) {
+            sql = dialect.getLimitString(sql, offset, limit);
+            offset = RowBounds.NO_ROW_OFFSET;
+        } else {
+            sql = dialect.getLimitString(sql, 0, limit);
+        }
+        limit = RowBounds.NO_ROW_LIMIT;
+
+        queryArgs[rowboundsIndex] = new RowBounds(offset, limit);
+       
+        BoundSql newBoundSql =
+            new BoundSql(ms.getConfiguration(), sql, boundSql.getParameterMappings(), boundSql.getParameterObject());
+        // 将原有的BoundSql中的MetaParameter复制到新的BoundSql中
+        copyMetaParameters(boundSql, newBoundSql);
+        MappedStatement newMs = copyFromMappedStatement(ms, new BoundSqlSqlSource(newBoundSql));
+        queryArgs[mappedStatementIndex] = newMs;
     }
         
     /**
