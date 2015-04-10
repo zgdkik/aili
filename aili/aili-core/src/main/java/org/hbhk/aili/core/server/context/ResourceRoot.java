@@ -15,7 +15,7 @@ public class ResourceRoot implements ServletContextAware {
 
 	private ServletContext context;
 
-	public static final String resourcePrefix ="/resource";
+	public static final String resourcePrefix ="/resources";
 
 
 	public void init() {
