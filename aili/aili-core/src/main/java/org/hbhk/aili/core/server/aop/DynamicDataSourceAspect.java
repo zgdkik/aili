@@ -37,4 +37,10 @@ public class DynamicDataSourceAspect {
 			DataSourceContextHolder.remove();
 		}
 	}
+
+	public void setDynamicDataSourceService(
+			IDynamicDataSourceService dynamicDataSourceService) {
+		this.dynamicDataSourceService = dynamicDataSourceService;
+	}
+	
 }
