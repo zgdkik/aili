@@ -42,6 +42,7 @@
 		<module>aili-jms</module>
 		<module>aili-sso</module>
 		<module>aili-webflow</module>
+		<module>aili-workflow</module>
 		<module>aili-main-project</module>
 		<module>aili-module-project</module>
 	</modules>
