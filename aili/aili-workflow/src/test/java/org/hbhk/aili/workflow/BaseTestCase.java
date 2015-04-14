@@ -16,9 +16,5 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class BaseTestCase extends AbstractTransactionalJUnit4SpringContextTests{
 
-    @Test
-    public void test(){
-    	System.out.println ("test"); 
-    }
     
 }

@@ -52,11 +52,13 @@ public class BpmDefinitionTest extends BaseTestCase{
 		
 		//生成图片
 		InputStream input = repositoryService.getProcessDiagram(processDefinition.getId());
+		
 		ProcessDiagramGenerator processDiagramGenerator  = new DefaultProcessDiagramGenerator();
 		
-		BufferedImage bi1 =  ImageIO.read(input);//processDiagramGenerator.generatePngImage(null, 1.0);
-		File w2 = new File("D://activiti.png");// 可以是jpg,png,gif格式
-		ImageIO.write(bi1, "png", w2);//
+		input = processDiagramGenerator.generateJpgDiagram(null);
+		BufferedImage bi1 =  ImageIO.read(input);
+		File w2 = new File("D://activiti.jpg");// 可以是jpg,png,gif格式
+		ImageIO.write(bi1, "jpg", w2);//
 	}
 	
 	public InputStream readXmlFile() throws IOException{
