@@ -30,6 +30,6 @@
 			expression="org.springframework.web.bind.annotation.ControllerAdvice" />
 	</context:component-scan>
 	<import resource="spring-dao.xml"/> 
-	<import resource="spring-activiti.xml"/>
+	<import resource="spring-activiti.xml"/> 
 	
 </beans>

@@ -12,12 +12,6 @@ public class DemoController implements InitializingBean {
 	public String index() {
 		return "index";
 	}
-	
-	@RequestMapping(value = {"/viewCart" })
-	public String viewCart(Integer productId) {
-		return "viewCart";
-	}
-	
 
 	@Override
 	public void afterPropertiesSet() throws Exception {

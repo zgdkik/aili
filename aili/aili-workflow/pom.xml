@@ -14,7 +14,6 @@
 	<packaging>war</packaging>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<webflow.version>2.4.0.RELEASE</webflow.version>
 		<activiti.version>5.17.0</activiti.version>
 	</properties>
 	<dependencies>
@@ -32,11 +31,13 @@
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
+			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<artifactId>slf4j-api</artifactId>
 			<groupId>org.slf4j</groupId>
 			<version>1.7.5</version>
+			<scope>compile</scope>
 		</dependency>
 		<!-- spring begin -->
 		<dependency>
@@ -58,10 +59,12 @@
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
 			<version>1.7.10</version>
+			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
+			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>p6spy</groupId>
