@@ -1,11 +1,14 @@
 package org.hbhk.aili.workflow;
 
 
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.imageio.ImageIO;
 
 import org.activiti.engine.RepositoryService;
 import org.activiti.engine.RuntimeService;
@@ -13,6 +16,8 @@ import org.activiti.engine.TaskService;
 import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.repository.ProcessDefinition;
 import org.activiti.engine.task.Task;
+import org.activiti.image.ProcessDiagramGenerator;
+import org.activiti.image.impl.DefaultProcessDiagramGenerator;
 import org.junit.Assert;
 import org.junit.Test;
 public class BpmDefinitionTest extends BaseTestCase{
@@ -33,7 +38,6 @@ public class BpmDefinitionTest extends BaseTestCase{
 		System.out.println("deployId:" + deployment.getId());
 		//查询流程定义
 		ProcessDefinition processDefinition=repositoryService.createProcessDefinitionQuery().deploymentId(deployment.getId()).singleResult();
-		
 		Long businessKey=new Double(1000000*Math.random()).longValue();
 		//启动流程
 		runtimeService.startProcessInstanceById(processDefinition.getId(),businessKey.toString());
@@ -44,6 +48,14 @@ public class BpmDefinitionTest extends BaseTestCase{
 		for(Task task:taskList){
 			System.out.println("task name is " + task.getName() + " ,task key is " + task.getTaskDefinitionKey());
 		}
+		
+		//生成图片
+		InputStream input = repositoryService.getProcessDiagram(processDefinition.getId());
+		ProcessDiagramGenerator processDiagramGenerator  = new DefaultProcessDiagramGenerator();
+		
+		BufferedImage bi1 =  ImageIO.read(input);//processDiagramGenerator.generatePngImage(null, 1.0);
+		File w2 = new File("D://QQ.png");// 可以是jpg,png,gif格式
+		ImageIO.write(bi1, "png", w2);//
 	}
 	
 	public InputStream readXmlFile() throws IOException{
