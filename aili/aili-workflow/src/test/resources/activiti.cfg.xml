@@ -7,7 +7,7 @@
 	<bean id="processEngineConfiguration"
 		class="org.activiti.engine.impl.cfg.StandaloneInMemProcessEngineConfiguration">
 		<property name="databaseSchemaUpdate" value="true" />
-		<property name="activityFontName" value="宋体"></property>
-		<property name="labelFontName" value="宋体" />
+		<property name="activityFontName" value="WenQuanYi Micro Hei"></property>
+		<property name="labelFontName" value="WenQuanYi Micro Hei" />
 	</bean>
 </beans>
