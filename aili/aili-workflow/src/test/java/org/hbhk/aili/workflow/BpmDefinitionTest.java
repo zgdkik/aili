@@ -18,6 +18,7 @@ import org.activiti.engine.repository.ProcessDefinition;
 import org.activiti.engine.task.Task;
 import org.activiti.image.ProcessDiagramGenerator;
 import org.activiti.image.impl.DefaultProcessDiagramGenerator;
+import org.apache.commons.io.FileUtils;
 import org.junit.Assert;
 import org.junit.Test;
 public class BpmDefinitionTest extends BaseTestCase{
@@ -54,7 +55,7 @@ public class BpmDefinitionTest extends BaseTestCase{
 		ProcessDiagramGenerator processDiagramGenerator  = new DefaultProcessDiagramGenerator();
 		
 		BufferedImage bi1 =  ImageIO.read(input);//processDiagramGenerator.generatePngImage(null, 1.0);
-		File w2 = new File("D://QQ.png");// 可以是jpg,png,gif格式
+		File w2 = new File("D://activiti.png");// 可以是jpg,png,gif格式
 		ImageIO.write(bi1, "png", w2);//
 	}
 	
@@ -62,4 +63,27 @@ public class BpmDefinitionTest extends BaseTestCase{
 		String filePath="holiday-request.bpmn";
 		return Class.class.getClass().getResource("/"+filePath).openStream();
 	}
+	
+	 @Test
+	  public void showImg() throws IOException{
+	    String deploymentId = "30001";
+	    //通过deploymentId获取资源名称
+	    List<String> names =repositoryService
+	          .getDeploymentResourceNames(deploymentId);
+	    String imgName = null;
+	    for (String name : names) {
+	      System.out.println("name:"+name);
+	      if (name.endsWith(".png")) {
+	        imgName = name;
+	      }
+	    }
+	    System.out.println("imgName:"+imgName);
+	    if (imgName != null) {
+	      File file = new File("e:/"+imgName);
+	      //获取资源文件的流
+	      InputStream in = repositoryService.getResourceAsStream(deploymentId, imgName);
+	      //通过FileUtils将资源文件以流的信息输出到指定文件
+	      FileUtils.copyInputStreamToFile(in, file);
+	    }
+	  }
 }
