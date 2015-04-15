@@ -34,7 +34,7 @@ public class BpmDefinitionTest extends BaseTestCase{
 		InputStream is=readXmlFile();
 		Assert.assertNotNull(is);
 		//发布流程
-		Deployment deployment=repositoryService.createDeployment().addInputStream("myProcess.bpmn20.xml", is).name("holiday-request").deploy();
+		Deployment deployment=repositoryService.createDeployment().addInputStream("myflow.bpmn20.xml", is).name("holiday-request").deploy();
 		Assert.assertNotNull(deployment);
 		System.out.println("deployId:" + deployment.getId());
 		//查询流程定义
@@ -55,10 +55,10 @@ public class BpmDefinitionTest extends BaseTestCase{
 		
 		ProcessDiagramGenerator processDiagramGenerator  = new DefaultProcessDiagramGenerator();
 		
-		input = processDiagramGenerator.generateJpgDiagram(null);
+		//input = processDiagramGenerator.generateJpgDiagram(null);
 		BufferedImage bi1 =  ImageIO.read(input);
-		File w2 = new File("D://activiti.jpg");// 可以是jpg,png,gif格式
-		ImageIO.write(bi1, "jpg", w2);//
+		File w2 = new File("D://activiti.png");// 可以是jpg,png,gif格式
+		ImageIO.write(bi1, "png", w2);//
 	}
 	
 	public InputStream readXmlFile() throws IOException{
