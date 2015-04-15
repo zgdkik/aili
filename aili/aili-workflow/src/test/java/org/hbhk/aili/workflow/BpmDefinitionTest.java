@@ -10,11 +10,16 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.imageio.ImageIO;
 
+import org.activiti.bpmn.model.BpmnModel;
+import org.activiti.engine.ProcessEngine;
 import org.activiti.engine.RepositoryService;
 import org.activiti.engine.RuntimeService;
 import org.activiti.engine.TaskService;
+import org.activiti.engine.impl.cfg.ProcessEngineConfigurationImpl;
+import org.activiti.engine.impl.context.Context;
 import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.repository.ProcessDefinition;
+import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Task;
 import org.activiti.image.ProcessDiagramGenerator;
 import org.activiti.image.impl.DefaultProcessDiagramGenerator;
@@ -28,6 +33,8 @@ public class BpmDefinitionTest extends BaseTestCase{
 	private RuntimeService runtimeService;
 	@Resource 
 	TaskService taskService;
+	@Resource 
+	private ProcessEngine processEngine;
 	
 	@Test
 	public void testDeploy() throws IOException{
@@ -41,7 +48,7 @@ public class BpmDefinitionTest extends BaseTestCase{
 		ProcessDefinition processDefinition=repositoryService.createProcessDefinitionQuery().deploymentId(deployment.getId()).singleResult();
 		Long businessKey=new Double(1000000*Math.random()).longValue();
 		//启动流程
-		runtimeService.startProcessInstanceById(processDefinition.getId(),businessKey.toString());
+		ProcessInstance processInstance = runtimeService.startProcessInstanceById(processDefinition.getId(),businessKey.toString());
 		//查询任务实例
 		List<Task> taskList=taskService.createTaskQuery().processDefinitionId(processDefinition.getId()).list();
 		Assert.assertNotNull(taskList==null);
@@ -49,14 +56,13 @@ public class BpmDefinitionTest extends BaseTestCase{
 		for(Task task:taskList){
 			System.out.println("task name is " + task.getName() + " ,task key is " + task.getTaskDefinitionKey());
 		}
-		
 		//生成图片
-		InputStream input = repositoryService.getProcessDiagram(processDefinition.getId());
-		
+		InputStream input = null ;//repositoryService.getProcessModel(processDefinition.getId());
 		ProcessDiagramGenerator processDiagramGenerator  = new DefaultProcessDiagramGenerator();
-		
-		//input = processDiagramGenerator.generateJpgDiagram(null);
-		BufferedImage bi1 =  ImageIO.read(input);
+		BpmnModel bpmnModel = repositoryService.getBpmnModel(processDefinition.getId());
+		Context.setProcessEngineConfiguration((ProcessEngineConfigurationImpl) processEngine.getProcessEngineConfiguration());
+		input = processDiagramGenerator.generateDiagram(bpmnModel, "png", runtimeService.getActiveActivityIds(processInstance.getId()));
+		BufferedImage bi1 = ImageIO.read(input);
 		File w2 = new File("D://activiti.png");// 可以是jpg,png,gif格式
 		ImageIO.write(bi1, "png", w2);//
 	}

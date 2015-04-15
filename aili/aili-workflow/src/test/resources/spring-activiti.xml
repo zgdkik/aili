@@ -17,7 +17,7 @@
 		<property name="jpaHandleTransaction" value="true" />
 		<property name="jpaCloseEntityManager" value="true" /> -->
 		<property name="jobExecutorActivate" value="false" />
-		<property name="activityFontName" value="WenQuanYi Micro Hei"></property>
+		<property name="activityFontName" value="WenQuanYi Micro Hei"/>
 		<property name="labelFontName" value="WenQuanYi Micro Hei" />
 	</bean>
 
