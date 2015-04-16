@@ -45,6 +45,8 @@ public class MemoryCacheTemplet<V> implements ICacheTemplet<String, V> {
 	
 	private static volatile boolean isDeal = false;
 	
+	private RedisReConnectExceptionHandler redisConnectExceptionHandler = new RedisReConnectExceptionHandler();
+	
 	private ExecutorService  taskExecutor  = Executors.newCachedThreadPool(new ThreadFactory() {
 		
 		@Override
@@ -52,7 +54,7 @@ public class MemoryCacheTemplet<V> implements ICacheTemplet<String, V> {
 			 System.out.println(this + " creating new Thread");
 		        Thread t = new Thread(r);
 		        log.error("created " + t + " ID:" + t.getId());
-		        t.setUncaughtExceptionHandler(new RedisReConnectExceptionHandler());
+		        t.setUncaughtExceptionHandler(redisConnectExceptionHandler);
 		        log.error("eh=" + t.getUncaughtExceptionHandler());
 		        return t;
 		}
