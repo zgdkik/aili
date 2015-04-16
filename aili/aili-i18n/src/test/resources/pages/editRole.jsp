@@ -1,24 +1,16 @@
-<%@include file="/pages/commons/common.jsp" %>
 <%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
 <head>
 <title>首页 | WMS</title>
-<%@include file="/pages/commons/common-meta.jsp" %>
-<%@include file="/pages/commons/common-css.jsp" %>
-<%@include file="/pages/commons/common-compatible.jsp" %>
-<%@include file="/pages/commons/common-icon.jsp" %>
 
 </head>
 <body class="fixed-left" locale="zh-cn">
-<%@include file="/pages/commons/common-layer.jsp" %>
 <!-- Begin page -->
 <div id="wrapper"> 
   
-  <%@include file="/pages/commons/common-top.jsp" %>
   
   
-  <jsp:include page="/pages/commons/common-left.jsp">
   	<jsp:param name="pagecode" value="index" />
   </jsp:include>
   
@@ -176,7 +168,6 @@
       </div>
       
       <!--主要内容开始部分 END--> 
-     <%@include file="/pages/commons/common-footer.jsp" %>
     </div>
     <!-- ============================================================== --> 
     <!-- End content here --> 
@@ -190,12 +181,10 @@
 <!-- End of page --> 
 <!-- the overlay modal element -->
 <div class="md-overlay"></div>
-<%@include file="/pages/commons/common-menu-template.jsp" %>
 <!-- End of eoverlay modal --> 
 <script>
 		var resizefunc = [];
 </script> 
- <%@include file="/pages/commons/common-script.jsp" %>
 
 <!-- Page Specific JS Libraries --> 
 <script src="${staticbase}/assets/js/wmspages/auth/operate/editRole.js?${version}"></script>
