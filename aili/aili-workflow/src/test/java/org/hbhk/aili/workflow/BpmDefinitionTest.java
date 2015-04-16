@@ -26,6 +26,7 @@ import org.activiti.image.impl.DefaultProcessDiagramGenerator;
 import org.apache.commons.io.FileUtils;
 import org.junit.Assert;
 import org.junit.Test;
+import org.springframework.test.annotation.Rollback;
 public class BpmDefinitionTest extends BaseTestCase{
 	@Resource
 	private RepositoryService repositoryService;
@@ -45,28 +46,80 @@ public class BpmDefinitionTest extends BaseTestCase{
 		Assert.assertNotNull(deployment);
 		System.out.println("deployId:" + deployment.getId());
 		//查询流程定义
-		ProcessDefinition processDefinition=repositoryService.createProcessDefinitionQuery().deploymentId(deployment.getId()).singleResult();
+		ProcessDefinition processDefinition= repositoryService.createProcessDefinitionQuery().deploymentId(deployment.getId()).singleResult();
+		
+		System.out.println("processDefinitionId:"+processDefinition.getId());
+	
+	}
+	/**
+	 * 
+	* @author 何波
+	* @Description: 开启新的流程
+	* @throws Exception   
+	* void   
+	* @throws
+	 */
+	@Test
+	public void startProcess() throws Exception {
+		String processDefinitionId="myProcess:2:2504";
 		Long businessKey=new Double(1000000*Math.random()).longValue();
 		//启动流程
-		ProcessInstance processInstance = runtimeService.startProcessInstanceById(processDefinition.getId(),businessKey.toString());
+		ProcessInstance processInstance = runtimeService.startProcessInstanceById(processDefinitionId,businessKey.toString());
+		System.out.println("processInstanceId:"+processInstance.getId());
+		
+	}
+	@Test
+	public void queryTask() throws Exception {
+		String executionId="22501";
 		//查询任务实例
-		List<Task> taskList=taskService.createTaskQuery().processDefinitionId(processDefinition.getId()).list();
-		Assert.assertNotNull(taskList==null);
-		Assert.assertTrue(taskList.size()>0);
-		for(Task task:taskList){
-			System.out.println("task name is " + task.getName() + " ,task key is " + task.getTaskDefinitionKey());
-		}
+		Task task=taskService.createTaskQuery().executionId(executionId).singleResult();
+		System.out.println("taskId:"+task.getId());
+		System.out.println("task name is " + task.getName() + " ,task key is " + task.getTaskDefinitionKey());
+	}
+	@Test
+	@Rollback(value=true)
+	public void generatorImg() throws Exception {
 		//生成图片
+		String processDefinitionId="myProcess:2:2504";
+		String processInstanceId="22501";
 		InputStream input = null ;//repositoryService.getProcessModel(processDefinition.getId());
 		ProcessDiagramGenerator processDiagramGenerator  = new DefaultProcessDiagramGenerator();
-		BpmnModel bpmnModel = repositoryService.getBpmnModel(processDefinition.getId());
+		BpmnModel bpmnModel = repositoryService.getBpmnModel(processDefinitionId);
 		Context.setProcessEngineConfiguration((ProcessEngineConfigurationImpl) processEngine.getProcessEngineConfiguration());
-		input = processDiagramGenerator.generateDiagram(bpmnModel, "png", runtimeService.getActiveActivityIds(processInstance.getId()));
+		input = processDiagramGenerator.generateDiagram(bpmnModel, "png", runtimeService.getActiveActivityIds(processInstanceId));
 		BufferedImage bi1 = ImageIO.read(input);
 		File w2 = new File("D://activiti.png");// 可以是jpg,png,gif格式
 		ImageIO.write(bi1, "png", w2);//
 	}
 	
+	/**
+	 * 
+	* @author 何波
+	* @Description:完成当前节点任务 
+	* @throws Exception   
+	* void   
+	* @throws
+	 */
+	@Test
+	public void completeProcess() throws Exception {
+		String taskId="27502";
+		taskService.complete(taskId);
+		generatorImg();
+	}
+	
+	/**
+	 * 
+	* @author 何波
+	* @Description: 分配流程
+	* @throws Exception   
+	* void   
+	* @throws
+	 */
+	@Test
+	public void claim() throws Exception {
+		String taskId="22504";
+		taskService.claim(taskId, "11");
+	}
 	public InputStream readXmlFile() throws IOException{
 		String filePath="holiday-request.bpmn";
 		return Class.class.getClass().getResource("/"+filePath).openStream();
