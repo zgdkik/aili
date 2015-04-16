@@ -243,45 +243,48 @@ public class MemoryCacheTemplet<V> implements ICacheTemplet<String, V> {
 			
 			private int sleep =20;
 			private ExecutorService  taskExecutor  = Executors.newCachedThreadPool();
+			private Object locked = new Object();
 		    @SuppressWarnings("unchecked")
 			@Override
-		    public void uncaughtException(Thread t, Throwable e) {
-		    	cache.clear();
-		    	//只能一个线程处理断开重连添加监听
-		    	if(isDeal){
-		    		log.info("正在处理断开重连添加监听...");
-		    		return;
-		    	}
-		    	isDeal = true;
-				//处理端口重连并注册监理
-				while(flag){
-					try {
-						RedisTemplate<String,Object> redisTemplate = WebApplicationContextHolder.getApplicationContext().getBean("redisTemplate", RedisTemplate.class);
-						redisTemplate.getConnectionFactory().getConnection();
-						Set<String> keys = MemoryCacheTemplet.subMap.keySet();
-						List<String> newKeys = new ArrayList<String>();
-						newKeys.addAll(keys);
-						MemoryCacheTemplet.subMap.clear();
-						for (final String key : newKeys) {
-							 if(!MemoryCacheTemplet.subMap.containsKey(key)){
-								 taskExecutor.execute(new Runnable() {
-									@Override
-									public void run() {
-										registerListener(key);
-									}
-								});
-							 }
-						}
-						log.info("断开重连已经完成");
-						flag = false;
-						isDeal = false;
-					} catch (Exception e2) {
-						MemoryCacheTemplet.cache.clear();
-						log.error(e2.getMessage(), e2);
+		    public void  uncaughtException(Thread t, Throwable e) {
+		    	synchronized (locked) {
+		    		cache.clear();
+			    	//只能一个线程处理断开重连添加监听
+			    	if(isDeal){
+			    		log.info("正在处理断开重连添加监听...");
+			    		return;
+			    	}
+			    	isDeal = true;
+					//处理端口重连并注册监理
+					while(flag){
 						try {
-							TimeUnit.SECONDS.sleep(sleep);
-						} catch (InterruptedException e1) {
-							log.error(e1);
+							RedisTemplate<String,Object> redisTemplate = WebApplicationContextHolder.getApplicationContext().getBean("redisTemplate", RedisTemplate.class);
+							redisTemplate.getConnectionFactory().getConnection();
+							Set<String> keys = MemoryCacheTemplet.subMap.keySet();
+							List<String> newKeys = new ArrayList<String>();
+							newKeys.addAll(keys);
+							MemoryCacheTemplet.subMap.clear();
+							for (final String key : newKeys) {
+								 if(!MemoryCacheTemplet.subMap.containsKey(key)){
+									 taskExecutor.execute(new Runnable() {
+										@Override
+										public void run() {
+											registerListener(key);
+										}
+									});
+								 }
+							}
+							log.info("断开重连已经完成");
+							flag = false;
+							isDeal = false;
+						} catch (Exception e2) {
+							MemoryCacheTemplet.cache.clear();
+							log.error(e2.getMessage(), e2);
+							try {
+								TimeUnit.SECONDS.sleep(sleep);
+							} catch (InterruptedException e1) {
+								log.error(e1);
+							}
 						}
 					}
 				}
