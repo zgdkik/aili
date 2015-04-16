@@ -51,7 +51,7 @@ public class MemoryCacheTemplet<V> implements ICacheTemplet<String, V> {
 		
 		@Override
 		public Thread newThread(Runnable r) {
-			 System.out.println(this + " creating new Thread");
+			    log.error(this + " creating new Thread");
 		        Thread t = new Thread(r);
 		        log.error("created " + t + " ID:" + t.getId());
 		        t.setUncaughtExceptionHandler(redisConnectExceptionHandler);
