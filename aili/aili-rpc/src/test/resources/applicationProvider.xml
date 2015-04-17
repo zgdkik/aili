@@ -13,7 +13,7 @@
 	<!-- <dubbo:registry address="multicast://224.5.6.7:1234" /> -->
 
 	<!-- 使用zookeeper注册中心暴露服务地址 --><!-- register="true" -->
-	<dubbo:registry address="zookeeper://127.0.0.1:2181" register="true" />
+	<dubbo:registry address="zookeeper://127.0.0.1:2181" register="false" />
 
 	<bean id="callbackService" class="org.hbhk.aili.rpc.server.dubbo.callback.impl.CallbackService" />
 	<dubbo:service interface="org.hbhk.aili.rpc.server.dubbo.callback.ICallbackService" ref="callbackService" connections="1" callbacks="3">
@@ -29,9 +29,7 @@
 	<dubbo:provider protocol="dubbo" default="true"
 		 timeout="350000"    filter="userContextFilter" />
 
-
 <!-- 	<dubbo:monitor address="${dubbo.monitor.address}" /> -->
-
 
 	<!-- Service interface Concurrent Control -->
 	<!-- 
@@ -42,10 +40,6 @@
 	<dubbo:service ref="processData" interface="org.hbhk.aili.rpc.server.dubbo.IProcessData">
 	</dubbo:service>
 
-	<!-- Default Protocol -->
-	<!-- <dubbo:protocol server="netty" /> -->
-	<!-- <dubbo:protocol name="dubbo" port="20880" /> -->
-	<!-- designate implementation -->
 	<bean id="processData" class="org.hbhk.aili.rpc.server.dubbo.ProcessData" >
 	</bean>
 
