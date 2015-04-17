@@ -1,9 +1,9 @@
 package org.hbhk.aili.workflow.share.model;
 
-import java.io.Serializable;
+import org.hbhk.aili.mybatis.share.model.BizBaseModel;
 
 
-public class UserInfo  implements Serializable {
+public class UserInfo   extends BizBaseModel{
 
 	private static final long serialVersionUID = 54122579931594962L;
 	private String userCode;
