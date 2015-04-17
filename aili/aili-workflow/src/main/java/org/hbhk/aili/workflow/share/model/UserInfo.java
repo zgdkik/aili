@@ -1,25 +1,28 @@
 package org.hbhk.aili.workflow.share.model;
 
+import org.hbhk.aili.mybatis.server.annotation.Column;
+import org.hbhk.aili.mybatis.server.annotation.Table;
 import org.hbhk.aili.mybatis.share.model.BizBaseModel;
 
-
+@Table(value="t_aili_user",dynamicInsert =true,dynamicUpdate=true)
 public class UserInfo   extends BizBaseModel{
 
 	private static final long serialVersionUID = 54122579931594962L;
+	@Column("userCode")
 	private String userCode;
-	
+	@Column("userName")
 	private String userName;
-
+	@Column("password")
 	private String password;
-
+	@Column("userHead")
 	private String userHead;
-
+	@Column("nickName")
 	private String nickName;
-
+	@Column("email")
 	private String email;
-
+	@Column("gender")
 	private String gender;
-
+	@Column("area")
 	private String area;
 
 	public String getUserName() {
