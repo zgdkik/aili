@@ -5,7 +5,7 @@ package org.hbhk.aili.cache.share.ex;
 /**
  * Cache没找到异常
  */
-public class CacheNotFoundException extends GeneralException {
+public class CacheNotFoundException extends RuntimeException {
 	
 	private static final long serialVersionUID = -8573419783281346196L;
 
