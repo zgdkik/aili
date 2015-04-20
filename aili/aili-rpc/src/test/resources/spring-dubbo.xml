@@ -5,23 +5,25 @@
     xsi:schemaLocation="http://www.springframework.org/schema/beans        http://www.springframework.org/schema/beans/spring-beans.xsd        http://code.alibabatech.com/schema/dubbo        http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
  
     <!-- 提供方应用信息，用于计算依赖关系 -->
-    <dubbo:application name="${dubbo.app.name}"  />
+    <dubbo:application name="hbhk"  />
   
     <!-- 使用multicast广播注册中心暴露服务地址 -->
 <!--     <dubbo:registry address="multicast://224.5.6.7:1234" /> -->
     
     <!-- 使用zookeeper注册中心暴露服务地址 -->  
-    <dubbo:registry address="${dubbo.registry.address}" register="${dubbo.register.flag}" />  
+    <dubbo:registry address="zookeeper://127.0.0.1:2181" register="false" />  
  
 	<!-- 用dubbo协议在20880端口暴露服务 -->
-	<dubbo:protocol  id="dubbo" name="dubbo" port="${dubbo.app.port}" />
-	<dubbo:provider protocol="dubbo" default="true" version="${dubbo.default.version}" timeout="350000" />
+	<dubbo:protocol  id="dubbo" name="dubbo" port="20880" />
+	<dubbo:provider protocol="dubbo" default="true" version="1.0.0" timeout="350000" />
 	
-    <dubbo:monitor address="${dubbo.monitor.address}"/>
+ <!--    <dubbo:monitor address="${dubbo.monitor.address}"/> -->
     
     <!-- 声明需要暴露的服务接口 -->
-    <dubbo:service interface="com.baozun.wms4.manager.system.SchedulerTaskManager" ref="schedulerTaskManager" />
-    
-    <dubbo:service interface="com.baozun.wms4.manager.system.SysDictionaryManager" ref="sysDictionaryManager" />
+    <dubbo:service ref="processData" interface="org.hbhk.aili.rpc.server.dubbo.IProcessData">
+	</dubbo:service>
+
+	<bean id="processData" class="org.hbhk.aili.rpc.server.dubbo.ProcessData" >
+	</bean>
 
 </beans>
