@@ -12,13 +12,13 @@ import org.hbhk.aili.hibernate.share.utils.Page;
 public interface IBaseDao<T extends BaseModel, PK extends Serializable> {
 
 	
-	T saveOrUpdate(T t);
+	T saveOrUpdate(T model);
 
 	T getById(PK id);
 	
 	int deleteById(PK id);
 	
-	List<T> get(Map<String, Object> params);
+	List<T> getList(Map<String, Object> params);
 
 	/**
 	 * 
