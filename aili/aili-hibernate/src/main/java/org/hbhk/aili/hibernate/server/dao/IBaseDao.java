@@ -10,9 +10,9 @@ import org.hbhk.aili.hibernate.share.utils.Page;
 
 public interface IBaseDao<T extends BaseModel, PK> {
 
-	int insert(T t);
+	T insert(T t);
 
-	int update(T t);
+	T update(T t);
 
 	T getById(PK id);
 
