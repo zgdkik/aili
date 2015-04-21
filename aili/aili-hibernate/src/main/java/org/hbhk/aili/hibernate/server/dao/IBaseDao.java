@@ -1,5 +1,6 @@
 package org.hbhk.aili.hibernate.server.dao;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
@@ -8,14 +9,14 @@ import org.hbhk.aili.hibernate.share.model.Pagination;
 import org.hbhk.aili.hibernate.share.model.Sort;
 import org.hbhk.aili.hibernate.share.utils.Page;
 
-public interface IBaseDao<T extends BaseModel, PK> {
+public interface IBaseDao<T extends BaseModel, PK extends Serializable> {
 
-	T insert(T t);
-
-	T update(T t);
+	T saveOrUpdate(T t);
 
 	T getById(PK id);
-
+	
+	int deleteById(PK id);
+	
 	List<T> get(Map<String, Object> params);
 
 	/**
@@ -32,9 +33,6 @@ public interface IBaseDao<T extends BaseModel, PK> {
 
 	int getPageTotalCount(Map<String, Object> params);
 
-	int deleteById(PK id);
-
-	int updateStatusById(PK id, int status);
 
 	Pagination<T> findPage(Map<String, Object> params, Page page,
 			Sort... sorts);
