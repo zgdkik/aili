@@ -19,6 +19,9 @@ public class Pagination<T> implements Serializable {
 	private int pageNum;
 	private int pageSize;
 	private String sortStr;
+	private int currentPage;
+	
+	private int start;
 
 	public Pagination() {
 	}
@@ -84,4 +87,22 @@ public class Pagination<T> implements Serializable {
 	public void setCount(int count) {
 		this.count = count;
 	}
+
+	public int getCurrentPage() {
+		return currentPage;
+	}
+
+	public void setCurrentPage(int currentPage) {
+		this.currentPage = currentPage;
+	}
+
+	public int getStart() {
+		return start;
+	}
+
+	public void setStart(int start) {
+		this.start = start;
+	}
+
+	
 }
