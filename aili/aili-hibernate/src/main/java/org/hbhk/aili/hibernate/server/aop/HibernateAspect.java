@@ -51,7 +51,7 @@ public class HibernateAspect implements InitializingBean{
 					list.addAll(Arrays.asList(m.getParameterTypes()));
 					args.add(modelClass);
 					args.addAll(Arrays.asList(pjp.getArgs()));
-					return BaseDaoWrapper.class.getMethod(m.getName(), list.toArray(new Class<?>[]{})).
+					return BaseDaoWrapper.class.getMethod(mName, list.toArray(new Class<?>[]{})).
 					invoke(baseDaoWrapper, args.toArray());
 				}else{
 					return BaseDaoWrapper.class.getMethod(mName, m.getParameterTypes()).
