@@ -43,7 +43,7 @@ public class HibernateAspect implements InitializingBean{
 				String  mName = m.getName();
 				if( mName.equals("getById") || 
 						 mName.equals("deleteById")){
-					ModelClassSupport mcs = (ModelClassSupport)pjp.getThis();
+					ModelClassSupport mcs = (ModelClassSupport)pjp.getTarget();
 					Class<?> modelClass = mcs.getModelClass();
 					List<Class<?>> list = new ArrayList<Class<?>>();
 					List<Object> args = new ArrayList<Object>();

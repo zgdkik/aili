@@ -28,6 +28,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class DaoService implements IDaoService {
@@ -49,6 +50,7 @@ public class DaoService implements IDaoService {
 
 	@SuppressWarnings("unchecked")
 	@Override
+	@Transactional
 	public <T> T save(T model) {
 		Session session = getSession();
 		if (EntityStatus.TRANSIENT == getStatus(model)) {
@@ -60,17 +62,20 @@ public class DaoService implements IDaoService {
 	}
 
 	@Override
+	@Transactional
 	public <T> T update(T model) {
 		return null;
 	}
 
 	@Override
+	@Transactional
 	public <T> void delete(T model) {
 		Session session = getSession();
 		session.delete(model);
 	}
 
 	@Override
+	@Transactional
 	public <T> void deleteByPrimaryKey(Class<T> clazz, Serializable pk) {
 		T entity = getByPrimaryKey(clazz, pk);
 		if (entity != null) {
@@ -190,6 +195,7 @@ public class DaoService implements IDaoService {
 		}		
 	}
 	@Override
+	@Transactional
 	public void executeDDL(String queryString) {
 		Session session = getSession();
 		SQLQuery query = session.createSQLQuery(queryString);

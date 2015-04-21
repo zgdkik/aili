@@ -24,7 +24,7 @@
 	<bean id="baseDaoProxy" class="org.springframework.aop.framework.ProxyFactoryBean"
 		abstract="true">
 	</bean> 
-	<bean class="org.hbhk.aili.hibernate.server.aop.QueryPageAspect"></bean>
+	<bean class="org.hbhk.aili.hibernate.server.aop.HibernateAspect"></bean>
 	<!-- 配置数据源 -->
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">

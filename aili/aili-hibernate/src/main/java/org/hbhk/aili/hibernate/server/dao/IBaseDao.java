@@ -11,6 +11,7 @@ import org.hbhk.aili.hibernate.share.utils.Page;
 
 public interface IBaseDao<T extends BaseModel, PK extends Serializable> {
 
+	
 	T saveOrUpdate(T t);
 
 	T getById(PK id);
