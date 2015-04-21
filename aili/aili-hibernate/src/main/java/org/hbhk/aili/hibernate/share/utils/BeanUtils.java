@@ -28,21 +28,14 @@ public class BeanUtils {
 			throws NoSuchFieldException {
 		Assert.notNull(object);
 		Assert.hasText(propertyName);
-		//Field �ṩ�й����ӿڵĵ����ֶε���Ϣ���Լ�����Ķ�̬����Ȩ�ޡ�������ֶο�����һ���ࣨ��̬���ֶλ�ʵ���ֶΡ�
 		return getDeclaredField(object.getClass(), propertyName);
 	}
 
-	/**
-	 * ��ȡ�����DeclaredField.
-	 * 
-	 * @throws NoSuchFieldException
-	 *             ���û�и�Fieldʱ�׳�.
-	 */
-	public static Field getDeclaredField(Class clazz, String propertyName)
+	public static Field getDeclaredField(Class<?> clazz, String propertyName)
 			throws NoSuchFieldException {
 		Assert.notNull(clazz);
 		Assert.hasText(propertyName);
-		for (Class superClass = clazz; superClass != Object.class; superClass = superClass
+		for (Class<?> superClass = clazz; superClass != Object.class; superClass = superClass
 				.getSuperclass()) {
 			try {
 				return superClass.getDeclaredField(propertyName);
@@ -113,7 +106,7 @@ public class BeanUtils {
 	 * @param type
 	 * @return
 	 */
-	public static List<Field> getFieldsByType(Object object, Class type) {
+	public static List<Field> getFieldsByType(Object object, Class<?> type) {
 		List<Field> list = new ArrayList<Field>();
 		Field[] fields = object.getClass().getDeclaredFields();
 		for (Field field : fields) {
@@ -124,10 +117,7 @@ public class BeanUtils {
 		return list;
 	}
 
-	/**
-	 * ��FiledName���Field������.
-	 */
-	public static Class getPropertyType(Class type, String name)
+	public static Class<?> getPropertyType(Class<?> type, String name)
 			throws NoSuchFieldException {
 		return getDeclaredField(type, name).getType();
 	}
