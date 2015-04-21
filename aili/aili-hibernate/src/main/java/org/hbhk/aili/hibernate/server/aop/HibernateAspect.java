@@ -22,13 +22,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 
-/**
- * 
- * @Description: mybatis增强处理
- * @author 何波
- * @date 2015年3月11日 上午10:05:24 
- *
- */
 @Aspect
 public class HibernateAspect implements InitializingBean{
 
@@ -36,6 +29,7 @@ public class HibernateAspect implements InitializingBean{
 	
 	@Autowired
 	private IDaoService daoService;
+	
 	private BaseDaoWrapper baseDaoWrapper;
 	
 	@Around("this(org.hbhk.aili.hibernate.server.dao.IBaseDao)")
@@ -60,7 +54,6 @@ public class HibernateAspect implements InitializingBean{
 					return BaseDaoWrapper.class.getMethod(m.getName(), list.toArray(new Class<?>[]{})).
 					invoke(baseDaoWrapper, args.toArray());
 				}else{
-					//return baseDaoWrapper.saveOrUpdate(pjp.getArgs()[0]);
 					return BaseDaoWrapper.class.getMethod(mName, m.getParameterTypes()).
 							invoke(baseDaoWrapper, pjp.getArgs());
 				}
