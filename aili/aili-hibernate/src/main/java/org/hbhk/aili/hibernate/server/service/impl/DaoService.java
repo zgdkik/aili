@@ -128,7 +128,7 @@ public class DaoService implements IDaoService {
 	
 	protected <T> Pagination<T> setPagination(Pagination<T> p, int start, int pageSize, Sort[] sorts){
 		if(pageSize == 0) throw new IllegalArgumentException();
-		p.setCurrentPage((start/pageSize) + 1);
+		p.setPageNum((start/pageSize) + 1);
 		p.setTotalPages((int)p.getCount()/pageSize + (p.getCount()%pageSize == 0 ? 0 : 1));
 		p.setStart(start);
 		p.setPageSize(pageSize);
@@ -294,6 +294,13 @@ public class DaoService implements IDaoService {
 		}
 		List<T> result = criteria.list();
 		pager = new Pagination<T>(result, rowCount);
+		pager.setPageNum(pageNo);
+		pager.setPageSize(pageSize);
+		int totalPages = rowCount/pager.getPageSize();
+		if(rowCount%pager.getPageSize()!=0){
+			totalPages =totalPages+1;
+		}
+		pager.setTotalPages(totalPages);
 		return pager;
 	}
 
