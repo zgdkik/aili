@@ -36,7 +36,9 @@ public interface IBaseDao<T extends BaseModel, PK> {
 
 	int updateStatusById(PK id, int status);
 
-	Pagination<T> getPagination(Map<String, Object> params, Page page,
+	Pagination<T> findPage(Map<String, Object> params, Page page,
 			Sort... sorts);
+	
+	
 
 }

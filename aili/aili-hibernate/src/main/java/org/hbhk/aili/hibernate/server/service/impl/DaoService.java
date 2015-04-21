@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.persistence.PersistenceException;
 
@@ -11,10 +12,14 @@ import org.hbhk.aili.hibernate.server.service.IDaoService;
 import org.hbhk.aili.hibernate.share.model.Pagination;
 import org.hbhk.aili.hibernate.share.model.Sort;
 import org.hbhk.aili.hibernate.share.utils.StringUtil;
+import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
 import org.hibernate.engine.internal.ForeignKeys;
 import org.hibernate.engine.spi.EntityEntry;
 import org.hibernate.engine.spi.SessionImplementor;
@@ -22,6 +27,7 @@ import org.hibernate.engine.spi.Status;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -30,6 +36,10 @@ public class DaoService implements IDaoService {
 	protected final Logger logger = LoggerFactory.getLogger(DaoService.class);
 	@Autowired
 	private SessionFactory sessionFactory;
+	
+	
+	private HibernateTemplate hibernateTemplate;
+	
 
 	private Session getSession() {
 		return sessionFactory.getCurrentSession();
@@ -237,6 +247,59 @@ public class DaoService implements IDaoService {
 
 	protected static enum EntityStatus {
 		TRANSIENT, PERSISTENT, DETACHED, REMOVED
+	}
+
+	@Override
+	public <T> Pagination<T> findPage(Map<String, Object> params,
+			Sort[] sorts, int pageNum, int pageSize, boolean withGroupby, Class<T> entityClass) {
+		return findPageByCriteria(pageNum, pageSize, params, sorts, entityClass);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public <T> List<T> getList(Map<String, Object> params, Sort[] sorts,
+			int start, int pageSize, boolean withGroupby,Class<T> entityClass) {
+		Session session = getSession();
+		Criteria criteria = session.createCriteria(entityClass);  
+		 if (params != null){  
+            Set<String> keys =params.keySet();  
+            for (String key : keys){  
+                criteria.add(Restrictions.like(key, params.get(key)));  
+            }  
+	     }  
+		return criteria.list(); 
+	}
+	
+	@SuppressWarnings("unchecked")
+	private <T> Pagination<T> findPageByCriteria(int pageNo, int pageSize,
+			Map<String, Object> params,Sort[] sorts, Class<T> entityClass) {
+		Pagination<T> pager = null;
+		Criteria criteria = this.getSession().createCriteria(entityClass);
+		if (params != null) {
+			Set<String> keys = params.keySet();
+			for (String key : keys) {
+				criteria.add(Restrictions.like(key, params.get(key)));
+			}
+		}
+		// 获取根据条件分页查询的总行数
+		int rowCount = (Integer) criteria.setProjection(
+				Projections.rowCount()).uniqueResult();
+		criteria.setProjection(null);
+
+		criteria.setFirstResult((pageNo - 1) * pageSize);
+		criteria.setMaxResults(pageSize);
+		if(sorts!=null && sorts.length>0){
+			for (Sort sort : sorts) {
+				if(Sort.ASC.equalsIgnoreCase(sort.getType())){
+					criteria.addOrder(Order.asc(sort.getField()));
+				}else{
+					criteria.addOrder(Order.desc(sort.getField()));
+				}
+			}
+		}
+		List<T> result = criteria.list();
+		pager = new Pagination<T>(result, rowCount);
+		return pager;
 	}
 
 }
