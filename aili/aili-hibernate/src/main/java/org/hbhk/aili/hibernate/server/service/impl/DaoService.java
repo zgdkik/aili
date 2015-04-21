@@ -27,7 +27,6 @@ import org.hibernate.engine.spi.Status;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -37,10 +36,6 @@ public class DaoService implements IDaoService {
 	@Autowired
 	private SessionFactory sessionFactory;
 	
-	
-	private HibernateTemplate hibernateTemplate;
-	
-
 	private Session getSession() {
 		return sessionFactory.getCurrentSession();
 	}
