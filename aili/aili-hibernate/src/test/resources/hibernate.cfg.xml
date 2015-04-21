@@ -6,9 +6,6 @@
 	<session-factory>
 		<!-- <property name="current_session_context_class">thread</property>   -->
 		<!-- 引入需要映射的类 -->
-		<mapping class="org.hbhk.aili.hibernate.share.model.User" />
-		<mapping class="org.hbhk.aili.hibernate.share.model.Category" />
-		<mapping class="org.hbhk.aili.hibernate.share.model.Product" />
 		
 	</session-factory>
 </hibernate-configuration>

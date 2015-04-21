@@ -19,7 +19,11 @@
 			http://hbhk.aili.org/schema/hbhk/aili-spring-ext.xsd
 			">
 
-	<hbhk:dao-config base-package="org.hbhk.aili.**.test" />
+	<hbhk:dao-config base-package="org.hbhk.aili.hibernate.server.dao" />
+	
+	<bean id="baseDaoProxy" class="org.springframework.aop.framework.ProxyFactoryBean"
+		abstract="true">
+	</bean> 
 	<!-- 配置数据源 -->
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
