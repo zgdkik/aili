@@ -51,20 +51,16 @@ public class DaoService implements IDaoService {
 	@SuppressWarnings("unchecked")
 	@Override
 	@Transactional
-	public <T> T save(T model) {
+	public <T> T saveOrUpdate(T model) {
 		Session session = getSession();
+//		session.saveOrUpdate(model);
+//		return model;
 		if (EntityStatus.TRANSIENT == getStatus(model)) {
-			session.persist(model);
+			session.save(model);
 			return model;
 		} else {
 			return (T) session.merge(model);
 		}
-	}
-
-	@Override
-	@Transactional
-	public <T> T update(T model) {
-		return null;
 	}
 
 	@Override

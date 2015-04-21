@@ -12,9 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 public interface IDaoService {
 	<T> T getByPrimaryKey(Class<T> clazz, Serializable pk);
 	@Transactional
-	<T> T save(T model);
-	@Transactional
-	<T> T update(T model);
+	<T> T saveOrUpdate(T model);
 	@Transactional
 	<T> void delete(T model);
 	@Transactional

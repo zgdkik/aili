@@ -19,7 +19,7 @@ public class BaseDaoWrapper {
 	public BaseDaoWrapper(IDaoService daoService){this.daoService = daoService;}
 	
 	public Object saveOrUpdate(BaseModel model) {
-		return daoService.save(model);
+		return daoService.saveOrUpdate(model);
 	}
 	
 	public void delete(BaseModel model) {
