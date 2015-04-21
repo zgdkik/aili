@@ -24,11 +24,12 @@
 	<bean id="baseDaoProxy" class="org.springframework.aop.framework.ProxyFactoryBean"
 		abstract="true">
 	</bean> 
+	<bean class="org.hbhk.aili.hibernate.server.aop.QueryPageAspect"></bean>
 	<!-- 配置数据源 -->
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://127.0.0.1/hbhk" />
+		<property name="url" value="jdbc:mysql://127.0.0.1/gctv" />
 		<property name="username" value="root" />
 		<property name="password" value="135246" />
 	</bean>
@@ -55,7 +56,7 @@
 				</value>
 			</list>
 		</property>
-		<!-- <property name="packagesToScan" value="org.hbhk.aili.*.share.model"/> -->
+		 <property name="packagesToScan" value="org.hbhk.aili.hibernate.server.model"/>
 	</bean>
 
 	<!-- 事务管理器 -->

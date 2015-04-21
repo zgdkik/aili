@@ -16,7 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public class BaseDao<T extends BaseModel, PK extends Serializable>  implements IBaseDao<T, PK>{
 
-	private Class<T> entityClass;
+	private Class<T> modelClass;
 	
 	@Autowired
 	protected IDaoService daoService;
@@ -26,7 +26,7 @@ public class BaseDao<T extends BaseModel, PK extends Serializable>  implements I
 		Class<?> c = this.getClass();  
         Type t = c.getGenericSuperclass();  
         if (t instanceof ParameterizedType) {  
-            this.entityClass = (Class<T>) ((ParameterizedType) t)  
+            this.modelClass = (Class<T>) ((ParameterizedType) t)  
                     .getActualTypeArguments()[0];  
         }  
 	}
@@ -42,17 +42,17 @@ public class BaseDao<T extends BaseModel, PK extends Serializable>  implements I
 
 	@Override
 	public T getById(PK id) {
-		return daoService.getByPrimaryKey(entityClass, id);
+		return daoService.getByPrimaryKey(modelClass, id);
 	}
 
 	@Override
 	public List<T> get(Map<String, Object> params) {
-		return daoService.getList(params, null, 0, 0, false,entityClass);
+		return daoService.getList(params, null, 0, 0, false,modelClass);
 	}
 
 	@Override
 	public List<T> getPage(Map<String, Object> params, int pageNum, int pageSize) {
-		return daoService.getList(params, null, 0, 0, false,entityClass);
+		return daoService.getList(params, null, 0, 0, false,modelClass);
 	}
 
 	@Override
@@ -73,7 +73,7 @@ public class BaseDao<T extends BaseModel, PK extends Serializable>  implements I
 	@Override
 	public Pagination<T> findPage(Map<String, Object> params, Page page,
 			Sort... sorts) {
-		return daoService.findPage(params, sorts, page.getStart(), page.getPageSize(), false,entityClass);
+		return daoService.findPage(params, sorts, page.getStart(), page.getPageSize(), false,modelClass);
 	}
 
 }

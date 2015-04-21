@@ -1,6 +1,6 @@
 package org.hbhk.aili.hibernate.server.dao;
 
-import org.hbhk.aili.hibernate.share.model.BaseModel;
+import org.hbhk.aili.hibernate.server.model.TestModel;
 
-public interface IUserDao extends IBaseDao<BaseModel, Long> {
+public interface IUserDao extends IBaseDao<TestModel, Long> {
 }

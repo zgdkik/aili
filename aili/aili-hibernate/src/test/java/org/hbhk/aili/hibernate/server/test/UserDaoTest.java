@@ -1,14 +1,18 @@
 package org.hbhk.aili.hibernate.server.test;
 
 import org.hbhk.aili.hibernate.server.dao.IUserDao;
+import org.hbhk.aili.hibernate.server.model.TestModel;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration({ "/spring.xml" })
+@Transactional
 public class UserDaoTest {
 	
 	@Autowired
@@ -16,7 +20,11 @@ public class UserDaoTest {
 	
 	
 	@Test
+	@Rollback(true)
 	public void testDao() throws Exception {
-		System.out.println(userDao);
+		TestModel t = new TestModel();
+		t.setId(1l);
+		t.setName("hbhk");
+		System.out.println(userDao.insert(t));
 	}
 }

@@ -37,7 +37,7 @@ public class DaoService implements IDaoService {
 	private SessionFactory sessionFactory;
 	
 	private Session getSession() {
-		return sessionFactory.getCurrentSession();
+		return sessionFactory.openSession();
 	}
 
 	@SuppressWarnings("unchecked")
