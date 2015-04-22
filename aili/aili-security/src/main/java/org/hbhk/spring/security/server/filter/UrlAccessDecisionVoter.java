@@ -1,6 +1,8 @@
 package org.hbhk.spring.security.server.filter;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import org.hbhk.aili.security.server.service.IUserService;
 import org.hbhk.spring.security.share.vo.UserDetailsVo;
@@ -14,6 +16,12 @@ public class UrlAccessDecisionVoter implements AccessDecisionVoter<FilterInvocat
 
 	@Autowired(required=false)
 	private IUserService userService;
+	
+	private static List<String> urls = new ArrayList<String>();
+	static{
+		urls.add("/");
+		urls.add("/index");
+	}
 
 	public boolean supports(ConfigAttribute attribute) {
 		return true;
@@ -32,11 +40,10 @@ public class UrlAccessDecisionVoter implements AccessDecisionVoter<FilterInvocat
 		if (!isControlledUrl(requestUrl)) {
 			return ACCESS_GRANTED;
 		}
-		UserDetailsVo userDetails = (UserDetailsVo) authentication.getPrincipal();
-		if (!userDetails.getPrivilegeUrls().contains(requestUrl)) {
-			return ACCESS_DENIED;
-		}
-
+//		UserDetailsVo userDetails = (UserDetailsVo) authentication.getPrincipal();
+//		if (!userDetails.getPrivilegeUrls().contains(requestUrl)) {
+//			return ACCESS_DENIED;
+//		}
 		return ACCESS_GRANTED;
 	}
 	/**
@@ -49,8 +56,7 @@ public class UrlAccessDecisionVoter implements AccessDecisionVoter<FilterInvocat
 	* @throws
 	 */
 	private boolean isControlledUrl(String requestUrl) {
-		return true;
-		//return userService.validate(requestUrl);
+		return urls.contains(requestUrl);
 	}
 
 }
