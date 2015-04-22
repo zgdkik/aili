@@ -11,17 +11,6 @@ public class SsoController implements InitializingBean {
 	public String index() {
 		return "index";
 	}
-	
-	@RequestMapping("/login")
-	public String login() {
-		return "login";
-	}
-	
-	@RequestMapping("/logout")
-	public String logout() {
-		return "logout";
-	}
-
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		System.out.println("aaaaaaaaaaaa");
