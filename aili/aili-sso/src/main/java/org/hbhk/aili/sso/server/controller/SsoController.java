@@ -7,17 +7,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class SsoController implements InitializingBean {
 	
-	@RequestMapping(value={"/","/index"})
+	@RequestMapping("/index")
 	public String index() {
 		return "index";
 	}
 	
-	@RequestMapping(value={"/login"})
+	@RequestMapping("/login")
 	public String login() {
 		return "login";
 	}
 	
-	@RequestMapping(value={"/logout"})
+	@RequestMapping("/logout")
 	public String logout() {
 		return "logout";
 	}

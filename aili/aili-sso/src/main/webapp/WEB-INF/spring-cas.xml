@@ -9,8 +9,8 @@
 	<http entry-point-ref="casEntryPoint" access-decision-manager-ref="urlAccessDecisionManager">
 		<intercept-url pattern="/**" access="IS_AUTHENTICATED_FULLY" />
 		<!-- 登录设置 -->
-		<form-login login-page="/login" default-target-url="/index"
-			always-use-default-target="true" />
+		<!-- <form-login login-page="/login" default-target-url="/index"
+			always-use-default-target="true" /> -->
 		<!-- 登出设置 -->
 		<logout logout-url="/logout" delete-cookies="JSESSIONID" />
 		<!-- session控制 -->
