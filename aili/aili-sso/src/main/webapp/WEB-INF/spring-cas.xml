@@ -18,21 +18,24 @@
 		</session-management>
 		<custom-filter position="CAS_FILTER" ref="casFilter" />
 	</http>
-
+	<!-- 密码加密方式 -->
+<!-- 	<beans:bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"></beans:bean> -->
 	<!-- 认证管理 -->
 	<authentication-manager alias="authenticationManager">
 <!-- 		<authentication-provider user-service-ref="userDetailsService"> -->
 <!-- 			<password-encoder ref="bcryptPasswordEncoder" /> -->
 <!-- 		</authentication-provider> -->
+		<!--使用cas就不需要密码加密  -->
 		<authentication-provider ref="casAuthenticationProvider" />
 	</authentication-manager>
 
 	<beans:bean id="userDetailsService" class="org.hbhk.spring.security.server.filter.UserDetailsServiceImpl"></beans:bean>
 	
-<!-- 	<beans:bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"></beans:bean> -->
+
 
 	<!-- cas config -->
 	<beans:bean id="serviceProperties" class="org.springframework.security.cas.ServiceProperties">
+		<!--认证成功后跳转的地址  -->
 		<beans:property name="service" value="${web.url}"/>
 		<beans:property name="sendRenew" value="false"/>
 	</beans:bean>
