@@ -12,13 +12,14 @@ import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.FilterInvocation;
 
-public class UrlAccessDecisionVoter implements AccessDecisionVoter<FilterInvocation> {
+public class UrlAccessDecisionVoter implements
+		AccessDecisionVoter<FilterInvocation> {
 
-	@Autowired(required=false)
+	@Autowired(required = false)
 	private IUserService userService;
-	
+
 	private static List<String> urls = new ArrayList<String>();
-	static{
+	static {
 		urls.add("/");
 		urls.add("/index");
 	}
@@ -34,26 +35,26 @@ public class UrlAccessDecisionVoter implements AccessDecisionVoter<FilterInvocat
 	@Override
 	public int vote(Authentication authentication, FilterInvocation fi,
 			Collection<ConfigAttribute> attributes) {
-		String requestUrl = fi.getRequestUrl();
-
+		// String requestUrl = fi.getRequestUrl();
 		// 不受管控的URL，直接跳过验证
-		if (!isControlledUrl(requestUrl)) {
-			return ACCESS_GRANTED;
-		}
-//		UserDetailsVo userDetails = (UserDetailsVo) authentication.getPrincipal();
-//		if (!userDetails.getPrivilegeUrls().contains(requestUrl)) {
-//			return ACCESS_DENIED;
-//		}
+		// if (!isControlledUrl(requestUrl)) {
+		// return ACCESS_GRANTED;
+		// }
+		// UserDetailsVo userDetails = (UserDetailsVo)
+		// authentication.getPrincipal();
+		// if (!userDetails.getPrivilegeUrls().contains(requestUrl)) {
+		// return ACCESS_DENIED;
+		// }
 		return ACCESS_GRANTED;
 	}
+
 	/**
 	 * 
-	* @author 何波
-	* @Description: 全部权限url
-	* @param requestUrl
-	* @return   
-	* boolean   
-	* @throws
+	 * @author 何波
+	 * @Description: 全部权限url
+	 * @param requestUrl
+	 * @return boolean
+	 * @throws
 	 */
 	private boolean isControlledUrl(String requestUrl) {
 		return urls.contains(requestUrl);
