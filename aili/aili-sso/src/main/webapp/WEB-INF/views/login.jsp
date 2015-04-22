@@ -6,7 +6,6 @@
 <title>HBHK</title>
 </head>
 <body>
-	<h1>hbhk-sso</h1>
-	<a href="/logout">退出</a>
+	<h1>hbhk-sso-login</h1>
 </body>
 </html>

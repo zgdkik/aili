@@ -30,10 +30,7 @@
 		<authentication-provider ref="casAuthenticationProvider" />
 	</authentication-manager>
 
-	<beans:bean id="userDetailsService"
-		class="org.hbhk.spring.security.server.filter.UserDetailsServiceImpl"></beans:bean>
-
-
+	<beans:bean id="userDetailsService" class="org.hbhk.spring.security.server.filter.UserDetailsServiceImpl"/>
 
 	<!-- cas config -->
 	<beans:bean id="serviceProperties"
@@ -74,8 +71,7 @@
 			value="an_id_for_this_auth_provider_only" />
 	</beans:bean>
 	<!--退出  -->
-	<beans:bean class="org.jasig.cas.client.session.SingleSignOutFilter"
-		id="singleLogoutFilter" />
+	<beans:bean id="singleLogoutFilter" class="org.jasig.cas.client.session.SingleSignOutFilter" />
 	<!-- This filter redirects to the CAS Server to signal Single Logout should 
 		be performed -->
 	<beans:bean
