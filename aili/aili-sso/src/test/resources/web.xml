@@ -31,8 +31,9 @@
 			<!--这里的server是服务端的IP -->
 		</init-param>
 		<init-param>
+			<!--认证成功后的返回地址  -->
 			<param-name>serverName</param-name>
-			<param-value>http://localhost:10000</param-value>
+			<param-value>http://localhost:5416</param-value>
 		</init-param>
 	</filter>
 	<filter-mapping>
@@ -52,7 +53,7 @@
 		</init-param>
 		<init-param>
 			<param-name>serverName</param-name>
-			<param-value>http://localhost:10000</param-value>
+			<param-value>http://localhost:5416</param-value>
 		</init-param>
 	</filter>
 	<filter-mapping>
