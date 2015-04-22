@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="SpringWebFlowTutorial:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="SpringWebFlowTutorial.war">
+      <element id="artifact" artifact-name="SpringWebFlowTutorial:war exploded" />
+    </root>
+  </artifact>
+</component>
