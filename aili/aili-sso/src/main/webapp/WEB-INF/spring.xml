@@ -28,4 +28,7 @@
 			expression="org.springframework.web.bind.annotation.ControllerAdvice" />
 	</context:component-scan>
 	
+	<context:property-placeholder location="classpath:config.properties" />
+	<import resource="spring-cas.xml"/>
+	
 </beans>
