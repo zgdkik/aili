@@ -11,7 +11,7 @@
 		<!-- 登录设置 -->
 		<form-login login-page="/login" default-target-url="/index" always-use-default-target="true"  />
 		<!-- 登出设置 -->
-		<logout logout-url="/lout" delete-cookies="JSESSIONID" />
+		<logout logout-url="/logout" delete-cookies="JSESSIONID" />
 		<!-- session控制 -->
 		<session-management invalid-session-url="${cas.service.url}/login">
 			<concurrency-control session-registry-alias="sessionRegistry" />
