@@ -6,8 +6,8 @@
            http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-	<http use-expressions="true" entry-point-ref="casEntryPoint">
-		<intercept-url pattern="/**" access="isAuthenticated()" />
+	<http entry-point-ref="casEntryPoint" access-decision-manager-ref="urlAccessDecisionManager">
+		<intercept-url pattern="/**" access="IS_AUTHENTICATED_FULLY" />
 		<!-- 登录设置 -->
 		<form-login login-page="/login" default-target-url="/index"
 			always-use-default-target="true" />
@@ -31,7 +31,15 @@
 	</authentication-manager>
 
 	<beans:bean id="userDetailsService" class="org.hbhk.spring.security.server.filter.UserDetailsServiceImpl"/>
-
+	<beans:bean id="loginSuccessHandler" class="org.hbhk.spring.security.server.filter.LoginSuccessHandler"></beans:bean>
+	<beans:bean id="urlAccessDecisionManager" class="org.springframework.security.access.vote.UnanimousBased">
+		<beans:constructor-arg>
+			<beans:list>
+				<beans:bean class="org.springframework.security.access.vote.AuthenticatedVoter" />
+				<beans:bean class="org.hbhk.spring.security.server.filter.UrlAccessDecisionVoter" />
+			</beans:list>
+		</beans:constructor-arg>
+	</beans:bean>
 	<!-- cas config -->
 	<beans:bean id="serviceProperties"
 		class="org.springframework.security.cas.ServiceProperties">
@@ -43,6 +51,7 @@
 	<beans:bean id="casFilter"
 		class="org.springframework.security.cas.web.CasAuthenticationFilter">
 		<beans:property name="authenticationManager" ref="authenticationManager" />
+		<beans:property name="authenticationSuccessHandler" ref="loginSuccessHandler" />
 	</beans:bean>
 
 	<beans:bean id="casEntryPoint"
