@@ -1,9 +1,11 @@
 package org.hbhk.spring.security.share.vo;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Set;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.GrantedAuthorityImpl;
 import org.springframework.security.core.userdetails.UserDetails;
 
 /**
@@ -37,7 +39,11 @@ public class UserDetailsVo implements UserDetails {
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return null;
+		GrantedAuthority[] gas = new GrantedAuthority[2];
+		gas[0] = new GrantedAuthorityImpl("role");
+		// 分配登录权限给所有通过登录验证的角色
+		gas[1] = new GrantedAuthorityImpl("ROLE_LOGIN");
+		return Arrays.asList(gas);
 	}
 
 	@Override
