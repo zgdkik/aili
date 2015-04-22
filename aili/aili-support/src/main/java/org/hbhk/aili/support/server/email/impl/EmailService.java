@@ -38,7 +38,7 @@ public class EmailService implements IEmailService {
 
 	private Log log = LogFactory.getLog(getClass());
 	private Executor executor = Executors.newFixedThreadPool(10);
-	@Autowired
+	@Autowired(required=false)
 	protected JavaMailSender mailSender;
 	@Value("${email.username}")
 	private String fromEmail;
