@@ -9,7 +9,7 @@
 	</parent>
 	<artifactId>aili-sso</artifactId>
 	<version>${aili-version}</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 
 	<name>aili-rpc</name>
 	<properties>
@@ -30,7 +30,21 @@
 		<dependency>
 			<groupId>org.jasig.cas.client</groupId>
 			<artifactId>cas-client-core</artifactId>
-			<version>3.2.2</version>
+			<version>3.3.3</version>
 		</dependency>
 	</dependencies>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat6-maven-plugin</artifactId>
+				<version>2.2</version>
+				<configuration>
+					<path>/</path>
+					<port>5416</port>
+				</configuration>
+			</plugin>
+		</plugins>
+
+	</build>
 </project>
