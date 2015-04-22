@@ -34,11 +34,6 @@
 			<version>${aili-version}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.hbhk.aili</groupId>
-			<artifactId>aili-support</artifactId>
-			<version>${aili-version}</version>
-		</dependency>
-		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>
 			<scope>provided</scope>

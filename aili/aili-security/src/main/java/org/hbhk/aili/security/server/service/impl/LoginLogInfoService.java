@@ -21,7 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class LoginLogInfoService implements ILoginLogInfoService {
 
-	@Autowired
+	@Autowired(required=false)
 	private ILoginLogInfoDao loginLogInfoDao;
 	private  ExecutorService executor = Executors.newFixedThreadPool(5);
 	public LoginLogInfo save(final LoginLogInfo model) {

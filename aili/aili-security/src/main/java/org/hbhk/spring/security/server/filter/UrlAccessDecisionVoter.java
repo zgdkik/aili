@@ -12,7 +12,7 @@ import org.springframework.security.web.FilterInvocation;
 
 public class UrlAccessDecisionVoter implements AccessDecisionVoter<FilterInvocation> {
 
-	@Autowired
+	@Autowired(required=false)
 	private IUserService userService;
 
 	public boolean supports(ConfigAttribute attribute) {
@@ -49,7 +49,8 @@ public class UrlAccessDecisionVoter implements AccessDecisionVoter<FilterInvocat
 	* @throws
 	 */
 	private boolean isControlledUrl(String requestUrl) {
-		return userService.validate(requestUrl);
+		return true;
+		//return userService.validate(requestUrl);
 	}
 
 }

@@ -6,8 +6,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import javax.annotation.Resource;
-
 import org.apache.commons.lang3.StringUtils;
 import org.hbhk.aili.cache.server.CacheManager;
 import org.hbhk.aili.cache.server.ICache;
@@ -34,7 +32,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserService implements IUserService, UserDetailsService {
 
-	@Resource
+	@Autowired(required=false)
 	private IUserDao userDao;
 
 	private String defaultHead = "/security/default_head.png";

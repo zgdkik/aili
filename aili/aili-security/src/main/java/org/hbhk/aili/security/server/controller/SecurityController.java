@@ -1,8 +1,5 @@
 package org.hbhk.aili.security.server.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -18,8 +15,6 @@ import org.hbhk.aili.security.share.define.SecurityConstant;
 import org.hbhk.aili.security.share.define.UserConstants;
 import org.hbhk.aili.security.share.model.LoginLogInfo;
 import org.hbhk.aili.security.share.model.UserInfo;
-import org.hbhk.aili.support.server.email.IEmailService;
-import org.hbhk.aili.support.server.email.impl.EmailInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,12 +25,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class SecurityController extends BaseController {
 
 	private static Log log = LogFactory.getLog(SecurityController.class);
-	@Autowired
+	@Autowired(required=false)
 	private IUserService userService;
 
-	@Autowired
-	private IEmailService emailService;
-	@Autowired
+//	@Autowired(required=false)
+//	private IEmailService emailService;
+	@Autowired(required=false)
 	private ILoginLogInfoService logInfoService;
 
 	@RequestMapping("/login")
@@ -77,37 +72,38 @@ public class SecurityController extends BaseController {
 	@ResponseBody
 	public ResultEntity regist(HttpServletRequest request, UserInfo user,
 			String code) {
-		try {
-			String scode = (String) request.getSession().getAttribute(
-					UserConstants.VALIDATECODE_SESSION_KEY);
-			if (scode == null) {
-				return returnException("验证码不正确");
-			}
-			if (code != null && !code.equalsIgnoreCase(scode)) {
-				return returnException("验证码不正确");
-			}
-			// 验证用户是否存在
-			UserInfo u = new UserInfo();
-			u.setUserName(user.getUserName());
-			if (userService.getUser(u) != null) {
-				return returnException("用户名已经被注册");
-			}
-			userService.save(user);
-			RequestContext.setSessionAttribute(UserConstants.CURRENT_USER_NAME,
-					user.getEmail());
-			EmailInfo emailInfo = new EmailInfo();
-			emailInfo.setSubject("买客网用户注册");
-			String info = "恭喜您成功注册！您的用户名为：" + user.getUserName();
-			emailInfo.setContext(info);
-			List<String> emails = new ArrayList<String>();
-			emails.add(user.getEmail());
-			emailInfo.setEmails(emails);
-			emailService.sendEmail(emailInfo);
-			return returnSuccess();
-		} catch (Exception e) {
-			log.error("regist", e);
-			return returnException("注册失败");
-		}
+				return null;
+//		try {
+//			String scode = (String) request.getSession().getAttribute(
+//					UserConstants.VALIDATECODE_SESSION_KEY);
+//			if (scode == null) {
+//				return returnException("验证码不正确");
+//			}
+//			if (code != null && !code.equalsIgnoreCase(scode)) {
+//				return returnException("验证码不正确");
+//			}
+//			// 验证用户是否存在
+//			UserInfo u = new UserInfo();
+//			u.setUserName(user.getUserName());
+//			if (userService.getUser(u) != null) {
+//				return returnException("用户名已经被注册");
+//			}
+//			userService.save(user);
+//			RequestContext.setSessionAttribute(UserConstants.CURRENT_USER_NAME,
+//					user.getEmail());
+//			EmailInfo emailInfo = new EmailInfo();
+//			emailInfo.setSubject("买客网用户注册");
+//			String info = "恭喜您成功注册！您的用户名为：" + user.getUserName();
+//			emailInfo.setContext(info);
+//			List<String> emails = new ArrayList<String>();
+//			emails.add(user.getEmail());
+//			emailInfo.setEmails(emails);
+//			emailService.sendEmail(emailInfo);
+//			return returnSuccess();
+//		} catch (Exception e) {
+//			log.error("regist", e);
+//			return returnException("注册失败");
+//		}
 	}
 
 	@RequestMapping("/validateEmail")

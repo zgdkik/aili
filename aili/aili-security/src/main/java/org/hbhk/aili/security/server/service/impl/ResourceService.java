@@ -4,20 +4,19 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.Resource;
-
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.hbhk.aili.core.share.util.BeanToMapUtil;
 import org.hbhk.aili.security.server.dao.IResourceDao;
 import org.hbhk.aili.security.server.service.IResourceService;
 import org.hbhk.aili.security.share.model.ResourceInfo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ResourceService implements IResourceService {
 
-	@Resource
+	@Autowired(required=false)
 	private IResourceDao resourceDao;
 
 	@Override
