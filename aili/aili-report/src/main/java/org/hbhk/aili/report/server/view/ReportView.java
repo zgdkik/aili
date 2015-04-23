@@ -1,5 +1,6 @@
 package org.hbhk.aili.report.server.view;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
@@ -17,13 +18,24 @@ public class ReportView extends JasperReportsMultiFormatView {
 
 	public static final String ATTACHEMT_FILE_NAME_KEY = "attachmentFileName"; // 格式不为html时的下载文件名
 
-	public static final String JR_DATA_SOURCE = "jrDataSource";
-
+	public static final String JR_DATA_SOURCE_KEY = "jrDataSource";
+	
+	public static final String EXPORTER_PARAMETERS_KEY = "exporter_parameters_key";
+	
+	@SuppressWarnings("unchecked")
 	@Override
 	protected void renderReport(JasperPrint populatedReport,
 			Map<String, Object> model, HttpServletResponse response)
 			throws Exception {
-		setReportDataKey(JR_DATA_SOURCE);
+		//设置列表数据
+		setReportDataKey(JR_DATA_SOURCE_KEY);
+		//设置参数
+		Map<String, Object> parameters = (Map<String,Object>) model.get(EXPORTER_PARAMETERS_KEY);
+		if(parameters == null){
+			parameters = new HashMap<String, Object>();
+		}
+		parameters.putAll((Map<? extends String, ? extends Object>) getExporterParameters());
+		setExporterParameters(parameters);
 		Object format = model.get(DEFAULT_FORMAT_KEY);
 		if (format == null) {
 			logger.error("model中未找到指定的输出格式(format:html、pdf、xls、csv)");

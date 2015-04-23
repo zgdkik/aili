@@ -13,17 +13,22 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.hbhk.aili.report.server.exporter.IReportExporter;
 import org.hbhk.aili.report.server.view.ReportView;
 import org.hbhk.aili.report.share.model.DailyZoom;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-public class ReportController {
+@RequestMapping("/report")
+public class ReportController implements InitializingBean {
 
-	@Autowired(required = false)
 	private IReportExporter reportExporter;
+	
+	@Autowired
+	private ApplicationContext context;
 
 	/**
 	 * 显示html、下载pdf、xls、cvs等报表<br>
@@ -36,28 +41,45 @@ public class ReportController {
 	 * @return
 	 */
 	@RequestMapping(value = "/report/{reportName}/{format}")
-	public ModelAndView showReport(@PathVariable String reportName,
+	public String showReport(@PathVariable String reportName,
 			@PathVariable String format, ModelAndView mv) {
-		// 要调用的jasperreports的模板文件名(不包括后缀)，该文件名必须以-report结尾
-		mv.setViewName(reportName);
 		// 显示格式：html、pdf、xls、csv
 		mv.addObject(ReportView.DEFAULT_FORMAT_KEY, format);
 		// 当为pdf、xls、csv时的附件名
 		Date now = new Date();
-
 		mv.addObject(ReportView.ATTACHEMT_FILE_NAME_KEY, new SimpleDateFormat(
 				"yyyyMMddHHmmss").format(now));
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("reportName", reportName);
 		params.put("format", format);
 		mv.addAllObjects(params);
-		List<DailyZoom> results = new ArrayList<DailyZoom>();
+		List<Object> results = new ArrayList<Object>();
 		for (int i = 0; i < 10; i++) {
 			results.add(new DailyZoom("hbhk" + i, i));
 		}
+		try {
+			reportExporter = (IReportExporter) context.getBean(reportName);
+		} catch (Exception e) {
+			reportExporter = null;
+		}
+		if(reportExporter != null){
+			results =reportExporter.getReportData().getDatas();
+			mv.addObject(ReportView.EXPORTER_PARAMETERS_KEY,reportExporter.getReportData().getParams());
+		}
 		JRDataSource jrDataSource = new JRBeanCollectionDataSource(results);
-		mv.addObject(ReportView.JR_DATA_SOURCE, jrDataSource);
-		return mv;
+		mv.addObject(ReportView.JR_DATA_SOURCE_KEY, jrDataSource);
+		return reportName;
 	}
 
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		System.out.println("aaaaaaaaaaaa");
+	}
+
+	@RequestMapping(value = "/index")
+	public String index(){
+		return "index";
+		
+	}
+	
 }
