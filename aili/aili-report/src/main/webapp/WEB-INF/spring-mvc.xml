@@ -52,7 +52,7 @@
 			<map>
 				<entry
 					key="net.sf.jasperreports.engine.export.JRHtmlExporterParameter.IMAGES_URI"
-					value="images/" /> <!-- HTML时的白色背景图片(px)路径 -->
+					value="/images/" /> <!-- HTML时的白色背景图片(px)路径 -->
 				<entry
 					key="net.sf.jasperreports.engine.export.JRHtmlExporterParameter.CHARACTER_ENCODING"
 					value="UTF-8" />
