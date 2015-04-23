@@ -17,6 +17,7 @@ import net.sf.jasperreports.engine.xml.JRXmlLoader;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.hbhk.aili.core.share.util.FileLoadUtil;
 import org.hbhk.aili.report.server.print.ReportPrint;
 import org.hbhk.aili.report.share.ex.ReportException;
 
@@ -75,13 +76,11 @@ public class ReportCreater {
         String filePath = jasperReportPath + reportKey + ".jrxml";
         InputStream jasperFileIS = null;
         JasperReport jasperReport = null;
-         
         try {
-            jasperFileIS = this.getClass().getClassLoader().getResourceAsStream(filePath);
+            jasperFileIS =  FileLoadUtil.getInputStreamForClasspath(filePath);
             if (jasperFileIS == null) {
                 throw new ReportException("报表文件不存在:" + filePath);
             }
-             
             JasperDesign jasperDesign = JRXmlLoader.load(jasperFileIS);
             jasperReport = JasperCompileManager.compileReport(jasperDesign);
         } finally {
