@@ -18,13 +18,11 @@
 	<mvc:resources mapping="/styles/**" location="/styles/" />
 
 	<!-- 扫描所有的controller -->
-	<context:component-scan base-package="org.hbhk.**.server.controller">
-	</context:component-scan>
+	<context:component-scan base-package="org.hbhk.**.server.controller"/>
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/views/"></property>
 		<property name="suffix" value=".jsp"></property>
-		<property name="order" value="99999" />
 	</bean>
 
 <!-- 	<bean id="jasperReportsViewResolver"
