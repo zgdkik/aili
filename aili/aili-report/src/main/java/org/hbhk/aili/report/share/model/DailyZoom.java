@@ -6,6 +6,7 @@ public class DailyZoom implements Serializable {
 	private static final long serialVersionUID = 6601800199395529117L;
 	private String name;
 	private double amounts;
+	
 
 	public DailyZoom(String name, double amounts) {
 		this.name = name;
@@ -28,7 +29,5 @@ public class DailyZoom implements Serializable {
 		this.amounts = amounts;
 	}
 
-
-	
 	
 }

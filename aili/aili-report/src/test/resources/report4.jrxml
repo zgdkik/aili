@@ -40,6 +40,7 @@ FROM
 	</queryString>
 	<field name="name" class="java.lang.String"/>
 	<field name="amounts" class="java.lang.String"/>
+	<field name="PRINTSCALING" class="java.lang.String"/>
 	<variable name="variable1" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
