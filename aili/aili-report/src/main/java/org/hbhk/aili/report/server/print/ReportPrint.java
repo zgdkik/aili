@@ -1,4 +1,4 @@
-package org.hbhk.aili.report.server;
+package org.hbhk.aili.report.server.print;
 
 import net.sf.jasperreports.engine.JasperPrint;
 

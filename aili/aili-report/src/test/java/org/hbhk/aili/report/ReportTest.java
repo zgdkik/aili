@@ -28,7 +28,7 @@ public class ReportTest {
 				.compileReport("D:/baocun-ws/aili/aili-report/src/test/resources/report4.jrxml");
 
 		Map<String, Object> parameters = new HashMap<String, Object>();
-		parameters.put("name1", true);
+		//parameters.put("title", "title");
 		JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,
 				parameters, javaBeanDataSource);
 		OutputStream outputStream = new FileOutputStream("D:/baocun-ws/aili/aili-report/src/test/resources/1.pdf");

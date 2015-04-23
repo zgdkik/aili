@@ -1,4 +1,4 @@
-package org.hbhk.aili.report.server;
+package org.hbhk.aili.report.share.ex;
 
 public class ReportException extends RuntimeException {
 

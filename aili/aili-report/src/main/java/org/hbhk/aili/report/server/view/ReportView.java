@@ -1,4 +1,4 @@
-package org.hbhk.aili.report.server;
+package org.hbhk.aili.report.server.view;
 
 import java.io.BufferedOutputStream;
 import java.io.IOException;
@@ -14,6 +14,9 @@ import net.sf.jasperreports.engine.JRException;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.hbhk.aili.report.server.exporter.IReportExporter;
+import org.hbhk.aili.report.server.exporter.impl.ReportPdfExporter;
+import org.hbhk.aili.report.server.print.ReportPrint;
 import org.springframework.web.servlet.view.AbstractView;
 
 public class ReportView extends AbstractView {
@@ -36,7 +39,7 @@ public class ReportView extends AbstractView {
 	}
 
 	@Override
-	protected void renderMergedOutputModel(Map<String,Object> model,
+	protected void renderMergedOutputModel(Map<String, Object> model,
 			HttpServletRequest request, HttpServletResponse response) {
 		String reportName = (String) model.get(REPORT_NAME);// 报表的文件名
 		String format = (String) model.get(FORMAT);// 报表的格式pdf xls .....
@@ -59,19 +62,7 @@ public class ReportView extends AbstractView {
 
 	private void exportFile(ReportPrint reportPrint, String format,
 			HttpServletResponse response) {
-		try {
-			_exportFile(reportPrint, format, response);
-		} catch (JRException e) {
-			logger.error("导出报表异常", e);
-		} catch (IOException e) {
-			logger.error(null, e);
-		}
-	}
-
-	private void _exportFile(ReportPrint reportPrint, String format,
-			HttpServletResponse response) throws IOException, JRException {
 		OutputStream buffOS = null;
-
 		try {
 			buffOS = new BufferedOutputStream(response.getOutputStream());
 			IReportExporter exporter = null;
@@ -82,9 +73,17 @@ public class ReportView extends AbstractView {
 			} else {
 				logger.error("错误的报表格式:" + format);
 			}
+		} catch (JRException e) {
+			logger.error("导出报表异常", e);
+		} catch (IOException e) {
+			logger.error(null, e);
 		} finally {
 			if (buffOS != null) {
-				buffOS.close();
+				try {
+					buffOS.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
 		}
 	}
