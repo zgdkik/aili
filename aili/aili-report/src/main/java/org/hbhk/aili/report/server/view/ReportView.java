@@ -15,7 +15,10 @@ import net.sf.jasperreports.engine.JRException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hbhk.aili.report.server.exporter.IReportExporter;
+import org.hbhk.aili.report.server.exporter.impl.ReportCsvExporter;
+import org.hbhk.aili.report.server.exporter.impl.ReportHtmlExporter;
 import org.hbhk.aili.report.server.exporter.impl.ReportPdfExporter;
+import org.hbhk.aili.report.server.exporter.impl.ReportXlsExporter;
 import org.hbhk.aili.report.server.print.ReportPrint;
 import org.springframework.web.servlet.view.AbstractView;
 
@@ -32,10 +35,10 @@ public class ReportView extends AbstractView {
 	private static Map<String, IReportExporter> EXPORTER_MAP = new HashMap<String, IReportExporter>();
 
 	static {
-		// EXPORTER_MAP.put(XLS, new ReportXlsExporter());
+		EXPORTER_MAP.put(XLS, new ReportXlsExporter());
 		EXPORTER_MAP.put(PDF, new ReportPdfExporter());
-		// EXPORTER_MAP.put(CSV, new ReportCsvExporter());
-		// EXPORTER_MAP.put(HTML, new ReportHtmlExporter());
+		EXPORTER_MAP.put(CSV, new ReportCsvExporter());
+		EXPORTER_MAP.put(HTML, new ReportHtmlExporter());
 	}
 
 	@Override
