@@ -27,6 +27,7 @@ public class ReportView extends JasperReportsMultiFormatView {
 	protected void renderReport(JasperPrint populatedReport,
 			Map<String, Object> model, HttpServletResponse response)
 			throws Exception {
+		
 		//设置列表数据
 		setReportDataKey(JR_DATA_SOURCE_KEY);
 		//设置参数

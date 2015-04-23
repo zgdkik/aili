@@ -17,12 +17,11 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping("/report")
 public class ReportController implements InitializingBean {
 
 	private IReportExporter reportExporter;
@@ -42,17 +41,16 @@ public class ReportController implements InitializingBean {
 	 */
 	@RequestMapping(value = "/report/{reportName}/{format}")
 	public String showReport(@PathVariable String reportName,
-			@PathVariable String format, ModelAndView mv) {
+			@PathVariable String format, Model mv) {
 		// 显示格式：html、pdf、xls、csv
-		mv.addObject(ReportView.DEFAULT_FORMAT_KEY, format);
+		mv.addAttribute(ReportView.DEFAULT_FORMAT_KEY, format);
 		// 当为pdf、xls、csv时的附件名
 		Date now = new Date();
-		mv.addObject(ReportView.ATTACHEMT_FILE_NAME_KEY, new SimpleDateFormat(
-				"yyyyMMddHHmmss").format(now));
+		mv.addAttribute(ReportView.ATTACHEMT_FILE_NAME_KEY, new SimpleDateFormat("yyyyMMddHHmmss").format(now));
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("reportName", reportName);
 		params.put("format", format);
-		mv.addAllObjects(params);
+		mv.addAllAttributes(params);
 		List<Object> results = new ArrayList<Object>();
 		for (int i = 0; i < 10; i++) {
 			results.add(new DailyZoom("hbhk" + i, i));
@@ -64,10 +62,10 @@ public class ReportController implements InitializingBean {
 		}
 		if(reportExporter != null){
 			results =reportExporter.getReportData().getDatas();
-			mv.addObject(ReportView.EXPORTER_PARAMETERS_KEY,reportExporter.getReportData().getParams());
+			mv.addAttribute(ReportView.EXPORTER_PARAMETERS_KEY,reportExporter.getReportData().getParams());
 		}
 		JRDataSource jrDataSource = new JRBeanCollectionDataSource(results);
-		mv.addObject(ReportView.JR_DATA_SOURCE_KEY, jrDataSource);
+		mv.addAttribute(ReportView.JR_DATA_SOURCE_KEY, jrDataSource);
 		return reportName;
 	}
 
