@@ -1,14 +1,13 @@
 package org.hbhk.aili.report;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 
 public class DailyZoom implements Serializable {
 	private static final long serialVersionUID = 6601800199395529117L;
 	private String name;
-	private BigDecimal amounts;
+	private double amounts;
 
-	public DailyZoom(String name, BigDecimal amounts) {
+	public DailyZoom(String name, double amounts) {
 		this.name = name;
 		this.amounts = amounts;
 	}
@@ -21,13 +20,15 @@ public class DailyZoom implements Serializable {
 		this.name = name;
 	}
 
-	public BigDecimal getAmounts() {
+	public double getAmounts() {
 		return amounts;
 	}
 
-	public void setAmounts(BigDecimal amounts) {
+	public void setAmounts(double amounts) {
 		this.amounts = amounts;
 	}
+
+
 	
 	
 }

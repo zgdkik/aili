@@ -1,6 +1,5 @@
 package org.hbhk.aili.report;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -28,8 +27,8 @@ public class DailySalesFactory {
 
 	public static List<DailyZoom> getDailyZoom() {
 		List<DailyZoom> dailyZooms = new ArrayList<DailyZoom>();
-		dailyZooms.add(new DailyZoom("厦门", new BigDecimal(123.00)));
-		dailyZooms.add(new DailyZoom("南昌", new BigDecimal(456.00)));
+		dailyZooms.add(new DailyZoom("厦门", 123.00));
+		dailyZooms.add(new DailyZoom("南昌", 456.00));
 		return dailyZooms;
 	}
 }
