@@ -30,11 +30,11 @@ FROM
 	<columnHeader>
 		<band height="51" splitType="Stretch">
 			<staticText>
-				<reportElement x="174" y="20" width="100" height="20" uuid="0c970dca-7bdc-4f7d-86bd-cd58a6cf7be7"/>
+				<reportElement x="63" y="20" width="100" height="20" uuid="0c970dca-7bdc-4f7d-86bd-cd58a6cf7be7"/>
 				<text><![CDATA[name]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="390" y="20" width="100" height="20" uuid="80f8870e-d1bc-43a1-82f7-561a154c6840"/>
+				<reportElement x="302" y="20" width="100" height="20" uuid="80f8870e-d1bc-43a1-82f7-561a154c6840"/>
 				<text><![CDATA[amounts]]></text>
 			</staticText>
 		</band>
@@ -42,11 +42,11 @@ FROM
 	<detail>
 		<band height="125" splitType="Stretch">
 			<textField>
-				<reportElement x="369" y="61" width="100" height="20" uuid="917fe02d-80f4-4803-a877-af53c9a16bd4"/>
+				<reportElement x="302" y="61" width="100" height="20" uuid="917fe02d-80f4-4803-a877-af53c9a16bd4"/>
 				<textFieldExpression><![CDATA[$F{amounts}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="189" y="61" width="100" height="20" uuid="5f75ef69-aed1-4234-bd6c-24111ccf38c5"/>
+				<reportElement x="63" y="61" width="100" height="20" uuid="5f75ef69-aed1-4234-bd6c-24111ccf38c5"/>
 				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
 			</textField>
 		</band>
