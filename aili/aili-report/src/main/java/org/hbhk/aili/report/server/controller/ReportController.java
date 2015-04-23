@@ -46,7 +46,7 @@ public class ReportController implements InitializingBean {
 		Date now = new Date();
 		mv.addAttribute(ReportView.ATTACHEMT_FILE_NAME_KEY, new SimpleDateFormat("yyyyMMddHHmmss").format(now));
 		mv.addAttribute("reportName", reportName);
-		mv.addAttribute("format", format);
+		mv.addAttribute(ReportView.DEFAULT_FORMAT_KEY, format);
 		List<Object> results = new ArrayList<Object>();
 		for (int i = 0; i < 10; i++) {
 			results.add(new DailyZoom("hbhk" + i, i));
