@@ -19,7 +19,6 @@
 			http://www.springframework.org/schema/util
 			 http://www.springframework.org/schema/util/spring-util.xsd
 			">
-	<context:annotation-config />
 	<!-- 扫描所有的controller -->
 	<context:component-scan base-package="org.hbhk.**.server">
 		<context:exclude-filter type="annotation"

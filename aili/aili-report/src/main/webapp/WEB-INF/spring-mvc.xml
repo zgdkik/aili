@@ -11,8 +11,6 @@
            http://www.springframework.org/schema/mvc   
            http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-	<!-- 约定优于配置，约定优于配置 -->
-
 	<!-- 配置静态资源，直接映射到对应的文件夹，不被DispatcherServlet处理 -->
 	<mvc:resources mapping="/images/**" location="/images/"
 		cache-period="31556926" />
@@ -21,12 +19,7 @@
 
 	<!-- 扫描所有的controller -->
 	<context:component-scan base-package="org.hbhk.**.server.controller">
-		<context:include-filter type="annotation"
-			expression="org.springframework.stereotype.Controller" />
-		<context:include-filter type="annotation"
-			expression="org.springframework.web.bind.annotation.ControllerAdvice" />
 	</context:component-scan>
-
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/views/"></property>
