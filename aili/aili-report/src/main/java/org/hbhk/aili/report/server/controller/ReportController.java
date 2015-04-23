@@ -3,9 +3,7 @@ package org.hbhk.aili.report.server.controller;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
@@ -47,10 +45,8 @@ public class ReportController implements InitializingBean {
 		// 当为pdf、xls、csv时的附件名
 		Date now = new Date();
 		mv.addAttribute(ReportView.ATTACHEMT_FILE_NAME_KEY, new SimpleDateFormat("yyyyMMddHHmmss").format(now));
-		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("reportName", reportName);
-		params.put("format", format);
-		mv.addAllAttributes(params);
+		mv.addAttribute("reportName", reportName);
+		mv.addAttribute("format", format);
 		List<Object> results = new ArrayList<Object>();
 		for (int i = 0; i < 10; i++) {
 			results.add(new DailyZoom("hbhk" + i, i));
