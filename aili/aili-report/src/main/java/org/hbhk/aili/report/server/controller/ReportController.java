@@ -39,6 +39,12 @@ public class ReportController{
 	@RequestMapping(value = "/report/{reportName}/{format}")
 	public String showReport(@PathVariable String reportName,
 			@PathVariable String format, Model mv) {
+		try {
+			reportExporter = (IReportExporter) context.getBean(reportName);
+		} catch (Exception e) {
+			reportExporter = null;
+			throw new BusinessException("报表: "+reportName+" 不存在");
+		}
 		// 显示格式：html、pdf、xls、csv
 		mv.addAttribute(ReportView.DEFAULT_FORMAT_KEY, format);
 		// 当为pdf、xls、csv时的附件名
@@ -46,14 +52,6 @@ public class ReportController{
 		mv.addAttribute(ReportView.ATTACHEMT_FILE_NAME_KEY, reportName+"-"+new SimpleDateFormat("yyyyMMddHHmmss").format(now));
 		mv.addAttribute("reportName", reportName);
 		mv.addAttribute(ReportView.DEFAULT_FORMAT_KEY, format);
-		
-		try {
-			reportExporter = (IReportExporter) context.getBean(reportName);
-		} catch (Exception e) {
-			reportExporter = null;
-			throw new BusinessException("报表: "+reportName+" 不存在");
-		}
-		
 		if(reportExporter != null){
 			//设置参数
 			mv.addAttribute(ReportView.EXPORTER_PARAMETERS_KEY,reportExporter.getReportData().getParams());
