@@ -10,8 +10,6 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
 import org.hbhk.aili.report.server.exporter.IReportExporter;
 import org.hbhk.aili.report.server.view.ReportView;
-import org.hbhk.aili.report.share.model.DailyZoom;
-import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
@@ -20,7 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class ReportController implements InitializingBean {
+public class ReportController{
 
 	private IReportExporter reportExporter;
 	
@@ -48,9 +46,6 @@ public class ReportController implements InitializingBean {
 		mv.addAttribute("reportName", reportName);
 		mv.addAttribute(ReportView.DEFAULT_FORMAT_KEY, format);
 		List<Object> results = new ArrayList<Object>();
-		for (int i = 0; i < 10; i++) {
-			results.add(new DailyZoom("hbhk" + i, i));
-		}
 		try {
 			reportExporter = (IReportExporter) context.getBean(reportName);
 		} catch (Exception e) {
@@ -63,17 +58,6 @@ public class ReportController implements InitializingBean {
 		JRDataSource jrDataSource = new JRBeanCollectionDataSource(results);
 		mv.addAttribute(ReportView.JR_DATA_SOURCE_KEY, jrDataSource);
 		return reportName;
-	}
-
-	@Override
-	public void afterPropertiesSet() throws Exception {
-		System.out.println("aaaaaaaaaaaa");
-	}
-
-	@RequestMapping(value = "/index")
-	public String index(){
-		return "index";
-		
 	}
 	
 }
