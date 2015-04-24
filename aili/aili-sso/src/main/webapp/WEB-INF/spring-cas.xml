@@ -14,7 +14,8 @@
 		<!-- 登出设置 -->
 		<logout logout-url="/logout" delete-cookies="JSESSIONID" />
 		<!-- session控制 -->
-		<session-management invalid-session-url="${cas.service.url}/login">
+		<!-- invalid-session-url="${cas.service.url}/login" 不需要配置让security跳转 -->
+		<session-management>
 			<concurrency-control session-registry-alias="sessionRegistry" />
 		</session-management>
 		<custom-filter position="CAS_FILTER" ref="casFilter" />
