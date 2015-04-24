@@ -44,7 +44,7 @@ public class ReportController implements InitializingBean {
 		mv.addAttribute(ReportView.DEFAULT_FORMAT_KEY, format);
 		// 当为pdf、xls、csv时的附件名
 		Date now = new Date();
-		mv.addAttribute(ReportView.ATTACHEMT_FILE_NAME_KEY, new SimpleDateFormat("yyyyMMddHHmmss").format(now));
+		mv.addAttribute(ReportView.ATTACHEMT_FILE_NAME_KEY, reportName+"-"+new SimpleDateFormat("yyyyMMddHHmmss").format(now));
 		mv.addAttribute("reportName", reportName);
 		mv.addAttribute(ReportView.DEFAULT_FORMAT_KEY, format);
 		List<Object> results = new ArrayList<Object>();
