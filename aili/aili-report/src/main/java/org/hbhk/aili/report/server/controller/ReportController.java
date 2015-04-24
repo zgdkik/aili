@@ -46,19 +46,23 @@ public class ReportController{
 		mv.addAttribute(ReportView.ATTACHEMT_FILE_NAME_KEY, reportName+"-"+new SimpleDateFormat("yyyyMMddHHmmss").format(now));
 		mv.addAttribute("reportName", reportName);
 		mv.addAttribute(ReportView.DEFAULT_FORMAT_KEY, format);
-		List<Object> results = new ArrayList<Object>();
+		
 		try {
 			reportExporter = (IReportExporter) context.getBean(reportName);
 		} catch (Exception e) {
 			reportExporter = null;
 			throw new BusinessException("报表: "+reportName+" 不存在");
 		}
+		
 		if(reportExporter != null){
-			results =reportExporter.getReportData().getDatas();
+			//设置参数
 			mv.addAttribute(ReportView.EXPORTER_PARAMETERS_KEY,reportExporter.getReportData().getParams());
+			//设置列表数据
+			List<Object> results = new ArrayList<Object>();
+			results =reportExporter.getReportData().getDatas();
+			JRDataSource jrDataSource = new JRBeanCollectionDataSource(results);
+			mv.addAttribute(ReportView.JR_DATA_SOURCE_KEY, jrDataSource);
 		}
-		JRDataSource jrDataSource = new JRBeanCollectionDataSource(results);
-		mv.addAttribute(ReportView.JR_DATA_SOURCE_KEY, jrDataSource);
 		return reportName;
 	}
 	
