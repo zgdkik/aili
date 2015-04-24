@@ -8,6 +8,7 @@ import java.util.List;
 import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
+import org.hbhk.aili.core.share.ex.BusinessException;
 import org.hbhk.aili.report.server.exporter.IReportExporter;
 import org.hbhk.aili.report.server.view.ReportView;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,6 +51,7 @@ public class ReportController{
 			reportExporter = (IReportExporter) context.getBean(reportName);
 		} catch (Exception e) {
 			reportExporter = null;
+			throw new BusinessException("报表:"+reportName+"不存在");
 		}
 		if(reportExporter != null){
 			results =reportExporter.getReportData().getDatas();
