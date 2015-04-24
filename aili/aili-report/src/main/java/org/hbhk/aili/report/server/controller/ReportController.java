@@ -51,7 +51,7 @@ public class ReportController{
 			reportExporter = (IReportExporter) context.getBean(reportName);
 		} catch (Exception e) {
 			reportExporter = null;
-			throw new BusinessException("报表:"+reportName+"不存在");
+			throw new BusinessException("报表: "+reportName+" 不存在");
 		}
 		if(reportExporter != null){
 			results =reportExporter.getReportData().getDatas();
