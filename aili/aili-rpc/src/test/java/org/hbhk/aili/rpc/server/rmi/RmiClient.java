@@ -1,9 +1,6 @@
 package org.hbhk.aili.rpc.server.rmi;
 import java.rmi.Naming;
-import java.util.List;
 
-import org.hbhk.aili.rpc.server.dubbo.BasicTableConfigSupport;
-import org.hbhk.aili.rpc.share.model.PersonEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 public class RmiClient {
@@ -13,11 +10,7 @@ public class RmiClient {
 	        try{  
 	            //调用远程对象，注意RMI路径与接口必须与服务器配置一致  
 	            IPersonService personService=(IPersonService)Naming.lookup("rmi://127.0.0.1:6600/personService");  
-	            List<PersonEntity> personList=personService.getList();  
-	            for(PersonEntity person:personList){  
-	                System.out.println("ID:"+person.getId()+" Age:"+person.getAge()+" Name:"+person.getName());  
-	            }  
-	           String str =  personService.deal1(new BasicTableConfigSupport("str"), "data");
+	           String str =  personService.deal1( "data");
 	           System.out.println(str);
 	        }catch(Exception ex){  
 	            ex.printStackTrace();  

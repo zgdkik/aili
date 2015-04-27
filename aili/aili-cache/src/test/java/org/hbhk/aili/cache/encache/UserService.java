@@ -11,17 +11,10 @@ import org.springframework.stereotype.Service;
  * 业务操作，
  */
 @Service("userService")
-public class UserService  implements IUserService{
+public class UserService implements IUserService {
 
 	@Autowired
 	private UserDao userDao;
-
-	// 查询所有，不要key,默认以方法名+参数值+内容 作为key
-	@Cacheable(value = "serviceCache")
-	public List<User> getAll() {
-		printInfo("getAll");
-		return userDao.users;
-	}
 
 	// 根据ID查询，ID 我们默认是唯一的
 	@Cacheable(value = "serviceCache", key = "#id")
@@ -48,6 +41,13 @@ public class UserService  implements IUserService{
 	public void updateUser(User u) {
 		removeById(u.getId());
 		userDao.updateUser(u);
+	}
+
+	// 查询所有，不要key,默认以方法名+参数值+内容 作为key
+	@Cacheable(value = "serviceCache")
+	public List<User> getAll() {
+		printInfo("getAll");
+		return userDao.users;
 	}
 
 	// allEntries 表示调用之后，清空缓存，默认false,

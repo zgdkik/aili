@@ -15,7 +15,7 @@ public class RmiServer {
 			// 注册通讯端口
 			LocateRegistry.createRegistry(6600);
 			// 注册通讯路径
-			Naming.rebind("rmi://127.0.0.1:6600/personService", personService);
+			Naming.rebind("rmi://127.0.0.1:6600/serviceCache", personService);
 			System.out.println("Service Start!");
 		} catch (Exception e) {
 			e.printStackTrace();
