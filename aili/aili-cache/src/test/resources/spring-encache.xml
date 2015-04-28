@@ -14,9 +14,6 @@
 
 	<!-- 默认扫描 @Component @Repository @Service @Controller -->
 	<context:component-scan base-package="org.hbhk.aili.cache.encache" />
-	<!-- 一些@RequestMapping 请求和一些转换 -->
-	<mvc:annotation-driven />
-
 	<!-- 缓存 属性 -->
 	<bean id="cacheManagerFactory"
 		class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
