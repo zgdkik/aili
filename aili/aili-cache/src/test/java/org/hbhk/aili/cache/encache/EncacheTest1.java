@@ -10,7 +10,7 @@ public class EncacheTest1 {
 		ApplicationContext context = new ClassPathXmlApplicationContext("classpath:spring-encache.xml");
 		IUserService userService = (IUserService) context.getBean("userService");
 		for (int i = 0; i < 1000; i++) {
-			System.out.println("获取最新数据");
+			System.out.println("删除缓存");
 			userService.removeById(1);
 			System.out.println(userService.findById(1).getName());
 			TimeUnit.SECONDS.sleep(3);
