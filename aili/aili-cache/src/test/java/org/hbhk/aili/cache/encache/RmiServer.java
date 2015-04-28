@@ -7,7 +7,6 @@ import java.rmi.registry.LocateRegistry;
 import net.sf.ehcache.CacheManager;
 import net.sf.ehcache.Ehcache;
 import net.sf.ehcache.distribution.RMICachePeer;
-import net.sf.ehcache.distribution.TransactionalRMICachePeer;
 
 public class RmiServer {
 
@@ -15,7 +14,7 @@ public class RmiServer {
 		try {
 			InputStream input = RmiServer.class.getClassLoader().getResourceAsStream("ehcache.xml");
 			Ehcache cache = CacheManager.create(input).getEhcache("serviceCache");
-			RMICachePeer rmiCachePeer = new TransactionalRMICachePeer(cache, "localhost", 40001, 40002, 120000);
+			RMICachePeer rmiCachePeer = new RMICachePeer(cache, "localhost", 40001, 40002, 120000);
 			// 注册通讯端口
 			LocateRegistry.createRegistry(40000);
 			// 注册通讯路径
