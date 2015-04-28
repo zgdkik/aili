@@ -12,9 +12,9 @@ public class EncacheTest1 {
 		for (int i = 0; i < 1000; i++) {
 			System.out.println("删除缓存");
 			userService.removeById(1);
+			TimeUnit.SECONDS.sleep(3);
 			System.out.println(userService.findById(1).getName());
 			TimeUnit.SECONDS.sleep(3);
-			
 		}
 	
 	}
