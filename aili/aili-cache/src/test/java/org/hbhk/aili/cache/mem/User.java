@@ -2,10 +2,11 @@ package org.hbhk.aili.cache.mem;
 
 
 import java.io.Serializable;
+import java.rmi.Remote;
 
 import com.google.code.ssm.api.CacheKeyMethod;
 
-public class User implements Serializable {
+public class User implements Serializable,Remote {
 	private static final long serialVersionUID = 7517080513591583073L;
 	private String userId;
 	private String username;

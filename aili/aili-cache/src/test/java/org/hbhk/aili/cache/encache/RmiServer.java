@@ -1,4 +1,4 @@
-package org.hbhk.aili.rpc.server.rmi;
+package org.hbhk.aili.cache.encache;
 
 import java.io.InputStream;
 import java.rmi.Naming;
@@ -17,9 +17,9 @@ public class RmiServer {
 			Ehcache cache = CacheManager.create(input).getEhcache("serviceCache");
 			RMICachePeer rmiCachePeer = new TransactionalRMICachePeer(cache, "localhost", 40001, 40002, 120000);
 			// 注册通讯端口
-			LocateRegistry.createRegistry(6600);
+			LocateRegistry.createRegistry(40000);
 			// 注册通讯路径
-			Naming.rebind("rmi://127.0.0.1:6600/serviceCache", rmiCachePeer);
+			Naming.rebind("rmi://127.0.0.1:40000/serviceCache", rmiCachePeer);
 			System.out.println("Service Start!");
 			System.in.read();
 		} catch (Exception e) {

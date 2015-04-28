@@ -6,7 +6,7 @@
 	<!--rmi手动配置 -->
 	<cacheManagerPeerProviderFactory
 		class="net.sf.ehcache.distribution.RMICacheManagerPeerProviderFactory"
-		properties="peerDiscovery=manual,rmiUrls=//127.0.0.1:6600/serviceCache" />
+		properties="peerDiscovery=manual,rmiUrls=//127.0.0.1:40000/serviceCache" />
 
 	<cacheManagerPeerListenerFactory
 		class="net.sf.ehcache.distribution.RMICacheManagerPeerListenerFactory"
@@ -36,8 +36,5 @@
             replicateRemovals=true " />
 	</cache>
 
-	<cache name="cachePeer" eternal="false" maxElementsInMemory="100"
-		overflowToDisk="false" diskPersistent="false" timeToIdleSeconds="0"
-		timeToLiveSeconds="300" memoryStoreEvictionPolicy="LRU" />
 </ehcache>
 

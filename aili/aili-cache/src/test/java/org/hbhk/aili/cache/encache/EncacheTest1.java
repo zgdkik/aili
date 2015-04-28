@@ -11,9 +11,8 @@ public class EncacheTest1 {
 		IUserService userService = (IUserService) context.getBean("userService");
 		for (int i = 0; i < 1000; i++) {
 			System.out.println("获取最新数据");
-			userService.getAll();
-			userService.getAll();
-			userService.removeAll();
+			userService.removeById(1);
+			System.out.println(userService.findById(1).getName());
 			TimeUnit.SECONDS.sleep(3);
 			
 		}

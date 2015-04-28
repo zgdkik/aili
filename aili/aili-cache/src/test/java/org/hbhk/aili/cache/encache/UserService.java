@@ -20,7 +20,7 @@ public class UserService implements IUserService {
 	@Cacheable(value = "serviceCache", key = "#id")
 	public User findById(Integer id) {
 		printInfo(id);
-		return userDao.findById(id);
+		return new User(id, System.currentTimeMillis()+"", System.currentTimeMillis()+"");
 	}
 
 	// 通过ID删除
