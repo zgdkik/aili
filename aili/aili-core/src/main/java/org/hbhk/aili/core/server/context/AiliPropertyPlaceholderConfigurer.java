@@ -31,15 +31,7 @@ public class AiliPropertyPlaceholderConfigurer extends PropertyPlaceholderConfig
 	/**
 	 * 覆盖属性路径
 	 */
-	private List<String> overrideLocaltions;
-
-	public List<String> getOverrideLocaltions() {
-		return overrideLocaltions;
-	}
-
-	public void setOverrideLocaltions(List<String> overrideLocaltions) {
-		this.overrideLocaltions = overrideLocaltions;
-	}
+	private List<String> oLocaltions;
 
 	private void addProperties(Properties props, Properties newProps) {
 		Set<Object> keys = newProps.keySet();
@@ -51,11 +43,11 @@ public class AiliPropertyPlaceholderConfigurer extends PropertyPlaceholderConfig
 	}
 	
 	private void addOverrideLocations(Properties props, Properties newProps) {
-		if(overrideLocaltions != null){
-			for (String location : overrideLocaltions) {
-				PathMatchingResourcePatternResolver pmrpr = new PathMatchingResourcePatternResolver();
+		if(oLocaltions != null){
+			for (String location : oLocaltions) {
+				PathMatchingResourcePatternResolver patternResolver = new PathMatchingResourcePatternResolver();
 				try {
-					Resource resource = pmrpr.getResource(location);
+					Resource resource = patternResolver.getResource(location);
 					Properties prop = PropertiesLoaderUtils.loadProperties(resource);
 					addProperties(props, prop);
 				} catch (Exception e) {
@@ -77,11 +69,27 @@ public class AiliPropertyPlaceholderConfigurer extends PropertyPlaceholderConfig
 				addOverrideLocations(props, newProps);
 			}
 		}
-		if(props!=null){
+		if(props != null){
 			properties.putAll(props);
 		}
 		
 		super.processProperties(beanFactoryToProcess, props);
+	}
+
+	public IPropertiesService getPropertiesService() {
+		return propertiesService;
+	}
+
+	public void setPropertiesService(IPropertiesService propertiesService) {
+		this.propertiesService = propertiesService;
+	}
+
+	public List<String> getoLocaltions() {
+		return oLocaltions;
+	}
+
+	public void setoLocaltions(List<String> oLocaltions) {
+		this.oLocaltions = oLocaltions;
 	}
 
 
