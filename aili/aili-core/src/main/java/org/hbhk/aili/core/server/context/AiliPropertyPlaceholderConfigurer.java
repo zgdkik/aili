@@ -13,6 +13,10 @@ public class AiliPropertyPlaceholderConfigurer extends PropertyPlaceholderConfig
 	private Logger log = LoggerFactory.getLogger(AiliPropertyPlaceholderConfigurer.class);
 	
 	private IPropertiesService propertiesService;
+	/**
+	 * 提供程序获取spring读取到的properties内容
+	 */
+	public static Properties properties = null;
 
 	private void addProperties(Properties props, Properties newProps) {
 		Set<Object> keys = newProps.keySet();
@@ -32,6 +36,7 @@ public class AiliPropertyPlaceholderConfigurer extends PropertyPlaceholderConfig
 				addProperties(props, newProps);
 			}
 		}
+		properties = props;
 		super.processProperties(beanFactoryToProcess, props);
 	}
 
