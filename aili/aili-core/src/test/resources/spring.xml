@@ -23,6 +23,11 @@
 				<value>jdbc.properties</value>
 			</list>
 		</property>
+		<property name="orLocaltions">
+			<list>
+				<value>ojdbc.properties</value>
+			</list>
+		</property>
 		<property name="propertiesService" ref="propertiesService"/>
 	</bean>
 	<aop:aspectj-autoproxy />

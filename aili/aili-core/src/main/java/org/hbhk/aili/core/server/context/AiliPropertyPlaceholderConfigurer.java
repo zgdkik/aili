@@ -31,7 +31,7 @@ public class AiliPropertyPlaceholderConfigurer extends PropertyPlaceholderConfig
 	/**
 	 * 覆盖属性路径
 	 */
-	private List<String> oLocaltions;
+	private List<String> orLocaltions;
 
 	private void addProperties(Properties props, Properties newProps) {
 		Set<Object> keys = newProps.keySet();
@@ -43,8 +43,8 @@ public class AiliPropertyPlaceholderConfigurer extends PropertyPlaceholderConfig
 	}
 	
 	private void addOverrideLocations(Properties props, Properties newProps) {
-		if(oLocaltions != null){
-			for (String location : oLocaltions) {
+		if(orLocaltions != null){
+			for (String location : orLocaltions) {
 				PathMatchingResourcePatternResolver patternResolver = new PathMatchingResourcePatternResolver();
 				try {
 					Resource resource = patternResolver.getResource(location);
@@ -84,12 +84,12 @@ public class AiliPropertyPlaceholderConfigurer extends PropertyPlaceholderConfig
 		this.propertiesService = propertiesService;
 	}
 
-	public List<String> getoLocaltions() {
-		return oLocaltions;
+	public List<String> getOrLocaltions() {
+		return orLocaltions;
 	}
 
-	public void setoLocaltions(List<String> oLocaltions) {
-		this.oLocaltions = oLocaltions;
+	public void setOrLocaltions(List<String> orLocaltions) {
+		this.orLocaltions = orLocaltions;
 	}
 
 
