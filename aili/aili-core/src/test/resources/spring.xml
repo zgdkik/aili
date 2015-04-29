@@ -16,6 +16,15 @@
 			http://www.springframework.org/schema/aop 
 			http://www.springframework.org/schema/aop/spring-aop.xsd">
 
+	<bean id="propertiesService" class="org.hbhk.test.ds.impl.DemoProrpertieService"></bean>
+	<bean class="org.hbhk.aili.core.server.context.AiliPropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>jdbc.properties</value>
+			</list>
+		</property>
+		<property name="propertiesService" ref="propertiesService"/>
+	</bean>
 	<aop:aspectj-autoproxy />
 	<context:component-scan base-package="org.hbhk.test.ds" />
 	<bean class="org.hbhk.aili.core.server.aop.DynamicDataSourceAspect"></bean>
