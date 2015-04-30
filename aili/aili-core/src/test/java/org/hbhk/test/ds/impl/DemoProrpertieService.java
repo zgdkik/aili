@@ -2,7 +2,7 @@ package org.hbhk.test.ds.impl;
 
 import java.util.Properties;
 
-import org.hbhk.aili.core.server.context.IPropertiesService;
+import org.hbhk.aili.core.server.properties.IPropertiesService;
 
 public class DemoProrpertieService implements IPropertiesService {
 

@@ -1,4 +1,4 @@
-package org.hbhk.aili.core.server.context;
+package org.hbhk.aili.core.server.properties;
 
 import java.util.Properties;
 

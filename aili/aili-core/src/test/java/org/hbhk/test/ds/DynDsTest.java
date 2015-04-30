@@ -1,6 +1,6 @@
 package org.hbhk.test.ds;
 
-import org.hbhk.aili.core.server.context.AiliPropertyPlaceholderConfigurer;
+import org.hbhk.aili.core.server.properties.AiliPropertyPlaceholderConfigurer;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
