@@ -1,16 +1,17 @@
-package org.hbhk.aili.gen.server.service;
+package org.hbhk.aili.gen.server.foss.service;
 
 import org.hbhk.aili.gen.server.Constants;
 import org.hbhk.aili.gen.server.GenerateMain;
 import org.hbhk.aili.gen.server.model.MakeModel;
+import org.hbhk.aili.gen.server.service.MakeCodeService;
 import org.hbhk.aili.gen.server.utils.BaseFreemarkUtils;
 
-public class MakeCodeServiceImpl implements MakeCodeService {
+public class FossMakeCodeServiceImpl implements MakeCodeService {
 	String prefix="template";
 	
 	
 
-	public MakeCodeServiceImpl(String prefix) {
+	public FossMakeCodeServiceImpl(String prefix) {
 		super();
 		this.prefix = prefix;
 	}

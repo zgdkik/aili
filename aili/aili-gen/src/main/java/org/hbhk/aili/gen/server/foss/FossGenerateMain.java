@@ -1,4 +1,4 @@
-package org.hbhk.aili.gen.server;
+package org.hbhk.aili.gen.server.foss;
 
 import org.hbhk.aili.gen.server.model.MakeModel;
 import org.hbhk.aili.gen.server.service.MakeCodeService;
@@ -7,7 +7,7 @@ import org.hbhk.aili.gen.server.service.MakeModelService;
 import org.hbhk.aili.gen.server.service.MakeModelServiceImpl;
 import org.hbhk.aili.gen.server.test.CarInfo;
 
-public class GenerateMain {
+public class FossGenerateMain {
 
 	/**
 	 * 生成的实体
@@ -62,7 +62,7 @@ public class GenerateMain {
 		Boolean hasDeleteLifecycle = new Boolean(args[3]);
 		mm.setHasDeleteLifecycle(hasDeleteLifecycle);
 
-		MakeCodeService mcs = new MakeCodeServiceImpl("template");
+		MakeCodeService mcs = new MakeCodeServiceImpl("foss-template");
 
 		mcs.makeSqlXml(mm, getAutoMakeCode());
 
@@ -98,7 +98,7 @@ public class GenerateMain {
 		}
 
 		mm.setHasDeleteLifecycle(hasDeleteLifecycle);
-		MakeCodeService mcs = new MakeCodeServiceImpl("template");
+		MakeCodeService mcs = new MakeCodeServiceImpl("foss-template");
 
 		mcs.makeSqlXml(mm, getAutoMakeCode());
 
@@ -112,7 +112,7 @@ public class GenerateMain {
 
 	public static void main(String[] args) throws Exception {
 
-		GenerateMain gm = new GenerateMain();
+		FossGenerateMain gm = new FossGenerateMain();
 
 		gm.execute(args);
 
