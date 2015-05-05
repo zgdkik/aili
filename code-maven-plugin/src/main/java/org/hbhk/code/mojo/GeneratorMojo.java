@@ -33,7 +33,7 @@ public class GeneratorMojo extends AbstractMojo {
 	private String projectName;
 	@Parameter(defaultValue="${project.artifactId}")
 	private String moduleName;
-	@Parameter(defaultValue="${basedir}", readonly=true)
+	@Parameter(defaultValue="${basedir}/target", readonly=true)
 	private File targetDir;
 	
 	@Override
