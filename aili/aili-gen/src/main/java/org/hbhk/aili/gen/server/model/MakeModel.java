@@ -43,7 +43,7 @@ public class MakeModel {
 	/**
 	 * 表名
 	 */
-	private String tableName;
+	private String tabName;
 
 	/**
 	 * 作者名(需要用户显示定义)
@@ -64,6 +64,8 @@ public class MakeModel {
 	 * 字段描述
 	 */
 	private List<PropertyDesc> propertyList = new ArrayList<PropertyDesc>();
+	
+	private List<ColumnDesc> columnList = new ArrayList<ColumnDesc>();
 
 	public Boolean getHasDeleteLifecycle() {
 		return hasDeleteLifecycle;
@@ -89,12 +91,13 @@ public class MakeModel {
 		this.propertyList = propertyList;
 	}
 
-	public String getTableName() {
-		return tableName;
+
+	public String getTabName() {
+		return tabName;
 	}
 
-	public void setTableName(String tableName) {
-		this.tableName = tableName;
+	public void setTabName(String tabName) {
+		this.tabName = tabName;
 	}
 
 	public String getVersionField() {
@@ -175,6 +178,14 @@ public class MakeModel {
 
 	public void setFname(String fname) {
 		this.fname = fname;
+	}
+
+	public List<ColumnDesc> getColumnList() {
+		return columnList;
+	}
+
+	public void setColumnList(List<ColumnDesc> columnList) {
+		this.columnList = columnList;
 	}
 	
 	

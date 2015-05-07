@@ -16,4 +16,6 @@ public interface MakeCodeService {
 	void makeController(MakeModel makeModel, String generateOutDir);
 	
 	void makeJs(MakeModel makeModel, String generateOutDir);
+	
+	void makeJsp(MakeModel makeModel, String generateOutDir);
 }

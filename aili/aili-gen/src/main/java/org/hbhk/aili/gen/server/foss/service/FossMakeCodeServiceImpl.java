@@ -30,6 +30,11 @@ public class FossMakeCodeServiceImpl implements MakeCodeService {
 		BaseFreemarkUtils.generate(queryTemplatePath(Constants.DAO_TEMPLATE),
 				makeModel, generateOutDir + Constants.DAO_FILE_START + "I"
 						+ name+ "Dao.java");
+		BaseFreemarkUtils.generate(
+				queryTemplatePath("dao_template_impl.fl"),
+				makeModel,
+				generateOutDir + Constants.DAO_FILE_START+"/impl/"
+						+name + "Dao.java");
 	}
 
 	@Override
@@ -56,8 +61,8 @@ public class FossMakeCodeServiceImpl implements MakeCodeService {
 		BaseFreemarkUtils.generate(
 				queryTemplatePath("controller_template.fl"),
 				makeModel,
-				generateOutDir +"controller/"
-						+ name + "Controller.java");
+				generateOutDir +"action/"
+						+ name + "Action.java");
 	}
 
 	@Override
@@ -65,9 +70,9 @@ public class FossMakeCodeServiceImpl implements MakeCodeService {
 		String name =  makeModel.getEntityName();
 		name = name.replaceAll("Info", "").trim();
 		makeModel.setFname(name);
-		BaseFreemarkUtils.generate(queryTemplatePath(Constants.XML_TEMPLATE),
-				makeModel, generateOutDir + Constants.XML_FILE_START
-						+ "orm" + "-"
+		BaseFreemarkUtils.generate(queryTemplatePath("xml_template.xml"),
+				makeModel, generateOutDir 
+						+ "ibatis/" 
 						+ name.toLowerCase() + ".xml");
 
 	}
@@ -79,6 +84,15 @@ public class FossMakeCodeServiceImpl implements MakeCodeService {
 		makeModel.setFname(name);
 		BaseFreemarkUtils.generate(queryTemplatePath("script.js"),
 				makeModel, generateOutDir + "scripts/" +name.toLowerCase() + ".js");
+	}
+
+	@Override
+	public void makeJsp(MakeModel makeModel, String generateOutDir) {
+		String name =  makeModel.getEntityName();
+		name = name.replaceAll("Entity", "").trim();
+		makeModel.setFname(name);
+		BaseFreemarkUtils.generate(queryTemplatePath("page.jsp"),
+				makeModel, generateOutDir + "views/" +name.toLowerCase() + ".jsp");
 	}
 
 }

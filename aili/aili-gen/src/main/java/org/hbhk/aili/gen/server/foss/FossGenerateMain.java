@@ -1,7 +1,11 @@
 package org.hbhk.aili.gen.server.foss;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.hbhk.aili.gen.server.foss.service.FossMakeCodeServiceImpl;
 import org.hbhk.aili.gen.server.foss.service.FossMakeModelServiceImpl;
+import org.hbhk.aili.gen.server.model.ColumnDesc;
 import org.hbhk.aili.gen.server.model.MakeModel;
 import org.hbhk.aili.gen.server.service.MakeCodeService;
 import org.hbhk.aili.gen.server.service.MakeCodeServiceImpl;
@@ -20,19 +24,13 @@ public class FossGenerateMain {
 	public static String moduleName = "backend";
 	
 	public static String entityName = "backend";
+	
+	public static String tabName="t_test";
 	/**
 	 * 作者名
 	 */
 	private final String authName = "何波";
-	/**
-	 * 生命周期字段,如果没有则为""空串
-	 */
-	private final String lifecycle = "status";
 
-	/**
-	 * 是否拥有删除状态,拥有删除状态则会在所有的查询后加上lifecycle!=2
-	 */
-	private final Boolean hasDeleteLifecycle = true;
 
 	private static String getAutoMakeCode() {
 
@@ -45,35 +43,29 @@ public class FossGenerateMain {
 			args = new String[4];
 			args[0] = modelClass.getName();
 			args[1] = authName;
-			args[2] = lifecycle;
-			args[3] = String.valueOf(hasDeleteLifecycle);
 		}
-
 		MakeModelService mmService = new FossMakeModelServiceImpl();
 
 		Class<?> clazz = Class.forName(args[0]);
 
 		MakeModel mm = mmService.queryByClass(clazz);
-
 		mm.setAuthName(args[1]);
-		if (args[2] == null || "null".equals(args[2])) {
-			mm.setLifecycle("");
-		} else {
-			mm.setLifecycle(args[2]);
-		}
 
-		Boolean hasDeleteLifecycle = new Boolean(args[3]);
-		mm.setHasDeleteLifecycle(hasDeleteLifecycle);
-
+		//添加属性与列映射 
+		List<ColumnDesc> columnList = new ArrayList<ColumnDesc>();
+		
+		ColumnDesc col = new ColumnDesc("name","c_name");
+		columnList.add(col);
+		mm.setColumnList(columnList);
+		
 		MakeCodeService mcs = new FossMakeCodeServiceImpl("foss-template");
 
-//		mcs.makeSqlXml(mm, getAutoMakeCode());
-//
-//		mcs.makeDao(mm, getAutoMakeCode());
-//
-//		mcs.makeManager(mm, getAutoMakeCode());
-//		mcs.makeController(mm, getAutoMakeCode());
+		mcs.makeSqlXml(mm, getAutoMakeCode());
+		mcs.makeDao(mm, getAutoMakeCode());
+		mcs.makeManager(mm, getAutoMakeCode());
+		mcs.makeController(mm, getAutoMakeCode());
 		mcs.makeJs(mm,  getAutoMakeCode());
+		mcs.makeJsp(mm,  getAutoMakeCode());
 		System.out.println(args[0] + args[1] + args[2] + args[3]);
 	}
 

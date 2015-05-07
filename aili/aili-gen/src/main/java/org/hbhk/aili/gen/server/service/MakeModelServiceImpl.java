@@ -168,12 +168,12 @@ public class MakeModelServiceImpl implements MakeModelService {
 		for (Annotation anno : classAnnos) {
 			if (anno instanceof Tabel) {
 				Tabel table = (Tabel) anno;
-				mm.setTableName(table.value());
+				mm.setTabName(table.value());
 			}
 		}
 		// 如果不显示定义表名,直接使用类名
-		if (mm.getTableName() == null) {
-			mm.setTableName(mm.getEntityName());
+		if (mm.getTabName() == null) {
+			mm.setTabName(mm.getEntityName());
 		}
 		// 过滤掉id以及version字段
 		mm.setPropertyList(filterPropertyList(mm.getPropertyList(), mm));

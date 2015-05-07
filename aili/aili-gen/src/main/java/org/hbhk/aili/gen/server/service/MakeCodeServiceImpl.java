@@ -77,4 +77,10 @@ public class MakeCodeServiceImpl implements MakeCodeService {
 		
 	}
 
+	@Override
+	public void makeJsp(MakeModel makeModel, String generateOutDir) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

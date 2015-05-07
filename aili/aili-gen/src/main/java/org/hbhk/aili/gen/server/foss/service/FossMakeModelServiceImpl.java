@@ -110,6 +110,7 @@ public class FossMakeModelServiceImpl implements MakeModelService {
 		mm.setEntityPackagName(clazz.getName());
 		mm.setProjectName(FossGenerateMain.projectName);
 		mm.setModuleName(FossGenerateMain.moduleName);
+		mm.setTabName(FossGenerateMain.tabName);
 		Field[] fields = clazz.getDeclaredFields();
 
 		for (Field field : fields) {
