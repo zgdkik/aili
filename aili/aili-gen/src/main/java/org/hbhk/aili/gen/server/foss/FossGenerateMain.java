@@ -20,7 +20,15 @@ public class FossGenerateMain {
 		return System.getProperty("user.dir") + "/target/template/";
 	}
 
-	
+	/**
+	 * @param projectName 项目名称
+	 * @param moduleName 模块名称
+	 * @param tabName 表名 可以不传
+	 * @param list 实体与表列的映射关系  表名 可以不传
+	 * @param clazz 实体
+	 * @param author 作者
+	 * @throws Exception
+	 */
 	public static void execute(String projectName ,String moduleName,String tabName,List<ColumnDesc> list, Class<?> clazz, String author) throws Exception {
 		MakeModelService mmService = new FossMakeModelServiceImpl();
 		MakeModel mm = mmService.queryByClass(clazz);
