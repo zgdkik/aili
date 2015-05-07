@@ -108,9 +108,6 @@ public class FossMakeModelServiceImpl implements MakeModelService {
 	public MakeModel queryByClass(Class<?> clazz) {
 		MakeModel mm = new MakeModel();
 		mm.setEntityPackagName(clazz.getName());
-		mm.setProjectName(FossGenerateMain.projectName);
-		mm.setModuleName(FossGenerateMain.moduleName);
-		mm.setTabName(FossGenerateMain.tabName);
 		Field[] fields = clazz.getDeclaredFields();
 
 		for (Field field : fields) {

@@ -13,22 +13,6 @@ import org.hbhk.aili.gen.server.test.CarEntity;
 
 public class FossGenerateMain {
 
-	/**
-	 * 生成的实体
-	 */
-	public final Class<?> modelClass = CarEntity.class;
-
-	public static String projectName = "secretary";
-
-	public static String moduleName = "backend";
-	
-	public static String entityName = "backend";
-	
-	public static String tabName="t_test";
-	/**
-	 * 作者名
-	 */
-	private final String authName = "何波";
 
 
 	private static String getAutoMakeCode() {
@@ -36,47 +20,14 @@ public class FossGenerateMain {
 		return System.getProperty("user.dir") + "/target/template/";
 	}
 
-	private void execute(String[] args) throws Exception {
-
-		if (args == null || args.length == 0) {
-			args = new String[4];
-			args[0] = modelClass.getName();
-			args[1] = authName;
-		}
+	
+	public static void execute(String projectName ,String moduleName,String tabName,List<ColumnDesc> list, Class<?> clazz, String author) throws Exception {
 		MakeModelService mmService = new FossMakeModelServiceImpl();
-
-		Class<?> clazz = Class.forName(args[0]);
-
 		MakeModel mm = mmService.queryByClass(clazz);
-		mm.setAuthName(args[1]);
-
-		//添加属性与列映射 
-		List<ColumnDesc> columnList = new ArrayList<ColumnDesc>();
-		
-		ColumnDesc col = new ColumnDesc("name","c_name");
-		columnList.add(col);
-		mm.setColumnList(columnList);
-		
-		MakeCodeService mcs = new FossMakeCodeServiceImpl("foss-template");
-
-		mcs.makeSqlXml(mm, getAutoMakeCode());
-		mcs.makeDao(mm, getAutoMakeCode());
-		mcs.makeManager(mm, getAutoMakeCode());
-		mcs.makeController(mm, getAutoMakeCode());
-		mcs.makeJs(mm,  getAutoMakeCode());
-		mcs.makeJsp(mm,  getAutoMakeCode());
-		System.out.println(args[0] + args[1] );
-	}
-
-	public static void execute(Class<?> cls, String author) throws Exception {
-		MakeModelService mmService = new FossMakeModelServiceImpl();
-
-		Class<?> clazz = cls;
-
-		MakeModel mm = mmService.queryByClass(clazz);
-
 		mm.setAuthName(author);
-
+		mm.setTabName(tabName);
+		mm.setProjectName(projectName);
+		mm.setModuleName(moduleName);
 		MakeCodeService mcs = new  FossMakeCodeServiceImpl("foss-template");
 
 		mcs.makeSqlXml(mm, getAutoMakeCode());
@@ -91,7 +42,10 @@ public class FossGenerateMain {
 
 	public static void main(String[] args) throws Exception {
 
-		execute(CarEntity.class, "何波");
+		List<ColumnDesc> list = new ArrayList<ColumnDesc>();
+		ColumnDesc c = new ColumnDesc("name","c_name");
+		list.add(c);
+		execute("hbhk","aili","t_test",list,CarEntity.class, "何波");
 
 	}
 }
