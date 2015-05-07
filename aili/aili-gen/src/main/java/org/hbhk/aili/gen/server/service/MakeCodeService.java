@@ -14,4 +14,6 @@ public interface MakeCodeService {
 	void makeSqlXml(MakeModel makeModel, String generateOutDir);
 
 	void makeController(MakeModel makeModel, String generateOutDir);
+	
+	void makeJs(MakeModel makeModel, String generateOutDir);
 }

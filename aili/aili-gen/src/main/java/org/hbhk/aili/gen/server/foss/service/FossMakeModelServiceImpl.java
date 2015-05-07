@@ -8,13 +8,11 @@ import java.util.List;
 
 import javassist.Modifier;
 
-import org.hbhk.aili.gen.server.GenerateMain;
+import org.hbhk.aili.gen.server.foss.FossGenerateMain;
+import org.hbhk.aili.gen.server.foss.ViewDataType;
 import org.hbhk.aili.gen.server.model.MakeModel;
 import org.hbhk.aili.gen.server.model.PropertyDesc;
 import org.hbhk.aili.gen.server.service.MakeModelService;
-import org.hbhk.aili.orm.server.annotation.Column;
-import org.hbhk.aili.orm.server.annotation.Id;
-import org.hbhk.aili.orm.server.annotation.Tabel;
 import org.springframework.util.ReflectionUtils;
 
 public class FossMakeModelServiceImpl implements MakeModelService {
@@ -110,8 +108,8 @@ public class FossMakeModelServiceImpl implements MakeModelService {
 	public MakeModel queryByClass(Class<?> clazz) {
 		MakeModel mm = new MakeModel();
 		mm.setEntityPackagName(clazz.getName());
-		mm.setProjectName(GenerateMain.projectName);
-		mm.setModuleName(GenerateMain.moduleName);
+		mm.setProjectName(FossGenerateMain.projectName);
+		mm.setModuleName(FossGenerateMain.moduleName);
 		Field[] fields = clazz.getDeclaredFields();
 
 		for (Field field : fields) {
@@ -119,63 +117,21 @@ public class FossMakeModelServiceImpl implements MakeModelService {
 				continue;
 			}
 			PropertyDesc pd = new PropertyDesc();
-			Annotation[] annos = findAnnosByFiledName(clazz, field);
-			// 是否发现Column,Joincolumn注解
-			boolean isfindColumn = false;
 			String fieldName = field.getName();
 			String jetName = ":"+field.getName();
-			for (Annotation anno : annos) {
-				if (anno instanceof Id) {
-					mm.setPkName(fieldName);
-				} else if (anno instanceof Column) {
-					Column column = (Column) anno;
-					pd.setFieldName(fieldName);
-					pd.setJetName(jetName);
-					pd.setColumnName(column.value());
-					pd.setFieldType(clearPackage(field.getType().getName()));
-					isfindColumn = true;
-				}
-				// else if (anno instanceof JoinColumn) {
-				// JoinColumn column = (JoinColumn) anno;
-				// pd.setFieldName(field.getName());
-				// pd.setColumnName(column.name());
-				// pd.setFieldType(clearPackage(field.getType().getName()));
-				// isfindColumn = true;
-				// } else if (anno instanceof SequenceGenerator) {
-				// SequenceGenerator sg = (SequenceGenerator) anno;
-				// mm.setSequeneName(sg.sequenceName());
-				// } else if (anno instanceof Version) {
-				// mm.setVersionField(field.getName());
-				// } else if (anno instanceof Transient) { // 如果字段不是持久化字段,直接跳过
-				// continue;
-				// }
-
-			}
-			// 如果没有发现Column,Joincolumn,则代表此字段使用默认的设置
-			if (!isfindColumn) {
-				pd.setFieldName(fieldName);
-				pd.setJetName(jetName);
-				pd.setColumnName(field.getName());
-				pd.setFieldType(clearPackage(field.getType().getName()));
-			}
+			pd.setFieldName(fieldName);
+			pd.setJetName(jetName);
+			pd.setColumnName(field.getName());
+			String veiwType = ViewDataType.forType(field.getType().getName());
+			pd.setFieldType(veiwType);
+			//pd.setFieldType(clearPackage(field.getType().getName()));
 			mm.getPropertyList().add(pd);
 
 		}
-
 		mm.setEntityName(clearPackage(clazz.getName()));
 		mm.setPackagName(queryLastPackageName(clazz.getName()));
-		Annotation[] classAnnos = clazz.getAnnotations();
-
-		for (Annotation anno : classAnnos) {
-			if (anno instanceof Tabel) {
-				Tabel table = (Tabel) anno;
-				mm.setTableName(table.value());
-			}
-		}
-		// 如果不显示定义表名,直接使用类名
-		if (mm.getTableName() == null) {
-			mm.setTableName(mm.getEntityName());
-		}
+		//TODO
+		//mm.setTableName(table.value());
 		// 过滤掉id以及version字段
 		mm.setPropertyList(filterPropertyList(mm.getPropertyList(), mm));
 

@@ -1,10 +1,11 @@
 package org.hbhk.aili.gen.server.foss;
 
+import org.hbhk.aili.gen.server.foss.service.FossMakeCodeServiceImpl;
+import org.hbhk.aili.gen.server.foss.service.FossMakeModelServiceImpl;
 import org.hbhk.aili.gen.server.model.MakeModel;
 import org.hbhk.aili.gen.server.service.MakeCodeService;
 import org.hbhk.aili.gen.server.service.MakeCodeServiceImpl;
 import org.hbhk.aili.gen.server.service.MakeModelService;
-import org.hbhk.aili.gen.server.service.MakeModelServiceImpl;
 import org.hbhk.aili.gen.server.test.CarInfo;
 
 public class FossGenerateMain {
@@ -12,11 +13,13 @@ public class FossGenerateMain {
 	/**
 	 * 生成的实体
 	 */
-	private final Class<?> modelClass = CarInfo.class;
+	public final Class<?> modelClass = CarInfo.class;
 
 	public static String projectName = "secretary";
 
 	public static String moduleName = "backend";
+	
+	public static String entityName = "backend";
 	/**
 	 * 作者名
 	 */
@@ -46,7 +49,7 @@ public class FossGenerateMain {
 			args[3] = String.valueOf(hasDeleteLifecycle);
 		}
 
-		MakeModelService mmService = new MakeModelServiceImpl();
+		MakeModelService mmService = new FossMakeModelServiceImpl();
 
 		Class<?> clazz = Class.forName(args[0]);
 
@@ -62,14 +65,15 @@ public class FossGenerateMain {
 		Boolean hasDeleteLifecycle = new Boolean(args[3]);
 		mm.setHasDeleteLifecycle(hasDeleteLifecycle);
 
-		MakeCodeService mcs = new MakeCodeServiceImpl("foss-template");
+		MakeCodeService mcs = new FossMakeCodeServiceImpl("foss-template");
 
-		mcs.makeSqlXml(mm, getAutoMakeCode());
-
-		mcs.makeDao(mm, getAutoMakeCode());
-
-		mcs.makeManager(mm, getAutoMakeCode());
-		mcs.makeController(mm, getAutoMakeCode());
+//		mcs.makeSqlXml(mm, getAutoMakeCode());
+//
+//		mcs.makeDao(mm, getAutoMakeCode());
+//
+//		mcs.makeManager(mm, getAutoMakeCode());
+//		mcs.makeController(mm, getAutoMakeCode());
+		mcs.makeJs(mm,  getAutoMakeCode());
 		System.out.println(args[0] + args[1] + args[2] + args[3]);
 	}
 
@@ -84,7 +88,7 @@ public class FossGenerateMain {
 			args[3] = String.valueOf(hasDeleteLifecycle);
 		}
 
-		MakeModelService mmService = new MakeModelServiceImpl();
+		MakeModelService mmService = new FossMakeModelServiceImpl();
 
 		Class<?> clazz = Class.forName(args[0]);
 

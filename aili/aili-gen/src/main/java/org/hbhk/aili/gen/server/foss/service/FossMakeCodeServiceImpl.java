@@ -72,4 +72,13 @@ public class FossMakeCodeServiceImpl implements MakeCodeService {
 
 	}
 
+	@Override
+	public void makeJs(MakeModel makeModel, String generateOutDir) {
+		String name =  makeModel.getEntityName();
+		name = name.replaceAll("Entity", "").trim();
+		makeModel.setFname(name);
+		BaseFreemarkUtils.generate(queryTemplatePath("script.js"),
+				makeModel, generateOutDir + "scripts/" +name.toLowerCase() + ".js");
+	}
+
 }

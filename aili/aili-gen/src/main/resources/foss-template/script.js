@@ -1,12 +1,12 @@
 [#ftl]
-[#assign modulepre="${project}.${module}.${table.typeName}.${table.typeName}"]
-[#assign modulepreid="${project}_${module}_${table.typeName}_${table.typeName}"]
-[#assign voParams = "${table.typeName?uncap_first}Vo.${table.typeName?uncap_first}"]
-[#assign delParams = "${table.typeName?uncap_first}"]
-[#assign mosubpre = "${module}.${table.typeName?uncap_first}"]
+[#assign moduleNamepre="${projectName}.${moduleName}.${entityName}.${entityName}"]
+[#assign moduleNamepreid="${projectName}_${moduleName}_${entityName}_${entityName}"]
+[#assign voParams = "${entityName?uncap_first}Vo.${entityName?uncap_first}"]
+[#assign delParams = "${entityName?uncap_first}"]
+[#assign mosubpre = "${moduleName}.${moduleName?uncap_first}"]
 ${mosubpre}.addupdateFlag;
 ${mosubpre}.delMoreData = function(){
-	var a_grid=Ext.getCmp('${modulepreid}Grid_Id');
+	var a_grid=Ext.getCmp('T_${moduleName}-${entityName}_content').getGrid();
 	// 获取选中的记录
 	var selectionRecord = a_grid.getSelectionModel().getSelection();
 	var ids = '';
@@ -28,7 +28,7 @@ ${mosubpre}.delMoreData = function(){
 					${delParams}Vo.ids = ids;
 					var params = {'${delParams}Vo':${delParams}Vo};
 					Ext.Ajax.request({
-						url : ${module}.realPath('delete${table.typeName}.action'),
+						url : ${moduleName}.realPath('delete${entityName}.action'),
 						jsonData :params,
 						//"作废"成功
 						success : function (response) {
@@ -55,31 +55,31 @@ ${mosubpre}.delMoreData = function(){
    
 };
 /**
- * ${table.typeName} Model
+ * ${entityName} Model
  */
-Ext.define('${modulepre}Model', {
+Ext.define('${moduleNamepre}Model', {
     extend: 'Ext.data.Model',
     fields: [
-    [#list table.columnList as column]
-      {name: '${column.columnName}', type: '${column.javaDataType}'}[#if column_has_next ],[/#if]
+    [#list propertyList as column]
+      {name: '${column.fieldName}', type: '${column.fieldType}'}[#if column_has_next ],[/#if]
     [/#list]
     ]
 });
 /**
- * ${table.typeName} Store
+ * ${entityName} Store
  */
-Ext.define('${modulepre}Store',{
+Ext.define('${moduleNamepre}Store',{
             extend:'Ext.data.Store',
-			model: '${project}.${module}.${table.typeName}.${table.typeName}Model',
+			model: '${projectName}.${moduleName}.${entityName}.${entityName}Model',
 			pageSize: 10,
 			autoLoad: false,
 			proxy: {
 				type: 'ajax',
-				actionMethods: 'POST',
-				url : ${module}.realPath("queryBy${table.typeName}.action"),
+				actionMethods: 'GET',
+				url : ${moduleName}.realPath("queryBy${entityName}.action"),
 				reader: {
 					type: 'json',
-					root: '${table.typeName?uncap_first}Vo.${table.typeName?uncap_first}s',
+					root: '${entityName?uncap_first}Vo.${entityName?uncap_first}s',
 					totalProperty : 'totalCount'
 				}
 			},
@@ -90,13 +90,13 @@ Ext.define('${modulepre}Store',{
 			},
 			listeners: {
 				beforeload : function(store, operation, eOpts) {
-					var queryForm = Ext.getCmp('${modulepreid}Form_Id');
+					var queryForm = Ext.getCmp('T_${moduleName}-${entityName}_content').getQueryForm();
 					if (queryForm != null) {
 						var queryParams = queryForm.getValues();
 						Ext.apply(operation, {
 							params : {
-								[#list table.columnList as column]
-								'${voParams}.${column.columnName}' : queryParams.${column.columnName}[#if column_has_next],[/#if]
+								[#list propertyList as column]
+								'${voParams}.${column.fieldName}' : queryParams.${column.fieldName}[#if column_has_next],[/#if]
 								[/#list]
 							}
 						});	
@@ -106,9 +106,9 @@ Ext.define('${modulepre}Store',{
 });
 
 //查询条件面板
-Ext.define('${modulepre}QueryForm',{
+Ext.define('${moduleNamepre}QueryForm',{
 	extend:'Ext.form.Panel',
-	id: '${modulepreid}Form_Id',
+	id: '${moduleNamepreid}Form_Id',
 	layout:'column',
 	frame : true,
 	columnWidth: 0.98,
@@ -128,7 +128,7 @@ Ext.define('${modulepre}QueryForm',{
 		text :${mosubpre}.i18n('dpap.code.gen.reset') ,//  '重置',
 		width : 30,
 		handler : function() {
-			var conflictForm = Ext.getCmp("${modulepreid}Form_Id");
+			var conflictForm = Ext.getCmp("T_${moduleName}-${entityName}_content").getQueryForm();
 			// 将表单中的数据清空：
 			conflictForm.getForm().reset();
 		}
@@ -142,10 +142,10 @@ Ext.define('${modulepre}QueryForm',{
 			${mosubpre}.pagingBar.moveFirst();
 		}
 	}];
-    me.items = [[#list table.columnList as column]{
-    			xtype:'${column.viewDataType}',
-				name:'${column.columnName}',
-				fieldLabel :'${column.columnName}',
+    me.items = [[#list propertyList as column]{
+    			xtype:'${column.fieldType}',
+				name:'${column.fieldName}',
+				fieldLabel :'${column.fieldName}',
 				margin:'5 20 5 10',
 				labelWidth:120,
 			    columnWidth:.333
@@ -156,9 +156,9 @@ Ext.define('${modulepre}QueryForm',{
   }
 });
 //查询的显示表格：
-Ext.define('${modulepre}Grid',{
+Ext.define('${moduleNamepre}Grid',{
 	extend: 'Ext.grid.Panel',
-	id : '${modulepreid}Grid_Id',
+	id : '${moduleNamepreid}Grid_Id',
 	cls:'autoHeight',
 	bodyCls:'autoHeight',
 	title:'xxx详细信息',
@@ -184,17 +184,14 @@ Ext.define('${modulepre}Grid',{
 	            	iconCls:'deppon_icons_edit',
 	                tooltip: ${mosubpre}.i18n('dpap.code.gen.update') ,//'修改',
 	                handler: function(grid, rowIndex, colIndex) {
-	                	var addUpdateeWindow = Ext.getCmp('${modulepreid}AddUpdateWindow_Id');
-						if(addUpdateeWindow == null ){
-							addUpdateeWindow = Ext.create('${modulepre}AddUpdateWindow');
-						}
+	                	var addUpdateWindow = Ext.getCmp('T_${moduleName}-${entityName}_content').getAddUpdateWindow();
 						${mosubpre}.addupdateFlag='update';
-						addUpdateeWindow.getAddUpdateForm().setTitle(${mosubpre}.i18n('dpap.code.gen.update'));
+						addUpdateWindow.getAddUpdateForm().setTitle(${mosubpre}.i18n('dpap.code.gen.update'));
 						// 获得当前选择的行的的数据
 						var rowInfo = grid.getStore().getAt(rowIndex);
-						addUpdateeWindow.getAddUpdateForm().getForm().reset();
-						addUpdateeWindow.getAddUpdateForm().loadRecord(rowInfo);
-						addUpdateeWindow.show();
+						addUpdateWindow.getAddUpdateForm().getForm().reset();
+						addUpdateWindow.getAddUpdateForm().loadRecord(rowInfo);
+						addUpdateWindow.show();
 	            }
 	            },{
             	iconCls:'deppon_icons_cancel',
@@ -214,7 +211,7 @@ Ext.define('${modulepre}Grid',{
 						${delParams}Vo.ids = rowInfo.id;
 						var params = {'${delParams}Vo':${delParams}Vo};
 							Ext.Ajax.request({
-								url : ${module}.realPath('delete${table.typeName}.action'),
+								url : ${moduleName}.realPath('delete${entityName}.action'),
 								jsonData : params,
 								//"作废"成功
 								success : function (response) {
@@ -237,10 +234,10 @@ Ext.define('${modulepre}Grid',{
             }
             }]
         },
-        [#list table.columnList as column]
+        [#list propertyList as column]
         {
-          text:'${column.columnName}',
-		  dataIndex:'${column.columnName}',
+          text:'${column.fieldName}',
+		  dataIndex:'${column.fieldName}',
 		  flex: 1
 		}[#if column_has_next],[/#if]
 		[/#list]
@@ -250,20 +247,17 @@ Ext.define('${modulepre}Grid',{
 		return [{
 			text : ${mosubpre}.i18n('dpap.code.gen.add') ,//'新增',								//新增
 			handler :function(){
-				var addUpdateeWindow = Ext.getCmp("${modulepreid}AddUpdateWindow_Id");
-				if(addUpdateeWindow == null){
-					addUpdateeWindow= Ext.create('${modulepre}AddUpdateWindow');
-				}
+				var addUpdateWindow = Ext.getCmp('T_${moduleName}-${entityName}_content').getAddUpdateWindow();
 				${mosubpre}.addupdateFlag='add';
-				var rowInfo = Ext.create('${modulepre}Store');
-				addUpdateeWindow.getAddUpdateForm().getForm().reset();
-				addUpdateeWindow.getAddUpdateForm().setTitle(${mosubpre}.i18n('dpap.code.gen.add'));
-				addUpdateeWindow.show();
+				var rowInfo = Ext.create('${moduleNamepre}Store');
+				addUpdateWindow.getAddUpdateForm().getForm().reset();
+				addUpdateWindow.getAddUpdateForm().setTitle(${mosubpre}.i18n('dpap.code.gen.add'));
+				addUpdateWindow.show();
 			} 
 		},'-', {
 			text : ${mosubpre}.i18n('dpap.code.gen.delete') ,//'作废',								//作废
 			handler :function(){
-				${module}.${table.typeName?uncap_first}.delMoreData();	
+				${moduleName}.${entityName?uncap_first}.delMoreData();	
 			} 
 		}];
 	},
@@ -271,7 +265,7 @@ Ext.define('${modulepre}Grid',{
 		var me = this,
 			cfg = Ext.apply({}, config);
 		me.selModel= Ext.create('Ext.selection.CheckboxModel');
-		me.store = Ext.create('${modulepre}Store');
+		me.store = Ext.create('${moduleNamepre}Store');
 		me.bbar = Ext.create('Deppon.StandardPaging',{
 				store:me.store
 		});
@@ -281,9 +275,8 @@ Ext.define('${modulepre}Grid',{
 		me.callParent([cfg]);
 	}
 });
-Ext.define('${modulepre}AddUpdateWindow',{
+Ext.define('${moduleNamepre}AddUpdateWindow',{
 	extend: 'Ext.window.Window',
-	id : '${modulepreid}AddUpdateWindow_Id',
 	title: ${mosubpre}.i18n('dpap.code.gen.update.ui.msg'),//'编辑界面',
     width: 900,
     modal:true,
@@ -292,7 +285,7 @@ Ext.define('${modulepre}AddUpdateWindow',{
 	addUpdateForm:null,
 	getAddUpdateForm:function(){
 		if(this.addUpdateForm == null){
-			this.addUpdateForm = Ext.create('${modulepre}.AddUpdateForm');
+			this.addUpdateForm = Ext.create('${moduleNamepre}.AddUpdateForm');
 		}
 		return this.addUpdateForm;
 	},
@@ -305,9 +298,9 @@ Ext.define('${modulepre}AddUpdateWindow',{
 		me.callParent([cfg]);
 	}
 });
-Ext.define('${modulepre}.AddUpdateForm',{
+Ext.define('${moduleNamepre}.AddUpdateForm',{
 	extend: 'Ext.form.Panel',
-	id: '${modulepreid}addUpdateForm_Id',
+	id: '${moduleNamepreid}addUpdateForm_Id',
 	frame: true,
 	hidden : false,
 	defaultType : 'textfield',
@@ -330,8 +323,8 @@ Ext.define('${modulepre}.AddUpdateForm',{
             columnWidth:.12, 
             hidden : false,
             handler: function(){
-	    		var a_window = Ext.getCmp('${modulepreid}AddUpdateWindow_Id');
-	    		var addUpdateForm=Ext.getCmp('${modulepreid}addUpdateForm_Id');
+	    		var a_window = Ext.getCmp('${moduleNamepreid}AddUpdateWindow_Id');
+	    		var addUpdateForm=Ext.getCmp('${moduleNamepreid}addUpdateForm_Id');
 	    		addUpdateForm.getForm().reset();
 	    		a_window.hide();
             }
@@ -352,7 +345,7 @@ Ext.define('${modulepre}.AddUpdateForm',{
 				width: 55,
 				margin:'5 5 5 450', 
 				handler: function() {
-					var a_updateForm=Ext.getCmp('${modulepreid}addUpdateForm_Id');
+					var a_updateForm=Ext.getCmp('${moduleNamepreid}addUpdateForm_Id');
 					a_updateForm.getForm().reset();	
 				}
 			});
@@ -369,31 +362,31 @@ Ext.define('${modulepre}.AddUpdateForm',{
 				text:${mosubpre}.i18n('dpap.code.gen.save'),//  '保存',
 				columnWidth:.12, 
 				handler: function() { 
-					var a_form = Ext.getCmp("${modulepreid}addUpdateForm_Id");
-					var a_model = Ext.create('${modulepre}Model', a_form.getForm().getValues());
+					var a_form = Ext.getCmp("${moduleNamepreid}addUpdateForm_Id");
+					var a_model = Ext.create('${moduleNamepre}Model', a_form.getForm().getValues());
 					// 请求合法性验证
 					if(!a_form.getForm().isValid()){
 						return;
 					}
 		    		
 					var ${delParams}Vo = new Object();
-					 ${delParams}Vo.${table.typeName?uncap_first} = new Object();
-					 ${delParams}Vo.${table.typeName?uncap_first} = a_model.data
+					 ${delParams}Vo.${entityName?uncap_first} = new Object();
+					 ${delParams}Vo.${entityName?uncap_first} = a_model.data
 					var params = {'${delParams}Vo':${delParams}Vo};
 					var  requrl ;
 					 if(${mosubpre}.addupdateFlag =="add"){
-						 requrl='insert${table.typeName}.action';
+						 requrl='insert${entityName}.action';
 					 }else{
-						 requrl='update${table.typeName}.action';
+						 requrl='update${entityName}.action';
 					 }
 					//发送新增结点的Ajax请求.
 					Ext.Ajax.request({
-						url: ${module}.realPath(requrl),
+						url: ${moduleName}.realPath(requrl),
 						jsonData:params,
 						//作废成功
 						success : function(response) {
 			                var json = Ext.decode(response.responseText);
-			                ${module}.${table.typeName?uncap_first}.pagingBar.moveFirst();
+			                ${moduleName}.${entityName?uncap_first}.pagingBar.moveFirst();
 							a_form.up('window').hide();
 							Ext.ux.Toast.msg(${mosubpre}.i18n('dpap.code.gen.title.success.msg') //'信息（成功）提示'
 							, json.message, 'ok', 1000);
@@ -408,10 +401,10 @@ Ext.define('${modulepre}.AddUpdateForm',{
 		                }
 					});
 
-					var a_conditionForm=Ext.getCmp("${modulepreid}addUpdateForm_Id");
+					var a_conditionForm=Ext.getCmp("${moduleNamepreid}addUpdateForm_Id");
 					// 将表单中的数据清空：
 					a_conditionForm.getForm().reset();
-					Ext.getCmp("${modulepreid}AddUpdateWindow_Id").setVisible(false);
+					Ext.getCmp("${moduleNamepreid}AddUpdateWindow_Id").setVisible(false);
 				}
             });
         }
@@ -420,10 +413,10 @@ Ext.define('${modulepre}.AddUpdateForm',{
 	initComponent: function(config){
 		var me = this,
 				cfg = Ext.apply({}, config);
-		me.items = [[#list table.columnList as column]{
-					xtype:'${column.viewDataType}',
-					name:'${column.columnName}',
-					fieldLabel :'${column.columnName}' ,
+		me.items = [[#list propertyList as column]{
+					xtype:'${column.fieldType}',
+					name:'${column.fieldName}',
+					fieldLabel :'${column.fieldName}' ,
 					margin:'5 20 5 10',
 					labelWidth:80,
 				    columnWidth:.333
@@ -444,18 +437,32 @@ Ext.define('${modulepre}.AddUpdateForm',{
  */
 Ext.onReady(function() {
 	Ext.QuickTips.init();
-	if (Ext.getCmp('T_${module}-${table.typeName}_content')) {
+	if (Ext.getCmp('T_${moduleName}-${entityName}_content')) {
 		return;
 	}
-	Ext.getCmp('T_${module}-${table.typeName?uncap_first}').add(Ext.create('Ext.panel.Panel',{
-		id: 'T_${module}-${table.typeName}_content',
+	var queryForm = Ext.create('${moduleNamepre}QueryForm');
+	var grid = Ext.create('${moduleNamepre}QueryForm');
+	Ext.getCmp('T_${moduleName}-${entityName?uncap_first}').add(Ext.create('Ext.panel.Panel',{
+		id: 'T_${moduleName}-${entityName}_content',
 		cls: "panelContentNToolbar",
 		bodyCls: 'panelContentNToolbar-body',
 		layout: 'column',
+		getQueryForm:function(){
+			return queryForm;
+		},
+		getGrid:function(){
+			return grid;
+		},
+		addUpdateWindow:null,
+		getAddUpdateWindow:function(){
+			if(this.addUpdateWindow == null ){
+				this.addUpdateWindow = Ext.create('${moduleNamepre}AddUpdateWindow');
+			}
+			return this.addUpdateWindow;
+		},
 		items: [
-			Ext.create('${modulepre}QueryForm'),
-			Ext.create('${modulepre}Grid')
-			
+			queryForm,
+			grid
 		] 
 	}));
 	
