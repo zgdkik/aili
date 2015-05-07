@@ -8,5 +8,6 @@
 <body>
 	<h1>hbhk-sso</h1>
 	<a href="/logout">退出</a>
+	<a href="http://127.0.0.2:5417/index?ticket=${service-ticket}" target="">B系统</a>
 </body>
 </html>
