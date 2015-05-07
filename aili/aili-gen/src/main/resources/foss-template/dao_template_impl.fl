@@ -13,7 +13,7 @@ import java.util.Map;
 /**
  * ${table.name}
  * 
- * @author DPAP
+ * @author ${authName}
  * 
  */
 public class ${table.typeName}Dao extends iBatis3DaoImpl implements I${table.typeName}Dao {

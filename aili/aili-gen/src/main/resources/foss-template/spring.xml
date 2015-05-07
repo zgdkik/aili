@@ -9,25 +9,19 @@
 			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
 
     <!--  dao -->
-    [#list tableList as tl]
 	<bean id="${tl.typeName?uncap_first}Dao" class="com.deppon.${project}.module.${module}.server.dao.impl.${tl.typeName}DaoImpl">
 		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
 	</bean>
-	[/#list]
 	
 	<!--  service -->
-	[#list tableList as tl]
 	<bean id="${tl.typeName?uncap_first}Service"
 		class="com.deppon.${project}.module.${module}.server.service.impl.${tl.typeName}ServiceImpl">
 		<property name="${tl.typeName?uncap_first}Dao" ref="${tl.typeName?uncap_first}Dao"/>
 	</bean>
-	[/#list]
 	
 	<!-- actions -->
-	[#list tableList as tl]
 	<bean id="${tl.typeName?uncap_first}Action"
 		class="com.deppon.${project}.module.${module}.server.action.${tl.typeName}Action" scope="prototype">
 		<property name="${tl.typeName?uncap_first}Service" ref="${tl.typeName?uncap_first}Service"/>
 	</bean>
-	[/#list]
 </beans>

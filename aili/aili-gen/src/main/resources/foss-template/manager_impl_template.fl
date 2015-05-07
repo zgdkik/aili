@@ -14,7 +14,7 @@ import com.deppon.${project}.module.${module}.shared.exception.${table.typeName}
 /**
  * ${table.name}
  * 
- * @author DPAP ${.now}
+ * @author ${authName} ${.now}
  * 
  */
 public class ${table.typeName}Service   implements I${table.typeName}Service{

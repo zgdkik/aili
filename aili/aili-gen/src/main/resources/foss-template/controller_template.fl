@@ -13,9 +13,10 @@ import java.util.List;
 /**
  * ${table.name}
  * 
- * @author DPAP
+ * @author ${authName}
  * 
  */
+ @JSON
 public class ${table.typeName}Action extends AbstractAction {
 
 	private static final long serialVersionUID = 1L;
@@ -25,7 +26,6 @@ public class ${table.typeName}Action extends AbstractAction {
 	private ${table.typeName}Vo ${table.typeName?uncap_first}Vo;
 	
 	/** 新增  */
-	@JSON
 	public String insert${table.typeName}() {
 		try {
 			this.${service}.insert(${table.typeName?uncap_first}Vo.get${table.typeName}());
@@ -35,7 +35,6 @@ public class ${table.typeName}Action extends AbstractAction {
 		}
 	}
 	/**删除 */
-	@JSON
 	public String delete${table.typeName}() {
 		try {
 			String[] id = ${table.typeName?uncap_first}Vo.getIds().split(",");
@@ -48,7 +47,6 @@ public class ${table.typeName}Action extends AbstractAction {
 	}
 	
 	/** 修改 */
-	@JSON
 	public String update${table.typeName}() {
 		try {
 			this.${service}.update(${table.typeName?uncap_first}Vo.get${table.typeName}());
@@ -59,7 +57,6 @@ public class ${table.typeName}Action extends AbstractAction {
 	}
 	
 	/** 查询所有 */
-	@JSON
 	public String queryAll${table.typeName}() {
 		try {
 			List<${table.typeName}Entity> ${table.typeName?uncap_first}s = this.${service}.getAll();
@@ -70,7 +67,6 @@ public class ${table.typeName}Action extends AbstractAction {
 		}
 	}
 	
-	@JSON
 	public String queryBy${table.typeName}() {
 		try {
 			${table.typeName}Entity entity=${table.typeName?uncap_first}Vo.get${table.typeName}();
