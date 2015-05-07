@@ -37,7 +37,7 @@ public class FossGenerateMain {
 		mcs.makeJs(mm,  getAutoMakeCode());
 		mcs.makeJsp(mm,  getAutoMakeCode());
 
-		System.out.println(cls.getName() + " "+author);
+		System.out.println(clazz.getName() + " "+author);
 	}
 
 	public static void main(String[] args) throws Exception {
