@@ -67,14 +67,15 @@ public class FossMakeCodeServiceImpl implements MakeCodeService {
 
 	@Override
 	public void makeSqlXml(MakeModel makeModel, String generateOutDir) {
+		if(makeModel.getColumnList()==null || makeModel.getColumnList().size()==0){
+			return;
+		}
 		String name =  makeModel.getEntityName();
 		name = name.replaceAll("Entity", "").trim();
-		makeModel.setFname(name);
 		BaseFreemarkUtils.generate(queryTemplatePath("xml_template.xml"),
 				makeModel, generateOutDir 
 						+ "ibatis/" 
 						+ name.toLowerCase() + ".xml");
-
 	}
 
 	@Override
