@@ -25,7 +25,7 @@ public class FossMakeCodeServiceImpl implements MakeCodeService {
 	@Override
 	public void makeDao(MakeModel makeModel, String generateOutDir) {
 		String name =  makeModel.getEntityName();
-		name = name.replaceAll("Info", "").trim();
+		name = name.replaceAll("Entity", "").trim();
 		makeModel.setFname(name);
 		BaseFreemarkUtils.generate(queryTemplatePath(Constants.DAO_TEMPLATE),
 				makeModel, generateOutDir + Constants.DAO_FILE_START + "I"
@@ -40,7 +40,7 @@ public class FossMakeCodeServiceImpl implements MakeCodeService {
 	@Override
 	public void makeManager(MakeModel makeModel, String generateOutDir) {
 		String name =  makeModel.getEntityName();
-		name = name.replaceAll("Info", "").trim();
+		name = name.replaceAll("Entity", "").trim();
 		makeModel.setFname(name);
 		BaseFreemarkUtils.generate(
 				queryTemplatePath(Constants.MANAGER_TEMPLATE),
@@ -56,7 +56,7 @@ public class FossMakeCodeServiceImpl implements MakeCodeService {
 	
 	public void makeController(MakeModel makeModel, String generateOutDir) {
 		String name =  makeModel.getEntityName();
-		name = name.replaceAll("Info", "").trim();
+		name = name.replaceAll("Entity", "").trim();
 		makeModel.setFname(name);
 		BaseFreemarkUtils.generate(
 				queryTemplatePath("controller_template.fl"),
@@ -68,7 +68,7 @@ public class FossMakeCodeServiceImpl implements MakeCodeService {
 	@Override
 	public void makeSqlXml(MakeModel makeModel, String generateOutDir) {
 		String name =  makeModel.getEntityName();
-		name = name.replaceAll("Info", "").trim();
+		name = name.replaceAll("Entity", "").trim();
 		makeModel.setFname(name);
 		BaseFreemarkUtils.generate(queryTemplatePath("xml_template.xml"),
 				makeModel, generateOutDir 

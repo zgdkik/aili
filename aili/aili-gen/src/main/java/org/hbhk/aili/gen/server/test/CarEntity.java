@@ -9,7 +9,7 @@ import org.hbhk.aili.orm.share.model.BaseInfo;
  * 汽车品牌
  */
 @Tabel("t_sct_car")
-public class CarInfo extends BaseInfo {
+public class CarEntity extends BaseInfo {
 
 	private static final long serialVersionUID = 5211504527985935662L;
 

@@ -5,14 +5,14 @@ import org.hbhk.aili.gen.server.service.MakeCodeService;
 import org.hbhk.aili.gen.server.service.MakeCodeServiceImpl;
 import org.hbhk.aili.gen.server.service.MakeModelService;
 import org.hbhk.aili.gen.server.service.MakeModelServiceImpl;
-import org.hbhk.aili.gen.server.test.CarInfo;
+import org.hbhk.aili.gen.server.test.CarEntity;
 
 public class GenerateMain {
 
 	/**
 	 * 生成的实体
 	 */
-	private final Class<?> modelClass = CarInfo.class;
+	private final Class<?> modelClass = CarEntity.class;
 
 	public static String projectName = "secretary";
 
