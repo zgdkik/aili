@@ -16,6 +16,13 @@ public class SsoController implements InitializingBean {
 		CasAuthenticationToken principal=  (CasAuthenticationToken) request.getUserPrincipal();
 		String ticket = principal.getCredentials().toString();
 		request.setAttribute("ticket", ticket); 
+		System.out.println(request.getHeader("name"));
+		response.addHeader("name", "hbhk");
+		return "index";
+	}
+	
+	@RequestMapping("/index1")
+	public String index1(HttpServletRequest request ,HttpServletResponse response) {
 		return "index";
 	}
 	@Override
