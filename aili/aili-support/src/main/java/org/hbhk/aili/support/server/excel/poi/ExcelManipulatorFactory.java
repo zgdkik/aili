@@ -26,7 +26,7 @@ import org.xml.sax.SAXException;
 public class ExcelManipulatorFactory {
 	static final Logger logger = LoggerFactory.getLogger(ExcelManipulatorFactory.class);
 	
-	public static final String RULE_FILE = "org/hbhk/aili/support/server/META-INF/excel/excelcontent-definition-rule.xml";
+	public static final String RULE_FILE = "META-INF/excel/excelcontent-definition-rule.xml";
 	
 	private Map<String, ExcelSheet> sheetDefinitions = new HashMap<String, ExcelSheet>();	
 	
