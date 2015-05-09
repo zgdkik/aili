@@ -63,15 +63,23 @@ public class ExcelWriterTest {
 		headMap.put("reportDate", new Date());
 		headMap.put("reporter", "汇报者");
 		beans.put("head", headMap);
-		List<Map<String, Object>> bodyList = new ArrayList<Map<String, Object>>();
+		//List<Map<String, Object>> bodyList = new ArrayList<Map<String, Object>>();
+		List<TestEntity> bodyList = new ArrayList<TestEntity>();
 		for (int i = 0; i < 10; i++) {
-			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("sn", i + 1);
-			map.put("name", "名称" + i);
-			map.put("lineDate", new Date());
-			map.put("intValue", i * 2 + 1);
-			map.put("floatValue", (i * 7 + 3) / 3.0);
-			bodyList.add(map);
+//			Map<String, Object> map = new HashMap<String, Object>();
+//			map.put("sn", i + 1);
+//			map.put("name", "名称" + i);
+//			map.put("lineDate", new Date());
+//			map.put("intValue", i * 2 + 1);
+//			map.put("floatValue", (i * 7 + 3) / 3.0);
+//			bodyList.add(map);
+			TestEntity te = new TestEntity();
+			te.setSn(i+1);
+			te.setName("名称"+i);
+			te.setLineDate(new Date());
+			te.setIntValue(i*2+1);
+			te.setFloatValue((float) ((i * 7 + 3) / 3.0));
+			bodyList.add(te);
 		}
 		beans.put("bodylist", bodyList);
 		System.out.println(report1ExcelWriter.getDefinition());
