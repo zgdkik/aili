@@ -1,7 +1,9 @@
 package org.hbhk.aili.support.server.excel;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -15,8 +17,10 @@ import java.util.UUID;
 import javax.annotation.Resource;
 
 import org.hbhk.aili.support.server.excel.poi.ExcelKit;
+import org.hbhk.aili.support.server.excel.poi.ExcelReader;
 import org.hbhk.aili.support.server.excel.poi.ExcelWriter;
 import org.hbhk.aili.support.server.excel.poi.WriteStatus;
+import org.hbhk.aili.support.server.excel.poi.impl.DefaultExcelReader;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +39,9 @@ public class ExcelWriterTest {
 	@Autowired
 	@Qualifier("report1Writer")
 	private ExcelWriter report1ExcelWriter;
+	@Autowired
+	@Qualifier("report1Reader")
+	ExcelReader reader;
 
 	@Autowired
 	@Qualifier("report2Writer")
@@ -89,8 +96,14 @@ public class ExcelWriterTest {
 				Locale.CHINESE)) {
 			System.out.println(str);
 		}
-
 		System.out.println("Done!");
+	}
+	@Test
+	public void import1() throws Exception {
+		Map<String, Object> beans = new HashMap<String, Object>();
+		File file = new File("D:/test.xlsx");
+		InputStream is = new FileInputStream(file);
+		reader.readAll(is, beans);
 	}
 
 	@Test
