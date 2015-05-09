@@ -16,7 +16,7 @@
 			http://www.springframework.org/schema/aop 
 			http://www.springframework.org/schema/aop/spring-aop.xsd">
 
-	<bean class="org.hbhk.aili.support.server.excel.InitExcelConfig">
+	<bean class="org.hbhk.aili.support.server.excel.jxl.InitExcelConfig">
 	<property name="path" value="org/hbhk/aili/support/server/META-INF/**/"></property>
 	</bean>
 
