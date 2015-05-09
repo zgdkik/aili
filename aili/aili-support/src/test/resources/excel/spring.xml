@@ -18,6 +18,10 @@
 		<constructor-arg><value>report1</value></constructor-arg>
 	</bean>
 	
+	<bean id="report1Reader" factory-bean="excelManipulatorFactory" factory-method="createExcelReader">
+		<constructor-arg><value>report1</value></constructor-arg>
+	</bean>
+	
 	<bean id="report2Writer" factory-bean="excelManipulatorFactory" factory-method="createExcelWriter">
 		<constructor-arg type="java.lang.Integer"><value>1</value></constructor-arg>
 		<constructor-arg><value>excel/reporttemplate-sample1.xlsx</value></constructor-arg>

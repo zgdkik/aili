@@ -101,6 +101,12 @@ public class ExcelWriterTest {
 	@Test
 	public void import1() throws Exception {
 		Map<String, Object> beans = new HashMap<String, Object>();
+		
+		Map<String, Object> headMap = new HashMap<String, Object>();
+		headMap.put("reportDate",Date.class);
+		headMap.put("reporter", String.class);
+		beans.put("head", headMap);
+		beans.put("bodylist", TestEntity.class);
 		File file = new File("D:/test.xlsx");
 		InputStream is = new FileInputStream(file);
 		reader.readAll(is, beans);
