@@ -122,6 +122,7 @@ public class ModalFrameUtil {
 		try {
 			new EventPump(frame).start();
 		} catch (Throwable throwable) {
+			log.error(throwable.getMessage(), throwable);
 			throw new RuntimeException(throwable);
 		}
 	}
