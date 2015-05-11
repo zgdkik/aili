@@ -55,6 +55,7 @@ public class ModalFrameUtil {
 	public void showAsModal(final JFrame frame, final Frame owner) {
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.setResizable(false);
+		frame.setLocationRelativeTo(owner);
 		frame.addWindowListener(new WindowAdapter() {
 			public void windowOpened(WindowEvent e) {
 				owner.setEnabled(false);
