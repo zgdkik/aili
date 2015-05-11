@@ -4,9 +4,6 @@ import java.awt.Component;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionAdapter;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -43,30 +40,33 @@ public class DialogTest extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equals("Dialog1")) {
 			JButton b = new JButton("Dialog2");
-			b.setLocation(10, 10);
-			b.setSize(100, 30);
-			b.addActionListener(this);
-			d1 = new AiliJDialog(this, "Im dialog one!", true);
-			// 获取按下的时的坐标点
-			b.addMouseListener(new MouseAdapter() {
-				public void mousePressed(MouseEvent e) {
-					pressedPoint = e.getPoint();
-				}
-			});
-			b.addMouseMotionListener(new MouseMotionAdapter() {
-				@Override
-				public void mouseDragged(MouseEvent e) {
-					Point point = e.getPoint();// 获取当前坐标
-					Point locationPoint = d1.getLocation();// 获取窗体坐标
-					int x = locationPoint.x + point.x - pressedPoint.x;// 计算移动后的新坐标
-					int y = locationPoint.y + point.y - pressedPoint.y;
-					d1.setLocation(x, y);// 改变窗体位置
-				}
-			});
-			d1.setLocationRelativeTo(this);
-			d1.addContainer(b);
-			d1.setSize(200, 100);
-			d1.setVisible(true);
+			JFrame frame = new JFrame();
+			frame.setSize(300, 200);
+			ModalFrameUtil.getInstance().showAsModal(frame, this);
+//			b.setLocation(10, 10);
+//			b.setSize(100, 30);
+//			b.addActionListener(this);
+//			d1 = new AiliJDialog(this, "Im dialog one!", true);
+//			// 获取按下的时的坐标点
+//			b.addMouseListener(new MouseAdapter() {
+//				public void mousePressed(MouseEvent e) {
+//					pressedPoint = e.getPoint();
+//				}
+//			});
+//			b.addMouseMotionListener(new MouseMotionAdapter() {
+//				@Override
+//				public void mouseDragged(MouseEvent e) {
+//					Point point = e.getPoint();// 获取当前坐标
+//					Point locationPoint = d1.getLocation();// 获取窗体坐标
+//					int x = locationPoint.x + point.x - pressedPoint.x;// 计算移动后的新坐标
+//					int y = locationPoint.y + point.y - pressedPoint.y;
+//					d1.setLocation(x, y);// 改变窗体位置
+//				}
+//			});
+//			d1.setLocationRelativeTo(this);
+//			d1.addContainer(b);
+//			d1.setSize(200, 100);
+//			d1.setVisible(true);
 		} 
 	}
 
