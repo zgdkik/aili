@@ -67,6 +67,11 @@
 					<groupId>com.fasterxml.jackson.core</groupId>
 					<artifactId>jackson-core</artifactId>
 				</exclusion>
+				<!-- 解决暂时错误， 上线时需要去掉 -->
+				<exclusion>
+					<groupId>org.olap4j</groupId>
+					<artifactId>olap4j</artifactId>
+				</exclusion>
 			</exclusions>
 		</dependency>
 		<dependency>
