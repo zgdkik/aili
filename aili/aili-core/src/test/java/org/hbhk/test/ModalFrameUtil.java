@@ -76,15 +76,15 @@ public class ModalFrameUtil {
 					switch (e.getNewState()) {
 					case Frame.MAXIMIZED_BOTH:
 						// 最大化
-						log.debug("最大化 ");
+						log.debug("最大化");
 						owner.setEnabled(false);
 						frame.setExtendedState(JFrame.NORMAL);
 						frame.toFront();
 						break;
 					case Frame.ICONIFIED:
-						iconifiedFlag = true;
 						// 最小化
-						log.debug("最小化 ");
+						log.debug("最小化" + iconifiedFlag);
+						iconifiedFlag = true;
 						owner.setEnabled(true);
 						owner.setExtendedState(JFrame.NORMAL);
 						owner.toFront();
