@@ -11,7 +11,7 @@ import org.springframework.remoting.caucho.HessianServiceExporter;
 @Target( { ElementType.TYPE })
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-public @interface HessianService {
+public @interface HessianRemoting {
 	String name() default "";
     @SuppressWarnings("rawtypes")
 	Class serviceExporter() default HessianServiceExporter.class;

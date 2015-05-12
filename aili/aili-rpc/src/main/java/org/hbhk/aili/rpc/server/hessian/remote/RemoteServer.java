@@ -7,7 +7,7 @@ import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.hbhk.aili.rpc.server.hessian.IService;
+import org.hbhk.aili.rpc.server.hessian.IHessianRemoting;
 import org.hbhk.aili.rpc.server.hessian.client.HttpClientHessianProxyFactory;
 import org.hbhk.aili.rpc.server.hessian.handler.IRemoteExceptionHandler;
 import org.hbhk.aili.rpc.server.hessian.transport.INetworkStatusListener;
@@ -27,7 +27,7 @@ public class RemoteServer implements IRemoteServer {
 	/**
 	 * 缂撳瓨閫氳繃HessianProxyFactory鍒涘缓鐨勮繙绋嬫湇鍔℃帴鍙ｄ唬鐞嗗疄渚�
 	 */
-	private static Map<Class<?>, IService> servicesCache = new HashMap<Class<?>, IService>();
+	private static Map<Class<?>, IHessianRemoting> servicesCache = new HashMap<Class<?>, IHessianRemoting>();
 	/**
 	 * HessianProxy宸ュ巶 宸ュ巶鐨勮繛鎺ュ垱寤哄伐鍘傜敱鏈湴瀹炵幇
 	 */
@@ -48,20 +48,20 @@ public class RemoteServer implements IRemoteServer {
 	}
 
 	@Override
-	public <T extends IService> T getService(Class<T> serviceCls, T executor) {
+	public <T extends IHessianRemoting> T getService(Class<T> serviceCls, T executor) {
 		
 		return getService(serviceCls,
 				computeDefaultServiceName(serviceCls.getSimpleName(),getModuleName(serviceCls)), executor);
 	}
 
 	@Override
-	public <T extends IService> T getService(Class<T> serviceCls,
+	public <T extends IHessianRemoting> T getService(Class<T> serviceCls,
 			String aliasName) {
 		return getService(serviceCls, aliasName, null);
 	}
 
 	@Override
-	public <T extends IService> T getService(Class<T> serviceCls) {
+	public <T extends IHessianRemoting> T getService(Class<T> serviceCls) {
 		return getService(serviceCls,
 				computeDefaultServiceName(serviceCls.getSimpleName(),getModuleName(serviceCls)), null);
 	}
@@ -89,9 +89,9 @@ public class RemoteServer implements IRemoteServer {
 	 * 瀹為檯鑾峰彇杩滅▼鏈嶅姟鐨勫疄鐜�杩斿洖鐨凷ervice鏄袱灞備唬鐞嗗寘瑁�1. hessian 杩涜浜嗙涓�鐨勪唬鐞嗗寘瑁�2.
 	 * 閫氳繃ServiceProxy杩涜浜嗙浜屾鍖呰锛屼富瑕佽В鍐崇绾垮拰鍦ㄧ嚎鐨勮皟鐢ㄩ棶棰�
 	 */
-	public <T extends IService> T getService(Class<T> serviceCls,
+	public <T extends IHessianRemoting> T getService(Class<T> serviceCls,
 			String serviceName, T executor) {
-		IService targetService = null;
+		IHessianRemoting targetService = null;
 		// 鍒ゆ柇鏄惁鍦ㄦ湇鍔＄紦瀛橀噷闈㈠瓨鍦�
 		if (servicesCache.containsKey(serviceCls)) {
 			targetService = servicesCache.get(serviceCls);
@@ -99,7 +99,7 @@ public class RemoteServer implements IRemoteServer {
 			// 閫氳繃Hessian宸ュ巶鐢熸垚
 			serviceName = computeServiceName(serviceName);
 			try {
-				targetService = (IService) this.factory.create(serviceCls,
+				targetService = (IHessianRemoting) this.factory.create(serviceCls,
 						serviceName);
 				// 鏀惧叆缂撳瓨淇濈暀
 				servicesCache.put(serviceCls, targetService);

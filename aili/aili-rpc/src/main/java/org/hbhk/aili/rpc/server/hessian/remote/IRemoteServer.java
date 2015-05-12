@@ -1,6 +1,6 @@
 package org.hbhk.aili.rpc.server.hessian.remote;
 
-import org.hbhk.aili.rpc.server.hessian.IService;
+import org.hbhk.aili.rpc.server.hessian.IHessianRemoting;
 import org.hbhk.aili.rpc.server.hessian.transport.INetworkStatusListener;
 import org.hbhk.aili.rpc.server.hessian.transport.ITransport;
 
@@ -20,7 +20,7 @@ public interface IRemoteServer {
 	 * @param executor 鎵ц鑰�
 	 * @return
 	 */
-	<T extends IService> T getService(Class<T> serviceCls, T executor);
+	<T extends IHessianRemoting> T getService(Class<T> serviceCls, T executor);
 
 	/**
 	 * 
@@ -32,7 +32,7 @@ public interface IRemoteServer {
 	 * @param executor 鎵ц鑰�
 	 * @return
 	 */
-	<T extends IService> T getService(Class<T> serviceCls, String aliasName,
+	<T extends IHessianRemoting> T getService(Class<T> serviceCls, String aliasName,
 			T executor);
 
 	/**
@@ -43,7 +43,7 @@ public interface IRemoteServer {
 	 * @param serviceCls 杩滅▼鏈嶅姟鎺ュ彛
 	 * @return
 	 */
-	<T extends IService> T getService(Class<T> serviceCls);
+	<T extends IHessianRemoting> T getService(Class<T> serviceCls);
 
 	/**
 	 * 
@@ -54,7 +54,7 @@ public interface IRemoteServer {
 	 * @param aliasName 鍒悕
 	 * @return
 	 */
-	<T extends IService> T getService(Class<T> serviceCls, String aliasName);
+	<T extends IHessianRemoting> T getService(Class<T> serviceCls, String aliasName);
 
 	/**
 	 * 

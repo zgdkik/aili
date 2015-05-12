@@ -17,14 +17,14 @@ public class HessianClient  {
 	}
 	
 	public static void testCallback() {
-		IHessianService processData = (IHessianService) context.getBean("hessianService"); 
+		IDemoHessianService processData = (IDemoHessianService) context.getBean("hessianService"); 
 		String str = processData.getName("hbhk");
 		System.out.println(str);
 		
 	}
 	
 	public static void testCallback1() {
-		IHessianService processData = DefaultRemoteServiceFactory.getService(IHessianService.class);
+		IDemoHessianService processData = DefaultRemoteServiceFactory.getService(IDemoHessianService.class);
 		String str = processData.getName("hbhk");
 		System.out.println(str);
 	}

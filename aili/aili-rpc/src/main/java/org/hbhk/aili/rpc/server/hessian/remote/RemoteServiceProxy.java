@@ -10,17 +10,17 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hbhk.aili.core.share.consts.Protocol;
 import org.hbhk.aili.core.share.ex.BusinessException;
-import org.hbhk.aili.rpc.server.hessian.IService;
-import org.hbhk.aili.rpc.server.hessian.client.SessionContext;
+import org.hbhk.aili.rpc.server.hessian.IHessianRemoting;
 import org.hbhk.aili.rpc.server.hessian.context.ApplicationContext;
 import org.hbhk.aili.rpc.server.hessian.context.IApplication;
+import org.hbhk.aili.rpc.server.hessian.context.SessionContext;
 import org.hbhk.aili.rpc.server.hessian.handler.IRemoteExceptionHandler;
 import org.hbhk.aili.rpc.server.hessian.transport.Transport;
 
 public class RemoteServiceProxy implements InvocationHandler {
 
-	private IService target;
-	private IService executor;
+	private IHessianRemoting target;
+	private IHessianRemoting executor;
 	private IRemoteExceptionHandler exceptionhander;
 	
 	private Log log = LogFactory.getLog(RemoteServiceProxy.class);
@@ -29,11 +29,11 @@ public class RemoteServiceProxy implements InvocationHandler {
 		this.exceptionhander = exceptionHandler;
 	}
 
-	public void setTarget(IService target) {
+	public void setTarget(IHessianRemoting target) {
 		this.target = target;
 	}
 
-	public void setExecutor(IService executor) {
+	public void setExecutor(IHessianRemoting executor) {
 		this.executor = executor;
 	}
 
@@ -80,8 +80,6 @@ public class RemoteServiceProxy implements InvocationHandler {
 								e.getTargetException();
 						if(be.getMessage()!=null &&"userNotLogin".equals(be.getMessage()) ){
 							log.error("用户未登录",be);
-							IApplication application = ApplicationContext.getApplication();
-							application.restart();
 						}
 					}
 					

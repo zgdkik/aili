@@ -2,7 +2,7 @@ package org.hbhk.aili.rpc.server.hessian.config;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.hbhk.aili.rpc.server.hessian.annotation.HessianService;
+import org.hbhk.aili.rpc.server.hessian.annotation.HessianRemoting;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.MutablePropertyValues;
 import org.springframework.beans.PropertyValue;
@@ -43,13 +43,13 @@ public class HessianExporter implements BeanFactoryPostProcessor {
 		for (String beanName : beanFactory.getBeanDefinitionNames()) {
 
 			Class<?> beanType = beanFactory.getType(beanName);
-			if (!AnnotationUtils.isAnnotationDeclaredLocally(HessianService.class,
+			if (!AnnotationUtils.isAnnotationDeclaredLocally(HessianRemoting.class,
 					beanType)) {
 				continue;
 			}
 
-			HessianService remote = AnnotationUtils.findAnnotation(beanType,
-					HessianService.class);
+			HessianRemoting remote = AnnotationUtils.findAnnotation(beanType,
+					HessianRemoting.class);
 
 			Class<?> serviceInterface = findServiceInterface(beanType, remote);
 
@@ -118,7 +118,7 @@ public class HessianExporter implements BeanFactoryPostProcessor {
 	 * @since:0.7
 	 */
 	@SuppressWarnings("rawtypes")
-	private Class findServiceInterface(Class beanType, HessianService remote) {
+	private Class findServiceInterface(Class beanType, HessianRemoting remote) {
 		Class serviceInterface = null;
 
 		serviceInterface = remote.serviceInterface();
@@ -153,7 +153,7 @@ public class HessianExporter implements BeanFactoryPostProcessor {
 	 */
 	private RemoteExporter createRemoteExporter(
 			@SuppressWarnings("rawtypes") Class serviceInterface,
-			Object service, HessianService remote) {
+			Object service, HessianRemoting remote) {
 		RemoteExporter remoteExporter = null;
 		try {
 			remoteExporter = (RemoteExporter) remote.serviceExporter()

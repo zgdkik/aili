@@ -20,6 +20,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.ContentProducer;
 import org.apache.http.entity.EntityTemplate;
 import org.hbhk.aili.core.share.ex.BusinessException;
+import org.hbhk.aili.rpc.server.hessian.context.SessionContext;
 import org.hbhk.aili.rpc.server.hessian.transport.Transport;
 
 import com.caucho.hessian.client.AbstractHessianConnection;

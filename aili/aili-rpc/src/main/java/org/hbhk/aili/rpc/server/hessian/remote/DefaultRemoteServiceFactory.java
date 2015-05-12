@@ -10,7 +10,7 @@ import java.nio.charset.Charset;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hbhk.aili.core.share.util.IOUtils;
-import org.hbhk.aili.rpc.server.hessian.IService;
+import org.hbhk.aili.rpc.server.hessian.IHessianRemoting;
 import org.hbhk.aili.rpc.share.model.RemoteInfo;
 import org.springframework.context.ApplicationContext;
 
@@ -55,7 +55,7 @@ public final class DefaultRemoteServiceFactory extends AbstractRemoteServerFacto
 	 * @param executor
 	 * @return
 	 */
-	public static <T extends IService> T getService(Class<T> cls, T executor) {
+	public static <T extends IHessianRemoting> T getService(Class<T> cls, T executor) {
 		return instance.getRemoteServer().getService(cls, executor);
 	}
 
@@ -67,7 +67,7 @@ public final class DefaultRemoteServiceFactory extends AbstractRemoteServerFacto
 	 * @param cls
 	 * @return
 	 */
-	public static <T extends IService> T getService(Class<T> cls) {
+	public static <T extends IHessianRemoting> T getService(Class<T> cls) {
 		return instance.getRemoteServer().getService(cls);
 	}
 
@@ -80,7 +80,7 @@ public final class DefaultRemoteServiceFactory extends AbstractRemoteServerFacto
 	 * @param aliasName
 	 * @return
 	 */
-	public static <T extends IService> T getService(Class<T> serviceCls, String aliasName) {
+	public static <T extends IHessianRemoting> T getService(Class<T> serviceCls, String aliasName) {
 		return instance.getRemoteServer().getService(serviceCls, aliasName);
 	}
 
@@ -94,7 +94,7 @@ public final class DefaultRemoteServiceFactory extends AbstractRemoteServerFacto
 	 * @param executor
 	 * @return
 	 */
-	public static <T extends IService> T getService(Class<T> serviceCls, String aliasName, T executor) {
+	public static <T extends IHessianRemoting> T getService(Class<T> serviceCls, String aliasName, T executor) {
 		return instance.getRemoteServer().getService(serviceCls, aliasName, executor);
 	}
 	

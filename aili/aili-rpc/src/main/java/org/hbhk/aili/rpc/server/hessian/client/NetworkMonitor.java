@@ -219,7 +219,7 @@ public class NetworkMonitor {
 
 	URL computeDefaultTestURL(URL url) {
 		String urlStr = url.getPath();
-		String fixx = "/monitor";
+		String fixx = "monitor";
 		try {
 			return new URL(url.getProtocol(), url.getHost(), url.getPort(), "/" + fixx.concat("/index.html"));
 		} catch (MalformedURLException e) {

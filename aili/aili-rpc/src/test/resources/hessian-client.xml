@@ -17,7 +17,7 @@
 		class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
 		<property name="serviceUrl"
 			value="http://localhost:5417/hessian/rpc/hessianService" />
-		<property name="serviceInterface" value="org.hbhk.aili.rpc.server.hessian.IHessianService" />
+		<property name="serviceInterface" value="org.hbhk.aili.rpc.server.hessian.IDemoHessianService" />
 	</bean>
 
 </beans>
