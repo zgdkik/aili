@@ -11,8 +11,6 @@ import org.apache.commons.logging.LogFactory;
 import org.hbhk.aili.core.share.consts.Protocol;
 import org.hbhk.aili.core.share.ex.BusinessException;
 import org.hbhk.aili.rpc.server.hessian.IHessianRemoting;
-import org.hbhk.aili.rpc.server.hessian.context.ApplicationContext;
-import org.hbhk.aili.rpc.server.hessian.context.IApplication;
 import org.hbhk.aili.rpc.server.hessian.context.SessionContext;
 import org.hbhk.aili.rpc.server.hessian.handler.IRemoteExceptionHandler;
 import org.hbhk.aili.rpc.server.hessian.transport.Transport;
