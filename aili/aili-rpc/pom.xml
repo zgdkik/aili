@@ -9,7 +9,7 @@
 	</parent>
 	<artifactId>aili-rpc</artifactId>
 	<version>${aili-version}</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 
 	<name>aili-rpc</name>
 	<properties>
@@ -78,9 +78,27 @@
 			<groupId>org.slf4j</groupId>
 			<version>1.7.5</version>
 		</dependency>
-			<dependency>
+		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.3.4</version>
+		</dependency>
 	</dependencies>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat6-maven-plugin</artifactId>
+				<version>2.2</version>
+				<configuration>
+					<path>/</path>
+					<port>5417</port>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>
