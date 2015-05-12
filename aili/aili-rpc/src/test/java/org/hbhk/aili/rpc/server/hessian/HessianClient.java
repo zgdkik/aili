@@ -13,7 +13,7 @@ public class HessianClient  {
 	public static void main(String[] args) {
 		run();
 		//testCallback(); 
-		testCallback1();  
+		testCallback1();   
 	}
 	
 	public static void testCallback() {

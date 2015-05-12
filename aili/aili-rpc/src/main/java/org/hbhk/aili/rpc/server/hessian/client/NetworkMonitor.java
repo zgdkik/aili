@@ -28,6 +28,7 @@ import org.apache.http.params.HttpParams;
 import org.apache.http.params.HttpProtocolParams;
 import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
+import org.hbhk.aili.rpc.server.hessian.remote.DefaultRemoteServiceFactory;
 import org.hbhk.aili.rpc.server.hessian.transport.INetworkStatusListener;
 
 public class NetworkMonitor {
@@ -218,10 +219,9 @@ public class NetworkMonitor {
 	}
 
 	URL computeDefaultTestURL(URL url) {
-		String urlStr = url.getPath();
-		String fixx = "monitor";
+		String fixx = "/"+ DefaultRemoteServiceFactory.properties.getProperty("monitor.url","monitor/index.html");
 		try {
-			return new URL(url.getProtocol(), url.getHost(), url.getPort(), "/" + fixx.concat("/index.html"));
+			return new URL(url.getProtocol(), url.getHost(), url.getPort(), fixx);
 		} catch (MalformedURLException e) {
 		}
 		return null;

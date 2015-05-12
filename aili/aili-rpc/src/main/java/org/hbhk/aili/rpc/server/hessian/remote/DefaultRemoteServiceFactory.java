@@ -6,32 +6,25 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
+import java.util.Properties;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.hbhk.aili.core.share.util.FileLoadUtil;
 import org.hbhk.aili.core.share.util.IOUtils;
 import org.hbhk.aili.rpc.server.hessian.IHessianRemoting;
 import org.hbhk.aili.rpc.share.model.RemoteInfo;
-import org.springframework.context.ApplicationContext;
 
-/**
- * Filename: DefaultRSFactory.java Description: Company: deppon
- * 
- * @author: davidcun
- * @version: 1.0 Create at: 2011-4-7 涓嬪崍05:06:26
- * 
- *           Modification History: Date Author Version Description
- *           ------------------------------------------------------------------
- *           2011-4-7 davidcun 1.0 1.0 Version
- */
 public final class DefaultRemoteServiceFactory extends AbstractRemoteServerFactory {
-	// 鏃ュ織瀵硅薄
 	private static final Log LOG = LogFactory.getLog(DefaultRemoteServiceFactory.class);
 
 	private static final DefaultRemoteServiceFactory instance = new DefaultRemoteServiceFactory();
 
-	// 杩滅▼杩炴帴閰嶇疆鏂囦欢鍚嶇О
-	private static final String HESSIAN_CONFIG = "hessianConfig.ini";
+	// 配置文件位置
+	private static final String HESSIAN_CONFIG = "config/config.properties";
+	
+	public static Properties properties = new Properties();
 
 	public static IRemoteServerFactory getInstance() {
 		return instance;
@@ -99,10 +92,7 @@ public final class DefaultRemoteServiceFactory extends AbstractRemoteServerFacto
 	}
 	
 	/**
-	 * 
-	 * <p>Title:parseTransportConfigurations
-	 * <p>Description:瑙ｆ瀽杩滅▼閫氳娉ㄥ唽灞炴�</p>
-	 * @see com.deppon.foss.framework.client.component.remote.AbstractRemoteServerFactory#parseTransportConfigurations()
+	 * 读取配置文件
 	 */
 	@Override
 	protected void parseTransportConfigurations() {
@@ -114,41 +104,21 @@ public final class DefaultRemoteServiceFactory extends AbstractRemoteServerFacto
 			if (!file.exists()) {
 				LOG.error("can not find hessianConfig file in appConfigHome");
 			}*/
-			in = ApplicationContext.class.getClassLoader().getResourceAsStream(HESSIAN_CONFIG);
+			in =  FileLoadUtil.getInputStreamForClasspath(HESSIAN_CONFIG);
+			properties = new Properties();
+			properties.load(in);
+			
 			reader = new BufferedReader(new InputStreamReader(in,Charset.defaultCharset().name()));
 			String info = null;
-			RemoteInfo rInfo = null;
-			while ((info = reader.readLine()) != null) {
-				info = info.trim();
-				if (info.length() < 1){
-					continue;
-				}
-				if (info.startsWith("[") && info.endsWith("]")) {
-					rInfo = new RemoteInfo();
-					rInfo.setName(info);
-					this.addRemoteInfo(rInfo);
-				}
-				if (info.startsWith("server-port")) {
-					info = info.replaceAll(".*\\:", "");
-					rInfo.setPort(Integer.valueOf(info));
-				}
-				if (info.startsWith("service-path")) {
-					info = info.replaceAll(".*\\:", "");
-					rInfo.setHessianPrefix(info);
-				}
-				if (info.startsWith("server-host")) {
-					info = info.replaceAll(".*\\:", "");
-					rInfo.setHostName(info);
-				}
-				if (info.startsWith("service-waittimeout")) {
-					info = info.replaceAll(".*\\:", "");
-					rInfo.setWaitTimeout(Integer.valueOf(info) * 1000);
-				}
-				if (info.startsWith("connection-waittimeout")) {
-					info = info.replaceAll(".*\\:", "");
-					rInfo.setConnectionTimeout(Integer.valueOf(info) * 1000);
-				}
-			}
+			RemoteInfo rInfo = new RemoteInfo();
+			rInfo.setName(properties.getProperty("remote-name", ""));
+			rInfo.setPort(Integer.valueOf(properties.getProperty("server-port", "8080")));
+			rInfo.setHessianPrefix(properties.getProperty("service-path", "/"));
+			rInfo.setHostName(properties.getProperty("server-host", "localhost"));
+			rInfo.setWaitTimeout(Integer.valueOf(properties.getProperty("service-waittimeout", "3")) * 1000);
+			rInfo.setConnectionTimeout(Integer.valueOf(properties.getProperty("connection-waittimeout", "3")) * 1000);
+			this.addRemoteInfo(rInfo);
+			LOG.debug("hessian配置文件信息:"+ToStringBuilder.reflectionToString(info));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (NumberFormatException e) {
