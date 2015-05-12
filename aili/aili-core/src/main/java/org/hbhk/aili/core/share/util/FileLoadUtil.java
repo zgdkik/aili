@@ -78,12 +78,12 @@ public final class FileLoadUtil {
 	public static InputStream getInputStreamForClasspath(String fileName)
 			throws FileNotFoundException, IOException {
 		PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
-		Resource resource = resolver.getResource("classpath*:" + fileName);
+		Resource[] resource = resolver.getResources("classpath*:" + fileName);
 		if (resource == null) {
 			throw new FileNotFoundException("file '" + fileName
 					+ "' not found in this root path!");
 		}
-		InputStream in = resource.getInputStream();
+		InputStream in = resource[0].getInputStream();
 		return in;
 	}
 
