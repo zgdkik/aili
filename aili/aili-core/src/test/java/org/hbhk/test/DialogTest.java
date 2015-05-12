@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -43,6 +44,7 @@ public class DialogTest extends JFrame implements ActionListener {
 			JFrame frame = new JFrame();
 			frame.setSize(300, 200);
 			ModalFrameUtil.getInstance().showAsModal(frame, this);
+			JDialog d = new JDialog();
 //			b.setLocation(10, 10);
 //			b.setSize(100, 30);
 //			b.addActionListener(this);
