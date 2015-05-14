@@ -15,4 +15,5 @@ public abstract class SolrBase implements Serializable {
 		this.id = id;
 	}
 
+	
 }
