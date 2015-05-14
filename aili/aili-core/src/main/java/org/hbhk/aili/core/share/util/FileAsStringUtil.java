@@ -20,9 +20,9 @@ import org.springframework.core.io.Resource;
  */
 public class FileAsStringUtil {
 
-	private Log log = LogFactory.getLog(getClass());
+	private static Log log = LogFactory.getLog(FileAsStringUtil.class);
 
-	public List<String> scanBeansXml(String path, String suffix)
+	public static List<String> scanBeansXml(String path, String suffix)
 			throws IOException {
 		Resource[] resources = FileLoadUtil
 				.getResourcesForClasspathByPath(path);
@@ -39,6 +39,31 @@ public class FileAsStringUtil {
 			char[] data = new char[10240];
 			inputStreamReader.read(data);
 			beansXml.add(new String(data).trim());
+		}
+		log.debug(beansXml);
+		return beansXml;
+	}
+	
+	public static List<String> readLines(String path, String suffix)
+			throws IOException {
+		Resource[] resources = FileLoadUtil
+				.getResourcesForClasspathByPath(path);
+		List<String> beansXml = new ArrayList<String>();
+		for (Resource res : resources) {
+			if (!res.isReadable()) {
+				continue;
+			}
+			if (!res.getFile().getName().endsWith(suffix)) {
+				continue;
+			}
+			InputStreamReader inputStreamReader = new InputStreamReader(res.getInputStream());
+			
+			BufferedReader  br = new BufferedReader(inputStreamReader);
+			String str = br.readLine();
+			while(str != null){
+				beansXml.add(str.trim());
+				str = br.readLine();
+			}
 		}
 		log.debug(beansXml);
 		return beansXml;
