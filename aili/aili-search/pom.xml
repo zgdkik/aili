@@ -26,10 +26,11 @@
 			<artifactId>solr-solrj</artifactId>
 			<version>4.8.1</version>
 		</dependency>
-		<dependency>
+		<!-- 数据库使用jpa规范  -->
+		<!-- <dependency>
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-solr</artifactId>
 			<version>1.3.2.RELEASE</version>
-		</dependency>
+		</dependency> -->
 	</dependencies>
 </project>

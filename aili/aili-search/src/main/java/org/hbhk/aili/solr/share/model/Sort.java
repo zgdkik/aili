@@ -4,8 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.data.solr.core.query.Criteria;
-
 public class Sort implements Serializable{
 	/**
 	 * 
@@ -89,22 +87,22 @@ public class Sort implements Serializable{
 		return field + " " + type;
 	}		
 	
-	public static org.springframework.data.domain.Sort[] parse(String sortStr) {
+	public static Sort[] parse(String sortStr) {
 		
 		if(sortStr == null || sortStr.trim().length() == 0) {
 			return null;
 		}
 		String[] sorts = sortStr.split(",");
-		List<org.springframework.data.domain.Sort> list = new ArrayList<org.springframework.data.domain.Sort>();
+		List<Sort> list = new ArrayList<Sort>();
 		for(String s: sorts){
 			String[] strs = s.trim().split(" ");
 			String order = strs.length > 1? strs[1] : ASC;
 			if((!order.equals(ASC)) && (!order.equals(DESC))){
 				throw new RuntimeException("parse sort error");
 			}
-			list.add(new org.springframework.data.domain.Sort(strs[0],order));
+			list.add(new Sort(strs[0],order));
 		}
-		return list.toArray(new org.springframework.data.domain.Sort[0]);
+		return list.toArray(new Sort[0]);
 		
     }
 	
