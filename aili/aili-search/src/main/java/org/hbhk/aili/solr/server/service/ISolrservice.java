@@ -1,7 +1,6 @@
 package org.hbhk.aili.solr.server.service;
 
 import java.util.List;
-import java.util.Map;
 
 import org.apache.solr.client.solrj.response.QueryResponse;
 import org.apache.solr.common.params.SolrParams;
