@@ -9,8 +9,8 @@ public class Pagination<T> implements Serializable {
 	private List<T> datas;
 	private int totalCount;
 	private int totalPages;
-	private int pageNum;
-	private int pageSize;
+	private int start;
+	private int size;
 
 	public Pagination() {
 	}
@@ -25,30 +25,13 @@ public class Pagination<T> implements Serializable {
 		this.datas = datas;
 		this.totalCount = totalCount;
 		this.totalPages = totalPages;
-		this.pageNum = start;
-		this.pageSize = size;
+		this.start = start;
+		this.size = size;
 	}
 
 	public int getTotalPages() {
 		return totalPages;
 	}
-
-	public int getPageNum() {
-		return pageNum;
-	}
-
-	public void setPageNum(int pageNum) {
-		this.pageNum = pageNum;
-	}
-
-	public int getPageSize() {
-		return pageSize;
-	}
-
-	public void setPageSize(int pageSize) {
-		this.pageSize = pageSize;
-	}
-
 
 	public List<T> getDatas() {
 		return datas;
@@ -64,6 +47,22 @@ public class Pagination<T> implements Serializable {
 
 	public void setTotalCount(int totalCount) {
 		this.totalCount = totalCount;
+	}
+
+	public int getStart() {
+		return start;
+	}
+
+	public void setStart(int start) {
+		this.start = start;
+	}
+
+	public int getSize() {
+		return size;
+	}
+
+	public void setSize(int size) {
+		this.size = size;
 	}
 
 	
