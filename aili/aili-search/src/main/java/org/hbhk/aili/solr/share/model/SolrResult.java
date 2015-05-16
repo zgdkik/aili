@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
-public  class SolrResult<T> implements Serializable {
+public  class SolrResult<T extends SolrBase> implements Serializable {
 	
 	private static final long serialVersionUID = 8478134894551547769L;
 
@@ -16,8 +16,8 @@ public  class SolrResult<T> implements Serializable {
 		return datas;
 	}
 
-	public void setDatas(List<T> datas) {
-		this.datas = datas;
+	public void setDatas(List<T> list) {
+		this.datas = list;
 	}
 
 	public Map<String, Integer> getFacets() {

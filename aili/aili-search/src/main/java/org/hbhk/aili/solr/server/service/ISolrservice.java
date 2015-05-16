@@ -2,13 +2,14 @@ package org.hbhk.aili.solr.server.service;
 
 import java.util.List;
 
+import org.apache.solr.client.solrj.SolrClient;
 import org.apache.solr.client.solrj.response.QueryResponse;
 import org.apache.solr.common.params.SolrParams;
 import org.hbhk.aili.solr.share.model.Pagination;
 import org.hbhk.aili.solr.share.model.SolrBase;
 import org.hbhk.aili.solr.share.model.SolrResult;
 
-public interface ISolrservice<T extends SolrBase> {
+public interface ISolrservice {
 
 	/**
 	 * 
@@ -17,9 +18,9 @@ public interface ISolrservice<T extends SolrBase> {
 	* @date 2015年5月16日 上午10:55:12 
 	  @param t
 	 */
-	void addIndex(T t);
+	<T extends SolrBase> void addIndex(T t);
 
-	void addIndex(List<T> list);
+	<T extends SolrBase> void addIndex(List<T> list);
 
 	/**
 	 * 
@@ -28,9 +29,9 @@ public interface ISolrservice<T extends SolrBase> {
 	* @date 2015年5月16日 上午10:55:12 
 	  @param t
 	 */	
-	void updateIndex(T t);
+	<T extends SolrBase> void updateIndex(T t);
 
-	void updateIndex(List<T> list);
+	<T extends SolrBase> void updateIndex(List<T> list);
 
 	/**
 	 * 
@@ -55,9 +56,9 @@ public interface ISolrservice<T extends SolrBase> {
 	  @param cls
 	  @return
 	 */
-	List<T> queryList(String keyword, Class<T> cls,String... fqs) ;
+	<T extends SolrBase> List<T> queryList(String keyword,String fl,String[] highlightField, String sort, String... fqs) ;
 	
-	SolrResult<T> queryList(String keyword, String[] fq,Class<T> cls,Integer limit,String... facets);
+	<T extends SolrBase> SolrResult<T> queryList(String keyword,String[] fqs,String fl,String[] highlightField, String sort,Integer limit,String... facets);
 	
 	/**
 	 * 
@@ -72,9 +73,10 @@ public interface ISolrservice<T extends SolrBase> {
 	  @param facets
 	  @return
 	 */
-	SolrResult<T> queryList(String keyword,String[] fqs, String sort, Class<T> cls,Integer limit,String... facets);
 	
-	List<T> queryList(String keyword, String sort, Class<T> cls,String... fqs);
+	<T extends SolrBase> List<T> queryList(String keyword, String fl,String[] highlightField, String sort,Integer start, Integer size,String... fqs);
+	
+	<T extends SolrBase> SolrResult<T> queryList(String keyword,String[] fqs,String fl,String[] highlightField, String sort,Integer start, Integer size, Integer limit,String... facets);
 	
 	/**
 	 * 
@@ -91,11 +93,11 @@ public interface ISolrservice<T extends SolrBase> {
 	  @param facets
 	  @return
 	 */
-	Pagination<T> queryListWithPage(String keyword, String[] fqs,String sort,
-			Integer start, Integer size, Class<T> cls,Integer limit,String... facets);
+	<T extends SolrBase> Pagination<T> queryListWithPage(String keyword, String[] fqs,String fl,String[] highlightField, String sort,
+			Integer start, Integer size,Integer limit,String... facets);
 	
-	Pagination<T> queryListWithPage(String keyword,String[] fqs, String sort,
-			Integer start, Integer size, Class<T> cls);
+	<T extends SolrBase> Pagination<T> queryListWithPage(String keyword,String[] fqs, String fl,String[] highlightField, String sort,
+			Integer start, Integer size);
 	
 	/**
 	 * 
@@ -106,4 +108,21 @@ public interface ISolrservice<T extends SolrBase> {
 	  @return
 	 */
 	QueryResponse query(SolrParams params);
+	/**
+	 * 
+	* @Description: 设置需要处理solr类名
+	* @author hebo 
+	* @date 2015年5月16日 上午11:29:03 
+	  @param solrModelCls
+	 */
+	void setSolrModelName(String solrModelName);
+	
+	/**
+	 * 
+	* @Description: 设置solr链接
+	* @author hebo 
+	* @date 2015年5月16日 上午11:31:09 
+	  @param solrServer
+	 */
+	void setSolrClient(SolrClient solrServer);
 }

@@ -8,9 +8,9 @@ import org.hbhk.aili.solr.share.model.SolrBase;
 public class AppTest {
 
 	public static void main(String[] args) {
-		ISolrservice<SolrBase> solrservice = new Solrservice();
-		
-		solrservice.queryList("", null,SolrBase.class);
+		ISolrservice solrservice = new Solrservice();
+		solrservice.setSolrModelName(SolrBase.class.getName());
+		solrservice.queryList("","",null,"");
 	}
 
 }
