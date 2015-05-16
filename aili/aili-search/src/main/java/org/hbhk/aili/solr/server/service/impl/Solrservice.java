@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.solr.client.solrj.SolrQuery;
@@ -19,6 +18,7 @@ import org.hbhk.aili.solr.server.service.ISolrservice;
 import org.hbhk.aili.solr.share.model.Pagination;
 import org.hbhk.aili.solr.share.model.SolrBase;
 import org.hbhk.aili.solr.share.model.SolrResult;
+import org.hbhk.aili.solr.share.util.SolrUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -161,37 +161,21 @@ public class Solrservice implements ISolrservice<SolrBase> {
 		}
 	}
 	
-	private void addFacets(ModifiableSolrParams params,Integer limit ,String... facets){
-		if(limit!=null && facets!=null && facets.length>0){
-			SolrQuery solrQuery = new SolrQuery();
-			//设置facet=on
-			solrQuery.setFacet(true);
-			//设置需要facet的字段		
-			solrQuery.addFacetField(facets);
-			//限制facet返回的数量
-			solrQuery.setFacetLimit(limit);
-			log.debug("设置facet返回数量:"+limit+" facet字段:"+facets);
-			params.add(solrQuery);
-		}
-	}
-	
-
 
 	@Override
-	public List<SolrBase> queryList(String keyword, Map<String, String> fq,
-			Class<SolrBase> cls) {
+	public List<SolrBase> queryList(String keyword,Class<SolrBase> cls,String... facets) {
 		
 		return null;
 	}
 	
 	@Override
-	public SolrResult<SolrBase> queryList(String keyword, Map<String, String> fq,
+	public SolrResult<SolrBase> queryList(String keyword,String[] fqs,
 			Class<SolrBase> cls,Integer limit,String...facets) {
 		SolrQuery solrQuery = new SolrQuery();
 		solrQuery.setQuery("*:*");
 		
 		ModifiableSolrParams params = new ModifiableSolrParams();
-		addFacets(params,10, facets);
+		SolrUtil.addFacets(params,10, facets);
 		params.add(solrQuery);
 		QueryResponse response = null;
 		try {
@@ -204,33 +188,6 @@ public class Solrservice implements ISolrservice<SolrBase> {
 		return null;
 	}
 	
-	private void  addParams(ModifiableSolrParams params,String keyword,String fq, String sort,String fl, Integer start,
-			Integer size,Integer limit, String... facets){
-		if (StringUtils.isEmpty(keyword)) {
-			keyword = "*:*";
-		}
-		params.set("q", keyword);
-		if(start!=null){
-			params.set("start", start);
-		}
-		if(StringUtils.isNotEmpty(fq)){
-			params.set("fq", fq);
-		}
-		if(size!=null){
-			params.set("rows", size);
-		}
-		if(size!=null){
-			params.set("sort", sort);
-		}
-		if(StringUtils.isEmpty(fl)){
-			fl ="*";
-		}
-		params.set("fl", fl);  
-		
-		addFacets(params, limit, facets);
-		
-		
-	}
 	
 
 	public void rollback(Exception ex) {
@@ -247,11 +204,11 @@ public class Solrservice implements ISolrservice<SolrBase> {
 	}
 
 	@Override
-	public SolrResult<SolrBase> queryList(String keyword, Map<String, String> fq,
+	public SolrResult<SolrBase> queryList(String keyword, String[] fqs,
 			String sort, Class<SolrBase> cls, Integer limit, String... facets) {
 		log.debug("查询索引开始...");
 		ModifiableSolrParams params = new ModifiableSolrParams();
-		addParams(params, keyword, null, sort, null, null, null, null, null);
+		SolrUtil.addParams(params, keyword, null, sort, null, null, null, null, facets);
 		List<SolrBase> list = new ArrayList<SolrBase>();
 		SolrResult<SolrBase>  solrResult = new SolrResult<SolrBase>();
 		try {
@@ -267,15 +224,13 @@ public class Solrservice implements ISolrservice<SolrBase> {
 	}
 
 	@Override
-	public List<SolrBase> queryList(String keyword, Map<String, String> fq,
-			String sort, Class<SolrBase> cls) {
-		// TODO Auto-generated method stub
+	public List<SolrBase> queryList(String keyword,String sort, Class<SolrBase> cls,String... fqs) {
 		return null;
 	}
 
 	@Override
 	public Pagination<SolrBase> queryListWithPage(String keyword,
-			Map<String, String> fq, String sort, Integer start, Integer size,
+			String[] fqs, String sort, Integer start, Integer size,
 			Class<SolrBase> cls, Integer limit, String... facets) {
 //		ModifiableSolrParams params = new ModifiableSolrParams();
 //		params.set("fq", fq);
@@ -308,7 +263,7 @@ public class Solrservice implements ISolrservice<SolrBase> {
 
 	@Override
 	public Pagination<SolrBase> queryListWithPage(String keyword,
-			Map<String, String> fq, String sort, Integer start, Integer size,
+			String[] fqs, String sort, Integer start, Integer size,
 			Class<SolrBase> cls) {
 		return null;
 	}

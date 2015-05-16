@@ -56,9 +56,9 @@ public interface ISolrservice<T extends SolrBase> {
 	  @param cls
 	  @return
 	 */
-	List<T> queryList(String keyword,Map<String, String> fq, Class<T> cls);
+	List<T> queryList(String keyword, Class<T> cls,String... fqs) ;
 	
-	SolrResult<T> queryList(String keyword, Map<String, String> fq,Class<T> cls,Integer limit,String... facets);
+	SolrResult<T> queryList(String keyword, String[] fq,Class<T> cls,Integer limit,String... facets);
 	
 	/**
 	 * 
@@ -73,9 +73,9 @@ public interface ISolrservice<T extends SolrBase> {
 	  @param facets
 	  @return
 	 */
-	SolrResult<T> queryList(String keyword,Map<String, String> fq, String sort, Class<T> cls,Integer limit,String... facets);
+	SolrResult<T> queryList(String keyword,String[] fqs, String sort, Class<T> cls,Integer limit,String... facets);
 	
-	List<T> queryList(String keyword,Map<String, String> fq, String sort, Class<T> cls);
+	List<T> queryList(String keyword, String sort, Class<T> cls,String... fqs);
 	
 	/**
 	 * 
@@ -92,10 +92,10 @@ public interface ISolrservice<T extends SolrBase> {
 	  @param facets
 	  @return
 	 */
-	Pagination<T> queryListWithPage(String keyword, Map<String, String> fq,String sort,
+	Pagination<T> queryListWithPage(String keyword, String[] fqs,String sort,
 			Integer start, Integer size, Class<T> cls,Integer limit,String... facets);
 	
-	Pagination<T> queryListWithPage(String keyword,Map<String, String> fq, String sort,
+	Pagination<T> queryListWithPage(String keyword,String[] fqs, String sort,
 			Integer start, Integer size, Class<T> cls);
 	
 	/**
