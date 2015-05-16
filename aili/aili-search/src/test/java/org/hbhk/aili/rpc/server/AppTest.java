@@ -10,7 +10,7 @@ public class AppTest {
 	public static void main(String[] args) {
 		ISolrservice<SolrBase> solrservice = new Solrservice();
 		
-		solrservice.queryList("", SolrBase.class);
+		solrservice.queryList("", null,SolrBase.class);
 	}
 
 }

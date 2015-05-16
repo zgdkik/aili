@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.solr.client.solrj.SolrQuery;
@@ -17,6 +18,7 @@ import org.apache.solr.common.params.SolrParams;
 import org.hbhk.aili.solr.server.service.ISolrservice;
 import org.hbhk.aili.solr.share.model.Pagination;
 import org.hbhk.aili.solr.share.model.SolrBase;
+import org.hbhk.aili.solr.share.model.SolrResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -159,25 +161,38 @@ public class Solrservice implements ISolrservice<SolrBase> {
 		}
 	}
 	
-	private void addFacets(SolrQuery solrQuery,String... facets){
-		if(facets!=null && facets.length>0){
+	private void addFacets(ModifiableSolrParams params,Integer limit ,String... facets){
+		if(limit!=null && facets!=null && facets.length>0){
+			SolrQuery solrQuery = new SolrQuery();
 			//设置facet=on
 			solrQuery.setFacet(true);
 			//设置需要facet的字段		
-			solrQuery.addFacetField(new String[] { "cpu", "videoCard" });
+			solrQuery.addFacetField(facets);
 			//限制facet返回的数量
-			solrQuery.setFacetLimit(10);
+			solrQuery.setFacetLimit(limit);
+			log.debug("设置facet返回数量:"+limit+" facet字段:"+facets);
+			params.add(solrQuery);
 		}
 	}
 	
+
+
 	@Override
-	public List<SolrBase> queryList(String query, Class<SolrBase> cls,
-			String... facets) {
+	public List<SolrBase> queryList(String keyword, Map<String, String> fq,
+			Class<SolrBase> cls) {
+		
+		return null;
+	}
+	
+	@Override
+	public SolrResult<SolrBase> queryList(String keyword, Map<String, String> fq,
+			Class<SolrBase> cls,Integer limit,String...facets) {
 		SolrQuery solrQuery = new SolrQuery();
 		solrQuery.setQuery("*:*");
-		addFacets(solrQuery, facets);
-	
+		
 		ModifiableSolrParams params = new ModifiableSolrParams();
+		addFacets(params,10, facets);
+		params.add(solrQuery);
 		QueryResponse response = null;
 		try {
 			response = solrServer.query(params);
@@ -188,61 +203,35 @@ public class Solrservice implements ISolrservice<SolrBase> {
 		List<FacetField> facetList = response.getFacetFields();
 		return null;
 	}
-
-	@Override
-	public List<SolrBase> queryList(String query, Map<String, String> filters,
-			Class<SolrBase> cls, String... facets) {
-		
-		return null;
-	}
-	@Override
-	public List<SolrBase> queryList(String query, String sort, int start,
-			int size, Class<SolrBase> cls,String... facets) {
-		log.debug("查询索引开始...");
-		ModifiableSolrParams params = new ModifiableSolrParams();
-		if (query.equals("")) {
-			query = "*:*";
+	
+	private void  addParams(ModifiableSolrParams params,String keyword,String fq, String sort,String fl, Integer start,
+			Integer size,Integer limit, String... facets){
+		if (StringUtils.isEmpty(keyword)) {
+			keyword = "*:*";
 		}
-		params.set("q", query);
-		params.set("start", start);
-		params.set("rows", size);
-		params.set("sort", sort);
-		List<SolrBase> list = new ArrayList<SolrBase>();
-		try {
-			QueryResponse response = solrServer.query(params);
-			list = response.getBeans(cls);
-			log.debug("查询索引结束...");
-		} catch (SolrServerException e) {
-			log.error("查询索引出现异常",e);
-			throw new RuntimeException(e);
+		params.set("q", keyword);
+		if(start!=null){
+			params.set("start", start);
 		}
-		return list;
-	}
-
-	@Override
-	public List<SolrBase> queryList(String query, Map<String, String> filters,
-			String sort, Class<SolrBase> cls,String... facets) {
-
-		return null;
-	}
-
-	@Override
-	public Pagination<SolrBase> queryListWithPage(String query, String sort,
-			int start, int size, Class<SolrBase> cls, String... facets) {
+		if(StringUtils.isNotEmpty(fq)){
+			params.set("fq", fq);
+		}
+		if(size!=null){
+			params.set("rows", size);
+		}
+		if(size!=null){
+			params.set("sort", sort);
+		}
+		if(StringUtils.isEmpty(fl)){
+			fl ="*";
+		}
+		params.set("fl", fl);  
 		
-		Pagination<SolrBase> pagination = new Pagination<SolrBase>();
-		pagination.setStart(start);
-		pagination.setSize(size);
+		addFacets(params, limit, facets);
 		
-		return null;
+		
 	}
 	
-	@Override
-	public Pagination<SolrBase> queryListWithPage(String query,
-			Map<String, String> filters, String sort, int start, int size,
-			Class<SolrBase> cls,String... facets) {
-		return null;
-	}
 
 	public void rollback(Exception ex) {
 		try {
@@ -255,6 +244,73 @@ public class Solrservice implements ISolrservice<SolrBase> {
 			log.error(ex.getMessage(), e);
 			throw new RuntimeException(e);
 		}
+	}
+
+	@Override
+	public SolrResult<SolrBase> queryList(String keyword, Map<String, String> fq,
+			String sort, Class<SolrBase> cls, Integer limit, String... facets) {
+		log.debug("查询索引开始...");
+		ModifiableSolrParams params = new ModifiableSolrParams();
+		addParams(params, keyword, null, sort, null, null, null, null, null);
+		List<SolrBase> list = new ArrayList<SolrBase>();
+		SolrResult<SolrBase>  solrResult = new SolrResult<SolrBase>();
+		try {
+			QueryResponse response = solrServer.query(params);
+			list = response.getBeans(cls);
+			solrResult.setDatas(list);
+			log.debug("查询索引结束...");
+		} catch (SolrServerException e) {
+			log.error("查询索引出现异常",e);
+			throw new RuntimeException(e);
+		}
+		return solrResult;
+	}
+
+	@Override
+	public List<SolrBase> queryList(String keyword, Map<String, String> fq,
+			String sort, Class<SolrBase> cls) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Pagination<SolrBase> queryListWithPage(String keyword,
+			Map<String, String> fq, String sort, Integer start, Integer size,
+			Class<SolrBase> cls, Integer limit, String... facets) {
+//		ModifiableSolrParams params = new ModifiableSolrParams();
+//		params.set("fq", fq);
+//		params.set("facet", "on");
+//		params.set("facet.field", "category", "brand");
+//		params.set("facet.mincount", "1");
+//		params.set("facet.limit", "15");
+		//查询关键字
+//		params.set("q","铁观音");
+		 // 返回信息  * 为全部  这里是全部加上score，如果不加下面就不能使用score  
+	   // params.set("fl", "*,score");  
+	      
+		
+		ModifiableSolrParams params = new ModifiableSolrParams();
+		if (keyword.equals("")) {
+			keyword = "*:*";
+		}
+		//查询关键字
+		params.set("q", keyword);
+		params.set("start", start);
+		params.set("rows", size);
+		params.set("sort", sort);
+		
+		
+		Pagination<SolrBase> pagination = new Pagination<SolrBase>();
+		pagination.setStart(start);
+		pagination.setSize(size);
+		return pagination;
+	}
+
+	@Override
+	public Pagination<SolrBase> queryListWithPage(String keyword,
+			Map<String, String> fq, String sort, Integer start, Integer size,
+			Class<SolrBase> cls) {
+		return null;
 	}
 
 	

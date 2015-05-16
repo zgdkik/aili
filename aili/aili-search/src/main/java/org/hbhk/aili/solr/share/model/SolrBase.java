@@ -14,6 +14,5 @@ public abstract class SolrBase implements Serializable {
 	public void setId(String id) {
 		this.id = id;
 	}
-
 	
 }

@@ -7,6 +7,7 @@ import org.apache.solr.client.solrj.response.QueryResponse;
 import org.apache.solr.common.params.SolrParams;
 import org.hbhk.aili.solr.share.model.Pagination;
 import org.hbhk.aili.solr.share.model.SolrBase;
+import org.hbhk.aili.solr.share.model.SolrResult;
 
 public interface ISolrservice<T extends SolrBase> {
 
@@ -27,19 +28,21 @@ public interface ISolrservice<T extends SolrBase> {
 	void delAllIndex();
 	
 
-	List<T> queryList(String query, Class<T> cls,String... facets);
+	List<T> queryList(String keyword,Map<String, String> fq, Class<T> cls);
 	
-	List<T> queryList(String query, Map<String, String> filters,Class<T> cls,String... facets);
+	SolrResult<T> queryList(String keyword, Map<String, String> fq,Class<T> cls,Integer limit,String... facets);
 	
-	List<T> queryList(String query, String sort,int start, int size, Class<T> cls,String... facets);
-
-	List<T> queryList(String query,Map<String, String> filters, String sort, Class<T> cls,String... facets);
 	
-	Pagination<T> queryListWithPage(String query, String sort,
-			int start, int size, Class<T> cls,String... facets);
+	SolrResult<T> queryList(String keyword,Map<String, String> fq, String sort, Class<T> cls,Integer limit,String... facets);
 	
-	Pagination<T> queryListWithPage(String query,Map<String, String> filters, String sort,
-			int start, int size, Class<T> cls,String... facets);
+	List<T> queryList(String keyword,Map<String, String> fq, String sort, Class<T> cls);
+	
+	
+	Pagination<T> queryListWithPage(String keyword, Map<String, String> fq,String sort,
+			Integer start, Integer size, Class<T> cls,Integer limit,String... facets);
+	
+	Pagination<T> queryListWithPage(String keyword,Map<String, String> fq, String sort,
+			Integer start, Integer size, Class<T> cls);
 	
 	
 	QueryResponse query(SolrParams params);
