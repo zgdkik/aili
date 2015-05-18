@@ -3,6 +3,8 @@ package org.hbhk.aili.core.server.context;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.hbhk.aili.core.share.entity.DynamicBean;
 import org.hbhk.aili.core.share.entity.Property;
 import org.springframework.beans.BeansException;
@@ -15,6 +17,8 @@ import org.springframework.context.ConfigurableApplicationContext;
 
 public class DynamicLoadBean implements ApplicationContextAware {
 
+	private Log log = LogFactory.getLog(getClass());
+	
 	private ConfigurableApplicationContext applicationContext = null;
 
 	@Autowired(required = false)
@@ -54,7 +58,9 @@ public class DynamicLoadBean implements ApplicationContextAware {
 						}
 					}
 				}
+				
 				acf.registerBeanDefinition(id, bdb.getBeanDefinition());
+				log.debug("动态注册bean: id=" +id+"  class="+cls.getName());
 			}
 			
 		}
