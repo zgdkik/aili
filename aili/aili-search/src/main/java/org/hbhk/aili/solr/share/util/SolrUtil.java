@@ -1,22 +1,24 @@
 package org.hbhk.aili.solr.share.util;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.solr.client.solrj.SolrQuery;
 import org.apache.solr.common.params.ModifiableSolrParams;
 import org.hbhk.aili.solr.server.service.impl.Solrservice;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class SolrUtil {
 	
-	private static Log log = LogFactory.getLog(Solrservice.class);
+	private static Logger log = LoggerFactory.getLogger(Solrservice.class);
+	
+	public static final String KEYWORD="keyword:";
 	
 	public static void  addParams(ModifiableSolrParams params,String keyword,String[] fqs, String[] highlightField, String sort,String fl, Integer start,
 			Integer size,Integer limit, String... facets){
 		if (StringUtils.isEmpty(keyword)) {
 			keyword = "*:*";
 		}
-		params.set("q", keyword);
+		params.set("q", KEYWORD+safeSolrKeyword(keyword));
 		if(start!=null){
 			params.set("start", start);
 		}
@@ -72,6 +74,12 @@ public class SolrUtil {
 		}
 		params.add(solrQuery);
 	}
-	
+	  public static String safeSolrKeyword(String keyword) {
+	        //special chars in solr query expression:+ - && || ! ( ) { } [ ] ^ " ~ * ? : \
+	        //'''P'''是一个占位符，这里用它为了避免\$，使分组捕获被转义，在下一语句中会将'''P'''替换为\
+	        keyword = keyword.replaceAll("([+\\-&|!(){}\\[\\]\\^\"~\\*\\?\\\\:]{1})","'''P'''$1");
+	        keyword = keyword.replace("'''P'''", "\\");
+	        return keyword;
+	    }
 
 }
