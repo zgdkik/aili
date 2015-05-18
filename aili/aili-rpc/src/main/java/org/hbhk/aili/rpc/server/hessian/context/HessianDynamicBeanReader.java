@@ -76,6 +76,7 @@ public class HessianDynamicBeanReader implements IDynamicBeanReader {
 						
 						List<Property> properties = new ArrayList<Property>();
 						String clsName = cls.getName();
+						log.debug("扫描hessian接口:"+clsName);
 						String id = getSpringId(cls);
 						db.setId(id);
 						db.setCls(hessianCls);
