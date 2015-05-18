@@ -79,17 +79,17 @@ public class HessianDynamicBeanReader implements IDynamicBeanReader {
 						String id = getSpringId(cls);
 						db.setId(id);
 						db.setCls(hessianCls);
-						Property pro = new Property();
-						pro.setName("serviceUrl");
-						pro.setValue(urlPrefix+id);
+						Property serviceUrl = new Property();
+						serviceUrl.setName("serviceUrl");
+						serviceUrl.setValue(urlPrefix+id);
 						
-						Property pro1= new Property();
-						pro1.setName("serviceInterface");
-						pro1.setValue(clsName);
+						Property serviceInterface= new Property();
+						serviceInterface.setName("serviceInterface");
+						serviceInterface.setValue(clsName);
 						
 						db.setProperties(properties);;
-						properties.add(pro);
-						properties.add(pro1);
+						properties.add(serviceUrl);
+						properties.add(serviceInterface);
 						dynamicBeans.add(db);
 					}
 				}
@@ -109,12 +109,17 @@ public class HessianDynamicBeanReader implements IDynamicBeanReader {
 			String tmpStr = pkgName.substring(0,pkgName.indexOf(".server"));
        		preFix = tmpStr.substring(tmpStr.lastIndexOf(".")+1,tmpStr.length());
 		}else{
-			preFix = pkgName.substring(pkgName.lastIndexOf(".")+1, pkgName.length());		
+			return preFix = computeDefaultServiceName(cls.getSimpleName(), null);		
 		}
    		return computeDefaultServiceName(cls.getSimpleName(), preFix);
 	}
 	private String computeDefaultServiceName(String clsName,String moduleName) {
-		final String returnName = clsName.substring(1);
+		String returnName = clsName.substring(1);
+		if(StringUtils.isEmpty(moduleName)){
+			return returnName.substring(0, 1).toLowerCase()
+					.concat(returnName.substring(1));
+		}
+		
 		return moduleName+"/"+(returnName.substring(0, 1).toLowerCase()
 				.concat(returnName.substring(1)));
 	}
