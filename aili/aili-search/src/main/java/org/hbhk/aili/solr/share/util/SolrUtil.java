@@ -37,10 +37,9 @@ public class SolrUtil {
 			fl ="*";
 		}
 		params.set("fl", fl);  
-		log.debug("查询属性\r"+"keyword:"+keyword+"\r fq:"+fqs+"\r sort:"+sort+"\r fl:"+fl+"\r start:"+start+"\r size:"+size);
-		
 		addFacets(params, highlightField,limit, facets);
-		
+		log.debug("查询属性\r"+"keyword:"+keyword+"\r fq:"+fqs+"\r sort:"+sort+"\r fl:"+fl+"\r start:"+start+"\r size:"+size);
+		System.out.println(params);
 	}
 	
 	
