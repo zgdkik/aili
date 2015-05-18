@@ -13,7 +13,8 @@ public class HessianClient  {
 	public static void main(String[] args) {
 		run();
 		//testCallback(); 
-		testCallback1();   
+		//testCallback1(); 
+		testCallback2();
 	}
 	
 	public static void testCallback() {
@@ -25,6 +26,12 @@ public class HessianClient  {
 	
 	public static void testCallback1() {
 		IDemoHessianService processData = DefaultRemoteServiceFactory.getService(IDemoHessianService.class);
+		String str = processData.getName("hbhk");
+		System.out.println(str);
+	}
+	 
+	public static void testCallback2() {
+		IDemoHessianService processData = (IDemoHessianService) context.getBean("rpc/demoHessianService"); 
 		String str = processData.getName("hbhk");
 		System.out.println(str);
 	}
