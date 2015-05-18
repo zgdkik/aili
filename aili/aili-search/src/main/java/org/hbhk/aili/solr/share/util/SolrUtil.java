@@ -79,7 +79,7 @@ public class SolrUtil {
 	        //'''P'''是一个占位符，这里用它为了避免\$，使分组捕获被转义，在下一语句中会将'''P'''替换为\
 	        keyword = keyword.replaceAll("([+\\-&|!(){}\\[\\]\\^\"~\\*\\?\\\\:]{1})","'''P'''$1");
 	        keyword = keyword.replace("'''P'''", "\\");
-	        return keyword;
+	        return "*"+keyword+"*";
 	    }
 
 }

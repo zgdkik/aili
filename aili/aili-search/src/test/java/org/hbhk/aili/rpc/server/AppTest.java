@@ -51,7 +51,7 @@ public class AppTest {
 	
 	@Test
 	public void queryIndex() throws Exception {
-		List<SolrTestModel> solrTestModels = solrservice.queryList("title99","*", new String[]{"title"}, null);
+		List<SolrTestModel> solrTestModels = solrservice.queryList("itl","*", new String[]{"title"}, null);
 		
 		for (SolrTestModel stm : solrTestModels) {
 			System.out.println(stm.getId()+" "+stm.getTitle()+"  "+stm.getContent());
