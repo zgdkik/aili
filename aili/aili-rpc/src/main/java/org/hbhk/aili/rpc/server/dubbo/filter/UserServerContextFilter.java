@@ -18,7 +18,8 @@ public class UserServerContextFilter implements Filter {
 	public Result invoke(Invoker<?> invoker, Invocation invocation)
 			throws RpcException {
 		RpcInvocation rpcInvocation = (RpcInvocation) invocation;
-			rpcInvocation.setAttachment("userName", "");
+		String userName = rpcInvocation.getAttachment("userName");
+		log.debug("当前用户:"+userName);
 		return invoker.invoke(rpcInvocation);
 	}
 
