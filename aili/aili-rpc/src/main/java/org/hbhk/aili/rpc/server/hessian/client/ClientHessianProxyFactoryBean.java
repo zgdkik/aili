@@ -16,7 +16,7 @@ public class ClientHessianProxyFactoryBean extends HessianProxyFactoryBean {
 		//设置当前用户
 		logger.debug("设置当前用户");
 		proxyFactory.setUser("hbhk");
-		proxyFactory.setPassword("hbhk");
+		proxyFactory.setPassword("135246");
 		return super.createHessianProxy(proxyFactory);
 	}
 
