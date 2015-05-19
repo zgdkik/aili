@@ -10,9 +10,9 @@ import com.alibaba.dubbo.rpc.Result;
 import com.alibaba.dubbo.rpc.RpcException;
 import com.alibaba.dubbo.rpc.RpcInvocation;
 @Activate("userContextFilter")
-public class UserContextFilter implements Filter {
+public class UserServerContextFilter implements Filter {
 	public static final Logger log = LoggerFactory
-			.getLogger(UserContextFilter.class);
+			.getLogger(UserServerContextFilter.class);
 
 	@Override
 	public Result invoke(Invoker<?> invoker, Invocation invocation)
