@@ -14,7 +14,7 @@ import org.hbhk.aili.core.share.entity.DynamicBean;
 import org.hbhk.aili.core.share.entity.Property;
 import org.hbhk.aili.core.share.util.ClassScanerUtil;
 import org.hbhk.aili.rpc.server.hessian.IHessianRemoting;
-import org.springframework.remoting.caucho.HessianProxyFactoryBean;
+import org.hbhk.aili.rpc.server.hessian.client.ClientHessianProxyFactoryBean;
 
 public class HessianDynamicBeanReader implements IDynamicBeanReader {
 	
@@ -25,7 +25,7 @@ public class HessianDynamicBeanReader implements IDynamicBeanReader {
 	 */
 	private String basePackage;
 	
-	private final Class<?> hessianCls = HessianProxyFactoryBean.class;
+	private final Class<?> hessianCls = ClientHessianProxyFactoryBean.class;
 	
 	
 	@SuppressWarnings("rawtypes")

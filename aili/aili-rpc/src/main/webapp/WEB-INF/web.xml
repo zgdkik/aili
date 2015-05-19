@@ -27,6 +27,14 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 
+	<filter>
+		<filter-name>AppFilter</filter-name>
+		<filter-class>org.hbhk.aili.rpc.server.hessian.filter.AppFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>AppFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
 	<servlet>
 		<servlet-name>hessian</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
