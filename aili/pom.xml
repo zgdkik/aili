@@ -32,6 +32,7 @@
 		<module>aili-theme</module>
 		<module>aili-hibernate</module>
 		<module>aili-mybatis</module>
+		<module>aili-jpa</module>
 		<module>aili-security</module>
 		<!-- <module>aili-test</module> -->
 		<module>aili-support</module>
