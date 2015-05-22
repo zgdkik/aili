@@ -50,4 +50,7 @@
 	<bean class="org.hbhk.aili.mybatis.server.aop.QueryPageAspect"></bean>
 	<!-- 动态sql生成器  -->
 	<bean class="org.hbhk.aili.mybatis.server.support.DynamicSqlTemplate"></bean>
+	<!-- 自定创建表  -->
+    <bean class="org.hbhk.aili.mybatis.server.support.AutoCreateTable"></bean>
+	
 </beans>
