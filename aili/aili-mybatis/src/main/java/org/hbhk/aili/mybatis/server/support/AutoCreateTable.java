@@ -23,7 +23,6 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Component;
 
 /**
  * 
@@ -32,7 +31,6 @@ import org.springframework.stereotype.Component;
  * @date 2015年3月11日 上午10:05:24 
  *
  */
-@Component
 public class AutoCreateTable implements InitializingBean {
 
 	public static Log logger = LogFactory.getLog(AutoCreateTable.class);
