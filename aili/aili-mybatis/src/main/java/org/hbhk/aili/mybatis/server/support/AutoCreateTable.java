@@ -23,6 +23,7 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Component;
 
 /**
  * 
@@ -31,10 +32,11 @@ import org.springframework.jdbc.core.JdbcTemplate;
  * @date 2015年3月11日 上午10:05:24 
  *
  */
+@Component
 public class AutoCreateTable implements InitializingBean {
 
 	public static Log logger = LogFactory.getLog(AutoCreateTable.class);
-	@Autowired
+	@Autowired(required = false)
 	private INameHandler nameHandler;
 
 	private JdbcTemplate jdbcTemplate;
@@ -46,10 +48,8 @@ public class AutoCreateTable implements InitializingBean {
 	/**
 	 * 多个包用,分割
 	 */
-	@Value("${auto.scan.table.packages}")
+	@Value("${auto.scan.table.packages}") 
 	private String autoTablePath;
-	@Value("${scann.package}")
-	private static String scannPackage;
 
 	@Value("${table.schema}")
 	private static String tableSchema;
@@ -164,10 +164,10 @@ public class AutoCreateTable implements InitializingBean {
 
 	public void initTableMap() throws ClassNotFoundException {
 
-		if (StringUtils.isEmpty(scannPackage)) {
-			scannPackage = "org.hbhk.**.model";
+		if (StringUtils.isEmpty(autoTablePath)) {
+			autoTablePath = "org.hbhk.**.model";
 		}
-		String[] scannPackages = scannPackage.split(",");
+		String[] scannPackages = autoTablePath.split(",");
 		List<Class<?>> tables = AnnotationScanningUtil.getAnnotatedClasses(
 				Table.class, scannPackages);
 		List<String> tabNames = new ArrayList<String>();
@@ -200,15 +200,15 @@ public class AutoCreateTable implements InitializingBean {
 			}
 			StringBuilder sql = new StringBuilder();
 			sql.append("select table_name,column_name,data_type from ");
-			sql.append("information_schema.columns where table_schema = "
-					+ tableSchema + " ");
+			sql.append("information_schema.columns where table_schema = '"
+					+ tableSchema + "' and ");
 			sql.append("table_name in (");
 			for (int i = 0; i < tabNames.size(); i++) {
 				String str = tabNames.get(i);
 				if ((i + 1) == tabNames.size()) {
-					sql.append(str + "");
+					sql.append("'"+str + "'");
 				} else {
-					sql.append(str + ",");
+					sql.append("'"+str + "',");
 				}
 			}
 			sql.append(")");
