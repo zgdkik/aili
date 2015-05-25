@@ -21,5 +21,13 @@ public class TxTest extends SpringTestManagerBase {
 		t.setName("hbhk");
 		userService.insert(t);
 	}
+	
+	@Test
+	public void insert1Test() throws Exception {
+		UserInfo t = new UserInfo();
+		t.setName("hbhk");
+		userService.insert1(t);
+	}
+
 
 }

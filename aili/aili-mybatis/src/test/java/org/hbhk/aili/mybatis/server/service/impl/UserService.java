@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-@Transactional
+
 @Service
 public class UserService  implements IUserService{
 	
@@ -15,9 +15,15 @@ public class UserService  implements IUserService{
 	private IUserDao userDao;
 
 	@Override
+	@Transactional
 	public void insert(UserInfo t) {
 		userDao.insert(t);
+		throw new RuntimeException();
 	}
-	
+
+	@Override
+	public void insert1(UserInfo t) {
+		insert(t);
+	}
 
 }
