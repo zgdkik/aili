@@ -48,6 +48,7 @@ public class QueryPageAspect {
 	private SqlSessionFactory sqlSessionFactory;
 	
 	private JdbcTemplate jdbcTemplate;
+	
 
 	@Autowired
 	public void setDataSource(DataSource dataSource) {
@@ -62,7 +63,7 @@ public class QueryPageAspect {
 		Class<?> rt = method.getReturnType();
 		String mapperIdPrefix= AopTargetUtil.getJdkDynamicProxyTargeInterface(pjp.getThis());
 		if(rt.isAssignableFrom(Pagination.class)){
-			Class<?> cls = method.getDeclaringClass();
+			Class<?> cls = AopTargetUtil.getJdkDynamicProxyTargeClass(pjp.getThis());
 			SelectProvider selectProvider = method.getAnnotation(SelectProvider.class);
 			if(selectProvider !=null){
 				Class<?> type =  selectProvider.type();
