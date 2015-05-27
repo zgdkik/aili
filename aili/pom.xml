@@ -63,6 +63,7 @@
 		<aili-deploy>snapshots</aili-deploy>
 		<jackson.version>2.3.5</jackson.version>
 		<security-version>3.2.4.RELEASE</security-version>
+		<logback-scope>test</logback-scope>
 	</properties>
 	<dependencyManagement>
 		<dependencies>
