@@ -68,4 +68,11 @@ public class AopTargetUtil {
 		Class<?> interfaceCls = cls[0];
 		return interfaceCls.getName();
 	}
+	public static Class<?> getJdkDynamicProxyTargeClass(Object proxy)
+			throws Exception {
+		Object target = getTarget(proxy);
+		Class<?>[] cls = AopProxyUtils.proxiedUserInterfaces(target);
+		Class<?> interfaceCls = cls[0];
+		return interfaceCls;
+	}
 }
