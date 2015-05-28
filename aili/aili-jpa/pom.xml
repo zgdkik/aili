@@ -23,12 +23,22 @@
 			<version>${aili-version}</version>
 		</dependency>
 		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-commons</artifactId>
+			<version>1.10.0.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.persistence</groupId>
+			<artifactId>persistence-api</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
 			<scope>test</scope>
 		</dependency>
 		<!-- jpa s -->
-			
+
 		<!-- jpa e -->
 		<dependency>
 			<groupId>commons-beanutils</groupId>
@@ -40,7 +50,7 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<scope>test</scope>
 		</dependency>
-			<!-- logback s -->
+		<!-- logback s -->
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-core</artifactId>
@@ -57,7 +67,7 @@
 			<scope>test</scope>
 		</dependency>
 		<!-- logback e -->
-		
+
 		<dependency>
 			<groupId>p6spy</groupId>
 			<artifactId>p6spy</artifactId>

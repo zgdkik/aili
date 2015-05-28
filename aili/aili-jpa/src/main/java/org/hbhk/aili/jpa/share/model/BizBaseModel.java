@@ -2,7 +2,7 @@ package org.hbhk.aili.jpa.share.model;
 
 import java.util.Date;
 
-import org.hbhk.aili.jpa.server.annotation.Column;
+import javax.persistence.Column;
 
 /**
  * 
@@ -14,15 +14,15 @@ import org.hbhk.aili.jpa.server.annotation.Column;
 public class BizBaseModel extends BaseModel {
 	private static final long serialVersionUID = 2088264869615355602L;
 	
-	@Column("creatUser")
+	@Column(name="creatUser")
 	private String creatUser;
-	@Column("createTime")
+	@Column(name="createTime")
 	private Date createTime;
-	@Column("updateUser")
+	@Column(name="updateUser")
 	private String updateUser;
-	@Column("updateTime")
+	@Column(name="updateTime")
 	private Date updateTime;
-	@Column("status")
+	@Column(name="status")
 	private Integer status = 1;
 	
 	public String getCreatUser() {
