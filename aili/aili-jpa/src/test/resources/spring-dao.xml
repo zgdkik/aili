@@ -24,12 +24,10 @@
 	</bean>
 	<bean id="jpaVendorAdapter"
 		class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
-	<!-- 	<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
-		<property name="hibernate.hbm2ddl.auto" value="update" />
-		should be close below two comments in an productive environment
-		<property name="hibernate.show_sql" value="true" />
-		<property name="hibernate.format_sql" value="true" />
-		 -->
+		<!-- <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" 
+			/> <property name="hibernate.hbm2ddl.auto" value="update" /> should be close 
+			below two comments in an productive environment <property name="hibernate.show_sql" 
+			value="true" /> <property name="hibernate.format_sql" value="true" /> -->
 		<property name="generateDdl" value="false" />
 		<property name="database" value="MYSQL" />
 		<property name="databasePlatform" value="org.hibernate.dialect.MySQL5InnoDBDialect" />
@@ -52,8 +50,8 @@
 		<property name="entityManagerFactory" ref="emf" />
 	</bean>
 	<jpa:repositories base-package="org.hbhk.aili.jpa.server.dao"
-		transaction-manager-ref="txManager" />
+		transaction-manager-ref="txManager" >
+		
+	</jpa:repositories>
 
-	<!-- 分页处理 -->
-	<bean class="org.hbhk.aili.jpa.server.aop.QueryPageAspect"></bean>
 </beans>
