@@ -1,23 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
-	xmlns:aop="http://www.springframework.org/schema/aop"
-	xmlns:mybatis="http://mybatis.org/schema/mybatis-spring"
-	xsi:schemaLocation="
-			http://www.springframework.org/schema/beans 
-			http://www.springframework.org/schema/beans/spring-beans.xsd
-			http://www.springframework.org/schema/context 
-			http://www.springframework.org/schema/context/spring-context.xsd
-			http://www.springframework.org/schema/jee 
-			http://www.springframework.org/schema/jee/spring-jee.xsd
-			http://www.springframework.org/schema/tx 
-			http://www.springframework.org/schema/tx/spring-tx.xsd
-			http://www.springframework.org/schema/aop 
-			http://www.springframework.org/schema/aop/spring-aop.xsd
-			http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd
-			">
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+		http://www.springframework.org/schema/data/jpa
+        http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
+
 	<context:component-scan base-package="org.hbhk.aili.mybatis.server" />
 	<!-- 开启事务注解驱动 -->
 	<tx:annotation-driven />
@@ -30,24 +22,38 @@
 		<property name="username" value="${db.username}" />
 		<property name="password" value="${db.password}" />
 	</bean>
+	<bean id="jpaVendorAdapter"
+		class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+	<!-- 	<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
+		<property name="hibernate.hbm2ddl.auto" value="update" />
+		should be close below two comments in an productive environment
+		<property name="hibernate.show_sql" value="true" />
+		<property name="hibernate.format_sql" value="true" />
+		 -->
+		<property name="generateDdl" value="false" />
+		<property name="database" value="MYSQL" />
+		<property name="databasePlatform" value="org.hibernate.dialect.MySQL5InnoDBDialect" />
+		<property name="showSql" value="true" />
+	</bean>
+
+	<bean id="emf"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<!-- <property name="persistenceUnitName" value="defaultPU" /> -->
+		<property name="jpaVendorAdapter" ref="jpaVendorAdapter" />
+		<property name="packagesToScan" value="org.hbhk.aili.jpa.server.model" />
+		<property name="persistenceProvider">
+			<bean class="org.hibernate.ejb.HibernatePersistence" />
+		</property>
+	</bean>
+
 	<!-- 事务管理器 -->
-	<bean id="transactionManager"
-		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-		<property name="dataSource" ref="dataSource" />
+	<bean id="txManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="emf" />
 	</bean>
-	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-		<property name="configLocation" value="classpath:mybatis.xml" />
-		<property name="mapperLocations" value="classpath*:orm/*.xml" />
-		<property name="dataSource" ref="dataSource" />
-	</bean>
-	<!-- <mybatis:scan base-package="org.hbhk.**.server.dao"/> -->
-	<!-- <mybatis:scan base-package="" marker-interface="" annotation="" name-generator="" factory-ref="" template-ref=""/> -->
-	 <bean id="mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="org.hbhk.**.server.dao"></property>
-		<property name="markerInterface" value="org.hbhk.aili.mybatis.server.dao.IBaseDao" />
-	</bean>
+	<jpa:repositories base-package="org.hbhk.aili.jpa.server.dao"
+		transaction-manager-ref="txManager" />
+
 	<!-- 分页处理 -->
-	<bean class="org.hbhk.aili.mybatis.server.aop.QueryPageAspect"></bean>
-	<!-- 动态sql生成器  -->
-	<bean class="org.hbhk.aili.mybatis.server.support.DynamicSqlTemplate"></bean>
+	<bean class="org.hbhk.aili.jpa.server.aop.QueryPageAspect"></bean>
 </beans>

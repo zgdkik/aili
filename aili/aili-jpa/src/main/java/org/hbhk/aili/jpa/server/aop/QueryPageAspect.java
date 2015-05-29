@@ -40,7 +40,7 @@ public class QueryPageAspect {
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 
-	@Around("this(org.hbhk.aili.mybatis.server.dao.IBaseDao)")
+	@Around("this(org.hbhk.aili.jpa.server.dao.IBaseDao)")
 	//@Around("execution(* org.hbhk.*.*.server.dao.*.*(..))")
 	public Object doQuery(ProceedingJoinPoint pjp) throws Throwable {
 		return pjp.proceed();

@@ -6,7 +6,6 @@ import java.util.Map;
 import org.hbhk.aili.jpa.server.support.Page;
 import org.hbhk.aili.jpa.server.support.Pagination;
 import org.hbhk.aili.jpa.server.support.Sort;
-import org.hbhk.aili.jpa.share.model.BaseModel;
 import org.springframework.data.repository.CrudRepository;
 /**
  * 
@@ -15,7 +14,7 @@ import org.springframework.data.repository.CrudRepository;
  * @date 2015年3月11日 上午10:05:24 
  *
  */
-public interface IBaseDao<T extends BaseModel, PK extends Serializable> extends CrudRepository<T, PK> {
+public interface IBaseDao<T, PK extends Serializable> extends CrudRepository<T, PK> {
 
 	
 
