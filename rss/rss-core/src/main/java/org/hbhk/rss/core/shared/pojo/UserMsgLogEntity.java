@@ -2,15 +2,13 @@ package org.hbhk.rss.core.shared.pojo;
 
 import java.util.Date;
 
-import org.hbhk.aili.orm.server.annotation.Column;
-import org.hbhk.aili.orm.server.annotation.Id;
-import org.hbhk.aili.orm.server.annotation.Tabel;
+import org.hbhk.aili.mybatis.server.annotation.Column;
+import org.hbhk.aili.mybatis.server.annotation.Table;
+import org.hbhk.aili.mybatis.share.model.BaseModel;
 
-@Tabel("t_rss_msglog")
-public class UserMsgLogEntity {
-	@Column("id")
-	@Id
-	private Integer id;
+@Table("t_rss_msglog")
+public class UserMsgLogEntity  extends BaseModel{
+	private static final long serialVersionUID = -6835701486183270215L;
 	@Column("user_name")
 	private String user_name;
 	@Column("create_time")
@@ -18,13 +16,6 @@ public class UserMsgLogEntity {
 	@Column("msg")
 	private String msg;
 
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
 
 	public String getUser_name() {
 		return user_name;

@@ -63,6 +63,6 @@ public class UserService implements IUserService {
 	public void saveUserMsgLog(UserMsgLogEntity log) {
 		log.setCreate_time(new Date());
 		log.setUser_name(UserContext.getCurrentContext().getCurrentUserName());
-		userDao.save(log);
+		userDao.insert(log);
 	}
 }

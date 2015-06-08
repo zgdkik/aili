@@ -17,7 +17,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.hbhk.aili</groupId>
-			<artifactId>aili-orm</artifactId>
+			<artifactId>aili-mybatis</artifactId>
 			<version>${aili-version}</version>
 		</dependency>
 		<dependency>
