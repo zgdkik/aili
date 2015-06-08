@@ -49,6 +49,7 @@ public class ModuleInterceptor extends HandlerInterceptorAdapter {
 			if (!moduleName.startsWith("/")) {
 				moduleName = "/" + moduleName;
 			}
+			log.debug("模块名:"+moduleName);
 			String viewName = modelAndView.getViewName();
 			if (filter(viewName)) {
 				if (!viewName.startsWith("/")) {
@@ -65,6 +66,7 @@ public class ModuleInterceptor extends HandlerInterceptorAdapter {
 				moduleName = moduleName.substring(moduleName.indexOf("/") + 1,
 						moduleName.length());
 				RequestContext.setCurrentContext(moduleName);
+				log.debug("视图路径:"+(moduleName+ viewName));
 			}
 
 		}
