@@ -7,11 +7,11 @@
 		<groupId>org.hbhk.aili</groupId>
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
-	<artifactId>aili-jpa</artifactId>
+	<artifactId>aili-nosql</artifactId>
 	<version>${aili-version}</version>
 	<packaging>jar</packaging>
 
-	<name>aili-jpa</name>
+	<name>aili-nosql</name>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
