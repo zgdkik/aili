@@ -21,10 +21,8 @@ import org.apache.commons.logging.LogFactory;
 import org.hbhk.aili.support.server.email.IEmailCallBack;
 import org.hbhk.aili.support.server.email.IEmailService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.stereotype.Component;
 
 /**
  * 
@@ -33,14 +31,12 @@ import org.springframework.stereotype.Component;
  * @date 2015年3月11日 上午10:05:24 
  *
  */
-@Component
 public class EmailService implements IEmailService {
 
 	private Log log = LogFactory.getLog(getClass());
 	private Executor executor = Executors.newFixedThreadPool(10);
 	@Autowired(required=false)
 	protected JavaMailSender mailSender;
-	@Value("${email.username}")
 	private String fromEmail;
 	
 	@Autowired(required=false)
