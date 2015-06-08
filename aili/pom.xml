@@ -47,6 +47,7 @@
 		<module>aili-report</module>
 		<module>aili-main-project</module>
 		<module>aili-module-project</module>
+		<module>aili-boot</module>
 	</modules>
 
 	<properties>
