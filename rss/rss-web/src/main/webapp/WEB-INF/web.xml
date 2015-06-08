@@ -20,7 +20,7 @@
 	</listener>
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>/WEB-INF/spring-orm.xml,classpath*:org/hbhk/**/server/META-INF/spring.xml</param-value>
+		<param-value>/WEB-INF/spring.xml,classpath*:org/hbhk/**/server/META-INF/spring.xml</param-value>
 	</context-param>
 	<!--应用关闭时清除应用产生的class loader -->
 	<listener>

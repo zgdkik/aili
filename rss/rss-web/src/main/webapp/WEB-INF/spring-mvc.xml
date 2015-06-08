@@ -25,7 +25,7 @@
 		location="/styles/" />
 
 	<!-- 异常统一处理 -->
-	<bean class="org.hbhk.aili.core.server.ex.GlobalExceptionController" />
+<!-- 	<bean class="org.hbhk.aili.core.server.ex.GlobalExceptionController" /> -->
 	<!-- 扫描所有的controller -->
 	<context:component-scan base-package="org.hbhk.**.server.controller"
 		use-default-filters="false">
