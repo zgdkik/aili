@@ -17,7 +17,6 @@ import org.hbhk.aili.mybatis.server.handler.INameHandler;
 import org.hbhk.aili.mybatis.share.util.SqlUtil;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 
 /**
  * 
@@ -31,10 +30,6 @@ public class DynamicSqlTemplate implements InitializingBean {
 	@Autowired(required=false)
 	private INameHandler nameHandler;
 	
-	/**
-	 * 多个包用,分割
-	 */
-	@Value("${auto.scan.table.packages}")
 	private String autoTablePath;
 
 	private static Map<String, ModelInfo> tabs = new HashMap<String, ModelInfo>();
@@ -441,4 +436,22 @@ public class DynamicSqlTemplate implements InitializingBean {
 	private String getKey() {
 		return GnericInterfaceTypeContext.getType().getName();
 	}
+
+	public INameHandler getNameHandler() {
+		return nameHandler;
+	}
+
+	public void setNameHandler(INameHandler nameHandler) {
+		this.nameHandler = nameHandler;
+	}
+
+	public String getAutoTablePath() {
+		return autoTablePath;
+	}
+
+	public void setAutoTablePath(String autoTablePath) {
+		this.autoTablePath = autoTablePath;
+	}
+	
+	
 }
