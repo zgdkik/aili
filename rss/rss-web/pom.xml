@@ -9,9 +9,7 @@
 	</parent>
 	<artifactId>rss-web</artifactId>
 	<packaging>war</packaging>
-
 	<properties>
-		<aili-version>1.0.0-SNAPSHOT</aili-version>
 	</properties>
 	<dependencies>
 		<dependency>

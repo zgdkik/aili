@@ -3,13 +3,13 @@ package org.hbhk.rss.core.shared.pojo;
 import java.util.Date;
 
 import org.hbhk.aili.orm.server.annotation.Column;
-import org.hbhk.aili.orm.server.annotation.PrimaryKey;
+import org.hbhk.aili.orm.server.annotation.Id;
 import org.hbhk.aili.orm.server.annotation.Tabel;
 
 @Tabel("t_rss_msglog")
 public class UserMsgLogEntity {
 	@Column("id")
-	@PrimaryKey
+	@Id
 	private Integer id;
 	@Column("user_name")
 	private String user_name;

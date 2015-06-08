@@ -12,14 +12,9 @@
 	<name>rss-core</name>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<aili-version>1.0.0-SNAPSHOT</aili-version>
+		<aili-version>1.2.0-SNAPSHOT</aili-version>
 	</properties>
 	<dependencies>
-		<dependency>
-			<groupId>org.hbhk.aili</groupId>
-			<artifactId>aili-core</artifactId>
-			<version>${aili-version}</version>
-		</dependency>
 		<dependency>
 			<groupId>org.hbhk.aili</groupId>
 			<artifactId>aili-orm</artifactId>
