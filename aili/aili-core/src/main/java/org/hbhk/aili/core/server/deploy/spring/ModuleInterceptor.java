@@ -3,6 +3,8 @@ package org.hbhk.aili.core.server.deploy.spring;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.hbhk.aili.core.server.context.RequestContext;
 import org.hbhk.aili.core.share.util.MyStringUtils;
 import org.springframework.util.StringUtils;
@@ -20,11 +22,12 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
  */
 public class ModuleInterceptor extends HandlerInterceptorAdapter {
 
+	private static  Log log = LogFactory.getLog(ModuleInterceptor.class);
 	@Override
 	public void postHandle(HttpServletRequest request,
 			HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
-
+		log.debug("模块处理开始...");
 		if (!(handler instanceof HandlerMethod)) {
 			return;
 		}
@@ -65,6 +68,7 @@ public class ModuleInterceptor extends HandlerInterceptorAdapter {
 			}
 
 		}
+		log.debug("模块处理结束...");
 	}
 
 	private boolean filter(String viewName) {
