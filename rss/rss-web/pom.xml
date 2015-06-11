@@ -74,7 +74,7 @@
 				<artifactId>tomcat6-maven-plugin</artifactId>
 				<configuration>
 					<path>/rss</path>
-					<port>8080</port>
+					<port>8083</port>
 					<warSourceDirectory>${project.build.directory}/webapp</warSourceDirectory>
 				</configuration>
 			</plugin>
