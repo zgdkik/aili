@@ -158,7 +158,6 @@ Ext.define('${moduleNamepre}QueryForm',{
 //查询的显示表格：
 Ext.define('${moduleNamepre}Grid',{
 	extend: 'Ext.grid.Panel',
-	id : '${moduleNamepreid}Grid_Id',
 	cls:'autoHeight',
 	bodyCls:'autoHeight',
 	title:'xxx详细信息',
