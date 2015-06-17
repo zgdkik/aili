@@ -1,6 +1,9 @@
 package org.hbhk.test.foss.sql;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -30,7 +33,10 @@ public class GenBuMaSql {
 			sql.append("\r");
 		}
 		sql.append(");");
-		
+		File f = new File("D:/21.sql");
+		OutputStream os = new FileOutputStream(f);
+		os.write(sql.toString().getBytes());
 		System.out.println(sql);
+		os.close();
 	}
 }
