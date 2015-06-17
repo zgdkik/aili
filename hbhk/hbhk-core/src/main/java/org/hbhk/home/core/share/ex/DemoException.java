@@ -1,4 +1,4 @@
-package org.hbhk.core.share.ex;
+package org.hbhk.home.core.share.ex;
 /**
  * Exception开发规范
  * 1.必须继承com.deppon.foss.framework.exception.BusinessException

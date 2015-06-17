@@ -1,4 +1,4 @@
-package org.hbhk.core.share.util;
+package org.hbhk.home.core.share.util;
 
 import java.util.ArrayList;
 import java.util.Collection;

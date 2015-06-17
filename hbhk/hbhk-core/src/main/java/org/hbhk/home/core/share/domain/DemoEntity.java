@@ -1,4 +1,4 @@
-package org.hbhk.core.share.domain;
+package org.hbhk.home.core.share.domain;
 /**
  * Entity开发规范
  * 1.必须继承com.deppon.foss.framework.entity.BaseEntity

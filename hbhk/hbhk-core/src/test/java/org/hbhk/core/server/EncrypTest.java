@@ -1,6 +1,6 @@
 package org.hbhk.core.server;
 
-import org.hbhk.core.share.util.EncryptUtil;
+import org.hbhk.home.core.share.util.EncryptUtil;
 
 public class EncrypTest {
 	public static void main(String args[]) {
