@@ -18,6 +18,23 @@
 			<groupId>org.hbhk.home</groupId>
 			<version>${hbhk-version}</version>
 		</dependency>
+		<!-- logback s -->
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-core</artifactId>
+			<version>1.1.2</version>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-access</artifactId>
+			<version>1.1.2</version>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>1.1.2</version>
+		</dependency>
+		<!-- logback e -->
 	</dependencies>
 
 	<profiles>
@@ -26,14 +43,16 @@
 			<properties>
 				<env>dev</env>
 			</properties>
-			<activation><activeByDefault>true</activeByDefault></activation>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
 		</profile>
 		<profile>
 			<id>prd</id>
 			<properties>
 				<env>prd</env>
 			</properties>
-		
+
 		</profile>
 	</profiles>
 	<build>
