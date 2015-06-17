@@ -32,7 +32,7 @@ public class ModuleInterceptor extends HandlerInterceptorAdapter {
 			return;
 		}
 		HandlerMethod m = (HandlerMethod) handler;
-		RequestMapping rm = m.getMethodAnnotation(RequestMapping.class);
+		RequestMapping rm = m.getBean().getClass().getAnnotation(RequestMapping.class);
 		String moduleName = null;
 		if (rm != null && rm.value().length > 0) {
 			moduleName = rm.value()[0];
