@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<artifactId>hbhk</artifactId>
-		<groupId>org.hbhk.mvc</groupId>
+		<groupId>org.hbhk.home</groupId>
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 
