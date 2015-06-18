@@ -42,7 +42,7 @@ public class ModuleInterceptor extends HandlerInterceptorAdapter {
 			moduleName = arr[3];
 		}
 		// 获取模块名
-		String contextPath = request.getContextPath() + "/";
+		String contextPath = request.getContextPath();
 		request.setAttribute("base", contextPath);
 		if (modelAndView != null
 				&& !StringUtils.isEmpty(modelAndView.getViewName())) {
