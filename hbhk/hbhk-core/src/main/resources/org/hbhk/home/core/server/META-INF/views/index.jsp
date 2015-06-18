@@ -9,21 +9,11 @@
 <body>
 	<jsp:include page="header.jsp" />
 	<div class="container-fluid">
-		<div class="row-fluid header">
-			<div class="span12"></div>
-		</div>
-		<div class="row-fluid content">
+		<div class="row-fluid">
 			<div class="span2">
-				<div class="switch switch-mini">
-					<input type="checkbox" checked />
-				</div>
+				11111111
 			</div>
 			<div class="span10">
-				<span>22222222222222222222222222222222222222222</span>
-			</div>
-		</div>
-		<div class="row-fluid footer">
-			<div class="span12">
 				<span>22222222222222222222222222222222222222222</span>
 			</div>
 		</div>
