@@ -70,6 +70,9 @@ public class ModuleInterceptor extends HandlerInterceptorAdapter {
 			}
 
 		}
+		String lang = request.getLocale().toLanguageTag();
+		request.setAttribute("lang",lang);
+		log.debug("当前语言:"+lang);
 		log.debug("模块处理结束...");
 	}
 
