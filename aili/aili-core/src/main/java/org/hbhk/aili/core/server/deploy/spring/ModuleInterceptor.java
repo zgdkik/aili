@@ -57,11 +57,11 @@ public class ModuleInterceptor extends HandlerInterceptorAdapter {
 				}
 				modelAndView.setViewName(moduleName + viewName);
 
-				request.setAttribute("images", contextPath + "images"
+				request.setAttribute("images", contextPath + "/images"
 						+ moduleName);
-				request.setAttribute("scripts", contextPath + "scripts"
+				request.setAttribute("scripts", contextPath + "/scripts"
 						+ moduleName);
-				request.setAttribute("styles", contextPath + "styles"
+				request.setAttribute("styles", contextPath + "/styles"
 						+ moduleName);
 				moduleName = moduleName.substring(moduleName.indexOf("/") + 1,
 						moduleName.length());
