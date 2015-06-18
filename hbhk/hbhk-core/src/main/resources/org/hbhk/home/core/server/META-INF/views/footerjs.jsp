@@ -6,3 +6,4 @@
 	var $j = jQuery.noConflict();
 	var base="${base}";
 </script>
+<script src="${scripts}/home/common.js"></script>
