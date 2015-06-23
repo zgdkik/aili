@@ -27,6 +27,21 @@
 		<context:exclude-filter type="annotation"
 			expression="org.springframework.web.bind.annotation.ControllerAdvice" />
 	</context:component-scan>
-	
+
 	<context:property-placeholder location="classpath:config.properties" />
+
+	<!-- <bean id="propertiesService" class="org.hbhk.test.ds.impl.DemoProrpertieService"/> -->
+	<bean class="org.hbhk.aili.core.server.properties.AiliPropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:config.properties</value>
+			</list>
+		</property>
+		<!-- <property name="orLocaltions">
+			<list>
+				<value>ojdbc.properties</value>
+			</list>
+		</property> -->
+		<!-- <property name="propertiesService" ref="propertiesService" /> -->
+	</bean>
 </beans>
