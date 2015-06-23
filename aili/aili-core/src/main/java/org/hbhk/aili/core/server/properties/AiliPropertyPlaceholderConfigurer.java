@@ -75,7 +75,7 @@ public class AiliPropertyPlaceholderConfigurer extends PropertyPlaceholderConfig
 		if(props != null){
 			Set<Object> pkyes = props.keySet();
 			for (Object pk : pkyes) {
-				properties.put((String) pk,props.get(pk));
+				properties.put(String.valueOf(pk),props.get(pk));
 			}
 		
 		}
