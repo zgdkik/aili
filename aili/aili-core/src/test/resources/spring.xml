@@ -17,7 +17,7 @@
 			http://www.springframework.org/schema/aop/spring-aop.xsd">
 
 	<bean id="propertiesService" class="org.hbhk.test.ds.impl.DemoProrpertieService"></bean>
-	<bean class="org.hbhk.aili.core.server.context.AiliPropertyPlaceholderConfigurer">
+	<bean class="org.hbhk.aili.core.server.properties.AiliPropertyPlaceholderConfigurer">
 		<property name="locations">
 			<list>
 				<value>jdbc.properties</value>
