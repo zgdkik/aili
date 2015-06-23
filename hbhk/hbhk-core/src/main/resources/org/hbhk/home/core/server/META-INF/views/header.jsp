@@ -12,12 +12,14 @@
 			<a class="navbar-brand" href="#">Home</a>
 		</div>
 
-		<div class="collapse navbar-collapse"
-			id="bs-example-navbar-collapse-6">
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-6">
 			<ul class="nav navbar-nav">
 				<li class="active"><a href="#">主页</a></li>
-				<li><a href="#">Link</a></li>
-				<li><a href="#">Link</a></li>
+				<li><a href="#">相册</a></li>
+				<li><a href="#">活动</a></li>
+				<li><a href="#">家居</a></li>
+				<li><a href="#">日记</a></li>
+				<li><a href="#">家谱</a></li>
 			</ul>
 		</div>
 		<!-- /.navbar-collapse -->
