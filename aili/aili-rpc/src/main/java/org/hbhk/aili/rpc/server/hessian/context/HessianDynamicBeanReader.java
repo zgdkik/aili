@@ -44,12 +44,12 @@ public class HessianDynamicBeanReader implements IDynamicBeanReader {
 				}
 			}
 			if(clsList.size()>0){
-				String host ="http://"+ AiliPropertyPlaceholderConfigurer.properties.getProperty("server-host");
-				String port = AiliPropertyPlaceholderConfigurer.properties.getProperty("server-port");
+				String host ="http://"+ AiliPropertyPlaceholderConfigurer.getProperties("server-host");
+				String port = AiliPropertyPlaceholderConfigurer.getProperties("server-port");
 				if(host.endsWith("/")){
 					 host = host.substring(0, host.length()-1);
 				}
-				String context =AiliPropertyPlaceholderConfigurer.properties.getProperty("service-path");
+				String context =AiliPropertyPlaceholderConfigurer.getProperties("service-path");
 				if(!context.endsWith("/")){
 					context = context+"/";
 				}
