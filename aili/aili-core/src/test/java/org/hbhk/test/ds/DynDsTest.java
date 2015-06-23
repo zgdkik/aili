@@ -9,7 +9,7 @@ public class DynDsTest {
 	public static void main(String[] args) {
 		ApplicationContext context = new ClassPathXmlApplicationContext(
 				"classpath:spring.xml");
-		Object object =  AiliPropertyPlaceholderConfigurer.properties.get("name");
+		String object =  AiliPropertyPlaceholderConfigurer.getProperties("name");
 		System.out.println("value:"+object);
 		IUserService us = (IUserService) context.getBean("userService");
 		us.getUser();

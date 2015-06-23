@@ -1,6 +1,8 @@
 package org.hbhk.aili.core.server.properties;
 
+import java.util.Hashtable;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 
@@ -27,7 +29,7 @@ public class AiliPropertyPlaceholderConfigurer extends PropertyPlaceholderConfig
 	 * 提供程序获取spring读取到的properties内容
 	 * 不能外部修改,修改对系统属性也不生效
 	 */
-	public static Properties properties = new Properties();
+	private static Map<String, Object> properties = new Hashtable<String, Object>();
 	/**
 	 * 覆盖属性路径
 	 */
@@ -70,26 +72,27 @@ public class AiliPropertyPlaceholderConfigurer extends PropertyPlaceholderConfig
 			}
 		}
 		if(props != null){
-			properties.putAll(props);
+			Set<Object> pkyes = props.keySet();
+			for (Object pk : pkyes) {
+				properties.put((String) pk,props.get(pk));
+			}
+		
 		}
 		
 		super.processProperties(beanFactoryToProcess, props);
-	}
-
-	public IPropertiesService getPropertiesService() {
-		return propertiesService;
 	}
 
 	public void setPropertiesService(IPropertiesService propertiesService) {
 		this.propertiesService = propertiesService;
 	}
 
-	public List<String> getOrLocaltions() {
-		return orLocaltions;
-	}
-
 	public void setOrLocaltions(List<String> orLocaltions) {
 		this.orLocaltions = orLocaltions;
+	}
+
+	@SuppressWarnings("unchecked")
+	public static <T> T getProperties(String key) {
+		return (T) properties.get(key);
 	}
 
 

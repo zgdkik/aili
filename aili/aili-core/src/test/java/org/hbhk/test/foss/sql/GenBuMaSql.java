@@ -33,7 +33,7 @@ public class GenBuMaSql {
 			sql.append("\r");
 		}
 		sql.append(");");
-		File f = new File("D:/无法补码.sql");
+		File f = new File("D:/无法补码.txt");
 		OutputStream os = new FileOutputStream(f);
 		os.write(sql.toString().getBytes());
 		System.out.println(sql);
