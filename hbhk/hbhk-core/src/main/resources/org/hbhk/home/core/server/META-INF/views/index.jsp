@@ -10,7 +10,7 @@
 	<jsp:include page="header.jsp" />
 	<div class="container">
 		<div class="row">
-			<div class="col-sm-4">col-sm-21</div>
+			<div class="col-sm-4" style="height: 2000px;">col-sm-21</div>
 			<div class="col-sm-4">col-sm-2</div>
 			<div class="col-sm-4">col-sm-2</div>
 		</div>

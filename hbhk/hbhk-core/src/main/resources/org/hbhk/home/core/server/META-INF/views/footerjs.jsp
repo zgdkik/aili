@@ -2,6 +2,7 @@
 <!--js 文件 -->
 <script src="${scripts}/jquery/jquery-1.9.1.js"></script>
 <script src="${scripts}/bootstrap/js/bootstrap.min.js"></script>
+<script src="${scripts}/headroom/headroom.js"></script>
 <script type="text/javascript">
 	var $j = jQuery.noConflict();
 	var base="${base}";
