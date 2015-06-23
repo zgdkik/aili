@@ -46,6 +46,7 @@ public class AiliPropertyPlaceholderConfigurer extends PropertyPlaceholderConfig
 	
 	private void addOverrideLocations(Properties props, Properties newProps) {
 		if(orLocaltions != null){
+			log.debug("自定义 properties路径 : "+orLocaltions);
 			for (String location : orLocaltions) {
 				PathMatchingResourcePatternResolver patternResolver = new PathMatchingResourcePatternResolver();
 				try {
