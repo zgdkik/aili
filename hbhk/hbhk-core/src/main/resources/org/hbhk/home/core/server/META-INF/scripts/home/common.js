@@ -6,16 +6,17 @@ $j(document).ready(function() {
 		me.addClass("active");
 	});
 
-	$j(".container-header").headroom({
+	var elem = document.querySelector("header");
+	var headroom = new Headroom(elem, {
 		"tolerance" : 5,
-		"offset" : 300,
+		"offset" : 205,
 		"classes" : {
 			"initial" : "animated",
-			"pinned" : "slideDown",
-			"unpinned" : "slideUp"
+			"pinned" : "flipInX",
+			"unpinned" : "flipOutX"
 		}
 	});
-
+	headroom.init();
 	// to destroy
-	//$("#header").headroom("destroy");
+	//headroom.destroy();
 });
