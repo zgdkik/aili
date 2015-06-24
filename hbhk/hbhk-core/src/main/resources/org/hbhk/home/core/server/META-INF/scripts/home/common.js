@@ -6,7 +6,7 @@ $j(document).ready(function() {
 		me.addClass("active");
 	});
 
-	var elem = document.querySelector("header");
+	var elem = document.querySelector(".container-header");
 	var headroom = new Headroom(elem, {
 		"tolerance" : 5,
 		"offset" : 205,
