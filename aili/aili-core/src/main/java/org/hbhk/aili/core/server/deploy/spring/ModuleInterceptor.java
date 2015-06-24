@@ -86,9 +86,9 @@ public class ModuleInterceptor extends HandlerInterceptorAdapter {
 		if (viewName.startsWith("https:")) {
 			return false;
 		}
-		if (MyStringUtils.mulStrCount(viewName, "/") > 1) {
-			return false;
-		}
+//		if (MyStringUtils.mulStrCount(viewName, "/") > 1) {
+//			return false;
+//		}
 
 		return true;
 
