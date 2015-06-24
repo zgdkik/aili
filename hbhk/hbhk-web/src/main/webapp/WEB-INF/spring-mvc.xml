@@ -43,12 +43,12 @@
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/**" />
-			<bean class="org.hbhk.aili.core.server.deploy.spring.ModuleInterceptor" />
+			<bean
+				class="org.hbhk.aili.core.server.interceptor.PerformanceWatchInterceptor" />
 		</mvc:interceptor>
 		<mvc:interceptor>
 			<mvc:mapping path="/**" />
-			<bean
-				class="org.hbhk.aili.core.server.interceptor.PerformanceWatchInterceptor" />
+			<bean class="org.hbhk.aili.core.server.interceptor.ModuleInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>
 

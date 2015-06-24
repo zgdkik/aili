@@ -5,10 +5,7 @@
 	version="2.5">
 	<display-name>hbhk-web</display-name>
 	<listener>
-		<listener-class>org.hbhk.aili.core.server.listener.AppContextListener</listener-class>
-	</listener>
-	<listener>
-		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+		<listener-class>org.hbhk.aili.core.server.listener.AppContextLoaderListener</listener-class>
 	</listener>
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
