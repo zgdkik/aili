@@ -42,7 +42,7 @@ public class ClusterFilter implements Filter {
 		String  token = CookieUtil.getCookieValue(request, AppConst.AILI_CLUSTER_TOKEN);
 		if(StringUtils.isNotEmpty(token)){
 			HttpSession session =  request.getSession();
-			 Object obj = clusterTokenGenerator.decodeToken(token);
+			Object obj = clusterTokenGenerator.decodeToken(token);
 			session.setAttribute(AppConst.AILI_SEESION_KEY, obj);
 		}
 		token = clusterTokenGenerator.encodeToken();
