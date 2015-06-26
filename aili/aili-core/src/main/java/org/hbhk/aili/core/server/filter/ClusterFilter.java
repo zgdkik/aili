@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.StringUtils;
 import org.hbhk.aili.core.server.service.IClusterTokenGenerator;
+import org.hbhk.aili.core.server.service.impl.DefaultClusterTokenGenerator;
 import org.hbhk.aili.core.share.consts.AppConst;
 import org.hbhk.aili.core.share.util.CookieUtil;
 import org.springframework.context.ApplicationContext;
@@ -29,7 +30,7 @@ public class ClusterFilter implements Filter {
 			if(context.containsBean("clusterTokenGenerator")){
 				clusterTokenGenerator = context.getBean("clusterTokenGenerator", IClusterTokenGenerator.class);
 			}else{
-				
+				clusterTokenGenerator = new DefaultClusterTokenGenerator();
 			}
 		}
 	}

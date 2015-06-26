@@ -32,6 +32,16 @@ public class BASE64Util {
 		return new String(encode(data.getBytes()));
 	}
 
+	public static String encode(Object data) {
+		try {
+			char[] ch = encode(data.toString().getBytes("UTF-8"));
+			return new String(ch);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+
+	}
+
 	/**
 	 * 功能：解码字符串
 	 * 
@@ -41,9 +51,11 @@ public class BASE64Util {
 	 *            源字符串
 	 * @return String
 	 */
-	public static String decode(String data) {
-		return new String(decode(data.toCharArray()));
+	@SuppressWarnings("unchecked")
+	public static <T> T decode(String data) {
+		return (T) new String(decode(data.toCharArray()));
 	}
+	
 
 	/**
 	 * 功能：编码byte[]
