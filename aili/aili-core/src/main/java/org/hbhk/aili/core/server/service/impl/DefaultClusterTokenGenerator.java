@@ -8,9 +8,12 @@ import org.hbhk.aili.core.share.consts.AppConst;
 import org.hbhk.aili.core.share.entity.Token;
 import org.hbhk.aili.core.share.util.BASE64Util;
 import org.hbhk.aili.core.share.util.JsonUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class DefaultClusterTokenGenerator implements IClusterTokenGenerator {
 
+	private Logger log = LoggerFactory.getLogger(getClass());
 	@Override
 	public String encodeToken(HttpServletRequest request) {
 		HttpSession session = request.getSession();
@@ -18,8 +21,10 @@ public class DefaultClusterTokenGenerator implements IClusterTokenGenerator {
 		if(token == null){
 			token  = new Token();
 		}
+		token.setSessionId(session.getId());
 		token.setTimestamp(String.valueOf(System.currentTimeMillis()));
 		String str = JsonUtil.toJson(token);
+		log.debug("集群josn->token:"+str);
 		return BASE64Util.encode(str);
 	}
 

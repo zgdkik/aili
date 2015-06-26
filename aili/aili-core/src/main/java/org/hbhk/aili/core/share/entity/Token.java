@@ -2,13 +2,15 @@ package org.hbhk.aili.core.share.entity;
 
 import java.io.Serializable;
 
-public class Token implements Serializable{
+public class Token implements Serializable {
 
 	private static final long serialVersionUID = 6290948047683392166L;
-	
+
 	private String userCode;
-	
+
 	private String timestamp;
+
+	private String sessionId;
 
 	public String getUserCode() {
 		return userCode;
@@ -25,7 +27,13 @@ public class Token implements Serializable{
 	public void setTimestamp(String timestamp) {
 		this.timestamp = timestamp;
 	}
-	
-	
+
+	public String getSessionId() {
+		return sessionId;
+	}
+
+	public void setSessionId(String sessionId) {
+		this.sessionId = sessionId;
+	}
 
 }
