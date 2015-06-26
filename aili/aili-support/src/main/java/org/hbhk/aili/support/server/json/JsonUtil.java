@@ -1,7 +1,6 @@
 package org.hbhk.aili.support.server.json;
 
 import org.apache.commons.lang3.StringUtils;
-import org.hbhk.aili.support.server.httpclient.exception.ClientException;
 
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -10,8 +9,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  * 
  * @Description: 整合第三方框架支持
  * @author 何波
- * @date 2015年3月11日 上午10:05:24 
- *
+ * @date 2015年3月11日 上午10:05:24
+ * 
  */
 public abstract class JsonUtil {
 
@@ -28,7 +27,7 @@ public abstract class JsonUtil {
 	 * @since
 	 */
 	public static <T> T parseJson(String json, Class<?> parametrized,
-			Class<?>... parameterClasses) throws ClientException {
+			Class<?>... parameterClasses) {
 		if (StringUtils.isBlank(json)) {
 			return null;
 		}
@@ -37,32 +36,30 @@ public abstract class JsonUtil {
 					parametrized, parameterClasses);
 			return mapper.readValue(json, jt);
 		} catch (Exception e) {
-			throw new ClientException(e.getMessage(), e);
+			throw new RuntimeException(e.getMessage(), e);
 		}
 	}
 
 	@SuppressWarnings("unchecked")
-	public static <T> T parseJson(String json, Class<?> parametrized)
-			throws ClientException {
+	public static <T> T parseJson(String json, Class<?> parametrized) {
 		if (StringUtils.isBlank(json)) {
 			return null;
 		}
 		try {
 			return (T) mapper.readValue(json, parametrized);
 		} catch (Exception e) {
-			throw new ClientException(e.getMessage(), e);
+			throw new RuntimeException(e.getMessage(), e);
 		}
 	}
 
-	@SuppressWarnings("unchecked")
-	public static <T> T toJson(Object obj) throws ClientException {
+	public static String toJson(Object obj) {
 		if (obj == null) {
 			return null;
 		}
 		try {
-			return (T) mapper.writeValueAsString(obj);
+			return mapper.writeValueAsString(obj);
 		} catch (Exception e) {
-			throw new ClientException(e.getMessage(), e);
+			throw new RuntimeException(e.getMessage(), e);
 		}
 	}
 }
