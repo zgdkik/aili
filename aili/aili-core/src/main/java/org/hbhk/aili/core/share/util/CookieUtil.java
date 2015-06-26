@@ -93,7 +93,9 @@ public class CookieUtil {
 	 */
 	public static void setCookie(HttpServletResponse response, String name,
 			String value) {
-		setCookie(response, name, value, COOKIE_MAX_AGE);
+		Cookie cookie = new Cookie(name, value);
+		cookie.setPath("/");
+		response.addCookie(cookie);
 	}
 
 	/**
