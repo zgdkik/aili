@@ -15,7 +15,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hbhk.aili.core.share.util.BASE64Util;
 
-public class AppFilter  implements Filter{
+public class HessianFilter  implements Filter{
 
 	private final Log logger = LogFactory.getLog(this.getClass());
 	
