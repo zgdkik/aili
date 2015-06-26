@@ -75,7 +75,7 @@
 				<artifactId>tomcat6-maven-plugin</artifactId>
 				<configuration>
 					<path>/hbhk</path>
-					<port>8080</port>
+					<port>5416</port>
 					<warSourceDirectory>${project.build.directory}/webapp</warSourceDirectory>
 				</configuration>
 			</plugin>

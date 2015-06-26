@@ -28,6 +28,14 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 
+	<filter>
+		<filter-name>clusterFilter</filter-name>
+		<filter-class>org.hbhk.aili.core.server.filter.ClusterFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>clusterFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
 	<servlet>
 		<servlet-name>springmvc</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
