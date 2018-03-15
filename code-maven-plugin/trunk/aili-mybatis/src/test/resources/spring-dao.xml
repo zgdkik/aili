@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:mybatis="http://mybatis.org/schema/mybatis-spring"
+	xmlns:hbhk="http://hbhk.aili.org/schema/hbhk" 
+	xsi:schemaLocation="
+			http://www.springframework.org/schema/beans 
+			http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/context 
+			http://www.springframework.org/schema/context/spring-context.xsd
+			http://www.springframework.org/schema/jee 
+			http://www.springframework.org/schema/jee/spring-jee.xsd
+			http://www.springframework.org/schema/tx 
+			http://www.springframework.org/schema/tx/spring-tx.xsd
+			http://www.springframework.org/schema/aop 
+			http://www.springframework.org/schema/aop/spring-aop.xsd
+			http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd
+			http://hbhk.aili.org/schema/hbhk
+			http://hbhk.aili.org/schema/hbhk/mybatis-spring-ext-1.0.xsd
+			">
+	<context:component-scan base-package="org.hbhk.aili.mybatis.server" />
+	<!-- 开启事务注解驱动 -->
+	<tx:annotation-driven order="2" />
+	<aop:aspectj-autoproxy />
+	<context:property-placeholder location="classpath:jdbc.properties" />
+	
+	<bean class="org.hbhk.aili.mybatis.server.aop.DynamicDataSourceAspect"></bean>
+
+	<bean id="parentDataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="${db.driverClassName}" />
+		<property name="username" value="${db.username}" />
+		<property name="password" value="${db.password}" />
+	</bean>
+	<bean parent="parentDataSource" id="testDataSource">
+		<property name="url"
+			value="${db.url}" />
+	</bean>
+	<bean parent="parentDataSource" id="UserDataSource">
+		<property name="url"
+			value="${db.url}" />
+	</bean>
+	 <bean class="org.hbhk.aili.mybatis.server.support.DynamicDataSource"
+		id="dataSource">
+		<property name="targetDataSources">
+			<map key-type="java.lang.String">
+				<entry value-ref="testDataSource" key="write"></entry>
+				<entry value-ref="UserDataSource" key="read"></entry>
+			</map>
+		</property>
+		<property name="defaultTargetDataSource" ref="testDataSource"></property>
+	</bean> 
+	<!-- <bean id="dataSource" destroy-method="close"
+		class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="${db.driverClassName}" />
+		<property name="url" value="${db.url}" />
+		<property name="username" value="${db.username}" />
+		<property name="password" value="${db.password}" />
+	</bean> -->
+	<!-- 事务管理器 -->
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="configLocation" value="classpath:mybatis.xml" />
+		<property name="mapperLocations" value="classpath*:orm/*.xml" />
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	 <bean id="mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="org.hbhk.**.server.dao"></property>
+		<property name="markerInterface" value="org.hbhk.aili.mybatis.server.dao.IBaseDao" />
+	</bean>
+	<!-- 分页处理 -->
+	<bean class="org.hbhk.aili.mybatis.server.aop.QueryPageAspect"></bean>
+	<hbhk:mybatis-config base-package="org.hbhk.**.entity" />
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	
+</beans>

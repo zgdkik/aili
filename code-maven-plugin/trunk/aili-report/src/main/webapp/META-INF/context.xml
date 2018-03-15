@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Context>
+	<WatchedResource>WEB-INF/web.xml</WatchedResource>
+	<Resource name="jdbc/hbhk-ds" auth="Container" type="javax.sql.DataSource"
+		username="root" password="135246" driverClassName="com.mysql.jdbc.Driver"
+		url="jdbc:mysql://127.0.1.1:3306/hbhk?useUnicode=true" maxActive="8"
+		maxIdle="4" />
+</Context>
