@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+	"http://struts.apache.org/dtds/struts-2.0.dtd">
+	
+<struts>
+	<constant name="struts.objectFacotry" value="spring"/>
+	<constant name="struts.devMode" value="true"/>
+	<constant name="struts.convention.action.mapAllMatches" value="true"/>
+	<constant name="struts.convention.classes.reload" value="false"/>
+	<constant name="struts.action.excludePattern" value="/index.html"/>
+	<constant name="struts.i18n.encoding" value="utf-8"/>
+	<constant name="struts.multipart.maxSize" value="31457280"/>
+</struts>

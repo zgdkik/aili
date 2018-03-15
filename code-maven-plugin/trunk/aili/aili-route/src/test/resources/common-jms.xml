@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camel="http://camel.apache.org/schema/spring"
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd
+        http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<context:annotation-config />
+	<context:component-scan base-package="com.deppon.esb.*" />
+	<tx:annotation-driven transaction-manager="transactionManager" />
+
+	<!-- 虚拟内存连接 -->
+	<bean id="jmsConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+		<!-- <property name="brokerURL" value="tcp://localhost:61616" /> -->
+		<property name="brokerURL" value="vm://localhost" />
+	</bean>
+	<!-- 配置事务管理器 -->
+	<camel:errorHandler id="transactionErrorHandler"
+		type="TransactionErrorHandler" transactionManagerRef="transactionManager" />
+	<bean id="transactionManager"
+		class="org.springframework.jms.connection.JmsTransactionManager">
+		<property name="connectionFactory" ref="jmsConnectionFactory" />
+	</bean>
+
+	<bean id="ESBMQ" class="org.apache.camel.component.jms.JmsComponent">
+		<property name="connectionFactory" ref="jmsConnectionFactory" />
+		<property name="transacted" value="true" />
+		<property name="transactionManager" ref="transactionManager" />
+		<property name="cacheLevelName" value="CACHE_NONE" />
+		<property name="concurrentConsumers" value="5" />
+		<property name="maxConcurrentConsumers" value="10" />
+	</bean>
+
+	<!-- 头信息验证工具 -->
+	<bean id="validateHeaderUtil" class="com.deppon.esb.server.common.utils.ValidateHeaderUtil">
+		<property name="configLoader" ref="serviceConfigLoader" />
+	</bean>
+	<!-- 用于验证的动态路由 -->
+	<bean id="validateDynamicRouter"
+		class="com.deppon.esb.server.common.dynamicroute.ValidateDynamicRouter">
+		<property name="validateHeaderUtil" ref="validateHeaderUtil"></property>
+	</bean>
+
+	<!-- 动态路由用于根据服务配置信息判断下一节点位置的动态路由 -->
+	<bean id="dynamicRouterBean"
+		class="com.deppon.esb.server.common.dynamicroute.DynamicRouterBean">
+		<property name="configLoader" ref="serviceConfigLoader" />
+	</bean>
+
+	<!-- 消息校验失败后的，记录失败队列和异常队列处理 -->
+	<bean id="exceptionProcessor"
+		class="com.deppon.esb.server.common.processor.ExceptionProcessor">
+		<property name="failQueueName" value="QU_ESB_FAILURE" />
+		<property name="exceptionQueueName" value="QU_ESB_EXCEPTION" />
+		<property name="jmsTemplate" ref="jmsTemplate" />
+	</bean>
+	<!-- 规范处理类。继承自camel的Processor。 记录审计日志、添加状态信息：接收、转换、发送 仅适用于from是JMS的. -->
+	<bean id="specificationsProcess"
+		class="com.deppon.esb.server.common.processor.SpecificationsProcess">
+		<property name="auditLogService" ref="auditLogService" />
+		<property name="configLoader" ref="serviceConfigLoader" />
+	</bean>
+	<!-- 状态处理类 -->
+	<bean id="statusProcess" class="com.deppon.esb.server.common.processor.StatusProcess">
+		<property name="statusService" ref="statusService" />
+	</bean>
+
+	<!-- JMS 模板 -->
+	<bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<property name="connectionFactory" ref="jmsConnectionFactory" />
+	</bean>
+	<!-- 处理发送审计日志信息 -->
+	<bean id="auditLogService"
+		class="com.deppon.esb.server.common.log.audit.impl.AuditLogService">
+		<property name="auditQueueName" value="QU_ESB_AUDITLOG" />
+		<property name="jmsTemplate" ref="jmsTemplate" />
+	</bean>
+	<!-- 处理发送异常信息 -->
+	<bean id="exceptionService"
+		class="com.deppon.esb.server.common.log.exception.impl.ExceptionService">
+		<property name="exceptionQueueName" value="QU_ESB_EXCEPTION" />
+		<property name="jmsTemplate" ref="jmsTemplate" />
+	</bean>
+	<!-- 处理发送状态处理信息 -->
+	<bean id="statusService"
+		class="com.deppon.esb.server.common.log.status.impl.StatusService">
+		<property name="statusQueueName" value="QU_ESB_STATUS" />
+		<property name="jmsTemplate" ref="jmsTemplate" />
+	</bean>
+
+	<bean id="serviceConfigLoader" class="com.deppon.esb.web.integration.jms.MockServiceConfigLoader" />
+</beans>

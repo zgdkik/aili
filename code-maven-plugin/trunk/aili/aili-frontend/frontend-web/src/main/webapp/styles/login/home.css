@@ -1,0 +1,9 @@
+@charset "utf-8";
+/* CSS Document */
+.homeMsg{
+	font-family: tahoma,arial,verdana,sans-serif,'宋体';font-size:15px;line-height:25px;left: 80px; 
+	top: 110px; z-index: 21;color:#111A1F;position: absolute;font-weight:bold;
+}
+.homeMsg ul li{
+	list-style-image:url(../../images/login/pointerSelected.png);
+}

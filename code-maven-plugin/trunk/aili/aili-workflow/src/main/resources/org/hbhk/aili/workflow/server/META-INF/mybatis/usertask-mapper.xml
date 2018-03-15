@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.hbhk.aili.workflow.server.dao.IUserTaskDao">
+
+	<select id="queryUserTaskList" resultType="org.hbhk.aili.workflow.share.vo.UserTaskVo" parameterType="map">
+		select 
+			r.ID_ as id,
+			r.execution_id_ as executionId,
+			r.proc_inst_Id_ as procinstId,
+			r.proc_def_id_ as prodefId,
+			r.assignee_ as assignee,
+			r.create_Time_ as createTime,
+			u.userName as userName,
+			f.create_time as logTime,
+			f.record_id as recordId
+		from t_auth_user as u,t_wf_flow_log as f,act_ru_task as r 
+		where r.proc_inst_Id_ = f.flow_id and r.ASSIGNEE_ != u.userName
+		<if test="assignee != null">
+		 	AND r.assignee_ = #{assignee}
+		</if>
+		<if test="id != null">
+		 	AND r.ID_ = #{id}
+		</if>
+	</select>
+	<select id="queryUserTask" resultType="org.hbhk.aili.workflow.share.vo.UserTaskVo" parameterType="map">
+		select 
+			r.ID_ as id,
+			r.execution_id_ as executionId,
+			r.proc_inst_Id_ as procinstId,
+			r.proc_def_id_ as prodefId,
+			r.assignee_ as assignee,
+			r.create_Time_ as createTime,
+			u.userName as userName,
+			f.create_time as logTime,
+			f.record_id as recordId
+		from t_auth_user as u,t_wf_flow_log as f,act_ru_task as r 
+		where r.proc_inst_Id_ = f.flow_id and r.ASSIGNEE_ != u.userName
+		<if test="assignee != null">
+		 	AND r.assignee_ = #{assignee}
+		</if>
+		<if test="id != null">
+		 	AND r.ID_ = #{id}
+		</if>
+	</select>
+</mapper>

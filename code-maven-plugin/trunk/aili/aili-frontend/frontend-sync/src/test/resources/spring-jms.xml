@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+			http://www.springframework.org/schema/beans 
+			http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+			http://www.springframework.org/schema/context 
+			http://www.springframework.org/schema/context/spring-context-3.0.xsd
+			http://www.springframework.org/schema/jee 
+			http://www.springframework.org/schema/jee/spring-jee-3.0.xsd
+			http://www.springframework.org/schema/tx 
+			http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+			http://www.springframework.org/schema/aop 
+			http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+			http://www.springframework.org/schema/util
+			http://www.springframework.org/schema/util/spring-util-3.0.xsd
+			">
+	<import resource="sqlsession.xml" />
+	<context:property-placeholder location="classpath*:spring-config.properties" />
+	<bean id="serverListener" class="com.deppon.dpap.module.sync.esb.listener.ServerListener" />
+
+	<!--接收请求 -->
+	<bean id="uumsAdminOrgListener"
+		class="com.deppon.dpap.module.sync.business.server.UumsAdminOrgListener" />
+	<bean id="uumsRoleListener"
+		class="com.deppon.dpap.module.sync.business.server.UumsRoleListener" />
+	<bean id="uumsEmployeeListenner"
+		class="com.deppon.dpap.module.sync.business.server.UumsEmployeeListenner" />
+	<bean id="uumsUserListener"
+		class="com.deppon.dpap.module.sync.business.server.UumsUserListener" />
+
+	<!--转换 -->
+	<bean id="syncOrganizationRequestTrans"
+		class="com.deppon.dpap.module.sync.business.transfer.SyncOrganizationRequestTrans" />
+	<bean id="syncOrganizationResponseTrans"
+		class="com.deppon.dpap.module.sync.business.transfer.SyncOrganizationResponseTrans" />
+	<bean id="syncRoleRequestTrans"
+		class="com.deppon.dpap.module.sync.business.transfer.SyncRoleRequestTrans" />
+	<bean id="syncRoleResponseTrans"
+		class="com.deppon.dpap.module.sync.business.transfer.SyncRoleResponseTrans" />
+	<bean id="syncEmployeeRequestTrans"
+		class="com.deppon.dpap.module.sync.business.transfer.SyncEmployeeRequestTrans" />
+	<bean id="syncEmployeeResponseTrans"
+		class="com.deppon.dpap.module.sync.business.transfer.SyncEmployeeResponseTrans" />
+	<bean id="syncUserInfoRequestTrans"
+		class="com.deppon.dpap.module.sync.business.transfer.SyncUserInfoRequestTrans" />
+	<bean id="syncUserInfoResponseTrans"
+		class="com.deppon.dpap.module.sync.business.transfer.SyncUserInfoResponseTrans" />
+
+ 	<bean id="connectionFactory" class="com.ibm.mq.jms.MQQueueConnectionFactory">
+		 <!-- <property name="transportType">
+			<util:constant static-field="com.ibm.mq.jms.JMSC.MQJMS_TP_CLIENT_MQ_TCPIP" />
+		</property>  -->
+		<property name="queueManager" value="QM_SYNC" />
+ 		<property name="hostName" value="10.224.68.65" />
+		<property name="channel" value="DPAP_SYNC.DATA" />
+		<property name="port" value="1415" />
+		<property name="CCSID" value="965" /> 
+	</bean> 
+
+<!-- 	<bean id="connectionFactory" class="com.ibm.mq.jms.MQQueueConnectionFactory">
+		 <property name="transportType">
+			<util:constant static-field="com.ibm.mq.jms.JMSC.MQJMS_TP_CLIENT_MQ_TCPIP" />
+		</property> 
+		<property name="queueManager" value="QM_APP" />
+ 		<property name="hostName" value="192.168.17.141" />
+		<property name="channel" value="CCS.CLIENT" />
+		<property name="port" value="1448" />
+		<property name="CCSID" value="1208" /> 
+	</bean> -->
+
+	<bean id="jmsTransactionManager"
+		class="org.springframework.jms.connection.JmsTransactionManager">
+		<property name="connectionFactory" ref="connectionFactory" />
+	</bean>
+	<bean id="jmsSender" class="com.deppon.dpap.module.sync.esb.sender.DefaultSender">
+		<property name="jmsTemplate" ref="jmsTemplate" />
+		<property name="queueName" value="QU_WDGH_REQUEST_COM_IN" />
+	</bean>
+
+	<tx:annotation-driven transaction-manager="jmsTransactionManager" />
+
+	<bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<property name="connectionFactory" ref="connectionFactory" />
+	</bean>
+
+	<bean id="serverThreadPool"
+		class="com.deppon.dpap.module.sync.esb.process.ServerThreadPool">
+		<property name="jmsTemplate" ref="jmsTemplate" />
+	</bean>
+
+	<bean id="configuration"
+		class="com.deppon.dpap.module.sync.esb.definition.Configuration"
+		scope="singleton" lazy-init="false">
+		<property name="serviceConfigMap">
+			<map>
+				<!--角色 -->
+				<entry key="WDGH_ESB2WDGH_WDGH_SYNC_ROLE">
+					<bean
+						class="com.deppon.dpap.module.sync.esb.definition.ServiceConfiguration">
+						<property name="reqConvertor" ref="syncRoleRequestTrans" />
+						<property name="resConvertor" ref="syncRoleResponseTrans" />
+						<property name="processor" ref="uumsRoleListener" />
+						<property name="responseQueue" value="RQ_WDGH_RESPONSE_COM_OUT" />
+						<property name="esbStatusQueue" value="RQ_ESB_STATUS" />
+					</bean>
+				</entry>
+				<!--人员信息 -->
+				<entry key="WDGH_ESB2WDGH_WDGH_SYNC_EMPLOYEE">
+					<bean
+						class="com.deppon.dpap.module.sync.esb.definition.ServiceConfiguration">
+						<property name="reqConvertor" ref="syncEmployeeRequestTrans" />
+						<property name="resConvertor" ref="syncEmployeeResponseTrans" />
+						<property name="processor" ref="uumsEmployeeListenner" />
+						<property name="responseQueue" value="RQ_WDGH_RESPONSE_COM_OUT" />
+						<property name="esbStatusQueue" value="RQ_ESB_STATUS" />
+					</bean>
+				</entry>
+				<!--部门信息 -->
+				<entry key="WDGH_ESB2WDGH_WDGH_SYNC_DEPARTMENT">
+					<bean
+						class="com.deppon.dpap.module.sync.esb.definition.ServiceConfiguration">
+						<property name="reqConvertor" ref="syncOrganizationRequestTrans" />
+						<property name="resConvertor" ref="syncOrganizationResponseTrans" />
+						<property name="processor" ref="uumsAdminOrgListener" />
+						<property name="responseQueue" value="RQ_WDGH_RESPONSE_COM_OUT" />
+						<property name="esbStatusQueue" value="RQ_ESB_STATUS" />
+					</bean>
+				</entry>
+				<!--用户信息 -->
+				<entry key="WDGH_ESB2WDGH_WDGH_SYNC_USER">
+					<bean
+						class="com.deppon.dpap.module.sync.esb.definition.ServiceConfiguration">
+						<property name="reqConvertor" ref="syncUserInfoRequestTrans" />
+						<property name="resConvertor" ref="syncUserInfoResponseTrans" />
+						<property name="processor" ref="uumsUserListener" />
+						<property name="responseQueue" value="RQ_WDGH_RESPONSE_COM_OUT" />
+						<property name="esbStatusQueue" value="RQ_ESB_STATUS" />
+					</bean>
+				</entry>
+			</map>
+		</property>
+		<property name="serverThreadPool" ref="serverThreadPool" />
+	</bean>
+
+
+	<!-- 服务端接收请求 -->
+	<!-- <bean id="serverContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer"> 
+		<property name="concurrentConsumers" value="8" /> <property name="destinationName" 
+		value="QU_WDGH_REQUEST_COM_IN" /> <property name="transactionManager" ref="jmsTransactionManager" 
+		/> <property name="messageListener" ref="serverListener" /> <property name="connectionFactory" 
+		ref="connectionFactory" /> <property name="messageSelector" value="backServiceCode 
+		in ('WDGH_ESB2WDGH_WDGH_SYNC_ROLE','WDGH_ESB2WDGH_WDGH_SYNC_DEPARTMENT','WDGH_ESB2WDGH_WDGH_SYNC_EMPLOYEE','WDGH_ESB2WDGH_WDGH_SYNC_USER')" 
+		/> </bean> -->
+
+	<!-- DAO层 -->
+	<!-- 部门数据访问 -->
+	<bean id="departmentDao"
+		class="com.deppon.dpap.module.organization.server.dao.impl.DepartmentDao">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+
+	<bean id="userDeptAuthorityDao"
+		class="com.deppon.dpap.module.authorization.server.dao.impl.UserDeptAuthorityDao">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+
+	<!-- 职员数据访问 -->
+	<bean id="employeeDao"
+		class="com.deppon.dpap.module.organization.server.dao.impl.EmployeeDao">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+
+	<!-- SERVICE层 -->
+	<!-- 部门管理服务 -->
+	<bean id="departmentService"
+		class="com.deppon.dpap.module.organization.server.service.impl.DepartmentService">
+		<property name="departmentDao" ref="departmentDao"></property>
+	</bean>
+
+	<!-- 职员管理服务 -->
+	<bean id="employeeService"
+		class="com.deppon.dpap.module.organization.server.service.impl.EmployeeService">
+		<property name="employeeDao" ref="employeeDao"></property>
+	</bean>
+
+	<!-- ACTION层 -->
+	<!-- 部门管理WEB接入层 -->
+	<bean id="departmentAction"
+		class="com.deppon.dpap.module.organization.server.action.DepartmentAction"
+		scope="prototype">
+		<property name="departmentService" ref="departmentService"></property>
+	</bean>
+
+	<!-- 功能管理WEB接入层 -->
+	<bean id="employeeAction"
+		class="com.deppon.dpap.module.organization.server.action.EmployeeAction"
+		scope="prototype">
+		<property name="employeeService" ref="employeeService"></property>
+	</bean>
+
+	<!-- 用户部门 -->
+	<bean id="userDeptAuthority"
+		class="com.deppon.dpap.module.authorization.server.action.UserDeptAuthorityAction"
+		scope="prototype">
+		<property name="departmentService" ref="departmentService" />
+		<property name="userDeptAuthorityService" ref="userDeptAuthorityService" />
+	</bean>
+
+	<bean id="userDeptAuthorityService"
+		class="com.deppon.dpap.module.authorization.server.service.impl.UserDeptAuthorityService">
+		<property name="userDeptAuthorityDao" ref="userDeptAuthorityDao" />
+		<property name="departmentService" ref="departmentService" />
+	</bean>
+	<!-- 用户部门 -->
+
+	<bean id="storage" class="com.deppon.dpap.framework.cache.storage.LocallyStorage">
+		<!-- <property name="client" ref="client"></property> -->
+		<property name="maxCapacity" value="10000" />
+	</bean>
+
+	<bean id="departmentCache"
+		class="com.deppon.dpap.module.organization.server.cache.DepartmentCache">
+		<property name="departmentDao" ref="departmentDao"></property>
+		<property name="storage" ref="storage"></property>
+		<property name="timeOut" value="600"></property>
+	</bean>
+</beans>

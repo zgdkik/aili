@@ -1,0 +1,40 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camel="http://camel.apache.org/schema/spring"
+	xsi:schemaLocation="
+         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+         http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
+
+	<camelContext xmlns="http://camel.apache.org/schema/spring">
+
+		<route>
+			<from uri="servlet:///route" />
+			<camel:dynamicRouter>
+				<camel:method bean="dynamicRouter" method="getDestination" />
+			</camel:dynamicRouter>
+		</route>
+
+	</camelContext>
+	<bean id="dynamicRouter"
+		class="org.hbhk.aili.route.http.processor.DynamicRouter"></bean>
+
+	<bean id="jmsConnectionFactory" class="org.apache.activemq.pool.PooledConnectionFactory"
+		destroy-method="stop">
+		<property name="connectionFactory">
+			<bean class="org.apache.activemq.ActiveMQConnectionFactory">
+				<property name="brokerURL" value="tcp://127.0.0.1:61616" />
+				<!-- <property name="userName"/> <property name="password"/> -->
+			</bean>
+		</property>
+		<property name="maxConnections" value="100"></property>
+	</bean>
+
+	<bean id="camelComponents"
+		class="org.hbhk.aili.route.jms.server.component.impl.CamelComponents">
+		<property name="components">
+			<list>
+				<bean
+					class="org.hbhk.aili.route.jms.server.component.impl.DefaultJmsComponent" />
+			</list>
+		</property>
+	</bean>
+</beans>

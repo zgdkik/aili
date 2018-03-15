@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camel="http://camel.apache.org/schema/spring"
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd
+        http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<context:annotation-config />
+	<tx:annotation-driven transaction-manager="transactionManager" />
+
+	<!-- 虚拟内存连接 -->
+	<bean id="jmsConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+		<!-- <property name="brokerURL" value="tcp://localhost:61616" /> -->
+		<property name="brokerURL" value="failover://tcp://localhost:61616" />
+	</bean>
+	<!-- 配置事务管理器 -->
+	<camel:errorHandler id="transactionErrorHandler"
+		type="TransactionErrorHandler" transactionManagerRef="transactionManager" />
+	<bean id="transactionManager"
+		class="org.springframework.jms.connection.JmsTransactionManager">
+		<property name="connectionFactory" ref="jmsConnectionFactory" />
+	</bean>
+	<bean id="jms" class="org.apache.camel.component.jms.JmsComponent">
+		<property name="connectionFactory" ref="jmsConnectionFactory" />
+		<property name="transacted" value="true" />
+		<property name="transactionManager" ref="transactionManager" />
+		<property name="cacheLevelName" value="CACHE_NONE" />
+		<property name="concurrentConsumers" value="5" />
+		<property name="maxConcurrentConsumers" value="10" />
+	</bean>
+
+	<bean id="validateDynamicRouter" class="org.hbhk.aili.route.server.jms.ValidateDynamicRouter"></bean>
+
+	<camelContext id="jms_common_camelContext"
+		errorHandlerRef="transactionErrorHandler" xmlns="http://camel.apache.org/schema/spring">
+
+		<route id="jms_request_out_route">
+			<from uri="jms:hbhk?disableReplyTo=true" />
+			<transacted />
+			<!-- 判断服务是否存在，如果不存在，走异常路由；如果存在，走正常路由 -->
+			<camel:dynamicRouter>
+				<camel:method bean="validateDynamicRouter" method="route" />
+			</camel:dynamicRouter>
+		</route>
+
+		<route id="normal">
+			<from uri="direct:normal" />
+			<!-- 根据服务编码发送对相应的队列 -->
+			<camel:dynamicRouter>
+				<camel:method bean="multiServerDynamicRouterBean"
+					method="route1" />
+			</camel:dynamicRouter>
+		</route>
+
+		<route id="multi_server">
+			<camel:from uri="direct:multi_server" />
+			<camel:log message="${property.backServiceCode.size}"
+				loggingLevel="DEBUG" />
+			<camel:process ref="multiServerCopyProcessor" />
+			<camel:loop>
+				<simple>${property.backServiceCode.size}</simple>
+				<camel:log message="multi_server ready send ..."
+					loggingLevel="DEBUG" />
+				<to uri="seda:multi_server_send" />
+			</camel:loop>
+		</route>
+
+		<route id="multi_server_send">
+			<from uri="seda:multi_server_send" />
+			<camel:log message="multi_server_send ready process and to ..."
+				loggingLevel="DEBUG" />
+			<process ref="multiServerProcessor" />
+			<camel:dynamicRouter>
+				<camel:method bean="multiServerDynamicRouterBean"
+					method="route2" />
+			</camel:dynamicRouter>
+		</route>
+
+		<!-- <route id="exception">
+			<from uri="direct:exception" />
+			<process ref="exceptionProcessor" />
+		</route> -->
+	</camelContext>
+
+	<bean id="multiServerDynamicRouterBean"
+		class="org.hbhk.aili.route.server.jms.MultiServerDynamicRouterBean">
+	</bean>
+	<bean id="multiServerCopyProcessor"
+		class="org.hbhk.aili.route.server.common.distribution.BodyCopyProcessor" />
+
+	<bean id="multiServerProcessor"
+		class="org.hbhk.aili.route.server.jms.MultiServerProcessor">
+	</bean>
+
+
+</beans>

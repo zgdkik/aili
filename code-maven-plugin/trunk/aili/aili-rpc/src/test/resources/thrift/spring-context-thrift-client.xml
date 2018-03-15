@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans.xsd 
+	http://www.springframework.org/schema/tx 
+	http://www.springframework.org/schema/tx/spring-tx.xsd 
+	http://www.springframework.org/schema/aop 
+	http://www.springframework.org/schema/aop/spring-aop.xsd 
+    http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context.xsd"
+       default-autowire="byName">
+	<!-- fixedAddress -->
+	<!--  
+    <bean id="userService" class="com.demo.thrift.ThriftServiceClientProxyFactory">
+        <property name="service" value="com.demo.service.UserService"></property>
+        <property name="serverAddress" value="127.0.0.1:9090:2"></property>
+        <property name="maxActive" value="5"></property>
+        <property name="idleTime" value="10000"></property>
+    </bean>
+    -->
+    <!-- zookeeper -->
+    <bean id="thriftZookeeper" class="org.hbhk.aili.rpc.server.thrift.zookeeper.ZookeeperFactory" destroy-method="close">
+    	<property name="connectString" value="127.0.0.1:2181"></property>
+    	<property name="namespace" value="hbhk/thrift"></property>
+    </bean>
+    <bean id="userService" class="org.hbhk.aili.rpc.server.thrift.ThriftServiceClientProxyFactory" destroy-method="close">
+        <property name="service" value="org.hbhk.aili.rpc.server.test.thrift.ThriftService"></property>
+        <property name="maxActive" value="5"/>
+        <property name="idleTime" value="1800000"/>
+        <property name="addressProvider">
+        	<bean class="org.hbhk.aili.rpc.server.thrift.support.impl.DynamicAddressProvider">
+        		<property name="configPath" value="UserServiceImpl"/>
+        		<property name="zookeeper" ref="thriftZookeeper"/>
+        	</bean>
+        </property>
+    </bean>
+    
+</beans>

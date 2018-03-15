@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<sheets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:noNamespaceSchemaLocation="exceltemplate-1.0.xsd">
+	
+	
+	<!-- 
+	<sheet name="transportAllNetBizCompWriter_Moddle">
+		<block start="A2" end="W2" loop="true" dataName="transportAllNetBizCompWriter_Moddle" loopClass="com.yimidida.metertick.report.share.vo.UnionWaybillReportVo">
+			<cell position="A2" dataName="consignedTm"/>
+			<cell position="B2" dataName="compCode"/>
+			<cell position="C2" dataName="provice"/>
+			<cell position="D2" dataName="listRDType"/>
+			<cell position="E2" dataName="quantity"/>
+			<cell position="F2" dataName="quantityTotal"/>
+			<cell position="G2" dataName="meterageWetghtTotal"/>
+			<cell position="H2" dataName="realWetghtTotal"/>
+			<cell position="I2" dataName="volume"/>
+			<cell position="J2" dataName="trafficFeeTotal"/>
+			<cell position="K2" dataName="goodsChargeFee"/>
+			<cell position="L2" dataName="goodsAgentFee"/>
+			<cell position="M2" dataName="insuranceFee"/>
+			<cell position="N2" dataName="singnedBackFee"/>
+			<cell position="O2" dataName="packageFee"/>
+			<cell position="P2" dataName="forwardFee"/>
+			<cell position="Q2" dataName="waitNotifyFee"/>
+			<cell position="R2" dataName="deliverFee"/>
+			<cell position="S2" dataName="debousGoodsFee"/>
+			<cell position="T2" dataName="debousGoodsServiceFee"/>
+			<cell position="U2" dataName="debousWayFee"/>
+			<cell position="V2" dataName="backCargoFee"/>
+			<cell position="W2" dataName="forkliftFee"/>
+			<cell position="X2" dataName="kickbacksFee"/>
+			<cell position="Y2" dataName="zhidanFee"/>
+		</block>
+	</sheet> -->
+	
+	
+	
+
+</sheets>

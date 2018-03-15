@@ -1,0 +1,227 @@
+/***************************************************
+* @name: form.css
+* @function: 自定义表单的样式
+***************************************************/
+
+.sfwl-form-field {
+	float: left;
+}
+
+.sfwl-form-group {
+	float: left;
+	margin: 0 0;
+	padding: 0 0;
+}
+
+.sfwl-form-field > .sfwl-label {
+	padding-top: 7px;
+	margin-bottom: 0;
+	text-align: right;
+	width: 80px;
+	float: left;
+	white-space: nowrap;
+	line-height: 7px;
+	margin: 4px 0px 4px 0px;
+}
+
+.sfwl-form-field > .sfwl-label-input {
+	margin-bottom: 0;
+	text-align: right;
+	width: 80px;
+	float: left;
+	white-space: nowrap;
+	line-height: 7px;
+	margin: 4px 0px 4px 0px;
+}
+
+.sfwl-form-field > .sfwl-control {
+	position: relative;
+	padding-right: 5px;
+	padding-left: 5px;
+	height: 20px;
+	width: 115px;
+	float: left;
+	margin: 4px 0px 4px 0px;
+}
+
+.sfwl-form-field > .sfwl-control > ul {
+	list-style-type:none; margin:0;width:100%;
+}
+.sfwl-form-field > .sfwl-control >ul li {
+	float: left;
+	margin-left: 5px
+}
+
+.controlText{
+	padding-top: 7px;
+	margin-bottom: 0;
+	text-align: left;
+	width: auto;
+	float: left;
+	white-space: nowrap;
+	line-height: 7px;
+	margin: 4px 0px 4px 0px;
+	padding-left: 5px}
+
+
+.sfwl-field1 {width:205px;}
+.sfwl-field2 {width:410px;}
+.sfwl-field3 {width:615px;}
+.sfwl-field4 { width:820px;}
+.sfwl-field5 { width:1025px;}
+
+
+.sfwl-col1 {width:222px;}
+.sfwl-col2 {width:427px;}
+.sfwl-col3 {width:632px;}
+.sfwl-col4 {width:837px;}
+.sfwl-col5 {width:1042px;}
+
+
+.sfwl-field2 > .sfwl-control {
+	position: relative;
+	padding-right: 5px;
+	padding-left: 5px;
+	float: left;
+	width: 320px;
+}
+
+.sfwl-field3 > .sfwl-control {
+	position: relative;
+	padding-right: 5px;
+	padding-left: 5px;
+	float: left;
+	width: 525px;
+}
+.BetweenInput{
+	position: relative;
+	padding-right: 5px;
+	padding-left: 5px;
+	height: 20px;
+	float: left;
+	margin: 4px 0px 4px 0px;
+}
+.BetweenInput> input{
+	width: 115px
+}
+.sfwl-field4 > .sfwl-control {
+	position: relative;
+	padding-right: 5px;
+	padding-left: 5px;
+	float: left;
+	width: 730px;
+}
+.sfwl-field5 > .sfwl-control {
+	position: relative;
+	padding-right: 5px;
+	padding-left: 5px;
+	float: left;
+	width: 935px;
+}
+
+.sfwl-col2 > .sfwl-control {
+	position: relative;
+	padding-right: 5px;
+	padding-left: 5px;
+	float: left;
+	width: 320px;
+}
+
+.sfwl-col3 > .sfwl-control {
+	position: relative;
+	padding-right: 5px;
+	padding-left: 5px;
+	float: left;
+	width: 525px;
+}
+
+.sfwl-col4 > .sfwl-control {
+	position: relative;
+	padding-right: 5px;
+	padding-left: 5px;
+	float: left;
+	width: 730px;
+}
+.sfwl-col5 > .sfwl-control {
+	position: relative;
+	padding-right: 5px;
+	padding-left: 5px;
+	float: left;
+	width: 935px;
+}
+
+
+.sfwl-row1 {height: 28px; overflow: auto;}
+.sfwl-row2 {height: 56px; overflow: auto;}
+.sfwl-row3 {height: 84px; overflow: auto;}
+.sfwl-row4 {height: 112px; overflow: auto;}
+.sfwl-row5 {height: 140px; overflow: auto;}
+.sfwl-row6 {height: 168px; overflow: auto;}
+.sfwl-row7 {height: 196px; overflow: auto;}
+.sfwl-row8 {height: 224px; overflow: auto;}
+.sfwl-row9 {height: 252px; overflow: auto;}
+.sfwl-row10 {height: 280px; overflow: auto;}
+.sfwl-row11 {height: 308px; overflow: auto;}
+.sfwl-row12 {height: 336px; overflow: auto;}
+.sfwl-row13 {height: 364px; overflow: auto;}
+.sfwl-row14 {height: 392px; overflow: auto;}
+.sfwl-row15 {height: 420px; overflow: auto;}
+
+.sfwl-row1 > .sfwl-control {height: 20px; overflow: auto;}
+.sfwl-row2 > .sfwl-control {height: 48px; overflow: auto;}
+.sfwl-row3 > .sfwl-control {height: 76px; overflow: auto;}
+.sfwl-row4 > .sfwl-control {height: 104px; overflow: auto;}
+.sfwl-row5 > .sfwl-control {height: 132px; overflow: auto;}
+.sfwl-row6 > .sfwl-control {height: 160px; overflow: auto;}
+.sfwl-row7 > .sfwl-control {height: 188px; overflow: auto;}
+.sfwl-row8 > .sfwl-control {height: 216px; overflow: auto;}
+.sfwl-row9 > .sfwl-control {height: 244px; overflow: auto;}
+.sfwl-row10 > .sfwl-control {height: 272px; overflow: auto;}
+.sfwl-row11 > .sfwl-control {height: 300px; overflow: auto;}
+.sfwl-row12 > .sfwl-control {height: 328px; overflow: auto;}
+.sfwl-row13 > .sfwl-control {height: 356px; overflow: auto;}
+.sfwl-row14 > .sfwl-control {height: 384px; overflow: auto;}
+.sfwl-row15 > .sfwl-control {height: 412px; overflow: auto;}
+
+
+/** 取消滚动条 */
+.sfwl-more{overflow-y:hidden!important;}
+
+.cover-full {width: 100%; height: 100%;}
+
+.checkbox {width:14px; height:14px;}
+
+
+
+.sf-popbox>.sf-form-field{
+
+}
+.sf-popbox>.sf-form-field>.sf-label{
+	width: 60px;
+}
+.sf-popbox>.sf-form-field>.sf-control{
+	width: 203px;
+}
+.sf-popbox>.sf-form-field:first-child>.sf-control{
+	width: 125px;
+}
+.sf-popbox>.sf-form-field>.sf-btns{
+	margin-top: 4px;
+}
+#_popbox>.sf-container>.after-toolbar{
+	top:34px;
+}
+
+TABLE.tablelist {
+	 MARGIN-LEFT: 4px; BORDER-COLLAPSE: collapse; FONT-FAMILY: Arial, Helvetica, sans-serif;
+}
+TABLE.tablelist TD {
+	font-size:12px;line-height:1.9; PADDING-LEFT: 5px; PADDING-RIGHT: 2px;padding-top: 4px;
+}
+
+.input-big{
+	width: 180px;
+}
+.num{
+	width: 80px;
+}

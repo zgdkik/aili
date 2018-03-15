@@ -1,0 +1,22 @@
+<?xml version="1.0" ?>
+<!DOCTYPE plugin PUBLIC "-//JPF//Java Plug-in Manifest 1.0" "http://jpf.sourceforge.net/plugin_1_0.dtd">
+<plugin id="org.hbhk.aili.client.login" version="0.0.1">
+	<requires>
+		<import plugin-id="org.hbhk.aili.client.boot"/>
+	</requires>
+	<runtime>
+		<library id="login.code" path="classes/" type="code">
+			<export prefix="*"/>
+		</library>
+	</runtime>
+	
+	
+	<extension plugin-id="org.hbhk.aili.client.boot" point-id="login" id="client-login">
+		<parameter id="login-class" value="org.hbhk.aili.client.login.Login" />
+	</extension>
+	<extension plugin-id="org.hbhk.aili.client.boot" point-id="plugins-all" id="login">
+	</extension>
+	
+	
+	
+</plugin>

@@ -1,0 +1,93 @@
+[#ftl]
+[#assign service="${entityName?uncap_first}Service"]
+package com.deppon.${projectName}.module.${moduleName}.server.action;
+
+import com.deppon.foss.framework.exception.BusinessException;
+import com.deppon.foss.framework.server.web.action.AbstractAction;
+import com.deppon.foss.framework.server.web.result.json.annotation.JSON;
+import com.deppon.${projectName}.module.${moduleName}.shared.domain.${entityName}Entity;
+import com.deppon.${projectName}.module.${moduleName}.server.service.I${entityName}Service;
+import com.deppon.${projectName}.module.${moduleName}.shared.vo.${entityName}Vo;
+import java.util.Arrays;
+import java.util.List;
+/**
+ * 
+ * @author ${authName}
+ * 
+ */
+@JSON
+public class ${entityName}Action extends AbstractAction {
+
+	private static final long serialVersionUID = 1L;
+	
+	private I${entityName}Service ${service};
+	
+	private ${entityName}Vo ${entityName?uncap_first}Vo;
+	
+	/** 新增  */
+	public String insert${entityName}() {
+		try {
+			this.${service}.insert(${entityName?uncap_first}Vo.get${entityName}());
+			return returnSuccess("dpap.code.gen.save.success");			
+		} catch (BusinessException e) {
+			return returnError(e);
+		}
+	}
+	/**删除 */
+	public String delete${entityName}() {
+		try {
+			String[] id = ${entityName?uncap_first}Vo.getIds().split(",");
+			List<String> ids = Arrays.asList(id);
+			this.${service}.delete(ids);
+			return returnSuccess("dpap.code.gen.delete.success");			
+		} catch (BusinessException e) {
+			return returnError(e);
+		}
+	}
+	
+	/** 修改 */
+	public String update${entityName}() {
+		try {
+			this.${service}.update(${entityName?uncap_first}Vo.get${entityName}());
+			return returnSuccess("dpap.code.gen.update.success");			
+		} catch (BusinessException e) {
+			return returnError(e);
+		}
+	}
+	
+	/** 查询所有 */
+	public String queryAll${entityName}() {
+		try {
+			List<${entityName}Entity> ${entityName?uncap_first}s = this.${service}.getAll();
+			${entityName?uncap_first}Vo.set${entityName}s(${entityName?uncap_first}s);
+			return returnSuccess();			
+		} catch (BusinessException e) {
+			return returnError(e);
+		}
+	}
+	
+	public String queryBy${entityName}() {
+		try {
+			${entityName}Entity entity=${entityName?uncap_first}Vo.get${entityName}();
+			List<${entityName}Entity> ${entityName?uncap_first}s = this.${service}.queryByEntity(entity,start,
+					limit);
+			totalCount = this.${service}.queryByEntityCount(entity);
+			${entityName?uncap_first}Vo.set${entityName}s(${entityName?uncap_first}s);
+			return returnSuccess();			
+		} catch (BusinessException e) {
+			return returnError(e);
+		}
+	}
+	
+	public void set${service?cap_first}(I${entityName}Service ${service}) {
+		this.${service} = ${service};
+	}
+	
+	public void set${entityName}Vo(${entityName}Vo ${entityName?uncap_first}Vo) {
+		this.${entityName?uncap_first}Vo = ${entityName?uncap_first}Vo;
+	}
+	
+	public ${entityName}Vo get${entityName}Vo() {
+		return this.${entityName?uncap_first}Vo;
+	}
+}

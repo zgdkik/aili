@@ -1,0 +1,97 @@
+package org.hbhk.${projectName}.${moduleName}.server.service.impl;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.hbhk.aili.base.server.context.UserContext;
+import org.hbhk.aili.base.share.util.UuidUtil;
+import org.hbhk.aili.mybatis.server.support.Page;
+import org.hbhk.aili.mybatis.server.support.Pagination;
+import org.hbhk.aili.mybatis.server.support.Sort;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+import org.apache.commons.lang3.StringUtils;
+import ${entityPackagName};
+import org.hbhk.${projectName}.${moduleName}.server.service.I${entityName}Service;
+import org.hbhk.${projectName}.${moduleName}.server.dao.I${entityName}Dao;
+
+ <#assign daovar =  "${fname[0]?lower_case}${fname[1..]}Dao" />
+/**
+ * @author  ${authName}
+ *
+ */
+@Service 
+public class ${fname}Service implements I${fname}Service {
+
+	private  Logger log = LoggerFactory.getLogger(${entityName}Service.class);
+	
+	@Autowired
+	private I${entityName}Dao ${daovar};
+
+	
+	@Override
+	@Transactional
+	public int insert(${entityName} t) {
+		if (StringUtils.isEmpty(t.getId())) {
+			t.setCreateTime(new Date());
+			t.setId(UuidUtil.getUuid());
+			t.setCreateUser(UserContext.getCurrentUser().getUserName());
+			${daovar}.insert(t);
+		} else {
+			t.setUpdateTime(new Date());
+			t.setUpdateUser(UserContext.getCurrentUser().getUserName());
+			${daovar}.update(t);
+		}
+		return 1;
+	}
+
+	@Override
+	@Transactional
+	public int update(${entityName} t) {
+		return ${daovar}.update(t);
+	}
+
+	@Override
+	public ${entityName} getById(String id) {
+		return ${daovar}.getById(id);
+	}
+
+	@Override
+	public List<${entityName}> get(Map<String, Object> params) {
+		return ${daovar}.get(params);
+	}
+
+	@Override
+	public List<${entityName}> getPage(Map<String, Object> params, int pageNum,
+			int pageSize) {
+		return ${daovar}.getPage(params, pageNum, pageSize);
+	}
+
+	@Override
+	public int getPageTotalCount(Map<String, Object> params) {
+		return ${daovar}.getPageTotalCount(params);
+	}
+
+	@Override
+	@Transactional
+	public int deleteById(String id) {
+		return ${daovar}.deleteById(id);
+	}
+
+	@Override
+	@Transactional
+	public int updateStatusById(String id, int status) {
+		return ${daovar}.updateStatusById(id, status);
+	}
+
+	@Override
+	public Pagination<${entityName}> getPagination(Map<String, Object> params,
+			Page page, Sort... sorts) {
+		return ${daovar}.getPagination(params, page, sorts);
+	}
+
+	
+}

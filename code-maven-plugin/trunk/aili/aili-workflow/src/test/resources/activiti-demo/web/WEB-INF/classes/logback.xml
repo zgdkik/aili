@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration>
+	<property name="OA_HOME" value="D:/log" />
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<!-- encoders are assigned the type ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<appender name="info" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${OA_HOME}/dynamiclog/info.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- daily rollover -->
+			<fileNamePattern>${OA_HOME}/dynamiclog/info.%d{yyyy-MM-dd}.log</fileNamePattern>
+			<!-- keep 30 days worth of history -->
+			<maxHistory>30</maxHistory>
+			<maxFileSize>20MB</maxFileSize>
+		</rollingPolicy>
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>INFO</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+		<!-- encoders are assigned the type ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
+		<encoder>
+			<pattern>
+				%d{HH:mm:ss.SSS} %-5level %logger{35} - %msg%n
+			</pattern>
+		</encoder>
+	</appender>
+
+	<appender name="debug" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${OA_HOME}/dynamiclog/debug.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- daily rollover -->
+			<fileNamePattern>${OA_HOME}/dynamiclog/debug.%d{yyyy-MM-dd}.log</fileNamePattern>
+			<!-- keep 30 days worth of history -->
+			<maxHistory>30</maxHistory>
+			<maxFileSize>20MB</maxFileSize>
+		</rollingPolicy>
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>DEBUG</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+		<!-- encoders are assigned the type ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
+		<encoder>
+			<pattern>
+				%d{HH:mm:ss.SSS} %-5level %logger{35} - %msg%n
+			</pattern>
+		</encoder>
+	</appender>
+
+	<appender name="error" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${OA_HOME}/dynamiclog/error.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- daily rollover -->
+			<fileNamePattern>${OA_HOME}/dynamiclog/error.%d{yyyy-MM-dd}.log</fileNamePattern>
+			<!-- keep 30 days worth of history -->
+			<maxHistory>30</maxHistory>
+			<maxFileSize>20MB</maxFileSize>
+		</rollingPolicy>
+		<!--<filter class="ch.qos.logback.classic.filter.LevelFilter"> <level>ERROR</level> <onMatch>ACCEPT</onMatch> <onMismatch>DENY</onMismatch> </filter> encoders are assigned the type ch.qos.logback.classic.encoder.PatternLayoutEncoder 
+			by default -->
+		<encoder>
+			<pattern>
+				<!--%d{HH:mm:ss.SSS} %-5level %logger{35} - %msg%n -->
+				%d{HH:mm:ss.SSS} - %msg%n
+			</pattern>
+		</encoder>
+	</appender>
+
+	<appender name="mybatis" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${OA_HOME}/dynamiclog/mybatis.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- daily rollover -->
+			<fileNamePattern>${OA_HOME}/dynamiclog/mybatis.%d{yyyy-MM-dd}.log</fileNamePattern>
+			<!-- keep 30 days worth of history -->
+			<maxHistory>30</maxHistory>
+			<maxFileSize>20MB</maxFileSize>
+		</rollingPolicy>
+		<encoder>
+			<pattern>
+				%d{HH:mm:ss.SSS} - %msg%n
+			</pattern>
+		</encoder>
+	</appender>
+
+	<logger name="org.activiti.demo" additivity="true">
+		<appender-ref ref="debug" />
+		<appender-ref ref="info" />
+		<appender-ref ref="error" />
+	</logger>
+
+	<logger name="org.mybatis" additivity="false">
+		<level value="debug" />
+		<appender-ref ref="mybatis" />
+	</logger>
+
+	<logger name="org.apache.ibatis">
+		<level value="debug" />
+		<appender-ref ref="mybatis" />
+	</logger>
+
+	<logger name="java.sql" additivity="true">
+		<level value="debug" />
+		<appender-ref ref="mybatis" />
+	</logger>
+
+	<root level="debug">
+		<appender-ref ref="STDOUT" />
+	</root>
+</configuration>

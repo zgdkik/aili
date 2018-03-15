@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+			http://www.springframework.org/schema/beans 
+			http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+			http://www.springframework.org/schema/context 
+			http://www.springframework.org/schema/context/spring-context-3.0.xsd
+			http://www.springframework.org/schema/jee 
+			http://www.springframework.org/schema/jee/spring-jee-3.2.xsd
+			http://www.springframework.org/schema/tx 
+			http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+			http://www.springframework.org/schema/aop 
+			http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+			http://www.springframework.org/schema/util
+			http://www.springframework.org/schema/util/spring-util-3.2.xsd "  >
+
+	<bean id="serverListener" class="com.deppon.dpap.module.sync.esb.listener.ServerListener" />
+
+	<!--接收请求 -->
+	<bean id="uumsAdminOrgListener" class="com.deppon.dpap.module.sync.business.server.UumsAdminOrgListener" >
+		<property name="departmentService" ref="departmentService"></property>
+		<property name="userDeptAuthorityService" ref="userDeptAuthorityService"></property>
+	</bean>
+	<bean id="uumsRoleListener" class="com.deppon.dpap.module.sync.business.server.UumsRoleListener">
+		<property name="roleService" ref="roleService"></property>
+	</bean>
+	<bean id="uumsEmployeeListenner" class="com.deppon.dpap.module.sync.business.server.UumsEmployeeListenner">
+		<property name="employeeService" ref="employeeService"></property>
+	</bean>
+	<bean id="uumsUserListener" class="com.deppon.dpap.module.sync.business.server.UumsUserListener">
+		<property name="userService" ref="userService"></property>
+	</bean>
+	
+	<!--转换 -->
+	<bean id="syncOrganizationRequestTrans" class="com.deppon.dpap.module.sync.business.transfer.SyncOrganizationRequestTrans" />
+	<bean id="syncOrganizationResponseTrans" class="com.deppon.dpap.module.sync.business.transfer.SyncOrganizationResponseTrans" />
+	<bean id="syncRoleRequestTrans" class="com.deppon.dpap.module.sync.business.transfer.SyncRoleRequestTrans" />
+	<bean id="syncRoleResponseTrans" class="com.deppon.dpap.module.sync.business.transfer.SyncRoleResponseTrans" />
+	<bean id="syncEmployeeRequestTrans" class="com.deppon.dpap.module.sync.business.transfer.SyncEmployeeRequestTrans" />
+	<bean id="syncEmployeeResponseTrans" class="com.deppon.dpap.module.sync.business.transfer.SyncEmployeeResponseTrans" />
+	<bean id="syncUserInfoRequestTrans" class="com.deppon.dpap.module.sync.business.transfer.SyncUserInfoRequestTrans" />
+	<bean id="syncUserInfoResponseTrans" class="com.deppon.dpap.module.sync.business.transfer.SyncUserInfoResponseTrans" />
+	
+	<context:annotation-config />
+	<context:component-scan base-package="com.deppon" />
+</beans>

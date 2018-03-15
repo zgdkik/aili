@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+		<typeAlias alias="sysUser" type="org.activiti.demo.domain.SysUser" />
+		<typeAlias alias="flowLog" type="org.activiti.demo.domain.FlowLog" />
+		<typeAlias alias="leave" type="org.activiti.demo.domain.Leave" />
+		<typeAlias alias="userTask" type="org.activiti.demo.domain.UserTask" />
+	</typeAliases>
+
+	<mappers>
+		<mapper resource="org/activiti/demo/dao/SysUserMapper.xml" /> 
+		<mapper resource="org/activiti/demo/dao/FlowLogMapper.xml" />
+		<mapper resource="org/activiti/demo/dao/LeaveMapper.xml" />
+		<mapper resource="org/activiti/demo/dao/UserTaskMapper.xml" />
+	</mappers>
+</configuration>

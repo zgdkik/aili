@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans     
+	   http://www.springframework.org/schema/beans/spring-beans.xsd     
+	   http://code.alibabatech.com/schema/dubbo        
+	   http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+	<!-- 提供方应用信息，用于计算依赖关系 -->
+	<dubbo:application name="hbhk" />
+
+	<!-- 使用multicast广播注册中心暴露服务地址 -->
+	<!-- <dubbo:registry address="multicast://224.5.6.7:1234" /> -->
+
+	<!-- 使用zookeeper注册中心暴露服务地址 --><!-- register="true" -->
+	<!-- <dubbo:registry  address="zookeeper://127.0.0.1:2182,zookeeper://127.0.0.1:2181" register="true" /> -->
+	<!-- <dubbo:registry protocol="zookeeper" address="127.0.0.1:2182,127.0.0.1:2181" register="true"  /> -->
+	<dubbo:registry protocol="zookeeper" address="139.196.180.16:2181" register="false"  />
+	<bean id="callbackService" class="org.hbhk.aili.rpc.server.dubbo.callback.impl.CallbackService" />
+	<dubbo:service interface="org.hbhk.aili.rpc.server.dubbo.callback.ICallbackService" ref="callbackService" connections="1" callbacks="10">
+	    <dubbo:method name="addListener">
+	        <dubbo:argument index="1" callback="true" />
+	        <!--也可以通过指定类型的方式-->
+	        <!--<dubbo:argument type="com.demo.CallbackListener" callback="true" />-->
+	    </dubbo:method>
+	</dubbo:service>
+	<!-- 用dubbo协议在20880端口暴露服务 -->
+ 	<dubbo:protocol name="dubbo" port="20880" />
+	<!-- scope="local" version="1.0" -->
+	<dubbo:provider protocol="dubbo" default="true"
+		 timeout="350000"    filter="userContextFilter" />
+
+
+<!-- 	<dubbo:monitor address="${dubbo.monitor.address}" /> -->
+
+
+	<!-- Service interface Concurrent Control -->
+	<!-- 
+		sent="true" 等待消息发出，消息发送失败将抛出异常。
+		sent="false" 不等待消息发出，将消息放入IO队列，即刻返回。
+		如果你只是想异步，完全忽略返回值，可以配置return="false"，以减少Future对象的创建和管理成本：
+	 -->
+	<!-- <dubbo:service ref="processData" interface="org.hbhk.aili.rpc.server.dubbo.IProcessData" >
+		<dubbo:method  name="deal" async="true" sent="true" return="false" />
+	</dubbo:service>
+ -->
+	<!-- Default Protocol -->
+	<!-- <dubbo:protocol server="netty" /> -->
+	<!-- <dubbo:protocol name="dubbo" port="20880" /> -->
+	<!-- designate implementation -->
+	<!-- <bean id="processData" class="org.hbhk.aili.rpc.server.dubbo.ProcessData" >
+	</bean> -->
+	
+	<dubbo:annotation package="org.hbhk.aili.rpc.server.dubbo.service" />
+
+</beans> 

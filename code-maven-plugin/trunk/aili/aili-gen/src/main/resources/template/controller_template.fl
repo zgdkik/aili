@@ -1,0 +1,71 @@
+package org.hbhk.${projectName}.${moduleName}.server.controller;
+
+import org.apache.commons.lang3.StringUtils;
+import org.hbhk.aili.base.server.annotation.QueryPage;
+import org.hbhk.aili.base.server.controller.AbstractController;
+import org.hbhk.aili.base.share.vo.QueryPageVo;
+import org.hbhk.aili.core.share.entity.ResultEntity;
+import org.hbhk.aili.mybatis.server.support.Pagination;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import ${entityPackagName};
+import org.hbhk.${projectName}.${moduleName}.server.service.I${entityName}Service;
+ <#assign service =  "${fname[0]?lower_case}${fname[1..]}Service" />
+/**
+ * @author  ${authName}
+ *
+ */
+@Controller
+@RequestMapping("/${fname?uncap_first}")
+public class ${fname}Controller extends AbstractController {
+
+	@Autowired
+	private I${fname}Service ${service};
+
+	@RequestMapping("/list")
+	public String client() {
+
+		return "/list";
+	}
+
+	@RequestMapping("/getPagination")
+	@ResponseBody
+	public Pagination<${entityName}> getPagination(@QueryPage QueryPageVo queryPageVo) {
+		queryPageVo.getParaMap().put("status", 1);
+		Pagination<${entityName}> pageInfo = ${service}.getPagination(
+				queryPageVo.getParaMap(), queryPageVo.getPage(),queryPageVo.getSorts());
+		return pageInfo;
+	}
+
+	@RequestMapping("/edit")
+	@ResponseBody
+	public ResultEntity edit(${entityName} entity, BindingResult bindingResult) {
+		validator(bindingResult);
+		String msg = "";
+		if (StringUtils.isNotEmpty(entity.getId())) {
+			msg = "修改成功!";
+		} else {
+			msg = "新增成功";
+		}
+		${service}.insert(entity);
+		return returnSuccess(msg);
+	}
+
+	@RequestMapping("/get/{id}")
+	@ResponseBody
+	public ResultEntity getById(@PathVariable String id) {
+		return returnSuccess(${service}.getById(id));
+	}
+	
+	@RequestMapping("/updateStatus/{id}")
+	@ResponseBody
+	public ResultEntity updateStatusById(@PathVariable String id) {
+		${service}.updateStatusById(id,0);
+		return returnSuccess("删除成功");
+	}
+}

@@ -1,0 +1,10 @@
+package org.hbhk.${projectName}.${moduleName}.server.service;
+
+import org.hbhk.aili.base.server.service.IBaseService;
+import ${entityPackagName};
+/**
+ * @author  ${authName}
+ */
+public interface I${fname}Service extends IBaseService<${entityName}, String> {
+	
+}

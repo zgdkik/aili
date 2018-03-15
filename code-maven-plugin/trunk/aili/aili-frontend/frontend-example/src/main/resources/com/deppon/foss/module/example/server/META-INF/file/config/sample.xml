@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE templates SYSTEM "/template.dtd">
+<TEMPLATES>
+   <TABLE SCHEMA="BSE" NAME="T_PACKCOST_BUDGET" ALIAS="material_cost" DESCRIPTION="material_cost" TABLE-TYPE="1" FILE-PATH="material_cost.xlsx" ROLE-SET="">
+     <HEADS>
+	    <TR>
+		  <TD COLSPAN="11">材料费用</TD>
+		</TR>
+		<TR>
+			<TD>公司编码</TD>
+			<TD>报表年度</TD>
+			<TD>牌号编码</TD>
+			<TD>牌号名称</TD>
+			<TD>材料大类编码</TD>			
+			<TD>材料大类名称</TD>			
+			<TD>材料编码</TD>			
+			<TD>材料名称</TD>			
+			<TD>计量单位</TD>			
+			<TD>年单价</TD>			
+			<TD>年单耗</TD>
+		</TR>
+	 </HEADS>
+	 <FIELDS>
+			<FIELD  NAME="PK_CORP"  ALIAS="公司编码" DATA-TYPE="java.lang.String"/>
+			<FIELD  NAME="VYEAR" ALIAS="年份" DATA-TYPE="java.lang.String"/>
+			<FIELD  NAME="INVCODE"  ALIAS="牌号编码" DATA-TYPE="java.lang.String"/>
+			<FIELD  NAME="INVNAME"  ALIAS="牌号名称" DATA-TYPE="java.lang.String"/>
+			<FIELD  NAME="VCODE"  ALIAS="材料大类编码"  DATA-TYPE="java.lang.String"/>
+			<FIELD  NAME="VNAME"  ALIAS="材料大类名称" DATA-TYPE="java.lang.String"/>
+			<FIELD  NAME="MCODE" ALIAS="材料编码" DATA-TYPE="java.lang.String"/>
+			<FIELD  NAME="MNAME"  ALIAS="材料名称"  DATA-TYPE="java.lang.String"/>						
+			<FIELD  NAME="MEASNAME"  ALIAS="计量单位" DATA-TYPE="java.lang.String"/>			
+			<FIELD  NAME="NREALPRICE" ALIAS="年单价" DATA-TYPE="java.math.BigDecimal"/>			
+			<FIELD  NAME="NAVGMNY"  ALIAS="年单耗" DATA-TYPE="java.math.BigDecimal"/>
+	 </FIELDS>
+   </TABLE>
+   
+   <TABLE SCHEMA="BSE" NAME="TEST_TRAIN_SIGN" ALIAS="开发培训签到" DESCRIPTION="开发培训签到" TABLE-TYPE="1" FILE-PATH="开发培训签到.xlsx" ROLE-SET="">
+     <HEADS>
+	    <TR>
+		  <TD COLSPAN="5">DPAP培训</TD>
+		</TR>
+		<TR>
+		  <TD COLSPAN="3">DPAP培训</TD>
+		  <TD>培训时间：</TD>
+		  <TD FIELD="TIME" FIELD-ALIAS="培训时间"></TD>
+		</TR>
+		<TR>
+			<TD COLSPAN="2">培训地点：</TD>
+			<TD FIELD="LOCATION" FIELD-ALIAS="培训地点"></TD>
+			<TD>监 督 人：</TD>
+			<TD FIELD="MONITOR" FIELD-ALIAS="监督人"></TD>
+		</TR>
+		<TR>
+			<TD>序号</TD>
+			<TD>姓名</TD>
+			<TD>部门</TD>
+			<TD>签到</TD>
+			<TD>备注</TD>			
+		</TR>
+	 </HEADS>
+	 <FIELDS>
+			<FIELD  NAME="SEQ"  ALIAS="序号" DATA-TYPE="java.lang.Integer"/>
+			<FIELD  NAME="STUDENT" ALIAS="姓名" DATA-TYPE="java.lang.String"/>
+			<FIELD  NAME="DEPARTMENT"  ALIAS="部门" DATA-TYPE="java.lang.String"/>
+			<FIELD  NAME="SIGN_STUDENT"  ALIAS="签到" DATA-TYPE="java.lang.String"/>
+			<FIELD  NAME="REMARK"  ALIAS="备注"  DATA-TYPE="java.lang.String"/>
+	 </FIELDS>
+   </TABLE>
+</TEMPLATES>

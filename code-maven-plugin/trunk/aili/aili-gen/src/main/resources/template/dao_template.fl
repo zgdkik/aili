@@ -1,0 +1,10 @@
+package org.hbhk.${projectName}.${moduleName}.server.dao;
+
+import org.hbhk.aili.mybatis.server.dao.IBaseDao;
+import ${entityPackagName};
+/**
+ * @author  ${authName}
+ */
+public interface I${fname}Dao  extends  IBaseDao<${entityName}, String>{
+	
+}

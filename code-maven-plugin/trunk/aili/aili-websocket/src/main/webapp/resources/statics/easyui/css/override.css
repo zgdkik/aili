@@ -1,0 +1,303 @@
+/***************************************************
+* @name: override.css
+* @function: 样式重新定义
+***************************************************/
+ 
+/**
+ * @name: override.css;
+ * @function: 样式重新定义;
+ **/
+ 
+/**easyui tab页中overflow出现滚动条*/ 
+.tabs-panels ,.tabs-panels-noborder .panel {
+	overflow: auto;
+} 
+ 
+/**easyui linkbutton的高度**/
+.l-btn-text{
+	line-height : 20px
+}
+.l-btn {
+	background: #EFEFEF;
+	color: black;
+	border: 1px solid #FAFAFA;
+	filter:progid:DXImageTransform.Microsoft.Gradient(enabled=false) ;
+}
+
+/**自定义布局的样式**/
+.ui-layout-pane { 
+	padding: 0px;
+}
+
+.tabs {
+	padding-left: 0px;
+	border-width: 0px 0px 0px 0px;
+}
+
+/* Grid提供元数据的Table默认不显示，避免出现卡屏 */
+.sfwl-grid{display:none;}
+.sfwl-editgrid{display:none;}
+.sfwl-treegrid{display:none;}
+
+.Wdate {
+  box-sizing: border-box;
+  border: #999 1px solid;
+  height: 20px;
+  width: 115px;
+  padding: 0 0 0 0;
+  margin:0 0 0 0;
+  background: #fff url(../image/datepick.png) no-repeat right;
+}
+
+.tabs-header{
+	background-color: #FFFFFF;
+}
+
+.panel-body {
+	background-color:  #FFFFFF;
+}
+
+input.validatebox-invalid {
+	border-color: #ffa8a8;
+	background-color: #fff3f3;
+	color: #404040;
+}
+.validatebox-invalid {
+	border-color: #ffa8a8;
+	background-color: #fff3f3;
+	color: #404040;
+}
+
+.textbox-invalid {
+	border-color: #ffa8a8 !important;
+	background-color: #fff3f3 !important;
+}
+
+.head-btn-icon {
+	display: inline-block;
+	width: 16px;
+	height: 14px;
+	cursor:pointer
+}
+
+.dg-proxy {
+	border: 1px solid #ccc;
+	width: 100px;
+	background: #fafafa;
+}
+
+.dg-proxy-error {
+	border: 1px solid #ffa8a8;
+	width: 100px;
+	background: #fafafa;
+}
+
+.dg-proxy-right {
+	border: 1px solid #ccc;
+	width: 100px;
+	background: #fafafa;
+}
+
+.textbox .textbox-text {
+	padding: 0px;
+}
+
+div.jbox .jbox-button {
+	cursor : auto
+}
+.uploadify-button{
+	border-radius : 3px;
+}
+
+.uploadify-queue-item {
+	background-color: white;
+}
+
+.btn {
+	border: 0;
+	background: #4D77A7;
+	color: #FFF;
+	font-size: 12px;
+	padding: 4px 10px;
+	line-height: 14px;
+	display: block;
+	width: 60px;
+}
+
+
+
+.sf-popbox{
+	width:113px; 
+	height:18px; 
+	margin:0px;
+	padding:0px; 
+	position: relative;
+	background-color: #fff;
+	vertical-align: middle;
+	display: inline-block;
+	overflow: hidden;
+	white-space: nowrap;
+	margin: 0;
+	padding: 0;
+}
+.sf-popbox{
+	background-color: rgb(255, 255, 255);
+	border-bottom-color: rgb(212, 212, 212);
+	border-bottom-left-radius: 0px;
+	border-bottom-right-radius: 0px;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+	border-collapse: separate;
+	border-image-outset: 0px;
+	border-image-repeat: stretch;
+	border-image-slice: 100%;
+	border-image-source: none;
+	border-image-width: 1;
+	border-left-color: rgb(212, 212, 212);
+	border-left-style: solid;
+	border-left-width: 1px;
+	border-right-color: rgb(212, 212, 212);
+	border-right-style: solid;
+	border-right-width: 1px;
+	border-top-color: rgb(212, 212, 212);
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	border-bottom-right-radius:5px;
+	border-bottom-left-radius:5px;
+	border-top-style: solid;
+	border-top-width: 1px;
+	color: rgb(255, 255, 255);
+	display: inline-block;
+	font-family: 'Microsoft YaHei';
+	font-size: 12px;
+	height: 20px;
+	line-height: 18px;
+	margin-bottom: 0px;
+	margin-left: 0px;
+	margin-right: 0px;
+	margin-top: 0px;
+	overflow-x: hidden;
+	overflow-y: hidden;
+	padding-bottom: 0px;
+	padding-left: 0px;
+	padding-right: 0px;
+	padding-top: 0px;
+	position: relative;
+	text-align: left;
+	vertical-align: middle;
+	white-space: nowrap;
+	width: 100%;
+	word-wrap: normal;
+	zoom: 1;
+	
+}
+td>.sf-popbox{
+	border-top-left-radius: 0px;
+	border-top-right-radius: 0px;
+	border-bottom-right-radius:0px;
+	border-bottom-left-radius:0px;
+}
+.sf-popbox>.icon-search{
+	border-collapse: separate;
+	color: rgb(255, 255, 255);
+	display: block;
+	font-family: 'Microsoft YaHei';
+	font-size: 12px;
+	height: 20px;
+	line-height: 18px;
+	position: absolute;
+	right: 0px;
+	text-align: left;
+	top: 0px;
+	white-space: nowrap;
+	width: 18px;
+	word-wrap: normal;
+	zoom: 1;
+	display:block;
+}
+.sf-popbox>.popbox-text {
+	-webkit-appearance: none;
+	-webkit-rtl-ordering: logical;
+	-webkit-user-select: text;
+	background-color: rgb(255, 255, 255);
+	border-bottom-color: rgb(170, 170, 170);
+	border-bottom-left-radius: 0px;
+	border-bottom-right-radius: 0px;
+	border-bottom-style: none;
+	border-bottom-width: 0px;
+	border-collapse: separate;
+	border-image-outset: 0px;
+	border-image-repeat: stretch;
+	border-image-slice: 100%;
+	border-image-source: none;
+	border-image-width: 1;
+	border-left-color: rgb(170, 170, 170);
+	border-left-style: none;
+	border-left-width: 0px;
+	border-right-color: rgb(170, 170, 170);
+	border-right-style: none;
+	border-right-width: 0px;
+	border-top-color: rgb(170, 170, 170);
+	border-top-left-radius: 0px;
+	border-top-right-radius: 0px;
+	border-top-style: none;
+	border-top-width: 0px;
+	cursor: auto;
+	display: inline-block;
+	font-family: 'Microsoft YaHei';
+	font-size: 12px;
+	font-stretch: normal;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: normal;
+	height: 16px;
+	letter-spacing: normal;
+	line-height: normal;
+	margin-bottom: 0px;
+	margin-left: 0px;
+	margin-right: 18px;
+	margin-top: 0px;
+	outline-style: none;
+	padding-bottom: 2px;
+	padding-left: 0px;
+	padding-right: 0px;
+	padding-top: 2px;
+	resize: none;
+	text-align: start;
+	text-indent: 0px;
+	text-rendering: auto;
+	text-shadow: none;
+	text-transform: none;
+	vertical-align: top;
+	white-space: normal;
+	word-spacing: 0px;
+	word-wrap: normal;
+	writing-mode: lr-tb;
+	width: 100%;
+	-webkit-writing-mode: horizontal-tb;
+	zoom: 1;
+}
+
+.popbox-text.validatebox-invalid {
+	border-color: #ffa8a8;
+	background-color: #fff3f3;
+	color: #404040;
+}
+
+.popbox-text.textbox-invalid {
+	border-color: #ffa8a8 !important;
+	background-color: #fff3f3 !important;
+}
+.sf-popbox.validatebox-invalid {
+	border-color: #ffa8a8;
+	background-color: #fff3f3;
+	color: #404040;
+}
+.l-btn-plain:hover {
+    background: #FCB714;
+    color: #000000;
+    border: 1px solid #ccc;
+    -moz-border-radius: 5px 5px 5px 5px;
+    -webkit-border-radius: 5px 5px 5px 5px;
+    border-radius: 5px 5px 5px 5px;
+}

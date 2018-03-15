@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://www.deppon.com/wdgh/inteface/domain/"
+	targetNamespace="http://www.deppon.com/wdgh/inteface/domain/"
+	elementFormDefault="qualified">
+	<!-- 同步角色信息 -->
+	<element name="syncRoleRequest" type="tns:SyncRoleRequest"/>
+	<element name="syncRoleResponse" type="tns:SyncRoleResponse"></element>
+	<complexType name="SyncRoleRequest">
+		<sequence>
+			<element name="roleid" type="string" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>角色ID</documentation>
+				</annotation>
+			</element>
+			<element name="roleName" type="string" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>角色名称</documentation>
+				</annotation>
+			</element>
+			<element name="roleStandardNumber" type="string" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>角色标准编码</documentation>
+				</annotation>
+			</element>
+			<element name="roleNumber" type="string" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>角色编码</documentation>
+				</annotation>
+			</element>
+			<element name="roleType" type="string" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>角色类别</documentation>
+				</annotation>
+			</element>
+			<element name="operateType" type="string" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>变动类别(新增、修改、删除)</documentation>
+				</annotation>
+			</element>
+			<element name="operateTime" type="string" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>变动时间</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="SyncRoleResponse">
+		<sequence>
+			<element name="sucessCount" type="int" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>成功总数</documentation>
+				</annotation>
+			</element>
+			<element name="failCount" type="int" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>失败总数</documentation>
+				</annotation>
+			</element>
+			<element name="details" type="tns:SyncRoleDetail" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>处理明细</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="SyncRoleDetail">
+		<sequence>
+			<element name="roleid" type="string" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation></documentation>
+				</annotation>
+			</element>
+			<element name="result" type="int" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>成功或失败(整数类型，0、失败；1、成功)</documentation>
+				</annotation>
+			</element>
+			<element name="reason" type="string" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>失败原因（当结果失败是必填）</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+</schema>

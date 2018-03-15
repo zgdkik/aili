@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camel="http://camel.apache.org/schema/spring"
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd
+        http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<context:annotation-config />
+	<tx:annotation-driven transaction-manager="transactionManager" />
+
+	<!-- 虚拟内存连接 -->
+	<bean id="jmsConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+		<!-- <property name="brokerURL" value="tcp://localhost:61616" /> -->
+		<property name="brokerURL" value="failover://tcp://localhost:61616" />
+	</bean>
+	<!-- 配置事务管理器 -->
+	<camel:errorHandler id="transactionErrorHandler"
+		type="TransactionErrorHandler" transactionManagerRef="transactionManager" />
+	<bean id="transactionManager"
+		class="org.springframework.jms.connection.JmsTransactionManager">
+		<property name="connectionFactory" ref="jmsConnectionFactory" />
+	</bean>
+
+	<bean id="jms" class="org.apache.camel.component.jms.JmsComponent">
+		<property name="connectionFactory" ref="jmsConnectionFactory" />
+		<property name="transacted" value="true" />
+		<property name="transactionManager" ref="transactionManager" />
+		<property name="cacheLevelName" value="CACHE_NONE" />
+		<property name="concurrentConsumers" value="5" />
+		<property name="maxConcurrentConsumers" value="10" />
+	</bean>
+	<bean id="testRouter" class="org.hbhk.aili.route.server.jms.TestRouter"></bean>
+	<bean id="testProcessor" class="org.hbhk.aili.route.server.jms.TestProcessor"></bean>
+	<bean id="dynamicRouter" class="org.hbhk.aili.route.server.jms.DynamicRouter"></bean>
+	<camelContext id="test_jms_camelContext" xmlns="http://camel.apache.org/schema/spring">
+
+		<!-- <route id="test_jms">
+			jms:queue:hbhk?disableReplyTo=true
+			<from uri="jms:queue:hbhk?disableReplyTo=true" />
+			<transacted />
+			<camel:dynamicRouter>
+				<camel:method bean="testRouter" method="route2" />
+			</camel:dynamicRouter>
+		</route> -->
+		<route id="normal">
+			<!-- jms:queue:hbhk?disableReplyTo=true -->
+			<from uri="jms:queue:hbhk?disableReplyTo=true" />
+			<process ref="testProcessor" />
+			<camel:dynamicRouter>
+				<camel:method bean="dynamicRouter" method="route" />
+			</camel:dynamicRouter>
+		</route>
+
+	</camelContext>
+
+	<!-- <camelContext xmlns="http://camel.apache.org/schema/spring">
+		<route>
+			<from uri="jms:queue:hbhk" />
+			<to uri="jms:queue:hbhk1" />
+		</route>
+	</camelContext> -->
+
+</beans>

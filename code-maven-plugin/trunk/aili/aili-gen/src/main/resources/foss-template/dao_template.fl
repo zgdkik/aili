@@ -1,0 +1,32 @@
+package com.deppon.${projectName}.module.${moduleName}.server.dao;
+
+import com.deppon.${projectName}.module.${moduleName}.shared.domain.${entityName}Entity;
+
+import java.util.List;
+
+/**
+ * 
+ * @author ${authName} ${.now}
+ * 
+ */
+public interface I${entityName}Dao {
+	
+	/** 新增 **/
+	void insert(${entityName}Entity entity);
+    
+    /** 删除  **/
+	void delete(List<String> ids,String modifyUser);
+	
+	/** 修改 **/
+	void update(${entityName}Entity entity);
+		
+	/** 获取所有的记录 **/
+	List<${entityName}Entity> getAll();
+	
+	/** 获取符合条件的记录 **/
+	List<${entityName}Entity> queryByEntity(${entityName}Entity entity, int start, int limit);
+	
+	/** 获取符合条件的记录数 */
+	Long queryByEntityCount(${entityName}Entity entity);
+	
+}

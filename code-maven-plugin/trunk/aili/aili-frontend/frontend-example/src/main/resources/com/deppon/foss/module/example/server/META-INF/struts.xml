@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN" "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<package name="example" namespace="/example" extends="dpap-default">
+		<!-- start excel导入模块 -->
+		<action name="excelIndex" class="excelTemplateAction">
+			<result name="success">index_excel.jsp</result>
+		</action>
+		<action name="getTemplateContent" class="excelTemplateAction" method="queryContent">
+			<result name="success" type="json">
+				<param name="includeProperties">templateList</param>
+			</result>
+			<result name="error" type="json" />
+		</action>
+		<action name="downLoadFile" class="excelTemplateAction" method="downLoadFile">
+		</action>
+		<action name="uploadExcel" class="excelUploadAction" method="upload">
+			<result name="success" type="json"></result>
+			<result name="error" type="json"></result>
+		</action>
+		<action name="currentTableBeanTransfer" class="excelUploadAction" method="currentTableBeanTransfer">
+			<result name="success" type="json"></result>
+		</action>
+		<action name="queryHistoryLoadTime" class="excelUploadAction" method="queryHistoryLoadTime">
+			<result name="success" type="json">
+				<param name="includeProperties">excelQueryData</param>
+			</result>
+			<result name="error" type="json"></result>
+		</action>
+		<action name="queryHistoryData" class="excelUploadAction" method="queryHistoryData">
+			<result name="success" type="json">
+				<param name="includeProperties">excelQueryData</param>
+			</result>
+			<result name="error" type="json"></result>
+		</action>
+		<action name="navigatePaging" class="excelUploadAction" method="navigatePaging">
+			<result name="success" type="json">
+				<param name="includeProperties">excelQueryData</param>
+			</result>
+			<result name="error" type="json"></result>
+		</action>
+		<action name="deleteDataByLoadTime" class="excelUploadAction" method="deleteDataByLoadTime">
+			<result name="success" type="json">
+				<param name="includeProperties">deleteFlg</param>
+			</result>
+			<result name="error" type="json"></result>
+		</action>
+		<!-- end excel导入模块 -->
+		
+		
+		<!-- start 网点查询模块 -->
+		<action name="networkQueryIndex" class="networkAnalyseAction">
+			<result name="success">index_network.jsp</result>
+		</action>
+		<action name="queryNetworksByCoordinate" class="networkAnalyseAction"
+			method="queryNetworksByCoordinate">
+			<result name="success" type="json"></result>
+			<result name="error" type="json"></result>
+		</action>
+		<!-- end 网点查询模块 -->
+	</package>
+</struts>

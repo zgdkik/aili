@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context.xsd
+           http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop 
+           http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<bean name="genericObjectPoolConfig" class="org.apache.commons.pool2.impl.GenericObjectPoolConfig">
+		<property name="maxWaitMillis" value="-1" />
+		<property name="maxTotal" value="10" />
+		<property name="minIdle" value="8" />
+		<property name="maxIdle" value="50" />
+	</bean>
+
+	<bean id="jedisCluster" class="org.hbhk.aili.cache.server.cluster.JedisClusterFactory">
+		<property name="addressConfig">
+			<value>classpath:redis3.properties</value>
+		</property>
+		<!-- 属性文件里 key的前缀 -->
+		<property name="addressKeyPrefix" value="address" />
+		<property name="timeout" value="300000" />
+		<property name="maxRedirections" value="6" />
+		<property name="genericObjectPoolConfig" ref="genericObjectPoolConfig" />
+	</bean>
+	<bean id="cacheTemplet" class="org.hbhk.aili.cache.server.templet.impl.Redis3CacheTemplet" >
+		<property name="jedisCluster" ref="jedisCluster"/>
+	</bean>
+	
+	<bean id="cacheSupportTest" class="org.hbhk.aili.cache.server.CacheSupportTest">
+		<property name="cacheTemplet" ref="cacheTemplet" />
+	</bean> 
+</beans>
