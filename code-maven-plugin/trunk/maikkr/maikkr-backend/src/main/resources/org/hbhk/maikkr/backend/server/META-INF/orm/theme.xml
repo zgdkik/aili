@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<orm xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.hbhk.org/orm/sql"
+	xsi:schemaLocation="http://www.hbhk.org/orm/sql orm.xsd">
+	<select id="findThemeInfoListByQueryMapWithPage">
+		<sql>
+			select *from t_mkk_theme where
+			status !=2
+			#if(title)
+			and title name :name
+			#end
+			#if(type)
+			and type = :type
+			#end
+		</sql>
+	</select>
+</orm>

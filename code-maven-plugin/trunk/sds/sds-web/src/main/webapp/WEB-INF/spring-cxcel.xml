@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<!-- <bean id="excelManipulatorFactory" class="org.hbhk.aili.support.server.excel.poi.ExcelManipulatorFactory">
+		<property name="config"><value>excel/excel_template.xml</value></property>
+	</bean>
+	<bean id="carPlanRecordReader" factory-bean="excelManipulatorFactory" factory-method="createExcelReader">
+		<constructor-arg><value>carPlanRecord</value></constructor-arg>
+	</bean>
+	
+	<bean id="carPlanRecordWriter" factory-bean="excelManipulatorFactory" factory-method="createExcelWriter">
+		<constructor-arg><value>excel/carplanrecord.xlsx</value></constructor-arg>
+		<constructor-arg><value>carPlanRecord</value></constructor-arg>
+	</bean>
+	<bean id="carPlanRecordWriter_customer" factory-bean="excelManipulatorFactory" factory-method="createExcelWriter">
+		<constructor-arg><value>excel/carplanrecord_customer.xlsx</value></constructor-arg>
+		<constructor-arg><value>carPlanRecord_customer</value></constructor-arg>
+	</bean> -->
+	
+	
+</beans>

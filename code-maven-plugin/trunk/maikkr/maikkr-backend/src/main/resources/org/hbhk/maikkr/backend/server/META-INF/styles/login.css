@@ -1,0 +1,23 @@
+.lbg {
+	background: url(../../images/backend/login/lbg.gif)
+}
+.login01 {
+	background: url(../../images/backend/login/login01.jpg)
+}
+.login02 {
+	background: url(../../images/backend/login/login02.jpg)
+}
+.login03 {
+	background: url(../../images/backend/login/login03.jpg)
+}
+.login04 {
+	background: url(../../images/backend/login/login04.jpg)
+}
+.login05 {
+	background: url(../../images/backend/login/inputbg.gif)
+}
+
+.inputbg{
+	background: url(../../images/backend/login/inputbg.gif) repeat-x;
+}
+

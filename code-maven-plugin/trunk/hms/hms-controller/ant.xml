@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+
+<project basedir="." name="common" default="deploy">
+
+	<property name="webapp" value="${basedir}/../aili-web/target/webapp"/>
+	<property name="moduleName" value="common"/>
+	
+	<property name="fromdir-scripts" value="${webapp}/scripts/${moduleName}/"/>
+	<property name="fromdir-views" value="${webapp}/WEB-INF/views/${moduleName}/"/>
+	<property name="fromdir-styles" value="${webapp}/styles/${moduleName}/"/>
+	<property name="fromdir-fromdir" value="${basedir}/src/main/resources/org/hbhk/aili/${moduleName}/server/META-INF"/>
+	<property name="fromdir-fromdir-scripts" value="${fromdir-fromdir}/scripts"/>
+	<property name="fromdir-fromdir-views" value="${fromdir-fromdir}/views"/>
+	<property name="fromdir-fromdir-styles" value="${fromdir-fromdir}/styles"/>
+	
+
+	<property name="todir-scripts" value="${webapp}/scripts/${moduleName}/"/>
+	<property name="todir-views" value="${webapp}/WEB-INF/views/${moduleName}/"/>
+	<property name="todir-styles" value="${webapp}/styles/${moduleName}/" />
+	<property name="fromdir" value="${basedir}/src/main/resources/org/hbhk/aili/${moduleName}/server/META-INF"/>
+	<property name="scripts" value="${fromdir}/scripts"/>
+	<property name="views" value="${fromdir}/views"/>
+	<target name="deploy">
+		<copy todir="${todir-scripts}" overwrite="true" verbose="true">
+			<fileset dir="${scripts}">
+				<include name="**" />
+			</fileset>
+		</copy>
+
+		<copy todir="${todir-views}" overwrite="true" verbose="true">
+			<fileset dir="${views}">
+				<include name="**" />
+			</fileset>
+		</copy>
+
+		<copy todir="${fromdir-scripts}" overwrite="true" verbose="true">
+			<fileset dir="${fromdir-fromdir-scripts}">
+				<include name="**" />
+			</fileset>
+		</copy>
+
+		<copy todir="${fromdir-views}" overwrite="true" verbose="true">
+			<fileset dir="${fromdir-fromdir-views}">
+				<include name="**" />
+			</fileset>
+		</copy>
+	</target>
+</project>

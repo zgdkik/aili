@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.feisuo.sds.user.server.dao.IUserDao">
+	<!-- 用户基本信息 -->
+	<resultMap type="com.feisuo.sds.user.share.entity.UserEntity"
+		id="BaseResultMap">
+		<result property="id" column="id" />
+		<result property="userName" column="user_name" javaType="String" />
+		<result property="password" column="password" javaType="String" />
+		<result property="type" column="type" javaType="Integer" />
+		<result property="beginTime" column="begin_time" javaType="Date" />
+		<result property="beginTime" column="begin_time" javaType="Date" />
+		<result property="endTime" column="end_time" javaType="Date" />
+		<result property="lastLogin" column="last_login" javaType="Date" />
+		<result property="createUser" column="create_user" javaType="String" />
+		<result property="updateUser" column="update_user" javaType="String" />
+		<result property="updateTime" column="update_time" javaType="Date" />
+		<result property="status" column="status" javaType="Integer" />
+		<result property="type" column="type" javaType="Integer" />
+		<result property="createTime" column="create_time" javaType="Date" />
+		<result property="frozenStatus" column="frozen_status"
+			javaType="Integer" />
+	</resultMap>
+	<!-- 用户基本信息+角色信息 -->
+	<resultMap type="com.feisuo.sds.user.share.entity.UserEntity"
+		id="UserInfoResultMap" extends="BaseResultMap">
+		<collection property="roles"
+			ofType="com.feisuo.sds.user.share.entity.RoleEntity">
+			<id property="id" column="role_id" />
+			<result property="roleCode" column="role_code" javaType="String" />
+			<result property="roleName" column="role_name" javaType="String" />
+			<result property="roleDesc" column="role_desc" javaType="String" />
+			<result property="deptCode" column="dept_code" javaType="String" />
+			<result property="roleType" column="role_type" javaType="String" />
+		</collection>
+	</resultMap>
+
+	<!-- 用户假删除 -->
+	<update id="deleteUserById">
+		UPDATE t_auth_user
+		SET status = 3
+		WHERE
+		ID = #{value}
+	</update>
+
+	<resultMap id="userFunCodeUrisResultMap" type="com.feisuo.sds.user.share.vo.CurrentUserVo">
+		<id property="userId" column="id" />
+		<id property="userName" column="USER_CODE" />
+		<id property="userType" column="type" />
+		<collection property="functionCodes" column="CODE" ofType="String">
+			<result column="CODE" />
+		</collection>
+		<collection property="functionUris" column="URI" ofType="String">
+			<result column="URI" />
+		</collection>
+		<collection property="roleCodes" column="role_code" ofType="String">
+			<result column="role_code" />
+		</collection>
+	</resultMap>
+
+
+	<select id="checkUserName" parameterType="String" resultMap="BaseResultMap">
+		SELECT
+		*
+		FROM
+		t_auth_user T
+		WHERE
+		T .user_name = #{value}
+		AND T .status in(1,4)
+	</select>
+
+	<!-- 根据用户名更改账号状态 -->
+	<update id="updateStatusByUserName" parameterType="map">
+		UPDATE
+		t_auth_user
+		SET status = #{status},
+		update_user = #{updateUser},
+		update_time = #{updateTime}
+		WHERE
+		user_name = #{userName}
+	</update>
+
+	<!-- 根据用户名锁定账号 -->
+	<update id="frozenByNames" parameterType="map">
+		UPDATE t_auth_user
+		SET frozen_status = #{frozenStatus}
+		WHERE
+		user_name in
+		<foreach collection="userNames" index="index" item="userName"
+			open="(" separator="," close=")">
+			#{userName}
+		</foreach>
+	</update>
+
+	<!-- 根据用户名解锁账号 -->
+	<update id="unFrozenByNames" parameterType="map">
+
+		UPDATE t_auth_user
+		SET frozen_status = #{frozenStatus}
+		WHERE
+		user_name in
+		<foreach collection="userNames" index="index" item="userName"
+			open="(" separator="," close=")">
+			#{userName}
+		</foreach>
+	</update>
+
+	<select id="getCurrentUserList" parameterType="list"
+		resultMap="userFunCodeUrisResultMap">
+		SELECT u.id, UR.USER_CODE AS USER_CODE,u.type , a.privilege_code AS
+		CODE, a.URI AS URI ,ur.role_code as role_code
+		FROM t_auth_user_role UR, t_auth_role_privilege rf,
+		t_auth_privilege a ,t_auth_user
+		u
+		WHERE
+		 a.status=1
+		and  u.status in(1,4) 
+		
+		AND ur.role_code=rf.role_code
+		AND
+		rf.function_code= a.privilege_code
+		and u.user_name=ur.USER_CODE
+		AND ur.USER_CODE in
+		<foreach collection="userNames" index="index" item="userName"
+			open="(" separator="," close=")">
+			#{userName}
+		</foreach>
+	</select>
+	<!-- 根据用户名查询用户和角色信息 -->
+	<select id="getUserInfoById" resultMap="UserInfoResultMap">
+		SELECT
+		u.*, r. ID role_id,
+		r.role_code,
+		r.role_name,
+		r.role_type,
+		r.role_desc
+		FROM
+		t_auth_user u
+		LEFT
+		JOIN t_auth_user_role ur ON u.user_name = ur.user_code
+		LEFT JOIN
+		t_auth_role r ON ur.role_code = r.role_code
+		WHERE
+		u.status in (1,2)
+		and
+		u.id=#{id}
+	</select>
+	<!-- 分页查询用户信息 -->
+	<select id="queryUserInfoByPage" resultMap="UserInfoResultMap">
+		SELECT
+		u.*
+		FROM
+		t_auth_user u
+		WHERE
+		u.status = 1
+		AND u.type = 1
+		<if test="userName!=null and userName!=''">
+			and u.user_name like #{userName}
+		</if>
+		order by status
+	</select>
+	
+
+</mapper>

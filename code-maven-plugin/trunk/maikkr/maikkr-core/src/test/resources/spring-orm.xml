@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:hbhk="http://hbhk.aili.org/schema/hbhk"
+	xsi:schemaLocation="
+			http://www.springframework.org/schema/beans 
+			http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/context 
+			http://www.springframework.org/schema/context/spring-context.xsd
+			http://www.springframework.org/schema/jee 
+			http://www.springframework.org/schema/jee/spring-jee.xsd
+			http://www.springframework.org/schema/tx 
+			http://www.springframework.org/schema/tx/spring-tx.xsd
+			http://www.springframework.org/schema/aop 
+			http://www.springframework.org/schema/aop/spring-aop.xsd
+			http://hbhk.aili.org/schema/hbhk  
+			http://hbhk.aili.org/schema/hbhk/aili-spring-ext.xsd
+			">
+
+	<!-- 动态注入dao实现类 -->
+	<hbhk:dao-config base-package="org.hbhk.**.dao" />
+
+	<context:property-placeholder location="classpath:config.properties" />
+	<!-- 开启注解扫描 -->
+	<context:annotation-config />
+	<context:component-scan base-package="org.hbhk.**.server">
+		<context:exclude-filter type="annotation"
+			expression="org.springframework.stereotype.Controller" />
+		<context:exclude-filter type="annotation"
+			expression="org.springframework.web.bind.annotation.ControllerAdvice" />
+	</context:component-scan>
+	<!--开启注解代理  -->
+	<aop:aspectj-autoproxy />
+	<!-- 代理dao -->
+	<bean class="org.hbhk.aili.orm.server.aspect.QueryAspect"></bean>
+	
+	<!--数据源  -->
+	<bean id="dataSource" destroy-method="close"
+		class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="${db.driverClass}" />
+		<property name="url" value="${db.jdbcUrl}" />
+		<property name="username" value="${db.user}" />
+		<property name="password" value="${db.password}" />
+	</bean>
+	<!-- 事务注解支持 -->
+	<tx:annotation-driven transaction-manager="transactionManager" />
+	
+	<!-- 数据连接管理 -->
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	<!-- 验证码 -->
+	<bean id="captchaProducer" class="com.google.code.kaptcha.impl.DefaultKaptcha">
+		<property name="config">
+			<bean class="com.google.code.kaptcha.util.Config">
+				<constructor-arg>
+					<props>
+						<prop key="kaptcha.border">no</prop>
+						<prop key="kaptcha.border.color">105,179,90</prop>
+						<prop key="kaptcha.textproducer.font.color">red</prop>
+						<prop key="kaptcha.image.width">120</prop>
+						<prop key="kaptcha.textproducer.font.size">30</prop>
+						<prop key="kaptcha.image.height">35</prop>
+						<prop key="kaptcha.session.key">code</prop>
+						<prop key="kaptcha.textproducer.char.length">4</prop>
+						<prop key="kaptcha.textproducer.font.names">宋体,楷体,微软雅黑</prop>
+					</props>
+				</constructor-arg>
+			</bean>
+		</property>
+	</bean>
+	<!-- 缓存支持 -->
+	<!-- <bean class="org.hbhk.aili.cache.server.CacheSupport">
+		<property name="cacheTemplet" ref="memoryCacheTemplet"/>
+		<property name="expire" value="360000"/>
+	</bean> -->
+</beans>
+

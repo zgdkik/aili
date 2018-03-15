@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<orm xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.hbhk.org/orm/sql"
+	xsi:schemaLocation="http://www.hbhk.org/orm/sql orm.xsd">
+	<select id="FriendInfo.findAllFriendInfoList">
+		<sql>
+			select * from t_mkk_friend
+			where status !=2
+		</sql>
+	</select>
+	<select id="FriendInfo.findFriendInfoListByIds">
+		<sql>
+			select * from t_mkk_friend where
+			id in (
+			#for (id : ids)
+			id,
+			#end
+			-1)
+		</sql>
+	</select>
+	<select id="FriendInfo.findFriendInfoListByQueryMap">
+		<sql>
+			select * from t_mkk_friend where
+			status !=2
+			#if(friendUser)
+			and friendUser = ${friendUser}
+			#end
+		</sql>
+	</select>
+	<select id="FriendInfo.findFriendInfoListByQueryMapWithPage">
+		<sql>
+			select * from t_mkk_friend
+			where status !=2
+		</sql>
+	</select>
+
+	<select id="FriendInfo.findAllEffectFriendInfoList">
+		<sql>
+			select * from t_mkk_friend where status=1
+		</sql>
+	</select>
+	<select id="FriendInfo.findEffectFriendInfoListByQueryMap">
+		<sql>
+			select * from t_mkk_friend where status=1
+
+			#if(friendUser)
+			and friendUser = ${friendUser}
+			#end
+		</sql>
+	</select>
+	<select id="FriendInfo.findEffectFriendInfoListByQueryMapWithPage">
+		<sql>
+			select * from t_mkk_friend where status=1
+
+			#if(friendUser)
+			and friendUser = ${friendUser}
+			#end
+		</sql>
+	</select>
+
+	<update id="FriendInfo.enableOrDisableFriendInfoByIds">
+		<sql>
+			update t_mkk_friend
+			set status=${status}
+			where
+			id in (
+			#for (id : ids)
+			id,
+			#end
+			-1)
+		</sql>
+	</update>
+</orm>
+

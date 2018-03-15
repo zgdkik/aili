@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.feisuo.sds.user.server.dao.IFunctionDao">
+
+	<resultMap id="FunResultMap"
+		type="com.feisuo.sds.user.share.entity.PrivilegeEntity">
+		<id column="id " property="id" />
+		<result column="status" property="status" />
+		<result column="update_time" property="updateTime" />
+		<result column="update_user" property="updateUser" />
+		<result column="create_user" property="createUser" />
+		<result column="create_time" property="createTime" />
+		<result column="privilege_code" property="privilegeCode" />
+		<result column="privilege_name" property="functionName" />
+		<result column="uri" property="uri" />
+		<result column="parent_code" property="parentCode" />
+		<result column="active" property="active" />
+		<result column="display_order" property="displayOrder" />
+		<result column="checkable" property="checkable" />
+		<result column="function_type" property="functionType" />
+		<result column="leaf" property="leaf" />
+		<result column="icon_cls" property="iconCls" />
+		<result column="cls" property="cls" />
+		<result column="function_desc" property="functionDesc" />
+	</resultMap>
+
+	<select id="getFunctionListByUris"  parameterType="list"
+		resultMap="FunResultMap">
+		select *from t_auth_privilege a where a.status=1 and a.active='Y'
+		and a.uri
+		in
+		<foreach collection="uris" index="index" item="uri" open="("
+			separator="," close=")">
+			#{uri}
+		</foreach>
+	</select>
+	
+	<select id="getCountByFunctionCode" parameterType="String"
+		resultType="int">
+		select count(*) from t_sds_role_function f where f.privilege_code=#{value}
+	</select>
+	
+	<!--根据父级获取子集返回对象 -->
+	<resultMap id="menuResultMap"
+		type="com.feisuo.sds.user.share.vo.MenuVo">
+		<id column="id " property="id" />
+		<result column="function_name" property="name" />
+		<result column="uri" property="url" />
+		<result column="display_order" property="sortNo" />
+		<result column="parent_code" property="parentId" />
+		<result column="privilege_code" property="acl" />
+		<collection property="childList" column="{code=privilege_code}"  javaType="java.util.ArrayList"
+			select="getMenuTree">
+		</collection>
+	</resultMap>
+
+	<!--根据父级id查询子级数据 -->
+	<select id="getMenuTree" resultMap="menuResultMap" parameterType="map">
+			select *from t_auth_privilege a where a.status=1 and a.active='Y'
+		    and a.parent_code=#{code}
+		    and a.function_type != 'F'
+		     and a.privilege_code != '8'
+		  <!--  and a.uri in
+		<foreach collection="uris" index="index" item="uri" open="("
+			separator="," close=")">
+			#{uri}
+		</foreach> -->
+	</select>
+
+</mapper>

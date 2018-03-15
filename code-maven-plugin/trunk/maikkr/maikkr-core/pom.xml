@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>maikkr</artifactId>
+		<groupId>org.hbhk.maikkr</groupId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<artifactId>maikkr-core</artifactId>
+	<packaging>jar</packaging>
+	<name>maikkr-core</name>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+	<repositories>
+		<repository>
+			<id>aili-repo</id>
+			<url>https://github.com/hbhk/aili-repo/raw/master/releases</url>
+		</repository>
+	</repositories>
+	<dependencies>
+		<dependency>
+			<groupId>org.hbhk.aili</groupId>
+			<artifactId>aili-core</artifactId>
+			<version>${aili-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hbhk.aili</groupId>
+			<artifactId>aili-security</artifactId>
+			<version>${aili-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hbhk.aili</groupId>
+			<artifactId>aili-orm</artifactId>
+			<version>${aili-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hbhk.aili</groupId>
+			<artifactId>aili-support</artifactId>
+			<version>${aili-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hbhk.aili</groupId>
+			<artifactId>aili-cache</artifactId>
+			<version>${aili-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+		</dependency>
+	</dependencies>
+</project>

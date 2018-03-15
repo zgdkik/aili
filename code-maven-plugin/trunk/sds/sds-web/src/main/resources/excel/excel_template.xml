@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<sheets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:noNamespaceSchemaLocation="exceltemplate-1.0.xsd">
+	<sheet name="demo1">		
+		<block start="A2" end="E2" loop="true" dataName="demoList">
+			<cell position="A2" dataName="name"/>
+			<cell position="B2" dataName="createUser"/>
+			<cell position="C2" dataName="createTime"/>
+			<cell position="D2" dataName="updateUser"/>
+			<cell position="E2" dataName="updateTime"/>
+		</block>
+	</sheet>
+	
+<!-- 	<sheet name="carPlanRecord">		
+		<block start="A2" end="J2" loop="true" dataName="carPlanRecordList" loopClass="com.feisuo.sds.recruit.share.vo.usecar.CarPlanRecordVo">
+			<cell position="A2" dataName="enpName"/>
+			<cell position="B2" dataName="repertoryName"/>
+			<cell position="C2" dataName="lineName"/>
+			<cell position="D2" dataName="createTime"/>
+			<cell position="E2" dataName="truckerName"/>
+			<cell position="F2" dataName="truckerPhone"/>
+			<cell position="G2" dataName="customerCost"/>
+			<cell position="H2" dataName="truckerCost"/>
+			<cell position="I2" dataName="remark"/>
+			<cell position="J2" dataName="id"/>
+		</block>
+	</sheet>	
+	
+		<sheet name="carPlanRecord_customer">		
+		<block start="A2" end="H2" loop="true" dataName="carPlanRecordList_customer" loopClass="com.feisuo.sds.recruit.share.vo.usecar.CarPlanRecordVo">
+			<cell position="A2" dataName="subName"/>
+			<cell position="B2" dataName="repertoryName"/>
+			<cell position="C2" dataName="lineName"/>
+			<cell position="D2" dataName="createTime"/>
+			<cell position="E2" dataName="truckerName"/>
+			<cell position="F2" dataName="truckerPhone"/>
+			<cell position="G2" dataName="customerCost"/>
+			<cell position="H2" dataName="remark"/>
+			<cell position="I2" dataName="id"/> 
+		</block>
+	</sheet>	 -->
+
+</sheets>

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.hbhk.hms</groupId>
+	<artifactId>hms</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>hms</name>
+	<url>https://github.com/hbhk/aili</url>
+	<licenses />
+	<scm>
+		<connection>scm:git:git://github.com/hbhk/aili-repo.git</connection>
+		<url>scm:git:git://github.com/hbhk/aili-repo.git</url>
+		<developerConnection>scm:git:git://github.com/hbhk/aili-repo.git</developerConnection>
+	</scm>
+	<developers>
+		<developer>
+			<id>HBHK</id>
+			<email>1024784402@qq.com</email>
+			<name>HBHK</name>
+		</developer>
+	</developers>
+	<modules>
+		<module>hms-api</module>
+		<module>hms-service</module>
+		<module>hms-controller</module>
+		<!-- <module>hms-web</module> -->
+	</modules>
+	<properties>
+		<aili-version>1.3.0-SNAPSHOT</aili-version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<hms-version>1.0.0-SNAPSHOT</hms-version>
+	</properties>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>javax.servlet</groupId>
+				<artifactId>servlet-api</artifactId>
+				<version>3.0-alpha-1</version>
+				<scope>provided</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<distributionManagement>
+
+		<repository>
+			<id>releases</id>
+			<url>http://120.27.115.240:8081/nexus/content/repositories/releases</url>
+			<uniqueVersion>false</uniqueVersion>
+		</repository>
+		<snapshotRepository>
+			<id>snapshots</id>
+			<url>http://120.27.115.240:8081/nexus/content/repositories/snapshots</url>
+			<uniqueVersion>false</uniqueVersion>
+		</snapshotRepository>
+	</distributionManagement>
+	<profiles>
+		<profile>
+			<id>dev</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+		</profile>
+		<profile>
+			<id>sit</id>
+			<properties>
+				<minimize>true</minimize>
+				<env>sit</env>
+				<gen-scope>test</gen-scope>
+			</properties>
+		</profile>
+		<profile>
+			<id>prd</id>
+			<properties>
+				<minimize>true</minimize>
+				<env>prd</env>
+				<gen-scope>test</gen-scope>
+			</properties>
+		</profile>
+	</profiles>
+	<build>
+		<plugins>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.5.1</version>
+				<configuration>
+					<source>${java-version}</source>
+					<target>${java-version}</target>
+					<encoding>${java-encoding}</encoding>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.6</version>
+				<configuration>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+
+		</plugins>
+
+	</build>
+</project>

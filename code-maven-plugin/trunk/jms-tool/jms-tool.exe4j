@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<exe4j version="4.2" transformSequenceNumber="1">
+  <directoryPresets config="E:/foss-bh-code/dev-20150917/jms-tool/target" />
+  <application name="jms-tool" distributionSourceDir="d:/089115/Desktop/111">
+    <languages>
+      <principalLanguage id="en" customLocalizationFile="" />
+    </languages>
+  </application>
+  <executable name="jms-tool" type="2" iconSet="false" iconFile="" executableDir="." redirectStderr="true" stderrFile="error.log" redirectStdout="false" stdoutFile="output.log" failOnStderrOutput="true" executableMode="1" changeWorkingDirectory="true" workingDirectory="." singleInstance="false" serviceStartType="2" serviceDependencies="" serviceDescription="" jreLocation="" executionLevel="asInvoker" checkConsoleParameter="false" amd64="false">
+    <messageSet />
+    <versionInfo include="false" fileVersion="" fileDescription="" legalCopyright="" internalName="" companyName="" productVersion="" />
+  </executable>
+  <splashScreen show="false" autoOff="true" alwaysOnTop="true" width="0" height="0" bitmapFile="" java6SplashScreen="false">
+    <text>
+      <statusLine x="20" y="20" text="" font="Arial" fontSize="8" fontColor="0,0,0" fontWeight="500" />
+      <versionLine x="20" y="40" text="version %VERSION%" font="Arial" fontSize="8" fontColor="0,0,0" fontWeight="500" />
+    </text>
+  </splashScreen>
+  <java mainClass="org.hbhk.aili.jms.server.main.JmsTool" vmParameters="" arguments="" allowVMPassthroughParameters="true" preferredVM="" minVersion="1.6" maxVersion="" allowBetaVM="false" jdkOnly="false">
+    <searchSequence>
+      <registry />
+      <envVar name="JAVA_HOME" />
+      <envVar name="JDK_HOME" />
+    </searchSequence>
+    <classPath>
+      <archive location="E:/foss-bh-code/dev-20150917/jms-tool/lib/activemq-core.jar" failOnError="false" />
+      <archive location="E:/foss-bh-code/dev-20150917/jms-tool/lib/activemq-pool.jar" failOnError="false" />
+      <archive location="E:/foss-bh-code/dev-20150917/jms-tool/lib/activemq-protobuf.jar" failOnError="false" />
+      <archive location="E:/foss-bh-code/dev-20150917/jms-tool/lib/aopalliance.jar" failOnError="false" />
+      <archive location="E:/foss-bh-code/dev-20150917/jms-tool/lib/commons-io.jar" failOnError="false" />
+      <archive location="E:/foss-bh-code/dev-20150917/jms-tool/lib/commons-lang.jar" failOnError="false" />
+      <archive location="E:/foss-bh-code/dev-20150917/jms-tool/lib/commons-logging.jar" failOnError="false" />
+      <archive location="E:/foss-bh-code/dev-20150917/jms-tool/lib/commons-net.jar" failOnError="false" />
+      <archive location="E:/foss-bh-code/dev-20150917/jms-tool/lib/commons-pool.jar" failOnError="false" />
+      <archive location="E:/foss-bh-code/dev-20150917/jms-tool/lib/commonservices.jar" failOnError="false" />
+      <archive location="E:/foss-bh-code/dev-20150917/jms-tool/lib/dhbcore.jar" failOnError="false" />
+      <archive location="E:/foss-bh-code/dev-20150917/jms-tool/lib/fscontext.jar" failOnError="false" />
+      <archive location="E:/foss-bh-code/dev-20150917/jms-tool/lib/geronimo-j2ee-management_1.1_spec.jar" failOnError="false" />
+      <archive location="E:/foss-bh-code/dev-20150917/jms-tool/lib/geronimo-jms_1.1_spec.jar" failOnError="false" />
+      <archive location="E:/foss-bh-code/dev-20150917/jms-tool/lib/geronimo-jta_1.0.1B_spec.jar" failOnError="false" />
+      <archive location="E:/foss-bh-code/dev-20150917/jms-tool/lib/hawtbuf.jar" failOnError="false" />
+      <archive location="E:/foss-bh-code/dev-20150917/jms-tool/lib/hawtdispatch-transport.jar" failOnError="false" />
+      <archive location="E:/foss-bh-code/dev-20150917/jms-tool/lib/hawtdispatch.jar" failOnError="false" />
+      <archive location="E:/foss-bh-code/dev-20150917/jms-tool/lib/headers.jar" failOnError="false" />
+      <archive location="E:/foss-bh-code/dev-20150917/jms-tool/lib/jasypt.jar" failOnError="false" />
+      <archive location="E:/foss-bh-code/dev-20150917/jms-tool/lib/jmqi.jar" failOnError="false" />
+      <archive location="E:/foss-bh-code/dev-20150917/jms-tool/lib/jms.jar" failOnError="false" />
+      <archive location="E:/foss-bh-code/dev-20150917/jms-tool/lib/jta.jar" failOnError="false" />
+      <archive location="E:/foss-bh-code/dev-20150917/jms-tool/lib/kahadb.jar" failOnError="false" />
+      <archive location="E:/foss-bh-code/dev-20150917/jms-tool/lib/logback-access.jar" failOnError="false" />
+      <archive location="E:/foss-bh-code/dev-20150917/jms-tool/lib/logback-classic.jar" failOnError="false" />
+      <archive location="E:/foss-bh-code/dev-20150917/jms-tool/lib/logback-core.jar" failOnError="false" />
+      <archive location="E:/foss-bh-code/dev-20150917/jms-tool/lib/mq.jar" failOnError="false" />
+      <archive location="E:/foss-bh-code/dev-20150917/jms-tool/lib/mqjms.jar" failOnError="false" />
+      <archive location="E:/foss-bh-code/dev-20150917/jms-tool/lib/mqtt-client.jar" failOnError="false" />
+      <archive location="E:/foss-bh-code/dev-20150917/jms-tool/lib/pcf.jar" failOnError="false" />
+      <archive location="E:/foss-bh-code/dev-20150917/jms-tool/lib/providerutil.jar" failOnError="false" />
+      <archive location="E:/foss-bh-code/dev-20150917/jms-tool/lib/providerutil.jar" failOnError="false" />
+      <archive location="E:/foss-bh-code/dev-20150917/jms-tool/lib/slf4j-api.jar" failOnError="false" />
+      <archive location="E:/foss-bh-code/dev-20150917/jms-tool/lib/spring-aop.jar" failOnError="false" />
+      <archive location="E:/foss-bh-code/dev-20150917/jms-tool/lib/spring-beans.jar" failOnError="false" />
+      <archive location="E:/foss-bh-code/dev-20150917/jms-tool/lib/spring-context.jar" failOnError="false" />
+      <archive location="E:/foss-bh-code/dev-20150917/jms-tool/lib/spring-core.jar" failOnError="false" />
+      <archive location="E:/foss-bh-code/dev-20150917/jms-tool/lib/spring-expression.jar" failOnError="false" />
+      <archive location="E:/foss-bh-code/dev-20150917/jms-tool/lib/spring-jms.jar" failOnError="false" />
+      <archive location="E:/foss-bh-code/dev-20150917/jms-tool/lib/spring-tx.jar" failOnError="false" />
+      <archive location="E:/foss-bh-code/dev-20150917/jms-tool/target/jms-tool-1.0.0.jar" failOnError="false" />
+    </classPath>
+    <nativeLibraryDirectories />
+  </java>
+  <includedFiles />
+  <unextractableFiles />
+</exe4j>
+

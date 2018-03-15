@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+ 
+<project basedir="." name="demo" default="deploy">
+
+	<property name="webapp" value="${basedir}/../logistics2-web/target/webapp"/>
+	
+    <property name="moduleName" value="demo"/>
+    <property name="todir-scripts" value="${webapp}/scripts/${moduleName}/"/>
+    <property name="todir-pages" value="${webapp}/WEB-INF/views/${moduleName}/"/>
+    <property name="todir-styles" value="${webapp}/styles/${moduleName}/"/>
+    <property name="fromdir" value="${basedir}/src/main/resources/com/feisuo/logistics/${ant.project.name}/server/META-INF"/>
+    <property name="scripts" value="${fromdir}/scripts"/>
+    <property name="pages" value="${fromdir}/views"/>
+    <property name="styles" value="${fromdir}/styles"/>
+ 
+    <target name="deploy">
+        <copy todir="${todir-scripts}" overwrite="true" verbose="true">
+            <fileset dir="${scripts}">
+                <include name="**" />
+            </fileset>
+        </copy>
+
+        <copy todir="${todir-pages}" overwrite="true" verbose="true">
+            <fileset dir="${pages}">
+                <include name="**" />
+            </fileset>
+        </copy>
+
+        <copy todir="${todir-styles}" overwrite="true" verbose="true">
+            <fileset dir="${styles}">
+                <include name="**" />
+            </fileset>
+        </copy>
+    </target>
+</project>

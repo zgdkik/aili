@@ -1,0 +1,24 @@
+.theme-font {
+	font-family: '宋体 Bold', '宋体';
+	font-weight: 700;
+	font-style: normal;
+	font-size: 12px;
+	color: #000000;
+}
+
+.pl {
+	font-family: '宋体 Regular', '宋体';
+	font-weight: 400;
+	font-style: normal;
+	font-size: 12px;
+}
+
+.pltext {
+	font-family: 'Arial Normal', 'Arial';
+	font-weight: 400;
+	font-style: normal;
+	font-size: 13px;
+	color: #333333;
+	text-align: left;
+	line-height: normal
+}

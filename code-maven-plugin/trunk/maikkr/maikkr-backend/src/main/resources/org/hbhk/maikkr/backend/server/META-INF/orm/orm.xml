@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<orm xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.hbhk.org/orm/sql"
+	xsi:schemaLocation="http://www.hbhk.org/orm/sql orm.xsd">
+	<select id="queryUsersByPage">
+		<sql>
+			select *from t_aili_user where
+			status !=2
+			#if(mail)
+			and mail like :mail
+			#end
+			#if(name)
+			and name like :name
+			#end
+		</sql>
+	</select>
+	<select id="queryAdminsByPage">
+		<sql>
+			select * from t_be_admin where
+			status !=2
+			#if(email)
+			and email like :email
+			#end
+			#if(name)
+			and name like :name
+			#end
+			#if(retrieveEmail)
+			and retrieveEmail like :retrieveEmail
+			#end
+		</sql>
+	</select>
+	
+	<select id="queryBlogsByPage">
+		<sql>
+			select *from t_mkk_blog blog where
+				blog.status !=2
+				#if(blogTitle)
+					and blog.blogTitle LIKE :blogTitle
+				#end
+				#if(blogContent)
+					and blog.blogContent LIKE :blogContent
+				#end
+				#if(blogUser)
+					and blog.blogUser LIKE :blogUser
+				#end
+		</sql>
+	</select>
+	
+	<select id="queryBlogGroupsByPage">
+		<sql>
+			SELECT com.id,com.commentUser,com.commentConcent,
+				com.createTime,blog.carType,blog.blogUser 
+				from t_mkk_comment com LEFT JOIN t_mkk_blog blog
+			  on com.blogId = blog.id 
+			WHERE blog.status !=2 and  com.status !=2 
+			#if(commentUser)
+				and com.commentUser  LIKE :commentUser
+			#end
+			#if(commentConcent)
+				and com.commentConcent  LIKE :commentConcent
+			#end
+			#if(blogTitle)
+				and blog.carType LIKE :carType
+			#end
+			#if(blogUser)
+				and blog.blogUser LIKE :blogUser
+			#end	
+		</sql>
+	</select>
+	
+	<select id="queryLogsByPage">
+		<sql>
+			select *from t_aili_login_log where
+			status !=2 
+			#if(user)
+			and user like :user
+			#end
+			order by createTime desc
+			
+		</sql>
+	</select>
+	
+	<select id="queryCommsByPage">
+		<sql>
+			select *from t_mkk_theme where
+			status !=2
+			#if(name)
+			and name like :name
+			#end
+			
+		</sql>
+	</select>
+</orm>

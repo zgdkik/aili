@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.feisuo.sds.common.server.dao.IDictDao">
+	
+	
+	<update id="editDictValueStatus" parameterType="com.feisuo.sds.common.share.entity.DictValueEntity">
+		update t_common_dict_value 
+		   set status=#{status},
+		       update_user=#{updateUser},
+		       update_time=#{updateTime}
+		   where dict_code=#{dictCode}
+	</update>
+	
+	
+
+</mapper>

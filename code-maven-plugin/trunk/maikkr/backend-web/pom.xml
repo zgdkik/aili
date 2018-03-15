@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.hbhk.maikkr</groupId>
+		<artifactId>maikkr</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<artifactId>backend-web</artifactId>
+	<packaging>war</packaging>
+
+	<properties>
+		<aili-version>1.0.0-SNAPSHOT</aili-version>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>org.hbhk.maikkr</groupId>
+			<artifactId>maikkr-core</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hbhk.maikkr</groupId>
+			<artifactId>maikkr-backend</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>p6spy</groupId>
+			<artifactId>p6spy</artifactId>
+			<version>2.1.0</version>
+		</dependency>
+		<!-- logback s -->
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-core</artifactId>
+			<version>1.1.2</version>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-access</artifactId>
+			<version>1.1.2</version>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>1.1.2</version>
+		</dependency>
+		<!-- logback e -->
+	</dependencies>
+
+	<build>
+		<filters>
+			<filter>src/main/filters/config-${env}.properties</filter>
+		</filters>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+			<resource>
+				<directory>src/main/webapp</directory>
+				<filtering>true</filtering>
+				<includes>
+					<include>**/*.*</include>
+				</includes>
+				<targetPath>${project.build.directory}/webapp</targetPath>
+			</resource>
+		</resources>
+		<plugins>
+			<!-- <plugin> <groupId>org.codehaus.mojo</groupId> <artifactId>tomcat-maven-plugin</artifactId> 
+				<version>1.1</version> <configuration> <server>mytomcat</server> <url>http://localhost:8181/manager/html</url> 
+				<path>/maikkr</path> <uriEncoding>utf-8</uriEncoding> <ignorePackaging>true</ignorePackaging> 
+				<warSourceDirectory>${project.build.directory}/webapp</warSourceDirectory> 
+				</configuration> </plugin> -->
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat6-maven-plugin</artifactId>
+				<version>2.2</version>
+				<configuration>
+					<path>/</path>
+					<port>80</port>
+					<warSourceDirectory>${project.build.directory}/webapp</warSourceDirectory> 
+				</configuration>
+			</plugin>
+
+			<!-- <plugin> <groupId>org.codehaus.mojo</groupId> <artifactId>tomcat-maven-plugin</artifactId> 
+				<version>1.1</version> <configuration> <charset>${project.build.sourceEncoding}</charset> 
+				<url>http://180.153.42.55/manager</url> <server>tomcat.server</server> <path>/mikkr</path> 
+				<port>80</port> <warFile>${project.build.directory}/mikkr.war</warFile> <warSourceDirectory>WebContent</warSourceDirectory> 
+				<uriEncoding>${project.build.sourceEncoding}</uriEncoding> </configuration> 
+				</plugin> -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.1.1</version>
+				<configuration>
+					<warName>mikkr</warName>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<profiles>
+		<profile>
+			<id>dev</id>
+			<properties>
+				<env>dev</env>
+			</properties>
+			<activation>
+				<!--默认启用的是dev环境配置 -->
+				<activeByDefault>true</activeByDefault>
+			</activation>
+		</profile>
+		<!-- 生产环境 -->
+		<profile>
+			<id>prd</id>
+			<properties>
+				<env>prd</env>
+			</properties>
+		</profile>
+		<!-- 测试环境 -->
+		<profile>
+			<id>test</id>
+			<properties>
+				<env>test</env>
+			</properties>
+		</profile>
+	</profiles>
+</project>

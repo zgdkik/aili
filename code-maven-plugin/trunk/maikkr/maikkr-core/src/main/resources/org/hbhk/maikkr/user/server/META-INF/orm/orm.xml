@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<orm xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.hbhk.org/orm/sql"
+	xsi:schemaLocation="http://www.hbhk.org/orm/sql orm.xsd">
+	<select id="blog_search">
+		<sql>
+			select *from t_mkk_blog blog where
+				blog.status=1
+				#if(q!="")
+					and (blog.blogTitle LIKE '${q}'
+					or blog.blogContent LIKE '${q}'
+					or blog.blogUser LIKE '${q}')
+				#end
+		</sql>
+	</select>
+	<update id="updateBlogsHit">
+			<sql>
+			update t_mkk_blog set blogHit = blogHit+1
+				 WHERE blogUrl = :blogUrl
+			</sql>
+	</update>
+	<select id="loadUserThemeType">
+		<sql>
+			select *from t_mkk_theme  t
+			 WHERE
+			 #if(cuser)
+			 t.creatUser= :cuser OR 
+			 #end
+			 t.type= :type
+		</sql>
+	</select>
+</orm>
