@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	version="2.5">
+	<display-name>aili</display-name>
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>/WEB-INF/spring.xml,classpath*:org/hbhk/**/server/META-INF/spring/spring.xml</param-value>
+	</context-param>
+	<context-param>
+		<param-name>resources</param-name>
+		<param-value>${resources.address}</param-value>
+	</context-param>
+	<context-param>
+		<param-name>spring.profiles.active</param-name>
+		<param-value>${env}</param-value>
+	</context-param>
+	<listener>
+		<listener-class>org.hbhk.aili.core.server.listener.AppContextLoaderListener</listener-class>
+	</listener>
+	<listener>
+		<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+	</listener>
+	<filter>
+		<filter-name>monitoring</filter-name>
+		<filter-class>net.bull.javamelody.MonitoringFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>monitoring</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<listener>
+		<listener-class>net.bull.javamelody.SessionListener</listener-class>
+	</listener>
+	<filter>
+		<filter-name>characterEncoding</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>forceEncoding</param-name>
+			<param-value>true</param-value><!-- 强制进行转码 -->
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>characterEncoding</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<filter>
+		<filter-name>frontendFilter</filter-name>
+		<filter-class>org.hbhk.aili.base.server.filter.FrontendFilter</filter-class>
+		<init-param>
+			<param-name>env</param-name>
+			<param-value>${env}</param-value>
+		</init-param>
+		<init-param>
+			<param-name>expire</param-name>
+			<param-value>30</param-value>
+		</init-param>
+		
+	</filter>
+	<filter-mapping>
+		<filter-name>frontendFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<servlet>
+		<servlet-name>springmvc</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/spring-mvc.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>springmvc</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+	<!-- 数据源配置 -->
+	<resource-ref>
+		<res-ref-name>jdbc/bi-write</res-ref-name>
+		<res-type>javax.sql.DataSource</res-type>
+		<res-auth>Container</res-auth>
+	</resource-ref>
+	
+	<resource-ref>
+		<res-ref-name>jdbc/bi-read</res-ref-name>
+		<res-type>javax.sql.DataSource</res-type>
+		<res-auth>Container</res-auth>
+	</resource-ref>
+
+	<!-- Welcome file lists -->
+	<welcome-file-list>
+		<welcome-file>/</welcome-file>
+	</welcome-file-list>
+
+	<error-page>
+		<error-code>404</error-code>
+		<location>/errors/404</location>
+	</error-page>
+	<error-page>
+		<error-code>500</error-code>
+		<location>/errors/error</location>
+	</error-page>
+	<session-config>
+		<session-timeout>30</session-timeout>
+	</session-config>
+
+</web-app>
