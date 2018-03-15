@@ -1,0 +1,3 @@
+【DP_ESB异常预警通知】
+从[${startTime}]到[${endTime}]之间，服务[${svcName}, ${svcCode}]发生异常次数[${excptnCount}]次，
+请注意查看ESB日志！

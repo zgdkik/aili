@@ -1,0 +1,105 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.deppon.esb</groupId>
+    <artifactId>esb-management</artifactId>
+    <version>2.0.1-SNAPSHOT</version>
+  </parent>
+  <artifactId>esb-management-rbackqe</artifactId>
+  <description>MQ回退队列处理</description>
+  
+  <properties>
+		<mq-version>1.0</mq-version>
+	</properties>
+	
+	<dependencies>
+		<!-- common lib -->
+		<dependency>
+			<groupId>com.deppon.esb</groupId>
+			<artifactId>esb-management-common</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.deppon.esb</groupId>
+			<artifactId>esb-management-svccfg</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+		</dependency>
+		<!-- mq lib -->
+		<dependency>
+			<groupId>com.ibm.mq</groupId>
+			<artifactId>jmqi</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.ibm.mq</groupId>
+			<artifactId>mq</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.ibm.mq</groupId>
+			<artifactId>pcf</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.ibm.mq</groupId>
+			<artifactId>commonservices</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.ibm.mq</groupId>
+			<artifactId>headers</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.ibm.mq</groupId>
+			<artifactId>mqjms</artifactId>
+			<version>${mq-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ibm.mq</groupId>
+			<artifactId>dhbcore</artifactId>
+			<version>${mq-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ibm.mq</groupId>
+			<artifactId>jms</artifactId>
+			<version>${mq-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ibm.mq</groupId>
+			<artifactId>fscontext</artifactId>
+			<version>${mq-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ibm.mq</groupId>
+			<artifactId>providerutil</artifactId>
+			<version>${mq-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ibm.mq</groupId>
+			<artifactId>jta</artifactId>
+			<version>${mq-version}</version>
+		</dependency>
+		<!-- dbcp only 4 test -->
+		<dependency>
+			<groupId>commons-dbcp</groupId>
+			<artifactId>commons-dbcp</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<!-- oracle lib -->
+		<dependency>
+			<groupId>oracle</groupId>
+			<artifactId>oracle-jdbc</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.dbunit</groupId>
+			<artifactId>dbunit</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+  
+</project>

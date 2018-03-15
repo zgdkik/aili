@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+	"-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.deppon.esb.management.svccfg.domain.SvcPointRelationInfo">
+
+	<resultMap id="svcpointRelationMap"
+		type="com.deppon.esb.management.svccfg.domain.SvcPointRelationInfo">
+		<result property="id" column="FID" />
+		<result property="frontSvcCode" column="FRONTSVCCODE" />
+		<result property="backSvcCode" column="FBACKSVCCODE" />
+	</resultMap>
+
+	<select id="getSvcpointRelation"  resultMap="svcpointRelationMap">
+		<![CDATA[
+		SELECT 	* FROM	T_ESB_SVCPOINT_RELATION  where FRONTSVCCODE = #{frontSvcCode}
+		]]>
+	
+	</select>
+
+	<insert id="saveSvcpointRelation"
+		parameterType="com.deppon.esb.management.svccfg.domain.SvcPointRelationInfo">
+		<![CDATA[
+			insert into T_ESB_SVCPOINT_RELATION(FID]]>
+		<if test="frontSvcCode != null"><![CDATA[,FRONTSVCCODE]]></if>
+		<if test="backSvcCode != null"><![CDATA[,FBACKSVCCODE]]></if>
+			<![CDATA[) values ( sys_guid()]]>
+		<if test="frontSvcCode != null"><![CDATA[,#{frontSvcCode}]]></if>
+		<if test="backSvcCode != null"><![CDATA[,#{backSvcCode}]]></if>
+		<![CDATA[)]]>
+	</insert>
+	
+	<delete id="deleteRelationById">
+	<![CDATA[	delete from T_ESB_SVCPOINT_RELATION where fid in]]>
+		<foreach collection="list" item="ids" open="(" separator="," close=")">
+			#{ids}
+		</foreach>
+	</delete>
+
+	<update id="updateRelation"
+		parameterType="com.deppon.esb.management.svccfg.domain.SvcPointRelationInfo">
+		<![CDATA[update T_ESB_SVCPOINT_RELATION o]]>
+		<set>
+			FID = FID
+			<if test="frontSvcCode != null and frontSvcCode !=''"><![CDATA[,FRONTSVCCODE=#{frontSvcCode}]]></if>
+			<if test="backSvcCode != null and backSvcCode !='' "><![CDATA[,FBACKSVCCODE=#{backSvcCode}]]></if>
+		</set>
+		<![CDATA[where FID=#{id}]]>
+	</update>
+	
+	<select id="isExistSvcpointRelation" parameterType="com.deppon.esb.management.svccfg.domain.SvcPointRelationInfo" resultMap="svcpointRelationMap">
+		SELECT 	* FROM	T_ESB_SVCPOINT_RELATION  where FRONTSVCCODE = #{frontSvcCode} and FBACKSVCCODE =#{backSvcCode}
+	</select>
+	
+	<delete id="deleteRelationByFrontSvcCode">
+	<![CDATA[	delete from T_ESB_SVCPOINT_RELATION where FRONTSVCCODE in]]>
+		<foreach collection="list" item="frontSvcCodes" open="(" separator="," close=")">
+			#{frontSvcCodes}
+		</foreach>
+	</delete>
+</mapper>

@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+	<T_ESB_NOTICE
+	FID='1'
+	SVCCODE='svccode'
+	STATISTICSTIME='2012-06-06 22:26:30.25'
+	SENDTIME='2012-06-06 22:26:30.25'
+	CONTENT='content'
+	TYPE='1'
+	/>
+</dataset>

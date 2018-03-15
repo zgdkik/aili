@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+	"-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.deppon.esb.management.svccfg.domain.SvcPointInfo">
+
+	<resultMap id="svcPointMap" type="com.deppon.esb.management.svccfg.domain.SvcPointInfo">
+		<result property="id" column="FID" jdbcType="VARCHAR" />
+		<result property="svcName" column="SVCNAME" jdbcType="NVARCHAR" />
+		<result property="svcCode" column="SVCCODE" jdbcType="NVARCHAR" />
+		<result property="svcProvdId" column="SVCPROVDID" jdbcType="NVARCHAR" />
+		<result property="svcAgrmt" column="SVCAGRMT" jdbcType="NVARCHAR" />
+		<result property="svcAddr" column="SVCADDR" jdbcType="NVARCHAR" />
+		<result property="frntOrBck" column="FRNTORBCK" jdbcType="CHAR" />
+		<result property="isAutoResend" column="ISAUTORESEND" jdbcType="CHAR" />
+		<result property="isRcdOrgBody" column="ISRCDORGBODY" jdbcType="CHAR" />
+		<result property="isRcdPfmcLog" column="ISRCDPFMCLOG" jdbcType="CHAR" />
+		<result property="isRcdErrLog" column="ISRCDERRLOG" jdbcType="CHAR" />
+		<result property="responseType" column="FRESPONSETYPE" jdbcType="VARCHAR" />
+		<result property="promptlyNotify" column="PROMPTLYNOTIFY" jdbcType="NUMERIC" />
+	</resultMap>
+	
+	<resultMap id="svcpointBean" type="com.deppon.esb.management.svccfg.domain.view.SvcpointBean">
+		<result property="id" column="FID" />
+		<result property="svcName" column="SVCNAME" />
+		<result property="svcCode" column="SVCCODE" />
+		<result property="svcProvdId" column="SVCPROVDID" />
+		<result property="svcAgrmt" column="SVCAGRMT" />
+		<result property="svcAddr" column="SVCADDR" />
+		<result property="frntOrBck" column="FRNTORBCK" />
+		<result property="isAutoResend" column="ISAUTORESEND" />
+		<result property="isRcdOrgBody" column="ISRCDORGBODY" />
+		<result property="isRcdPfmcLog" column="ISRCDPFMCLOG" />
+		<result property="isRcdErrLog" column="ISRCDERRLOG" />
+		<result property="promptlyNotify" column="PROMPTLYNOTIFY" />
+		<result property="responseType" column="FRESPONSETYPE" />
+		<result property="backSvcId" column="BACKSVCID"/>
+		<result property="backSvcName" column="BACKSVCNAME"/>
+	</resultMap>
+
+	<select id="loadConfigBySvcCode" parameterType="string" resultMap="svcPointMap">
+		select
+		SVCNAME,
+		SVCCODE,
+		FRNTORBCK,
+		SVCPROVDID,
+		SVCADDR,
+		SVCAGRMT,
+		FRESPONSETYPE,
+		ISRCDORGBODY,
+		ISRCDPFMCLOG,
+		ISRCDERRLOG,
+		FRESPONSETYPE,
+		PROMPTLYNOTIFY
+		from
+		T_ESB_SVCPOINT
+		where
+		SVCCODE=#{svcCode}
+	</select>
+
+	<select id="getTotalCount" resultType="Integer">
+		<![CDATA[
+		SELECT 	count(*) FROM	T_ESB_SVCPOINT
+		]]>
+		<where>
+			1=1
+			<if test="svcName !=null and svcName !=''"><![CDATA[and svcName like '%'||#{svcName}||'%']]></if>
+			<if test="svcCode !=null and svcCode !=''"><![CDATA[and svcCode =#{svcCode}]]></if>
+			<if test="svcProvdId !=null and svcProvdId !=''"><![CDATA[and svcProvdId = #{svcProvdId}]]></if>
+			<if test="svcAgrmt !=null and svcAgrmt !=''"><![CDATA[and svcAgrmt = #{svcAgrmt}]]></if>
+			<if test="svcAddr !=null and svcAddr !=''"><![CDATA[and svcAddr like '%'||#{svcAddr}||'%']]></if>
+			<if test="frntOrBck !=null and frntOrBck !=''"><![CDATA[and frntOrBck = #{frntOrBck}]]></if>
+			<if test="isAutoResend !=null and isAutoResend !=''"><![CDATA[and isAutoResend = #{isAutoResend}]]></if>
+			<if test="isRcdOrgBody !=null and isRcdOrgBody !=''"><![CDATA[and isRcdOrgBody = #{isRcdOrgBody}]]></if>
+			<if test="isRcdPfmcLog !=null and isRcdPfmcLog !=''"><![CDATA[and isRcdPfmcLog = #{isRcdPfmcLog}]]></if>
+			<if test="isRcdErrLog !=null and isRcdErrLog !=''"><![CDATA[and isRcdErrLog = #{isRcdErrLog}]]></if>
+		</where>
+	</select>
+
+	<select id="loadSvcpointByConditions" parameterType="Map" resultMap="svcPointMap">
+		<![CDATA[
+		SELECT 	* FROM	T_ESB_SVCPOINT
+		]]>
+		<where>
+			1=1
+			<if test="svcName !=null and svcName !=''"><![CDATA[and svcName like '%'||#{svcName}||'%']]></if>
+			<if test="svcCode !=null and svcCode !=''"><![CDATA[and svcCode =#{svcCode}]]></if>
+			<if test="svcProvdId !=null and svcProvdId !=''"><![CDATA[and svcProvdId = #{svcProvdId}]]></if>
+			<if test="svcAgrmt !=null and svcAgrmt !=''"><![CDATA[and svcAgrmt = #{svcAgrmt}]]></if>
+			<if test="svcAddr !=null and svcAddr !=''"><![CDATA[and svcAddr = #{svcAddr}]]></if>
+			<if test="frntOrBck !=null and frntOrBck !=''"><![CDATA[and frntOrBck = #{frntOrBck}]]></if>
+			<if test="isAutoResend !=null and isAutoResend !=''"><![CDATA[and isAutoResend = #{isAutoResend}]]></if>
+			<if test="isRcdOrgBody !=null and isRcdOrgBody !=''"><![CDATA[and isRcdOrgBody = #{isRcdOrgBody}]]></if>
+			<if test="isRcdPfmcLog !=null and isRcdPfmcLog !=''"><![CDATA[and isRcdPfmcLog = #{isRcdPfmcLog}]]></if>
+			<if test="isRcdErrLog !=null and isRcdErrLog !=''"><![CDATA[and isRcdErrLog = #{isRcdErrLog}]]></if>
+		</where>
+	</select>
+
+	<insert id="saveSvcpoint" parameterType="com.deppon.esb.management.svccfg.domain.SvcPointInfo">
+		<![CDATA[
+			insert into T_ESB_SVCPOINT(FID]]>
+		<if test="svcName != null"><![CDATA[,SVCNAME]]></if>
+		<if test="svcCode != null"><![CDATA[,SVCCODE]]></if>
+		<if test="svcProvdId != null"><![CDATA[,SVCPROVDID]]></if>
+		<if test="svcAgrmt != null"><![CDATA[,SVCAGRMT]]></if>
+		<if test="svcAddr != null"><![CDATA[,SVCADDR]]></if>
+		<if test="frntOrBck != null"><![CDATA[,FRNTORBCK]]></if>
+		<if test="responseType != null"><![CDATA[,FRESPONSETYPE]]></if>
+		<if test="isAutoResend != null"><![CDATA[,ISAUTORESEND]]></if>
+		<if test="isRcdOrgBody != null"><![CDATA[,ISRCDORGBODY]]></if>
+		<if test="isRcdPfmcLog != null"><![CDATA[,ISRCDPFMCLOG]]></if>
+		<if test="isRcdErrLog != null"><![CDATA[,ISRCDERRLOG]]></if>
+		<if test="promptlyNotify != null"><![CDATA[,PROMPTLYNOTIFY]]></if>
+			<![CDATA[) values ( sys_guid()]]>
+		<if test="svcName != null"><![CDATA[,#{svcName}]]></if>
+		<if test="svcCode != null"><![CDATA[,#{svcCode}]]></if>
+		<if test="svcProvdId != null"><![CDATA[,#{svcProvdId}]]></if>
+		<if test="svcAgrmt != null"><![CDATA[,#{svcAgrmt}]]></if>
+		<if test="svcAddr != null"><![CDATA[,#{svcAddr}]]></if>
+		<if test="frntOrBck != null"><![CDATA[,#{frntOrBck}]]></if>
+		<if test="responseType != null"><![CDATA[,#{responseType}]]></if>
+		<if test="isAutoResend != null"><![CDATA[,#{isAutoResend}]]></if>
+		<if test="isRcdOrgBody != null"><![CDATA[,#{isRcdOrgBody}]]></if>
+		<if test="isRcdPfmcLog != null"><![CDATA[,#{isRcdPfmcLog}]]></if>
+		<if test="isRcdErrLog != null"><![CDATA[,#{isRcdErrLog}]]></if>
+		<if test="promptlyNotify != null"><![CDATA[,#{promptlyNotify}]]></if>
+		<![CDATA[)]]>
+	</insert>
+
+	<delete id="deleteSvcpoint" parameterType="String">
+		delete from T_ESB_SVCPOINT where SVCCODE =#{svcCode}
+	</delete>
+
+	<update id="updateSvcpoint" parameterType="com.deppon.esb.management.svccfg.domain.SvcPointInfo">
+		<![CDATA[update T_ESB_SVCPOINT o]]>
+		<set>
+			FID = FID
+			<if test="svcName != null and svcName !=''"><![CDATA[,SVCNAME=#{svcName}]]></if>
+			<if test="svcProvdId != null and svcProvdId !='' "><![CDATA[,SVCPROVDID=#{svcProvdId}]]></if>
+			<if test="svcAgrmt != null and svcAgrmt !=''"><![CDATA[,SVCAGRMT=#{svcAgrmt}]]></if>
+			<if test="svcAddr != null and svcAddr != ''"><![CDATA[,SVCADDR=#{svcAddr}]]></if>
+			<if test="frntOrBck != null and frntOrBck !=''"><![CDATA[,FRNTORBCK=#{frntOrBck}]]></if>
+			<if test="responseType != null and responseType !=''"><![CDATA[,FRESPONSETYPE=#{responseType}]]></if>
+			<![CDATA[,ISAUTORESEND=#{isAutoResend,jdbcType=CHAR}
+			,ISRCDORGBODY=#{isRcdOrgBody,jdbcType=CHAR}
+			,ISRCDPFMCLOG=#{isRcdPfmcLog,jdbcType=CHAR}
+			,ISRCDERRLOG=#{isRcdErrLog,jdbcType=CHAR}
+			,PROMPTLYNOTIFY=#{promptlyNotify,jdbcType=NUMERIC}]]>
+		</set>
+		<![CDATA[where SVCCODE=#{svcCode}]]>
+	</update>
+	
+	<!-- 查询esb服务管理配置 -->
+	<select id="getSvcpointBean" parameterType="com.deppon.esb.management.svccfg.domain.view.SvcpointQueryBean" resultMap="svcpointBean">
+		<![CDATA[
+			select front.svcname,front.svccode,front.svcprovdid,front.svcagrmt,front.svcaddr,front.frntorbck,
+			front.isautoresend,front.isrcdorgbody,front.isrcdpfmclog,front.isrcderrlog,front.promptlynotify,
+       		front.fresponsetype ,back.fid BACKSVCID, back.svcname BACKSVCNAME
+			from t_esb_svcpoint front
+			left join t_esb_svcpoint_relation r on front.svccode = r.frontsvccode
+			left join t_esb_svcpoint back on r.fbacksvccode = back.svccode
+		]]>
+		<where>
+			front.frntOrBck = 'F' and front.svcprovdid='ESB'
+			<if test="frontSvcName !=null and frontSvcName !=''"><![CDATA[and front.svcname like '%'||#{frontSvcName}||'%']]></if>
+			<if test="backSvcName !=null and backSvcName !=''"><![CDATA[and back.svcname like '%'||#{backSvcName}||'%']]></if>
+			<if test="clientSystem !=null and clientSystem !=''"><![CDATA[and front.svccode like ''||#{clientSystem}||'%']]></if>
+			<if test="svcAgrmt !=null and svcAgrmt !=''"><![CDATA[and front.svcAgrmt = #{svcAgrmt}]]></if>
+			<if test="svcAddr !=null and svcAddr !=''"><![CDATA[and front.svcAddr like '%'||#{svcAddr}||'%']]></if>
+		</where>		
+	</select>
+	
+	<select id="getSvcpointBeanCount" parameterType="com.deppon.esb.management.svccfg.domain.view.SvcpointQueryBean" resultType="Integer">
+		<![CDATA[
+			select count(*)
+			  from t_esb_svcpoint front
+			  left join t_esb_svcpoint_relation r on front.svccode = r.frontsvccode
+			  left join t_esb_svcpoint back on r.fbacksvccode = back.svccode
+		]]>
+		<where>
+			front.frntOrBck = 'F' and front.svcprovdid='ESB'
+			<if test="frontSvcName !=null and frontSvcName !=''"><![CDATA[and front.svcname like '%'||#{frontSvcName}||'%']]></if>
+			<if test="backSvcName !=null and backSvcName !=''"><![CDATA[and back.svcname like '%'||#{backSvcName}||'%']]></if>
+			<if test="clientSystem !=null and clientSystem !=''"><![CDATA[and front.svccode like ''||#{clientSystem}||'%']]></if>
+			<if test="svcAgrmt !=null and svcAgrmt !=''"><![CDATA[and front.svcAgrmt = #{svcAgrmt}]]></if>
+			<if test="svcAddr !=null and svcAddr !=''"><![CDATA[and front.svcAddr like '%'||#{svcAddr}||'%']]></if>
+		</where>		
+	</select>
+	
+</mapper>

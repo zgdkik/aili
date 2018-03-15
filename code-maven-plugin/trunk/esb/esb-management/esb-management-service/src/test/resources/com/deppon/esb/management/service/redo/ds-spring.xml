@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:camel="http://camel.apache.org/schema/spring" xmlns:jee="http://www.springframework.org/schema/jee" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:cxf="http://camel.apache.org/schema/cxf" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd
+        http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.0.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+        http://camel.apache.org/schema/cxf http://camel.apache.org/schema/cxf/camel-cxf.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+		http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd">
+
+<!-- 	<context:annotation-config /> -->
+<!-- 	<context:component-scan base-package="com.deppon.esb.management.*"></context:component-scan> -->
+	<context:property-placeholder location="classpath*:com/deppon/esb/management/service/jdbc.properties"/>
+<!-- 	<bean id="properties" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"> -->
+<!-- 		<property name="locations"> -->
+<!-- 			<list> -->
+<!-- 				<value>classpath:com/deppon/esb/management/META-INF/jdbc.properties</value> -->
+<!-- 				<value>classpath:com/deppon/esb/util/META-INF/adapter/mail/mail.properties</value> -->
+<!-- 				<value>classpath:com/deppon/esb/util/META-INF/adapter/mail/mailtemplate.properties</value> -->
+<!-- 			</list> -->
+<!-- 		</property> -->
+<!-- 	</bean> -->
+
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="esbmgmtdb"></property>
+	</bean>
+
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="esbmgmtdb" />
+	</bean>
+
+	<tx:annotation-driven transaction-manager="transactionManager" />
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="mapperLocations" value="classpath*:com/deppon/esb/**/META-INF/ibatis/*.xml" />
+		<property name="dataSource" ref="esbmgmtdb" />
+		<property name="configLocation" value="com/deppon/esb/management/service/ibatis.xml" />
+	</bean>
+
+	<bean id="esbmgmtdb" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="${driverClassName}" />
+		<property name="url" value="${url}" />
+		<property name="username" value="${username}" />
+		<property name="password" value="${password}" />
+	</bean>
+
+	<bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<constructor-arg index="0" ref="jmsConnectionFactory"></constructor-arg>
+	</bean>
+	<bean id="jmsConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+		<property name="brokerURL" value="vm://localhost?broker.persistent=false&amp;broker.useJmx=false" />
+	</bean>
+</beans>

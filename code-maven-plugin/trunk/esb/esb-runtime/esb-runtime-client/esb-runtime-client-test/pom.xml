@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.hbhk.aili.esb</groupId>
+		<artifactId>esb</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+	</parent>
+	<artifactId>esb-runtime-client-test</artifactId>
+	<version>2.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.hbhk.aili.esb</groupId>
+			<artifactId>esb-runtime-common</artifactId>
+			<version>2.0.1-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+ 		<plugins>
+<!--			wsdl2java plugins
+			<plugin>
+				<groupId>org.apache.cxf</groupId>
+				<artifactId>cxf-codegen-plugin</artifactId>
+				<version>${cxf-version}</version>
+				<executions>
+					<execution>
+						<configuration>
+							<fork>always</fork>
+							<additionalJvmArgs>-Dfile.encoding=UTF-8</additionalJvmArgs>
+							<sourceRoot>${project.build.directory}/generated-sources/cxf</sourceRoot>
+							<wsdlOptions>
+								<wsdlOption>
+									<wsdl>${basedir}/src/main/resources/com/deppon/esb/client/foss/METE-INF/ws/foss4crm/FossService.wsdl</wsdl>
+									<bindingFiles>
+										<bindingFile>${basedir}/src/main/resources/com/deppon/esb/client/foss/META-INF/ws/foss4crm/FossService_binding.xml</bindingFile>
+									</bindingFiles>
+									<extraargs>
+										<extraarg>-p</extraarg>
+										<extraarg>com.deppon.crm2foss</extraarg>
+									</extraargs>
+								</wsdlOption>
+								<wsdlOption> <wsdl>${basedir}/src/main/resources/com/deppon/esb/client/foss/METE-INF/ws/foss4dip/FossOAService.wsdl</wsdl> 
+									<bindingFiles> <bindingFile>${basedir}/src/main/resources/com/deppon/esb/client/foss/META-INF/ws/foss4dip/FossOAService_binding.xml</bindingFile> 
+									</bindingFiles> <extraargs> <extraarg>-p</extraarg> <extraarg>com.deppon.dip2foss</extraarg> 
+									</extraargs> </wsdlOption> <wsdlOption> <wsdl>${basedir}/src/main/resources/com/deppon/esb/client/foss/METE-INF/ws/foss4edi/AirService.wsdl</wsdl> 
+									<bindingFiles> <bindingFile>${basedir}/src/main/resources/com/deppon/esb/client/foss/META-INF/ws/foss4edi/AirService_binding.xml</bindingFile> 
+									</bindingFiles> <extraargs> <extraarg>-p</extraarg> <extraarg>com.deppon.edi2foss</extraarg> 
+									</extraargs> </wsdlOption> <wsdlOption> <wsdl>${basedir}/src/main/resources/com/deppon/esb/client/foss/METE-INF/ws/foss4fin_self/foss_finmanager_service.wsdl</wsdl> 
+									<bindingFiles> <bindingFile>${basedir}/src/main/resources/com/deppon/esb/client/foss/META-INF/ws/foss4fin_self/foss_finmanager_service_binding.xml</bindingFile> 
+									</bindingFiles> <extraargs> <extraarg>-p</extraarg> <extraarg>com.deppon.finself2foss</extraarg> 
+									</extraargs> </wsdlOption> <wsdlOption> <wsdl>${basedir}/src/main/resources/com/deppon/esb/client/foss/METE-INF/ws/foss4gps/foss_gps_service.wsdl</wsdl> 
+									<bindingFiles> <bindingFile>${basedir}/src/main/resources/com/deppon/esb/client/foss/META-INF/ws/foss4gps/foss_gps_service_binding.xml</bindingFile> 
+									</bindingFiles> <extraargs> <extraarg>-p</extraarg> <extraarg>com.deppon.gps2foss</extraarg> 
+									</extraargs> </wsdlOption> <wsdlOption> <wsdl>${basedir}/src/main/resources/com/deppon/esb/client/foss/METE-INF/ws/foss4ows/AccountService.wsdl</wsdl> 
+									<bindingFiles> <bindingFile>${basedir}/src/main/resources/com/deppon/esb/client/foss/METE-INF/ws/foss4ows/AccountService_binding.xml</bindingFile> 
+									</bindingFiles> <extraargs> <extraarg>-p</extraarg> <extraarg>com.deppon.ows2foss</extraarg> 
+									</extraargs> </wsdlOption>
+							</wsdlOptions>
+						</configuration>
+
+						<id>generate-sources</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>wsdl2java</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin> -->
+			<!-- add resource to classpath -->
+<!-- 			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>add-source</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>add-source</goal>
+						</goals>
+						<configuration>
+							<sources>
+								<source>${project.build.directory}/generated-sources/cxf</source>
+							</sources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin> -->
+		</plugins>
+	</build>
+</project>

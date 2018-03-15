@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<package name="verification" namespace="/verification" extends="esb-default">
+		<!-- 主页页面 -->
+		<action name="index">
+			<result name="success">/WEB-INF/pages/verification/verificationIndex.jsp</result>
+		</action>
+		<action name="verifyMq" class="verifyAction" method="verifyMq">
+			<result name="success" type="json">
+				<param name="includeProperties">success,msg</param>
+			</result>
+		</action>
+		<action name="verifyDb" class="verifyAction" method="verifyDb">
+			<result name="success" type="json">
+				<param name="includeProperties">success,msg</param>
+			</result>
+		</action>
+		<!-- 主页页面 -->
+		<action name="index">
+			<result name="success">/WEB-INF/pages/verification/verificationIndex.jsp</result>
+		</action>
+		<action name="queryWsAddressStatus" class="wsAddressStatusAction" method="queryWsAddressStatus">
+			<result name="success" type="json">
+				<param name="includeProperties">addrStatusList</param>
+			</result>
+		</action>
+	</package>
+	
+	<package  name="/verification/wsAddrSta" namespace="/verification/wsAddrSta" extends="esb-default">
+		<!-- 主页页面 -->
+		<action name="index">
+			<result name="success">/WEB-INF/pages/verification/wsAddrStaIndex.jsp</result>
+		</action>
+		<action name="queryWsAddressStatus" class="wsAddressStatusAction" method="queryWsAddressStatus">
+			<result name="success" type="json">
+				<param name="includeProperties">addrStatusList</param>
+			</result>
+		</action>
+		<action name="querySingleWsAddressStatus" class="wsAddressStatusAction" method="querySingleWsAddressStatus">
+			<result name="success" type="json">
+				<param name="includeProperties">urlStatus,message</param>
+			</result>
+			<result name="error" type="json">
+				<param name="includeProperties">urlStatus,message</param>
+			</result>
+		</action>
+	</package>
+</struts>

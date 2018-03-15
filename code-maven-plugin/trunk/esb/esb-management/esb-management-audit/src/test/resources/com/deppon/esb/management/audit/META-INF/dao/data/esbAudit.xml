@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+	<T_ESB2_AUDIT
+		FID='36985'
+		VERSION='0.1'
+		BIZID='0'
+		BIZDESC1='1'
+		BIZDESC2='22'
+		BIZDESC3='333'
+		REQID='dsfsdafsdf'
+		RESID='asdfsdfasdf'
+		SOURCESYS='UUMS'
+		TARGETSYS='FOSS'
+		ESBSVCCODE='ESB_UUMS2ESB_SEND_ADMINORG'
+		BACKSVCCODE='FOSS_ESB2FOSS_SEND_ADMINORG'
+		MSGFMT='XML'
+		EXGPTN='2'
+		SENTSEQ='0'
+		RESULTCODE='1'
+		USERNAME='username'
+		PASSWORD='password'
+		BODY='this is body. but just for test.%=_=%'
+		CREATETIME='2013-01-10 22:26:30.253'
+		/>
+	<T_ESB2_AUDIT
+		FID='36986'
+		VERSION='0.1'
+		BIZID='00'
+		BIZDESC1='11'
+		BIZDESC2='222'
+		BIZDESC3='3333'
+		REQID='werwerwer'
+		RESID='werwer'
+		SOURCESYS='UUMS'
+		TARGETSYS='FOSS'
+		ESBSVCCODE='ESB_UUMS2ESB_SEND_POSITION'
+		BACKSVCCODE='FOSS_ESB2FOSS_SEND_POSITION'
+		MSGFMT='XML'
+		EXGPTN='2'
+		SENTSEQ='0'
+		RESULTCODE='1'
+		USERNAME='username'
+		PASSWORD='password'
+		BODY='this is body. but just for test.%=_=%'
+		CREATETIME='2013-01-10 22:26:30.253'
+		/>
+		
+		
+
+</dataset>

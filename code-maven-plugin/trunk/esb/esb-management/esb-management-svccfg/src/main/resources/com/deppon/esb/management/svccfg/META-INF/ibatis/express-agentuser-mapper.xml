@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+	"-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.deppon.esb.security.domain.UserInfo">
+
+	<resultMap id="AgentUserMap"
+		type="com.deppon.esb.security.domain.UserInfo">
+		<result property="fid" column="FID" />
+		<result property="user" column="USERCODE" />
+		<result property="createTime" column="CREATETIME" />
+		<result property="passwd" column="PASSWD" />
+		<result property="desc" column="USERNAME" />
+		<result property="active" column="ACTIVE" />
+	</resultMap>
+
+	<select id="queryAllAgentUser"  resultMap="AgentUserMap">
+		<![CDATA[
+		select fid,usercode,createtime,passwd,username,active from t_esb2_user where active ='Y'
+		]]>
+	</select>
+</mapper>

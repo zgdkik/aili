@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camel="http://camel.apache.org/schema/spring"
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd
+        http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.0.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+	<bean
+		class="org.hbhk.aili.esb.server.common.listener.LoggingTimeCostsNotifer">
+		<property name="exceptionService" ref="exceptionService" />
+		<property name="performanceService" ref="wsPerformanceService" />
+		<property name="serviceConfigLoader" ref="serviceConfigLoader" />
+	</bean>
+
+	<bean id="exceptionService"
+		class="org.hbhk.aili.esb.server.common.log.exception.impl.ExceptionService">
+		<property name="exceptionQueueName" value="QU_ESB_EXCEPTION" />
+		<property name="jmsTemplate" ref="jmsTemplate" />
+	</bean>
+
+	<bean id="auditLogService"
+		class="org.hbhk.aili.esb.server.common.log.audit.impl.AuditLogService">
+		<property name="auditQueueName" value="QU_ESB_AUDITLOG" />
+		<property name="jmsTemplate" ref="jmsTemplate" />
+	</bean>
+
+	<bean id="statusService"
+		class="org.hbhk.aili.esb.server.common.log.status.impl.StatusService">
+		<property name="statusQueueName" value="QU_ESB_STATUS" />
+		<property name="jmsTemplate" ref="jmsTemplate" />
+	</bean>
+
+	<bean id="serviceConfigLoader"
+		class="org.hbhk.aili.esb.server.common.config.impl.ServiceConfigLoader"
+		init-method="start" scope="singleton">
+		<property name="jdbcTemplate" ref="jdbcTemplate" />
+	</bean>
+
+	<bean id="serviceConfigLoaderRuntimeService"
+		class="org.hbhk.aili.esb.server.common.config.ServiceConfigLoaderRuntimeService">
+		<property name="configLoader" ref="serviceConfigLoader" />
+	</bean>
+
+	<bean id="blackListContainer"
+		class="org.hbhk.aili.esb.server.common.filter.BlackListContainer"></bean>
+
+	<bean id="ServiceConfigExporter" class="org.springframework.jmx.export.MBeanExporter"
+		lazy-init="false">
+		<property name="beans">
+			<map>
+				<entry key="bean:name=ConfigLoaderService" value-ref="serviceConfigLoaderRuntimeService" />
+				<entry key="bean:name=wsAuditJmsSender" value-ref="wsAuditJmsSender" />
+				<entry key="bean:name=wsPerformanceJmsSender" value-ref="wsPerformanceJmsSender" />
+				<entry key="bean:name=auditLogDdSender" value-ref="auditLogDdSender" />
+				<entry key="bean:name=statusLogDdSender" value-ref="statusLogDdSender" />
+				<entry key="bean:name=wsExceptionJmsSender" value-ref="wsExceptionJmsSender" />
+				<entry key="bean:name=wsFailMessageJmsSender" value-ref="wsFailMessageJmsSender" />
+				<entry key="bean:name=auditEsblogTemplate" value-ref="wsAuditEsbLogTemplate" />
+				<entry key="bean:name=statusEsblogTemplate" value-ref="wsPerEsbLogTemplate" />
+				<entry key="bean:name=exceptionEsblogTemplate" value-ref="wsExceptionJmsTemplate" />
+				<entry key="bean:name=blackListContainer" value-ref="blackListContainer" />
+			</map>
+		</property>
+	</bean>
+
+	<!-- ================================================================================= -->
+
+	<!-- webservice 审计日志保存服务 -->
+	<bean id="wsAuditJmsSender" class="org.hbhk.aili.esb.server.common.utils.jms.EsbJmsSender">
+		<property name="connectionFactory" ref="localJmsConnectionFactory" />
+		<property name="queueName" value="QU_ESB_AUDITLOG" />
+		<property name="threadCount" value="5" />
+		<property name="commitSize" value="100" />
+		<property name="recoveryInterval" value="5000" />
+		<property name="queueCapacity" value="100000" />
+		<property name="threadName" value="wsAuditJmsSender" />
+	</bean>
+
+	<!-- =========================DB 发送日志配置====================== -->
+	<!-- 1、JDBC操作 -->
+	<bean id="AuditPreparedStatementSetter"
+		class="org.hbhk.aili.esb.server.common.log.db.impl.AuditPreparedStatementSetter"></bean>
+	<bean id="StatusLogPreparedStatementSetter"
+		class="org.hbhk.aili.esb.server.common.log.db.impl.StatusLogPreparedStatementSetter"></bean>
+	<bean id="ExceptionLogPreparedStatementSetter"
+		class="org.hbhk.aili.esb.server.common.log.db.impl.ExceptionLogPreparedStatementSetter"></bean>
+	<bean id="FailLogPreparedStatementSetter"
+		class="org.hbhk.aili.esb.server.common.log.db.impl.FailLogPreparedStatementSetter"></bean>
+
+	<!-- 2、日志持久化配置 -->
+	<bean id="auditLogPersistence"
+		class="org.hbhk.aili.esb.server.common.log.db.impl.EsbLogPersistenceImpl">
+		<property name="batchSize" value="100"></property>
+		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
+		<property name="preparedStatementSetter" ref="AuditPreparedStatementSetter">
+		</property>
+	</bean>
+	<bean id="statusLogPersistence"
+		class="org.hbhk.aili.esb.server.common.log.db.impl.EsbLogPersistenceImpl">
+		<property name="batchSize" value="100"></property>
+		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
+		<property name="preparedStatementSetter" ref="StatusLogPreparedStatementSetter">
+		</property>
+	</bean>
+	<bean id="exceptionLogPersistence"
+		class="org.hbhk.aili.esb.server.common.log.db.impl.EsbLogPersistenceImpl">
+		<property name="batchSize" value="100"></property>
+		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
+		<property name="preparedStatementSetter" ref="ExceptionLogPreparedStatementSetter">
+		</property>
+	</bean>
+	<bean id="failLogPersistence"
+		class="org.hbhk.aili.esb.server.common.log.db.impl.EsbLogPersistenceImpl">
+		<property name="batchSize" value="100"></property>
+		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
+		<property name="preparedStatementSetter" ref="FailLogPreparedStatementSetter">
+		</property>
+	</bean>
+	<!-- 3、日志发送器 -->
+	<bean id="auditLogDdSender" class="org.hbhk.aili.esb.server.common.log.db.DbSender">
+		<property name="esbLogPersistence" ref="auditLogPersistence"></property>
+		<property name="threadCount" value="5"></property>
+		<property name="queueCapacity" value="100000"></property>
+	</bean>
+	<bean id="statusLogDdSender" class="org.hbhk.aili.esb.server.common.log.db.DbSender">
+		<property name="esbLogPersistence" ref="statusLogPersistence"></property>
+		<property name="threadCount" value="5"></property>
+		<property name="queueCapacity" value="100000"></property>
+	</bean>
+	<bean id="failLogDdSender" class="org.hbhk.aili.esb.server.common.log.db.DbSender">
+		<property name="esbLogPersistence" ref="exceptionLogPersistence"></property>
+		<property name="threadCount" value="5"></property>
+		<property name="queueCapacity" value="100000"></property>
+	</bean>
+	<bean id="exceptionLogDdSender" class="org.hbhk.aili.esb.server.common.log.db.DbSender">
+		<property name="esbLogPersistence" ref="failLogPersistence"></property>
+		<property name="threadCount" value="5"></property>
+		<property name="queueCapacity" value="100000"></property>
+	</bean>
+
+	<!--========================DB 发送日志配置结束========================== -->
+
+	<!-- JMS -->
+	<bean id="wsAuditEsbLogTemplate" class="org.hbhk.aili.esb.server.common.log.EsbLogTemplate">
+		<property name="esbJmsSender" ref="wsAuditJmsSender" />
+		<property name="dbSender" ref="auditLogDdSender" />
+	</bean>
+	<bean id="wsAuditLogService"
+		class="org.hbhk.aili.esb.server.common.jmsservice.impl.SendMessageImpl">
+		<property name="esbLogTemplate" ref="wsAuditEsbLogTemplate" />
+	</bean>
+	<!-- webservice状态日志保存服务 -->
+	<bean id="wsPerformanceJmsSender" class="org.hbhk.aili.esb.server.common.utils.jms.EsbJmsSender">
+		<property name="connectionFactory" ref="localJmsConnectionFactory" />
+		<property name="queueName" value="QU_ESB_STATUS" />
+		<property name="threadCount" value="5" />
+		<property name="commitSize" value="100" />
+		<property name="recoveryInterval" value="5000" />
+		<property name="threadName" value="wsPerformanceJmsSender" />
+	</bean>
+	<bean id="wsPerEsbLogTemplate" class="org.hbhk.aili.esb.server.common.log.EsbLogTemplate">
+		<property name="esbJmsSender" ref="wsPerformanceJmsSender" />
+		<property name="dbSender" ref="statusLogDdSender" />
+	</bean>
+	<bean id="wsPerformanceService"
+		class="org.hbhk.aili.esb.server.common.jmsservice.impl.SendMessageImpl">
+		<property name="esbLogTemplate" ref="wsPerEsbLogTemplate" />
+	</bean>
+
+	<!-- 请求发送性能日志记录 -->
+	<bean id="sendRequestPerformanceRecorder"
+		class="org.hbhk.aili.esb.server.common.processor.RecordPerformanceProcessor">
+		<property name="status" value="ST_208"></property>
+	</bean>
+	<!-- 接受响应性能日志记录 -->
+	<bean id="receiveResponsePerformanceRecorder"
+		class="org.hbhk.aili.esb.server.common.processor.RecordPerformanceProcessor">
+		<property name="status" value="ST_402"></property>
+	</bean>
+
+	<!-- 保存失败队列服务 -->
+	<bean id="wsFailMessageJmsSender" class="org.hbhk.aili.esb.server.common.utils.jms.EsbJmsSender">
+		<property name="connectionFactory" ref="localJmsConnectionFactory" />
+		<property name="queueName" value="QU_ESB_FAILURE" />
+		<property name="threadCount" value="5" />
+		<property name="commitSize" value="100" />
+		<property name="recoveryInterval" value="5000" />
+		<property name="threadName" value="wsFailMessageJmsSender" />
+	</bean>
+	<bean id="wsFailEsbLogTemplate" class="org.hbhk.aili.esb.server.common.log.EsbLogTemplate">
+		<property name="esbJmsSender" ref="wsFailMessageJmsSender" />
+		<property name="dbSender" ref="failLogDdSender" />
+	</bean>
+	<bean id="failMessageService"
+		class="org.hbhk.aili.esb.server.common.jmsservice.impl.SendMessageImpl">
+		<property name="esbLogTemplate" ref="wsFailEsbLogTemplate"></property>
+	</bean>
+	<!-- ws异常日志保存服务 -->
+	<bean id="wsExceptionMessageService"
+		class="org.hbhk.aili.esb.server.common.jmsservice.impl.SendMessageImpl">
+		<property name="esbLogTemplate" ref="wsExceptionJmsTemplate" />
+	</bean>
+	<bean id="wsExceptionJmsTemplate" class="org.hbhk.aili.esb.server.common.log.EsbLogTemplate">
+		<property name="esbJmsSender" ref="wsExceptionJmsSender" />
+		<property name="dbSender" ref="exceptionLogDdSender" />
+	</bean>
+	<bean id="wsExceptionJmsSender" class="org.hbhk.aili.esb.server.common.utils.jms.EsbJmsSender">
+		<property name="connectionFactory" ref="localJmsConnectionFactory" />
+		<property name="queueName" value="QU_ESB_EXCEPTION" />
+		<property name="threadCount" value="5" />
+		<property name="commitSize" value="100" />
+		<property name="recoveryInterval" value="5000" />
+		<property name="threadName" value="wsExceptionJmsSender" />
+	</bean>
+</beans>

@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+			http://www.springframework.org/schema/beans 
+			http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/context 
+			http://www.springframework.org/schema/context/spring-context.xsd
+			http://www.springframework.org/schema/jee 
+			http://www.springframework.org/schema/jee/spring-jee.xsd
+			http://www.springframework.org/schema/tx 
+			http://www.springframework.org/schema/tx/spring-tx.xsd
+			http://www.springframework.org/schema/util
+			http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<context:annotation-config />
+	<context:component-scan base-package="com.deppon.esb.management.*"></context:component-scan>
+
+	<bean id="properties"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:com/deppon/esb/management/META-INF/jdbc.properties
+				</value>
+				<value>classpath:com/deppon/esb/management/common/META-INF/adapter/mail/mail.properties
+				</value>
+				<value>classpath:com/deppon/esb/management/common/META-INF/adapter/mail/mailtemplate.properties
+				</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="esbmgmtdb"></property>
+	</bean>
+
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="esbmgmtdb" />
+	</bean>
+
+	<tx:annotation-driven transaction-manager="transactionManager" />
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="mapperLocations"
+			value="classpath*:com/deppon/esb/**/META-INF/ibatis/*.xml" />
+		<property name="dataSource" ref="esbmgmtdb" />
+		<property name="configLocation" value="/WEB-INF/ibatis.xml" />
+	</bean>
+
+	<bean id="esbmgmtdb" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="${driverClassName}" />
+		<property name="url" value="${url}" />
+		<property name="username" value="${username}" />
+		<property name="password" value="${password}" />
+	</bean>
+
+	<!-- <bean id="jmsConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory"> -->
+	<!-- <property name="brokerURL" -->
+	<!-- value="vm://localhost?broker.persistent=false&amp;broker.useJmx=false" 
+		/> -->
+	<!-- </bean> -->
+
+	<bean id="jmsConnectionFactory" class="com.ibm.mq.jms.MQQueueConnectionFactory">
+		<property name="transportType">
+			<util:constant static-field="com.ibm.mq.jms.JMSC.MQJMS_TP_CLIENT_MQ_TCPIP" />
+		</property>
+		<property name="queueManager" value="QM_ESB" />
+		<property name="hostName" value="192.168.17.141" />
+		<property name="channel" value="SYSTEM.DEF.SVRCONN" />
+		<property name="port" value="1515" />
+		<property name="CCSID" value="1208" />
+	</bean>
+
+	<bean id="configJmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<constructor-arg index="0" ref="cachedConnectionFactory"></constructor-arg>
+	</bean>
+
+	<bean id="cachedConnectionFactory"
+		class="org.springframework.jms.connection.CachingConnectionFactory">
+		<property name="targetConnectionFactory" ref="jmsConnectionFactory" />
+		<property name="sessionCacheSize" value="15" />
+	</bean>
+
+	<bean id="jmsTransactionManager"
+		class="org.springframework.jms.connection.JmsTransactionManager">
+		<property name="connectionFactory" ref="cachedConnectionFactory" />
+	</bean>
+
+	<!-- 需要被查看的队列管理器配置 -->
+	<bean id="channelAction" class="com.deppon.esb.management.web.action.infobull.ChannelAction" scope="prototype">
+		<property name="channelService" ref="channelService" />
+		<property name="hostname">
+			<list>
+				<value>192.168.17.141</value>
+				<value>192.168.17.141</value>
+			</list>
+		</property>
+		<property name="port">
+			<list>
+				<value>3428</value>
+				<value>3429</value>
+			</list>
+		</property>
+		<property name="channel">
+			<list>
+				<value>ADMIN.CHANNEL</value>
+				<value>ADMIN.CHANNEL</value>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="mqLocalQueueAction" class="com.deppon.esb.management.web.action.infobull.MqLocalQueueAction" scope="prototype">
+		<property name="mqQueueService" ref="mqQueueService" />
+		<property name="hostname">
+			<list>
+				<value>192.168.17.141</value>
+				<value>192.168.17.141</value>
+			</list>
+		</property>
+		<property name="port">
+			<list>
+				<value>3428</value>
+				<value>3429</value>
+			</list>
+		</property>
+		<property name="channel">
+			<list>
+				<value>ADMIN.CHANNEL</value>
+				<value>ADMIN.CHANNEL</value>
+			</list>
+		</property>
+	</bean>
+
+</beans>
+
+
+

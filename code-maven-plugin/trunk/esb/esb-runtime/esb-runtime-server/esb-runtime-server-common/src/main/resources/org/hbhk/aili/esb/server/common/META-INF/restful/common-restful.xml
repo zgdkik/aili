@@ -1,0 +1,77 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<!-- 日志详细处理 -->
+	<bean id="auditLogProcessor" class="org.hbhk.aili.esb.server.agent.processor.AuditLogProcessor"></bean>
+	<!-- 响应消息处理 -->
+	<bean id="auditLogResponseProcessor"
+		class="org.hbhk.aili.esb.server.agent.processor.AuditLogResponseProcessor">
+		<property name="rsAuditLogService" ref="wsAuditLogService" />
+		<property name="configLoader" ref="serviceConfigLoader" />
+		<property name="exceptionMessageService" ref="wsExceptionMessageService" />
+		<property name="customerMapper" ref="customerMapper" />
+	</bean>
+	<!-- 头消息处理 -->
+	<bean id="expressHeaderProcessor"
+		class="org.hbhk.aili.esb.server.agent.processor.ExpressHeaderProcessor">
+		<property name="configLoader" ref="serviceConfigLoader" />
+		<!-- 权限控制，计数控制在esb-runtime-server-security模块下实现， -->
+		<property name="authorize" ref="authorizeImpl" />
+		<property name="esbInterfaceCountContainer" ref="esbInterfaceCountContainer" />
+		<property name="esbUserInterfaceCountContainer" ref="esbUserInterfaceCountContainer" />
+	</bean>
+	<!-- 默认异常处理 -->
+	<bean id="defaultErrorProcessor"
+		class="org.hbhk.aili.esb.server.agent.processor.ExpressErrorProcessor">
+		<property name="exceptionMessageService" ref="wsExceptionMessageService" />
+		<property name="rsAuditLogService" ref="wsAuditLogService" />
+		<property name="control" value="fasle" />
+		<property name="customerMapper" ref="customerMapper" />
+	</bean>
+
+	<!-- 转换 -->
+	<bean id="customerMapper" class="org.codehaus.jackson.map.ObjectMapper">
+		<property name="dateFormat">
+			<bean class="java.text.SimpleDateFormat">
+				<!-- 落地配接口规范要求json 字符中日期格式如下 -->
+				<constructor-arg value="yyyy-MM-dd HH:mm:ss"></constructor-arg>
+			</bean>
+		</property>
+	</bean>
+
+	<!-- 并行处理机 -->
+	<bean id="concurrentProcessor"
+		class="org.hbhk.aili.esb.server.agent.processor.ConcurrentProcessor">
+		<property name="esbInterfaceConcurrentContainer" ref="esbInterfaceConcurrentContainer" />
+		<property name="esbUserInterfaceConcurrentContainer" ref="esbUserInterfaceConcurrentContainer" />
+	</bean>
+	<!-- Header处理工具 -->
+	<bean id="expressHeaderUtil" class="org.hbhk.aili.esb.server.agent.processor.ExpressHeaderUtil">
+		<property name="serviceConfigLoader" ref="serviceConfigLoader" />
+	</bean>
+	<!-- 默认路由 -->
+	<bean id="defaultEsbRouter"
+		class="org.hbhk.aili.esb.server.agent.processor.router.DefaultEsbRouter">
+		<property name="configLoader" ref="serviceConfigLoader" />
+	</bean>
+	<!-- 地址处理 -->
+	<bean id="URLProcesscor" class="org.hbhk.aili.esb.server.agent.processor.URLProcesscor">
+		<property name="httpSupports">
+			<list>
+				<ref bean="httpServletURLSupport" />
+				<ref bean="httpAgrmtSupport" />
+			</list>
+		</property>
+	</bean>
+	<!-- 地址验证 -->
+	<bean id="httpServletURLSupport"
+		class="org.hbhk.aili.esb.server.agent.support.HttpServletURLSupport">
+		<property name="configLoader" ref="serviceConfigLoader" />
+	</bean>
+	
+	<!-- 服务端类型验证 -->
+	<bean id="httpAgrmtSupport" class="org.hbhk.aili.esb.server.agent.support.HttpAgrmtSupport" >
+		<property name="configLoader" ref="serviceConfigLoader" />
+	</bean>
+</beans>

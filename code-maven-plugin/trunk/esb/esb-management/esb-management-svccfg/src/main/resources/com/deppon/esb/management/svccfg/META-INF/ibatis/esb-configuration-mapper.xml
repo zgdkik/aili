@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+	"-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.deppon.esb.management.svccfg.domain.ESBRuntimeConfiguration">
+	<resultMap id="runtimeSvcCfgMap"
+		type="com.deppon.esb.management.svccfg.domain.ESBRuntimeConfiguration">
+		<result property="id" column="FID" />
+		<result property="esbServiceCode" column="ESBSVCCODE" />
+		<result property="targetServiceCode" column="TARGETSVCCODE" />
+		<result property="targetSystem" column="TARGETSYSTEM" />
+		<result property="targetServiceAddr" column="BACKADDR" />
+		<result property="targetPortName" column="WSPORTNAME" />
+		<result property="targetServiceName" column="WSSERVICENAME" />
+		<result property="targetNameSpace" column="WSTARGETNAMESPACE" />
+		<result property="agrmt" column="AGRMT" />
+		<result property="sourceSystem" column="SOURCESYSTEM" />
+		<result property="needAudit" column="NEEDAUDIT" />
+		<result property="needStatus" column="NEEDSTATUS" />
+		<result property="needExpn" column="NEEDXPN" />
+		<result property="timeout" column="TIMEOUT" />
+	</resultMap>
+
+	<resultMap id="runtimeSvcAddrMap"
+		type="com.deppon.esb.management.svccfg.domain.view.EsbRuntimeConfigAddrBean">
+		<result property="id" column="FID" />
+		<result property="serviceCode" column="CODE" />
+		<result property="serviceAddr" column="ESBREQUESTADDR" />
+		<result property="serviceName" column="NAME" />
+	</resultMap>
+
+	<resultMap id="svcPoint"
+		type="com.deppon.esb.management.svccfg.domain.EsbSvcPoint">
+		<result property="id" column="FID" />
+		<result property="code" column="CODE" />
+		<result property="esbRequestAddr" column="ESBREQUESTADDR" />
+		<result property="esbResponseAddr" column="ESBRESPONSEADDR" />
+	</resultMap>
+
+	<select id="loadESBRuntimeConfiguration" resultMap="runtimeSvcCfgMap">
+		SELECT
+		A.FID,
+		A.ESBSVCCODE,
+		A.JMS_COMPONENT,
+		A.TARGETSVCCODE,
+		A.SYSID TARGETSYSTEM,
+		T.SYSID SOURCESYSTEM,
+		A.AGRMT,
+		A.BACKADDR ,
+		A.NEEDAUDIT,
+		A.NEEDEXPN,
+		A.NEEDSTATUS,
+		A.TIMEOUT
+		FROM (
+		SELECT
+		TR.FID,
+		TR.ESBSVCCODE,
+		TR.TARGETSVCCODE,
+		TS.SYSID ,
+		TS.JMS_COMPONENT,
+		TS.AGRMT,
+		TS.NEEDAUDIT,
+		TS.NEEDEXPN,
+		TS.NEEDSTATUS,
+		TS.TIMEOUT,
+		CASE WHEN TS.FRNTORBCK='B' THEN TS.ESBREQUESTADDR ELSE TS.ESBRESPONSEADDR
+		END AS BACKADDR
+		FROM
+		T_ESB2_ROUTE TR,T_ESB2_SVCPOINT TS
+		WHERE TR.TARGETSVCCODE=TS.CODE
+		) A
+		LEFT JOIN T_ESB2_SVCPOINT T
+		ON A.ESBSVCCODE=T.CODE
+	</select>
+
+	<select id="selectBackendWsAddr" resultMap="runtimeSvcAddrMap">
+		<![CDATA[
+		    SELECT T.FID, T.NAME, T.CODE, T.ESBREQUESTADDR
+		      FROM T_ESB2_SVCPOINT T
+		     WHERE T.FRNTORBCK = 'B'
+		       AND T.AGRMT = 'WebService'
+		    UNION ALL (SELECT T.FID, T.NAME, T.CODE, T.ESBREQUESTADDR
+		                 FROM T_ESB2_SVCPOINT T
+		                WHERE T.FRNTORBCK = 'B'
+		                  AND T.AGRMT = 'restful')
+		    UNION ALL (SELECT T.FID,
+		                      T.SVCNAME NAME,
+		                      T.SVCCODE CODE,
+		                      T.SVCADDR ESBREQUESTADDR
+		                 FROM T_ESB_SVCPOINT T
+		                WHERE T.SVCCODE = 'ESB2FOSS_CUSTOMERDATASYNC')
+		   ]]>
+	</select>
+
+
+	<select id="selectEsbSvcPoint" resultMap="svcPoint">
+		SELECT
+		SV.FID,
+		SV.CODE,
+		SV.ESBREQUESTADDR,
+		SV.ESBRESPONSEADDR,
+		SV.APPREQUESTADDR,
+		SV.APPRESPONSEADDR
+		FROM
+		T_ESB2_SVCPOINT SV
+		WHERE
+		SV.FID IS NOT NULL
+		AND
+		SV.AGRMT = 'JMS'
+	</select>
+
+</mapper>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+	"-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.deppon.esb.management.svccfg.domain.extend.ESBSystemConfiguration">
+	<resultMap id="sysCfgMap"
+		type="com.deppon.esb.management.svccfg.domain.extend.ESBSystemConfiguration">
+		<result property="id" column="FID"></result>
+		<result property="systemCode" column="SYSNAME" />
+		<result property="clientMQRequestURL" column="REQUESTOUT" />
+		<result property="clientMQResponseURL" column="RESPONSEIN" />
+		<result property="serverMQRequestURL" column="REQUESTIN" />
+		<result property="serverMQResponseURL" column="RESPONSEOUT" />
+	</resultMap>
+	<resultMap id="svcCfgMap"
+		type="com.deppon.esb.management.svccfg.domain.extend.r.ESBServiceConfiguration">
+		<result property="code" column="CODE" />
+		<result property="frntOrbck" column="FRNTORBCK" />
+		<result property="agrmt" column="AGRMT" />
+		<result property="expattern" column="EXPATTERN" />
+		<result property="messageFormat" column="MESSAGEFORMAT" />
+		<result property="timeout" column="TIMEOUT" />
+		<result property="requestAddr" column="APPREQUESTADDR" />
+		<result property="responseAddr" column="APPRESPONSEADDR" />
+		<result property="reqConvertorClass" column="REQCONVERTORCLASS" />
+		<result property="resConvertorClass" column="RESCONVERTORCLASS" />
+	</resultMap>
+
+	<select id="loadAllSystemChannel" resultMap="sysCfgMap">
+		select
+		SYSNAME,requestout,responsein,requestin,responseout
+		from
+		t_esb2_syschannelcfg t where t.sysname=#{systemCode}
+	</select>
+
+	<select id="loadServiceConfiguration" resultMap="svcCfgMap">
+		select 
+		t.code,
+		t.frntorbck,
+		t.agrmt,
+		t.expattern,
+		t.messageformat,
+		t.timeout,
+		t.apprequestaddr,
+		t.appresponseaddr,
+		t.reqconvertorclass,
+		t.resconvertorclass
+		from
+		t_esb2_svcpoint t
+		where
+		t.agrmt='JMS'
+		and t.sysid=#{systemCode} and
+		t.reqconvertorclass is not null
+	</select>
+
+</mapper>

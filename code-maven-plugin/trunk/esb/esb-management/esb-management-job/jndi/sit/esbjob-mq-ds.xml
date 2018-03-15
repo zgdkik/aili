@@ -1,0 +1,17 @@
+<connection-factories>
+	<tx-connection-factory>
+		<jndi-name>jms/ESBJOBMQ</jndi-name>
+		<xa-transaction />
+		<rar-name>wmq.jmsra.rar</rar-name>
+		<connection-definition>javax.jms.QueueConnectionFactory</connection-definition>
+		<config-property name="channel" type="java.lang.String">SYSTEM.DEF.SVRCONN</config-property>
+		<config-property name="hostName" type="java.lang.String">192.168.17.142</config-property>
+		<config-property name="port" type="java.lang.String">1415</config-property>
+		<config-property name="queueManager" type="java.lang.String">QM_ESB</config-property>
+		<config-property name="transportType" type="java.lang.String">CLIENT</config-property>
+		<config-property name="username" type="java.lang.String">mqm</config-property>
+		<security-domain-and-application>JmsXARealm</security-domain-and-application>
+		<min-pool-size>20</min-pool-size>
+		<max-pool-size>100</max-pool-size>
+	</tx-connection-factory>
+</connection-factories>

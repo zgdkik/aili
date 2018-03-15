@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.deppon.esb.management.excptn.domain.ExcptnStatisticsInfo">
+	<resultMap id="excptnStatisticsMap" type="com.deppon.esb.management.excptn.domain.ExcptnStatisticsInfo">
+		<result property="id" column="FID" />
+		<result property="svcCode" column="SVCCODE" />
+		<result property="calledCount" column="CALLEDCOUNT" />
+		<result property="excptnCount" column="EXCPTNCOUNT" />
+		<result property="createTime" column="CREATETIME" />
+		<result property="startTime" column="STARTTIME" />
+		<result property="endTime" column="ENDTIME" />
+		<result property="isSend" column="ISSEND" />
+	</resultMap>
+
+	<select id="queryExcptnStatistics" resultMap="excptnStatisticsMap">
+		SELECT e.FID, e.STARTTIME, e.ENDTIME, e.SVCCODE, e.EXCPTNCOUNT, e.CREATETIME, e.ISSEND
+		FROM T_ESB_EXCPTNSTATISTICS e
+		WHERE e.ISSEND=0
+		ORDER BY E.CREATETIME
+	</select>
+
+	<update id="markProcessed">
+		UPDATE T_ESB_EXCPTNSTATISTICS p
+		<set>
+			p.ISSEND=1
+		</set>
+		<where>
+			p.FID IN
+			<foreach collection="list" item="ids" open="(" separator="," close=")">
+				#{ids}
+			</foreach>
+		</where>
+	</update>
+	
+	<select id="getExceptionStatistic" resultMap="excptnStatisticsMap">
+		SELECT
+		p.FID,
+		p.SVCCODE,
+		p.CALLEDCOUNT,
+		p.CREATETIME,
+		p.STARTTIME,
+		p.ENDTIME,
+		p.ISSEND
+		FROM
+		T_ESB_EXCPTNSTATISTICS p
+		WHERE
+		p.FID = #{id}
+	</select>
+
+</mapper>

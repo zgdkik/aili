@@ -1,0 +1,61 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.deppon.esb</groupId>
+    <artifactId>esb-management</artifactId>
+    <version>2.0.1-SNAPSHOT</version>
+  </parent>
+  <artifactId>esb-management-failure</artifactId>
+  <description>失败日志管理</description>
+  
+  <dependencies>
+		<dependency>
+			<groupId>com.deppon.esb</groupId>
+			<artifactId>esb-management-common</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+		</dependency>
+		<!-- JMS lib -->
+		<dependency>
+			<groupId>javax.jms</groupId>
+			<artifactId>jms</artifactId>
+		</dependency>
+		<!-- json lib -->
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-core-asl</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+		</dependency>
+		<!-- dbcp only 4 test -->
+		<dependency>
+			<groupId>commons-dbcp</groupId>
+			<artifactId>commons-dbcp</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<!-- oracle lib -->
+		<dependency>
+			<groupId>oracle</groupId>
+			<artifactId>oracle-jdbc</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.dbunit</groupId>
+			<artifactId>dbunit</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.activemq</groupId>
+			<artifactId>activemq-core</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+	
+</project>

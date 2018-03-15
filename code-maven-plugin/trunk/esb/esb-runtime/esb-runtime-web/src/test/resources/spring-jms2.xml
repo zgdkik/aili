@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:camel="http://camel.apache.org/schema/spring" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+			http://camel.apache.org/schema/spring 
+			http://camel.apache.org/schema/spring/camel-spring.xsd
+			http://www.springframework.org/schema/beans 
+			http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/context 
+			http://www.springframework.org/schema/context/spring-context.xsd
+			http://www.springframework.org/schema/jee 
+			http://www.springframework.org/schema/jee/spring-jee.xsd
+			http://www.springframework.org/schema/tx 
+			http://www.springframework.org/schema/tx/spring-tx.xsd
+			http://www.springframework.org/schema/util 
+			http://www.springframework.org/schema/util/spring-util.xsd ">
+
+	
+	<bean id="jmsConnectionFactory" class="com.ibm.mq.jms.MQQueueConnectionFactory">
+		<property name="transportType">
+			<util:constant static-field="com.ibm.msg.client.wmq.WMQConstants.WMQ_CM_CLIENT" />
+		</property>
+		<property name="queueManager" value="MQM6">
+		</property>
+		<property name="hostName" value="192.168.17.141">
+		</property>
+		<property name="channel" value="FOSS.CLIENT">
+		</property>
+		<property name="port" value="2428">
+		</property>
+		<property name="CCSID" value="1208" />
+	</bean>
+
+	<bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<property name="connectionFactory">
+			<ref local="jmsConnectionFactory" />
+		</property>
+	</bean>
+</beans>
+

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+	"-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.deppon.esb.management.svccfg.domain.rest.ESBServiceRoute">
+		
+		<!-- 插入数据 -->
+	<insert id="insertRoute" parameterType="com.deppon.esb.management.svccfg.domain.rest.ESBServiceRoute">
+		<![CDATA[insert into T_ESB2_ROUTE(FID]]>
+		<if test="esbSvcCode != null and esbSvcCode !=''"><![CDATA[,ESBSVCCODE]]></if>
+		<if test="targetSvcCode != null and targetSvcCode !=''"><![CDATA[,TARGETSVCCODE]]></if>
+			<![CDATA[) values ( sys_guid()]]>
+		<if test="esbSvcCode != null and esbSvcCode !=''"><![CDATA[,#{esbSvcCode}]]></if>
+		<if test="targetSvcCode != null and targetSvcCode !=''"><![CDATA[,#{targetSvcCode}]]></if>
+		<![CDATA[)]]>
+	</insert>
+		
+</mapper>

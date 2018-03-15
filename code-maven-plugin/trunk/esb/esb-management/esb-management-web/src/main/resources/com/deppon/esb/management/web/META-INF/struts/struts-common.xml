@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<!-- ==============首页设置============================== -->
+	<package name="index" namespace="/" extends="esb-default">
+		<action name="index">
+			<result name="success">main.jsp</result>
+		</action>
+		<!-- ===========登录设置============================= -->
+	<action name="logout" class="loginAction" method="logout" />
+	<action name="login" class="loginAction" method="login">
+		<result type="redirect">${goingToURL}</result>
+		<result name="input">/login.jsp</result>
+		<interceptor-ref name="defaultStack"></interceptor-ref>
+	</action>
+	<!-- <action name="register" class="registerAction">
+		<result type="redirect">/login.jsp</result>
+		<result name="input">/register.jsp</result>
+		<interceptor-ref name="defaultStack"></interceptor-ref>
+	</action> -->
+	</package>
+	<!-- ==============公共action设置========================= -->
+	<package name="common" namespace="/common" extends="esb-default">
+		<!-- 顶部页面 -->
+		<action name="topRegion">
+			<result name="success">/WEB-INF/pages/top.jsp</result>
+		</action>
+		<!-- 底部页面 -->
+		<action name="bottomRegion">
+			<result name="success">/WEB-INF/pages/bottom.jsp</result>
+		</action>
+	</package>
+
+
+
+</struts>

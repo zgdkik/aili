@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+	"-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.deppon.esb.management.svccfg.domain.rest.ESBServiceConfig">
+	
+	<!-- 插入数据 -->
+	<insert id="insertSvcpoint" parameterType="com.deppon.esb.management.svccfg.domain.rest.ESBServiceConfig">
+		<![CDATA[insert into T_ESB2_SVCPOINT(FID]]>
+		<if test="name != null and name !=''"><![CDATA[,NAME]]></if>
+		<if test="code != null and code !=''"><![CDATA[,CODE]]></if>
+		<if test="sysId != null and sysId !=''"><![CDATA[,SYSID]]></if>
+		<if test="agrmt != null and agrmt !=''"><![CDATA[,AGRMT]]></if>
+		<if test="frntOrback != null and frntOrback !=''"><![CDATA[,FRNTORBCK]]></if>
+		<if test="appRequestAddr != null and appRequestAddr !=''"><![CDATA[,APPREQUESTADDR]]></if>
+		<if test="appResponseAddr != null and appResponseAddr !=''"><![CDATA[,APPRESPONSEADDR]]></if>
+		<if test="esbRequestAddr != null and esbRequestAddr !=''"><![CDATA[,ESBREQUESTADDR]]></if>
+		<if test="esbResponseAddr != null and esbResponseAddr !=''"><![CDATA[,ESBRESPONSEADDR]]></if>
+		<if test="expattern != null "><![CDATA[,EXPATTERN]]></if>
+		<if test="messageFormat != null and messageFormat !=''"><![CDATA[,MESSAGEFORMAT]]></if>
+		<if test="reqConvertorClass != null and reqConvertorClass !=''"><![CDATA[,REQCONVERTORCLASS]]></if>
+		<if test="resConvertorClass != null and resConvertorClass !=''"><![CDATA[,RESCONVERTORCLASS]]></if>
+		<if test="timeOut != null and timeOut !=''"><![CDATA[,TIMEOUT]]></if>
+		<if test="needAudit != null and needAudit !=''"><![CDATA[,NEEDAUDIT]]></if>
+		<if test="needexpn != null and needexpn !=''"><![CDATA[,NEEDEXPN]]></if>
+		<if test="needStatus != null and needStatus !=''"><![CDATA[,NEEDSTATUS]]></if>
+			<![CDATA[) values ( sys_guid()]]>
+		<if test="name != null and name !=''"><![CDATA[,#{name}]]></if>
+		<if test="code != null and code !=''"><![CDATA[,#{code}]]></if>
+		<if test="sysId != null and sysId !=''"><![CDATA[,#{sysId}]]></if>
+		<if test="agrmt != null and agrmt !=''"><![CDATA[,#{agrmt}]]></if>
+		<if test="frntOrback != null and frntOrback !=''"><![CDATA[,#{frntOrback}]]></if>
+		<if test="appRequestAddr != null and appRequestAddr !=''"><![CDATA[,#{appRequestAddr}]]></if>
+		<if test="appResponseAddr != null and appResponseAddr !=''"><![CDATA[,#{appResponseAddr}]]></if>
+		<if test="esbRequestAddr != null and esbRequestAddr !=''"><![CDATA[,#{esbRequestAddr}]]></if>
+		<if test="esbResponseAddr != null and esbResponseAddr !=''"><![CDATA[,#{esbResponseAddr}]]></if>
+		<if test="expattern != null "><![CDATA[,#{expattern}]]></if>
+		<if test="messageFormat != null and messageFormat !=''"><![CDATA[,#{messageFormat}]]></if>
+		<if test="reqConvertorClass != null and reqConvertorClass !=''"><![CDATA[,#{reqConvertorClass}]]></if>
+		<if test="resConvertorClass != null and resConvertorClass !=''"><![CDATA[,#{resConvertorClass}]]></if>
+		<if test="timeOut != null and timeOut !=''"><![CDATA[,#{timeOut}]]></if>
+		<if test="needAudit != null and needAudit !=''"><![CDATA[,#{needAudit}]]></if>
+		<if test="needexpn != null and needexpn !=''"><![CDATA[,#{needexpn}]]></if>
+		<if test="needStatus != null and needStatus !=''"><![CDATA[,#{needStatus}]]></if>
+		<![CDATA[)]]>
+	</insert>
+		
+</mapper>

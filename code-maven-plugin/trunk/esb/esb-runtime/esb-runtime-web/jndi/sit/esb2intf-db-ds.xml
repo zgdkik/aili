@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<datasources>
+	<!--
+	<local-tx-datasource>
+		<jndi-name>db/esb2intfdb</jndi-name>
+		<connection-url>jdbc:oracle:thin:@192.168.17.141:1521:esbdb
+		</connection-url>
+		<driver-class>oracle.jdbc.driver.OracleDriver</driver-class>
+		<user-name>esbdev</user-name>
+		<password>esbdev</password>
+		<exception-sorter-class-name>org.jboss.resource.adapter.jdbc.vendor.OracleExceptionSorter</exception-sorter-class-name>
+		<metadata>
+			<type-mapping>Oracle 11g</type-mapping>
+		</metadata>
+		<min-pool-size>50</min-pool-size>
+		<max-pool-size>200</max-pool-size>
+		<blocking-timeout-millis>5000</blocking-timeout-millis>
+		<idle-timeout-minutes>2</idle-timeout-minutes>
+	</local-tx-datasource>
+	-->
+	<xa-datasource>
+    <jndi-name>db/esb2intfdb</jndi-name>
+    <track-connection-by-tx/>
+    <isSameRM-override-value>false</isSameRM-override-value>
+    <xa-datasource-class>oracle.jdbc.xa.client.OracleXADataSource</xa-datasource-class>
+    <xa-datasource-property name="URL">jdbc:oracle:thin:@192.168.17.141:1521:esbdb</xa-datasource-property>
+    <xa-datasource-property name="User">esbdev</xa-datasource-property>
+    <xa-datasource-property name="Password">esbdev</xa-datasource-property>
+    <!-- Uses the pingDatabase method to check a connection is still valid before handing it out from the pool -->
+    <!--valid-connection-checker-class-name>org.jboss.resource.adapter.jdbc.vendor.OracleValidConnectionChecker</valid-connection-checker-class-name-->
+    <!-- Checks the Oracle error codes and messages for fatal errors -->
+    <exception-sorter-class-name>org.jboss.resource.adapter.jdbc.vendor.OracleExceptionSorter</exception-sorter-class-name>
+    <!-- Oracles XA datasource cannot reuse a connection outside a transaction once enlisted in a global transaction and vice-versa -->
+    <no-tx-separate-pools/>
+
+      <!-- corresponding type-mapping in the standardjbosscmp-jdbc.xml -->
+      <metadata>
+         <type-mapping>Oracle10g</type-mapping>
+      </metadata>
+  </xa-datasource>
+</datasources> 

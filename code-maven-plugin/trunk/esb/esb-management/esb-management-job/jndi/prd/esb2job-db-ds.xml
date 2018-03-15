@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<datasources>
+	<xa-datasource>
+		<jndi-name>db/esbjobdb</jndi-name>
+		<track-connection-by-tx />
+		<isSameRM-override-value>false</isSameRM-override-value>
+		<xa-datasource-class>oracle.jdbc.xa.client.OracleXADataSource</xa-datasource-class>
+		<xa-datasource-property name="URL">jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=tcp)(HOST=192.168.2.48)(PORT=1521))(ADDRESS=(PROTOCOL=tcp)(HOST=192.168.2.55)(PORT=1521))(LOAD_BALANCE=yes))(CONNECT_DATA =(SERVER = DEDICATED)(SERVICE_NAME = esbdb)(FAILOVER_MODE =(TYPE = SELECT)(METHOD = BASIC)(RETRIES = 3)(DELAY = 5))))</xa-datasource-property>
+		<xa-datasource-property name="User">esbprd</xa-datasource-property>
+		<xa-datasource-property name="Password">esbprd</xa-datasource-property>
+		<!-- Uses the pingDatabase method to check a connection is still valid before handing it out from the pool -->
+		<!--valid-connection-checker-class-name>org.jboss.resource.adapter.jdbc.vendor.OracleValidConnectionChecker</valid-connection-checker-class-name -->
+		<!-- Checks the Oracle error codes and messages for fatal errors -->
+		<exception-sorter-class-name>org.jboss.resource.adapter.jdbc.vendor.OracleExceptionSorter
+		</exception-sorter-class-name>
+		<!-- Oracles XA datasource cannot reuse a connection outside a transaction once enlisted in a global transaction and vice-versa -->
+		<no-tx-separate-pools />
+
+		<!--pooling parameters-->
+		<min-pool-size>20</min-pool-size>
+		<max-pool-size>200</max-pool-size>
+
+		<!-- corresponding type-mapping in the standardjbosscmp-jdbc.xml -->
+		<metadata>
+			<type-mapping>Oracle11g</type-mapping>
+		</metadata>
+	</xa-datasource>
+
+</datasources>

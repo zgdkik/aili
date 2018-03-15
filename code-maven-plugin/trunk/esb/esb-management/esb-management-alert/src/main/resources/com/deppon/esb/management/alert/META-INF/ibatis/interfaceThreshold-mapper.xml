@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+	"-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.deppon.esb.management.alert.domain.InterfaceThresholdInfo">
+	
+	<resultMap id="InterfaceThresholdBean" type="com.deppon.esb.management.alert.domain.view.InterfaceThresholdBean">
+		<result property="id" column="THRESHOLDID"/>
+		<result property="svcCode" column="SRVCODE"/>
+		<result property="svcName" column="SVCNAME"/>
+		<result property="svcName" column="SVCNAME"/>
+		<result property="channel" column="channelId"/>
+		<result property="threshold" column="THRESHOLD"/>
+		<result property="personId" column="PERSONID"/>
+		<result property="type" column="TYPE"/>
+	</resultMap>
+	<resultMap id="InterfaceThresholdInfo" type="com.deppon.esb.management.alert.domain.InterfaceThresholdInfo" >
+		<result property="id" column="FID"/>
+		<result property="svcCode" column="SRVCODE"/>
+		<result property="threshold" column="THRESHOLD"/>
+		<result property="channelId" column="CHANNELID"/>
+		<result property="personId" column="PERSONID"/>
+		<result property="type" column="TYPE"/>
+	</resultMap>
+	
+	<select id="selectThresholdInfo" parameterType="com.deppon.esb.management.alert.domain.view.InterfaceThresholdQueryBean" resultMap="InterfaceThresholdInfo">
+		select * from t_esb_interfacethreshold 
+		<where> 1=1 
+		<if test="id !=null and id !=''"><![CDATA[and fid =#{id}]]></if>
+		<if test="svcCode !=null and svcCode !=''"><![CDATA[and SRVCODE =#{svcCode}]]></if>
+		<if test="channel !=null and channel !=''"><![CDATA[and CHANNELID =#{channel}]]></if>
+		<if test="threshold !=null and threshold !=''"><![CDATA[and THRESHOLD =#{threshold}]]></if>
+		</where>
+	</select>
+	<select id="selectThresholdForPerformance" 
+		parameterType="com.deppon.esb.management.alert.domain.view.InterfaceThresholdQueryBean" 
+		resultMap="InterfaceThresholdInfo">
+		select * from t_esb_interfacethreshold 
+		<where> type=0 
+		<if test="svcCode !=null and svcCode !=''"><![CDATA[and SRVCODE =#{svcCode}]]></if>
+		<if test="channel !=null and channel !=''"><![CDATA[and CHANNELID =#{channel}]]></if>
+		<if test="threshold !=null and threshold !=''"><![CDATA[and THRESHOLD <=#{threshold}]]></if>
+		</where>
+	</select>
+	
+	<select id="selectThresholdForException" 
+		parameterType="com.deppon.esb.management.alert.domain.view.InterfaceThresholdQueryBean" 
+		resultMap="InterfaceThresholdInfo">
+		select * from t_esb_interfacethreshold 
+		<where> type=1
+		<if test="svcCode !=null and svcCode !=''"><![CDATA[and SRVCODE =#{svcCode}]]></if>
+		<if test="channel !=null and channel !=''"><![CDATA[and CHANNELID =#{channel}]]></if>
+		</where>
+	</select>
+	
+	<!-- 查找性能监控设置记录 -->
+	<select id="selectThresholdResultBean" parameterType="com.deppon.esb.management.alert.domain.view.InterfaceThresholdQueryBean" resultMap="InterfaceThresholdBean">
+		select thr.fid THRESHOLDID,
+		       thr.threshold,
+		       thr.channelid,
+		       thr.personid,
+		       svc.svcname,
+		       svc.svccode,
+		       svc.svcprovdid
+		  from t_esb_interfacethreshold thr
+		 left join t_esb_svcpoint svc on thr.srvcode = svc.svccode
+		 <where>
+		 	thr.type=0
+		 	<if test="frntorbck !=null and frntorbck !=''"><![CDATA[and frntorbck =#{frntorbck}]]></if>
+			<if test="svcName !=null and svcName !=''"><![CDATA[and svcName like '%'||#{svcName}||'%']]></if>
+			<if test="svcProvdId !=null and svcProvdId !=''"><![CDATA[and svcprovdid =#{svcProvdId}]]></if>
+			<if test="svcCode !=null and svcCode !=''"><![CDATA[and thr.svcCode =#{svcCode}]]></if>
+			<if test="channel !=null and channel !=''"><![CDATA[and thr.channelid=#{channel}]]></if>
+			<if test="threshold !=null and threshold !=''"><![CDATA[and thr.threshold =#{threshold}]]></if>
+		</where>  
+	</select>	
+	<insert id="insert" parameterType="com.deppon.esb.management.alert.domain.InterfaceThresholdInfo">
+		 	 <selectKey keyProperty="id" resultType="String" order="BEFORE">  
+      			 select sys_guid() from dual
+ 			</selectKey>  
+				INSERT INTO t_esb_interfacethreshold(FID
+				<if test="svcCode != null"><![CDATA[,SRVCODE]]></if>
+				<if test="threshold != null"><![CDATA[,THRESHOLD]]></if>
+				<if test="channelId != null"><![CDATA[,CHANNELID]]></if>
+				<if test="personId != null"><![CDATA[,PERSONID]]></if>
+				<if test="type != null"><![CDATA[,TYPE]]></if>
+				<![CDATA[) values ( #{id}]]>
+				<if test="svcCode != null"><![CDATA[,#{svcCode}]]></if>
+				<if test="threshold != null"><![CDATA[,#{threshold}]]></if>
+				<if test="channelId != null"><![CDATA[,#{channelId}]]></if>
+				<if test="personId != null"><![CDATA[,#{personId}]]></if>
+				<if test="type != null"><![CDATA[,#{type}]]></if>
+				<![CDATA[)]]>
+	</insert>
+	<update id="update" parameterType="com.deppon.esb.management.alert.domain.InterfaceThresholdInfo">
+		update t_esb_interfacethreshold 
+		<set> 
+			<![CDATA[FID=FID]]>
+			<if test="svcCode !=null and svcCode !=''"><![CDATA[, SRVCODE =#{svcCode}]]></if>
+			<if test="threshold !=null "><![CDATA[, THRESHOLD =#{threshold}]]></if>
+			<if test="channelId !=null and channelId !=''"><![CDATA[, CHANNELID =#{channelId}]]></if>
+			<if test="personId !=null and personId !=''"><![CDATA[, PERSONID =#{personId}]]></if>
+		 </set>
+		<![CDATA[where fid =#{id}]]>
+	</update>
+	<delete id="deleteThresholdById">
+		delete from t_esb_interfacethreshold
+		where fid in
+	   <foreach collection="list" item="idList"  open="(" separator="," close=")">  
+       #{idList}   
+  		</foreach> 
+	</delete>
+	
+	<select id="getThresholdBySvcCode" parameterType="java.lang.String">
+		SELECT THRESHOLD FROM T_ESB_INTERFACETHRESHOLD WHERE SRVCODE=#{svcCode}
+	</select>
+	
+	<select id="queryExcptnEmailBySvcCodeAndType1" parameterType="java.util.Map" resultType="String">
+		SELECT PERSONID FROM T_ESB_INTERFACETHRESHOLD WHERE SRVCODE=#{svcCode} and TYPE=#{type} and CHANNELID=#{channelId}
+	</select>
+	<select id="queryExcptnEmailBySvcCodeAndType2" resultType="String">
+		SELECT EMAIL FROM T_ESB_NOTICUSER WHERE FID IN 
+		<foreach collection="array" item="ids"  open="(" separator="," close=")">
+        #{ids}
+     </foreach>
+	</select>
+	
+	<!-- 查找异常监控设置记录 -->
+		<select id="selectExceptionSet" parameterType="com.deppon.esb.management.alert.domain.view.InterfaceThresholdQueryBean" resultMap="InterfaceThresholdBean">
+		select thr.fid THRESHOLDID,
+		       thr.threshold,
+		       thr.channelid,
+		       thr.personid,
+		       svc.svcname,
+		       svc.svccode,
+		       svc.svcprovdid
+		  from t_esb_interfacethreshold thr
+		 left join t_esb_svcpoint svc on thr.srvcode = svc.svccode
+		 <where>
+		 	thr.type=1
+		 	<if test="frntorbck !=null and frntorbck !=''"><![CDATA[and frntorbck =#{frntorbck}]]></if>
+			<if test="svcName !=null and svcName !=''"><![CDATA[and svcName like '%'||#{svcName}||'%']]></if>
+			<if test="svcProvdId !=null and svcProvdId !=''"><![CDATA[and svcprovdid =#{svcProvdId}]]></if>
+			<if test="svcCode !=null and svcCode !=''"><![CDATA[and thr.srvcode =#{svcCode}]]></if>
+			<if test="channel !=null and channel !=''"><![CDATA[and thr.channel=#{channel}]]></if>
+			<if test="threshold !=null and threshold !=''"><![CDATA[and thr.threshold =#{threshold}]]></if>
+		</where>  
+	</select>	
+	
+		<!-- 查找异常监控设置记录数量 -->
+		<select id="selectExceptionSetCount" parameterType="com.deppon.esb.management.alert.domain.view.InterfaceThresholdQueryBean" resultType="Integer">
+		select count(*)
+		  from t_esb_interfacethreshold thr
+		 left join t_esb_svcpoint svc on thr.srvcode = svc.svccode
+		 <where>
+		 	thr.type=1
+		 	<if test="frntorbck !=null and frntorbck !=''"><![CDATA[and frntorbck =#{frntorbck}]]></if>
+			<if test="svcName !=null and svcName !=''"><![CDATA[and svcName like '%'||#{svcName}||'%']]></if>
+			<if test="svcProvdId !=null and svcProvdId !=''"><![CDATA[and svcprovdid =#{svcProvdId}]]></if>
+			<if test="svcCode !=null and svcCode !=''"><![CDATA[and thr.srvcode =#{svcCode}]]></if>
+			<if test="channel !=null and channel !=''"><![CDATA[and thr.channel=#{channel}]]></if>
+			<if test="threshold !=null and threshold !=''"><![CDATA[and thr.threshold =#{threshold}]]></if>
+		</where>
+	</select>
+	
+	<select id="getThresholdForStatusNoComplete" resultMap="InterfaceThresholdInfo">
+		select thr.fid THRESHOLDID, thr.channelid, thr.personid, thr.srvcode
+		  from t_esb_interfacethreshold thr
+		 <where>
+			<if test="type !=null and type !=''"><![CDATA[and thr.type =#{type}]]></if>
+			<if test="svcCode !=null and svcCode !=''"><![CDATA[and thr.srvCode =#{svcCode}]]></if>
+			<if test="channel !=null and channel !=''"><![CDATA[and thr.channelid=#{channel}]]></if>
+		</where>
+	</select>
+	
+</mapper>

@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+	<t_esb_queuethreshold
+		FID='1'
+		SVCCODE='订单状态更新'
+		QMGR='qmgr'
+		QUEUE='queue'
+		THRESHOLD='10000'
+		CHANNELID='fetion'
+		PERSONID='1,2,3,4'
+		CLUSTERS='0'
+		/>	
+	<t_esb_queuethreshold
+		FID='2'
+		SVCCODE='订单状态更新'
+		QMGR='qmgr'
+		QUEUE='queue'
+		THRESHOLD='10000'
+		CHANNELID='fetion'
+		PERSONID='1,2,3,4'
+		CLUSTERS='0'
+		/>
+</dataset>

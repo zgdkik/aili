@@ -1,0 +1,24 @@
+create table t_home_user(
+id varchar(255) ,
+userName varchar(255),
+name varchar(255),
+pwd varchar(255)
+);
+create table t_home_customer(
+name varchar(255),
+sex varchar(255),
+address varchar(255),
+company varchar(255),
+type varchar(255),
+network varchar(255),
+registeredCapital varchar(255),
+remark varchar(255),
+intention varchar(255),
+industry varchar(255),
+source varchar(255),
+level varchar(255),
+big varchar(255),
+bigOrder varchar(255),
+open varchar(255),
+id varchar(255)
+);

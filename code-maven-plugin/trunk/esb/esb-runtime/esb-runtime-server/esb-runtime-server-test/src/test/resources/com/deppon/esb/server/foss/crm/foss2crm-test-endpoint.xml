@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camel="http://camel.apache.org/schema/spring"
+	xmlns:cxf="http://camel.apache.org/schema/cxf"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd
+        http://camel.apache.org/schema/cxf http://camel.apache.org/schema/cxf/camel-cxf.xsd 
+		http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+		http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd">	
+	<!--mock esb Endpoint  -->
+	<cxf:cxfEndpoint id="foss2crm_frontEndpoint" address="http://localhost:8080/ws/foss2crm/front"
+		serviceClass="com.deppon.crm.FossToCrmService">
+	</cxf:cxfEndpoint>
+	<cxf:cxfEndpoint id="foss2crm_backEndpoint" address="http://localhost:8080/ws/foss2crm/back"
+		serviceClass="com.deppon.crm.FossToCrmService">
+		<cxf:features>
+ 			<bean class="org.apache.cxf.transport.common.gzip.GZIPFeature ">
+				<property name="threshold"><value>10240</value></property>
+			</bean>
+		</cxf:features>
+	</cxf:cxfEndpoint>
+	
+	
+	
+	<!-- mock server -->
+	<jaxws:endpoint id="server"
+		implementorClass="com.deppon.crm._interface.crmservice.FossToCrmService" 
+		implementor ="com.deppon.esb.server.foss.crm.ServiceImpl"
+		address="http://localhost:8080/ws/foss2crm/back">
+		<jaxws:features>
+			<bean class="org.apache.cxf.feature.LoggingFeature"></bean>
+		</jaxws:features>
+	</jaxws:endpoint>
+	
+		<!-- mock client -->
+	<jaxws:client id="client" serviceClass="com.deppon.crm._interface.crmservice.FossToCrmService"
+		address="http://localhost:8080/ws/foss2crm/front">
+	</jaxws:client>
+	
+	<import resource="classpath:META-INF/cxf/cxf.xml" />
+	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
+</beans>

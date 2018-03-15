@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+	"-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.deppon.esb.management.audit.domain.EsbAuditInfo">
+
+	<resultMap id="esbAuditInfo"
+		type="com.deppon.esb.management.audit.domain.EsbAuditInfo">
+		<result property="id" column="FID" javaType="java.lang.String"
+			jdbcType="VARCHAR" />
+		<result property="esbHeader.version" column="VERSION" javaType="java.lang.String"
+			jdbcType="NVARCHAR" />
+		<result property="esbHeader.businessId" column="BIZID"
+			javaType="java.lang.String" jdbcType="NVARCHAR" />
+		<result property="esbHeader.businessDesc1" column="BIZDESC1"
+			javaType="java.lang.String" jdbcType="NVARCHAR" />
+		<result property="esbHeader.businessDesc2" column="BIZDESC2"
+			javaType="java.lang.String" jdbcType="NVARCHAR" />
+		<result property="esbHeader.businessDesc3" column="BIZDESC3"
+			javaType="java.lang.String" jdbcType="NVARCHAR" />
+		<result property="esbHeader.requestId" column="REQID"
+			javaType="java.lang.String" jdbcType="NVARCHAR" />
+		<result property="esbHeader.responseId" column="RESID"
+			javaType="java.lang.String" jdbcType="NVARCHAR" />
+		<result property="esbHeader.sourceSystem" column="SOURCESYS"
+			javaType="java.lang.String" jdbcType="NVARCHAR" />
+		<result property="esbHeader.targetSystem" column="TARGETSYS"
+			javaType="java.lang.String" jdbcType="NVARCHAR" />
+		<result property="esbHeader.esbServiceCode" column="ESBSVCCODE"
+			javaType="java.lang.String" jdbcType="NVARCHAR" />
+		<result property="esbHeader.backServiceCode" column="BACKSVCCODE"
+			javaType="java.lang.String" jdbcType="NVARCHAR" />
+		<result property="esbHeader.messageFormat" column="MSGFMT"
+			javaType="java.lang.String" jdbcType="NVARCHAR" />
+		<result property="esbHeader.exchangePattern" column="EXGPTN"
+			javaType="java.lang.Integer" jdbcType="NUMERIC" />
+		<result property="esbHeader.sentSequence" column="SENTSEQ"
+			javaType="java.lang.Integer" jdbcType="NUMERIC" />
+		<result property="esbHeader.resultCode" column="RESULTCODE"
+			javaType="java.lang.Integer" jdbcType="NUMERIC" />
+		<result property="esbHeader.authentication.username" column="USERNAME"
+			javaType="java.lang.String" jdbcType="NVARCHAR" />
+		<result property="esbHeader.authentication.password" column="PASSWORD"
+			javaType="java.lang.String" jdbcType="NVARCHAR" />
+		<result property="esbBody" column="BODY" javaType="java.lang.String"
+			jdbcType="CLOB" />
+		<result property="createTime" column="CREATETIME" javaType="java.util.Date"
+			jdbcType="TIME" />
+	</resultMap>
+
+	<insert id="saveAudit" parameterType="com.deppon.esb.management.audit.domain.EsbAuditInfo">
+		INSERT INTO
+		T_ESB2_AUDIT(FID,VERSION,BIZID,BIZDESC1,BIZDESC2,BIZDESC3,REQID,RESID,SOURCESYS,TARGETSYS,ESBSVCCODE,BACKSVCCODE,MSGFMT,EXGPTN,SENTSEQ,RESULTCODE,USERNAME,PASSWORD,BODY,CREATETIME)
+		VALUES
+		(sys_guid(),
+		#{esbHeader.version,jdbcType=VARCHAR},
+		#{esbHeader.businessId,jdbcType=VARCHAR},#{esbHeader.businessDesc1,jdbcType=VARCHAR},
+		#{esbHeader.businessDesc2,jdbcType=VARCHAR},#{esbHeader.businessDesc3,jdbcType=VARCHAR},
+		#{esbHeader.requestId,jdbcType=VARCHAR},#{esbHeader.responseId,jdbcType=VARCHAR},
+		#{esbHeader.sourceSystem,jdbcType=VARCHAR},#{esbHeader.targetSystem,jdbcType=VARCHAR},
+		#{esbHeader.esbServiceCode,jdbcType=VARCHAR},#{esbHeader.backServiceCode,jdbcType=VARCHAR},
+		#{esbHeader.messageFormat,jdbcType=VARCHAR},#{esbHeader.exchangePattern,jdbcType=NUMERIC},
+		#{esbHeader.sentSequence,jdbcType=NUMERIC},#{esbHeader.resultCode,jdbcType=NUMERIC},
+		#{esbHeader.authentication.username,jdbcType=VARCHAR},#{esbHeader.authentication.password,jdbcType=VARCHAR},
+		#{esbBody,jdbcType=CLOB},#{createTime,jdbcType=TIME})
+	</insert>
+	
+	<resultMap id="esbAuditInfoView" type="com.deppon.esb.management.audit.view.EsbAuditInfoView"  extends="esbAuditInfo">
+		<result property="fid" column="FID"/>
+		<result property="createTime" column="CREATTIME"/>
+	</resultMap>
+	<!--  查询日志列表信息 -->
+	<select id="queryAuditLogList" parameterType="com.deppon.esb.management.audit.view.EsbAuditInfoQueryBean" resultMap="esbAuditInfoView">
+	select FID,VERSION,BIZID,BIZDESC1,BIZDESC2,BIZDESC3,REQID,RESID,SOURCESYS,TARGETSYS,ESBSVCCODE,BACKSVCCODE,MSGFMT,EXGPTN,SENTSEQ,RESULTCODE,CREATETIME from t_esb2_audit t
+	<where>
+		1=1
+		<if test="fid !=null  and esbHeader.fid !='' ">
+		   and	fid=#{fid}
+		</if>
+		<if test=" esbHeader.businessId != null and esbHeader.businessId !=''">
+			and bizid=#{esbHeader.businessId}
+		</if>
+		<if test=" esbHeader.businessDesc1 !=null and esbHeader.esbHeader.businessDesc1 !='' ">
+			and bizdesc1 = #{esbHeader.businessDesc1}
+		</if>
+		<if test="esbHeader.businessDesc2 != null and esbHeader.businessDesc2 !=''">
+			and bizdesc2=#{esbHeader.businessDesc2}
+		</if>
+		<if test="esbHeader.businessDesc3 != null and esbHeader.businessDesc3 !=''">
+			and bizdesc3=#{esbHeader.businessDesc3}
+		</if>
+		<if test=" esbHeader.requestId != null and esbHeader.requestId !='' ">
+			and reqid=#{esbHeader.requestId}
+		</if>
+		<if test="esbHeader.responseId != null and esbHeader.responseId !='' ">
+			and resid=#{esbHeader.responseId}
+		</if>
+		<if test="esbHeader.sourceSystem != null and esbHeader.sourceSystem !='' ">
+			and sourcesys=#{esbHeader.sourceSystem}
+		</if>
+		<if test=" esbHeader.targetSystem !=null and esbHeader.targetSystem !='' ">
+			and targetsys=#{esbHeader.targetSystem}
+		</if>
+		<if test=" esbHeader.esbServiceCode != null and esbHeader.esbServiceCode !='' ">
+			and esbsvccode=#{esbHeader.esbServiceCode}
+		</if>
+		<if test="esbHeader.backServiceCode != null and esbHeader.backServiceCode !='' ">
+			and backsvccode=#{esbHeader.backServiceCode}
+		</if>
+		<if test="esbHeader.messageFormat !=null and esbHeader.messageFormat !='' ">
+			and msgfmt=#{esbHeader.messageFormat}
+		</if>
+		<if test="esbHeader.exchangePattern !=null  ">
+			and exgptn=#{esbHeader.exchangePattern}
+		</if>
+		<if test="esbHeader.sentSequence !=null  ">
+			and sentseq=#{esbHeader.sentSequence}
+		</if>
+		<if test="esbHeader.resultCode !=null  ">
+			and resultcode=#{esbHeader.resultCode}
+		</if>
+		<if test="startTime !=null ">
+			<![CDATA[and createtime>#{startTime}]]>
+		</if>
+		<if test="endTime !=null">
+			<![CDATA[and createtime<#{endTime}]]>
+		</if>
+		<![CDATA[order by createtime desc]]>
+	</where>
+	</select>
+	
+	<!--  查询条件过滤 的记录总数 -->
+	<select id="queryAuditLogCount" parameterType="com.deppon.esb.management.audit.view.EsbAuditInfoQueryBean" resultType="int">
+	select count(*) from t_esb2_audit t
+	<where>
+		<if test="fid !=null  and esbHeader.fid !='' ">
+			fid=#{fid}
+		</if>
+		<if test=" esbHeader.businessId != null and esbHeader.businessId !=''">
+			and bizid=#{esbHeader.businessId}
+		</if>
+		<if test=" esbHeader.businessDesc1 !=null and esbHeader.esbHeader.businessDesc1 !='' ">
+			and bizdesc1 = #{esbHeader.businessDesc1}
+		</if>
+		<if test="esbHeader.businessDesc2 != null and esbHeader.businessDesc2 !=''">
+			and bizdesc2=#{esbHeader.businessDesc2}
+		</if>
+		<if test="esbHeader.businessDesc3 != null and esbHeader.businessDesc3 !=''">
+			and bizdesc3=#{esbHeader.businessDesc3}
+		</if>
+		<if test=" esbHeader.requestId != null and esbHeader.requestId !='' ">
+			and reqid=#{esbHeader.requestId}
+		</if>
+		<if test="esbHeader.responseId != null and esbHeader.responseId !='' ">
+			and resid=#{esbHeader.responseId}
+		</if>
+		<if test="esbHeader.sourceSystem != null and esbHeader.sourceSystem !='' ">
+			and sourcesys=#{esbHeader.sourceSystem}
+		</if>
+		<if test=" esbHeader.targetSystem !=null and esbHeader.targetSystem !='' ">
+			and targetsys=#{esbHeader.targetSystem}
+		</if>
+		<if test=" esbHeader.esbServiceCode != null and esbHeader.esbServiceCode !='' ">
+			and esbsvccode=#{esbHeader.esbServiceCode}
+		</if>
+		<if test="esbHeader.backServiceCode != null and esbHeader.backServiceCode !='' ">
+			and backsvccode=#{esbHeader.backServiceCode}
+		</if>
+		<if test="esbHeader.messageFormat !=null and esbHeader.messageFormat !='' ">
+			and msgfmt=#{esbHeader.messageFormat}
+		</if>
+		<if test="esbHeader.exchangePattern !=null  ">
+			and exgptn=#{esbHeader.exchangePattern}
+		</if>
+		<if test="esbHeader.sentSequence !=null  ">
+			and sentseq=#{esbHeader.sentSequence}
+		</if>
+		<if test="esbHeader.resultCode !=null  ">
+			and resultcode=#{esbHeader.resultCode}
+		</if>
+		<if test="startTime !=null ">
+			<![CDATA[and createtime>#{startTime}]]>
+		</if>
+		<if test="endTime !=null">
+			<![CDATA[and createtime<#{endTime}]]>
+		</if>
+	</where>
+	</select>
+	
+	
+	<!-- 查询日志body内容 -->
+	<select id="queryAuditLogBody" parameterType="java.lang.String" resultType="java.lang.String" >
+		select t.body from t_esb2_audit t where t.fid = #{fid}
+	</select>
+</mapper>

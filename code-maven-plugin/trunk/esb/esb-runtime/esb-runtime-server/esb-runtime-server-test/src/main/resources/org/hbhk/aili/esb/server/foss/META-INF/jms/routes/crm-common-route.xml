@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camel="http://camel.apache.org/schema/spring"
+	xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd ">
+
+	<camelContext id="crm_jms_common_camelContext"
+		errorHandlerRef="transactionErrorHandler" xmlns="http://camel.apache.org/schema/spring">
+
+		<!-- CRM作为客户端，发出请求到相应的服务端系统 -->
+		<route id="crm_jms_request_out_route">
+			<from uri="ESBMQ:QU_CRM_REQUEST_COM_OUT?disableReplyTo=true&amp;maxConcurrentConsumers=20&amp;concurrentConsumers=10" />
+			<transacted />
+			<!-- 判断服务是否存在，如果不存在，走异常路由；如果存在，走正常路由 -->
+			<camel:dynamicRouter>
+				<camel:method bean="validateDynamicRouter" method="route" />
+			</camel:dynamicRouter>
+		</route>
+
+		<!-- CRM作为服务端，转发响应到相应的客户端系统 -->
+		<route id="crm_jms_response_out_route">
+			<from uri="ESBMQ:QU_CRM_RESPONSE_COM_OUT?disableReplyTo=true" />
+			<transacted />
+			<!-- 判断服务是否存在，如果不存在，走异常路由；如果存在，走正常路由 -->
+			<camel:dynamicRouter>
+				<camel:method bean="validateDynamicRouter" method="route" />
+			</camel:dynamicRouter>
+		</route>
+
+		<route id="normal">
+			<from uri="direct:normal" />
+			<!-- 消息的审计日志和状态处理 -->
+			<process ref="specificationsProcess" />
+			<!-- 根据服务编码发送对相应的队列 -->
+			<camel:dynamicRouter>
+				<camel:method bean="dynamicRouterBean" method="route" />
+			</camel:dynamicRouter>
+			<camel:process ref="statusProcess" />
+		</route>
+		<route id="exception">
+			<from uri="direct:exception" />
+			<!-- 记录失败队列和异常队列 -->
+			<process ref="exceptionProcessor" />
+		</route>
+	</camelContext>
+</beans>

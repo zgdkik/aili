@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.0.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+	<bean id="esbSecurityExporter" class="org.springframework.jmx.export.MBeanExporter"
+		lazy-init="false">
+		<property name="beans">
+			<map>
+				<entry key="bean:name=sercurityJmxService" value-ref="sercurityJmxService" />
+			</map>
+		</property>
+	</bean>
+	<bean id="userInterfaceRelationLoader" class="org.hbhk.aili.esb.server.security.authorize.impl.UserInterfaceRelationLoader" init-method="init">
+	</bean>
+	<bean id="userConfigLoader" class="org.hbhk.aili.esb.server.security.authorize.impl.UserConfigLoader" 	 init-method="init"></bean>
+	<bean id="authorizeImpl" class="org.hbhk.aili.esb.server.security.authorize.impl.AuthorizeImpl">
+		<property name="userConfigLoader" ref="userConfigLoader"></property>
+		<property name="userInterfaceRelationLoader" ref="userInterfaceRelationLoader"></property>
+	</bean>
+	<bean id="esbInterfaceCountContainer" class="org.hbhk.aili.esb.server.security.flowcontrol.container.impl.EsbInterfaceCountContainer" init-method="init" ></bean>
+	<bean id="esbUserInterfaceCountContainer" class="org.hbhk.aili.esb.server.security.flowcontrol.container.impl.EsbUserInterfaceCountContainer" init-method="init"></bean>
+	
+	<bean id="sercurityJmxService" class="org.hbhk.aili.esb.server.security.SercurityJmx">
+		<property name="userConfigLoader" ref="userConfigLoader"></property>
+		<property name="userInterfaceConfigLoader" ref="userInterfaceRelationLoader"></property>
+		<property name="esbInterfaceCountContainer" ref="esbInterfaceCountContainer"></property>
+		<property name="esbUserInterfaceCountContainer" ref="esbUserInterfaceCountContainer"></property>
+		<property name="esbInterfaceConcurrentContainer" ref="esbInterfaceConcurrentContainer"></property>
+		<property name="esbUserInterfaceConcurrentContainer" ref="esbUserInterfaceConcurrentContainer"></property>
+	</bean>
+	
+	<!-- 并发计数器 -->
+	<bean id="esbInterfaceConcurrentContainer" class="org.hbhk.aili.esb.server.security.flowcontrol.container.impl.EsbInterfaceConcurrentContainer" init-method="init"></bean>
+	<bean id="esbUserInterfaceConcurrentContainer" class="org.hbhk.aili.esb.server.security.flowcontrol.container.impl.EsbUserInterfaceConcurrentContainer" init-method="init"></bean>
+	<!-- JOB -->
+	 	<bean id="counterResetJob"
+		class="org.hbhk.aili.esb.server.security.flowcontrol.scheduling.CounterRetJob">
+		<property name="list">
+			<list>
+				<ref bean="esbInterfaceCountContainer"/>	
+				<ref bean="esbUserInterfaceCountContainer"/>		
+			</list>
+		</property>
+	</bean> 
+ 	<bean id="counterResetJobDetail"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="counterResetJob">
+		</property>
+		<property name="targetMethod">
+			<value>execute</value>
+		</property>
+	</bean> 
+	<!-- 触发器，定义job触发的时间 每天凌晨00:00:30执行 -->
+ 	<bean id="counterResetTriggerBean" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="counterResetJobDetail">
+		</property>
+		<property name="cronExpression" value="30 0 0 * * ?" />
+	</bean>
+	<bean id="counterResetScheduler"
+		class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<ref bean="counterResetTriggerBean" />
+			</list>
+		</property>
+	</bean> 
+</beans>

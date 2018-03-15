@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+	<bean id="mailPropertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath*:com/deppon/esb/management/common/META-INF/adapter/mail/mail.properties</value>
+				<value>classpath*:com/deppon/esb/management/common/META-INF/adapter/mail/mailtemplate.properties</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="baseMailSupport" class="com.deppon.esb.management.common.adapter.mail.VelocityMailSupport" abstract="true">
+		<property name="mailSender" ref="pooledMailSender" />
+		<property name="velocityEngine" ref="velocityEngine" />
+		<property name="mailHeaders">
+			<props>
+				<prop key="Content-Type">
+					${mail.default.contentType}
+				</prop>
+			</props>
+		</property>
+		<property name="from">
+			<value>${mail.default.from}</value>
+		</property>
+	</bean>
+
+
+	<bean id="pooledMailSender" class="com.deppon.esb.management.common.adapter.mail.PooledMailSender" scope="singleton">
+		<property name="mailSender" ref="javaMailSender" />
+		<property name="emailSenderExecutor" ref="emailSenderExecutor"></property>
+	</bean>
+
+	<bean id="mailProperties" class="com.deppon.esb.management.common.adapter.mail.MailProperties">
+		<constructor-arg index="0">
+			<value>${mail.smtp.auth}</value>
+		</constructor-arg>
+	</bean>
+	<bean id="javaMailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host">
+			<value>${mail.host}</value>
+		</property>
+		<property name="username">
+			<value>${mail.username}</value>
+		</property>
+		<property name="password">
+			<value>${mail.password}</value>
+		</property>
+		<property name="javaMailProperties">
+			<ref local="mailProperties" />
+		</property>
+	</bean>
+
+	<!-- Configure Velocity for sending e-mail -->
+	<bean id="velocityEngine" class="org.springframework.ui.velocity.VelocityEngineFactoryBean">
+		<property name="resourceLoaderPath">
+			<value>classpath:/com/deppon/esb/management/common/META-INF/adapter/mail/vm</value>
+		</property>
+	</bean>
+
+	<bean id="emailSenderExecutor" class="com.deppon.esb.management.common.adapter.mail.EmailSenderExecutor">
+		<property name="corePoolSize" value="5" />
+		<property name="maxPoolSize" value="20" />
+	</bean>
+
+</beans>

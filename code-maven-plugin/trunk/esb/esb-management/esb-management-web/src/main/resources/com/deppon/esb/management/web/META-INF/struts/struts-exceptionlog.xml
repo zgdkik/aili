@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+	"http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+
+	<package name="exceptionlog" namespace="/exceptionlog" extends="esb-default">
+		<action name="index">
+			<result name="success">/WEB-INF/pages/exceptionlog/index.jsp</result>
+		</action>
+		<action name="queryExceptionBean" class="exceptionLogAction"
+			method="queryExceptionBean">
+			<result name="success" type="json">
+				<param name="includeProperties">success,message,list,totalCount</param>
+			</result>
+		</action>
+		
+		<action name="queryExceptionStrace" class="exceptionLogAction"
+			method="queryExceptionStrace">
+			<result name="success">/WEB-INF/pages/exceptionlog/exception.jsp</result>
+		</action>
+		
+		<!-- 导出文件 -->
+		<action name="exportIndex">
+			<result name="success">/WEB-INF/pages/exceptionlog/exportIndex.jsp</result>
+		</action>
+		
+		<action name="export" class="exportAction" method="export">
+            <result name="success" type="stream">  
+                <param name="contentType">application/vnd.ms-excel</param>  
+                <param name="contentDisposition">filename="${fileName}.xls"</param>  
+                <param name="inputName">excelStream</param>  
+            </result>  
+		</action>
+	</package>
+</struts>

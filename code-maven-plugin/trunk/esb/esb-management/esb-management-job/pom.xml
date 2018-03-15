@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>esb-management</artifactId>
+		<groupId>com.deppon.esb</groupId>
+		<version>2.0.1-SNAPSHOT</version>
+	</parent>
+	<artifactId>esb-management-job</artifactId>
+	<packaging>war</packaging>
+	<name>esb-management-job</name>
+	<url>http://maven.apache.org</url>
+	<dependencies>
+		<!-- <dependency> -->
+		<!-- <groupId>com.deppon.esb</groupId> -->
+		<!-- <artifactId>esb-management-excptn</artifactId> -->
+		<!-- <version>${project.version}</version> -->
+		<!-- </dependency> -->
+		<!-- <dependency> -->
+		<!-- <groupId>com.deppon.esb</groupId> -->
+		<!-- <artifactId>esb-management-pfmc</artifactId> -->
+		<!-- <version>${project.version}</version> -->
+		<!-- </dependency> -->
+		<dependency>
+			<groupId>org.quartz-scheduler</groupId>
+			<artifactId>quartz-oracle</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.deppon.esb</groupId>
+			<artifactId>esb-management-alert</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.deppon.esb</groupId>
+			<artifactId>esb-management-redo</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+	</dependencies>
+	<build>
+
+		<plugins>
+			<plugin>
+				<groupId>org.mortbay.jetty</groupId>
+				<artifactId>jetty-maven-plugin</artifactId>
+				<configuration>
+					<webAppConfig>
+						<contextPath>/esb</contextPath>
+					</webAppConfig>
+				</configuration>
+			</plugin>
+		</plugins>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<includes>
+					<include>**/*.*</include>
+				</includes>
+				<filtering>true</filtering>
+			</resource>
+			<resource>
+				<directory>config/${environment}</directory>
+				<includes>
+					<include>**/*.*</include>
+				</includes>
+			</resource>
+		</resources>
+	</build>
+	<profiles>
+		<profile>
+			<id>dev</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<environment>dev</environment>
+			</properties>
+			<dependencies>
+				<dependency>
+					<groupId>commons-dbcp</groupId>
+					<artifactId>commons-dbcp</artifactId>
+				</dependency>
+				<dependency>
+					<groupId>org.apache.activemq</groupId>
+					<artifactId>activemq-core</artifactId>
+				</dependency>
+				<dependency>
+					<groupId>com.ibm.mq</groupId>
+					<artifactId>jmqi</artifactId>
+					<version>1.0</version>
+				</dependency>
+				<dependency>
+					<groupId>com.ibm.mq</groupId>
+					<artifactId>mq</artifactId>
+					<version>1.0</version>
+				</dependency>
+				<dependency>
+					<groupId>com.ibm.mq</groupId>
+					<artifactId>pcf</artifactId>
+					<version>1.0</version>
+				</dependency>
+				<dependency>
+					<groupId>geronimo-spec</groupId>
+					<artifactId>geronimo-spec-j2ee</artifactId>
+					<version>1.4-rc4</version>
+				</dependency>
+				<dependency>
+					<groupId>com.ibm.mq</groupId>
+					<artifactId>commonservices</artifactId>
+					<version>1.0</version>
+				</dependency>
+				<dependency>
+					<groupId>com.ibm.mq</groupId>
+					<artifactId>headers</artifactId>
+					<version>1.0</version>
+				</dependency>
+			</dependencies>
+		</profile>
+		<profile>
+			<id>sit</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<properties>
+				<environment>sit</environment>
+			</properties>
+		</profile>
+		<profile>
+			<id>prd</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<properties>
+				<environment>prd</environment>
+			</properties>
+		</profile>
+	</profiles>
+</project>

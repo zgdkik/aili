@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<package name="noticuser" namespace="/noticuser" extends="esb-default">
+		<!-- 主页页面 -->
+		<action name="index">
+			<result name="success">/WEB-INF/pages/noticuser/noticuserIndex.jsp</result>
+		</action>
+		<action name="queryNoticUsers" class="noticUserAction" method="queryNoticUsers">
+			<result name="success" type="json">
+				<param name="includeProperties">resultCount,noticUserInfoList</param>
+			</result>
+		</action>
+		<action name="deleteNoticUsersByIds" class="noticUserAction" method="deleteNoticUsersByIds">
+			<result name="success" type="json">
+				<param name="includeProperties">success,message</param>
+			</result>
+		</action>
+		<action name="updateNoticUser" class="noticUserAction" method="updateNoticUser">
+			<result name="success" type="json">
+				<param name="includeProperties">success,message</param>
+			</result>
+		</action>
+		<action name="addNoticUser" class="noticUserAction" method="addNoticUser">
+			<result name="success" type="json">
+				<param name="includeProperties">success,message</param>
+			</result>
+		</action>
+		<action name="querySystemUsers" class="noticUserAction" method="querySystemUsers">
+			<result name="success" type="json">
+				<param name="includeProperties">resultCount,noticUserInfoList</param>
+			</result>
+		</action>
+		
+	</package>
+
+</struts>

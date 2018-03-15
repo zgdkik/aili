@@ -1,0 +1,647 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camel="http://camel.apache.org/schema/spring"
+	xmlns:cxf="http://camel.apache.org/schema/cxf" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd
+        http://camel.apache.org/schema/cxf http://camel.apache.org/schema/cxf/camel-cxf.xsd 
+		http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd 
+			http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
+	<!-- foss2crm -->
+	<!-- <cxf:cxfEndpoint id="foss2crm_frontEndpoint_fossToCrmService"
+		address="/foss2crm/fossToCrmService" wsdlURL="com/deppon/esb/client/crm/META-INF/ws/wsdl/CrmService.wsdl">
+		auditLogFeature 定义在esb-runtime-server-common包中
+		<cxf:features>
+			<ref bean="auditLogFeature" />
+		</cxf:features>
+	</cxf:cxfEndpoint>
+	修改订单锁屏信息
+	<cxf:cxfEndpoint id="CRM_ESB2CRM_MODIFY_ORDER_LOCK_INFO"
+		address="CRM_ESB2CRM_MODIFY_ORDER_LOCK_INFO" wsdlURL="com/deppon/esb/client/crm/META-INF/ws/wsdl/CrmService.wsdl">
+		<cxf:properties>
+			<entry>
+				<key>
+					<util:constant
+						static-field="com.deppon.esb.common.constant.ESBServiceConstant.CXF_SERVICE_CODE" />
+				</key>
+				<value>CRM_ESB2CRM_MODIFY_ORDER_LOCK_INFO</value>
+			</entry>
+		</cxf:properties>
+	</cxf:cxfEndpoint>
+	查询订单接口
+	<cxf:cxfEndpoint id="CRM_ESB2CRM_QUERYORDER" address="CRM_ESB2CRM_QUERYORDER"
+		wsdlURL="com/deppon/esb/client/crm/META-INF/ws/wsdl/CrmService.wsdl">
+		<cxf:properties>
+			<entry>
+				<key>
+					<util:constant
+						static-field="com.deppon.esb.common.constant.ESBServiceConstant.CXF_SERVICE_CODE" />
+				</key>
+				<value>CRM_ESB2CRM_QUERYORDER</value>
+			</entry>
+		</cxf:properties>
+	</cxf:cxfEndpoint>
+	导入订单开单接口
+	<cxf:cxfEndpoint id="CRM_ESB2CRM_IMPORT" address="CRM_ESB2CRM_IMPORT"
+		wsdlURL="com/deppon/esb/client/crm/META-INF/ws/wsdl/CrmService.wsdl">
+		<cxf:properties>
+			<entry>
+				<key>
+					<util:constant
+						static-field="com.deppon.esb.common.constant.ESBServiceConstant.CXF_SERVICE_CODE" />
+				</key>
+				<value>CRM_ESB2CRM_IMPORT</value>
+			</entry>
+		</cxf:properties>
+	</cxf:cxfEndpoint>
+	优惠券校验与使用接口
+	<cxf:cxfEndpoint id="CRM_ESB2CRM_VALIDATE_COUPON"
+		address="CRM_ESB2CRM_VALIDATE_COUPON" wsdlURL="com/deppon/esb/client/crm/META-INF/ws/wsdl/CrmService.wsdl">
+		<cxf:properties>
+			<entry>
+				<key>
+					<util:constant
+						static-field="com.deppon.esb.common.constant.ESBServiceConstant.CXF_SERVICE_CODE" />
+				</key>
+				<value>CRM_ESB2CRM_VALIDATE_COUPON</value>
+			</entry>
+		</cxf:properties>
+	</cxf:cxfEndpoint>
+	反使用优惠券接口
+	<cxf:cxfEndpoint id="CRM_ESB2CRM_COUPON_STATE" address="CRM_ESB2CRM_COUPON_STATE"
+		wsdlURL="com/deppon/esb/client/crm/META-INF/ws/wsdl/CrmService.wsdl">
+		<cxf:properties>
+			<entry>
+				<key>
+					<util:constant
+						static-field="com.deppon.esb.common.constant.ESBServiceConstant.CXF_SERVICE_CODE" />
+				</key>
+				<value>CRM_ESB2CRM_COUPON_STATE</value>
+			</entry>
+		</cxf:properties>
+	</cxf:cxfEndpoint>
+	退运费状态校验
+	<cxf:cxfEndpoint id="CRM_ESB2CRM_BACK_FREIGHT_CHECK"
+		address="CRM_ESB2CRM_BACK_FREIGHT_CHECK" wsdlURL="com/deppon/esb/client/crm/META-INF/ws/wsdl/CrmService.wsdl">
+		<cxf:properties>
+			<entry>
+				<key>
+					<util:constant
+						static-field="com.deppon.esb.common.constant.ESBServiceConstant.CXF_SERVICE_CODE" />
+				</key>
+				<value>CRM_ESB2CRM_BACK_FREIGHT_CHECK</value>
+			</entry>
+		</cxf:properties>
+	</cxf:cxfEndpoint>
+	查询理赔单 2013-04-24添加
+	<cxf:cxfEndpoint id="CRM_ESB2CRM_QUERY_CLAIMBILL"
+		address="CRM_ESB2CRM_QUERY_CLAIMBILL" wsdlURL="com/deppon/esb/client/crm/META-INF/ws/wsdl/CrmService.wsdl">
+		<cxf:properties>
+			<entry>
+				<key>
+					<util:constant
+						static-field="com.deppon.esb.common.constant.ESBServiceConstant.CXF_SERVICE_CODE" />
+				</key>
+				<value>CRM_ESB2CRM_QUERY_CLAIMBILL</value>
+			</entry>
+		</cxf:properties>
+	</cxf:cxfEndpoint>
+
+
+	foss2finself
+	<cxf:cxfEndpoint id="foss2finself_frontEndpoint_claimNumService"
+		address="/foss2finself/claimNumService"
+		wsdlURL="com/deppon/esb/client/fin-self/META-INF/ws/wsdl/ClaimNumService.wsdl">
+		auditLogFeature 定义在esb-runtime-server-common包中
+		<cxf:features>
+			<ref bean="auditLogFeature" />
+		</cxf:features>
+	</cxf:cxfEndpoint>
+	占用认领编号
+	<cxf:cxfEndpoint id="FIN_SELF_ESB2FIN_SELF_OBTAIN_NUMBER"
+		address="FIN_SELF_ESB2FIN_SELF_OBTAIN_NUMBER"
+		wsdlURL="com/deppon/esb/client/fin-self/META-INF/ws/wsdl/ClaimNumService.wsdl">
+		<cxf:properties>
+			<entry>
+				<key>
+					<util:constant
+						static-field="com.deppon.esb.common.constant.ESBServiceConstant.CXF_SERVICE_CODE" />
+				</key>
+				<value>FIN_SELF_ESB2FIN_SELF_OBTAIN_NUMBER</value>
+			</entry>
+		</cxf:properties>
+	</cxf:cxfEndpoint>
+	释放认领编号
+	<cxf:cxfEndpoint id="FIN_SELF_ESB2FIN_SELF_RELEASE_NUMBER"
+		address="FIN_SELF_ESB2FIN_SELF_RELEASE_NUMBER"
+		wsdlURL="com/deppon/esb/client/fin-self/META-INF/ws/wsdl/ClaimNumService.wsdl">
+		<cxf:properties>
+			<entry>
+				<key>
+					<util:constant
+						static-field="com.deppon.esb.common.constant.ESBServiceConstant.CXF_SERVICE_CODE" />
+				</key>
+				<value>FIN_SELF_ESB2FIN_SELF_RELEASE_NUMBER</value>
+			</entry>
+		</cxf:properties>
+	</cxf:cxfEndpoint>
+	查询汇款记录
+	<cxf:cxfEndpoint id="FIN_SELF_ESB2FIN_SELF_QUERY_TRANSFER"
+		address="FIN_SELF_ESB2FIN_SELF_QUERY_TRANSFER"
+		wsdlURL="com/deppon/esb/client/fin-self/META-INF/ws/wsdl/ClaimNumService.wsdl">
+		<cxf:properties>
+			<entry>
+				<key>
+					<util:constant
+						static-field="com.deppon.esb.common.constant.ESBServiceConstant.CXF_SERVICE_CODE" />
+				</key>
+				<value>FIN_SELF_ESB2FIN_SELF_QUERY_TRANSFER</value>
+			</entry>
+		</cxf:properties>
+	</cxf:cxfEndpoint>
+	
+	查询财务自助网上支付信息
+	<cxf:cxfEndpoint id="foss2finself_frontEndpoint_onlinePayService"
+		address="/foss2finself/onlinePayService"
+		wsdlURL="com/deppon/esb/client/fin-self/META-INF/ws/wsdl/fin_self4foss/OnlinePayService.wsdl">
+		auditLogFeature 定义在esb-runtime-server-common包中
+		<cxf:features>
+			<ref bean="auditLogFeature" />
+		</cxf:features>
+	</cxf:cxfEndpoint>
+	
+	<cxf:cxfEndpoint id="FIN_SELF_ESB2FIN_SELF_QUERY_OL_REMITINFO"
+		address="FIN_SELF_ESB2FIN_SELF_QUERY_OL_REMITINFO"
+		wsdlURL="com/deppon/esb/client/fin-self/META-INF/ws/wsdl/fin_self4foss/OnlinePayService.wsdl">
+		<cxf:properties>
+			<entry>
+				<key>
+					<util:constant
+						static-field="com.deppon.esb.common.constant.ESBServiceConstant.CXF_SERVICE_CODE" />
+				</key>
+				<value>FIN_SELF_ESB2FIN_SELF_QUERY_OL_REMITINFO</value>
+			</entry>
+		</cxf:properties>	
+	</cxf:cxfEndpoint>
+	
+	<cxf:cxfEndpoint id="FIN_SELF_ESB2FIN_SELF_OBTAIN_OL_REMIT_AMOUNT"
+		address="FIN_SELF_ESB2FIN_SELF_OBTAIN_OL_REMIT_AMOUNT"
+		wsdlURL="com/deppon/esb/client/fin-self/META-INF/ws/wsdl/fin_self4foss/OnlinePayService.wsdl">
+		<cxf:properties>
+			<entry>
+				<key>
+					<util:constant
+						static-field="com.deppon.esb.common.constant.ESBServiceConstant.CXF_SERVICE_CODE" />
+				</key>
+				<value>FIN_SELF_ESB2FIN_SELF_OBTAIN_OL_REMIT_AMOUNT</value>
+			</entry>
+		</cxf:properties>	
+	</cxf:cxfEndpoint>
+
+	=====================================================================================
+	foss与dip相关接口
+	<cxf:cxfEndpoint id="foss2dip_frontEndpoint_workflowService"
+		address="/foss2dip/workflowService"
+		wsdlURL="com/deppon/esb/client/dip/META-INF/ws/wsdl/dip4foss/OAErrorsForFOSSImplService.wsdl">
+		auditLogFeature 定义在esb-runtime-server-common包中
+		<cxf:features>
+			<ref bean="auditLogFeature" />
+		</cxf:features>
+	</cxf:cxfEndpoint>
+
+	FOSS2DIP(上报处理反签收差错接口)
+	<cxf:cxfEndpoint id="DIP_ESB2DIP_REVERSE_SIGN" address="DIP_ESB2DIP_REVERSE_SIGN.ADDR"
+		wsdlURL="com/deppon/esb/client/dip/META-INF/ws/wsdl/dip4foss/OAErrorsForFOSSImplService.wsdl">
+		<cxf:properties>
+			<entry key="soap.no.validate.parts" value="true"></entry>
+			<entry>
+				<key>
+					<util:constant
+						static-field="com.deppon.esb.common.constant.ESBServiceConstant.CXF_SERVICE_CODE" />
+				</key>
+				<value>DIP_ESB2DIP_REVERSE_SIGN</value>
+			</entry>
+		</cxf:properties>
+	</cxf:cxfEndpoint>
+
+	上报无标签多货信息接口
+	<cxf:cxfEndpoint id="DIP_ESB2DIP_REPORT_NOLABEL"
+		address="DIP_ESB2DIP_REPORT_NOLABEL"
+		wsdlURL="com/deppon/esb/client/dip/META-INF/ws/wsdl/dip4foss/OAErrorsForFOSSImplService.wsdl">
+		<cxf:properties>
+			<entry key="soap.no.validate.parts" value="true"></entry>
+			<entry>
+				<key>
+					<util:constant
+						static-field="com.deppon.esb.common.constant.ESBServiceConstant.CXF_SERVICE_CODE" />
+				</key>
+				<value>DIP_ESB2DIP_REPORT_NOLABEL</value>
+			</entry>
+		</cxf:properties>
+	</cxf:cxfEndpoint>
+	上报多货差错信息接口
+	<cxf:cxfEndpoint id="DIP_ESB2DIP_REPORT_CLEARMORE"
+		address="DIP_ESB2DIP_REPORT_CLEARMORE"
+		wsdlURL="com/deppon/esb/client/dip/META-INF/ws/wsdl/dip4foss/OAErrorsForFOSSImplService.wsdl">
+		<cxf:properties>
+			<entry key="soap.no.validate.parts" value="true"></entry>
+			<entry>
+				<key>
+					<util:constant
+						static-field="com.deppon.esb.common.constant.ESBServiceConstant.CXF_SERVICE_CODE" />
+				</key>
+				<value>DIP_ESB2DIP_REPORT_CLEARMORE</value>
+			</entry>
+		</cxf:properties>
+	</cxf:cxfEndpoint>
+	上报少货差错信息接口
+	<cxf:cxfEndpoint id="DIP_ESB2DIP_REPORT_CLEARLESS"
+		address="DIP_ESB2DIP_REPORT_CLEARLESS"
+		wsdlURL="com/deppon/esb/client/dip/META-INF/ws/wsdl/dip4foss/OAErrorsForFOSSImplService.wsdl">
+		<cxf:properties>
+			<entry key="soap.no.validate.parts" value="true"></entry>
+			<entry>
+				<key>
+					<util:constant
+						static-field="com.deppon.esb.common.constant.ESBServiceConstant.CXF_SERVICE_CODE" />
+				</key>
+				<value>DIP_ESB2DIP_REPORT_CLEARLESS</value>
+			</entry>
+		</cxf:properties>
+	</cxf:cxfEndpoint>
+	查询少货差错是否上报接口
+	<cxf:cxfEndpoint id="DIP_ESB2DIP_REPORT_LESSFOUND"
+		address="DIP_ESB2DIP_REPORT_LESSFOUND"
+		wsdlURL="com/deppon/esb/client/dip/META-INF/ws/wsdl/dip4foss/OAErrorsForFOSSImplService.wsdl">
+		<cxf:properties>
+			<entry key="soap.no.validate.parts" value="true"></entry>
+			<entry>
+				<key>
+					<util:constant
+						static-field="com.deppon.esb.common.constant.ESBServiceConstant.CXF_SERVICE_CODE" />
+				</key>
+				<value>DIP_ESB2DIP_REPORT_LESSFOUND</value>
+			</entry>
+		</cxf:properties>
+	</cxf:cxfEndpoint>
+	查询卸车差错报告处理状态接口
+	<cxf:cxfEndpoint id="DIP_ESB2DIP_QUERY_UNLOADDIFF" address="#{DIP_ESB2DIP_QUERY_UNLOADDIFF.ADDR}" 
+		wsdlURL="com/deppon/esb/client/dip/META-INF/ws/wsdl/OAErrorsForFOSSImplService.wsdl"> 
+		<cxf:properties> <entry key="soap.no.validate.parts" value="true"></entry> 
+		</cxf:properties> </cxf:cxfEndpoint>
+	新增封签差错单接口
+	<cxf:cxfEndpoint id="DIP_ESB2DIP_REPORT_SLIPERROR"
+		address="DIP_ESB2DIP_REPORT_SLIPERROR"
+		wsdlURL="com/deppon/esb/client/dip/META-INF/ws/wsdl/dip4foss/OAErrorsForFOSSImplService.wsdl">
+		<cxf:properties>
+			<entry key="soap.no.validate.parts" value="true"></entry>
+			<entry>
+				<key>
+					<util:constant
+						static-field="com.deppon.esb.common.constant.ESBServiceConstant.CXF_SERVICE_CODE" />
+				</key>
+				<value>DIP_ESB2DIP_REPORT_SLIPERROR</value>
+			</entry>
+		</cxf:properties>
+	</cxf:cxfEndpoint>
+	查询违禁品差错信息接口
+	<cxf:cxfEndpoint id="DIP_ESB2DIP_QUERY_CONTRABAND" address="#{DIP_ESB2DIP_QUERY_CONTRABAND.ADDR}" 
+		wsdlURL="com/deppon/esb/client/dip/META-INF/ws/wsdl/OAErrorsForFOSSImplService.wsdl"> 
+		<cxf:properties> <entry key="soap.no.validate.parts" value="true"></entry> 
+		</cxf:properties> </cxf:cxfEndpoint>
+	查询虚开运单差错接口
+	<cxf:cxfEndpoint id="DIP_ESB2DIP_QUERY_RESULT" address="DIP_ESB2DIP_QUERY_RESULT"
+		wsdlURL="com/deppon/esb/client/dip/META-INF/ws/wsdl/dip4foss/OAErrorsForFOSSImplService.wsdl">
+		<cxf:properties>
+			<entry key="soap.no.validate.parts" value="true"></entry>
+			<entry>
+				<key>
+					<util:constant
+						static-field="com.deppon.esb.common.constant.ESBServiceConstant.CXF_SERVICE_CODE" />
+				</key>
+				<value>DIP_ESB2DIP_QUERY_RESULT</value>
+			</entry>
+		</cxf:properties>
+	</cxf:cxfEndpoint>
+	上报超重超方接口
+	<cxf:cxfEndpoint id="DIP_ESB2DIP_REPORT_OVERWEIGHT"
+		address="DIP_ESB2DIP_REPORT_OVERWEIGHT"
+		wsdlURL="com/deppon/esb/client/dip/META-INF/ws/wsdl/dip4foss/OAErrorsForFOSSImplService.wsdl">
+		<cxf:properties>
+			<entry key="soap.no.validate.parts" value="true"></entry>
+			<entry>
+				<key>
+					<util:constant
+						static-field="com.deppon.esb.common.constant.ESBServiceConstant.CXF_SERVICE_CODE" />
+				</key>
+				<value>DIP_ESB2DIP_REPORT_OVERWEIGHT</value>
+			</entry>
+		</cxf:properties>
+	</cxf:cxfEndpoint>
+	更新多货管理货物状态
+	<cxf:cxfEndpoint id="DIP_ESB2DIP_UPDATE_STATEOFGOODS"
+		address="DIP_ESB2DIP_UPDATE_STATEOFGOODS"
+		wsdlURL="com/deppon/esb/client/dip/META-INF/ws/wsdl/dip4foss/OAErrorsForFOSSImplService.wsdl">
+		<cxf:properties>
+			<entry key="soap.no.validate.parts" value="true"></entry>
+			<entry>
+				<key>
+					<util:constant
+						static-field="com.deppon.esb.common.constant.ESBServiceConstant.CXF_SERVICE_CODE" />
+				</key>
+				<value>DIP_ESB2DIP_UPDATE_STATEOFGOODS</value>
+			</entry>
+		</cxf:properties>
+	</cxf:cxfEndpoint>
+
+	foss2dip 根据需求重用园区无线网络验证接口的wsdl
+	<cxf:cxfEndpoint id="foss2dip_frontEndpoint_retrievePasswordService"
+		address="/foss2dip/retrievePasswordService"
+		wsdlURL="com/deppon/esb/client/dip/META-INF/ws/wsdl/dip4dkeytms/DIPService.wsdl">
+		auditLogFeature 定义在esb-runtime-server-common包中
+		<cxf:features>
+			<ref bean="auditLogFeature" />
+		</cxf:features>
+	</cxf:cxfEndpoint>
+	<cxf:cxfEndpoint id="DIP_ESB2DIP_RETRIEVE_PASSWORD"
+		address="DIP_ESB2DIP_RETRIEVE_PASSWORD"
+		wsdlURL="com/deppon/esb/client/dip/META-INF/ws/wsdl/dip4dkeytms/DIPService.wsdl">
+		<cxf:properties>
+			<entry key="soap.no.validate.parts" value="true"></entry>
+			<entry>
+				<key>
+					<util:constant
+						static-field="com.deppon.esb.common.constant.ESBServiceConstant.CXF_SERVICE_CODE" />
+				</key>
+				<value>DIP_ESB2DIP_RETRIEVE_PASSWORD</value>
+			</entry>
+		</cxf:properties>
+	</cxf:cxfEndpoint>
+
+
+	foss2gps FOSS将要跟踪的任务车辆列表信息发给GPS系统
+	<cxf:cxfEndpoint id="foss2gps_frontEndpoint_gpsService"
+		address="/foss2gps/gpsService"
+		wsdlURL="com/deppon/esb/client/gps/META-INF/ws/wsdl/deppon_gps_service.wsdl">
+		auditLogFeature 定义在esb-runtime-server-common包中
+		<cxf:features>
+			<ref bean="auditLogFeature" />
+		</cxf:features>
+	</cxf:cxfEndpoint>
+	获取FOSS系统任务
+	<cxf:cxfEndpoint id="GPS_ESB2GPS_TRANSMIT_VEHICLE"
+		address="GPS_ESB2GPS_TRANSMIT_VEHICLE"
+		wsdlURL="com/deppon/esb/client/gps/META-INF/ws/wsdl/deppon_gps_service.wsdl">
+		<cxf:properties>
+			<entry>
+				<key>
+					<util:constant
+						static-field="com.deppon.esb.common.constant.ESBServiceConstant.CXF_SERVICE_CODE" />
+				</key>
+				<value>GPS_ESB2GPS_TRANSMIT_VEHICLE</value>
+			</entry>
+		</cxf:properties>
+	</cxf:cxfEndpoint>
+	FOSS向GPS传送班线数据信息
+	<cxf:cxfEndpoint id="GPS_ESB2GPS_TRANSMIT_LINE"
+		address="GPS_ESB2GPS_TRANSMIT_LINE"
+		wsdlURL="com/deppon/esb/client/gps/META-INF/ws/wsdl/deppon_gps_service.wsdl">
+		<cxf:properties>
+			<entry>
+				<key>
+					<util:constant
+						static-field="com.deppon.esb.common.constant.ESBServiceConstant.CXF_SERVICE_CODE" />
+				</key>
+				<value>GPS_ESB2GPS_TRANSMIT_LINE</value>
+			</entry>
+		</cxf:properties>
+	</cxf:cxfEndpoint>
+
+
+	foss2csair Login 获取Awb验证票据
+	<cxf:cxfEndpoint id="foss2csair_frontEndpoint_csairLoginService"
+		address="/foss2csair/csairLoginService"
+		wsdlURL="com/deppon/esb/client/csair/META-INF/ws/wsdl/deppon_csair_login_service.wsdl">
+		auditLogFeature 定义在esb-runtime-server-common包中
+		<cxf:features>
+			<ref bean="auditLogFeature" />
+		</cxf:features>
+	</cxf:cxfEndpoint>
+	获取登陆票据
+	<cxf:cxfEndpoint id="CSAIR_ESB2CSAIR_LOGIN" address="CSAIR_ESB2CSAIR_LOGIN"
+		wsdlURL="com/deppon/esb/client/csair/META-INF/ws/wsdl/deppon_csair_login_service.wsdl">
+		<cxf:properties>
+			<entry>
+				<key>
+					<util:constant
+						static-field="com.deppon.esb.common.constant.ESBServiceConstant.CXF_SERVICE_CODE" />
+				</key>
+				<value>CSAIR_ESB2CSAIR_LOGIN</value>
+			</entry>
+		</cxf:properties>
+	</cxf:cxfEndpoint>
+
+	foss2csair Awb 制单服务接口
+	<cxf:cxfEndpoint id="foss2csair_frontEndpoint_csairAwbService"
+		address="/foss2csair/csairAwbService"
+		wsdlURL="com/deppon/esb/client/csair/META-INF/ws/wsdl/deppon_csair_awb_service.wsdl">
+		<cxf:features>
+			<ref bean="auditLogFeature" />
+		</cxf:features>
+	</cxf:cxfEndpoint>
+	查询制单
+	<cxf:cxfEndpoint id="CSAIR_ESB2CSAIR_QUERY_AWB"
+		address="CSAIR_ESB2CSAIR_QUERY_AWB"
+		wsdlURL="com/deppon/esb/client/csair/META-INF/ws/wsdl/deppon_csair_awb_service.wsdl">
+		<cxf:properties>
+			<entry>
+				<key>
+					<util:constant
+						static-field="com.deppon.esb.common.constant.ESBServiceConstant.CXF_SERVICE_CODE" />
+				</key>
+				<value>CSAIR_ESB2CSAIR_QUERY_AWB</value>
+			</entry>
+		</cxf:properties>
+	</cxf:cxfEndpoint>
+	制单
+	<cxf:cxfEndpoint id="CSAIR_ESB2CSAIR_MADE_AWB" address="CSAIR_ESB2CSAIR_MADE_AWB"
+		wsdlURL="com/deppon/esb/client/csair/META-INF/ws/wsdl/deppon_csair_awb_service.wsdl">
+		<cxf:properties>
+			<entry>
+				<key>
+					<util:constant
+						static-field="com.deppon.esb.common.constant.ESBServiceConstant.CXF_SERVICE_CODE" />
+				</key>
+				<value>CSAIR_ESB2CSAIR_MADE_AWB</value>
+			</entry>
+		</cxf:properties>
+	</cxf:cxfEndpoint>
+
+	======FOSS2OWS（foss调用官网）=====
+	<cxf:cxfEndpoint id="foss2ows_frontEndpoint_QueryPayInfoService"
+		address="/foss2ows/queryPayInfo" wsdlURL="com/deppon/esb/client/ows/META-INF/ws/OnlinePays.wsdl">
+		<cxf:features>
+			<ref bean="auditLogFeature" />
+		</cxf:features>
+	</cxf:cxfEndpoint>
+
+	<cxf:cxfEndpoint id="OWS_ESB2OWS_QUERY_PAYINFO"
+		address="OWS_ESB2OWS_QUERY_PAYINFO" wsdlURL="com/deppon/esb/client/ows/META-INF/ws/OnlinePays.wsdl">
+		<cxf:properties>
+			<entry>
+				<key>
+					<util:constant
+						static-field="com.deppon.esb.common.constant.ESBServiceConstant.CXF_SERVICE_CODE" />
+				</key>
+				<value>OWS_ESB2OWS_QUERY_PAYINFO</value>
+			</entry>
+		</cxf:properties>
+	</cxf:cxfEndpoint>
+
+	===== foss2gis ======
+
+	<cxf:cxfEndpoint id="foss2gis_frontEndpoint_gisService"
+		address="/foss2gis/gisService"
+		wsdlURL="com/deppon/esb/client/gis/META-INF/ws/wsdl/gis4ows/QueryDeptService.wsdl">
+		<cxf:features>
+			<ref bean="auditLogFeature" />
+		</cxf:features>
+	</cxf:cxfEndpoint>
+
+	收集地址接口
+	<cxf:cxfEndpoint id="GIS_ESB2GIS_COLLECT_ADDRESS"
+		address="GIS_ESB2GIS_COLLECT_ADDRESS"
+		wsdlURL="com/deppon/esb/client/gis/META-INF/ws/wsdl/gis4ows/QueryDeptService.wsdl">
+		<cxf:properties>
+			<entry>
+				<key>
+					<util:constant
+						static-field="com.deppon.esb.common.constant.ESBServiceConstant.CXF_SERVICE_CODE" />
+				</key>
+				<value>GIS_ESB2GIS_COLLECT_ADDRESS</value>
+			</entry>
+		</cxf:properties>
+	</cxf:cxfEndpoint>
+	
+	<cxf:cxfEndpoint id="foss2gis_frontEndpoint_expressRoutePlan"
+		address="/foss2gis/expressRoutePlan"
+		wsdlURL="com/deppon/esb/client/gis/META-INF/ws/wsdl/gis4foss/expressRoutePlan.wsdl">
+		<cxf:features>
+			<ref bean="auditLogFeature" />
+		</cxf:features>
+	</cxf:cxfEndpoint>
+	同步快递班车排班方案信息
+	<cxf:cxfEndpoint id="GIS_ESB2GIS_EXPRESS_ROUTEPLAN_INFO"
+		address="GIS_ESB2GIS_EXPRESS_ROUTEPLAN_INFO"
+		wsdlURL="com/deppon/esb/client/gis/META-INF/ws/wsdl/gis4foss/expressRoutePlan.wsdl">
+		<cxf:properties>
+			<entry>
+				<key>
+					<util:constant
+						static-field="com.deppon.esb.common.constant.ESBServiceConstant.CXF_SERVICE_CODE" />
+				</key>
+				<value>GIS_ESB2GIS_EXPRESS_ROUTEPLAN_INFO</value>
+			</entry>
+		</cxf:properties>
+	</cxf:cxfEndpoint>
+	
+	foss2ccs
+	<cxf:cxfEndpoint id="foss2ccs_frontEndpoint_fossToccsService"
+		address="/foss2ccs/fossToccsService" wsdlURL="com/deppon/esb/client/ccs/META-INF/ws/wsdl/ccs4foss/FOSS2CCService.wsdl">
+		auditLogFeature 定义在esb-runtime-server-common包中
+		<cxf:features>
+			<ref bean="auditLogFeature" />
+		</cxf:features>
+	</cxf:cxfEndpoint>
+	记录单信息接口
+	<cxf:cxfEndpoint id="CCS_ESB2CCS_SEND_RECORDORINFO"
+		address="CCS_ESB2CCS_SEND_RECORDORINFO"
+		wsdlURL="com/deppon/esb/client/ccs/META-INF/ws/wsdl/ccs4foss/FOSS2CCService.wsdl">
+		<cxf:properties>
+			<entry>
+				<key>
+					<util:constant
+						static-field="com.deppon.esb.common.constant.ESBServiceConstant.CXF_SERVICE_CODE" />
+				</key>
+				<value>CCS_ESB2CCS_SEND_RECORDORINFO</value>
+			</entry>
+		</cxf:properties>
+	</cxf:cxfEndpoint>
+	催运单信息反馈CC接口
+	<cxf:cxfEndpoint id="CCS_ESB2CCS_FEEDBACK_REMINDER"
+		address="CCS_ESB2CCS_FEEDBACK_REMINDER"
+		wsdlURL="com/deppon/esb/client/ccs/META-INF/ws/wsdl/ccs4foss/FOSS2CCService.wsdl">
+		<cxf:properties>
+			<entry>
+				<key>
+					<util:constant
+						static-field="com.deppon.esb.common.constant.ESBServiceConstant.CXF_SERVICE_CODE" />
+				</key>
+				<value>CCS_ESB2CCS_FEEDBACK_REMINDER</value>
+			</entry>
+		</cxf:properties>
+	</cxf:cxfEndpoint> -->
+<!-- 	
+	foss2fims
+	<cxf:cxfEndpoint id="foss2fims_frontEndpoint_fossToFimsService"
+		address="/foss2fims/fossToFimsService"
+		wsdlURL="com/deppon/esb/client/fims/META-INF/ws/fims4foss/FossToFimsService.wsdl">
+		<cxf:features>
+			<ref bean="auditLogFeature" />
+		</cxf:features>
+	</cxf:cxfEndpoint>
+	可开票余额同步接口
+	<cxf:cxfEndpoint id="FIMS_ESB2FIMS_FIMS_SYN_REMAIN"
+		address="FIMS_ESB2FIMS_FIMS_SYN_REMAIN"
+		wsdlURL="com/deppon/esb/client/fims/META-INF/ws/fims4foss/FossToFimsService.wsdl">
+		<cxf:properties>
+			<entry>
+				<key>
+					<util:constant
+						static-field="com.deppon.esb.common.constant.ESBServiceConstant.CXF_SERVICE_CODE" />
+				</key>
+				<value>FIMS_ESB2FIMS_FIMS_SYN_REMAIN</value>
+			</entry>
+		</cxf:properties>
+	</cxf:cxfEndpoint>	
+	定额发票登记信息接口
+	<cxf:cxfEndpoint id="FIMS_ESB2FIMS_FIMS_SYN_REGISTER"
+		address="FIMS_ESB2FIMS_FIMS_SYN_REGISTER"
+		wsdlURL="com/deppon/esb/client/fims/META-INF/ws/fims4foss/FossToFimsService.wsdl">
+		<cxf:properties>
+			<entry>
+				<key>
+					<util:constant
+						static-field="com.deppon.esb.common.constant.ESBServiceConstant.CXF_SERVICE_CODE" />
+				</key>
+				<value>FIMS_ESB2FIMS_FIMS_SYN_REGISTER</value>
+			</entry>
+		</cxf:properties>
+	</cxf:cxfEndpoint>
+
+	foss2fssc
+	<cxf:cxfEndpoint id="foss2fssc_frontEndpoint_FossAccruedService"
+		address="/foss2fssc/FossAccruedService"
+		wsdlURL="com/deppon/esb/client/fssc/META-INF/ws/wsdl/fssc4foss/FossAccruedService.wsdl">
+		<cxf:features>
+			<ref bean="auditLogFeature" />
+		</cxf:features>
+	</cxf:cxfEndpoint>	
+	生成付款预提工作流
+	<cxf:cxfEndpoint id="FSSC_ESB2FSSC_GENERATE_ACCRUED_WORKFLOW"
+		address="FSSC_ESB2FSSC_GENERATE_ACCRUED_WORKFLOW.addr"
+		wsdlURL="com/deppon/esb/client/fssc/META-INF/ws/wsdl/fssc4foss/FossAccruedService.wsdl">
+		<cxf:properties>
+			<entry>
+				<key>
+					<util:constant
+						static-field="com.deppon.esb.common.constant.ESBServiceConstant.CXF_SERVICE_CODE" />
+				</key>
+				<value>FSSC_ESB2FSSC_GENERATE_ACCRUED_WORKFLOW</value>
+			</entry>
+		</cxf:properties>
+	</cxf:cxfEndpoint>		 -->
+</beans>

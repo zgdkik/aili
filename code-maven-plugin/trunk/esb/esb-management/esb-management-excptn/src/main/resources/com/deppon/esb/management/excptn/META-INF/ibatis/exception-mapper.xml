@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+	"-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.deppon.esb.management.excptn.domain.ExceptionInfo">
+	<resultMap id="ExcptnMap"
+		type="com.deppon.esb.management.excptn.domain.ExceptionInfo">
+		<result property="id" column="FID"></result>
+		<result property="msgId" column="MSGID" />
+		<result property="svcCode" column="SVCCODE" />
+		<result property="createTime" column="CREATETIME" />
+		<result property="exceptionCode" column="EXCPTIONCODE" />
+		<result property="dtlExcptn" column="DTLEXCPTN" />
+		<result property="biz1" column="BIZ1" />
+		<result property="biz2" column="BIZ2" />
+		<result property="orgnMsg" column="ORGNMSG" />
+		<result property="retryCount" column="RETRYCOUNT" />
+		<result property="statstcFlg" column="STATSTCFLG" />
+		<result property="fromEndpointURI" column="FROMENDPOINTURI" />
+		<result property="isAutoResend" column="ISAUTORESEND" />
+		<result property="esbHostName" column="ESBHOSTNAME" />
+		<result property="esbIp" column="ESBIP" />
+		<result property="redoType" column="REDOTYPE"/>
+		<result property="method" column="METHOD"/>
+		<result property="operationNamespace" column="OPERATIONNAMESPACE"/>
+		<result property="isSystemSend" column="ISSYSTEMSEND"/>
+	</resultMap>
+
+
+
+	<select id="queryExceptionList" parameterType="java.util.Map" resultMap="ExcptnMap">
+		SELECT 
+		SVCCODE, CREATETIME, EXCPTIONCODE
+		FROM 
+		T_ESB_EXCEPTION
+		GROUP BY SVCCODE, CREATETIME, EXCPTIONCODE;
+	</select>
+
+	<!-- 如果存在request相同的值，retrycount次数加1，ISSUCCESS 值修改为0；如果不存在，则新增一条数据-->
+	<insert id="saveException" parameterType="com.deppon.esb.management.excptn.domain.ExceptionInfo">
+		<![CDATA[
+			insert into t_esb_exception (FID]]>
+		<if test="msgId != null"><![CDATA[,MSGID]]></if>
+		<if test="svcCode != null"><![CDATA[,SVCCODE]]></if>
+		<if test="createTime != null"><![CDATA[,CREATETIME]]></if>
+		<if test="exceptionCode != null"><![CDATA[,EXCPTIONCODE]]></if>
+		<if test="dtlExcptn != null"><![CDATA[,DTLEXCPTN]]></if>
+		<if test="biz1 != null"><![CDATA[,BIZ1]]></if>
+		<if test="biz2 != null"><![CDATA[,BIZ2]]></if>
+		<if test="orgnMsg != null"><![CDATA[,ORGNMSG]]></if>
+		<if test="retryCount != null"><![CDATA[,RETRYCOUNT]]></if>
+		<if test="statstcFlg != null"><![CDATA[,STATSTCFLG]]></if>
+		<if test="fromEndpointURI != null"><![CDATA[,FROMENDPOINTURI]]></if>
+		<if test="isAutoResend != null"><![CDATA[,ISAUTORESEND]]></if>
+		<if test="esbHostName != null"><![CDATA[,ESBHOSTNAME]]></if>
+		<if test="esbIp != null"><![CDATA[,ESBIP]]></if>
+		<if test="redoType != null"><![CDATA[,REDOTYPE]]></if>
+		<if test="method != null"><![CDATA[,METHOD]]></if>
+		<if test="operationNamespace != null"><![CDATA[,OPERATIONNAMESPACE]]></if>
+		<if test="isSystemSend != null"><![CDATA[,ISSYSTEMSEND]]></if>
+			<![CDATA[) values ( sys_guid()]]>
+		<if test="msgId != null"><![CDATA[,#{msgId}]]></if>
+		<if test="svcCode != null"><![CDATA[,#{svcCode}]]></if>
+		<if test="createTime != null"><![CDATA[,#{createTime}]]></if>
+		<if test="exceptionCode != null"><![CDATA[,#{exceptionCode}]]></if>
+		<if test="dtlExcptn != null"><![CDATA[,#{dtlExcptn}]]></if>
+		<if test="biz1 != null"><![CDATA[,#{biz1}]]></if>
+		<if test="biz2 != null"><![CDATA[,#{biz2}]]></if>
+		<if test="orgnMsg != null"><![CDATA[,#{orgnMsg,jdbcType=BLOB}]]></if>
+		<if test="retryCount != null"><![CDATA[,#{retryCount}]]></if>
+		<if test="statstcFlg != null"><![CDATA[,#{statstcFlg}]]></if>
+		<if test="fromEndpointURI != null"><![CDATA[,#{fromEndpointURI}]]></if>
+		<if test="isAutoResend != null"><![CDATA[,#{isAutoResend}]]></if>
+		<if test="esbHostName != null"><![CDATA[,#{esbHostName}]]></if>
+		<if test="esbIp != null"><![CDATA[,#{esbIp}]]></if>
+		<if test="redoType != null"><![CDATA[,#{redoType}]]></if>
+		<if test="method != null"><![CDATA[,#{method}]]></if>
+		<if test="operationNamespace != null"><![CDATA[,#{operationNamespace}]]></if>
+		<if test="isSystemSend != null"><![CDATA[,#{isSystemSend}]]></if>
+		<![CDATA[)]]>
+	</insert>
+
+	<resultMap type="com.deppon.esb.management.excptn.domain.view.ExceptionBean"
+		id="ExceptionBean">
+		<id property="id" column="FID" />
+		<result property="msgId" column="MSGID" />
+		<result property="createTime" column="CREATETIME" />
+		<result property="biz" column="BIZ" />
+		<result property="exceptionCode" column="EXCPTIONCODE" />
+		<result property="svcName" column="SVCNAME" />
+		<result property="svcCode" column="SVCCODE" />
+	</resultMap>
+	<select id="selectExceptionBean"
+		parameterType="com.deppon.esb.management.excptn.domain.view.ExceptionQueryBean"
+		resultMap="ExceptionBean">
+		<![CDATA[	
+		select *
+		  from (select e.fid,
+		               e.msgid,
+		               e.createtime,
+		               e.biz1 || ' ' || e.biz2 BIZ,
+		               e.excptioncode,
+		               e.svccode,
+		               rownum num
+		          from t_esb_exception e ]]>
+		<where>
+			1=1
+			<if test="limit != null"><![CDATA[ and rownum <#{start}+#{limit}]]></if>
+			<if test="startTime != null"><![CDATA[ and CREATETIME >#{startTime}]]></if>
+			<if test="endTime != null"><![CDATA[ and CREATETIME <#{endTime}]]></if>
+			<if test="svcCode != null and svcCode!='' "><![CDATA[ and SVCCODE =#{svcCode}]]></if>
+			<if test="biz != null and biz != '' "><![CDATA[and BIZ1 like '%'||#{biz}||'%']]></if>
+			<if test="exception != null and exception != '' "><![CDATA[and DTLEXCPTN like '%'||#{exception}||'%']]></if>
+		</where>
+  		<![CDATA[ )]]>
+		<where>
+			1=1
+			<if test="start != null "><![CDATA[and  num > #{start}]]></if>
+		</where>
+	</select>
+	
+	
+	<!-- 计数 -->
+	<select id="count"
+		parameterType="com.deppon.esb.management.excptn.domain.view.ExceptionQueryBean"
+		resultType="int">
+		<![CDATA[	select count(*) from t_esb_exception e]]>
+		<where>
+			1=1
+			<if test="startTime != null"><![CDATA[ and CREATETIME >#{startTime}]]></if>
+			<if test="endTime != null"><![CDATA[ and CREATETIME <#{endTime}]]></if>
+			<if test="svcCode != null and svcCode!='' "><![CDATA[ and SVCCODE =#{svcCode}]]></if>
+			<if test="biz != null and biz != '' "><![CDATA[and BIZ1 like '%'||#{biz}||'%']]></if>
+			<if test="exception != null and exception != '' "><![CDATA[and DTLEXCPTN like '%'||#{exception}||'%']]></if>
+		</where>
+	</select>
+	
+	
+	<!-- 查询异常堆栈信息 -->
+	<select id="selectStackTrace" parameterType="String" resultType="String">
+		<![CDATA[select t.dtlexcptn from t_esb_exception t where t.fid=#{id}]]>
+	</select>
+	
+	<!-- 查询重发信息 -->
+	<select id="selectRedo" resultMap="ExcptnMap">
+	 	<![CDATA[ 
+			select t.fid,
+			       t.msgid,
+			       t.svccode,
+			       t.orgnmsg,
+			       t.fromendpointuri,
+			       t.method,
+			       t.operationnamespace,
+			       t.redotype,
+			         t.isSystemsend
+			  from t_esb_exception t
+			 where t.retrycount <= 3
+			   and t.isautoresend = '1'
+			     and t.issuccess='0'
+			     and t.isSystemSend='0'
+  		 ]]>
+	</select>
+	<!-- 更新 为成功状态-->
+	<update id="updateRedoSuccess" parameterType="com.deppon.esb.management.excptn.domain.ExceptionInfo">
+		<![CDATA[ 	
+		update t_esb_exception t
+  		  set t.issuccess =1
+ 		where t.fid in
+ 		 ]]>
+		<foreach collection="list" item="ids" open="(" separator="," close=")">
+			#{ids}
+		</foreach>
+	</update>
+	
+	<!-- 更新重发次数 -->
+	<update id="updateRedoCount" parameterType="com.deppon.esb.management.excptn.domain.ExceptionInfo">
+		<![CDATA[ 	
+        update t_esb_exception t
+  		set t.retrycount = nvl(t.retrycount,0)+1
+ 		where t.fid in
+ 		 ]]>
+		<foreach collection="list" item="ids" open="(" separator="," close=")">
+			#{ids}
+		</foreach>
+	</update>
+</mapper>

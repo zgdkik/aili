@@ -1,0 +1,9 @@
+【ESB状态不完整告警】
+ESB服务编码:${esbServiceCode}
+后端服务编码:${backServiceCode}
+请求唯一编码:${requestId}
+响应唯一编码:${responseId}
+最后状态编码:${statusId}
+最后状态时间:${statusTimeStamp}
+
+请及时处理.可以结合日志信息解决问题！

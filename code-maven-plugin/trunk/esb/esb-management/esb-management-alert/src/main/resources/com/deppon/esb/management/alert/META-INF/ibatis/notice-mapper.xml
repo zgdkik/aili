@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+	"-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.deppon.esb.management.alert.domain.NoticeInfo">
+
+	<resultMap id="noticeMap" type="com.deppon.esb.management.alert.domain.NoticeInfo">
+		<result property="id" column="FID" />
+		<result property="svcCode" column="SVCCODE" />
+		<result property="statisticsTime" column="STATISTICSTIME" />
+		<result property="sendTime" column="SENDTIME" />
+		<result property="content" column="CONTENT" />
+		<result property="type" column="TYPE" />
+	</resultMap>
+
+	<insert id="insertNotices" parameterType="com.deppon.esb.management.alert.domain.NoticeInfo">
+		INSERT INTO T_ESB_NOTICE(FID,SVCCODE,STATISTICSTIME,SENDTIME,CONTENT,TYPE) VALUES
+			(sys_guid(),#{svcCode},#{statisticsTime},#{sendTime},#{content},#{type})
+	</insert>
+	
+	<select id="getNoticesByServiceCode" parameterType="string" resultMap="noticeMap">
+		select
+			FID,
+			SVCCODE,
+			STATISTICSTIME,
+			SENDTIME,
+			CONTENT,
+			TYPE
+		FROM
+			T_ESB_NOTICE
+		where
+			SVCCODE=#{serviceCode}
+	</select>
+
+
+</mapper>

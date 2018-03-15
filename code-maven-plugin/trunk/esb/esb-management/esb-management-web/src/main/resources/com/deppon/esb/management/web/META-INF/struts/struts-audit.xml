@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<package name="audit" namespace="/audit" extends="esb-default">
+		<!-- 主页页面 -->
+		<action name="auditIndex">
+			<result name="success">/WEB-INF/pages/audit/auditIndex.jsp</result>
+		</action>
+ 		<action name="queryAuditLogList" class="auditLogAction" method="queryAuditLogList">
+			<result name="success" type="json">
+				<param name="includeProperties">resultCount,list,success,tips</param>
+			</result>
+		</action>
+		<action name="queryAuditLogBody" class="auditLogAction" method="queryAuditLogBody">
+			<result name="success">/WEB-INF/pages/audit/auditBody.jsp</result>
+			<result name="fail">/WEB-INF/pages/audit/exception.jsp</result>
+		</action>
+	</package>
+
+</struts>

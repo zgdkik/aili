@@ -1,0 +1,1 @@
+esb-service-server-XXX：去其中XXX表示的是系统简称，表示ESB提供服务给各个系统调用的服务

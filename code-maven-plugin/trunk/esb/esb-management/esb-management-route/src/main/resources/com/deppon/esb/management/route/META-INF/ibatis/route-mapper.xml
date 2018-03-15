@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+	"-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.deppon.esb.management.route.domain.RouteInfo">
+	<resultMap id="routeInfo"
+		type="com.deppon.esb.management.route.domain.RouteInfo">
+		<result property="id" column="FID" />
+		<result property="esbServiceCode" column="ESBSVCCODE" />
+		<result property="targetServiceCode" column="TARGETSVCCODE" />
+	</resultMap>
+
+	<select id="selectAllRoute" parameterType="java.util.Map" resultMap="routeInfo" >
+		select * from
+		(select t.*,rownum r from T_ESB2_ROUTE t
+		where
+		<![CDATA[rownum<=#{limit})]]>
+		<![CDATA[where r>#{start}]]>
+	</select>
+	<select id="selectRouteCount" resultType="java.lang.Integer">
+		select count(*) from T_ESB2_ROUTE
+	</select>
+
+
+</mapper>

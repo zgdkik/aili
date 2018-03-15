@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camel="http://camel.apache.org/schema/spring"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd 
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+	<!-- esb as http proxy  -->
+	<camelContext id="common2esb_rest_camelContext" xmlns="http://camel.apache.org/schema/spring">
+		<!-- 异常处理 -->
+			<onException>
+				<exception>java.lang.Exception</exception>
+				<handled>
+					<constant>true</constant>
+				</handled>
+				<bean ref="defaultErrorProcessor" method="exceptionHandler" />
+			</onException>
+		<route id="common2esb_rest_route" handleFault="true">
+			<!--servletName 必须是在web.xml配置好的Servlet才行。 CamelServlet  -->
+			<from
+				uri="servlet:esb4common?matchOnUriPrefix=true&amp;servletName=CamelServlet" />
+				<bean ref="expressHeaderProcessor" method="completeEsbHeader" />
+				<bean ref="URLProcesscor" method="supportURL"/>
+				<bean ref="expressHeaderProcessor" method="completeEsbHeaderForExpress" />
+			<camel:process ref="auditLogProcessor"></camel:process>
+			<dynamicRouter>
+					<camel:method ref="defaultEsbRouter" method="getDestination"></camel:method>
+			</dynamicRouter>
+			<camel:choice>
+				<camel:when>
+					<camel:simple>${header.ESB-ESBServiceCode} == 'hbhk2'</camel:simple>
+					<bean ref="expressHeaderProcessor" method="addResultCodeHeader" />
+				</camel:when>
+			</camel:choice>
+			<camel:process ref="auditLogResponseProcessor"></camel:process>
+		</route>
+	</camelContext>
+</beans>	

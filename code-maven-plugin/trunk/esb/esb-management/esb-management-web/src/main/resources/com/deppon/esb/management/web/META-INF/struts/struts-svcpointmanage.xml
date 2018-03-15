@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+	"http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	
+	<package name="svcpoint" namespace="/svcpoint" extends="esb-default">
+		<!-- 后端服务管理 -->
+		<action name="backIndex">
+			<result name="success">/WEB-INF/pages/svcpoint/back.jsp</result>
+		</action>
+		<action name="addSvcpoint" class="backSvcpintAction" method="addSvcpoint">
+			<result name="success" type="json">
+				<param name="includeProperties">success,message</param>
+			</result>
+		</action>
+		<action name="queryBackSvcpoints" class="backSvcpintAction"
+			method="queryBackSvcpoints">
+			<result name="success" type="json">
+				<param name="includeProperties">success,message,totalCount,svcPointInfolist</param>
+			</result>
+		</action>
+		<action name="updateSvcpoint" class="backSvcpintAction" method="updateSvcpoint">
+			<result name="success" type="json">
+				<param name="includeProperties">success,message</param>
+			</result>
+		</action>
+		
+		<action name="deleteSvcpoint" class="backSvcpintAction" method="deleteSvcpoint">
+			<result name="success" type="json">
+				<param name="includeProperties">success,message</param>
+			</result>
+		</action>
+		
+		<!-- esb服务管理 -->
+		<action name="esbIndex">
+			<result name="success">/WEB-INF/pages/svcpoint/front.jsp</result>
+		</action>
+		
+		<action name="queryFrontSvcpoints" class="frontSvcpointAction" method="queryFrontSvcpoints">
+			<result name="success" type="json">
+				<param name="includeProperties">success,message,totalCount,svcpointBeanlist</param>
+			</result>
+		</action>
+		
+		<action name="addFrontSvcpoint" class="frontSvcpointAction" method="addFrontSvcpoint">
+			<result name="success" type="json">
+				<param name="includeProperties">success,message</param>
+			</result>
+		</action>
+		
+		<action name="addRelation" class="frontSvcpointAction" method="addRelation">
+			<result name="success" type="json">
+				<param name="includeProperties">success,message</param>
+			</result>
+		</action>
+		
+		<action name="deleteRelation" class="frontSvcpointAction" method="deleteRelation">
+			<result name="success" type="json">
+				<param name="includeProperties">success,message</param>
+			</result>
+		</action>				
+		<action name="queryRelation" class="frontSvcpointAction" method="queryRelation">
+			<result name="success" type="json">
+				<param name="includeProperties">relationList,success,message</param>
+			</result>
+		</action>
+		<action name="flushConfig" class="backSvcpintAction" method="flushConfig">
+			<result name="success" type="json">
+				<param name="includeProperties">success,message</param>
+			</result>
+		</action>
+		
+		<!-- 查询服务编码 -->
+		<action name="getAllSvcpoint" class="backSvcpintAction" method="getAllSvcpoint">
+			<result name="success" type="json">
+				<param name="includeProperties">svcPointInfolist</param>
+			</result>
+		</action>
+	</package>
+</struts>

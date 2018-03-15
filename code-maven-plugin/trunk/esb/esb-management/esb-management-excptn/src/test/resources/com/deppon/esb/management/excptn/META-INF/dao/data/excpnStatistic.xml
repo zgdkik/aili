@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+<t_esb_excptnstatistics
+FID='1'
+SVCCODE='CC2ESB_ADDORDER'
+CALLEDCOUNT='100'
+EXCPTNCOUNT='50'
+CREATETIME='2012-04-24 22:26:30.25'
+STARTTIME='2012-04-24 22:26:30.25'
+ENDTIME='2012-04-24 22:26:30.253'
+ISSEND='0'
+/>
+</dataset>

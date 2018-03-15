@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+	"-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.deppon.esb.management.svccfg.domain.SvcPoint2Info">
+	
+	<resultMap id="svcPointMap" type="com.deppon.esb.management.svccfg.domain.SvcPoint2Info">
+		<result property="id" column="FID" jdbcType="VARCHAR" />
+		<result property="name" column="NAME" jdbcType="NVARCHAR" />
+		<result property="code" column="CODE" jdbcType="NVARCHAR" />
+		<result property="sysid" column="SYSID" jdbcType="NVARCHAR" />
+		<result property="agrmt" column="AGRMT" jdbcType="NVARCHAR" />
+		<result property="frontOrBack" column="FRNTORBCK" jdbcType="CHAR" />
+		<result property="appRequestAddr" column="APPREQUESTADDR" jdbcType="NVARCHAR" />
+		<result property="appResponseAddr" column="APPRESPONSEADDR" jdbcType="NVARCHAR" />
+		<result property="esbRequestAddr" column="ESBREQUESTADDR" jdbcType="NVARCHAR" />
+		<result property="esbResponseAddr" column="ESBRESPONSEADDR" jdbcType="NVARCHAR" />
+		<result property="expattern" column="EXPATTERN" jdbcType="NUMERIC" />
+		<result property="messageFormat" column="MESSAGEFORMAT" jdbcType="VARCHAR" />
+		<result property="timeout" column="TIMEOUT" jdbcType="NUMERIC" />
+		<result property="reqConvertorClass" column="REQCONVERTORCLASS" jdbcType="NVARCHAR" />
+		<result property="resConvertorClass" column="RESCONVERTORCLASS" jdbcType="NVARCHAR" />
+	</resultMap>
+
+	<sql id="commonCondition">
+		  	  	<if test="id !=null and id !='' ">
+  	  		<![CDATA[and FID=#{id}]]>  	  		
+  	  	</if>
+   	  	<if test="name !=null and name !='' ">
+  	  		<![CDATA[and NAME like '%'||#{name}||'%']]>
+  	  	</if> 	  	
+   	  	<if test="code !=null and code !='' ">
+  	  		<![CDATA[and CODE=#{code}]]>
+  	  	</if> 	  	
+   	  	<if test="sysid !=null and sysid !='' ">
+  	  		<![CDATA[and SYSID=#{sysid}]]>
+  	  	</if> 	  	
+   	  	<if test="agrmt !=null and agrmt !='' ">
+  	  		<![CDATA[and AGRMT=#{agrmt}]]>
+  	  	</if> 	  	
+   	  	<if test="frontOrBack !=null and frontOrBack !='' ">
+  	  		<![CDATA[and FRNTORBCK=#{frontOrBack}]]>
+  	  	</if> 	  	
+   	  	<if test="appRequestAddr !=null and appRequestAddr !='' ">
+  	  		<![CDATA[and APPREQUESTADDR  like '%'||#{appRequestAddr}||'%']]>
+  	  	</if> 	  	
+   	  	<if test="appResponseAddr !=null and appResponseAddr !='' ">
+  	  		<![CDATA[and APPRESPONSEADDR  like '%'||#{appResponseAddr}||'%']]>
+  	  	</if> 	  	
+   	  	<if test="esbRequestAddr !=null and esbRequestAddr !='' ">
+  	  		<![CDATA[and ESBREQUESTADDR  like '%'||#{esbRequestAddr}||'%']]>
+  	  	</if> 	  	
+   	  	<if test="esbResponseAddr !=null and esbResponseAddr !='' ">
+  	  		<![CDATA[and ESBRESPONSEADDR  like '%'||#{esbResponseAddr}||'%']]>
+  	  	</if> 	  	
+   	  	<if test="expattern !=null and expattern !='' ">
+  	  		<![CDATA[and EXPATTERN=#{expattern}]]>
+  	  	</if> 	  			  	
+	</sql>
+
+	<!-- 根据条件查询服务配置信息 -->
+	<select id="querySvcpoint" parameterType="com.deppon.esb.management.svccfg.domain.view.SvcPoint2QueryBean" resultMap="svcPointMap">
+	<![CDATA[  
+		select 
+		  FID               ,
+		  NAME              ,
+		  CODE              ,
+		  SYSID             ,
+		  AGRMT             ,
+		  FRNTORBCK         ,
+		  APPREQUESTADDR    ,
+		  APPRESPONSEADDR   ,
+		  ESBREQUESTADDR    ,
+		  ESBRESPONSEADDR   ,
+		  EXPATTERN         ,
+		  MESSAGEFORMAT     ,
+		  TIMEOUT           ,
+		  REQCONVERTORCLASS ,
+		  RESCONVERTORCLASS 
+		from T_ESB2_SVCPOINT
+	  ]]>
+  	  <where>
+  	  	<![CDATA[appRequestAddr is null]]>
+		<include refid="commonCondition"/>
+  	  </where>
+	</select>
+
+	<!-- 查询符合条件的记录总数 -->
+	<select id="querySvcpointCount" parameterType="com.deppon.esb.management.svccfg.domain.view.SvcPoint2QueryBean" resultType="Integer" >
+		<![CDATA[SELECT count(1) FROM	T_ESB2_SVCPOINT]]>
+  	  <where>
+  	  <![CDATA[appRequestAddr is null]]>
+  	  <include refid="commonCondition"/>
+  	  </where>
+	</select>
+	
+	
+	<!-- 根据条件查询扩展服务配置信息 -->
+	<select id="queryExtendSvcpoint" parameterType="com.deppon.esb.management.svccfg.domain.view.SvcPoint2QueryBean" resultMap="svcPointMap">
+	<![CDATA[  
+		select 
+		  FID               ,
+		  NAME              ,
+		  CODE              ,
+		  SYSID             ,
+		  AGRMT             ,
+		  FRNTORBCK         ,
+		  APPREQUESTADDR    ,
+		  APPRESPONSEADDR   ,
+		  ESBREQUESTADDR    ,
+		  ESBRESPONSEADDR   ,
+		  EXPATTERN         ,
+		  MESSAGEFORMAT     ,
+		  TIMEOUT           ,
+		  REQCONVERTORCLASS ,
+		  RESCONVERTORCLASS 
+		from T_ESB2_SVCPOINT
+	  ]]>
+  	  <where>
+  	  	<![CDATA[appRequestAddr is not null]]>
+		<include refid="commonCondition"/>
+  	  </where>
+	</select>
+
+	<!-- 查询符合条件的扩展配置记录总数 -->
+	<select id="queryExtendSvcpointCount" parameterType="com.deppon.esb.management.svccfg.domain.view.SvcPoint2QueryBean" resultType="Integer">
+		<![CDATA[SELECT count(1) FROM	T_ESB2_SVCPOINT]]>
+  	  <where>
+  	  <![CDATA[appRequestAddr is not null]]>
+  	  <include refid="commonCondition"/>
+  	  </where>
+	</select>
+	
+	<!-- 插入数据 -->
+	<insert id="insertSvcpoint" parameterType="com.deppon.esb.management.svccfg.domain.SvcPoint2Info">
+		<![CDATA[insert into T_ESB2_SVCPOINT(FID]]>
+		<if test="name != null and name !=''"><![CDATA[,NAME]]></if>
+		<if test="code != null and code !=''"><![CDATA[,CODE]]></if>
+		<if test="sysid != null and sysid !=''"><![CDATA[,SYSID]]></if>
+		<if test="agrmt != null and agrmt !=''"><![CDATA[,AGRMT]]></if>
+		<if test="frontOrBack != null and frontOrBack !=''"><![CDATA[,FRNTORBCK]]></if>
+		<if test="appRequestAddr != null and appRequestAddr !=''"><![CDATA[,APPREQUESTADDR]]></if>
+		<if test="appResponseAddr != null and appResponseAddr !=''"><![CDATA[,APPRESPONSEADDR]]></if>
+		<if test="esbRequestAddr != null and esbRequestAddr !=''"><![CDATA[,ESBREQUESTADDR]]></if>
+		<if test="esbResponseAddr != null and esbResponseAddr !=''"><![CDATA[,ESBRESPONSEADDR]]></if>
+		<if test="expattern != null "><![CDATA[,EXPATTERN]]></if>
+		<if test="messageFormat != null and messageFormat !=''"><![CDATA[,MESSAGEFORMAT]]></if>
+		<if test="reqConvertorClass != null and reqConvertorClass !=''"><![CDATA[,REQCONVERTORCLASS]]></if>
+		<if test="resConvertorClass != null and resConvertorClass !=''"><![CDATA[,RESCONVERTORCLASS]]></if>
+		<if test="timeout != null and timeout !=''"><![CDATA[,TIMEOUT]]></if>
+			<![CDATA[) values ( sys_guid()]]>
+		<if test="name != null and name !=''"><![CDATA[,#{name}]]></if>
+		<if test="code != null and code !=''"><![CDATA[,#{code}]]></if>
+		<if test="sysid != null and sysid !=''"><![CDATA[,#{sysid}]]></if>
+		<if test="agrmt != null and agrmt !=''"><![CDATA[,#{sysid}]]></if>
+		<if test="frontOrBack != null and frontOrBack !=''"><![CDATA[,#{frontOrBack}]]></if>
+		<if test="appRequestAddr != null and appRequestAddr !=''"><![CDATA[,#{appRequestAddr}]]></if>
+		<if test="appResponseAddr != null and appResponseAddr !=''"><![CDATA[,#{appResponseAddr}]]></if>
+		<if test="esbRequestAddr != null and esbRequestAddr !=''"><![CDATA[,#{esbRequestAddr}]]></if>
+		<if test="esbResponseAddr != null and esbResponseAddr !=''"><![CDATA[,#{esbResponseAddr}]]></if>
+		<if test="expattern != null "><![CDATA[,#{expattern}]]></if>
+		<if test="messageFormat != null and messageFormat !=''"><![CDATA[,#{messageFormat}]]></if>
+		<if test="reqConvertorClass != null and reqConvertorClass !=''"><![CDATA[,#{reqConvertorClass}]]></if>
+		<if test="resConvertorClass != null and resConvertorClass !=''"><![CDATA[,#{resConvertorClass}]]></if>
+		<if test="timeout != null and timeout !=''"><![CDATA[,#{timeout}]]></if>
+		<![CDATA[)]]>
+	</insert>
+
+	<!-- 删除服务配置 -->
+	<delete id="deleteSvcpoint"  >
+		delete from T_ESB2_SVCPOINT where CODE in
+			    <foreach item="item" index="index" collection="list" 
+                         open="(" separator="," close=")">
+                        #{item}
+                </foreach>
+	</delete>
+	<!-- 更新服务配置 -->
+	<update id="updateSvcpoint" parameterType="com.deppon.esb.management.svccfg.domain.SvcPoint2Info">
+		<![CDATA[update T_ESB2_SVCPOINT]]>
+		<set>
+			FID = FID
+			<if test="name != null and name !=''"><![CDATA[,NAME=#{name}]]></if>
+			<if test="code != null and code !=''"><![CDATA[,CODE=#{code}]]></if>
+			<if test="sysid != null and sysid !='' "><![CDATA[,SYSID=#{sysid}]]></if>
+			<if test="agrmt != null and agrmt !=''"><![CDATA[,AGRMT=#{agrmt}]]></if>
+			<if test="frontOrBack != null and frontOrBack !=''"><![CDATA[,FRNTORBCK=#{frontOrBack}]]></if>
+			<if test="appRequestAddr != null and appRequestAddr != ''"><![CDATA[,APPREQUESTADDR=#{appRequestAddr}]]></if>
+			<if test="appResponseAddr != null and appResponseAddr !=''"><![CDATA[,APPRESPONSEADDR=#{appResponseAddr}]]></if>
+			<if test="esbRequestAddr != null and esbRequestAddr !=''"><![CDATA[,ESBREQUESTADDR=#{esbRequestAddr}]]></if>
+			<if test="esbResponseAddr != null and esbResponseAddr !=''"><![CDATA[,ESBRESPONSEADDR=#{esbResponseAddr}]]></if>
+			<if test="expattern != null"><![CDATA[,EXPATTERN=#{expattern}]]></if>
+			<if test="messageFormat != null and messageFormat !=''"><![CDATA[,MESSAGEFORMAT=#{messageFormat}]]></if>
+			<if test="reqConvertorClass != null and reqConvertorClass !=''"><![CDATA[,REQCONVERTORCLASS=#{reqConvertorClass}]]></if>
+			<if test="resConvertorClass != null and resConvertorClass !=''"><![CDATA[,RESCONVERTORCLASS=#{resConvertorClass}]]></if>
+		</set>
+		<![CDATA[where FID=#{id}]]>
+	</update>	
+	
+	<!-- 查询接入系统编码 -->
+	<select id="querySysIds" resultType="string" useCache="true">
+		<![CDATA[select distinct SYSID from T_ESB2_SVCPOINT ]]>
+	</select>
+	<!-- 查询接入协议 -->
+	<select id="queryAgrmt" resultType="string" useCache="true">
+		<![CDATA[select distinct agrmt from T_ESB2_SVCPOINT ]]>
+	</select>
+	<!-- 查询交互模式 -->
+	
+	<!-- 是否存在服务名称 -->
+	<select id="existName" parameterType="string" resultType="Integer">
+		<![CDATA[select count(1) from t_esb2_svcpoint t where t.name= #{name} ]]>
+	</select>
+	<!-- 是否存在服务编码 -->
+	<select id="existCode" parameterType="string" resultType="Integer">
+		<![CDATA[select count(1) from t_esb2_svcpoint t where t.code= #{code} ]]>
+	</select>
+</mapper>

@@ -1,0 +1,34 @@
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
+			classpath*:com/deppon/esb/management/META-INF/ds-spring.xml;
+			classpath*:com/deppon/esb/management/common/META-INF/adapter/mail/spring-*.xml;
+			classpath*:com/deppon/esb/management/META-INF/queue-spring.xml;
+			classpath*:com/deppon/esb/management/job/META-INF/task/quartz-*.xml;
+			classpath*:com/deppon/esb/management/alert/META-INF/alert-spring.xml;
+			classpath*:com/deppon/esb/management/redo/META-INF/redo-spring.xml;
+			classpath*:com/deppon/esb/management/job/META-INF/job-spring.xml;
+		</param-value>
+	</context-param>
+	<context-param>
+		<param-name>webAppRootKey</param-name>
+		<param-value>esbjob.root</param-value>
+	</context-param>
+	<!-- 日志配置文件的位置 -->
+	<context-param>
+		<param-name>log4jConfigLocation</param-name>
+		<param-value>/WEB-INF/log4j.xml</param-value>
+	</context-param>
+	<listener>
+		<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+	</listener>
+	<!-- 加载Spring容器配置 -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+</web-app>

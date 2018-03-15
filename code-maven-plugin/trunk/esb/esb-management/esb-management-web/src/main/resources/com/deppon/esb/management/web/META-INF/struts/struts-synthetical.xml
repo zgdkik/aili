@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="synthetical" namespace="/synthetical" extends="esb-default">
+		<action name="syntheticalIndex">
+			<result name="success">/WEB-INF/pages/synthetical/syntheticalIndex.jsp</result>
+		</action>
+		<action name="syntheticalAuditList" class="syntheticalAction" method="syntheticalList">
+			<result name="success" type="json">
+				<param name="includeProperties">list,resultCount</param>
+			</result>
+		</action>
+		<action name="ifaceSyntheticalAction">
+			<result name="success">/WEB-INF/pages/IfaceSynthetical/ifaceSynthetical.jsp</result>
+		</action>
+		<action name="esbSvcCodeList" class="ifaceSyntheticalAction" method="svcCodeList">
+			<result name="success" type="json">
+				<param name="includeProperties">codeList</param>
+			</result>
+		</action>
+		<action name = "viewList" class="ifaceSyntheticalAction" method ="viewList">
+			<result name="success" type = "json">
+				<param name="includeProperties">viewList,resultCount,success,tips</param>
+			</result>
+		</action>
+	</package>
+</struts>    

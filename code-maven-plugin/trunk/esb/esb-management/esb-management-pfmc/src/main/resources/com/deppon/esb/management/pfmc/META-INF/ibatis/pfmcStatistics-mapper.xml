@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+	"-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.deppon.esb.management.pfmc.domain.PfmcStatisticsInfo">
+	<resultMap id="pfmStatisticsMap" type="com.deppon.esb.management.pfmc.domain.PfmcStatisticsInfo">
+		<result property="id" column="FID" />
+		<result property="svcCode" column="SVCCODE" />
+		<result property="calledCount" column="CALLEDCOUNT" />
+		<result property="minRspTime" column="MINRSPTIME" />
+		<result property="maxRspTime" column="MAXRSPTIME" />
+		<result property="avgRspTime" column="AVGRSPTIME" />
+		<result property="createTime" column="CREATETIME" />
+		<result property="startTime" column="STARTTIME" />
+		<result property="endTime" column="ENDTIME" />
+		<result property="isSend" column="ISSEND" />
+	</resultMap>
+
+	<select id="queryPfmcStatistics2Notice" resultMap="pfmStatisticsMap">
+		SELECT
+		p.FID,
+		p.SVCCODE,
+		p.CALLEDCOUNT,
+		p.MINRSPTIME,
+		p.MAXRSPTIME,
+		p.AVGRSPTIME,
+		p.CREATETIME,
+		p.STARTTIME,
+		p.ENDTIME,
+		p.ISSEND
+		FROM
+		T_ESB_PFMCSTATISTICS p
+		WHERE
+		p.ISSEND=0
+	</select>
+	
+	<select id="getPfmcStatistic" resultMap="pfmStatisticsMap">
+		SELECT
+		p.FID,
+		p.SVCCODE,
+		p.CALLEDCOUNT,
+		p.MINRSPTIME,
+		p.MAXRSPTIME,
+		p.AVGRSPTIME,
+		p.CREATETIME,
+		p.STARTTIME,
+		p.ENDTIME,
+		p.ISSEND
+		FROM
+		T_ESB_PFMCSTATISTICS p
+		WHERE
+		p.FID = #{id}
+	</select>
+
+	<update id="updatePfmcStatistics">
+		UPDATE T_ESB_PFMCSTATISTICS p
+		<set>
+			p.ISSEND=1
+		</set>
+		<where>
+			p.FID IN
+			<foreach collection="list" item="ids" open="(" separator="," close=")">
+				#{ids}
+			</foreach>
+		</where>
+	</update>
+
+
+
+</mapper>

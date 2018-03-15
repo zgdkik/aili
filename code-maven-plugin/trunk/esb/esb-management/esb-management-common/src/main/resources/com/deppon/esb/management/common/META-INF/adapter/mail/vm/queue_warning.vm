@@ -1,0 +1,4 @@
+【DP_ESB队列预警通知】
+队列管理器${qmgr}中的队列${queue}的队列在${time}当前深度为${currentDepth}，
+已超过阀值${threshold},
+请注意查看ESB日志！

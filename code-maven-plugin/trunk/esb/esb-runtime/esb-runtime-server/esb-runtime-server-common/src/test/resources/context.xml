@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camel="http://camel.apache.org/schema/spring"
+	xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd ">
+	
+	<!-- 获取connectionFactory -->
+	<bean id="connectionFactory" class="com.ibm.mq.jms.MQQueueConnectionFactory">
+		<!-- 设置通道 -->
+		<property name="channel" value="ADMIN.CHANNEL" />
+		<!-- 设置MQ连接地址 -->
+		<property name="hostName" value="192.168.10.92" />
+		<!-- 设置端口号 -->
+		<property name="port" value="1429" />
+		<!-- 设置CCSID -->
+		<property name="CCSID" value="1208" />
+		<!-- 设置MQ -->
+		<property name="queueManager" value="MQM1" />
+		<!-- 设置传输类型 -->
+		<property name="transportType" value="1" />
+	</bean>
+	<!-- <bean id="mqRequestQueue" class="com.ibm.mq.jms.MQQueue"
+		depends-on="connectionFactory">
+		<property name="baseQueueName" value="QU_FIN_BANK_RESPONSE_COM_IN" />
+		<property name="targetClient" value="1" />
+	</bean> -->
+
+	<!-- 设置消息模板 -->
+	<bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate102">
+		<property name="connectionFactory" ref="connectionFactory" />
+	</bean>
+
+	
+	
+	<!-- 设置Sender -->
+	<bean id="jmsSender" class="com.deppon.esb.server.common.sender.JmsSender">
+		<property name="jmsTemplate" ref="jmsTemplate" />
+	</bean>
+	
+	<!-- 设置Receiver -->
+	<bean id="jmsReceiver" class="com.deppon.esb.server.common.receive.JmsReceiver">
+		<property name="jmsTemplate" ref="jmsTemplate" />
+	</bean> 
+	
+</beans>

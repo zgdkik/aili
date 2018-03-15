@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+	"-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	<!-- 查询接口调用次数统计记录 -->
+<mapper namespace="com.deppon.esb.management.statistic.view.StatisticView">
+	<resultMap id="statisticView"
+		type="com.deppon.esb.management.statistic.view.StatisticView">
+		<result property="name" column="NAME"/>
+		<result property="esbSvcCode" column="ESBSVCCODE" />
+		<result property="backSvcCode" column="BACKSVCCODE"/>
+		<result property="totalCount" column="TOTALCOUNT" />
+		<result property="successCount" column="SUCCESSCOUNT" />
+		<result property="exceptionCount" column="EXCEPTIONCOUNT" />
+		<result property="incompletestatuscount" column="INCOMPLETESTATUSCOUNT"/>
+		<result property="startDate" column="STARTDATE"/>
+		<result property="endDate" column="ENDDATE"/>
+		<result property="type" column="TYPE" />
+	</resultMap>
+
+	<sql id="queryCondition">
+		<where>
+			1=1
+			<if test=" esbSvcCode!= null and esbSvcCode !=''">
+				<![CDATA[and ESBSVCCODE=#{esbSvcCode}]]>
+			</if>
+			<if test=" backSvcCode!= null and backSvcCode !=''">
+				<![CDATA[and BACKSVCCODE=#{backSvcCode}]]>
+			</if>
+			<if test=" startDate != null ">
+				<![CDATA[and STATISTICDATE>=trunc(#{startDate},'dd')]]>
+			</if>
+			<if test=" endDate != null ">
+				<![CDATA[and STATISTICDATE<=(trunc(#{endDate},'dd')+1)]]>
+			</if>
+			<if test=" type != null and type != '' ">
+				<![CDATA[and t.agrmt=#{type}]]>
+			</if>
+		</where>
+	</sql>	
+	<!--  查询统计日志 -->
+	<select id="queryStatisticView" parameterType="com.deppon.esb.management.statistic.view.StatisticQueryBean" resultMap="statisticView">
+		<![CDATA[	
+		        SELECT 
+		             s.esbsvccode,
+		             MAX(s.name) NAME,
+		             MAX(BACKSVCCODE)BACKSVCCODE,
+		             SUM(TOTALCOUNT)TOTALCOUNT,
+		             SUM(SUCCESSCOUNT)SUCCESSCOUNT,
+		             SUM(EXCEPTIONCOUNT)EXCEPTIONCOUNT,
+		             SUM(INCOMPLETESTATUSCOUNT)INCOMPLETESTATUSCOUNT,
+		             MIN(STATISTICDATE) STARTDATE,
+		             MAX(STATISTICDATE) ENDDATE,
+		             MIN(t.agrmt)TYPE
+		        FROM T_ESB2_INTERFACESTATISTICS s
+		        LEFT JOIN T_ESB2_SVCPOINT  t ON s.esbsvccode=t.code 
+			]]>
+		<include refid="queryCondition"/>
+		<![CDATA[	GROUP BY s.esbsvccode]]>
+	</select>
+	
+	<select id="queryStatisticViewCount" parameterType="com.deppon.esb.management.statistic.view.StatisticQueryBean" resultType="Integer">
+		<![CDATA[	SELECT count(DISTINCT s.esbsvccode)  FROM t_esb2_interfacestatistics s]]>
+	</select>
+</mapper>

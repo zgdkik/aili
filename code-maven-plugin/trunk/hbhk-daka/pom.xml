@@ -1,0 +1,47 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.hbhk.daka</groupId>
+	<artifactId>hbhk-daka</artifactId>
+	<packaging>jar</packaging>
+	<version>1.0.0-SNAPSHOT</version>
+	<name>hbhk-daka Maven Webapp</name>
+	<url>http://maven.apache.org</url>
+	<dependencies>
+		<dependency>
+			<groupId>djnativeswing-swt</groupId>
+			<artifactId>djnativeswing</artifactId>
+			<version>1.0.1</version>
+			<scope>system</scope>
+			<systemPath>${basedir}/lib/swt/djnativeswing-1.0.1.jar</systemPath>
+		</dependency>
+		<dependency>
+			<groupId>djnativeswing</groupId>
+			<artifactId>djnativeswing</artifactId>
+			<version>1.0.1</version>
+			<scope>system</scope>
+			<systemPath>${basedir}/lib/djnativeswing-1.0.1.jar</systemPath>
+		</dependency>
+		<dependency>
+			<groupId>eclipse.web</groupId>
+			<artifactId>web</artifactId>
+			<version>1.0</version>
+			<scope>system</scope>
+			<systemPath>${basedir}/lib/eclipse.web.jar</systemPath>
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.1</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<version>2.6</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<finalName>hbhk-daka</finalName>
+	</build>
+</project>

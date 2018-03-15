@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+	"-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.deppon.esb.management.user.domain.SysUserInfo">
+
+	<resultMap id="sysUserMap" type="com.deppon.esb.management.user.domain.SysUserInfo">
+		<result property="id" column="FID" />
+		<result property="sysUserName" column="SYSUSERNAME" />
+		<result property="userName" column="USERNAME" />
+		<result property="password" column="PASSWORD" />
+		<result property="telPhone" column="TELPHONE" />
+		<result property="mobilePhone" column="MOBILEPHONE" />
+		<result property="email" column="EMAIL" />
+	</resultMap>
+
+	<sql id="all_column_set">
+		<if test="sysUserName != null"><![CDATA[SYSUSERNAME=#{sysUserName},]]></if>
+		<if test="userName != null"><![CDATA[USERNAME=#{userName},]]></if>
+		<if test="password != null"><![CDATA[PASSWORD=#{password},]]></if>
+		<if test="telPhone != null"><![CDATA[TELPHONE=#{telPhone},]]></if>
+		<if test="mobilePhone != null"><![CDATA[MOBILEPHONE=#{mobilePhone},]]></if>
+		<if test="email != null"><![CDATA[EMAIL=#{email}]]></if>
+	</sql>
+
+	<select id="querySysUserCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+		select count(*) from T_ESB_SYSUSER
+		<if test="userName != null">
+			<![CDATA[WHERE username=#{userName}]]>
+		</if>
+	</select>
+
+	<select id="querySysUsers" parameterType="java.util.Map" resultMap="sysUserMap">
+		select * from T_ESB_SYSUSER
+		<if test="sysUserInfo != null">
+			<trim prefix="WHERE" prefixOverrides="AND|OR">
+				<if test="sysUserInfo.sysUserName != null"><![CDATA[AND SYSUSERNAME=#{sysUserInfo.sysUserName}]]></if>
+				<if test="sysUserInfo.userName != null"><![CDATA[AND USERNAME=#{sysUserInfo.userName}]]></if>
+				<if test="sysUserInfo.password != null"><![CDATA[AND PASSWORD=#{sysUserInfo.password}]]></if>
+				<if test="sysUserInfo.telPhone != null"><![CDATA[AND TELPHONE=#{sysUserInfo.telPhone}]]></if>
+				<if test="sysUserInfo.mobilePhone != null"><![CDATA[AND MOBILEPHONE=#{sysUserInfo.mobilePhone}]]></if>
+				<if test="sysUserInfo.email != null"><![CDATA[AND EMAIL=#{sysUserInfo.email}]]></if>
+				<![CDATA[AND rownum<=#{limit} and rownum>#{start}]]>
+			</trim>
+		</if>
+		<if test="sysUserInfo == null">
+			<trim prefix="WHERE" prefixOverrides="AND|OR">
+				<![CDATA[AND rownum<=#{limit} and rownum>#{start}]]>
+			</trim>
+		</if>
+	</select>
+
+	<delete id="deleteSysUsersByIds">
+		delete from T_ESB_SYSUSER
+		where fid in
+		<foreach collection="array" item="ids" open="(" separator="," close=")">
+			#{ids}
+		</foreach>
+	</delete>
+
+	<update id="updateSysUser" parameterType="com.deppon.esb.management.user.domain.SysUserInfo">
+		UPDATE T_ESB_SYSUSER
+		<trim prefix="SET" suffixOverrides=",">
+			<include refid="all_column_set" />
+		</trim>
+		WHERE FID=#{id}
+	</update>
+
+	<insert id="addSysUser" parameterType="com.deppon.esb.management.user.domain.SysUserInfo">
+		INSERT INTO T_ESB_SYSUSER(FID
+		<if test="sysUserName != null"><![CDATA[,SYSUSERNAME]]></if>
+		<if test="userName != null"><![CDATA[,USERNAME]]></if>
+		<if test="password != null"><![CDATA[,PASSWORD]]></if>
+		<if test="telPhone != null"><![CDATA[,TELPHONE]]></if>
+		<if test="mobilePhone != null"><![CDATA[,MOBILEPHONE]]></if>
+		<if test="email != null"><![CDATA[,EMAIL]]></if>
+		<![CDATA[) values ( sys_guid()]]>
+		<if test="sysUserName != null"><![CDATA[,#{sysUserName}]]></if>
+		<if test="userName != null"><![CDATA[,#{userName}]]></if>
+		<if test="password != null"><![CDATA[,#{password}]]></if>
+		<if test="telPhone != null"><![CDATA[,#{telPhone}]]></if>
+		<if test="mobilePhone != null"><![CDATA[,#{mobilePhone}]]></if>
+		<if test="email != null"><![CDATA[,#{email}]]></if>
+		<![CDATA[)]]>
+	</insert>
+
+	<select id="querySysUserBySysUserName" parameterType="java.lang.String" resultType="java.lang.String">
+		SELECT PASSWORD FROM
+		T_ESB_SYSUSER WHERE SYSUSERNAME=#{sysUserName}
+	</select>
+
+	<update id="modifyPassWord" parameterType="com.deppon.esb.management.user.domain.SysUserInfo">
+		UPDATE T_ESB_SYSUSER
+		<trim prefix="SET" suffixOverrides=",">
+			<if test="password != null"><![CDATA[PASSWORD=#{password},]]></if>
+		</trim>
+		WHERE SYSUSERNAME=#{sysUserName}
+	</update>
+	<select id="attemptLogin" parameterType="java.util.Map" resultMap="sysUserMap">
+		SELECT * FROM
+		T_ESB_SYSUSER WHERE
+		SYSUSERNAME=#{sysUserName} AND PASSWORD=#{password}
+	</select>
+</mapper>

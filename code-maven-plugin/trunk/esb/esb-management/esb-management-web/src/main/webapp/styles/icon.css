@@ -1,0 +1,71 @@
+.treeNodeLeafIcon
+{
+	background-image: url(../images/treeNodeLeafIcon.png) !important;
+}
+
+.treeNodePackageIcon
+{
+	background-image: url(../images/treeNodePackage.png) !important;
+}
+
+.closeCurrentTab
+{
+	background-image: url(../images/closeCurrentTab.png) !important;
+}
+
+.closeOtherTab
+{
+	background-image: url(../images/closeOtherTab.png) !important;
+}
+
+.refreshIcon
+{
+	background-image: url(../images/refreshIcon.png) !important;
+}
+
+.deliverIcon
+{
+	background-image: url(../images/folder_go.png) !important;
+}
+
+.sysmanagemenu {
+	background-image: url(../images/sysmanagemenu.png);!important;
+	background-repeat: no-repeat ;	
+	height:19;
+}
+
+.home {
+	background-image: url(../images/homemanage.gif);!important;
+	background-repeat: no-repeat ;	
+	height:19;
+}
+
+.root1 {
+	background-image: url(../images/root1.gif);!important;
+	background-repeat: no-repeat ;
+	height:19;
+}
+
+.root2 {
+	background-image: url(../images/root2.gif);!important;
+	background-repeat: no-repeat ;
+	height:19;
+}
+
+.root3 {
+	background-image: url(../images/root3.gif);!important;
+	background-repeat: no-repeat ;
+	height:19;
+}
+
+.root4 {
+	background-image: url(../images/root4.gif);!important;
+	background-repeat: no-repeat ;
+	height:19;
+}
+
+.root5 {
+	background-image: url(../images/root5.gif);!important;
+	background-repeat: no-repeat ;
+	height:19;
+}

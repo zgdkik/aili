@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+	"-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.deppon.esb.management.pfmc.domain.PerformanceInfo">
+
+	<resultMap id="pfmMap" type="com.deppon.esb.management.pfmc.domain.PerformanceInfo">
+		<result property="camelContextId" column="CAMELCONTEXTID" />
+		<result property="routeId" column="ROUTEID" />
+		<result property="exchangeId" column="EXCHANGEID" />
+		<result property="svcCode" column="SVCCODE" />
+		<result property="fromEndPoint" column="FROMENDPOINT" />
+		<result property="timecosts" column="TIMECOSTS" />
+		<result property="toEndPoint" column="TOENDPOINT" />
+		<result property="reqMsg" column="REQMSG" />
+		<result property="requestTime" column="REQUESTTIME"/>
+		<result property="rspMsg" column="RSPMSG" />
+		<result property="responseTime" column="RESPONSETIME"/>
+		<result property="statisticsFlg" column="STATISTICSFLG" />
+		<result property="createTime" column="CREATETIME" />
+	</resultMap>
+
+	<select id="queryPerformanceList" parameterType="java.util.Map" resultMap="pfmMap">
+		select
+		pfm.CAMELCONTEXTID,
+		pfm.ROUTEID,
+		pfm.EXCHANGEID,
+		pfm.SVCCODE,
+		pfm.FROMENDPOINT,
+		pfm.TIMECOSTS,
+		pfm.TOENDPOINT,
+		pfm.REQUESTTIME,
+		pfm.REQMSG,
+		pfm.RESPONSETIME,
+		pfm.RSPMSG,
+		pfm.STATISTICSFLG,
+		pfm.CREATETIME
+		from
+		t_esb_performance pfm,t_esb_svcpoint sp
+		where
+		pfm.svccode=sp.svccode
+		and sp.svcname=#{svcName} and
+		sp.svcprovdid=#{svcProvider}
+	</select>
+
+	<insert id="savePerformance" parameterType="com.deppon.esb.management.pfmc.domain.PerformanceInfo">
+		<![CDATA[insert into t_esb_performance(FID]]>
+		<if test="camelContextId != null"><![CDATA[,CAMELCONTEXTID]]></if>
+		<if test="routeId != null"><![CDATA[,routeId]]></if>
+		<if test="exchangeId != null"><![CDATA[,EXCHANGEID]]></if>
+		<if test="svcCode != null"><![CDATA[,SVCCODE]]></if>
+		<if test="fromEndPoint != null"><![CDATA[,FROMENDPOINT]]></if>
+		<if test="timecosts != null"><![CDATA[,TIMECOSTS]]></if>
+		<if test="toEndPoint != null"><![CDATA[,TOENDPOINT]]></if>
+		<if test="requestTime != null"><![CDATA[,REQUESTTIME]]></if>
+		<if test="reqMsg != null"><![CDATA[,REQMSG]]></if>
+		<if test="responseTime != null"><![CDATA[,RESPONSETIME]]></if>
+		<if test="rspMsg != null"><![CDATA[,RSPMSG]]></if>
+		<if test="statisticsFlg != null"><![CDATA[,STATISTICSFLG]]></if>
+		<if test="createTime != null"><![CDATA[,CREATETIME]]></if>
+			<![CDATA[) values ( sys_guid()]]>
+		<if test="camelContextId != null"><![CDATA[,#{camelContextId}]]></if>
+		<if test="routeId != null"><![CDATA[,#{routeId}]]></if>
+		<if test="exchangeId != null"><![CDATA[,#{exchangeId}]]></if>
+		<if test="svcCode != null"><![CDATA[,#{svcCode}]]></if>
+		<if test="fromEndPoint != null"><![CDATA[,#{fromEndPoint}]]></if>
+		<if test="timecosts != null"><![CDATA[,#{timecosts}]]></if>
+		<if test="toEndPoint != null"><![CDATA[,#{toEndPoint}]]></if>
+		<if test="requestTime != null"><![CDATA[,#{requestTime}]]></if>
+		<if test="reqMsg != null"><![CDATA[,#{reqMsg}]]></if>
+		<if test="responseTime != null"><![CDATA[,#{responseTime}]]></if>
+		<if test="rspMsg != null"><![CDATA[,#{rspMsg}]]></if>
+		<if test="statisticsFlg != null"><![CDATA[,#{statisticsFlg}]]></if>
+		<if test="createTime != null"><![CDATA[,#{createTime}]]></if>
+		<![CDATA[)]]>
+	</insert>
+
+</mapper>

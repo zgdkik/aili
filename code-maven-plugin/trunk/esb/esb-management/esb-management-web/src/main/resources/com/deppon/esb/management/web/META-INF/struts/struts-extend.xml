@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<package name="extend" namespace="/extend" extends="esb-default">
+		<!-- Index 页面 -->
+		<action name="index">
+			<result name="success">/WEB-INF/pages/svcpoint/esbExtend.jsp</result>
+		</action>
+		<!-- 新增 -->
+		<action name="add" class="extendAction" method="add">
+			<result name="success" type="json">
+				<param name="includeProperties">success,message</param>
+			</result>
+			<result name="error" type="json">
+				<param name="includeProperties">success,message</param>
+			</result>
+		</action>
+		<!-- 删除 -->		
+ 		<action name="delete" class="extendAction" method="delete">
+			<result name="success" type="json">
+				<param name="includeProperties">success,message</param>
+			</result>
+			<result name="error" type="json">
+				<param name="includeProperties">success,message</param>
+			</result>
+		</action>
+		<!-- 更新  -->
+ 		<action name="update" class="extendAction" method="update">
+			<result name="success" type="json">
+				<param name="includeProperties">success,message</param>
+			</result>
+			<result name="error" type="json">
+				<param name="includeProperties">success,message</param>
+			</result>
+		</action>
+		<!-- 查询-->
+ 		<action name="query" class="extendAction" method="query">
+			<result name="success" type="json">
+				<param name="includeProperties">resultCount,list,success,message</param>
+			</result>
+			<result name="error" type="json">
+				<param name="includeProperties">success,message</param>
+			</result>
+		</action>
+		
+		<!-- 查询系统编码-->
+ 		<action name="querySysIds" class="extendAction" method="querySysIds">
+			<result name="success" type="json">
+				<param name="includeProperties">sysIds,success,message</param>
+			</result>
+			<result name="error" type="json">
+				<param name="includeProperties">success,message</param>
+			</result>
+		</action>
+		<!-- 查询接入协议-->
+ 		<action name="queryAgrmts" class="extendAction" method="queryAgrmts">
+			<result name="success" type="json">
+				<param name="includeProperties">agrmts,success,message</param>
+			</result>
+			<result name="error" type="json">
+				<param name="includeProperties">success,message</param>
+			</result>
+		</action>
+	</package>
+
+</struts>

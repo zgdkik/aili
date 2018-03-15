@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tns:CollectAirBillRequest xmlns:tns="http://www.deppon.com/esb/inteface/domain/air">
+  <tns:creatorNumber>10086</tns:creatorNumber>
+  <tns:SenderName>a</tns:SenderName>
+  <tns:sendDate>2012-11-08</tns:sendDate>
+  <tns:subject>abc</tns:subject>
+  <tns:mailFolderName>清单夹</tns:mailFolderName>
+  <tns:noticeFlag>1</tns:noticeFlag>
+  <tns:readFlag>read</tns:readFlag>
+  <tns:mailFlag>1</tns:mailFlag>
+  <tns:priorityLevel>高</tns:priorityLevel>
+  <tns:mailSize>1000</tns:mailSize>
+  <tns:attachmentName>name</tns:attachmentName>
+  <tns:attachmentLink>link</tns:attachmentLink>
+</tns:CollectAirBillRequest>

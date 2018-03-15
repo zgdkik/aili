@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+	"-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.deppon.esb.management.status.domain.EsbRouteInfo">
+	<resultMap id="esbRouteInfo"
+		type="com.deppon.esb.management.status.domain.EsbRouteInfo">
+		<result property="id" column="FID" javaType="java.lang.String"
+			jdbcType="VARCHAR" />
+		<result property="esbServiceCode" column="ESBSVCCODE" javaType="java.lang.String"
+			jdbcType="NVARCHAR" />
+		<result property="targetServiceCode" column="TARGETSVCCODE"
+			javaType="java.lang.String" jdbcType="NVARCHAR" />
+	</resultMap>
+	
+	<!-- 查询所有的分发的路由 -->
+	<select id="queryAllMultiRoute" resultMap="esbRouteInfo">
+		select r.esbsvccode
+		  from t_esb2_route r
+		 where r.esbsvccode in (select cd
+		                          from (select t.esbsvccode cd, count(*) sz
+		                                  from t_esb2_route t
+		                                 group by t.esbsvccode)
+		                         where sz > 1)
+	</select>
+	
+</mapper>

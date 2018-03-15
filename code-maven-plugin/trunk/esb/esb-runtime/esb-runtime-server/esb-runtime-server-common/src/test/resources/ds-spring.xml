@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:camel="http://camel.apache.org/schema/spring" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+			http://camel.apache.org/schema/spring 
+			http://camel.apache.org/schema/spring/camel-spring.xsd
+			http://www.springframework.org/schema/beans 
+			http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+			http://www.springframework.org/schema/context 
+			http://www.springframework.org/schema/context/spring-context-3.0.xsd
+			http://www.springframework.org/schema/jee 
+			http://www.springframework.org/schema/jee/spring-jee-3.0.xsd
+			http://www.springframework.org/schema/tx 
+			http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+			http://www.springframework.org/schema/util 
+			http://www.springframework.org/schema/util/spring-util-3.0.xsd ">
+
+	<context:component-scan base-package="com.deppon.esb.server.common.service.*"></context:component-scan>
+	<context:annotation-config/>
+	
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
+		<property name="url" value="jdbc:oracle:thin:@192.168.17.141:1521:esbdb" />
+		<property name="username" value="esbdev" />
+		<property name="password" value="esbdev" />
+	</bean>
+	
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>	
+	
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	<tx:annotation-driven transaction-manager="transactionManager"/>
+	
+	<bean id="auditLogPersistence" class="com.deppon.esb.server.common.service.db.impl.EsbLogPersistenceImpl">
+		<property name="batchSize" value="10"></property>
+		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
+		<property name="preparedStatementSetter" ref="AuditPreparedStatementSetter">
+		</property>
+	</bean>
+	<bean id="statusLogPersistence" class="com.deppon.esb.server.common.service.db.impl.EsbLogPersistenceImpl">
+		<property name="batchSize" value="10"></property>
+		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
+		<property name="preparedStatementSetter" ref="StatusLogPreparedStatementSetter">
+		</property>
+	</bean>
+	
+	<bean id="auditDdbSender" class="com.deppon.esb.server.common.utils.db.DbSender" >
+		<constructor-arg index="0" ref="auditLogPersistence"></constructor-arg>
+	</bean>
+	<bean id="statusDbSender" class="com.deppon.esb.server.common.utils.db.DbSender" >
+		<constructor-arg index="0" ref="statusLogPersistence"></constructor-arg>
+	</bean>
+	
+</beans>
+

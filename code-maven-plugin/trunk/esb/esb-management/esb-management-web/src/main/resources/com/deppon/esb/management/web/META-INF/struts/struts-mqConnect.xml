@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<package name="mqConnect" namespace="/mqConnect" extends="esb-default">
+		<!-- 主页页面 -->
+		<action name="index">
+			<result name="success">/WEB-INF/pages/mqConnect/mqConnectIndex.jsp</result>
+		</action>
+		<action name="queryMqConnect" class="mqConnectAction" method="queryMqConnect">
+			<result name="success" type="json">
+				<param name="includeProperties">resultCount,mqConnectInfoList</param>
+			</result>
+		</action>
+		<action name="deleteMqConnectByIds" class="mqConnectAction" method="deleteMqConnectByIds">
+			<result name="success" type="json">
+				<param name="includeProperties">success,message</param>
+			</result>
+		</action>
+		<action name="updateMqConnect" class="mqConnectAction" method="updateMqConnect">
+			<result name="success" type="json">
+				<param name="includeProperties">success,message</param>
+			</result>
+		</action>
+		<action name="addMqConnect" class="mqConnectAction" method="addMqConnect">
+			<result name="success" type="json">
+				<param name="includeProperties">success,message</param>
+			</result>
+		</action>
+	</package>
+
+</struts>

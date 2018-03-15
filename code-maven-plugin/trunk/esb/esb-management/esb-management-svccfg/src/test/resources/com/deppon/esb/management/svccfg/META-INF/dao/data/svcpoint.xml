@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+	<T_ESB_SVCPOINT
+		FID='9990'
+		SVCNAME='订单状态更新'
+		SVCCODE='[SVCCODE]'
+		SVCPROVDID='ESB'
+		SVCAGRMT='WS'
+		SVCADDR='http://localhost:8080/services/order'
+		FRNTORBCK='F'
+		ISAUTORESEND='0'
+		ISRCDORGBODY='1'
+		ISRCDPFMCLOG='0'
+		ISRCDERRLOG='1'
+		FRESPONSETYPE='com.deppon.esb.service.erp.domain.ESBResponse4ERP'
+		/>
+</dataset>

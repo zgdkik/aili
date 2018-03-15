@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+	"-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.deppon.esb.management.excptn.domain.EsbExceptionInfo">
+	<resultMap id="esbExceptionInfoMap"
+		type="com.deppon.esb.management.excptn.domain.EsbExceptionInfo">
+		<result property="id" column="FID" />
+		<result property="esbHeader.version" column="VERSION" javaType="java.lang.String"
+			jdbcType="NVARCHAR" />
+		<result property="esbHeader.businessId" column="BIZID"
+			javaType="java.lang.String" jdbcType="NVARCHAR" />
+		<result property="esbHeader.businessDesc1" column="BIZDESC1"
+			javaType="java.lang.String" jdbcType="NVARCHAR" />
+		<result property="esbHeader.businessDesc2" column="BIZDESC2"
+			javaType="java.lang.String" jdbcType="NVARCHAR" />
+		<result property="esbHeader.businessDesc3" column="BIZDESC3"
+			javaType="java.lang.String" jdbcType="NVARCHAR" />
+		<result property="esbHeader.requestId" column="REQID"
+			javaType="java.lang.String" jdbcType="NVARCHAR" />
+		<result property="esbHeader.responseId" column="RESID"
+			javaType="java.lang.String" jdbcType="NVARCHAR" />
+		<result property="esbHeader.sourceSystem" column="SOURCESYS"
+			javaType="java.lang.String" jdbcType="NVARCHAR" />
+		<result property="esbHeader.targetSystem" column="TARGETSYS"
+			javaType="java.lang.String" jdbcType="NVARCHAR" />
+		<result property="esbHeader.esbServiceCode" column="ESBSVCCODE"
+			javaType="java.lang.String" jdbcType="NVARCHAR" />
+		<result property="esbHeader.backServiceCode" column="BACKSVCCODE"
+			javaType="java.lang.String" jdbcType="NVARCHAR" />
+		<result property="esbHeader.messageFormat" column="MSGFMT"
+			javaType="java.lang.String" jdbcType="NVARCHAR" />
+		<result property="esbHeader.exchangePattern" column="EXGPTN"
+			javaType="java.lang.Integer" jdbcType="NUMERIC" />
+		<result property="esbHeader.sentSequence" column="SENTSEQ"
+			javaType="java.lang.Integer" jdbcType="NUMERIC" />
+		<result property="esbHeader.resultCode" column="RESULTCODE"
+			javaType="java.lang.Integer" jdbcType="NUMERIC" />
+		<result property="esbHeader.authentication.username" column="USERNAME"
+			javaType="java.lang.String" jdbcType="NVARCHAR" />
+		<result property="esbHeader.authentication.password" column="PASSWORD"
+			javaType="java.lang.String" jdbcType="NVARCHAR" />
+
+		<result property="commonExceptionInfo.exceptioncode" column="EXCPTNCODE"
+			javaType="java.lang.String" jdbcType="NVARCHAR" />
+		<result property="commonExceptionInfo.exceptiontype" column="EXCPTNTYPE"
+			javaType="java.lang.String" jdbcType="NVARCHAR" />
+		<result property="commonExceptionInfo.message" column="MSG"
+			javaType="java.lang.String" jdbcType="NVARCHAR" />
+		<result property="commonExceptionInfo.createdTime" column="EXCPTNCREATETIME"
+			javaType="java.util.Date" jdbcType="TIME" />
+		<result property="commonExceptionInfo.detailedInfo" column="DETAIL"
+			javaType="java.lang.String" jdbcType="NVARCHAR" />
+
+		<result property="hostIp" column="HOSTIP" javaType="java.lang.String"
+			jdbcType="NVARCHAR" />
+		<result property="createTime" column="CREATETIME" javaType="java.util.Date"
+			jdbcType="TIME" />
+	</resultMap>
+
+	<!-- 如果存在request相同的值，retrycount次数加1，ISSUCCESS 值修改为0；如果不存在，则新增一条数据 -->
+	<insert id="saveEsbException"
+		parameterType="com.deppon.esb.management.excptn.domain.EsbExceptionInfo">
+		INSERT INTO
+		T_ESB2_EXCEPTION(FID,VERSION,BIZID,BIZDESC1,BIZDESC2,BIZDESC3,REQID,RESID,SOURCESYS,TARGETSYS,ESBSVCCODE,BACKSVCCODE,MSGFMT,EXGPTN,SENTSEQ,RESULTCODE,USERNAME,PASSWORD,
+		EXCPTNCODE,EXCPTNTYPE,MSG,EXCPTNCREATETIME,DETAIL,CREATETIME)
+		VALUES
+		(sys_guid(),
+		#{esbHeader.version,jdbcType=VARCHAR},
+		#{esbHeader.businessId,jdbcType=VARCHAR},#{esbHeader.businessDesc1,jdbcType=VARCHAR},
+		#{esbHeader.businessDesc2,jdbcType=VARCHAR},#{esbHeader.businessDesc3,jdbcType=VARCHAR},
+		#{esbHeader.requestId,jdbcType=VARCHAR},#{esbHeader.responseId,jdbcType=VARCHAR},
+		#{esbHeader.sourceSystem,jdbcType=VARCHAR},#{esbHeader.targetSystem,jdbcType=VARCHAR},
+		#{esbHeader.esbServiceCode,jdbcType=VARCHAR},#{esbHeader.backServiceCode,jdbcType=VARCHAR},
+		#{esbHeader.messageFormat,jdbcType=VARCHAR},#{esbHeader.exchangePattern,jdbcType=NUMERIC},
+		#{esbHeader.sentSequence,jdbcType=NUMERIC},#{esbHeader.resultCode,jdbcType=NUMERIC},
+		#{esbHeader.authentication.username,jdbcType=VARCHAR},#{esbHeader.authentication.password,jdbcType=VARCHAR},
+		#{commonExceptionInfo.exceptioncode,jdbcType=VARCHAR},#{commonExceptionInfo.exceptiontype,jdbcType=VARCHAR},
+		#{commonExceptionInfo.message,jdbcType=VARCHAR},#{commonExceptionInfo.createdTime,jdbcType=TIME},
+		#{commonExceptionInfo.detailedInfo,jdbcType=CLOB},#{createTime,jdbcType=TIME})
+	</insert>
+	
+	
+	<!-- For 2.0 TODO-->
+	<resultMap type="com.deppon.esb.management.excptn.domain.view.ExceptionBean2"
+		id="ExceptionBean2">
+		<id property="id" column="FID" />
+		<!-- <result property="msgId" column="MSGID" /> -->
+		<result property="version" column="VERSION" />
+		<result property="createTime" column="CREATETIME" />
+		<result property="businessId" column="BIZID" />
+		<result property="businessDesc1" column="BIZDESC1" />
+		<result property="businessDesc2" column="BIZDESC2" />
+		<result property="businessDesc3" column="BIZDESC3" />
+		<result property="requestId" column="REQID" />
+		<result property="requestId" column="RESID" />
+		<result property="esbServiceCode" column="ESBSVCCODE" />
+		<result property="backServiceCode" column="BACKSVCCODE" />
+		<result property="messageFormat" column="MSGFMT" />
+		<result property="exchangePattern" column="EXGPTN" />
+		<result property="message" column="MSG" />  
+	</resultMap>
+
+	<!-- For 2.0 TODO -->
+	<select id="selectExceptionBean2"
+		parameterType="com.deppon.esb.management.excptn.domain.view.ExceptionQueryBean2"
+		resultMap="ExceptionBean2">
+		<![CDATA[	
+		select *
+		  from (select e.fid,
+		               e.version,
+		               e.bizid,
+		               e.bizdesc1,
+		               e.bizdesc2,
+		               e.bizdesc3,
+		               e.reqid,
+		               e.resid,
+		               e.esbsvccode,
+		               e.backsvccode,
+		               e.msgfmt,
+		               e.exgptn,
+		               e.msg,
+		               e.createtime,
+		               rownum num
+		          from t_esb2_exception e ]]>
+		<where>
+			1=1
+			<if test="limit != null"><![CDATA[ and rownum <#{start}+#{limit}]]></if>
+			<if test="startTime != null"><![CDATA[ and CREATETIME >#{startTime}]]></if>
+			<if test="endTime != null"><![CDATA[ and CREATETIME <#{endTime}]]></if>
+			
+			<if test="biz != null and biz!='' "><![CDATA[ and BIZID =#{biz}]]></if>
+			<if test="sourceSystem != null and sourceSystem!='' "><![CDATA[ and SOURCESYS =#{sourceSystem}]]></if>
+			<if test="messageFormat != null and messageFormat!='' "><![CDATA[ and MSGFMT =#{messageFormat}]]></if>
+			<if test="svcCode != null and svcCode!='' "><![CDATA[ and ESBSVCCODE =#{svcCode}]]></if>
+			
+			<if test="businessDesc1 != null and businessDesc1 != '' "><![CDATA[and BIZDESC1 like '%'||#{businessDesc1}||'%']]></if>
+			<if test="businessDesc2 != null and businessDesc2 != '' "><![CDATA[and BIZDESC2 like '%'||#{businessDesc2}||'%']]></if>
+			<if test="businessDesc3 != null and businessDesc3 != '' "><![CDATA[and BIZDESC3 like '%'||#{businessDesc3}||'%']]></if>
+		
+		</where>
+  		<![CDATA[ )]]>
+		<where>
+			1=1
+			<if test="start != null "><![CDATA[and  num > #{start}]]></if>
+		</where>
+	</select>
+
+	<!-- 计数 For2.0 TODO -->
+	<select id="count2"
+		parameterType="com.deppon.esb.management.excptn.domain.view.ExceptionQueryBean2"
+		resultType="int">
+		<![CDATA[	select count(*) from t_esb2_exception e]]>
+		<where>
+			1=1
+			<if test="startTime != null"><![CDATA[ and CREATETIME >#{startTime}]]></if>
+			<if test="endTime != null"><![CDATA[ and CREATETIME <#{endTime}]]></if>
+			
+			<if test="biz != null and biz!='' "><![CDATA[ and BIZID =#{biz}]]></if>
+			<if test="sourceSystem != null and sourceSystem!='' "><![CDATA[ and SOURCESYS =#{sourceSystem}]]></if>
+			<if test="messageFormat != null and messageFormat!='' "><![CDATA[ and MSGFMT =#{messageFormat}]]></if>
+			<if test="svcCode != null and svcCode!='' "><![CDATA[ and ESBSVCCODE =#{svcCode}]]></if>
+			
+			<if test="businessDesc1 != null and businessDesc1 != '' "><![CDATA[and BIZDESC1 like '%'||#{businessDesc1}||'%']]></if>
+			<if test="businessDesc2 != null and businessDesc2 != '' "><![CDATA[and BIZDESC2 like '%'||#{businessDesc2}||'%']]></if>
+			<if test="businessDesc3 != null and businessDesc3 != '' "><![CDATA[and BIZDESC3 like '%'||#{businessDesc3}||'%']]></if>
+		</where>
+	</select>
+	
+	<!-- 查询异常堆栈信息   For 2.0 -->
+	<select id="selectStackTrace2" parameterType="String" resultType="String">
+		<![CDATA[select t.detail from t_esb2_exception t where t.fid=#{id}]]>
+	</select>
+	
+	<select id="querySysExcption" resultMap="esbExceptionInfoMap">
+		select t.FID,t.BIZID,t.REQID,t.ESBSVCCODE,t.BACKSVCCODE,
+				t.EXCPTNCODE,t.EXCPTNTYPE,t.MSG,t.EXCPTNCREATETIME
+		from t_esb2_exception t where t.FLAG=0 and t.EXCPTNTYPE='SystemException'
+	</select>
+	
+	<update id="updateExceptionFlagByIds" parameterType="java.util.Map">
+		UPDATE t_esb2_exception
+		<trim prefix="SET" suffixOverrides=",">
+			<if test="flag != null"><![CDATA[flag=#{flag}]]></if>
+		</trim>
+		WHERE FID IN
+		<foreach collection="ids" item="ids" open="(" separator="," close=")">
+			#{ids}
+		</foreach>
+	</update>
+
+</mapper>

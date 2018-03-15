@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camel="http://camel.apache.org/schema/spring"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd 
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+	<!-- <camelContext id="foss2crm_webservice_camelContext"
+		errorHandlerRef="webserviceErrorHandler" xmlns="http://camel.apache.org/schema/spring">
+		<route id="foss2crm_webservice_route">
+			<from
+				uri="cxf:bean:foss2crm_frontEndpoint_fossToCrmService?dataFormat=PAYLOAD" />
+			soapHeader处理
+			<process ref="soapHeaderProcessor"></process>
+			日志记录
+			<process ref="sendRequestPerformanceRecorder"></process>
+			发送消息到后端
+			<choice>
+				<when>
+					<simple>${header.backServiceCode} == 'CRM_ESB2CRM_QUERYORDER'</simple>
+					<to uri="cxf:bean:CRM_ESB2CRM_QUERYORDER?dataFormat=PAYLOAD"></to>
+				</when>
+				<when>
+					<simple>${header.backServiceCode} == 'CRM_ESB2CRM_IMPORT'</simple>
+					<to uri="cxf:bean:CRM_ESB2CRM_IMPORT?dataFormat=PAYLOAD"></to>
+				</when>
+				<when>
+					<simple>${header.backServiceCode} == 'CRM_ESB2CRM_VALIDATE_COUPON'</simple>
+					<to uri="cxf:bean:CRM_ESB2CRM_VALIDATE_COUPON?dataFormat=PAYLOAD"></to>
+				</when>
+				<when>
+					<simple>${header.backServiceCode} == 'CRM_ESB2CRM_COUPON_STATE'</simple>
+					<to uri="cxf:bean:CRM_ESB2CRM_COUPON_STATE?dataFormat=PAYLOAD"></to>
+				</when>
+				<when>
+					<simple>${header.backServiceCode} == 'CRM_ESB2CRM_BACK_FREIGHT_CHECK'</simple>
+					<to uri="cxf:bean:CRM_ESB2CRM_BACK_FREIGHT_CHECK?dataFormat=PAYLOAD"></to>
+				</when>
+				<when>
+					<simple>${header.backServiceCode} == 'CRM_ESB2CRM_QUERY_CLAIMBILL'</simple>
+					<to uri="cxf:bean:CRM_ESB2CRM_QUERY_CLAIMBILL?dataFormat=PAYLOAD"></to>
+				</when>
+				<when>
+					<simple>${header.backServiceCode} == 'CRM_ESB2CRM_MODIFY_ORDER_LOCK_INFO'</simple>
+					<to
+						uri="cxf:bean:CRM_ESB2CRM_MODIFY_ORDER_LOCK_INFO?dataFormat=PAYLOAD"></to>
+				</when>
+				<otherwise>
+					<process ref="destinationNotFoundProcessor"></process>
+				</otherwise>
+			</choice>
+			<process ref="receiveResponsePerformanceRecorder"></process>
+		</route>
+	</camelContext> -->
+</beans>

@@ -1,0 +1,72 @@
+<connection-factories>
+
+        <tx-connection-factory>
+                <jndi-name>jms/ESBMQ</jndi-name>
+                <xa-transaction />
+                <rar-name>wmq.jmsra.rar</rar-name>
+                <connection-definition>javax.jms.ConnectionFactory</connection-definition>
+                <config-property name="channel" type="java.lang.String">ESB.INTFACE.CLIENT</config-property>
+                <config-property name="hostName" type="java.lang.String">192.168.17.141</config-property>
+                <config-property name="port" type="java.lang.String">2429</config-property>
+                <config-property name="queueManager" type="java.lang.String">QM_ESBD</config-property>
+                <config-property name="transportType" type="java.lang.String">CLIENT</config-property>
+                <config-property name="username" type="java.lang.String">mqm</config-property>
+                <security-domain-and-application>JmsXARealm</security-domain-and-application>
+                <min-pool-size>20</min-pool-size>
+                <max-pool-size>100</max-pool-size>
+        </tx-connection-factory>
+
+        <no-tx-connection-factory>
+                <jndi-name>jms/ESBMQCONF</jndi-name>
+                <xa-transaction />
+                <rar-name>wmq.jmsra.rar</rar-name>
+                <connection-definition>javax.jms.ConnectionFactory</connection-definition>
+                <config-property name="channel" type="java.lang.String">ESB.INTFACE.CLIENT</config-property>
+                <config-property name="hostName" type="java.lang.String">192.168.17.141</config-property>
+                <config-property name="port" type="java.lang.String">2429</config-property>
+                <config-property name="queueManager" type="java.lang.String">QM_ESBD</config-property>
+                <config-property name="transportType" type="java.lang.String">CLIENT</config-property>
+                <config-property name="username" type="java.lang.String">mqm</config-property>
+                <security-domain-and-application>JmsXARealm</security-domain-and-application>
+                <min-pool-size>1</min-pool-size>
+                <max-pool-size>5</max-pool-size>
+        </no-tx-connection-factory>
+        
+        <!-- 请注意把 esb-util-jboss包拷贝到server/XXX/lib目录下-->
+        <mbean code="com.deppon.esb.util.jboss.JndiProperties" 
+           name="Jndi.Properties:service=JndiProperties">
+			<attribute name="JndiName">jndi/properties</attribute>
+			<depends>jboss:service=Naming</depends>
+			<attribute name="Properties">
+				queueManager=QM_ESBD
+				hostName=192.168.10.90
+				channel=ESB.INTFACE.CLIENT
+				port=3429
+				CCSID=1208
+			</attribute>
+		</mbean>
+
+         <mbean code="org.jboss.resource.deployment.AdminObject" name="jca.wmq:name=jms/request">
+                <attribute name="JNDIName">jms/confRequest</attribute>
+                <depends optional-attribute-name="RARName">jboss.jca:service=RARDeployment,name='wmq.jmsra.rar'
+                </depends>
+                <attribute name="Type">javax.jms.Queue</attribute>
+                <attribute name="Properties">
+                        baseQueueManagerName=QM_ESBD
+                        baseQueueName=QU_ESB_REQUEST_COM_IN
+                        CCSID=1208
+        		</attribute>
+        </mbean>
+
+        <mbean code="org.jboss.resource.deployment.AdminObject" name="jca.wmq:name=jms/response">
+                <attribute name="JNDIName">jms/confResponse</attribute>
+                <depends optional-attribute-name="RARName">jboss.jca:service=RARDeployment,name='wmq.jmsra.rar'
+                </depends>
+                <attribute name="Type">javax.jms.Queue</attribute>
+                <attribute name="Properties">
+                        baseQueueManagerName=QM_ESBD
+                        baseQueueName=QU_ESB_RESPONSE_COM_OUT
+                        CCSID=1208
+      			</attribute>
+        </mbean>
+</connection-factories>

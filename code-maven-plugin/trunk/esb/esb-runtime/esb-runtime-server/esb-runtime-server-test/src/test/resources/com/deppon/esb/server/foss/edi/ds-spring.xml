@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+		http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd">
+
+	<bean id="ediDataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="${sqlserver_driverClassName}" />
+		<property name="url" value="${edi_db_url}" />
+		<property name="username" value="${edi_db_username}" />
+		<property name="password" value="${edi_db_passwd}" />
+	</bean>
+	
+	<bean id="sumbillService" class="com.deppon.esb.server.foss.edi.SumBillService">
+		<property name="ediDataSource" ref="ediDataSource"></property>
+	</bean>
+	
+	<context:property-placeholder location="classpath:com/deppon/esb/server/foss/edi/edi_jdbc.properties"/>
+</beans>

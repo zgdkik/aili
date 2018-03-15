@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<package name="infobull" namespace="/infobull" extends="esb-default">
+		<!-- channelIndex页面 -->
+		<action name="channelIndex">
+			<result name="success">/WEB-INF/pages/infobull/channelIndex.jsp</result>
+		</action>
+		<action name="listAllChannelNamesAndTypes" class="channelAction" method="listAllChannelNamesAndTypes">
+			<result name="success" type="json">
+				<param name="includeProperties">success,resultChannelList</param>
+			</result>
+		</action>
+		<action name="listChannelStatus" class="channelAction" method="listChannelStatus">
+			<result name="success" type="json">
+				<param name="includeProperties">success,resultChannelList</param>
+			</result>
+		</action>
+		<action name="channelIndex2">
+			<result name="success">/WEB-INF/pages/infobull/channelIndex2.jsp</result>
+		</action>
+		<action name="listChannelStatus2" class="channelAction" method="listChannelStatus">
+			<result name="success" type="json">
+				<param name="includeProperties">success,resultChannelList</param>
+			</result>
+		</action>
+		
+		<!-- mqLocalQueueIndex页面 -->
+		<action name="mqLocalQueueIndex">
+			<result name="success">/WEB-INF/pages/infobull/mqLocalQueueIndex.jsp</result>
+		</action>
+		<action name="listLocalQueues" class="mqLocalQueueAction" method="listLocalQueues">
+			<result name="success" type="json">
+				<param name="includeProperties">success,resultLocalQueueList</param>
+			</result>
+		</action>
+		
+		<!-- routeIndex页面 -->
+		<action name="routeIndex">
+			<result name="success">/WEB-INF/pages/infobull/routeIndex.jsp</result>
+		</action>
+		<action name="queryAllRoute" class="routeAction" method="queryAllRoute">
+			<result name="success" type="json">
+				<param name="includeProperties">resultCount,routeInfoList</param>
+			</result>
+		</action>
+	</package>
+
+</struts>

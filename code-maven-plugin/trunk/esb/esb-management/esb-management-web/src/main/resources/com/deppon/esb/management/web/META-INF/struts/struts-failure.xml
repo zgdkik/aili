@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<package name="failure" namespace="/failure" extends="esb-default">
+		<action name="failureIndex">
+			<result name="success">/WEB-INF/pages/failure/failureIndex.jsp</result>
+		</action>
+		<action name="queryFailureLogList" class="failureLogAction"
+			method="queryFailureLogList">
+			<result name="success" type="json">
+				<param name="includeProperties">resultCount,list,success,tips</param>
+			</result>
+		</action>
+		<action name="queryFailureLogBody" class="failureLogAction"
+			method="queryFailureLogBody">
+			<result name="success">/WEB-INF/pages/failure/failureBody.jsp</result>
+			<result name="fail">/WEB-INF/pages/failure/exception.jsp</result>
+		</action>
+	</package>
+</struts>

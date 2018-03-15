@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+	<T_ESB_INTERFACETHRESHOLD
+		FID='1'
+		SRVCODE='svcCode'
+		THRESHOLD='10'
+		CHANNELID='Email'
+		PERSONID='36985,36986,'
+		TYPE='0'
+		/>
+		
+</dataset>

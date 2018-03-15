@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+<!-- 	<T_ESB2_SVCPOINT -->
+<!-- 		  FID='999' -->
+<!-- 		  NAME='测试服务' -->
+<!-- 		  CODE='TEST_CODE' -->
+<!-- 		  SYSID='FOSS' -->
+<!-- 		  AGRMT='JMS' -->
+<!-- 		  FRNTORBCK='F' -->
+<!-- 		  ESBREQUESTADDR='QU_FOSS_REQUEST_OUT' -->
+<!-- 		  ESBRESPONSEADDR='QU_FOSS_RESPONSE_IN' -->
+<!-- 		  EXPATTERN='3' -->
+<!-- 		  MESSAGEFORMAT='XML' -->
+<!-- 		  TIMEOUT='60' -->
+<!-- 		  REQCONVERTORCLASS='com.deppon.esb.transformer.RequestTrans' -->
+<!-- 		  RESCONVERTORCLASS='com.deppon.esb.transformer.ResponseTrans' -->
+<!-- 		/> -->
+<!-- 		<T_ESB2_SVCPOINT -->
+<!-- 		  FID='123213' -->
+<!-- 		  NAME='测试服务' -->
+<!-- 		  CODE='TEST_CODE123' -->
+<!-- 		  SYSID='FOSS' -->
+<!-- 		  AGRMT='WebService' -->
+<!-- 		  FRNTORBCK='B' -->
+<!-- 		  ESBREQUESTADDR='http://127.0.0.1:8080/ws/wwww' -->
+<!-- 		  ESBRESPONSEADDR='QU_FOSS_RESPONSE_IN' -->
+<!-- 		  EXPATTERN='3' -->
+<!-- 		  MESSAGEFORMAT='SOAP' -->
+<!-- 		  TIMEOUT='60' -->
+<!-- 		  REQCONVERTORCLASS='com.deppon.esb.transformer.RequestTrans' -->
+<!-- 		  RESCONVERTORCLASS='com.deppon.esb.transformer.ResponseTrans' -->
+<!-- 		/> -->
+<!-- 	<T_ESB2_SYSCHANNELCFG -->
+<!-- 		  FID='222' -->
+<!-- 		  SYSNAME='FOSS' -->
+<!-- 		  REQUESTOUT='RQ_FOSS_REQUEST_COM_OUT' -->
+<!-- 		  RESPONSEIN='QU_FOSS_RESPONSE_COM_IN' -->
+<!-- 		  REQUESTIN='QU_FOSS_REQUEST_COM_IN' -->
+<!-- 		  RESPONSEOUT='RQ_FOSS_RESPONSE_COM_OUT' -->
+<!-- 		/> -->
+<!-- 	<T_ESB2_ROUTE -->
+<!-- 		FID='123' -->
+<!-- 		ESBSVCCODE='TEST_CODE_F' -->
+<!-- 		TARGETSVCCODE='TEST_CODE' -->
+
+<!--  	/> -->
+</dataset>

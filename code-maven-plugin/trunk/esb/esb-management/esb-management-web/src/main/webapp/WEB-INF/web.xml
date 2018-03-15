@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+	<distributable/>
+	<!-- 设置Spring容器要加载的xml文件 -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
+			classpath*:com/deppon/esb/management/META-INF/ds-spring.xml;
+			classpath*:com/deppon/esb/management/common/META-INF/adapter/mail/spring-*.xml;
+			classpath*:com/deppon/esb/management/*/META-INF/*-spring.xml;
+		</param-value>
+	</context-param>
+	<context-param>
+		<param-name>webAppRootKey</param-name>
+		<param-value>esbmgmt.root</param-value>
+	</context-param>	
+	<!-- 日志配置文件的位置 -->
+	<context-param>
+		<param-name>log4jConfigLocation</param-name>
+		<param-value>/WEB-INF/log4j.xml</param-value>
+	</context-param>
+	<context-param>
+		<param-name>staticServerAddress</param-name>
+		<param-value>/extjs4</param-value>
+	</context-param>
+	<listener>
+		<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+	</listener>
+	<!-- 加载Spring容器配置 -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	<listener>
+		<listener-class>com.deppon.esb.management.web.deploy.AppContextListener</listener-class>
+	</listener>
+	<filter>
+		<filter-name>encoding</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+	<!-- struts核心控制器 -->
+	<filter>
+		<filter-name>struts2</filter-name>
+		<filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>struts2</filter-name>
+		<url-pattern>*.action</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>encoding</filter-name>
+		<url-pattern>*.action</url-pattern>
+	</filter-mapping>
+	<servlet>  
+        <description>Apache CXF Endpoint</description>  
+        <display-name>cxf</display-name>  
+        <servlet-name>cxf</servlet-name>  
+        <servlet-class>org.apache.cxf.transport.servlet.CXFServlet</servlet-class>  
+        <load-on-startup>1</load-on-startup>  
+    </servlet>  
+    <servlet-mapping>  
+        <servlet-name>cxf</servlet-name>  
+        <url-pattern>/service/*</url-pattern>  
+    </servlet-mapping>
+	<session-config>
+         <session-timeout>30</session-timeout>
+    </session-config>
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+	<error-page>
+		<error-code>404</error-code>
+		<location>/404ErrorPage.html</location>
+	</error-page>
+	<error-page>
+		<error-code>500</error-code>
+		<location>/500ErrorPage.html</location>
+	</error-page>
+</web-app>

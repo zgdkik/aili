@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+	<T_ESB_QUEUETHRESHOLD
+		FID='1'
+		QUEUE='test'
+		THRESHOLD='1'
+		CHANNELID='[EMAIL]'
+		PERSONID='36985'
+		/>	
+</dataset>

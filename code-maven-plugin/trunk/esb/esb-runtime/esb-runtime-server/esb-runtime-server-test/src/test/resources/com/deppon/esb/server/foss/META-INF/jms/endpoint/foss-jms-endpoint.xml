@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camel="http://camel.apache.org/schema/spring"
+	xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd ">
+
+	<!-- FOSS 2 ESB request ===RECIEVE -->
+	<camel:endpoint
+		id="mq_foss_request_com_out_ESB_FOSS2ESB_UPLOAD_CASHINCOMERPT"
+		uri="ESBMQ:QU_FOSS_REQUEST_COM_OUT?selector=ESBServiceCode='ESB_FOSS2ESB_UPLOAD_CASHINCOMERPT'" />
+	<!-- ESB 2 FOSS response ===SEND -->
+	<camel:endpoint id="mq_foss_response_com_in" uri="ESBMQ:RQ_FOSS_RESPONSE_COM_IN" />
+
+	<camel:endpoint
+		id="mq_fin_self_response_com_out_FIN_SELF_ESB2FIN_SELF_UPLOAD_CASHINCOMERPT"
+		uri="ESBMQ:QU_FIN_SELF_RESPONSE_OUT?selector=BackServiceCode='FIN_SELF_ESB2FIN_SELF_UPLOAD_CASHINCOMERPT'" />
+		
+	<camel:endpoint id="mq_fin_self_request_com_in" uri="ESBMQ:RQ_FIN_SELF_REQUEST_COM_IN" />
+
+
+
+	<camel:endpoint id="mq_lms_request_com_in" uri="ESBMQ:RQ_LMS_REQUEST_COM_IN" />
+	<camel:endpoint
+		id="mq_foss_request_com_out_ESB_FOSS2ESB_RECEIVE_TRANSFERSITEINFO"
+		uri="ESBMQ:QU_FOSS_REQUEST_COM_OUT?selector=ESBServiceCode='ESB_FOSS2ESB_RECEIVE_TRANSFERSITEINFO'" />
+	<camel:endpoint
+		id="mq_lms_response_com_out_LMS_ESB2LMS_RECEIVE_TRANSFERSITEINFO"
+		uri="ESBMQ:QU_LMS_RESPONSE_COM_OUT?selector=BackServiceCode='LMS_ESB2LMS_RECEIVE_TRANSFERSITEINFO'" />
+
+	<camel:endpoint
+		id="mq_foss_request_com_out_ESB_FOSS2ESB_UPDATE_VEHICLESTATE"
+		uri="ESBMQ:QU_FOSS_REQUEST_COM_OUT?selector=ESBServiceCode='ESB_FOSS2ESB_UPDATE_VEHICLESTATE'" />
+	<camel:endpoint
+		id="mq_lms_response_com_out_LMS_ESB2LMS_UPDATE_VEHICLESTATE"
+		uri="ESBMQ:QU_LMS_RESPONSE_COM_OUT?selector=BackServiceCode='LMS_ESB2LMS_UPDATE_VEHICLESTATE'" />
+
+	<camel:endpoint
+		id="mq_foss_request_com_out_ESB_FOSS2ESB_DRIVE_KM"
+		uri="ESBMQ:QU_FOSS_REQUEST_COM_OUT?selector=ESBServiceCode='ESB_FOSS2ESB_DRIVE_KM'" />
+	<camel:endpoint
+		id="mq_lms_response_com_out_LMS_ESB2LMS_DRIVE_KM"
+		uri="ESBMQ:QU_LMS_RESPONSE_COM_OUT?selector=BackServiceCode='LMS_ESB2LMS_DRIVE_KM'" />
+
+</beans>

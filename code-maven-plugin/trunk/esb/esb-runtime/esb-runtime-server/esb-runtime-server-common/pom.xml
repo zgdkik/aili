@@ -1,0 +1,265 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.hbhk.aili.esb</groupId>
+		<artifactId>esb</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+	</parent>
+	<artifactId>esb-runtime-server-common</artifactId>
+	<packaging>jar</packaging>
+	<version>2.0.1-SNAPSHOT</version>
+	<dependencies>
+		<!-- 测试用jms -->
+		<!-- start -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>com.ibm.mq</groupId> -->
+<!-- 			<artifactId>mq</artifactId> -->
+<!-- 			<version>1.0</version> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 		  <groupId>com.ibm.mq</groupId> -->
+<!-- 		  <artifactId>mqjms</artifactId> -->
+<!-- 		  <version>1.0</version> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 		  <groupId>com.ibm.mq</groupId> -->
+<!-- 		  <artifactId>jmqi</artifactId> -->
+<!-- 		  <version>1.0</version> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 		  <groupId>com.ibm.mq</groupId> -->
+<!-- 		  <artifactId>jms</artifactId> -->
+<!-- 		  <version>1.0</version> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 		  <groupId>com.ibm.mq</groupId> -->
+<!-- 		  <artifactId>dhbcore</artifactId> -->
+<!-- 		  <version>1.0</version> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 		  <groupId>com.ibm.mq</groupId> -->
+<!-- 		  <artifactId>jta</artifactId> -->
+<!-- 		  <version>1.0</version> -->
+<!-- 		</dependency> -->
+		<!-- end -->
+		<dependency>
+			<groupId>org.hbhk.aili.esb</groupId>
+			<artifactId>esb-runtime-server-security</artifactId>
+			<version>2.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>commons-dbcp</groupId>
+			<artifactId>commons-dbcp</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aop</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+		</dependency>
+		<!-- CXF lib -->
+		<dependency>
+			<artifactId>geronimo-annotation_1.0_spec</artifactId>
+			<groupId>org.apache.geronimo.specs</groupId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-frontend-jaxws</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-testutils</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-transports-http</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-transports-http-jetty</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<!-- CXF lib end -->
+		<!-- Camel Dependencies -->
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-spring</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-stream</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-mail</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-jms</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-cxf</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-servlet</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-test</artifactId>
+			<scope>test</scope>
+			<optional>true</optional>
+		</dependency>
+		<!-- Jackson -->
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-core-asl</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jms</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.jms</groupId>
+			<artifactId>jms</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.activemq</groupId>
+			<artifactId>activemq-core</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.hbhk.aili.esb</groupId>
+			<artifactId>esb-runtime-common</artifactId>
+			<version>2.0.1-SNAPSHOT</version>
+		</dependency>
+
+		<!-- selvet -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+		</dependency>
+		
+	</dependencies>
+
+<!-- 
+	<build>
+		<plugins>
+
+			<plugin>
+				<groupId>org.jvnet.jaxb2.maven2</groupId>
+				<artifactId>maven-jaxb2-plugin</artifactId>
+				<version>0.8.2</version>
+				<configuration>
+					<schemaDirectory>${basedir}/src/main/schema</schemaDirectory>
+					<includeSchemas>
+						<includeSchema>*.xsd</includeSchema>
+					</includeSchemas>
+					<generateDirectory>target/generated-sources/jaxb</generateDirectory>
+					<generatePackage>com.deppon.esb.server.common</generatePackage>
+					<strict>true</strict>
+					<verbose>false</verbose>
+					<extension>true</extension>
+					<readOnly>yes</readOnly>
+					<removeOldOutput>true</removeOldOutput>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>add-source</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>add-source</goal>
+						</goals>
+						<configuration>
+							<sources>
+								<source>${project.build.directory}/target/generated-sources/jaxb</source>
+							</sources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+			<groupId>org.jibx</groupId>
+			<artifactId>jibx-maven-plugin</artifactId>
+			<configuration>
+			<schemaLocation>src/main/schema</schemaLocation>
+			<includeSchemas>
+			<includeSchema>*.xsd</includeSchema>
+			</includeSchemas>
+			<options>
+			<package>my.package</package>
+			</options>
+			<targetDirectory>target/generated-sources/jibx</targetDirectory>
+			<schemaBindingDirectory>target/generated-sources/jibx</schemaBindingDirectory>
+			<includeSchemaBindings>
+			<includeSchemaBindings>binding.xml</includeSchemaBindings>
+			</includeSchemaBindings>
+			<verbose>true</verbose>
+			</configuration>
+			<executions>
+			<execution>
+			<id>generate-java-code-from-schema</id>
+			<goals>
+			<goal>schema-codegen</goal>
+			</goals>
+			</execution>
+			<execution>
+			<id>compile-binding</id>
+			<goals>
+			<goal>bind</goal>
+			</goals>
+			</execution>
+			</executions>
+			</plugin>
+		</plugins>
+	</build> -->
+</project>

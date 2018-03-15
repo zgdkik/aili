@@ -1,0 +1,9 @@
+【接口异常告警】
+业务ID:[${bizId}];
+ESB服务编码:[${esbServiceCode}];
+后端服务编码:[${backServiceCode}];
+异常编码:[${excptnCode}];
+异常类型:[${excptnType}];
+异常消息:[${excptnMsg}];
+异常时间:[${excptnTime}];
+请及时处理！

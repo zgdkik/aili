@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<package name="express" namespace="/expressAgent" extends="esb-default">
+		<!-- 主页页面 -->
+		<action name="agentIndex">
+			<result name="success">/WEB-INF/pages/express/agent/agentIndex.jsp</result>
+		</action>
+  		<action name="add" class="agentUserAction" method="addAgentUser">
+			<result name="success" type="json">
+				<param name="includeProperties">success,message</param>
+			</result>
+			<result name="error" type="json">
+				<param name="includeProperties">success,message</param>
+			</result>			
+		</action>
+		<action name="query" class="agentUserAction" method="query">
+			<result name="success" type="json">
+				<param name="includeProperties">list,success,message</param>
+			</result>
+			<result name="error" type="json">
+				<param name="includeProperties">success,message</param>
+			</result>	
+		</action>
+		<action name="update" class="agentUserAction" method="update">
+			<result name="success" type="json">
+				<param name="includeProperties">success,message</param>
+			</result>
+			<result name="error" type="json">
+				<param name="includeProperties">success,message</param>
+			</result>	
+		</action>
+		<action name="delete" class="agentUserAction" method="delete">
+			<result name="success" type="json">
+				<param name="includeProperties">success,message</param>
+			</result>
+			<result name="error" type="json">
+				<param name="includeProperties">success,message</param>
+			</result>	
+		</action>
+	</package>
+
+</struts>

@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>esb-management</artifactId>
+		<groupId>com.deppon.esb</groupId>
+		<version>2.0.1-SNAPSHOT</version>
+	</parent>
+	<artifactId>esb-management-web</artifactId>
+	<packaging>war</packaging>
+	<name>esb-management-web Maven Webapp</name>
+	<url>http://maven.apache.org</url>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.struts</groupId>
+			<artifactId>struts2-spring-plugin</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.struts</groupId>
+			<artifactId>struts2-json-plugin</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jsp-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.quartz-scheduler</groupId>
+			<artifactId>quartz-oracle</artifactId>
+		</dependency>
+		<dependency>
+			<artifactId>geronimo-annotation_1.0_spec</artifactId>
+			<groupId>org.apache.geronimo.specs</groupId>
+		</dependency>
+		<!-- jstl -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjrt</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>cglib</groupId>
+			<artifactId>cglib-nodep</artifactId>
+		</dependency>
+
+		
+		<dependency>
+			<groupId>com.deppon.esb</groupId>
+			<artifactId>esb-management-svccfg</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.deppon.esb</groupId>
+			<artifactId>esb-management-pfmc</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.deppon.esb</groupId>
+			<artifactId>esb-management-excptn</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.deppon.esb</groupId>
+			<artifactId>esb-management-alert</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.deppon.esb</groupId>
+			<artifactId>esb-management-audit</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.deppon.esb</groupId>
+			<artifactId>esb-management-status</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.deppon.esb</groupId>
+			<artifactId>esb-management-mq</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.deppon.esb</groupId>
+			<artifactId>esb-management-route</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.deppon.esb</groupId>
+			<artifactId>esb-management-verification</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.deppon.esb</groupId>
+			 <artifactId>esb-management-failure</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.deppon.esb</groupId>
+			 <artifactId>esb-management-statistic</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.deppon.esb</groupId>
+			 <artifactId>esb-management-agentuser</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ibm.mq</groupId>
+			<artifactId>jms</artifactId>
+			<version>1.0</version>
+			<scope>provided</scope>
+		</dependency>
+		<!-- dom4j -->
+		<dependency>
+		  <groupId>org.apache.directory.studio</groupId>
+		  <artifactId>org.dom4j.dom4j</artifactId>
+		</dependency>
+		<!-- httpclient -->
+		<dependency>
+			<groupId>commons-httpclient</groupId>
+			<artifactId>commons-httpclient</artifactId>
+		</dependency>
+		
+		
+		<!-- 新增cxf -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.apache.cxf</groupId> -->
+<!-- 			<artifactId>cxf-bundle</artifactId> -->
+<!-- 			<version>${cxf-version}</version> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.apache.cxf</groupId> -->
+<!-- 			<artifactId>cxf-bundle-jaxrs</artifactId> -->
+<!-- 			<version>2.2.4</version> -->
+<!-- 		</dependency> -->
+		<dependency>  
+            <groupId>org.codehaus.jackson</groupId>  
+            <artifactId>jackson-jaxrs</artifactId>  
+            <version>${jackson-version}</version>  
+        </dependency> 
+	</dependencies>
+
+	<build>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<includes>
+					<include>**/*.*</include>
+				</includes>
+				<filtering>true</filtering>
+			</resource>
+			<resource>
+				<directory>config/${environment}</directory>
+				<includes>
+					<include>**/*.*</include>
+				</includes>
+			</resource>
+		</resources>
+		<plugins>
+			<plugin>
+				<groupId>org.mortbay.jetty</groupId>
+				<artifactId>jetty-maven-plugin</artifactId>
+				<configuration>
+					<webAppConfig>
+						<contextPath>/esb</contextPath>
+					</webAppConfig>
+					<contextHandlers>
+						<contextHandler implementation="org.eclipse.jetty.webapp.WebAppContext">
+							<war>${basedir}/jndi/extjs4.war</war>
+							<contextPath>/extjs4</contextPath>
+						</contextHandler>
+					</contextHandlers>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	<profiles>
+		<profile>
+			<id>dev</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<environment>dev</environment>
+			</properties>
+			<dependencies>
+			<dependency>
+				<groupId>com.ibm.mq</groupId>
+				<artifactId>jms</artifactId>
+				<version>1.0</version>
+			</dependency>
+				<dependency>
+					<groupId>com.ibm.mq</groupId>
+					<artifactId>mq</artifactId>
+				</dependency>
+				<dependency>
+					<groupId>com.ibm.mq</groupId>
+					<artifactId>mqjms</artifactId>
+					<version>1.0</version>
+				</dependency>
+				<dependency>
+					<groupId>com.ibm.mq</groupId>
+					<artifactId>jmqi</artifactId>
+				</dependency>
+				<dependency>
+					<groupId>com.ibm.mq</groupId>
+					<artifactId>connector</artifactId>
+				</dependency>
+				<dependency>
+					<groupId>com.ibm.mq</groupId>
+					<artifactId>commonservices</artifactId>
+				</dependency>
+				<dependency>
+					<groupId>com.ibm.mq</groupId>
+					<artifactId>headers</artifactId>
+				</dependency>
+				<dependency>
+					<groupId>com.ibm.mq</groupId>
+					<artifactId>dhbcore</artifactId>
+					<version>1.0</version>
+				</dependency>
+				<dependency>
+					<groupId>commons-dbcp</groupId>
+					<artifactId>commons-dbcp</artifactId>
+				</dependency>
+				<dependency>
+					<groupId>org.apache.activemq</groupId>
+					<artifactId>activemq-core</artifactId>
+					<version>5.7.0</version>
+				</dependency>
+			</dependencies>
+		</profile>
+		<profile>
+			<id>sit</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<properties>
+				<environment>sit</environment>
+			</properties>
+		</profile>
+		<profile>
+			<id>prd</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<properties>
+				<environment>prd</environment>
+			</properties>
+		</profile>
+	</profiles>
+</project>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+
+	<!-- 配置quartz工厂类 -->
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="dataSource" ref="esbjobdb" />
+		<property name="configLocation"
+			value="classpath:com/deppon/esb/management/job/META-INF/quartz.properties" />
+		<property name="triggers">
+			<list>
+				<ref bean="excptnWarningCronTriggerBean" />
+				<ref bean="pfmcWarningCronTriggerBean" />
+			 <!--   <ref bean="msgRedoCronTriggerBean" /> -->
+			    <!-- 关闭队列连接告警，加强新的告警模块 -->
+<!-- 			    <ref bean="queueCronTriggerBean" /> -->
+				<ref bean="mqConnCronTriggerBean" />
+<!-- 				<ref bean="statusNoCompleteCronTriggerBean" /> -->
+				<ref bean="excptn2CronTriggerBean" />
+				<ref bean="queueAlertCronTriggerBean" />
+<!--  				<ref bean="gainWarningCronTriggerBean" />-->
+			</list>
+		</property>
+		<!-- applicationContextSchedulerContextKey：是org.springframework.scheduling.quartz.SchedulerFactoryBean这个类中把spring上下文以key/value的方式存放在了quartz的上下文中了，可以用applicationContextSchedulerContextKey所定义的key得到对应的spring上下文 -->
+		<property name="applicationContextSchedulerContextKey" value="applicationContext" />
+	</bean>
+
+</beans>

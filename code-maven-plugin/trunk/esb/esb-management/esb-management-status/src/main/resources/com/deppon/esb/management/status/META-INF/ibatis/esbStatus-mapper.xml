@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+	"-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.deppon.esb.management.status.domain.EsbStatusInfo">
+	<resultMap id="esbStatusInfo"
+		type="com.deppon.esb.management.status.domain.EsbStatusInfo">
+		<result property="id" column="FID" javaType="java.lang.String"
+			jdbcType="VARCHAR" />
+		<result property="esbServiceCode" column="ESBSVCCODE" javaType="java.lang.String"
+			jdbcType="NVARCHAR" />
+		<result property="backServiceCode" column="TARGETSVCCODE"
+			javaType="java.lang.String" jdbcType="NVARCHAR" />
+		<result property="businessId" column="BIZID" javaType="java.lang.String"
+			jdbcType="NVARCHAR" />
+		<result property="requestId" column="REQID" javaType="java.lang.String"
+			jdbcType="NVARCHAR" />
+		<result property="responseId" column="RESID" javaType="java.lang.String"
+			jdbcType="NVARCHAR" />
+		<result property="sourceSystem" column="SOURCESYS" javaType="java.lang.String"
+			jdbcType="NVARCHAR" />
+		<result property="targetSystem" column="TARGETSYS" javaType="java.lang.String"
+			jdbcType="NVARCHAR" />
+		<result property="statusInfo.statusId" column="STATUSID"
+			javaType="java.lang.String" jdbcType="NVARCHAR" />
+		<result property="statusInfo.timeStamp" column="TIMESTAMP"
+			javaType="java.lang.Long" jdbcType="NUMERIC" />
+		<result property="createTime" column="CREATETIME" javaType="java.util.Date"
+			jdbcType="TIME" />
+	</resultMap>
+
+	<insert id="saveStatus"
+		parameterType="com.deppon.esb.management.status.domain.EsbStatusInfo">
+		INSERT INTO
+		T_ESB2_STATUS(FID,ESBSVCCODE,TARGETSVCCODE,BIZID,REQID,RESID,SOURCESYS,TARGETSYS,STATUSID,TIMESTAMP,CREATETIME)
+		VALUES
+		(sys_guid(),
+		#{esbServiceCode,jdbcType=VARCHAR},#{backServiceCode,jdbcType=VARCHAR},
+		#{businessId,jdbcType=VARCHAR},#{requestId,jdbcType=VARCHAR},
+		#{responseId,jdbcType=VARCHAR},#{sourceSystem,jdbcType=VARCHAR},
+		#{targetSystem,jdbcType=VARCHAR},#{statusInfo.statusId,jdbcType=VARCHAR},
+		#{statusInfo.timeStamp,jdbcType=NUMERIC},#{createTime,jdbcType=TIME})
+	</insert>
+
+	<select id="getNotCompleteRecords" resultMap="esbStatusInfo">
+		SELECT
+		t.FID,t.ESBSVCCODE,t.TARGETSVCCODE,t.BIZID,t.REQID,t.RESID,t.SOURCESYS,t.TARGETSYS,t.STATUSID,t.TIMESTAMP,t.CREATETIME
+		FROM T_ESB2_STATUS t
+		WHERE
+		<![CDATA[t.flag<=1]]>
+		AND
+		<![CDATA[t.CREATETIME<sysdate - #{mi}/24/60]]>
+		and
+		t.reqid not in
+		(
+		SELECT
+	    t2.REQID
+	    FROM T_ESB2_STATUS t2
+	    WHERE
+		<![CDATA[t2.flag<=1]]>
+		AND
+		<![CDATA[t2.CREATETIME<sysdate - #{mi}/24/60]]>
+		and t2.statusid='ST_999'
+		)
+	</select>
+	
+	<!-- 分发,有部分999的情况 -->
+	<select id="getMultiNotCompleteRecords" resultMap="esbStatusInfo">
+		select *
+	  from t_esb2_status t1
+	 where t1.reqid in (select unique(t.reqid)
+	                      from t_esb2_status t
+	                     where t.statusid = 'ST_999')
+	   and t1.esbsvccode in
+	       (select r.esbsvccode
+	          from t_esb2_route r
+	         where r.esbsvccode in (select cd
+	                                  from (select t.esbsvccode cd, count(*) sz
+	                                          from t_esb2_route t
+	                                         group by t.esbsvccode)
+	                                 where sz > 1))
+	       WHERE
+			<![CDATA[t1.flag<=1]]>
+			AND
+			<![CDATA[t1.CREATETIME<sysdate - #{mi}/24/60]]>
+	</select>
+	
+	<update id="updateStatusByIds" parameterType="java.util.Map">
+		UPDATE T_ESB2_STATUS
+		<trim prefix="SET" suffixOverrides=",">
+			<if test="flag != null"><![CDATA[flag=#{flag}]]></if>
+		</trim>
+		WHERE FID IN
+		<foreach collection="ids" item="ids" open="(" separator="," close=")">
+			#{ids}
+		</foreach>
+	</update>
+	
+	
+	<resultMap id="statusViewMap" type="com.deppon.esb.management.status.view.StatusView" >
+		<result property="fid" column="FID"/>
+		<result property="esbServiceCode" column="ESBSVCCODE"/>
+		<result property="targetServiceCode" column="TARGETSVCCODE"/>
+		<result property="bizid" column="BIZID"/>
+		<result property="reqid" column="REQID"/>
+		<result property="resid" column="RESID"/>
+		<result property="sourceSys" column="SOURCESYS"/>
+		<result property="targetsys" column="TARGETSYS"/>
+		<result property="st102" column="ST_102"/>
+		<result property="st105" column="ST_105"/>
+		<result property="st108" column="ST_108"/>
+		<result property="st202" column="ST_202"/>
+		<result property="st205" column="ST_205"/>
+		<result property="st208" column="ST_208"/>
+		<result property="st302" column="ST_302"/>
+		<result property="st305" column="ST_305"/>
+		<result property="st308" column="ST_308"/>
+		<result property="st402" column="ST_402"/>
+		<result property="st405" column="ST_405"/>
+		<result property="st408" column="ST_408"/>
+		<result property="st502" column="ST_502"/>
+		<result property="st505" column="ST_505"/>
+		<result property="st508" column="ST_508"/>
+		<result property="st999" column="ST_999"/>
+		<result property="createTime" column="CREATETIME"/>
+		<result property="esbReqTimecost" column="ESBREQTIMECOST"/>
+		<result property="backReqTimecost" column="BACKREQTIMECOST"/>
+		<result property="esbResTimecost" column="ESBRESTIMECOST"/>
+		<result property="backResTimecost" column="BACKRESTIMECOST"/>
+	</resultMap>
+	<!-- 查询条件 -->
+	<sql id="queryCondition">
+		<if test="esbServiceCode !=null and esbServiceCode !=''">
+			<![CDATA[ and esbSvccode =#{esbServiceCode} ]]>
+		</if>
+		<if test="targetServiceCode !=null and targetServiceCode !=''">
+			<![CDATA[ and targetSvccode =#{targetServiceCode} ]]>
+		</if>
+		<if test="bizid !=null and bizid !=''">
+			<![CDATA[ and bizid =#{bizid} ]]>
+		</if>
+		<if test="reqid !=null and reqid !=''">
+			<![CDATA[ and reqid =#{reqid} ]]>
+		</if>
+		<if test="resid !=null and resid !=''">
+			<![CDATA[ and resid =#{resid} ]]>
+		</if>
+		<if test="sourceSys !=null and sourceSys !=''">
+			<![CDATA[ and sourceSys =#{sourceSys} ]]>
+		</if>
+		<if test="targetSys !=null and targetSys !=''">
+			<![CDATA[ and targetSys =#{targetSys} ]]>
+		</if>
+		<if test="startTime !=null ">
+			<![CDATA[ and createTime >=#{startTime} ]]>
+		</if>
+		<if test="endTime !=null ">
+			<![CDATA[ and createTime <=#{endTime} ]]>
+		</if>
+	</sql>
+
+	<!-- 查询状态日志列表（历史记录） 查询t_esb2_status_static -->
+	<select id="queryStatusList" parameterType="com.deppon.esb.management.status.view.StatusQueryBean" resultMap="statusViewMap">
+		<![CDATA[
+			select fid,
+			       esbsvccode,
+			       targetsvccode,
+			       bizid,
+			       reqid,
+			       resid,
+			       sourcesys,
+			       targetsys,
+			       st_102,
+			       st_105,
+			       st_108,
+			       st_202,
+			       st_205,
+			       st_208,
+			       st_302,
+			       st_305,
+			       st_308,
+			       st_402,
+			       st_405,
+			       st_408,
+			       st_502,
+			       st_505,
+			       st_508,
+			       st_999,
+			       esbreqtimecost,
+			       esbrestimecost,
+			       backreqtimecost,
+			       backrestimecost
+			  from esbdev.t_esb2_status_statistic
+		]]>
+		<where>
+			1=1
+			<include refid="queryCondition"/>
+		</where>
+	</select>
+	
+	<!-- 查询 状态日志记录数-->
+	<select id="queryStatusListCount" parameterType="com.deppon.esb.management.status.view.StatusQueryBean" resultType="Integer">
+		<![CDATA[
+			select count(1)  from esbdev.t_esb2_status_statistic
+		]]>
+		<where>
+			1=1
+			<include refid="queryCondition"/>
+		</where>
+	</select>
+
+	<!--TODO 查询即时状态日志  查询t_esb2_status-->
+	<select id="queryOriginalStatus" parameterType="com.deppon.esb.management.status.view.StatusQueryBean" resultMap="esbStatusInfo">
+		<![CDATA[
+			select fid,
+			       esbsvccode,
+			       targetsvccode,
+			       bizid,
+			       reqid,
+			       resid,
+			       sourcesys,
+			       targetsys,
+			       statusid,
+			       timestamp
+			  from t_esb2_status
+		]]>
+		<where>
+		 	1=1
+			<if test="esbServiceCode !=null and esbServiceCode !='' ">
+				<![CDATA[and ESBSVCCODE =#{esbServiceCode}]]>
+			</if>
+			<if test="targetServiceCode !=null and targetServiceCode !='' ">
+				<![CDATA[and TARGETSVCCODE =#{targetServiceCode}]]>
+			</if>
+			<if test="bizid !=null and bizid!='' ">
+				<![CDATA[and BIZID =#{bizid}]]>
+			</if>
+			<if test="reqid !=null and reqid !='' ">
+				<![CDATA[and REQID =#{reqid}]]>
+			</if>
+			<if test="resid !=null and resid !='' ">
+				<![CDATA[and RESID =#{resid}]]>
+			</if>
+			<if test="sourceSys !=null and sourceSys !='' ">
+				<![CDATA[and SOURCESYS =#{sourceSys}]]>
+			</if>
+			<if test="targetSys !=null and targetSys !='' ">
+				<![CDATA[and TARGETSYS =#{targetSys}]]>
+			</if>
+			<if test="longValueOfStartTime !=null ">
+				<![CDATA[and TIMESTAMP >=#{longValueOfStartTime}]]>
+			</if>
+			<if test="longValueOfEndTime !=null ">
+				<![CDATA[and TIMESTAMP <=#{longValueOfEndTime}]]>
+			</if>
+		</where>
+	</select>
+</mapper>

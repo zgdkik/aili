@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.hbhk.aili.esb</groupId>
+		<artifactId>esb</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+	</parent>
+	<artifactId>esb-runtime-server-test</artifactId>
+	<version>2.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+	<dependencies>
+	<!-- Jackson -->
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-core-asl</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+		</dependency>
+		<!-- ESB路由运行时模块依赖 -->
+	
+		<!-- ESB路由运行时模块依赖 结束 -->
+
+		<dependency>
+			<groupId>org.hbhk.aili.esb</groupId>
+			<artifactId>esb-runtime-common</artifactId>
+			<version>2.0.1-SNAPSHOT</version>
+		</dependency>
+		
+		<!-- http client -->
+		<dependency>
+			<groupId>commons-httpclient</groupId>
+			<artifactId>commons-httpclient</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.hbhk.aili.esb</groupId>
+			<artifactId>esb-runtime-server-common</artifactId>
+			<version>2.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.activemq</groupId>
+			<artifactId>activemq-core</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-test</artifactId>
+		</dependency>
+		<!-- sqlserver jdbc driver -->
+		<dependency>
+			<groupId>net.sourceforge.jtds</groupId>
+			<artifactId>jtds</artifactId>
+			<scope>provided</scope>
+		</dependency>	
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<scope>test</scope>
+		</dependency>	
+	</dependencies>
+	<build>
+		<plugins>
+			<!-- jaxb plugin:xsd to java 如何配置binding文件让datetime转换为java.util.Date-->
+			
+        <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>jaxb2-maven-plugin</artifactId>
+        <executions>
+            <execution>
+                <phase>generate-sources</phase>
+                <goals>
+                    <goal>xjc</goal>
+                </goals>
+            </execution>
+        </executions>
+        <configuration>
+            <schemaDirectory>src/main/resources/org/hbhk/aili/esb/server/foss/META-INF/jms/schema/</schemaDirectory>
+            <outputDirectory>target/generated-sources/jaxb2</outputDirectory>
+        </configuration>
+        </plugin>
+
+<!-- 			<plugin>
+				<groupId>org.jibx</groupId>
+				<artifactId>jibx-maven-plugin</artifactId>
+				<version>1.2.4.5</version>
+				<configuration>
+					<schemaLocation>src/main/resources/com/deppon/esb/server/foss/METE-INF/jms/schema</schemaLocation>
+					<includeSchemas>
+						<includeSchema>*.xsd</includeSchema>
+					</includeSchemas>
+					<options>
+					<package>my.package</package>
+					</options>
+					<targetDirectory>target/generated-sources/jibx</targetDirectory>
+					<schemaBindingDirectory>target/generated-sources/jibx</schemaBindingDirectory>
+					<includeSchemaBindings>
+						<includeSchemaBindings>binding.xml</includeSchemaBindings>
+					</includeSchemaBindings>
+					<verbose>true</verbose>
+				</configuration>
+				<executions>
+					<execution>
+						<id>generate-java-code-from-schema</id>
+						<goals>
+							<goal>schema-codegen</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>compile-binding</id>
+						<goals>
+							<goal>bind</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin> -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>add-source</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>add-source</goal>
+						</goals>
+						<configuration>
+							<sources>
+								<source>${project.build.directory}/target/generated-sources/jaxb2</source>
+							</sources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>

@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+	<T_ESB_NOTICUSER
+		FID='36985'
+		USERNAME='testcase'
+		TELPHONE='4008305555'
+		MOBILEPHONE='4008305555'
+		EMAIL='zhengvl@hotmail.com'
+		/>
+	<T_ESB_NOTICUSER
+		FID='36986'
+		USERNAME='testcase1'
+		TELPHONE='40083055551'
+		MOBILEPHONE='40083055551'
+		EMAIL='deppon@deppon.com1'
+		/>
+	<T_ESB_NOTICUSER
+		FID='36987'
+		USERNAME='testcase2'
+		TELPHONE='40083055552'
+		MOBILEPHONE='40083055552'
+		EMAIL='deppon@deppon.com2'
+		/>
+	<T_ESB_NOTICUSER
+		FID='36988'
+		USERNAME='testcase3'
+		TELPHONE='40083055553'
+		MOBILEPHONE='40083055553'
+		EMAIL='deppon@deppon.com3'
+		/>
+</dataset>

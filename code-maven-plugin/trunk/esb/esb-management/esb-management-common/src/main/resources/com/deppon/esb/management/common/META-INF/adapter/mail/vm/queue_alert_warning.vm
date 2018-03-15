@@ -1,0 +1,2 @@
+${qmgr}中${queue}在${time}.D-${currentDepth}T-${threshold}V-${volatility}
+请注意查看ESB队列管理器！

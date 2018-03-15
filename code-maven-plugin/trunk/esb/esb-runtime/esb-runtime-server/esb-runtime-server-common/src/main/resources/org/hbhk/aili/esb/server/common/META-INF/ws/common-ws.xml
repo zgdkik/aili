@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camel="http://camel.apache.org/schema/spring"
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:cxf="http://camel.apache.org/schema/cxf"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd
+        http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.0.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+        http://camel.apache.org/schema/cxf http://camel.apache.org/schema/cxf/camel-cxf.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+		http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd">
+ 	<import resource="classpath*:META-INF/cxf/cxf.xml"/>
+    <import resource="classpath*:META-INF/cxf/cxf-servlet.xml"/>
+	<!-- 异常处理器； 适用于同步调用；(异步调用异常处理请使用transactionErrorHandler)
+		 在同步调用路由中添加配置 即可eg: 
+			errorHandler="webserviceErrorHandler" -->
+	<bean id="webserviceErrorHandler" class="org.apache.camel.builder.DeadLetterChannelBuilder">
+		<!-- 当配置有failureProcessor时，deadLetterUri定义的队列无用 -->
+		<property name="deadLetterUri" value="mock:error_neverUsed" />
+		<property name="failureProcessor" ref="failureProcessor" />
+		<property name="redeliveryPolicy" ref="redeliveryPolicy" />
+	</bean>
+
+	<bean id="redeliveryPolicy" class="org.apache.camel.processor.RedeliveryPolicy">
+		<property name="maximumRedeliveries" value="0" />
+	</bean>
+	<!-- wsExceptionMessageService 配置在common-Spring.xml中 -->
+	<bean id="failureProcessor" class="org.hbhk.aili.esb.server.common.processor.FailureProcessor">
+		<property name="wsExceptionMessageService" ref="wsExceptionMessageService"></property>
+		<property name="configLoader" ref="serviceConfigLoader" />
+	</bean>
+	<bean id="soapHeaderProcessor" class="org.hbhk.aili.esb.server.common.processor.SoapHeaderProcessor">
+		<property name="configLoader" ref="serviceConfigLoader" />
+		<property name="wsAuditLogService" ref="wsAuditLogService"></property>
+		<property name="failMessageService" ref="failMessageService"></property>
+	</bean>
+	<bean id="wsAuditLogInIntercepter" class="org.hbhk.aili.esb.server.common.log.intercepter.AuditLogInIntercepter">
+	</bean>
+	<bean id="wsAuditLogOutIntercepter" class="org.hbhk.aili.esb.server.common.log.intercepter.AuditLogOutIntercepter">
+		<property name="wsAuditLogService" ref="wsAuditLogService"></property>
+		<property name="failMessageService" ref="failMessageService"></property>
+		<property name="configLoader" ref="serviceConfigLoader" />
+	</bean>
+	<!-- ws记录审计日志，添加auditLogFeature即可 -->
+	<bean id="auditLogFeature" class="org.hbhk.aili.esb.server.common.log.intercepter.AuditLogFeature">
+		<property name="in" ref="wsAuditLogInIntercepter"></property>
+		<property name="out" ref="wsAuditLogOutIntercepter"></property>
+	</bean>
+	<bean id="destinationNotFoundProcessor" class="org.hbhk.aili.esb.server.common.processor.DestinationNotFoundProcessor"></bean>
+</beans>
+

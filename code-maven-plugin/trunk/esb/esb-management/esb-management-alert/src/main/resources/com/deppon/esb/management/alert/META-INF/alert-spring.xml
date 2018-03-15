@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="
+			http://www.springframework.org/schema/beans 
+			http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+			http://www.springframework.org/schema/context 
+			http://www.springframework.org/schema/context/spring-context-3.0.xsd
+			http://www.springframework.org/schema/jee 
+			http://www.springframework.org/schema/jee/spring-jee-3.0.xsd
+			http://www.springframework.org/schema/tx 
+			http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+			http://www.springframework.org/schema/aop 
+			http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+	<context:annotation-config></context:annotation-config>
+	<context:component-scan base-package="com.deppon.esb.management.*"></context:component-scan>
+
+	<bean id="sendWarningService" class="com.deppon.esb.management.alert.service.impl.SendWarningService">
+		<property name="svcpointService" ref="svcpointService" />
+	<property name="warningService" ref="warningService" />
+	<property name="pfmcStatisticsService" ref="pfmcStatisticsService" />
+	<property name="excptnStatisticsService" ref="excptnStatisticsService" />
+	<property name="noticeDao" ref="noticeDao" />
+	<property name="pfmncWrnMailSupport" ref="pfmncWrnMailSupport" />
+	<property name="excptnWrnMailSupport" ref="excptnWrnMailSupport" />
+	<property name="statusNoCompleteMailSupport" ref="statusNoCompleteMailSupport" />
+	</bean>
+
+	<bean id="warningService" class="com.deppon.esb.management.alert.service.impl.WarningService">
+		<property name="interfaceThresholdDao" ref="interfaceThresholdDao" />
+		<property name="noticeUserDao" ref="noticUserDao" />
+	</bean>
+	
+	<bean id="excptnStatisticsService" class="com.deppon.esb.management.excptn.service.impl.ExcptnStatisticsService">
+		<property name="excptnStatisticsDao" ref="excptnStatisticsDao" />
+		<property name="svcPointDao" ref="svcPointDao" />
+	</bean>
+	<bean id="pfmcStatisticsService" class="com.deppon.esb.management.pfmc.service.impl.PfmcStatisticsService">
+		<property name="pfmcStatisticsDao" ref="pfmcStatisticsDao" />
+		<property name="svcPointDao" ref="svcPointDao" />
+	</bean>
+
+	<bean id="statusService" class="com.deppon.esb.management.alert.service.impl.StatusService">
+		<property name="statusNoCompleteMailSupport" ref="statusNoCompleteMailSupport" />
+		<property name="esbStatusService" ref="esbStatusService" />
+		<property name="interfaceThresholdDao" ref="interfaceThresholdDao" />
+		<property name="noticeDao" ref="noticeDao" />
+		<property name="noticUserDao" ref="noticUserDao" />
+	</bean>
+	
+	<bean id="excptService" class="com.deppon.esb.management.alert.service.impl.ExcptService">
+		<property name="esbExceptionService" ref="esbExceptionService" />
+		<property name="excptn2MailSupport" ref="excptn2MailSupport" />
+		<property name="interfaceThresholdDao" ref="interfaceThresholdDao" />
+		<property name="noticeDao" ref="noticeDao" />
+		<property name="noticUserDao" ref="noticUserDao" />
+	</bean>
+	
+	<bean id="queueAlertService" class="com.deppon.esb.management.alert.service.impl.QueueAlertService">
+		<property name="queueAlertMailSupport" ref="queueAlertMailSupport" />
+		<property name="mqQueueService" ref="mqQueueService" />
+		<property name="configLoader" ref="serviceConfigLoader" />
+	</bean>
+	
+	<bean id="serviceConfigLoader"
+		class="com.deppon.esb.management.alert.config.impl.ServiceConfigLoader"
+		init-method="start" scope="singleton" />
+	<bean id="serviceConfigLoaderRuntimeService"
+		class="com.deppon.esb.management.alert.config.ServiceConfigLoaderRuntimeService">
+		<property name="configLoader" ref="serviceConfigLoader" />
+	</bean>
+	<bean id="ServiceConfigExporter" class="org.springframework.jmx.export.MBeanExporter"
+		lazy-init="false">
+		<property name="beans">
+			<map>
+				<entry key="bean:name=ConfigLoaderService" value-ref="serviceConfigLoaderRuntimeService" />
+			</map>
+		</property>
+	</bean>
+	
+	<bean id="queueService" class="com.deppon.esb.management.alert.service.impl.QueueService">
+		<property name="quWrnMailSupport" ref="quWrnMailSupport" />
+		<property name="quConnWrnMailSupport" ref="quConnWrnMailSupport" />
+		<property name="queueThresholdDao" ref="queueThresholdDao" />
+		<property name="noticUserDao" ref="noticUserDao" />
+		<property name="noticeDao" ref="noticeDao" />
+		<property name="mqQueueService" ref="mqQueueService" />
+		<property name="configLoader" ref="serviceConfigLoader" />
+	</bean>
+	
+</beans>

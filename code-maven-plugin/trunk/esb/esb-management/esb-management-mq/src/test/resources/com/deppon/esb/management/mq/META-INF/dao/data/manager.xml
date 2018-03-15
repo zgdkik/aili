@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+		<t_esb2_manager 
+			fid='111'
+			ip='192.168.17.141'
+			port='3438'
+			channel='ESB.INTFACE.CLIENT'
+			queuenamereg='QU*'
+			qmgr='QM_ESBD'
+		/>
+</dataset>

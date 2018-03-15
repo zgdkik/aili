@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+	"http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+
+	<package name="queue" namespace="/queue" extends="esb-default">
+		<action name="index">
+			<result name="success">/WEB-INF/pages/monitor/queue.jsp</result>
+		</action>
+		<action name="addQueueMonitor" class="queueMonitorAction"
+			method="addQueueMonitor">
+			<result name="success" type="json">
+				<param name="includeProperties">success,message</param>
+			</result>
+		</action>
+		<action name="updateQueueMonitor" class="queueMonitorAction"
+			method="updateQueueMonitor">
+			<result name="success" type="json">
+				<param name="includeProperties">success,message</param>
+			</result>
+		</action>
+
+		<action name="deleteQueueMonitor" class="queueMonitorAction"
+			method="deleteQueueMonitor">
+			<result name="success" type="json">
+				<param name="includeProperties">success,message</param>
+			</result>
+		</action>
+		<action name="queryQueueMonitor" class="queueMonitorAction"
+			method="queryQueueMonitor">
+			<result name="success" type="json">
+				<param name="includeProperties">success,queueList,totalCount</param>
+			</result>
+		</action>
+	</package>
+</struts>

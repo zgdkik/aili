@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+	<T_ESB_SYSUSER
+		FID='36985'
+		SYSUSERNAME='testcasesys'
+		USERNAME='testuser'
+		PASSWORD='testpwd'
+		TELPHONE='4008305555'
+		MOBILEPHONE='4008305555'
+		EMAIL='deppon@deppon.com'
+		/>
+	<T_ESB_SYSUSER
+		FID='36986'
+		SYSUSERNAME='huanghua'
+		USERNAME='huanghua'
+		PASSWORD='huanghua'
+		TELPHONE='40083055551'
+		MOBILEPHONE='40083055551'
+		EMAIL='deppon@deppon.com1'
+		/>
+</dataset>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jaxws:bindings wsdlLocation="FossService.wsdl"
+	xmlns:jaxws="http://java.sun.com/xml/ns/jaxws" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:jxb="http://java.sun.com/xml/ns/jaxb" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+	<enableWrapperStyle>false</enableWrapperStyle>
+	<jaxws:bindings
+		node="wsdl:definitions/wsdl:types/xs:schema[@targetNamespace='http://www.deppon.com/esb/exception']">
+		<enableWrapperStyle>false</enableWrapperStyle>
+		<jxb:globalBindings xmlns:jxb="http://java.sun.com/xml/ns/jaxb"
+			xmlns:xs="http://www.w3.org/2001/XMLSchema">
+			<jxb:serializable uid="11082011" />
+			<jxb:javaType name="java.util.Date" xmlType="xs:dateTime"
+				parseMethod="com.deppon.esb.common.utils.DataTypeAdapter.parseDateTime"
+				printMethod="com.deppon.esb.common.utils.DataTypeAdapter.printDateTime" />
+		</jxb:globalBindings>
+	</jaxws:bindings>
+</jaxws:bindings>

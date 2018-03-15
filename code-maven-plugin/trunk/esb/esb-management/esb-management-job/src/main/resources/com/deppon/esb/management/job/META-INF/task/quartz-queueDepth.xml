@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="
+			http://www.springframework.org/schema/beans 
+			http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+			http://www.springframework.org/schema/context 
+			http://www.springframework.org/schema/context/spring-context-3.0.xsd
+			http://www.springframework.org/schema/jee 
+			http://www.springframework.org/schema/jee/spring-jee-3.0.xsd
+			http://www.springframework.org/schema/tx 
+			http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+			http://www.springframework.org/schema/aop 
+			http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+<!-- 队列深度超过阀值告警 -->
+
+	<bean id="queueBootstrapJob"
+		class="com.deppon.esb.management.job.cluster.support.BootstrapJob">
+		<property name="targetJob" value="queueDepthJob" />
+	</bean>
+
+	<!-- 引导Job,队列预警定时任务,任务定义 -->
+	<bean id="queueJobDetail"
+		class="com.deppon.esb.management.job.cluster.support.MethodInvokingJobDetailFactoryBean">
+		<property name="concurrent" value="false" />
+		<property name="targetObject" ref="queueBootstrapJob" />
+	</bean>
+
+	<!-- 触发器，定义job触发的时间 -->
+	<bean id="queueCronTriggerBean" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="queueJobDetail" />
+		<property name="cronExpression" value="0 0/5 * * * ?" />
+	</bean>
+</beans>

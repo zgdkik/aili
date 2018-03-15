@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+	"http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+
+	<package name="exceptionMonitor" namespace="/exceptionMonitor" extends="esb-default">
+		<action name="backIndex">
+			<result name="success">/WEB-INF/pages/monitor/backExceptionSet.jsp</result>
+		</action>
+		<action name="queryFullTrheshold" class="exceptionMonitorSetAction" method="queryFullTrheshold">
+			<result name="success" type="json">
+				<param name="includeProperties">success,thresholdList,totalCount</param>
+			</result>
+		</action>
+		<action name="addThreshold" class="exceptionMonitorSetAction" method="addThreshold">
+			<result name="success" type="json">
+				<param name="includeProperties">success,message</param>
+			</result>
+		</action>
+		<action name="updateThreshold" class="exceptionMonitorSetAction" method="updateThreshold">
+			<result name="success" type="json">
+				<param name="includeProperties">success,message</param>
+			</result>
+		</action>
+		<action name="deleteThreshold" class="exceptionMonitorSetAction" method="deleteThreshold">
+			<result name="success" type="json">
+				<param name="includeProperties">success,message</param>
+			</result>
+		</action>
+		
+		<!-- esb端异常监控设置 -->
+		<action name="esbIndex">
+			<result name="success">/WEB-INF/pages/monitor/esbExceptionSet.jsp</result>
+		</action>
+		
+		<action name="queryBackSvcpoint" class="exceptionMonitorSetAction" method="queryBackSvcpoint">
+			<result name="success" type="json">
+				<param name="includeProperties">success,message,svcPointInfolist,totalCount</param>
+			</result>
+		</action>
+		<action name="queryEsbSvcpoint" class="exceptionMonitorSetAction" method="queryEsbSvcpoint">
+			<result name="success" type="json">
+				<param name="includeProperties">success,message,svcPointInfolist,totalCount</param>
+			</result>
+		</action>
+	</package>
+</struts>

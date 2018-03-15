@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+	"http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.i18n.encoding" value="utf-8"></constant>
+	<package name="statistic" namespace="/statistic" extends="esb-default">
+		<!-- ===========异常报表统计=============== -->
+		<action name="index">
+			<result name="success">/WEB-INF/pages/statistic/index.jsp</result>
+		</action>
+		<!-- 查询后端服务配置 -->
+		<action name="getSvcPoints" class="exceptionReportAction"
+			method="getSvcPoints">
+			<result name="success" type="json">
+				<param name="includeProperties">success,svcPointList,resultCount</param>
+			</result>
+		</action>
+		<!--查询异常统计信息 -->
+		<action name="getStatistics" class="exceptionReportAction"
+			method="getStatistics">
+			<result name="success" type="json">
+				<param name="includeProperties">success,statisticList</param>
+			</result>
+		</action>
+		<!-- 异常饼图统计 -->
+		<action name="getExceptionPieStatistics" class="exceptionReportAction"
+			method="getExceptionPieStatistics">
+			<result name="success" type="json">
+				<param name="includeProperties">pieList</param>
+			</result>
+		</action>
+		<!-- csv报表导出 -->
+		<action name="export2csv" class="exceptionReportAction" method="export2csv">
+			<result name="success" type="stream">
+				<param name="contentType">application/vnd.ms-excel</param>
+				<param name="content-Encoding">UTF8</param>
+				<param name="inputName">inputStream</param>
+				<param name="contentDisposition">attachment;filename=${fileName}</param>
+				<param name="bufferSize">10240</param>
+			</result>
+		</action>
+
+
+		<!-- ===========后端性能报表统计=============== -->
+		<action name="backIndex">
+			<result name="success">/WEB-INF/pages/statistic/back.jsp</result>
+		</action>
+		<!-- 查询后端性能统计信息 -->
+		<action name="getBackStatistics" class="backStatisticAction"
+			method="getStatistics">
+			<result name="success" type="json">
+				<param name="includeProperties">success,statisticList</param>
+			</result>
+		</action>
+		<!-- 查询后端服务配置 -->
+		<action name="getBackSvcPoints" class="backStatisticAction"
+			method="getBackSvcPoints">
+			<result name="success" type="json">
+				<param name="includeProperties">success,svcPointList</param>
+			</result>
+		</action>
+
+		<!-- 后端性能报表导出 -->
+		<action name="pfmcBackExport2csv" class="frontStatisticAction"
+			method="export2csv">
+			<result name="success" type="stream">
+				<param name="contentType">application/vnd.ms-excel</param>
+				<param name="content-Encoding">UTF8</param>
+				<param name="inputName">inputStream</param>
+				<param name="contentDisposition">attachment;filename=${fileName}</param>
+				<param name="bufferSize">10240</param>
+			</result>
+		</action>
+
+
+		<!-- ===========前端性能报表统计=============== -->
+		<action name="frontIndex">
+			<result name="success">/WEB-INF/pages/statistic/front.jsp</result>
+		</action>
+		<!-- 查询前端服务配置 -->
+		<action name="getFrontSvcPoints" class="frontStatisticAction"
+			method="getFrontSvcPoints">
+			<result name="success" type="json">
+				<param name="includeProperties">success,svcPointList</param>
+			</result>
+		</action>
+
+		<action name="getFrontStatistics" class="frontStatisticAction"
+			method="getStatistics">
+			<result name="success" type="json">
+				<param name="includeProperties">success,statisticList</param>
+			</result>
+		</action>
+
+		<!-- 前端性能报表导出 -->
+		<action name="pfmcFrontExport2csv" class="frontStatisticAction"
+			method="export2csv">
+			<result name="success" type="stream">
+				<param name="contentType">application/vnd.ms-excel</param>
+				<param name="content-Encoding">UTF8</param>
+				<param name="inputName">inputStream</param>
+				<param name="contentDisposition">attachment;filename=${fileName}</param>
+				<param name="bufferSize">10240</param>
+			</result>
+		</action>
+
+		<!-- 日常报表 -->
+		<action name="statisticIndex">
+			<result name="success">/WEB-INF/pages/statistic/statisticIndex.jsp
+			</result>
+		</action>
+		<!-- 最近两天接口调用情况 -->
+		<action name="getRecentlyStatistics" class="commonStatisticAction"
+			method="getRecentlyStatistics">
+			<result name="success" type="json">
+				<param name="includeProperties">statisticList</param>
+			</result>
+		</action>
+		<action name="getInterfaceCallCount" class="commonStatisticAction"
+			method="getInterfaceCallCount">
+			<result name="success" type="json">
+				<param name="includeProperties">callCountList</param>
+			</result>
+		</action>
+		<action name="getExceptionCount" class="commonStatisticAction"
+			method="getExceptionCount">
+			<result name="success" type="json">
+				<param name="includeProperties">exceptionCountList</param>
+			</result>
+		</action>
+	</package>
+</struts>

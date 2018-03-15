@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+	"-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.deppon.esb.security.domain.InterfaceCount">
+
+	<resultMap id="interfaceCountMap"
+		type="com.deppon.esb.security.domain.InterfaceCount">
+		<result property="fid" column="FID" />
+		<result property="createTime" column="CREATETIME" />
+		<result property="esbServiceCode" column="ESBSERVICECODE" />
+		<result property="maxCount" column="MAXCOUNT" />
+		<result property="concurrent" column="CONCURRENT" />
+		<result property="active" column="ACTIVE" />
+	</resultMap>
+
+	<select id="queryAllInterfaceCount"  resultMap="interfaceCountMap">
+		<![CDATA[
+		select fid,createtime,esbservicecode,maxcount,active,concurrent from T_ESB2_ITF_LIMIT where active='Y'
+		]]>
+	</select>
+</mapper>

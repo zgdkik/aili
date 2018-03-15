@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+	"-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.deppon.esb.security.domain.UserInterfaceRelation">
+
+	<resultMap id="userInterfaceRelationMap"
+		type="com.deppon.esb.security.domain.UserInterfaceRelation">
+		<result property="fid" column="FID" />
+		<result property="createTime" column="CREATETIME" />
+		<result property="user" column="USERCODE" />
+		<result property="esbServiceCode" column="ESBSERVICECODE" />
+		<result property="active" column="ACTIVE" />
+	</resultMap>
+
+	<select id="queryAllUserInterfaceRelation"  resultMap="userInterfaceRelationMap">
+		<![CDATA[
+		select fid,createtime,usercode,esbServiceCode,active from T_ESB2_USER_ITF where active='Y'
+		]]>
+	</select>
+</mapper>

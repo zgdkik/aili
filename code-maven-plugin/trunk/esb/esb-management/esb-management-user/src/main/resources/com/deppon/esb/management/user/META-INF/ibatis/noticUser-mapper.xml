@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+	"-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.deppon.esb.management.user.domain.NoticUserInfo">
+
+	<resultMap id="noticUserMap" type="com.deppon.esb.management.user.domain.NoticUserInfo">
+		<result property="id" column="FID" />
+		<result property="userName" column="USERNAME" />
+		<result property="telPhone" column="TELPHONE" />
+		<result property="mobilePhone" column="MOBILEPHONE" />
+		<result property="email" column="EMAIL" />
+		<result property="pjVersion" column="PJVERSION" />
+	</resultMap>
+	
+	<resultMap id="alertUserMap" type="com.deppon.esb.management.user.domain.NoticUserInfo">
+		<result property="id" column="FID" />
+		<result property="userName" column="USERNAME" />
+		<result property="telPhone" column="TELPHONE" />
+		<result property="mobilePhone" column="MOBILEPHONE" />
+		<result property="email" column="EMAIL" />
+		<result property="pjVersion" column="PJVERSION" />
+	</resultMap>
+
+	<select id="queryNoticUserCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+		select count(*) from T_ESB_NOTICUSER
+		WHERE 1=1
+		<if test="userName != null">
+			<![CDATA[and username=#{userName}]]>
+		</if>
+		<if test="telPhone != null">
+			<![CDATA[and telphone=#{telPhone}]]>
+		</if>
+		<if test="mobilePhone != null">
+			<![CDATA[and mobilephone=#{mobilePhone}]]>
+		</if>
+		<if test="email != null">
+			<![CDATA[and email=#{email}]]>
+		</if>
+		<if test="pjVersion != null">
+			<![CDATA[and pjVersion=#{pjVersion}]]>
+		</if>
+	</select>
+
+	<select id="queryNoticUsers" parameterType="java.util.Map" resultMap="noticUserMap">
+		select * from
+		(select t.*,rownum r from T_ESB_NOTICUSER t
+		where 1=1
+		<if test="userName != null">
+			<![CDATA[and username=#{userName}]]>
+		</if>
+		<if test="telPhone != null">
+			<![CDATA[and telphone=#{telPhone}]]>
+		</if>
+		<if test="mobilePhone != null">
+			<![CDATA[and mobilephone=#{mobilePhone}]]>
+		</if>
+		<if test="email != null">
+			<![CDATA[and email=#{email}]]>
+		</if>
+		<if test="pjVersion != null">
+			<![CDATA[and pjVersion=#{pjVersion}]]>
+		</if>
+		<![CDATA[and rownum<=#{limit})]]>
+		<![CDATA[where r>#{start}]]>
+	</select>
+	
+	<select id="queryNoticeUser" resultMap="noticUserMap">
+		select * from T_ESB_NOTICUSER t
+		where FID=#{id}
+	</select>
+
+	<delete id="deleteNoticUsersByIds">
+		delete from T_ESB_NOTICUSER
+		where fid in
+		<foreach collection="array" item="ids" open="(" separator="," close=")">
+			#{ids}
+		</foreach>
+	</delete>
+
+	<insert id="addNoticUser" parameterType="com.deppon.esb.management.user.domain.NoticUserInfo">
+		INSERT INTO T_ESB_NOTICUSER(FID
+		<if test="userName != null"><![CDATA[,userName]]></if>
+		<if test="telPhone != null"><![CDATA[,telPhone]]></if>
+		<if test="mobilePhone != null"><![CDATA[,mobilePhone]]></if>
+		<if test="email != null"><![CDATA[,email]]></if>
+		<if test="pjVersion != null"><![CDATA[,pjVersion]]></if>
+		<![CDATA[) values ( sys_guid()]]>
+		<if test="userName != null"><![CDATA[,#{userName}]]></if>
+		<if test="telPhone != null"><![CDATA[,#{telPhone}]]></if>
+		<if test="mobilePhone != null"><![CDATA[,#{mobilePhone}]]></if>
+		<if test="email != null"><![CDATA[,#{email}]]></if>
+		<if test="pjVersion != null"><![CDATA[,#{pjVersion}]]></if>
+		<![CDATA[)]]>
+	</insert>
+
+	<update id="updateNoticuser" parameterType="com.deppon.esb.management.user.domain.NoticUserInfo">
+		UPDATE T_ESB_NOTICUSER
+		<trim prefix="SET" suffixOverrides=",">
+			<if test="userName != null"><![CDATA[USERNAME=#{userName},]]></if>
+			<if test="telPhone != null"><![CDATA[TELPHONE=#{telPhone},]]></if>
+			<if test="mobilePhone != null"><![CDATA[MOBILEPHONE=#{mobilePhone},]]></if>
+			<if test="email != null"><![CDATA[EMAIL=#{email},]]></if>
+			<if test="pjVersion != null"><![CDATA[PJVERSION=#{pjVersion}]]></if>
+		</trim>
+		WHERE FID=#{id}
+	</update>
+
+	<select id="querySysUsers" parameterType="java.util.Map" resultMap="noticUserMap">
+		select * from
+		(select t.*,rownum r from t_esb_sysuser t
+		where 1=1
+		<if test="userName != null">
+			<![CDATA[and username=#{userName}]]>
+		</if>
+		<if test="telPhone != null">
+			<![CDATA[and telphone=#{telPhone}]]>
+		</if>
+		<if test="mobilePhone != null">
+			<![CDATA[and mobilephone=#{mobilePhone}]]>
+		</if>
+		<if test="email != null">
+			<![CDATA[and email=#{email}]]>
+		</if>
+		<![CDATA[and rownum<=#{limit})]]>
+		<![CDATA[where r>#{start}]]>
+	</select>
+
+	<select id="querySysUserCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+		select count(*) from t_esb_sysuser
+		WHERE 1=1
+		<if test="userName != null">
+			<![CDATA[and username=#{userName}]]>
+		</if>
+		<if test="telPhone != null">
+			<![CDATA[and telphone=#{telPhone}]]>
+		</if>
+		<if test="mobilePhone != null">
+			<![CDATA[and mobilephone=#{mobilePhone}]]>
+		</if>
+		<if test="email != null">
+			<![CDATA[and email=#{email}]]>
+		</if>
+	</select>
+
+	<select id="queryEmailById" resultType="java.lang.String">
+		SELECT n.EMAIL
+		FROM T_ESB_NOTICUSER n
+		WHERE n.FID IN
+		<foreach collection="array" item="ids" open="(" separator="," close=")">
+			#{ids}
+		</foreach>
+
+	</select>
+	
+	<select id="queryAlertUser" resultMap="alertUserMap">
+		SELECT FID,USERNAME,TELPHONE,MOBILEPHONE,EMAIL,PJVERSION
+		FROM T_ESB_NOTICUSER N
+		WHERE N.PJVERSION like '%ESB2%'
+	</select>
+
+</mapper>

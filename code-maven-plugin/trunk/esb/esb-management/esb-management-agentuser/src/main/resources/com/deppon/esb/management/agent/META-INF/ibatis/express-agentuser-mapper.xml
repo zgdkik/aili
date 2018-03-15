@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+	"-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.deppon.esb.security.domain.UserInfoOperation">
+
+	<resultMap id="AgentUserMap"
+		type="com.deppon.esb.security.domain.UserInfo">
+		<result property="fid" column="FID" />
+		<result property="user" column="USERCODE" />
+		<result property="createTime" column="CREATETIME" />
+		<result property="passwd" column="PASSWD" />
+		<result property="desc" column="USERNAME" />
+		<result property="active" column="ACTIVE" />
+	</resultMap>
+
+ 	<select id="queryAllAgentUser" resultMap="AgentUserMap">
+		<![CDATA[
+		select FID,USERCODE,CREATETIME,PASSWD,USERNAME,ACTIVE from t_esb2_user where active ='Y'
+		]]>
+	</select>
+
+	<select id="queryAgentUser" resultMap="AgentUserMap"
+		parameterType="com.deppon.esb.management.agentuser.view.AgentUserQueryBean">
+		<![CDATA[
+		select FID,USERCODE,USERNAME,PASSWD,ACTIVE,CREATETIME from t_esb2_user
+		]]>
+		<where>
+			ACTIVE ='Y'
+			<if test="userName !=null and userName !=''"><![CDATA[and USERNAME = #{userName}]]></if>
+			<if test="agentName !=null and agentName !=''"><![CDATA[and USERCODE like  '%'||#{agentName}||'%']]></if>
+			<if test="status !=null and status !=''"><![CDATA[and ACTIVE = #{status}]]></if>
+		</where>
+	</select>
+
+	<insert id="addAgentUser"
+		parameterType="com.deppon.esb.security.domain.UserInfo">
+		<![CDATA[
+			insert into t_esb2_user(FID,USERCODE,USERNAME,PASSWD,ACTIVE,CREATETIME)
+			values ( sys_guid(),
+		]]>
+		#{desc},
+		#{user},
+		#{passwd},
+		'Y',
+		<![CDATA[sysdate)]]>
+	</insert>
+
+ 	<update id="canelAgenUser">
+	<![CDATA[	update t_esb2_user set active='N' where username in]]>
+		<foreach collection="list" item="usernames" open="("
+			separator="," close=")">
+			#{usernames}
+		</foreach>
+	</update>
+
+	<update id="activeAgenUser">
+	<![CDATA[	update t_esb2_user set active='Y' where username in]]>
+		<foreach collection="list" item="usernames" open="("
+			separator="," close=")">
+			#{usernames}
+		</foreach>
+	</update>
+	<update id="updateAgentUser" parameterType="com.deppon.esb.security.domain.UserInfo">
+	<![CDATA[	update t_esb2_user t set
+			 t.usercode =#{desc},
+			 t.passwd=#{passwd},
+			 t.active=#{active,jdbcType=VARCHAR},
+			 t.username=#{user}
+			where fid=#{fid}
+	]]>
+	</update>	
+ 	<delete id="deleteAgentUser">
+	<![CDATA[	delete t_esb2_user where fid in]]>
+		<foreach collection="list" item="ids" open="("
+			separator="," close=")">
+			#{ids}
+		</foreach>
+	</delete>
+</mapper>

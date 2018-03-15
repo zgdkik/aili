@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+	"-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.deppon.esb.management.alert.domain.QueueThresholdInfo">
+	<resultMap type="com.deppon.esb.management.alert.domain.QueueThresholdInfo" id="QueueThresholdInfo">
+		<result property="id" column="FID" />
+		<result property="svcCode" column="SVCCODE" />
+		<result property="qmgr" column="QMGR" />
+		<result property="queue" column="QUEUE" />
+		<result property="threshold" column="THRESHOLD" />
+		<result property="channelId" column="CHANNELID" />
+		<result property="personId" column="PERSONID" />
+		<result property="clusters" column="CLUSTERS" />
+		<result property="comparetime" column="COMPARETIME" />
+		<result property="volatility" column="VOLATILITY" />
+		<result property="maxDepth" column="MAXDEPTH" />
+		<result property="pjVersion" column="PJVERSION" />
+	</resultMap>
+	
+	<resultMap type="com.deppon.esb.management.alert.domain.view.QueueBean" id="QueueBean">
+		<result property="id" column="FID" />
+		<result property="queue" column="QUEUE" />
+		<result property="threshold" column="THRESHOLD" />
+		<result property="channelId" column="CHANNELID" />
+		<result property="personId" column="PERSONID" />
+		<result property="clusters" column="CLUSTERS" />
+		<result property="comparetime" column="COMPARETIME" />
+		<result property="volatility" column="VOLATILITY" />
+		<result property="maxDepth" column="MAXDEPTH" />
+		<result property="pjVersion" column="PJVERSION" />
+	</resultMap>
+
+	<select id="select" parameterType="com.deppon.esb.management.alert.domain.view.QueueQueryBean" resultMap="QueueThresholdInfo">
+	<![CDATA[select * from 	t_esb_queuethreshold]]>
+		<where>
+			1=1
+			<if test="id != null"><![CDATA[and FID=#{id}]]></if>
+			<if test="qmgr != null"><![CDATA[and QMGR=#{qmgr}]]></if>
+			<if test="queue !=null and queue !=''"><![CDATA[and QUEUE like '%'||#{queue}||'%']]></if>
+			<if test="threshold != null"><![CDATA[and THRESHOLD=#{threshold}]]></if>
+			<if test="clusters != null"><![CDATA[and CLUSTERS=#{clusters}]]></if>
+			<if test="channel != null"><![CDATA[and CHANNELID=#{channel}]]></if>
+			<if test="pjVersion != null"><![CDATA[and PJVERSION=#{pjVersion}]]></if>
+		</where>
+	</select>
+
+	<select id="selectQueueBean" parameterType="com.deppon.esb.management.alert.domain.view.QueueQueryBean" resultMap="QueueBean">
+	<![CDATA[select FID,QMGR,QUEUE,THRESHOLD,CHANNELID,PERSONID,CLUSTERS,COMPARETIME,VOLATILITY,MAXDEPTH,PJVERSION  from  t_esb_queuethreshold]]>
+		<where>
+			1=1
+			<if test="id != null"><![CDATA[and FID=#{id}]]></if>
+			<if test="queue !=null and queue !=''"><![CDATA[and QUEUE like '%'||#{queue}||'%']]></if>
+			<if test="threshold != null"><![CDATA[and THRESHOLD=#{threshold}]]></if>
+			<if test="qmgr != null and qmgr !=''"><![CDATA[and QMGR=#{qmgr}]]></if>
+		</where>
+	</select>
+
+	<select id="selectQueueBeanCount" parameterType="com.deppon.esb.management.alert.domain.view.QueueQueryBean" resultType="Integer">
+	<![CDATA[select count(*) from 	t_esb_queuethreshold]]>
+		<where>
+			1=1
+			<if test="id != null"><![CDATA[and FID=#{id}]]></if>
+			<if test="queue !=null and queue !=''"><![CDATA[and QUEUE like '%'||#{queue}||'%']]></if>
+			<if test="threshold != null"><![CDATA[and THRESHOLD=#{threshold}]]></if>
+			<if test="qmgr != null and qmgr !=''"><![CDATA[and QMGR=#{qmgr}]]></if>
+		</where>
+	</select>
+
+	<insert id="insert" parameterType="com.deppon.esb.management.alert.domain.QueueThresholdInfo">
+	<![CDATA[
+		insert into t_esb_queuethreshold(FID
+	]]>
+		<if test=" svcCode != null"><![CDATA[,SVCCODE]]></if>
+		<if test=" qmgr != null"><![CDATA[,QMGR]]></if>
+		<if test=" queue != null"><![CDATA[,QUEUE]]></if>
+		<if test=" threshold != null"><![CDATA[,THRESHOLD]]></if>
+		<if test=" channelId != null"><![CDATA[,CHANNELID]]></if>
+		<if test=" personId != null"><![CDATA[,PERSONID]]></if>
+		<if test=" clusters != null"><![CDATA[,CLUSTERS]]></if>
+		<if test=" comparetime != null"><![CDATA[,COMPARETIME]]></if>
+		<if test=" volatility != null"><![CDATA[,VOLATILITY]]></if>
+		<if test=" maxDepth != null"><![CDATA[,MAXDEPTH]]></if>
+		<if test=" pjVersion != null"><![CDATA[,PJVERSION]]></if>
+	<![CDATA[) values ( sys_guid()]]>
+		<if test="svcCode != null"><![CDATA[,#{svcCode}]]></if>
+		<if test="qmgr != null"><![CDATA[,#{qmgr}]]></if>
+		<if test="queue != null"><![CDATA[,#{queue}]]></if>
+		<if test="threshold != null"><![CDATA[,#{threshold}]]></if>
+		<if test="channelId != null"><![CDATA[,#{channelId}]]></if>
+		<if test="personId != null"><![CDATA[,#{personId}]]></if>
+		<if test="clusters != null"><![CDATA[,#{clusters}]]></if>
+		<if test=" comparetime != null"><![CDATA[,#{comparetime}]]></if>
+		<if test=" volatility != null"><![CDATA[,#{volatility}]]></if>
+		<if test=" maxDepth != null"><![CDATA[,#{maxDepth}]]></if>
+		<if test=" pjVersion != null"><![CDATA[,#{pjVersion}]]></if>
+	<![CDATA[)]]>
+	</insert>
+
+	<update id="update" parameterType="com.deppon.esb.management.alert.domain.QueueThresholdInfo">
+	<![CDATA[update t_esb_queuethreshold o]]>
+		<set>
+			FID = FID
+			<if test="svcCode != null and svcCode !=''"><![CDATA[,SVCCODE=#{svcCode}]]></if>
+			<if test="qmgr != null and qmgr !=''"><![CDATA[,QMGR=#{qmgr}]]></if>
+			<if test="queue != null and queue != ''"><![CDATA[,QUEUE=#{queue}]]></if>
+			<if test="threshold != null and threshold !=''"><![CDATA[,THRESHOLD=#{threshold}]]></if>
+			<if test="channelId != null and channelId !=''"><![CDATA[,CHANNELID=#{channelId}]]></if>
+			<if test="personId != null and personId !=''"><![CDATA[,PERSONID=#{personId}]]></if>
+			<if test="clusters != null and clusters !=''"><![CDATA[,CLUSTERS=#{clusters}]]></if>
+			<if test="comparetime != null and comparetime !=''"><![CDATA[,COMPARETIME=#{comparetime}]]></if>
+			<if test="volatility != null and volatility !=''"><![CDATA[,VOLATILITY=#{volatility}]]></if>
+			<if test="maxDepth != null and maxDepth !=''"><![CDATA[,MAXDEPTH=#{maxDepth}]]></if>
+			<if test="pjVersion != null and pjVersion !=''"><![CDATA[,PJVERSION=#{pjVersion}]]></if>
+		</set>
+	<![CDATA[where FID=#{fid}]]>
+	</update>
+
+	<delete id="deleteById">
+	<![CDATA[	delete from t_esb_queuethreshold where fid in]]>
+		<foreach collection="list" item="ids" open="(" separator="," close=")">
+			#{ids}
+		</foreach>
+	</delete>
+
+	<select id="findQuThrsldByQueueAndCrntDepth" parameterType="java.util.Map" resultMap="QueueThresholdInfo">
+		SELECT FID,
+		SVCCODE,
+		QMGR,
+		QUEUE,
+		THRESHOLD,
+		CHANNELID,
+		PERSONID
+		FROM
+		T_ESB_QUEUETHRESHOLD t
+		<where>
+		t.QUEUE=#{queue} and <![CDATA[t.THRESHOLD<=#{depth}]]>
+			AND T.PJVERSION like '%ESB1%'
+		</where>
+	</select>
+	
+	<select id="findQmgrConn" parameterType="java.util.Map" resultMap="QueueThresholdInfo">
+		SELECT FID,
+		QMGR,
+		CHANNELID,
+		PERSONID
+		FROM
+		T_ESB_QUEUETHRESHOLD t
+		<where>
+			t.QUEUE='*'
+			AND T.PJVERSION like '%ESB1%'
+		</where>
+	</select>
+	
+	<select id="findAll" parameterType="java.util.Map" resultMap="QueueThresholdInfo">
+		SELECT FID,
+		QMGR,
+		QUEUE,
+		THRESHOLD,
+		CHANNELID,
+		PERSONID,
+		CLUSTERS,
+		COMPARETIME,
+		VOLATILITY,
+		MAXDEPTH
+		FROM
+		T_ESB_QUEUETHRESHOLD T
+		<where>
+			T.PERSONID IS NOT NULL
+			AND T.VOLATILITY IS NOT NULL
+			AND T.QUEUE IS NOT NULL
+			AND T.PJVERSION like '%ESB2%'
+		</where>
+	</select>
+
+</mapper>

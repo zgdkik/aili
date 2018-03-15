@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>esb-parent</artifactId>
+		<groupId>com.deppon.esb</groupId>
+		<version>2.0.1-SNAPSHOT</version>
+	</parent>
+	<artifactId>esb-management</artifactId>
+	<version>2.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<modules>
+		<module>esb-management-web</module>
+		<module>esb-management-job</module>
+		<module>esb-management-common</module>
+		<module>esb-management-svccfg</module>
+		<module>esb-management-pfmc</module>
+		<module>esb-management-excptn</module>
+		<module>esb-management-user</module>
+		<module>esb-management-alert</module>
+		<module>esb-management-redo</module>
+		<module>esb-management-status</module>
+		<module>esb-management-audit</module>
+		<module>esb-management-mq</module>
+		<module>esb-management-verification</module>
+		<module>esb-management-route</module>
+		<module>esb-management-failure</module>
+		<module>esb-management-statistic</module>
+
+		<module>esb-management-agentuser</module>
+	</modules>
+</project>
