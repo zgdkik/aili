@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<VerifyBadBebtsRequest xmlns="http://www.deppon.com/esb/inteface/domain/finance">
+    <serialNO>3a20d7d5-5174-4f1b-8d30-3ce068792ae7</serialNO>
+    <applyMoney>1</applyMoney>
+    <workflowName>坏账核销</workflowName>
+    <result>true</result>
+    <billNumber>YS1029243604</billNumber>
+    <billType>冲销方式</billType>
+</VerifyBadBebtsRequest>
