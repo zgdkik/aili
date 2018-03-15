@@ -1,0 +1,1 @@
+Update pkp.t_srv_pre_hand_ewaybill_order o Set o.job_id='N/A' Where o.order_no='wo';

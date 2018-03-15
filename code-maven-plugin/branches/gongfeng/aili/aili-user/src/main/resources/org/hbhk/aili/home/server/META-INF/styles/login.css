@@ -1,0 +1,45 @@
+.backBg {
+	box-shadow: 0px 0px 10px #ccc;
+	padding: 20px 0;
+	background: #ffffff;
+}
+
+.login-page .marT80 .btn {
+	padding: 10px 0;
+}
+
+.login-page .form-control.insertLine {
+	border-bottom: 1px solid #666;
+	background: none !important;
+}
+
+.login-page, .signup-page {
+	background: #f3f3f3
+}
+
+body.login-page {
+	background: #f5faf7;
+}
+
+
+.login-page .form-control {
+	border: 0;
+	border-bottom: 1px solid #ccc;
+}
+
+.login-page .control-label {
+	text-align: center;
+	font-size: 16px;
+}
+
+.login-page .form-group.marT {
+	margin-top: 70px;
+}
+
+.login-page .form-group.marT40 {
+	margin-top: 40px;
+}
+
+.login-page .form-group.marT80 {
+	margin-top: 80px;
+}

@@ -1,0 +1,37 @@
+[#ftl]
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN" "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<package name="${module}" namespace="/${module}" extends="dpap-default">
+		<!-- 页面 -->                    
+		<action name="${tl.typeName?uncap_first}" class="${tl.typeName?uncap_first}Action" >
+			<result name="success">${tl.typeName}.jsp</result>
+		</action>
+		<!-- save -->
+		<action name="insert${tl.typeName}" method="insert${tl.typeName}" class="${tl.typeName?uncap_first}Action" >
+			<result name="success" type="json"/>
+			<result name="error" type="json"/>
+		</action>
+		<!-- delete -->
+		<action name="delete${tl.typeName}" method="delete${tl.typeName}" class="${tl.typeName?uncap_first}Action" >
+			<result name="success" type="json"/>
+			<result name="error" type="json"/>
+		</action>
+		<!-- update -->
+		<action name="update${tl.typeName}" method="update${tl.typeName}" class="${tl.typeName?uncap_first}Action" >
+			<result name="success" type="json"/>
+			<result name="error" type="json"/>
+		</action>
+		<!-- queryAll -->
+		<action name="queryAll${tl.typeName}" method="queryAll${tl.typeName}" class="${tl.typeName?uncap_first}Action" >
+			<result name="success" type="json"/>
+			<result name="error" type="json"/>
+		</action>
+		<!-- queryByEntity -->
+		<action name="queryBy${tl.typeName}" method="queryBy${tl.typeName}" class="${tl.typeName?uncap_first}Action" >
+			<result name="success" type="json"/>
+			<result name="error" type="json"/>
+		</action>
+	</package>
+</struts>

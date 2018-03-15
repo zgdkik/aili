@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Context>
+	<WatchedResource>WEB-INF/web.xml</WatchedResource>
+
+	<!-- <Valve
+		className="com.orangefunction.tomcat.redissessions.RedisSessionHandlerValve" />
+	<Manager className="com.orangefunction.tomcat.redissessions.RedisSessionManager"
+		maxInactiveInterval="1800" sentinelMaster="mymaster"
+		sentinels="10.10.0.12:26379,10.10.0.12:26380" /> -->
+
+	<Resource name="jdbc/metertick" auth="Container" type="javax.sql.DataSource"
+		maxActive="100" maxIdle="3" maxWait="10000" username="omtk" password="LongJingCha_haoHe_56"
+		driverClassName="com.p6spy.engine.spy.P6SpyDriver" url="jdbc:p6spy:oracle:thin:@(DESCRIPTION = (ADDRESS = (PROTOCOL = TCP)(HOST = 10.9.1.2)(PORT = 1521))(CONNECT_DATA =(SERVER = DEDICATED)(SERVICE_NAME = omtkadg)))" />
+</Context>

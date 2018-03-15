@@ -1,0 +1,5 @@
+.accordion-noborder .accordion-body {
+	border-width: 0px;
+	height: auto !important;
+	max-height: 400px;
+}

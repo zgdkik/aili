@@ -1,0 +1,30 @@
+/*
+*功能：指定公里数和坐标 得到5公里半径圆顶点坐标
+*参数：kilometer 公里数，bpoint 百度坐标 格式-BMap.Point(121.494015, 31.228717),lats 纬度合集表单隐藏域名称， lngs 经度合集表单隐藏域名称
+*/
+function query5KiloPoint(kilometer,bpoint,lats,lngs){
+	//执行前最好加一个loading动画	
+	map.clearOverlays();
+	var radius5 = 	kilometer*1000;//公里转换成米
+	var circle	= new BMap.Circle(bpoint,radius5,{fillColor:"green", strokeWeight: 1 ,fillOpacity: 0.3, strokeOpacity: 0.3});
+		//处理参数 把顶点坐标分割成 经度坐标集合 纬度坐标集合
+			var circlesArray = null;
+			if(circle.W){
+				circlesArray = circle.W;
+			}else if(circle.$){
+				circlesArray = circle.$;
+			}else{
+				alert("发生错误");	
+			}
+			var circlesArray = circle.W;
+			var circlesLats=[];
+			var circlesLngs=[];
+			for(var j=0;j<circlesArray.length-1;j++){
+				circlesLats.push(circlesArray[j].lat);
+				circlesLngs.push(circlesArray[j].lng);
+			}
+			//把解析出来的圆顶点坐标设置到表单隐藏域
+			$("#lats").val(circlesLats.join(","));
+			$("#lngs").val(circlesLngs.join(","));
+}
+

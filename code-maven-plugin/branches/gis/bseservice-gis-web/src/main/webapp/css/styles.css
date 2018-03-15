@@ -1,0 +1,229 @@
+/* 输入框  */
+.input1 { 
+     font-size: 14px; 
+	 color: #000000; 
+	 text-decoration: none; 
+	 border: 1px #666666 solid; 
+	 margin-top: 1px; 
+	 margin-right: 1px; 
+	 margin-bottom: 1px; 
+	 margin-left: 1px; 
+	 padding-top: 1px; 
+	 padding-right: 1px; 
+	 padding-bottom: 1px; 
+	 padding-left: 1px; 
+	 height: 17px; 
+	 background-color: #FFFFFF;
+}
+/*形状*/
+.gis_shape {
+	text-align: center; color: rgb(51, 51, 51); line-height: normal; font-family: "Arial Normal", "Arial"; font-size: 13px; font-style: normal; font-weight: 400;
+}
+button{background-color:green;color:#ffffff; border: 1px solid #ffffff; border-radius: 3px; padding:2px 5px; line-height:18px;}
+.button.green{
+border:1px solid #64c878;
+font-size: 14px; 
+box-shadow: 0 1px 2px #b9ecc4 inset,0 -1px 0 #6c9f76 inset,0 -2px 3px #b9ecc4 inset;
+background: -webkit-linear-gradient(top,#90dfa2,#84d494);
+background: -moz-linear-gradient(top,#90dfa2,#84d494);
+background: linear-gradient(top,#90dfa2,#84d494);
+}
+
+/* 输入框  */
+.input1 { 
+     font-size: 14px; 
+	 color: #000000; 
+	 text-decoration: none; 
+	 border: 1px #666666 solid; 
+	 margin-top: 1px; 
+	 margin-right: 1px; 
+	 margin-bottom: 1px; 
+	 margin-left: 1px; 
+	 padding-top: 1px; 
+	 padding-right: 1px; 
+	 padding-bottom: 1px; 
+	 padding-left: 1px; 
+	 height: 17px; 
+	 background-color: #FFFFFF;
+}
+
+/*文本 */
+.gis_label {
+	text-align: left; color: rgb(51, 51, 51); line-height: normal; font-family: "Arial Normal", "Arial"; font-size: 13px; font-style: normal; font-weight: 400;
+}
+.gis_h1 {
+	text-align: left; color: rgb(51, 51, 51); line-height: normal; font-family: "Arial Negreta", "Arial"; font-size: 32px; font-style: normal; font-weight: 700;
+}
+.gis_h2 {
+	text-align: left; color: rgb(51, 51, 51); line-height: normal; font-family: "Arial Negreta", "Arial"; font-size: 24px; font-style: normal; font-weight: 700;
+}
+.gis_h3 {
+	text-align: left; color: rgb(51, 51, 51); line-height: normal; font-family: "Arial Negreta", "Arial"; font-size: 18px; font-style: normal; font-weight: 700;
+}
+.gis_h4 {
+	text-align: left; color: rgb(51, 51, 51); line-height: normal; font-family: "Arial Negreta", "Arial"; font-size: 14px; font-style: normal; font-weight: 700;
+}
+.gis_h5 {
+	text-align: left; color: rgb(51, 51, 51); line-height: normal; font-family: "Arial Negreta", "Arial"; font-size: 13px; font-style: normal; font-weight: 700;
+}
+.gis_h6 {
+	text-align: left; color: rgb(51, 51, 51); line-height: normal; font-family: "Arial Negreta", "Arial"; font-size: 10px; font-style: normal; font-weight: 700;
+}
+/*图片*/
+.gis_image {
+	text-align: center; color: rgb(0, 0, 0); line-height: normal; font-family: "Arial Normal", "Arial"; font-size: 13px; font-style: normal; font-weight: 400;
+}
+/*文本链接*/
+.gis_label_link {
+	color: rgb(0, 0, 255);
+}
+/*鼠标悬停文本链接*/
+.gis_mouse_hover_label_link {
+	
+}
+/*鼠标按下文本链接*/
+.gis_mouse_press_label_link {
+	
+}
+/*文本框_单行*/
+.gis_input_sign_ {
+	text-align: left; color: rgb(0, 0, 0); line-height: normal; font-family: "Arial Normal", "Arial"; font-size: 13px; font-style: normal; font-weight: 400;
+}
+/*文本框_多行_*/
+.gis_input_multi_ {
+	text-align: left; color: rgb(0, 0, 0); line-height: normal; font-family: "Arial Normal", "Arial"; font-size: 13px; font-style: normal; font-weight: 400;
+}
+/*下拉列表框*/
+.gis_list_box {
+	text-align: left; color: rgb(0, 0, 0); line-height: normal; font-family: "Arial Normal", "Arial"; font-size: 13px; font-style: normal; font-weight: 400;
+}
+/*列表选择框*/
+.gis_selection {
+	text-align: left; color: rgb(0, 0, 0); line-height: normal; font-family: "Arial Normal", "Arial"; font-size: 13px; font-style: normal; font-weight: 400;
+}
+/*复选框 */
+.gis_checkBox {
+	text-align: left; color: rgb(51, 51, 51); line-height: normal; font-family: "Arial Normal", "Arial"; font-size: 13px; font-style: normal; font-weight: 400;
+}
+/*单选框 */
+.gis_radio {
+	text-align: left; color: rgb(51, 51, 51); line-height: normal; font-family: "Arial Normal", "Arial"; font-size: 13px; font-style: normal; font-weight: 400;
+}
+/*流程形状*/
+.gis_process_shape {
+	text-align: center; color: rgb(51, 51, 51); line-height: normal; font-family: "Arial Normal", "Arial"; font-size: 13px; font-style: normal; font-weight: 400;
+}
+/*树节点*/
+.gis_tree_node {
+	text-align: left; color: rgb(51, 51, 51); line-height: normal; font-family: "Arial Normal", "Arial"; font-size: 13px; font-style: normal; font-weight: 400;
+}
+.gis_html_button {
+	text-align: center; color: rgb(0, 0, 0); line-height: normal; font-family: "Arial Normal", "Arial"; font-size: 13px; font-style: normal; font-weight: 400;
+}
+.gis_hot_spot {
+	text-align: center; color: rgb(51, 51, 51); line-height: normal; font-family: "Arial Normal", "Arial"; font-size: 13px; font-style: normal; font-weight: 400;
+}
+/*内部框架*/
+.gis_internal_frame {
+	text-align: center; color: rgb(51, 51, 51); line-height: normal; font-family: "Arial Normal", "Arial"; font-size: 13px; font-style: normal; font-weight: 400;
+}
+/*动态面板*/
+.gis_dynamic_panel {
+	text-align: center; color: rgb(51, 51, 51); line-height: normal; font-family: "Arial Normal", "Arial"; font-size: 13px; font-style: normal; font-weight: 400;
+}
+/*编辑选项 */
+.gis_wditing_options {
+	text-align: center; color: rgb(51, 51, 51); line-height: normal; font-family: "Arial Normal", "Arial"; font-size: 13px; font-style: normal; font-weight: 400;
+}
+/*中继器*/
+.gis_repeater {
+	text-align: center; color: rgb(51, 51, 51); line-height: normal; font-family: "Arial Normal", "Arial"; font-size: 13px; font-style: normal; font-weight: 400;
+}
+/*表格*/
+.gis_table {
+	text-align: center; color: rgb(51, 51, 51); line-height: normal; font-family: "Arial Normal", "Arial"; font-size: 13px; font-style: normal; font-weight: 400;
+}
+/*表格单元*/
+.gis_table_cell {
+	text-align: left; color: rgb(51, 51, 51); line-height: normal; font-family: "Arial Normal", "Arial"; font-size: 13px; font-style: normal; font-weight: 400;
+}
+/*菜单*/
+.gis_menu {
+	text-align: center; color: rgb(0, 0, 0); line-height: normal; font-family: "Arial Normal", "Arial"; font-size: 13px; font-style: normal; font-weight: 400;
+}
+/*水平线*/
+.gis_line {
+	text-align: center; color: rgb(51, 51, 51); line-height: normal; font-family: "Arial Normal", "Arial"; font-size: 13px; font-style: normal; font-weight: 400;
+}
+/*垂直线*/
+.gis_vertical_line {
+	text-align: center; color: rgb(51, 51, 51); line-height: normal; font-family: "Arial Normal", "Arial"; font-size: 13px; font-style: normal; font-weight: 400;
+}
+.gis_connector {
+	text-align: center; color: rgb(51, 51, 51); line-height: normal; font-family: "Arial Normal", "Arial"; font-size: 13px; font-style: normal; font-weight: 400;
+}
+.movbg {background: #4a4a4a; z-index:11; opacity: 0.6; height: 160px; position: absolute; left:40%;top: 200px; width: 300px;}
+.movtxt{color: #fff; height: 80px;z-index:11; line-height: 160px; position: absolute; left: 40%; text-align: center; top: 200px; width: 300px;}
+.spanText{margin:65px 20px 20px 30px; display:block; float:left }
+.spanTextCar{margin:30px 20px 20px 30px; display:block; float:left }
+.text_css_style{lin-height:21px; font-size:13px; color:green}
+.turack_driver { 
+width: 100px; 
+height: 100px; 
+background-image: url(../images/cart_img.jpg);
+
+-moz-border-radius: 10px; 
+-webkit-border-radius: 10px; 
+border-radius: 10px; text-align:center; overflow:hidden;
+margin:0 0 10px 10px;
+}
+.turack_driver img{ height:100%;}
+#tackDiv {
+            width: 100%;
+            
+        }
+        #fset {
+            width: 100%;
+            
+        }
+        #track_order_left_controller {
+        }
+        #track_order_bottom_controller {
+            width: 100%;
+        }
+        #track_order_controller {
+            width: 100%;
+        }
+        #map_canvas {
+            height: 100%;
+            width: 100%;
+            filter: alpha(Opacity=100);
+            -moz-opacity: 1;
+            opacity: 1;
+            z-index: 10000;
+            background-color: #9BCD9B;
+        }
+        #queryDiv {
+            width: 100%;
+            height: 30px;
+            filter: alpha(Opacity=100);
+            -moz-opacity: 1;
+            opacity: 1;
+            z-index: 10000;
+            line-height:28px;
+            background-color: #9BCD9B;
+           
+        }        
+        #divs_display {
+            width: 100%;
+            height: 30px;
+            margin-top:3px;
+            filter: alpha(Opacity=100);
+            -moz-opacity: 1;
+            opacity: 1;
+            z-index: 10000;
+            background-color: #9BCD9B;
+            float:right;
+        }  
+        
+        

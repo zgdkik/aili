@@ -1,0 +1,94 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.hbhk.aili</groupId>
+		<artifactId>aili</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+	</parent>
+	<artifactId>aili-webflow</artifactId>
+	<version>${aili-version}</version>
+	<name>aili-job</name>
+	<packaging>war</packaging>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<webflow.version>2.4.0.RELEASE</webflow.version>
+	</properties>
+	<dependencies>
+		<dependency>
+		<groupId>org.hbhk.aili</groupId>
+		<artifactId>aili-mybatis</artifactId>
+		<version>${aili-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+		<!-- 日志 -->
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+		</dependency>
+		<dependency>
+			<artifactId>slf4j-api</artifactId>
+			<groupId>org.slf4j</groupId>
+			<version>1.7.5</version>
+		</dependency>
+		<!-- spring begin -->
+		<dependency>
+			<groupId>org.springframework.webflow</groupId>
+			<artifactId>spring-webflow</artifactId>
+			<version>${webflow.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<!-- spring end -->
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.10</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>p6spy</groupId>
+			<artifactId>p6spy</artifactId>
+			<version>2.1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+		</dependency>
+	</dependencies>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat6-maven-plugin</artifactId>
+				<version>2.2</version>
+				<configuration>
+					<path>/</path>
+					<port>5416</port>
+				</configuration>
+			</plugin>
+		</plugins>
+
+	</build>
+</project>

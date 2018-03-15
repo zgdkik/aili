@@ -1,0 +1,187 @@
+/***************************************************
+* CSS:base.css
+* 鐗堟湰:1.0
+****************************************************/
+html{
+	scrollbar-face-color:#eef2fa;
+	scrollbar-arrow-color:5a75a5;
+	scrollbar-track-color:#fff;
+	scrollbar-shadow-color:#fff;
+	scrollbar-highlight-color:#fff;
+	scrollbar-3dlight-color:#bac7db;
+	scrollbar-darkshadow-Color:#bac7db;
+	overflow-x:hidden;
+}
+body{
+	margin: 0px;
+	font-family : Microsoft YaHei;
+}
+html,body { height: 100%; padding: 0; margin: 0; }
+body,button,input,label,select,tr,td,textarea {
+	font-size: 12px
+}
+div,form,img,ul,ol,li,p,dl,dt,dd{
+	margin:0;
+	padding:0;
+	border:0;
+}
+
+
+.sfwl-control input[type='text'][readonly]{background-color:#ebebe4;}
+.sfwl-control input[class^='combo-input'][readonly]{background-color:#ffffff;}
+.sfwl-control input[class^='combo-input'][disabled]{background-color:#ebebe4 !important;}
+input[disabled]{
+    background-color: #ebebe4;
+}
+textarea[disabled]{
+    background-color: #ebebe4;
+}
+/* input[type=text]{ */
+/* 	border: 1px solid #999999; */
+/* 	padding:0 0; */
+/* 	-webkit-box-sizing: border-box;  */
+/* 	-moz-box-sizing: border-box; */
+/* 	box-sizing : border-box ; */
+/* } */
+input[type=checkbox] {
+	margin: 0;
+	-webkit-box-sizing: border-box; 
+	-moz-box-sizing: border-box;
+	box-sizing : border-box ;
+	vertical-align: middle;
+}
+/** 鏁扮粍妗�*/
+span.textbox.numberbox{
+	-webkit-box-sizing: border-box; 
+	-moz-box-sizing: border-box;
+	box-sizing : border-box ;
+}
+/** 鏁板�妗�*/
+.sfwl-control > span{
+	width : 100% !important;
+}
+/** 鏁板�妗�*/
+.sfwl-control > span > input{
+	width : 100% !important;
+}
+
+input, label, select, option, textarea, button, fieldset, legend{
+    font-size:12px;
+    font-family : Microsoft YaHei;
+}
+form{
+	display:inline;
+}
+ul{
+	list-style:none;
+}
+h1,h2,h3,h4,h5,h6 {
+	margin:0;
+	padding:0;
+}
+textarea {
+	padding: 0px;
+	margin: 0px;
+	border: 1px solid #999999;
+	box-sizing: border-box;
+	resize:none;
+	overflow: auto;
+}
+
+.combo-input {
+	font-family : Microsoft YaHei;
+}
+
+
+/* panel 甯冨眬*/
+.sfwl-panel-title:hover{
+	/*border-bottom: 1px solid #28B779;*/
+}
+
+.sfwl-panel{
+	padding-top:5px;
+}
+.sfwl-panel-title {
+	margin-bottom:7px;
+	border-bottom: 1px solid #dedede;
+	height: 11px;
+	cursor:pointer;
+	position: relative;
+	padding-left:15px;
+	font: 12px/1.5 tahoma,"microsoft yahei","\5FAE\8F6F\96C5\9ED1";
+	text-shadow: 0 1px 1px rgba(0,0,0,0.4);
+	text-decoration: none;
+	font-size: 14px;
+	font-weight: bold;
+	letter-spacing: 1.5px;
+}
+.sfwl-panel-title:after, .sfwl-panel-title:before {
+  border: 7px solid transparent;
+  position: absolute;
+  width: 0;
+  height: 0;
+  content: ' '
+}
+
+.sfwl-panel-title-right:after, .sfwl-panel-title-right:before {
+  border-left: 7px solid #fff;
+  top:5px;
+  left: 1px;
+}
+.sfwl-panel-title-right:before {
+  border-left-color: #9F9F9F;
+  left: 3px;
+}
+.sfwl-panel-title-down:after, .sfwl-panel-title-down:before {
+    border-top: 7px solid #fff;
+    top: 8px;
+    left: -1px;
+}
+.sfwl-panel-title-down:before {
+  border-top-color: #9F9F9F;
+  top: 10px;
+}
+.sfwl-panel-title span {
+	display:inline;
+	background:white;
+}
+.sfwl-panel-context{
+}
+
+.combobox-item{
+	height:17px;
+}
+.sfwl-partTitle{
+	margin-bottom:7px;
+	border-bottom: 1px solid #dedede;
+	height: 11px;
+	cursor:pointer;
+	padding-left:15px;
+	font: 12px/1.5 tahoma,"microsoft yahei","\5FAE\8F6F\96C5\9ED1";
+	text-shadow: 0 1px 1px rgba(0,0,0,0.4);
+	text-decoration: none;
+	font-size: 14px;
+	font-weight: bold;
+	letter-spacing: 1.5px;
+}
+.sfwl-partTitle span {
+color:#12a000;
+display:inline;
+background:white;
+}
+.container { width: 800px; margin: 0 auto; }
+.autocomplete-suggestions { border: 1px solid #999; background: #FFF; cursor: default; overflow: auto; -webkit-box-shadow: 1px 4px 3px rgba(50, 50, 50, 0.64); -moz-box-shadow: 1px 4px 3px rgba(50, 50, 50, 0.64); box-shadow: 1px 4px 3px rgba(50, 50, 50, 0.64); }
+.autocomplete-suggestion { padding: 2px 5px; white-space: nowrap; overflow: hidden; }
+.autocomplete-no-suggestion {  font-size: 12px; padding: 2px 5px;}
+.autocomplete-selected { background: #C4C8F4; }
+.autocomplete-suggestions strong { font-weight: bold; color: #000; }
+.autocomplete-group { padding: 2px 5px; }
+.autocomplete-group strong { font-weight: bold; font-size: 16px; color: #000; display: block; border-bottom: 1px solid #000; }
+.text_span{ width: 126px; height: 20px;padding: 0;}
+.easyui-panel {
+	display: none;
+	padding: 5px 0px 5px 0px;
+}
+.BetweenInput input[type='text'][readonly] {
+    background-color: #ebebe4;
+}

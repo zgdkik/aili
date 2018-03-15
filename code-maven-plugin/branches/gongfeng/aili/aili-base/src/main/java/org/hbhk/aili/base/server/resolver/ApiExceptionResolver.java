@@ -1,0 +1,49 @@
+package org.hbhk.aili.base.server.resolver;
+
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.io.Writer;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.hbhk.aili.core.share.ex.BusinessException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
+import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
+
+public class ApiExceptionResolver extends SimpleMappingExceptionResolver {
+
+	private static final Logger log = LoggerFactory
+			.getLogger(ApiExceptionResolver.class);
+
+	@Override
+	protected ModelAndView getModelAndView(String viewName,
+			Exception exception, HttpServletRequest request) {
+
+		log.error(exception.getMessage(), exception);
+
+		ModelAndView mv = new ModelAndView(viewName);
+		Map<String, Object> exceptionMap = new HashMap<String, Object>();
+		if (exception instanceof BusinessException) {
+			BusinessException businessException = (BusinessException) exception;
+			exceptionMap.put("code", businessException.getErrCode());
+			exceptionMap.put("success", false);
+			exceptionMap.put("msg", exception.getMessage());
+		} else {
+			exceptionMap.put("code", "500");
+			exceptionMap.put("msg", "系统内部错误");
+			exceptionMap.put("success", false);
+			Writer w = new StringWriter();
+			exception.printStackTrace(new PrintWriter(w));
+			exceptionMap.put("stackTrace", w.toString());
+		}
+		mv.setView(new MappingJackson2JsonView());
+		mv.addAllObjects(exceptionMap);
+		return mv;
+	}
+
+}

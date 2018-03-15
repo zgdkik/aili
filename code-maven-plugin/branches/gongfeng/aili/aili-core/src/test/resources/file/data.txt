@@ -1,0 +1,26 @@
+[
+    [
+        "accountid",
+        "radaraddress",
+        "realname",
+        "bankname",
+        "bankfullname",
+        "accountnum",
+        "state",
+        "provincename",
+        "cityname",
+        "createdate"
+    ],
+    [
+        "bf91adcb-2bbf-440f-85ac-742f78525e47",
+        "rHBWdALnNkqsf9d1xKJ2VYRCWcqUyGwqby",
+        "李想",
+        "工商银行",
+        "松江大学城支行",
+        "6222021001019178083",
+        1,
+        "上海市",
+        "上海市",
+        "20160314055912"
+    ]
+]

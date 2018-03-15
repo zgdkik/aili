@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="
+    http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-3.0.xsd
+    http://www.springframework.org/schema/mvc
+    http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
+
+	
+		
+	 <bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+	  <property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
+	  <property name="prefix" value="/WEB-INF/views/" />
+	  <property name="suffix" value=".jsp" />
+	 </bean>
+
+	<bean id="mappingJacksonHttpMessageConverter"
+		class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+		<property name="supportedMediaTypes">
+			<list>
+				<value>text/html;charset=UTF-8</value>
+				<!-- <value>application/json;charset=UTF-8</value> -->
+			</list>
+		</property>
+	</bean>
+	 
+    
+	<bean id="localeResolver" class="org.springframework.web.servlet.i18n.AcceptHeaderLocaleResolver"></bean>
+	
+	
+	<!--配置控制器的映射-->
+	<bean id="urlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="mappings">
+			<props>
+				<prop key="trackOrdersHistorical.jspa">trackOrdersHistoricalAction</prop>
+				<prop key="trackNearOrder.jspa">trackNearOrderAction</prop>
+				<prop key="IsPointInPolygon.jspa">IsPointInPolygonAction</prop>
+				<prop key="getTrackInfoAction.jspa">getTrackInfoAction</prop>
+				<prop key="searchTrackOrderSignAction.jspa">searchTrackOrderSignAction</prop>
+				<prop key="muiltTrackLbsAction.jspa">muiltTrackLbsAction</prop>
+			</props>
+		</property>
+	</bean>
+
+	<!--指定控制器的实现类，并且配置其参数的值-->
+	<bean id="trackOrdersHistoricalAction" class="com.feisuo.yhhc.module.bseservice_gis.server.action.TrackOrdersHistoricalAction">
+		<property name="viewPage">
+			<value>track_orders_historical</value>
+		</property>
+		<property name="trackOrdersHistoricalServiceImpl">
+			<ref bean="trackOrdersHistoricalServiceImpl"/>
+		</property>
+	</bean>
+	<!--指定控制器的实现类，并且配置其参数的值-->
+	<bean id="searchTrackOrderSignAction" class="com.feisuo.yhhc.module.bseservice_gis.server.action.SearchTrackOrderSignAction">
+		<property name="viewPage">
+			<value>track_orders_signInfo</value>
+		</property>
+		<property name="trackOrdersHistoricalServiceImpl">
+			<ref bean="trackOrdersHistoricalServiceImpl"/>
+		</property>
+	</bean>
+	<!--指定控制器的实现类，并且配置其参数的值-->
+	<bean id="trackNearOrderAction" class="com.feisuo.yhhc.module.bseservice_gis.server.action.TrackNearOrderAction">
+		<property name="viewPage">
+			<value>track_near_order</value>
+		</property>
+		<property name="trackNearOrderServiceImpl">
+			<ref bean="trackNearOrderServiceImpl"/>
+		</property>
+	</bean>
+	
+	<!--指定控制器的实现类，并且配置其参数的值-->
+	<bean id="IsPointInPolygonAction" class="com.feisuo.yhhc.module.bseservice_gis.server.action.IsPointInPolygonAction">
+		<property name="trackNearOrderServiceImpl">
+			<ref bean="trackNearOrderServiceImpl"/>
+		</property>
+		<property name="isPointInPolygonServiceImpl">
+			<ref bean="isPointInPolygonServiceImpl"/>
+		</property>
+	</bean>
+	
+	<!--指定控制器的实现类，并且配置其参数的值-->
+	<bean id="muiltTrackLbsAction" class="com.feisuo.yhhc.module.bseservice_gis.server.action.MuiltTrackLbsAction">
+	</bean>
+
+
+				
+</beans>

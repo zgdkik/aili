@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+ xmlns:context="http://www.springframework.org/schema/context"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://www.springframework.org/schema/beans
+      http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+      http://www.springframework.org/schema/context
+      http://www.springframework.org/schema/context/spring-context.xsd">
+ 
+    <!-- 引入jdbc配置文件 -->
+    <context:property-placeholder location="classpath:com/feisuo/yhhc/module/gis/server/META-INF/jdbc.properties"/>
+    
+   <bean id="trackOrdersHistoricalServiceImpl" class="com.feisuo.yhhc.module.bseservice_gis.server.service.impl.TrackOrdersHistoricalServiceImpl"> 
+   		<property name="trackOrdersHistoricalDao">
+            <ref bean="trackOrdersHistoricalDao"/>
+        </property>
+   </bean>
+   <bean id="trackNearOrderServiceImpl" class="com.feisuo.yhhc.module.bseservice_gis.server.service.impl.TrackNearOrderServiceImpl"> 
+   		<property name="trackOrdersHistoricalDao">
+            <ref bean="trackOrdersHistoricalDao"/>
+        </property>
+   </bean>
+   <bean id="isPointInPolygonServiceImpl" class="com.feisuo.yhhc.module.bseservice_gis.server.service.impl.IsPointInPolygonServiceImpl"> 
+   </bean>
+   
+   <bean id="trackOrdersHistoricalDao" class="com.feisuo.yhhc.module.bseservice_gis.server.dao.impl.TrackOrdersHistoricalDaoImpl">
+	<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+   </bean>
+      
+</beans>

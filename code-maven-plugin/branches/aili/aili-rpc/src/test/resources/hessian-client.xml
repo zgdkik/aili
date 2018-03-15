@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+			http://www.springframework.org/schema/beans 
+			http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/context 
+			http://www.springframework.org/schema/context/spring-context.xsd
+			http://www.springframework.org/schema/jee 
+			http://www.springframework.org/schema/jee/spring-jee.xsd
+			http://www.springframework.org/schema/tx 
+			http://www.springframework.org/schema/tx/spring-tx.xsd
+			">
+	<!-- <bean id="hessianService"
+		class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+		<property name="serviceUrl"
+			value="http://localhost:5417/hessian/rpc/hessianService" />
+		<property name="serviceInterface" value="org.hbhk.aili.rpc.server.hessian.IDemoHessianService" />
+	</bean> -->
+	
+	<bean class="org.hbhk.aili.core.server.properties.AiliPropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>config/config.properties</value>
+			</list>
+		</property>
+		<!-- <property name="orLocaltions">
+			<list>
+				<value>ojdbc.properties</value>
+			</list>
+		</property>
+		<property name="propertiesService" ref="propertiesService"/> -->
+	</bean>
+	
+	<bean id="dynamicBeanReader" class="org.hbhk.aili.rpc.server.hessian.context.HessianDynamicBeanReader">
+		<property name="basePackage" value="org.hbhk.aili.rpc.server.hessian"/>
+	</bean>
+	<bean class="org.hbhk.aili.core.server.context.DynamicLoadBean" init-method="LoadDynBean">
+		<property name="dynamicBeanReader" ref="dynamicBeanReader"/>
+		
+	</bean>
+	
+</beans>

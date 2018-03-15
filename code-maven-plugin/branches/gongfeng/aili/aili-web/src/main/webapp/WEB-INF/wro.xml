@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<groups xmlns="http://www.isdc.ro/wro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.isdc.ro/wro wro.xsd">
+	<group name="base-css">
+		<css>/resources/static/libs/jqueryui/ui-lightness/jquery-ui-1.10.4.custom.min.css</css>
+		<css>/resources/static/libs/bootstrap/css/bootstrap.min.css</css>
+		<css>/resources/static/libs/font-awesome/css/font-awesome.min.css</css>
+		<css>/resources/static/libs/fontello/css/fontello.css</css>
+		<css>/resources/static/libs/animate-css/animate.min.css</css>
+		<css>/resources/static/libs/nifty-modal/css/component.css</css>
+	     <css>/resources/static/libs/magnific-popup/magnific-popup.css</css>
+		<css>/resources/static/libs/ios7-switch/ios7-switch.css</css>
+		<css>/resources/static/libs/pace/pace.css</css>
+		<css>/resources/static/libs/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css</css>
+		<css>/resources/static/libs/jquery-icheck/skins/all.css</css>
+		<css>/resources/static/libs/rickshaw/rickshaw.min.css</css>
+		<css>/resources/static/libs/bootstrap-treeview/bootstrap-treeview.min.css</css>
+		<css>/resources/static/libs/notifyjs/styles/metro/notify-metro.css</css>
+		<css>/resources/static/libs/select2/css/select2.min.css</css>
+		<css>/resources/static/libs/bootstrap-table/css/bootstrap-table.min.css</css>
+		<css>/resources/static/libs/bootstrap-validator/css/bootstrapValidator.min.css</css>
+		<css>/resources/static/libs/zTree_v3/css/zTreeStyle/zTreeStyle.css</css>
+		<css>/resources/static/libs/bootstrap-multiselect/css/style.css</css>
+		<css>/resources/static/css/style-responsive.css</css>
+		<css>/resources/static/libs/prettify/github.css</css>
+		<css>/resources/static/libs/jquery-Upload/css/fileinput.min.css</css>
+		<css>/resources/static/libs/uploadify/css/uploadify.css</css>
+		<css>/styles/home/main.min.css</css>
+		<css>/styles/home/custom.css</css>
+	</group>
+	<group name="base-js">
+		<js>/resources/static/libs/jquery/jquery.min.js</js>
+		<js>/resources/static/libs/bootstrap/js/bootstrap.js</js>
+		<!-- <js>/resources/static/libs/jqueryui/jquery-ui-1.10.4.custom.min.js</js> -->
+	    <js>/resources/static/libs/detectmobile/detect.js</js>
+		<!-- <js>/resources/static/libs/moment/moment.js</js> -->
+		<!-- <js>/resources/static/libs/moment/locale/zh-cn.js</js> -->
+		 	<js>/resources/static/libs/jquery-animateNumber/jquery.animateNumber.min.js</js>
+		<js>/resources/static/libs/ios7-switch/ios7.switch.js</js>
+		<js>/resources/static/libs/fastclick/fastclick.js</js>
+		<js>/resources/static/libs/jquery-slimscroll/jquery.slimscroll.min.js</js>
+		<js>/resources/static/libs/autonumeric/autoNumeric.js</js>
+		<js>/resources/static/libs/bootbox/bootbox.js</js>
+		<js>/resources/static/libs/nifty-modal/js/classie.js</js>
+		<js>/resources/static/libs/nifty-modal/js/modalEffects.js</js>
+		<js>/resources/static/libs/jasny-bootstrap/js/jasny-bootstrap.min.js</js>
+		<js>/resources/static/libs/magnific-popup/jquery.magnific-popup.min.js</js>
+		<js>/resources/static/libs/pace/pace.min.js</js>
+	   <!--  <js>/resources/static/libs/bootstrap-datetimepicker/js/moment-with-locales.js</js> -->
+		<js>/resources/static/libs/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js</js>
+		<js>/resources/static/libs/jquery-icheck/icheck.min.js</js>
+		 <js>/resources/static/libs/bootstrap-treeview/bootstrap-treeview.min.js</js>
+		<js>/resources/static/libs/handlerbars/handlebars-v3.0.0.js</js>
+		<js>/resources/static/libs/blockui/jquery.blockUI.js</js>
+		<js>/resources/static/libs/jquery-cookie/jquery.cookie.js</js>
+		 <js>/resources/static/libs/i18next/i18next.min.js</js>
+		<js>/resources/static/libs/notifyjs/notify.js</js>
+		<js>/resources/static/libs/notifyjs/styles/metro/notify-metro.js</js>
+		<js>/resources/static/libs/prettify/prettify.js</js>
+		<!-- <js>/resources/static/libs/bootstrap-table/js/tableExport.js</js>
+		<js>/resources/static/libs/bootstrap-table/js/jquery.base64.js</js>
+		<js>/resources/static/libs/bootstrap-table/js/bootstrap-table.js</js>
+		<js>/resources/static/libs/bootstrap-table/js/bootstrap-table-export.js</js> -->
+		<js>/resources/static/libs/bootstrap-validator/js/bootstrapValidator.js</js>
+		<js>/resources/static/libs/bootstrap-validator/js/language/zh_CN.js</js>
+		<!-- <js>/resources/static/libs/zTree_v3/js/jquery.ztree.all-3.5.min.js</js> -->
+		<js>/resources/static/libs/bootstrap-autocomplete/bootstrap-typeahead.js</js>
+		<js>/resources/static/libs/bootstrap-autocomplete/bootstrap-autocomplete.js</js>
+		<js>/resources/static/libs/bootstrap-multiselect/js/multiselect.min.js</js>
+		<js>/resources/static/libs/select2/js/select2.full.js</js>
+		<js>/resources/static/libs/jquery-Upload/js/fileinput.min.js</js>
+		<js>/resources/static/libs/jquery-Upload/js/fileinput_locale_zh.js</js>
+		<js>/resources/static/libs/uploadify/js/jquery.uploadify.min.js</js>
+		<js>/resources/static/libs/ajaxfileupload/js/ajaxfileupload.js</js>
+		<js>/scripts/home/menus.js</js>
+		<js>/scripts/home/main.js</js>
+		<js>/scripts/home/custom.js</js>
+	</group>
+
+</groups>
+

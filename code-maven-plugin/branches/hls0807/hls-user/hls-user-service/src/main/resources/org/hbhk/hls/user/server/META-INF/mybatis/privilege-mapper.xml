@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.hbhk.hls.user.server.dao.IFunctionDao">
+
+	<resultMap id="FunResultMap"
+		type="org.hbhk.hls.user.share.entity.PrivilegeEntity">
+		<id column="id " property="id" />
+		<result column="status" property="status" />
+		<result column="update_time" property="updateTime" />
+		<result column="update_user" property="updateUser" />
+		<result column="create_user" property="createUser" />
+		<result column="create_time" property="createTime" />
+		<result column="code" property="privilegeCode" />
+		<result column="name" property="functionName" />
+		<result column="url" property="url" />
+		<result column="parent_code" property="parentCode" />
+		<result column="display_order" property="displayOrder" />
+		<result column="checkable" property="checkable" />
+		<result column="type" property="functionType" />
+		<result column="leaf" property="leaf" />
+		<result column="icon_cls" property="iconCls" />
+		<result column="cls" property="cls" />
+		<result column="function_desc" property="functionDesc" />
+		<result property="moduleType" column="MODULE_TYPE" />
+		<result property="appType" column="APP_TYPE" />
+		<result property="shoutcutKeys" column="SHOUTCUT_KEYS" />
+	</resultMap>
+
+	<select id="getFunctionListByUris" parameterType="list"
+		resultMap="FunResultMap">
+		select *from t_auth_privilege a where a.status=1
+		and a.url
+		in
+		<foreach collection="uris" index="index" item="uri" open="("
+			separator="," close=")">
+			#{uri}
+		</foreach>
+	</select>
+
+	<select id="getCountByFunctionCode" parameterType="String"
+		resultType="int">
+		select count(*) from t_auth_role_privilege  where
+		privilege_code=#{value}
+	</select>
+
+	<!--根据父级获取子集返回对象 -->
+	<resultMap id="menuResultMap" type="org.hbhk.hls.user.share.vo.MenuVo">
+		<id column="id " property="id" />
+		<result column="name" property="name" />
+		<result column="url" property="url" />
+		<result column="display_order" property="sortNo" />
+		<result column="parent_code" property="parentId" />
+		<result column="code" property="acl" />
+		<collection property="childList" column="{code=code}"
+			javaType="java.util.ArrayList" select="getMenuTree">
+		</collection>
+	</resultMap>
+
+	<!--根据父级id查询子级数据 -->
+	<select id="getMenuTree" resultMap="menuResultMap"
+		parameterType="map">
+		select *from t_auth_privilege a where a.status=1
+		and a.parent_code=#{code}
+		and a.MODULE_TYPE!='WIDGET'
+		<!-- and a.uri in <foreach collection="uris" index="index" item="uri" open="(" 
+			separator="," close=")"> #{uri} </foreach> -->
+	</select>
+	
+	
+	<resultMap id="userMenuResultMap" type="org.hbhk.hls.user.share.vo.MenuVo">
+		<id column="id " property="id" />
+		<result column="name" property="name" />
+		<result column="url" property="url" />
+		<result column="display_order" property="sortNo" />
+		<result column="parent_code" property="parentId" />
+		<result column="code" property="acl" />
+	</resultMap>
+	
+	<select id="getUserMenuTree" resultMap="userMenuResultMap"
+		parameterType="map">
+		select *from t_auth_privilege a where a.status=1
+		and a.url
+		in
+		<foreach collection="urls" index="index" item="url" open="("
+			separator="," close=")">
+			#{url}
+		</foreach>
+	</select>
+	
+
+</mapper>

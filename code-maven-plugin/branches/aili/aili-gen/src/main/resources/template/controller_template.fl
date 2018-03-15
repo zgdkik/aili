@@ -1,0 +1,119 @@
+package org.hbhk.${projectName}.${moduleName}.server.controller;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import java.util.List;
+import java.util.Map;
+import org.hbhk.aili.orm.server.surpport.Page;
+import org.hbhk.aili.orm.server.surpport.Sort;
+import org.hbhk.aili.orm.share.model.Pagination;
+import org.hbhk.aili.orm.server.intercptor.QueryBeanParam;
+import org.hbhk.aili.orm.server.page.bean.QueryBean;
+import ${entityPackagName};
+import org.hbhk.${projectName}.${moduleName}.server.service.I${entityName}Service;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+ <#assign service =  "${fname[0]?lower_case}${fname[1..]}Service" />
+/**
+ * @author  ${authName}
+ *
+ */
+@Controller
+@RequestMapping("/${fname?uncap_first}")
+public class ${fname}Controller extends BaseController {
+
+	@Autowired
+	private I${fname}Service ${service};
+
+
+	/**
+	 * 保存${entityName}
+	 */
+	@RequestMapping("/save")
+	@ResponseBody
+	public ${entityName} save(${entityName} model){
+	
+		return ${service}.save(model);
+	}
+	
+	/**
+	 * 通过id获取${entityName}
+	 * 
+	 */
+	@RequestMapping("/findById")
+	@ResponseBody
+	public ${entityName} findById(Long id){
+	
+		return ${service}.findById(id);
+	}
+
+	/**
+	 * 获取所有${entityName}列表
+	 * @return
+	 */
+	@RequestMapping("/findAllList")
+	@ResponseBody
+	public List<${entityName}> findAllList(){
+	
+		return ${service}.findAllList();
+	}
+	
+	/**
+	 * 通过ids获取${entityName}列表
+	 * @param ids
+	 * @return
+	 */
+	@RequestMapping("findListByIds")
+	@ResponseBody
+	public List<${entityName}> findListByIds(List<Long> ids){
+	
+		return ${service}.find${entityName}ListByIds(ids);
+	}
+	
+	/**
+	 * 通过参数map获取${entityName}列表
+	 * @param paraMap
+	 * @return
+	 */
+	@RequestMapping("findList")
+	@ResponseBody
+	public List<${entityName}> findList(@QueryBeanParam QueryBean queryBean){
+	
+		return ${service}.findListByQueryMap(paraMap);
+	};
+	
+	/**
+	 * 分页获取${entityName}列表
+	 * @param start
+	 * @param size
+	 * @param paraMap
+	 * @param sorts 
+	 * @return
+	 */
+	@RequestMapping("findListPage")
+	@ResponseBody
+	public Pagination<${entityName}> findListPage(@QueryBeanParam QueryBean queryBean){
+	
+		return ${service}.findListByQueryMapWithPagequeryBean.getPage(), queryBean.getSorts(),
+				queryBean.getParaMap());
+	}
+	
+	
+	<#if lifecycle !="">
+	
+	/**
+	 * 通过ids批量启用或禁用${entityName}
+	 * 设置${lifecycle} =0 或 1
+	 * @param ids
+	 * @return
+	 */
+	@RequestMapping("updateStatusByIds")
+	@ResponseBody
+	public int updateStatusByIds(List<Long> ids,Integer state){
+		return ${service}.updateStatusByIds(ids,state);
+	}
+	
+	</#if>
+	
+}

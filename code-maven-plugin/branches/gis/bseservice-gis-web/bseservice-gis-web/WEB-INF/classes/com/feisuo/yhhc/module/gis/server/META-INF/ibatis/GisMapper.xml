@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gisDao">
+            
+         <select id="searchTrackSignInfoList" parameterType="map" resultType="com.feisuo.yhhc.module.bseservice_gis.api.shared.dto.OrderSignInfoDTO">
+         	SELECT * from OrderSignInfo o 		
+         </select>
+         <select id="searchTrackOrdersHistorical" parameterType="map" resultType="com.feisuo.yhhc.module.bseservice_gis.api.shared.dto.TrackOrdersHistoricalDTO">
+         	SELECT
+				*
+			FROM
+				TruckUserLocation t
+			<where> 
+				t.UserID = #{UserID}
+			<if test="drivingStart !=null ">  	
+			AND t.CreateDate BETWEEN 
+				#{drivingStart}
+			AND	#{drivingEnd}
+			</if>
+			<if test="drivingStart ==null ">  	
+			AND t.CreateDate BETWEEN 
+				date_sub(NOW(), INTERVAL '1 0:0:0' DAY_SECOND)
+			AND	NOW()
+			</if>			
+			ORDER BY
+				t.CreateDate ASC
+			</where>		
+         </select>
+         <select id="searchTrackPintList" parameterType="map" resultType="com.feisuo.yhhc.module.bseservice_gis.api.shared.dto.TrackOrdersHistoricalDTO">
+			SELECT
+				t1.*
+			FROM
+				TruckUserLocation t1,
+				(
+					SELECT
+						t.UserID,
+						t.SequenceID,
+						MAX(t.CreateDate) max_day
+					FROM
+						TruckUserLocation t
+					<where> 
+						t.Province = #{Province}
+						AND t.CreateDate BETWEEN date_sub(
+							<if test="orderTime !=null ">  
+									#{orderTime},
+							</if>	
+							<if test="orderTime ==null ">  
+									NOW(),
+							</if>	
+							INTERVAL #{orderTimeSub} DAY_SECOND
+						)
+						AND	
+							<if test="orderTime !=null ">  
+								#{orderTime}
+							</if>	
+							<if test="orderTime ==null ">  
+								NOW()
+							</if>	
+					</where>							
+					GROUP BY
+						t.UserID
+				) t2
+			where t1.SequenceID=t2.SequenceID
+			ORDER BY
+				t1.SequenceID DESC
+         </select>
+          
+</mapper>
