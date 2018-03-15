@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">HBHK系统</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="bottom_item_one">我执行</string>
+    <string name="bottom_item_two">我发起</string>
+    <string name="bottom_item_three">团队</string>
+    <string name="bottom_item_four">执行</string>
+    <string name="bottom_item_five">设置</string>
+    <string name="button_text">显示图标</string>
+    <string name="workbench_title">我执行的任务</string>
+    <string name="workbench_home_page">首  页</string>
+    <string name="workbench_add_task">新增任务</string>
+    <string name="num_0">0</string>
+    <string name="num_1">1</string>
+    <string name="num_2">2</string>
+    <string name="num_3">3</string>
+    <string name="num_4">4</string>
+    <string name="indicate_value">99</string>
+    <string name="group_online">在线好友</string>
+    <string name="yes">是</string>
+    <string name="no">否</string>
+    <string name="cancel">取消</string>
+    <string name="ok">确定</string>
+    <string name="login">登 录</string>
+    <string name="account">输入QQ号码</string>
+    <string name="password">输入密码</string>
+    <string name="account_ok">确定</string>
+    <string name="account_cancel">取消</string>
+    <string name="register2">注册新帐号</string>
+    <string name="auto_save_password">记住密码</string>
+    <string name="hide_login">隐身登录</string>
+    <string name="silence_login">静音登录</string>
+    <string name="info_troopmessage">接收群消息</string>
+    <string name="sc_menu_help">关于</string>
+    <string name="info_accounts">允许手机/电脑同时在线</string>
+    <string name="more_login_setting">更多登录选项</string>
+    <string name="scan_barcode">扫描条形码</string>
+
+    <!-- Home tab 首页的底部几个tab -->
+    <string name="title_activity_login">首页</string>
+    <string name="login_cb_save_id">搜索</string>
+
+    <!-- 左侧抽屉 -->
+    <string name="drag_item_use">使用手册</string>
+    <string name="drag_item_gonggao">系統公告</string>
+    <string name="drag_item_update">版本更新</string>
+
+    <!-- 顶部文字显示 -->
+    <string name="tv_top1">推荐</string>
+    <string name="tv_top2">特效</string>
+    <string name="tv_top2_">框架</string>
+    <string name="tv_top3">文章</string>
+    <string name="change_pwd_chk_show_pwd">显示密码</string>
+    <string name="title_activity_feed_back">意见反馈</string>
+    <string name="ip_btn_cancel">取消</string>
+    <string name="ip_btn_ok">确定</string>
+    <string name="change_pwd_btnok">确定</string>
+    <string name="title_activity_settings">设置</string>
+    <string name="settings_tv_about">关于我们</string>
+    <string name="settings_tv_change_pwd">修改密码</string>
+    <string name="settings_tv_clear_cache">清除缓存</string>
+    <string name="settings_tv_feedback">意见反馈</string>
+    <string name="settings_tv_contact_us">联系我们</string>
+    <string name="settings_tv_support">技术支持</string>
+    <string name="settings_tv_logout">退出登录</string>
+    <string name="dialog_logout_tv_logout">退出当前账号</string>
+    <string name="dialog_logout_tv_cancel">取消</string>
+    <string name="dialog_logout_tv_ok">确认退出</string>
+    <string name="title_activity_shus_mission_detail">任务详情</string>
+    <string name="scan_text">将二维码放入框内, 即可自动扫描</string>
+
+</resources>

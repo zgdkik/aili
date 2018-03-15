@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="org.hbhk.aili.mobile"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="17" />
+
+    <application
+        android:name="org.hbhk.aili.mobile.application.SoftApplication"
+        android:allowBackup="true"
+        android:icon="@drawable/icon_iv_face_yuan"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+
+        <!--
+        <activity
+            android:name="org.hbhk.ad.activity.LoginActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        -->
+        <activity
+            android:name="org.hbhk.aili.mobile.activity.HomeActivity"
+            android:label="@string/app_name"
+            android:theme="@style/StyledIndicators" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="org.hbhk.aili.mobile.exp.activity.BaseActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="org.hbhk.aili.mobile.exp.activity.MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="org.hbhk.aili.mobile.exp.activity.WelcomeActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="org.hbhk.aili.mobile.exp.activity.FlashlightActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="org.hbhk.aili.mobile.exp.activity.BarCodeActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="org.hbhk.aili.mobile.qr.QrActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="org.hbhk.aili.mobile.qr.MipcaActivityCapture"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden" >
+        </activity>
+
+		<activity
+            android:name="org.hbhk.aili.mobile.activity.camera.CameraActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <service android:name="org.hbhk.aili.mobile.exp.service.DownloadService" >
+        </service>
+         <activity
+            android:name="org.hbhk.aili.mobile.activity.DakaActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+    </application>
+    <!-- 闪光灯权限 -->
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RESTART_PACKAGES" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_LOGS" />
+    <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
+</manifest>

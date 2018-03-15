@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <!-- deppon logo -->
+
+<!--     <RelativeLayout
+        android:id="@+id/user_orderquery"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/bg_title_bar"
+        android:gravity="center_vertical" >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="2dp"
+            android:layout_marginRight="2dp"
+            android:layout_marginTop="2dp"
+            android:background="@drawable/hbhk_logo" />
+    </RelativeLayout> -->
+    
+     <org.hbhk.aili.mobile.exp.actionbar.ActionBar
+            android:id="@+id/action_bar_barcode_query"
+            style="@style/ActionBar" />
+    
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_margin="40dp"
+        android:orientation="vertical" >
+
+        <ImageView
+            android:id="@+id/dxm"
+            android:layout_width="223dp"
+            android:layout_height="120dp"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/scan_btn_style_button" />
+
+        <EditText
+            android:id="@+id/et_qr_string"
+            android:layout_width="180dp"
+            android:layout_height="30dp"
+            android:layout_below="@id/dxm"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="20dp"
+            android:background="#ffffff"
+            android:hint="输入条形码"
+            android:inputType="number"
+            android:textSize="10sp" >
+        </EditText>
+
+        <Button
+            android:id="@+id/order_query"
+            android:layout_width="160dp"
+            android:layout_height="40dp"
+            android:layout_below="@id/et_qr_string"
+            android:layout_centerHorizontal="true"
+            android:textColor="#ffffff"
+            android:background="@drawable/title_btn_rect_selector"
+            android:text="查询" />
+    </RelativeLayout>
+
+</RelativeLayout>

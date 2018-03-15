@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:background="@drawable/tm"
+  >
+
+	<LinearLayout 
+	    android:id="@+id/pop_layout"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:gravity="center_horizontal"
+	    android:orientation="vertical"
+	    android:layout_alignParentBottom="true"
+	    android:background="@drawable/btn_style_alert_dialog_background"
+	     >
+	     
+		   <LinearLayout 
+				android:layout_height="wrap_content"
+				android:layout_gravity="center_horizontal"
+				android:layout_width="fill_parent"
+				android:paddingTop="2dp"
+				android:orientation="horizontal">
+			
+		   <org.hbhk.aili.mobile.exp.wheel.WheelView android:id="@+id/provinces"
+		        android:layout_height="fill_parent"
+		        android:layout_width="wrap_content"
+		        android:layout_gravity="center_vertical"
+		        android:layout_weight="1"/>
+			
+			<org.hbhk.aili.mobile.exp.wheel.WheelView android:id="@+id/city"
+				android:layout_height="fill_parent"
+				android:layout_width="wrap_content"
+		        android:layout_gravity="center_vertical"
+				android:layout_marginLeft="2dp"
+				android:layout_weight="1"/>
+				
+			</LinearLayout>
+	</LinearLayout>
+</RelativeLayout>

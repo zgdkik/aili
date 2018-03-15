@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <org.hbhk.aili.mobile.exp.actionbar.ActionBar
+        android:id="@+id/action_bar_camera"
+        style="@style/ActionBar" />
+
+    <Button
+        android:id="@+id/takePhotoBn"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="拍照" />
+
+    <ImageView
+        android:id="@+id/showImage"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:contentDescription="图片预览" />
+
+</LinearLayout>

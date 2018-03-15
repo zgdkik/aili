@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <SurfaceView
+        android:id="@+id/preview_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" />
+
+    <org.hbhk.aili.mobile.exp.barcode.view.ViewfinderView
+        android:id="@+id/viewfinder_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_gravity="center"
+        android:orientation="vertical" >
+
+        <!--
+        <TextView
+            android:id="@+id/scan_barcode_id"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerInParent="true"
+            android:background="@drawable/bg_title_bar"
+            android:gravity="center"
+            android:text="@string/scan_barcode"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <View style="@style/horizontal_header_line" 
+            android:layout_below="@+id/scan_barcode_id"/>
+        -->
+
+        <org.hbhk.aili.mobile.exp.actionbar.ActionBar
+            android:id="@+id/action_bar_barcode"
+            style="@style/ActionBar" />
+
+        <Button
+            android:id="@+id/btn_cancel_scan"
+            android:layout_width="130dp"
+            android:layout_height="40dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="40dp"
+            android:background="@drawable/title_btn_rect_selector"
+            android:text="@string/cancel"
+            android:textColor="#ffffff"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btn_open_light"
+            android:layout_width="20dp"
+            android:layout_height="25dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="70dp"
+            android:gravity="center" />
+    </RelativeLayout>
+
+</FrameLayout>
