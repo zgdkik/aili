@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yimidida.ows.home.server.dao.IUserPeopleDao">
+	<resultMap type="com.yimidida.ows.home.share.entity.UserPeople" id="UserPeopleMap">
+		<result column="id" property="id"/>
+		<result column="user_id" property="userId"/>
+		<result column="user_name" property="userName"/>
+		<result column="user_mobile" property="userMobile"/>
+		<result column="user_content" property="userContent"/>
+		<result column="user_postcode" property="userPostcode"/>
+		<result column="user_address" property="userAddress"/>
+		<result column="user_type" property="userType"/>
+		<result column="create_time" property="createTime"/>
+		<result column="change_time" property="changeTime"/>
+		<result column="comp_code" property="compCode"/>
+	</resultMap>
+	
+	<select id="getByType" parameterType="map" resultMap="UserPeopleMap">
+	select * from tb_user_people u where u.user_id=(select id from tb_ows_user o
+	where o.id = #{userId})
+	</select>
+</mapper>

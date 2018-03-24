@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="   
+           http://www.springframework.org/schema/beans   
+           http://www.springframework.org/schema/beans/spring-beans.xsd   
+           http://www.springframework.org/schema/context   
+           http://www.springframework.org/schema/context/spring-context.xsd  
+           http://www.springframework.org/schema/mvc   
+           http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+	<!-- 约定优于配置，约定优于配置 -->
+
+	<!-- 配置静态资源，直接映射到对应的文件夹，不被DispatcherServlet处理 -->
+	<mvc:resources mapping="/images/**" location="/images/"
+		cache-period="31556926" />
+	<mvc:resources mapping="/scripts/**" location="/scripts/" />
+	<mvc:resources mapping="/styles/**" location="/styles/" />
+	<mvc:resources mapping="/resources/**" location="/resources/" />
+	<mvc:resources mapping="/wro/**" location="/wro/" />
+	<!-- 扫描所有的controller -->
+	<context:component-scan base-package="com.yimidida.**.server.controller">
+		<context:include-filter type="annotation"
+			expression="org.springframework.stereotype.Controller" />
+		<context:include-filter type="annotation"
+			expression="org.springframework.web.bind.annotation.ControllerAdvice" />
+	</context:component-scan>
+	<bean id="validator"
+		class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+		<property name="providerClass" value="org.hibernate.validator.HibernateValidator" />
+	</bean>
+	<mvc:annotation-driven validator="validator">
+		<mvc:argument-resolvers>
+			<bean
+				class="com.yimidida.ows.base.server.arg.FormModelMethodArgumentResolver" />
+			<bean
+				class="com.yimidida.ows.base.server.arg.ArrayCommandMethodArgumentResolver" />
+		</mvc:argument-resolvers>
+		<mvc:message-converters register-defaults="true">
+			<bean
+				class="com.yimidida.ows.base.server.spring.json.FrontendMappingJackson2HttpMessageConverter">
+				<property name="supportedMediaTypes">
+					<list>
+						<value>application/json</value>
+						<value>text/json</value>
+					</list>
+				</property>
+			</bean>
+		</mvc:message-converters>
+	</mvc:annotation-driven>
+
+	<!-- 启用基于注解的处理器映射，添加拦截器，类级别的处理器映射 -->
+	<mvc:interceptors>
+		<!-- 	<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<mvc:exclude-mapping path="/images/**" />
+			<mvc:exclude-mapping path="/scripts/**" />
+			<mvc:exclude-mapping path="/styles/**" />
+			<mvc:exclude-mapping path="/resources/**" />
+			<bean class="com.yimidida.ows.base.server.interceptor.SecurityInterceptor" >
+				<property name="notUrl">
+					<list>
+						<value>/areaMap/gisArea</value>
+						<value>/areaMap/getGisArea</value>
+						<value>/line/getAreaTime</value>
+						<value>/areaMap/getAreaCodeByaddr</value>
+					</list>
+				</property>
+			
+			</bean>
+		</mvc:interceptor> -->
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<bean
+				class="com.yimidida.ymdp.core.server.interceptor.PerformanceWatchInterceptor" />
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<bean class="com.yimidida.ymdp.core.server.interceptor.ModuleInterceptor" />
+		</mvc:interceptor>
+	</mvc:interceptors>
+
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/views/"></property>
+		<property name="suffix" value=".jsp"></property>
+		<property name="order" value="9999" />
+	</bean>
+
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- 指定所上传文件的总大小不能超过200KB。注意maxUploadSize属性的限制不是针对单个文件，而是所有文件的容量之和 -->
+		<property name="defaultEncoding" value="UTF-8"></property>
+		<property name="maxUploadSize" value="20000000" />
+		<property name="maxInMemorySize" value="4098"></property>
+	</bean>
+	<!-- 统一异常处理 -->
+	<bean id="exceptionResolver" class="com.yimidida.ows.base.server.resolver.ExceptionResolver">
+		<property name="exceptionMappings">
+			<props>
+				<prop key="com.yimidida.ymdp.core.share.ex.BusinessException">
+					forward:/errors/error
+				</prop>
+				<prop key="java.lang.Throwable">
+					forward:/errors/error
+				</prop>
+			</props>
+		</property>
+	</bean>
+
+</beans>   

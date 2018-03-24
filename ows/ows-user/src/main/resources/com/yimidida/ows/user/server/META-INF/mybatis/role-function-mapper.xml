@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yimidida.ows.user.server.dao.IRoleFunctionDao">
+	<delete id="deleteByRoleCode" parameterType="list">
+		delete from t_auth_role_privilege 
+		<where>
+			role_code in
+			<foreach collection="roleCodes" index="index" item="code"
+				open="(" separator="," close=")">
+				#{code}
+			</foreach>
+		</where>
+	</delete>
+</mapper>

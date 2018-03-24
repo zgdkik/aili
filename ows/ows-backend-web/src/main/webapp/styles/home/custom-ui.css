@@ -1,0 +1,13 @@
+.footer {
+    text-align: center;
+    color: #fafafa;
+    margin: 0px;
+    padding: 0px;
+    line-height: 23px;
+    font-weight: bold;
+    background-color: #353435;
+}
+.accordion-noborder .accordion-body {
+    border-width: 0px;
+    height: auto !important;
+}

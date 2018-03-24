@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yimidida.ows.home.server.dao.ILeagueDao">
+	<resultMap type="com.yimidida.ows.home.share.entity.League" id="leagueMap">
+		<result column="id" property="id"/>
+		<result column="name" property="name"/>
+		<result column="link_Man" property="linkMan"/>
+		<result column="link_Phone" property="linkPhone"/>
+		<result column="allot" property="allot"/>
+		<result column="deliver_Scope" property="deliverScope"/>
+		<result column="address" property="address"/>
+		<result column="othor_Message" property="othorMessage"/>
+		<result column="province" property="province"/>
+		<result column="city" property="city"/>
+		<result column="district" property="district"/>
+		<result column="longitude" property="longitude"/>
+		<result column="latitude" property="latitude"/>
+		<result column="create_Date" property="createDate"/>
+		<result column="create_User" property="createUser"/>
+		<result column="change_Date" property="changeDate"/>
+		<result column="change_User" property="changeUser"/>
+		<result column="provincename" property="provincename"/>
+		<result column="cityname" property="cityname"/>
+		<result column="districtname" property="districtname"/>
+		<result column="othor_Message" property="othorMessage"/>
+		
+	</resultMap>
+	
+	
+	
+ 
+	
+	
+	<select id="getLeague" parameterType="map" resultMap="leagueMap">
+		select * from tb_league t
+		<where>
+		<if test="district!=null and district!='' "> and t.district =#{district}</if>
+		<if test="province!=null and province!='' "> and t.province =#{province}</if>
+		<if test="city!=null and city!='' "> and t.city =#{city}</if>
+		<if test="deptName!=null and deptName!='' "> and t.name like #{deptName}</if>
+		</where>
+		
+	</select>
+</mapper>

@@ -1,0 +1,235 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<sheets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:noNamespaceSchemaLocation="exceltemplate-1.0.xsd">
+	
+	<!-- 运输线路维护 -->
+	<sheet name="transportLineList_Moddle">
+		<block start="A2" end="W2" loop="true" dataName="transportLineList_Moddle" loopClass="com.yimidida.metertick.transportline.share.entity.TransportLineEntity">
+			<cell position="A2" dataName="lineCode"/>
+			<cell position="B2" dataName="lineName"/>
+			<cell position="C2" dataName="srcZoneCode"/>
+			<cell position="D2" dataName="destZoneCode"/>
+			<cell position="E2" dataName="lineType"/>
+			<cell position="F2" dataName="lineDistance"/>
+			<cell position="G2" dataName="lineTransportCode"/>
+			<cell position="H2" dataName="lineLevelCode"/>
+			<cell position="I2" dataName="compCode"/>
+			<cell position="J2" dataName="destCompCode"/>
+			<cell position="K2" dataName="createdEmpCode"/>
+			<cell position="L2" dataName="createdTm"/>
+			<cell position="M2" dataName="modifiedEmpCode"/>
+			<cell position="N2" dataName="modifiedTm"/>
+			<cell position="O2" dataName="lineDesc"/>
+			<cell position="P2" dataName="transorptType"/>
+			<cell position="Q2" dataName="transportNightTm"/>
+			<cell position="R2" dataName="transportLaseTm"/>
+			<cell position="S2" dataName="transportFromTm"/>
+			<cell position="T2" dataName="transportToTm"/>
+			<cell position="U2" dataName="transportGoodTm"/>
+			<cell position="V2" dataName="transportDays"/>
+			<cell position="W2" dataName="transportValidTm"/>
+		</block>
+	</sheet>
+	
+	<sheet name="doShowLineList_Moddle">
+		<block start="A2" end="AP2" loop="true" dataName="doShowLineList_Moddle" loopClass="com.yimidida.metertick.transportline.share.vo.DoShowLineVo">
+			<cell position="A2" dataName="waybillNo"/>
+			<cell position="B2" dataName="consignedTm"/>
+			<cell position="C2" dataName="linecode"/>
+			<cell position="D2" dataName="lineName"/>
+			<cell position="E2" dataName="srcZonecode"/>
+			<cell position="F2" dataName="transportFromTm"/>
+			<cell position="G2" dataName="acsrcZonecode"/>
+			<cell position="H2" dataName="actransportFromTm"/>
+			<cell position="I2" dataName="destZonecode"/>
+			<cell position="J2" dataName="transportGoodTm"/>
+			<cell position="K2" dataName="acdestZonecode"/>
+			<cell position="L2" dataName="actransportGoodTm"/>
+			<cell position="M2" dataName="linecode1"/>
+			<cell position="N2" dataName="lineName1"/>
+			<cell position="O2" dataName="srcZonecode1"/>
+			<cell position="P2" dataName="transportFromTm1"/>
+			<cell position="Q2" dataName="acsrcZonecode1"/>
+			<cell position="R2" dataName="actransportFromTm1"/>
+			<cell position="S2" dataName="destZonecode1"/>
+			<cell position="T2" dataName="transportGoodTm1"/>
+			<cell position="U2" dataName="acdestZonecode1"/>
+			<cell position="V2" dataName="actransportGoodTm1"/>
+			<cell position="W2" dataName="linecode2"/>
+			<cell position="X2" dataName="lineName2"/>
+			<cell position="Y2" dataName="srcZonecode2"/>
+			<cell position="Z2" dataName="transportFromTm2"/>
+			<cell position="AA2" dataName="acsrcZonecode2"/>
+			<cell position="AB2" dataName="actransportFromTm2"/>
+			<cell position="AC2" dataName="destZonecode2"/>
+			<cell position="AD2" dataName="transportGoodTm2"/>
+			<cell position="AE2" dataName="acdestZonecode2"/>
+			<cell position="AF2" dataName="actransportGoodTm2"/>
+			<cell position="AG2" dataName="linecode3"/>
+			<cell position="AH2" dataName="lineName3"/>
+			<cell position="AI2" dataName="srcZonecode3"/>
+			<cell position="AJ2" dataName="transportFromTm3"/>
+			<cell position="AK2" dataName="acsrcZonecode3"/>
+			<cell position="AL2" dataName="actransportFromTm3"/>
+			<cell position="AM2" dataName="destZonecode3"/>
+			<cell position="AN2" dataName="transportGoodTm3"/>
+			<cell position="AO2" dataName="acdestZonecode3"/>
+			<cell position="AP2" dataName="actransportGoodTm3"/>
+		</block>
+	</sheet>
+	
+	<sheet name="signLineList_Moddle">
+		<block start="A2" end="AQ2" loop="true" dataName="signLineList_Moddle" loopClass="com.yimidida.metertick.dispatch.share.entity.VehicleManage">
+			<cell position="A2" dataName="waybillNo"/>
+			<cell position="B2" dataName="consignedTm"/>
+			<cell position="C2" dataName="gatherTm"/>
+			<cell position="D2" dataName="linecode"/>
+			<cell position="E2" dataName="lineName"/>
+			<cell position="F2" dataName="srcZonecode"/>
+			<cell position="G2" dataName="transportFromTm"/>
+			<cell position="H2" dataName="acsrcZonecode"/>
+			<cell position="I2" dataName="actransportFromTm"/>
+			<cell position="J2" dataName="destZonecode"/>
+			<cell position="K2" dataName="transportGoodTm"/>
+			<cell position="L2" dataName="acdestZonecode"/>
+			<cell position="M2" dataName="actransportGoodTm"/>
+			<cell position="N2" dataName="linecode1"/>
+			<cell position="O2" dataName="lineName1"/>
+			<cell position="P2" dataName="srcZonecode1"/>
+			<cell position="Q2" dataName="transportFromTm1"/>
+			<cell position="R2" dataName="acsrcZonecode1"/>
+			<cell position="S2" dataName="actransportFromTm1"/>
+			<cell position="T2" dataName="destZonecode1"/>
+			<cell position="U2" dataName="transportGoodTm1"/>
+			<cell position="V2" dataName="acdestZonecode1"/>
+			<cell position="W2" dataName="actransportGoodTm1"/>
+			<cell position="X2" dataName="linecode2"/>
+			<cell position="Y2" dataName="lineName2"/>
+			<cell position="Z2" dataName="srcZonecode2"/>
+			<cell position="AA2" dataName="transportFromTm2"/>
+			<cell position="AB2" dataName="acsrcZonecode2"/>
+			<cell position="AC2" dataName="actransportFromTm2"/>
+			<cell position="AD2" dataName="destZonecode2"/>
+			<cell position="AE2" dataName="transportGoodTm2"/>
+			<cell position="AF2" dataName="acdestZonecode2"/>
+			<cell position="AG2" dataName="actransportGoodTm2"/>
+			<cell position="AH2" dataName="linecode3"/>
+			<cell position="AI2" dataName="lineName3"/>
+			<cell position="AJ2" dataName="srcZonecode3"/>
+			<cell position="AK2" dataName="transportFromTm3"/>
+			<cell position="AL2" dataName="acsrcZonecode3"/>
+			<cell position="AM2" dataName="actransportFromTm3"/>
+			<cell position="AN2" dataName="destZonecode3"/>
+			<cell position="AO2" dataName="transportGoodTm3"/>
+			<cell position="AP2" dataName="acdestZonecode3"/>
+			<cell position="AQ2" dataName="actransportGoodTm3"/>
+		</block>
+	</sheet>
+	
+		<!-- 约车信息导出-->
+	<sheet name="vehicleManageList_Moddle">
+		<block start="A2" end="Q2" loop="true" dataName="vehicleManageList_Moddle" loopClass="com.yimidida.metertick.dispatch.share.entity.VehicleManage">
+			<cell position="A2" dataName="conventionCarTime"/>
+			<cell position="B2" dataName="makeCarNum"/>
+			<cell position="C2" dataName="useCarDept"/>
+			<cell position="D2" dataName="useCarAddress"/>
+			<cell position="E2" dataName="conveCarPerosn"/>
+			<cell position="F2" dataName="requirdTime"/>
+			<cell position="G2" dataName="statusName"/>
+			<cell position="H2" dataName="carNum"/>
+			<cell position="I2" dataName="makeCarType"/>
+			<cell position="J2" dataName="using"/>
+			<cell position="K2" dataName="driverPerson"/>
+			<cell position="L2" dataName="acceptTime"/>
+			<cell position="M2" dataName="sendCarTime"/>
+			<cell position="N2" dataName="actualCarType"/>
+			<cell position="O2" dataName="sendCarCenter"/>
+			<cell position="P2" dataName="remark"/>
+			<cell position="Q2" dataName="rfuseReason"/>
+		</block>
+	</sheet>
+	
+	
+	<!-- 清仓差异信息导出-->
+	<sheet name="cleanDiffierenceList_Moddle">
+		<block start="A2" end="E2" loop="true" dataName="cleanDiffierenceList_Moddle" loopClass="com.yimidida.metertick.dispatch.share.vo.StorageCleanDifferenceDetail">
+			<cell position="A2" dataName="differenceCode"/>
+			<cell position="B2" dataName="name"/>
+			<cell position="C2" dataName="handdingStatus"/>
+			<cell position="D2" dataName="createTime"/>
+			<cell position="E2" dataName="cleanUser"/>
+			
+			<cell position="F2" dataName="waybillNo"/>
+			<cell position="G2" dataName="moreNum"/>
+			<cell position="H2" dataName="lessNum"/>
+			<cell position="I2" dataName="consName"/>
+			<cell position="J2" dataName="quantity"/>
+		</block>
+	</sheet>
+	
+	<sheet name="unloadDiffierenceList_Moddle">
+		<block start="A2" end="E2" loop="true" dataName="unloadDiffierenceList_Moddle" loopClass="com.yimidida.metertick.transfer.share.entity.UnloadDifferenceDetail">
+			<cell position="A2" dataName="waybillNo"/>
+			<cell position="B2" dataName="consName"/>
+			<cell position="C2" dataName="quantity"/>
+			<cell position="D2" dataName="lessNum"/>
+			<cell position="E2" dataName="moreNum"/>
+			<cell position="F2" dataName="remark"/>
+		</block>
+	</sheet>
+	
+	<sheet name="findBalanceOfPaymentsBySource_Moddle">
+	<block start="A3" end="H3" loop="true" dataName="findBalanceOfPaymentsBySource_Moddle" loopClass="com.yimidida.metertick.settlement.share.vo.SendIncomeReportVo">
+		<cell position="A3" dataName="sourceZoneCode"/>
+		<cell position="B3" dataName="destZoneCode"/>
+		<cell position="C3" dataName="payGoFee"/>
+		<cell position="D3" dataName="monthDealFee"/>
+		<cell position="E3" dataName="companySumFee"/>
+		<cell position="F3" dataName="pagForFee"/>
+		<cell position="G3" dataName="businessIncomeFee"/>
+		<cell position="H3" dataName="conversionSumFee"/>
+	</block>
+</sheet>
+
+<sheet name="findBalanceOfPaymentsByDest_Moddle">
+	<block start="A3" end="H3" loop="true" dataName="findBalanceOfPaymentsByDest_Moddle" loopClass="com.yimidida.metertick.settlement.share.vo.SendIncomeReportVo">
+		<cell position="A3" dataName="sourceZoneCode"/>
+		<cell position="B3" dataName="destZoneCode"/>
+		<cell position="C3" dataName="pagForFee"/>
+		<cell position="D3" dataName="payGoFee"/>
+		<cell position="E3" dataName="monthDealFee"/>
+		<cell position="F3" dataName="companySumFee"/>
+		<cell position="G3" dataName="businessIncomeFee"/>
+		<cell position="H3" dataName="conversionSumFee"/>
+	</block>
+</sheet>
+
+<sheet name="deptCashDayReportList_Moddle">
+	<block start="A2" end="B2" loop="true" dataName="deptCashDayReportList_Moddle" loopClass="com.yimidida.metertick.settlement.share.vo.SubjectFeeVo">
+		<cell position="A2" dataName="subjectName"/>
+		<cell position="B2" dataName="feeAmt"/>
+	</block>
+</sheet>
+
+<sheet name="findAllDeptDayReport_Moddle">
+	<block start="A3" end="P3" loop="true" dataName="findAllDeptDayReport_Moddle" loopClass="com.yimidida.metertick.settlement.share.vo.DeptCashDayReportVo">
+		<cell position="A3" dataName="sourceZoneCode"/>
+		<cell position="B3" dataName="destZoneCode"/>
+		<cell position="C3" dataName="pagForFee"/>
+		<cell position="D3" dataName="payGoFee"/>
+		<cell position="E3" dataName="monthDealFee"/>
+		<cell position="F3" dataName="companySumFee"/>
+		<cell position="G3" dataName="businessIncomeFee"/>
+		<cell position="H3" dataName="conversionSumFee"/>
+		<cell position="I3" dataName="conversionSumFee"/>
+		<cell position="J3" dataName="conversionSumFee"/>
+		<cell position="K3" dataName="conversionSumFee"/>
+		<cell position="L3" dataName="conversionSumFee"/>
+		<cell position="M3" dataName="conversionSumFee"/>
+		<cell position="N3" dataName="conversionSumFee"/>
+		<cell position="O3" dataName="conversionSumFee"/>
+		<cell position="P3" dataName="conversionSumFee"/>
+	</block>
+</sheet>
+	
+</sheets>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yimidida.ows.common.server.dao.IDictDao">
+	<!-- 修改其所有子节点的父编码 -->
+	<update id="updateChildParentCode" parameterType="java.util.Map">
+		update t_common_dict
+		   set parent_dict_code=#{parentDictCode},
+		   UPDATE_TIME = #{updateTime},
+		   UPDATE_USER = #{updateUser}
+		   where parent_dict_code=#{oldParentDictCode}
+	</update>
+	<!-- 修改其所有数据字典的对应类型编码 -->
+	<update id="updateValueKeyDictCode" parameterType="java.util.Map">
+		update t_common_dict_value
+		   set dict_code=#{parentDictCode},
+		   UPDATE_TIME = #{updateTime},
+		   UPDATE_USER = #{updateUser}
+		   where dict_code=#{oldParentDictCode}
+	</update>
+	
+	<!-- 删除其所有子节点的（级联）-->
+	<update id="deleteChildParent" parameterType="java.util.Map">
+		update t_common_dict
+		   set STATUS=#{status},
+		   UPDATE_TIME = #{updateTime},
+		   UPDATE_USER = #{updateUser}
+		   where dict_code in (select dict_code from t_common_dict  start with dict_code=#{dictCode} connect by PARENT_DICT_CODE =prior dict_code)
+	</update>
+	<!-- 删除其自己以及自己的所有子节点对应的数据字典（级联）-->
+	<update id="deleteValueKey" parameterType="java.util.Map">
+		update t_common_dict_value
+		   set STATUS=#{status},
+		   UPDATE_TIME = #{updateTime},
+		   UPDATE_USER = #{updateUser}
+		   where dict_code in (select dict_code from t_common_dict  start with dict_code=#{dictCode} connect by PARENT_DICT_CODE =prior dict_code)
+	</update>
+
+</mapper>

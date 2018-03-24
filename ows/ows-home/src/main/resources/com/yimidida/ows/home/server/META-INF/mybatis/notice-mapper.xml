@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yimidida.ows.home.server.dao.INoticeDao">
+
+
+	<resultMap id="NoticeMap"
+		type="com.yimidida.ows.home.share.entity.Notice">
+		<result column="id" property="id" />
+		<result column="notice_title" property="noticeTitle" />
+		<result column="notice_summary" property="noticeSummary" />
+		<result column="notice_type" property="noticeType" />
+		<result column="notice_img" property="noticeImg" />
+		<result column="notice_content" property="noticeContent" />
+		<result column="notice_status" property="noticeStatus" />
+		<result column="create_date" property="createDate" />
+		<result column="create_user" property="createUser" />
+		<result column="change_date" property="changeDate" />
+		<result column="change_user" property="changeUser" />
+		<result column="notice_running" property="noticeRunning" />
+		<result column="comp_code" property="compCode" />
+		<result column="release_time" property="releaseTime" />
+	</resultMap>
+
+	<select id="getNoticeByNoticeId" parameterType="map" resultMap="NoticeMap">
+		select * from tb_notice;
+	</select>
+
+	<select id="getNewNoticeList" parameterType="map" resultMap="NoticeMap">
+		select * from tb_notice t where t.notice_type in ('1') order by t.release_time desc LIMIT 3
+	</select>
+	<delete id="deleteByNoticeId" parameterType="int">
+		delete from tb_notice where id = "#{noticeId}"
+	</delete>
+	
+	<select id="getAllNotice" parameterType="map" resultMap="NoticeMap" >
+		select * from tb_notice where notice_type = #{noticeType} order by release_time desc
+	</select>
+</mapper>

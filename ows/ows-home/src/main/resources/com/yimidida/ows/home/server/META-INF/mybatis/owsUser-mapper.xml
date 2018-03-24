@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yimidida.ows.home.server.dao.IOwsUserDao">
+	<resultMap type="com.yimidida.ows.home.share.entity.OwsUser" id="OwsUserMap">
+		<result column="id" property="id"/>
+		<result column="user_name" property="userName"/>
+		<result column="password" property="password"/>
+		<result column="mobile" property="mobile"/>
+		<result column="email" property="email"/>
+		<result column="create_time" property="createTime"/>
+		<result column="update_time" property="updateTime"/>
+		<result column="status" property="status"/>
+		<result column="compCode" property="compCode"/>
+		<result column="mobile" property="mobile"/>
+		<result column="realName" property="realName"/>
+		<result column="gender" property="gender"/>
+		<result column="companyName" property="companyName"/>
+		<result column="areaCode" property="areaCode"/>
+		<result column="telephone" property="telephone"/>
+		<result column="checkAddress" property="checkAddress"/>
+		<result column="concreteAddress" property="concreteAddress"/>
+		<result column="bankType" property="bankType"/>
+		<result column="bankNumber" property="bankNumber"/>
+		<result column="out_time" property="outTime"/>
+		<result column="mail_key" property="mailKey"/>
+		<result column="memberCard" property="memberCard"/>
+		<result column="IDCard" property="IDCard"/>
+		<result column="initialPhone" property="initialPhone"/>
+		         
+	</resultMap>
+
+	<update id="changePassWord">
+		UPDATE tb_ows_user SET password=#{newPassWord} WHERE id=#{id}
+	</update>
+	
+	<!-- 根据登陆名获取对象 -->
+	<select id="queryfindUserInfoByLoginName" resultMap="OwsUserMap" parameterType="java.lang.String">
+		SELECT
+		id as id,
+		user_name as userName,
+		`password` as password,
+		mobile as mobile,
+		email as email,
+		create_time as createTime,
+		update_time as updateTime,
+		`status` as status,
+		compCode as compCode
+		FROM
+        tb_ows_user where (mobile=#{userName} or email=#{userName} or user_name=#{userName})
+	</select>
+		
+	<!-- 更新邮箱找回的失效时间和密钥 -->
+	<update id="modifyMailTime"  parameterType="java.util.Map">
+		update tb_ows_user set out_time=#{outTime},mail_key=#{mailKey} where user_name=#{userName}
+	</update>
+	
+		<!-- 验证用户名是否存在 -->
+	<select id="querycheckUserName" resultMap="OwsUserMap" parameterType="java.lang.String">
+		SELECT
+		id as id,
+		user_name as userName,
+		`password` as password,
+		mobile as mobile,
+		email as email,
+		create_time as createTime,
+		update_time as updateTime,
+		`status` as status,
+		compCode as compCode,
+        out_time outTime,
+        mail_key mailKey
+		FROM  tb_ows_user where user_name=#{userName}
+	</select>
+	
+	
+		<!-- 修改密码 -->
+	<update id="modifyPassword"  parameterType="java.util.Map">
+		update tb_ows_user set password=#{newPassword} where 1=1
+		<if test="username!=null">
+			and user_name=#{username} 
+		</if>
+	</update>
+	
+	<update id="updateDetailsByuserId" parameterType="com.yimidida.ows.home.share.entity.OwsUser" >
+		UPDATE tb_ows_user
+				SET 
+				 realName = #{realName},
+				 gender = #{gender},
+				 areaCode = #{areaCode},
+				 telephone = #{telephone},
+				 checkAddress = #{checkAddress},
+				 concreteAddress = #{concreteAddress},
+				 bankType = #{bankType},
+				 bankNumber = #{bankNumber},
+				 companyName = #{companyName},
+				 update_time = #{updateTime}
+				WHERE
+						id = #{id}
+	</update>
+	
+	<update id="changeEmail" parameterType="com.yimidida.ows.home.share.entity.OwsUser">
+		UPDATE tb_ows_user SET email=#{email} WHERE id=#{id}
+	</update>
+	
+	<update id="updatePhoneById" parameterType="com.yimidida.ows.home.share.entity.OwsUser">
+		UPDATE tb_ows_user SET mobile=#{mobile} WHERE id=#{id}
+	</update>
+	<update id="updateMemberCardById" parameterType="com.yimidida.ows.home.share.entity.OwsUser">
+		UPDATE tb_ows_user SET memberCard=#{memberCard},IDCard=#{IDCard},initialPhone=#{initialPhone} WHERE id=#{id}
+	</update>
+</mapper> 
