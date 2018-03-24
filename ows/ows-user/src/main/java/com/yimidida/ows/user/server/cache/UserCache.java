@@ -30,16 +30,11 @@ public class UserCache extends CacheSupport<CurrentUserVo> {
 
 	@Override
 	public CurrentUserVo doSet(String key) {
-		log.info("获取当前用户信息开始:"+key);
 		if (StringUtils.isEmpty(key)) {
 			return null;
 		}
-		String[] arr = key.split(",");
-		String compCode=arr[0];
-		String userCode =arr[1];
 		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("userCode", userCode);
-		params.put("compCode", compCode);
+		params.put("userCode", key);
 		List<CurrentUserVo> list = userDao.getCurrentUserList(params);
 		if (list == null || list.isEmpty()) {
 			return null;

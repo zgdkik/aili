@@ -72,7 +72,6 @@
 	    left join	  t_auth_user 	u on  u.username=ur.USER_CODE 
    		WHERE  ur.USER_CODE = #{userCode}
 		and u.username=#{userCode}
-		and u.comp_code=#{compCode}
 	</select>
 	<!-- 根据用户名查询用户和角色信息 -->
 	<select id="getUserInfoById" resultMap="UserInfoResultMap">

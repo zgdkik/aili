@@ -183,11 +183,13 @@ function InitLeftMenu() {
 function getIcon(menuid) {
 	var icon = 'icon ';
 	$.each(_menus.menus, function(i, n) {
-		$.each(n.menus, function(j, o) {
-			if (o.menuid == menuid) {
-				icon += "icon-nav";
-			}
-		})
+		if(n.menus!=null){
+			$.each(n.menus, function(j, o) {
+				if (o.menuid == menuid) {
+					icon += "icon-nav";
+				}
+			})
+		}
 	})
 
 	return icon;

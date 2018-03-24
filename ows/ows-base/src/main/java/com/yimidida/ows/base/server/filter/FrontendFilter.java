@@ -87,8 +87,7 @@ public class FrontendFilter implements Filter {
 			}
 			if(StringUtils.isNotEmpty(userCode)){
 				log.info("设置当前用户信息开始:"+userCode);
-				String compCode = token.getCompCode();
-				IUser user = CacheManager.getInstance().getCache(FrontendConstants.USER_CACHE_UUID, compCode+","+userCode);
+				IUser user = CacheManager.getInstance().getCache(FrontendConstants.USER_CACHE_UUID, userCode);
 				log.info("设置当前用户信息中...:"+userCode);
 				UserContext.setCurrentUser(user);
 				log.info("设置当前用户信息结束:"+userCode);

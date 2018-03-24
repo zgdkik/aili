@@ -8,7 +8,7 @@ import org.mybatis.spring.annotation.Id;
 import org.mybatis.spring.annotation.Table;
 
 //招聘信息实体类
-@Table("TB_RECRUIT")
+@Table("tb_recruit")
 public class Recruit implements Serializable {
 
 	private static final long serialVersionUID = 7946373522675173331L;

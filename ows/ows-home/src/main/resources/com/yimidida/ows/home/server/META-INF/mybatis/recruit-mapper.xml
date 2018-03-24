@@ -26,10 +26,10 @@
 	</resultMap>
 
 	<select id="getAllrecruit" parameterType="map" resultMap="recruitMap">
-		select * from TB_RECRUIT t where  t.compCode=#{compCode}  order by t.change_Date desc
+		select * from tb_recruit t where  t.compCode=#{compCode}  order by t.change_Date desc
 	</select>
 	<select id="queryRecruitList" parameterType="map" resultMap="recruitMap">
-		select * from TB_RECRUIT t where t.compCode=#{compCode}  order by t.change_Date desc
+		select * from tb_recruit t where t.compCode=#{compCode}  order by t.change_Date desc
 	</select>
 
 

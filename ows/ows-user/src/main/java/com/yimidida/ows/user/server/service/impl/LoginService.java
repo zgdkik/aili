@@ -87,21 +87,9 @@ public class LoginService implements ILoginService {
 		// 验证用户,并进行密码校验
 		Map<String, Object>  params = new HashMap<String, Object>();
 		String userCode =null;
-		String compCode=null;
-		if(validExistAt(userName)){
-			String[] logArr = userName.split("@");
-			userCode = logArr[0];
-			compCode = logArr[1];
-			params.put("userName", userCode);
-			params.put("compCode", compCode);
-			password = encrypt(userCode, password);
-		}else{
-			params.put("userName", userName);
-			params.put("compCode", userName);
-			userCode = userName;
-			compCode = userName;
-			password = encrypt(userName, password);
-		}
+		params.put("userName", userName);
+		userCode = userName;
+		password = encrypt(userName, password);
 		List<UserEntity> list = userService.get(params);
 		if (list == null || list.size() == 0) {
 			throw new BusinessException("用户不存在:" + userName);
@@ -116,7 +104,7 @@ public class LoginService implements ILoginService {
 		if (!password.equalsIgnoreCase(pwd)) {
 			throw new BusinessException("密码错误");
 		}
-		IUser userCache = CacheManager.getInstance().getCache(FrontendConstants.USER_CACHE_UUID, compCode+","+userCode);
+		IUser userCache = CacheManager.getInstance().getCache(FrontendConstants.USER_CACHE_UUID, userCode);
 		if(userCache==null){
 			throw new BusinessException("用户未配置角色");
 		}
@@ -133,7 +121,7 @@ public class LoginService implements ILoginService {
 		token.setSessionId(session.getId());
 		token.setTimestamp(System.currentTimeMillis() + "");
 		token.setUserCode(user.getUserName());
-		token.setCompCode(compCode);
+		token.setCompCode("hbhk");
 		token.setDeptCode(userCache.getDeptCode());
 		session.setAttribute(FrontendConstants.USER_SESSION_KEY, token);
 		CookieUtil.setCookie(response, AppConst.SESSION_COOKIE_KYE, token.getUserCode());
