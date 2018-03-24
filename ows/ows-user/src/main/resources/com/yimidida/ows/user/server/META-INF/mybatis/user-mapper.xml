@@ -64,9 +64,9 @@
 
 	<select id="getCurrentUserList" parameterType="list"
 		resultMap="userFunCodeUrisResultMap">
-	select distinct u.id as id, u.comp_code, UR.USER_CODE AS USER_CODE, a.code AS
+	select distinct u.id as id, u.comp_code, ur.USER_CODE AS USER_CODE, a.code AS
 		CODE, a.URL AS URL ,ur.role_code as role_code
-		FROM t_auth_user_role UR 
+		FROM t_auth_user_role ur 
 	    left join t_auth_role_privilege rf on 	ur.role_code=rf.role_code 
 		left join	t_auth_privilege a on  rf.privilege_code= a.code 
 	    left join	  t_auth_user 	u on  u.username=ur.USER_CODE 

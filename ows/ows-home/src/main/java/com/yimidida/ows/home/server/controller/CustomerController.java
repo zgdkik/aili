@@ -768,15 +768,15 @@ public class CustomerController extends AbstractController {
   @ResponseBody
   public ResultEntity getSearchSourceCity(HttpSession session, String newEmail) {
     String resultStr = "";
-    resultStr = HttpUtil.sendPost(
-        SystemParameterUtil.getValue("interface.weixin") + "/ddwl/getSearchSourceCity", null,
-        String.class);
-    ReturnFreightCity citys = JsonUtil.parseJson(resultStr, ReturnFreightCity.class);
-    Map<String, Object> map = new HashMap<String, Object>();
-    if (citys.isSuccess()) {
-      map.put("list", citys.getData());
-    }
-    return returnSuccess(map);
+//    resultStr = HttpUtil.sendPost(
+//        SystemParameterUtil.getValue("interface.weixin") + "/ddwl/getSearchSourceCity", null,
+//        String.class);
+//    ReturnFreightCity citys = JsonUtil.parseJson(resultStr, ReturnFreightCity.class);
+//    Map<String, Object> map = new HashMap<String, Object>();
+//    if (citys.isSuccess()) {
+//      map.put("list", citys.getData());
+//    }
+    return returnSuccess();
   }
   // 运价查询获取目的城市输入框城市查询输入框
 

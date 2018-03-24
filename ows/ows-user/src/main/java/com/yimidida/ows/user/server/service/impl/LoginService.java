@@ -149,6 +149,9 @@ public class LoginService implements ILoginService {
 		return MD5Util.encode(username+password);
 	}
 
+	public static void main(String[] args) {
+		System.out.println(encrypt("admin", "135246"));;
+	}
 	/**
 	 * 获取当前网络ip
 	 * 
