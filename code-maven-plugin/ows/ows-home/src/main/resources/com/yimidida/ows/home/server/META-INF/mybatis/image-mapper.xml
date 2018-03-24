@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yimidida.ows.home.server.dao.ImageManageDao">
+	<resultMap id="imgMap" type="com.yimidida.ows.home.share.entity.ImgManage">
+		<result column="id" property="id" />
+		<result column="type" property="type" />
+		<result column="sort" property="sort" />
+		<result column="main_title" property="mainTitle" />
+		<result column="sub_title" property="subTitle" />
+		<result column="img_url" property="imgUrl" />
+		<result column="default_img" property="defaultImg" />
+		<result column="click_img" property="clickImg" />
+		<result column="create_date" property="createDate" />
+		<result column="change_date" property="changeDate" />
+		<result column="create_user" property="createUser" />
+		<result column="change_user" property="changeUser" />
+		<result column="comp_code" property="compCode" />
+		<result column="status" property="status" />
+	</resultMap>
+
+	<select id="getAllImgManage" parameterType="map" resultMap="imgMap"> 
+		select * from tb_img_manage tim where 1=1 order by tim.sort
+	</select>
+
+	<update id="blockStatusByid">
+		update tb_img_manage SET status=0 where id=#{id}
+	</update>
+	
+	<update id="updateStatusByid">
+		update tb_img_manage SET status=1 where id=#{id}
+	</update>
+	
+	<select id="getShowImgById" parameterType="map" resultMap="imgMap">
+		select * from tb_img_manage where status='1' order by sort asc LIMIT 4
+	</select>
+</mapper>

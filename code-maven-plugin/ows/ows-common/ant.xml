@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+ 
+<project basedir="." name="common" default="deploy">
+
+	<property name="webapp" value="${basedir}/../metertick-bi/target/webapp"/>
+	
+    <property name="common" value="common"/>
+    <property name="common-scripts" value="${webapp}/scripts/${common}/"/>
+    <property name="common-views" value="${webapp}/WEB-INF/views/${common}/"/>
+	<property name="common-fromdir" value="${basedir}/src/main/resources/com/yimidida/metertick/${ant.project.name}//server/META-INF"/>
+	<property name="common-fromdir-scripts" value="${common-fromdir}/scripts"/>
+	<property name="common-fromdir-views" value="${common-fromdir}/views"/>
+	
+    <property name="moduleName" value="common"/>
+    <property name="todir-scripts" value="${webapp}/scripts/${moduleName}/"/>
+    <property name="todir-views" value="${webapp}/WEB-INF/views/${moduleName}/"/>
+    <property name="fromdir" value="${basedir}/src/main/resources/com/yimidida/metertick/${ant.project.name}/server/META-INF"/>
+    <property name="scripts" value="${fromdir}/scripts"/>
+    <property name="views" value="${fromdir}/views"/>
+ 
+    <target name="deploy">
+        <copy todir="${todir-scripts}" overwrite="true" verbose="true">
+            <fileset dir="${scripts}">
+                <include name="**" />
+            </fileset>
+        </copy>
+
+        <copy todir="${todir-views}" overwrite="true" verbose="true">
+            <fileset dir="${views}">
+                <include name="**" />
+            </fileset>
+        </copy>
+    	
+        <copy todir="${common-scripts}" overwrite="true" verbose="true">
+            <fileset dir="${common-fromdir-scripts}">
+                <include name="**" />
+            </fileset>
+        </copy>
+
+        <copy todir="${common-views}" overwrite="true" verbose="true">
+            <fileset dir="${common-fromdir-views}">
+                <include name="**" />
+            </fileset>
+        </copy>
+    </target>
+</project>

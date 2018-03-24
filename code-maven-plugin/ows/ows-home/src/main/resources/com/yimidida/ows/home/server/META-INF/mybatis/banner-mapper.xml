@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yimidida.ows.home.server.dao.IHomePageDao">
+	<resultMap id="HomePageMap" type="com.yimidida.ows.home.share.entity.HomePage">
+		<result column="id" property="id" />
+		<result column="banner_title" property="bannerTitle" />
+		<result column="sub_title" property="subTitle" />
+		<result column="title_desc" property="titleDesc" />
+		<result column="banner_url" property="bannerUrl" />
+		<result column="banner_pic" property="bannerPic" />
+		<result column="pic2" property="pic2" />
+		<result column="content" property="content" />
+		<result column="create_date" property="createDate" />
+		<result column="change_date" property="changeDate" />
+		<result column="create_user" property="createUser" />
+		<result column="change_user" property="changeUser" />
+		<result column="comp_code" property="compCode" />
+		<result column="banner_type" property="bannerType" />
+		<result column="banner_sort" property="bannerSort" />
+	</resultMap>
+	<delete id="deleteByBannerId" parameterType="int">
+		 delete from tb_banner where id = #{bannerId}  
+	</delete>
+	
+	<select id="getHomeBanner" resultType="map">
+		select * from tb_banner t where banner_type = #{bannerType} order by banner_sort ASC;
+	</select>
+</mapper>

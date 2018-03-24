@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yimidida.ows.home.server.dao.IOrderInfoDao">
+	
+	
+	<update id="deleteOrder" parameterType="map" >
+		update tb_order t set t.order_state=0 where t.order_no=#{orderNo}
+	</update>
+</mapper>

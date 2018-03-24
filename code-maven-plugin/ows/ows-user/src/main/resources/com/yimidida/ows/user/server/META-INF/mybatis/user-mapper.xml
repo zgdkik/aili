@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yimidida.ows.user.server.dao.IUserDao">
+	<!-- 用户基本信息 -->
+	<resultMap type="com.yimidida.ows.user.share.entity.UserEntity"
+		id="BaseResultMap">
+		<result property="id" column="id" />
+		<result property="userName" column="user_name" javaType="String" />
+		<result property="password" column="password" javaType="String" />
+		<result property="type" column="type" javaType="Integer" />
+		<result property="beginTime" column="begin_time" javaType="Date" />
+		<result property="beginTime" column="begin_time" javaType="Date" />
+		<result property="endTime" column="end_time" javaType="Date" />
+		<result property="lastLogin" column="last_login" javaType="Date" />
+		<result property="createUser" column="create_user" javaType="String" />
+		<result property="updateUser" column="update_user" javaType="String" />
+		<result property="updateTime" column="update_time" javaType="Date" />
+		<result property="status" column="status" javaType="Integer" />
+		<result property="type" column="type" javaType="Integer" />
+		<result property="createTime" column="create_time" javaType="Date" />
+		<result property="frozenStatus" column="frozen_status"
+			javaType="Integer" />
+	</resultMap>
+	<!-- 用户基本信息+角色信息 -->
+	<resultMap type="com.yimidida.ows.user.share.entity.UserEntity"
+		id="UserInfoResultMap" extends="BaseResultMap">
+	</resultMap>
+
+
+	<resultMap id="userFunCodeUrisResultMap" type="com.yimidida.ows.user.share.vo.CurrentUserVo">
+		<id property="userId" column="id" />
+		<result property="userName" column="USER_CODE" />
+		<result property="compCode" column="comp_code" />
+		<result property="deptCode" column="dept_code" />
+		<result column="dept_name" property="deptName" />
+		<result column="type_code" property="deptTypeCode" />
+		<result column="emp_name" property="name" />
+		<result column="short_name" property="compName" />
+		
+		<collection property="functionCodes" column="CODE" ofType="String">
+			<result column="CODE" />
+		</collection>
+		
+		<collection property="functionUris" column="URL" ofType="String">
+			<result column="URL" />
+		</collection>
+		
+		<collection property="roleCodes" column="role_code" ofType="String">
+			<result column="role_code" />
+		</collection>
+	</resultMap>
+
+
+	<select id="checkUserName" parameterType="String" resultMap="BaseResultMap">
+		SELECT
+		*
+		FROM
+		t_auth_user T
+		WHERE
+		T .username = #{value}
+		AND T .status in(1,4)
+	</select>
+
+
+	<select id="getCurrentUserList" parameterType="list"
+		resultMap="userFunCodeUrisResultMap">
+	select distinct u.id as id, u.comp_code, UR.USER_CODE AS USER_CODE, a.code AS
+		CODE, a.URL AS URL ,ur.role_code as role_code
+		FROM t_auth_user_role UR 
+	    left join t_auth_role_privilege rf on 	ur.role_code=rf.role_code 
+		left join	t_auth_privilege a on  rf.privilege_code= a.code 
+	    left join	  t_auth_user 	u on  u.username=ur.USER_CODE 
+   		WHERE  ur.USER_CODE = #{userCode}
+		and u.username=#{userCode}
+		and u.comp_code=#{compCode}
+	</select>
+	<!-- 根据用户名查询用户和角色信息 -->
+	<select id="getUserInfoById" resultMap="UserInfoResultMap">
+		SELECT
+		u.*, r. ID role_id,
+		r.role_code,
+		r.role_name,
+		r.role_type,
+		r.role_desc
+		FROM
+		t_auth_user u
+		LEFT
+		JOIN t_auth_user_role ur ON u.user_name = ur.user_code
+		LEFT JOIN
+		t_auth_role r ON ur.role_code = r.role_code
+		WHERE
+		u.status in (1,2)
+		and
+		u.id=#{id}
+	</select>
+	<!-- 分页查询用户信息 -->
+	<select id="queryUserInfoByPage" resultMap="UserInfoResultMap">
+		SELECT
+		u.*
+		FROM
+		t_auth_user u
+		WHERE
+		 u.status in('1') 
+		<if test="userName!=null and userName!=''">
+			and u.username like #{userName}
+		</if>
+	</select>
+	
+
+</mapper>

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.feisuo1.sds.user.test.dao.ITestDao">
+
+	<select id="list" resultType="com.yimidida.metertick.user.share.entity.PostRoleEntity">
+	<![CDATA[ 
+	select count(1) as num from (select TOCOMPCODE,SUM(quantityTotal) quantityTotal
+		,SUM(meterageWetghtTotal) meterageWetghtTotal,SUM(realWetghtTotal) realWetghtTotal,SUM(volume) volume
+		,SUM(quantity) quantity,SUM(trafficFeeTotal) trafficFeeTotal
+		,SUM(goodsChargeFee) goodsChargeFee,SUM(goodsAgentFee) goodsAgentFee
+		,SUM(insuranceFee) insuranceFee,SUM(singnedBackFee) singnedBackFee
+		,SUM(packageFee) packageFee,SUM(forwardFee) forwardFee
+		,SUM(waitNotifyFee) waitNotifyFee,SUM(deliverFee) deliverFee
+		,SUM(debousGoodsFee) debousGoodsFee,SUM(debousGoodsServiceFee) debousGoodsServiceFee
+		,SUM(debousWayFee) debousWayFee,SUM(backCargoFee) backCargoFee
+		,SUM(forkliftFee) forkliftFee,SUM(kickbacksFee) kickbacksFee,SUM(zhidanFee) zhidanFee from (with s1 as
+		  (SELECT
+           A.TO_COMP_CODE toCompCode,
+           
+	   SUM(DECODE(B.SERVICE_TYPE_CODE, 'SF01', NVL(a.quantity, 0), 0)) quantityTotal,
+       SUM(DECODE(B.SERVICE_TYPE_CODE, 'SF01', NVL(a.Meterage_Weight_Qty, 0),0)) meterageWetghtTotal,
+       SUM(DECODE(B.SERVICE_TYPE_CODE, 'SF01', NVL(a.real_weight_qty, 0), 0)) realWetghtTotal,
+       SUM(DECODE(B.SERVICE_TYPE_CODE, 'SF01', NVL(a.volume, 0), 0)) volume,
+       SUM(DECODE(B.SERVICE_TYPE_CODE, 'SF01', 1, 0)) quantity,
+       SUM(DECODE(B.SERVICE_TYPE_CODE, 'SF01', B.IN_FEE_AMT, 0)) trafficFeeTotal,
+       SUM(DECODE(B.SERVICE_TYPE_CODE, 'SF02', B.OUT_FEE_AMT, 0)) goodsChargeFee,
+       SUM(DECODE(B.SERVICE_TYPE_CODE, 'SF02', B.IN_FEE_AMT, 0)) goodsAgentFee,
+       SUM(DECODE(B.SERVICE_TYPE_CODE, 'SF03', B.IN_FEE_AMT, 0)) insuranceFee,
+       SUM(DECODE(B.SERVICE_TYPE_CODE, 'SF04', B.IN_FEE_AMT, 0)) singnedBackFee,
+       SUM(DECODE(B.SERVICE_TYPE_CODE, 'SF05', B.IN_FEE_AMT, 0)) packageFee,
+       SUM(DECODE(B.SERVICE_TYPE_CODE, 'SF06', B.OUT_FEE_AMT, 0)) forwardFee,
+       SUM(DECODE(B.SERVICE_TYPE_CODE, 'SF07', B.IN_FEE_AMT, 0)) waitNotifyFee,
+       SUM(DECODE(B.SERVICE_TYPE_CODE, 'SF08', B.IN_FEE_AMT, 0)) deliverFee,
+       SUM(DECODE(B.SERVICE_TYPE_CODE, 'SF09', B.OUT_FEE_AMT, 0)) debousGoodsFee,
+       SUM(DECODE(B.SERVICE_TYPE_CODE, 'SF09', B.IN_FEE_AMT, 0)) debousGoodsServiceFee,
+       SUM(DECODE(B.SERVICE_TYPE_CODE, 'SF10', B.OUT_FEE_AMT, 0)) debousWayFee,
+       SUM(DECODE(B.SERVICE_TYPE_CODE, 'SF13', B.IN_FEE_AMT, 0)) backCargoFee,
+       SUM(DECODE(B.SERVICE_TYPE_CODE, 'SF14', B.IN_FEE_AMT, 0)) forkliftFee,
+       SUM(DECODE(B.SERVICE_TYPE_CODE, 'SF15', B.OUT_FEE_AMT, 0)) kickbacksFee,
+       SUM(DECODE(B.SERVICE_TYPE_CODE, 'SF16', B.IN_FEE_AMT, 0)) zhidanFee
+	 
+	       FROM tb_waybill a  ,tb_waybill_service_fee b
+	       WHERE a.waybill_id = b.waybill_id
+	       AND a.BIZ_TYPE_CODE = '2'
+	        
+	         
+				AND a.input_tm >=  to_date('2016-04-06 00:00:00','yyyy-mm-dd hh24:mi:ss')
+			 
+			 
+				 AND a.input_tm  <  to_date('2016-04-13 00:00:00','yyyy-mm-dd hh24:mi:ss')
+			 
+           GROUP BY A.TO_COMP_CODE),s2 as(
+           SELECT
+             A1.COMP_CODE toCompCode,
+             SUM(DECODE(B1.SERVICE_TYPE_CODE, 'SF01', NVL(a1.quantity, 0), 0)) quantityTotal,
+             SUM(DECODE(B1.SERVICE_TYPE_CODE, 'SF01', NVL(a1.Meterage_Weight_Qty, 0), 0)) meterageWetghtTotal,
+             SUM(DECODE(B1.SERVICE_TYPE_CODE, 'SF01', NVL(a1.real_weight_qty, 0), 0)) realWetghtTotal,
+             SUM(DECODE(B1.SERVICE_TYPE_CODE, 'SF01', NVL(a1.volume, 0), 0)) volume,
+             SUM(DECODE(B1.SERVICE_TYPE_CODE, 'SF01', 1, 0)) quantity,
+             SUM(DECODE(B1.SERVICE_TYPE_CODE, 'SF01', B1.IN_FEE_AMT, 0)) trafficFeeTotal,
+             SUM(DECODE(B1.SERVICE_TYPE_CODE, 'SF02', B1.OUT_FEE_AMT, 0)) goodsChargeFee,
+             SUM(DECODE(B1.SERVICE_TYPE_CODE, 'SF02', B1.IN_FEE_AMT, 0)) goodsAgentFee,
+             SUM(DECODE(B1.SERVICE_TYPE_CODE, 'SF03', B1.IN_FEE_AMT, 0)) insuranceFee,
+             SUM(DECODE(B1.SERVICE_TYPE_CODE, 'SF04', B1.IN_FEE_AMT, 0)) singnedBackFee,
+             SUM(DECODE(B1.SERVICE_TYPE_CODE, 'SF05', B1.IN_FEE_AMT, 0)) packageFee,
+             SUM(DECODE(B1.SERVICE_TYPE_CODE, 'SF06', B1.OUT_FEE_AMT, 0)) forwardFee,
+             SUM(DECODE(B1.SERVICE_TYPE_CODE, 'SF07', B1.IN_FEE_AMT, 0)) waitNotifyFee,
+             SUM(DECODE(B1.SERVICE_TYPE_CODE, 'SF08', B1.IN_FEE_AMT, 0)) deliverFee,
+             SUM(DECODE(B1.SERVICE_TYPE_CODE, 'SF09', B1.OUT_FEE_AMT, 0)) debousGoodsFee,
+             SUM(DECODE(B1.SERVICE_TYPE_CODE, 'SF09', B1.IN_FEE_AMT, 0)) debousGoodsServiceFee,
+             SUM(DECODE(B1.SERVICE_TYPE_CODE, 'SF10', B1.OUT_FEE_AMT, 0)) debousWayFee,
+             SUM(DECODE(B1.SERVICE_TYPE_CODE, 'SF13', B1.IN_FEE_AMT, 0)) backCargoFee,
+             SUM(DECODE(B1.SERVICE_TYPE_CODE, 'SF14', B1.IN_FEE_AMT, 0)) forkliftFee,
+             SUM(DECODE(B1.SERVICE_TYPE_CODE, 'SF15', B1.OUT_FEE_AMT, 0)) kickbacksFee,
+             SUM(DECODE(B1.SERVICE_TYPE_CODE, 'SF16', B1.IN_FEE_AMT, 0)) zhidanFee
+       		 FROM tb_waybill a1  ,tb_waybill_service_fee b1
+       		 WHERE a1.waybill_id = b1.waybill_id
+        	 AND a1.BIZ_TYPE_CODE = '1'
+        	 
+	         
+				AND a1.input_tm >= to_date('2016-04-06 00:00:00','yyyy-mm-dd hh24:mi:ss')
+			 
+			 
+				 AND a1.input_tm  < to_date('2016-04-13 00:00:00','yyyy-mm-dd hh24:mi:ss')
+			 
+            GROUP BY A1.COMP_CODE)
+            select s1.* from s1
+            union all
+            select s2.* from s2) s3 
+            GROUP BY s3.TOCOMPCODE
+            ORDER BY s3.TOCOMPCODE DESC) tmp_tbl
+            ]]>
+	</select>
+</mapper>

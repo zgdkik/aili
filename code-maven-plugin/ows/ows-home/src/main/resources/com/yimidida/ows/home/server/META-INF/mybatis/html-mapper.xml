@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yimidida.ows.home.server.dao.IHtmlDao">
+
+
+	<resultMap id="htmlMap"
+		type="com.yimidida.ows.home.share.entity.Html">
+		<result column="html_Id" property="htmlId" />
+		<result column="html_Content" property="htmlContent" />
+		<result column="html_Backup" property="htmlBackup" />
+		<result column="menu_Id" property="menuId" />
+		<result column="change_Date" property="changeDate" />
+		<result column="change_User" property="changeUser" />
+		<result column="comp_code" property="compCode" />
+	</resultMap>
+
+
+	<select id="getHtmlByMenuId" parameterType="map" resultMap="htmlMap">
+		select * from tb_html where menu_id=#{menuId}
+	</select>
+
+
+
+</mapper>

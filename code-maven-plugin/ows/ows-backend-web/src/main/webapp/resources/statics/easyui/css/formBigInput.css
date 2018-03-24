@@ -1,0 +1,111 @@
+/***************************************************
+* @name: form.css
+* @function: 自定义表单的样式
+***************************************************/
+
+
+
+.sfwl-form-field > .sfwl-label {
+	padding-top: 7px;
+	margin-bottom: 0;
+	text-align: right;
+	width: 80px;
+	float: left;
+	white-space: nowrap;
+	line-height: 7px;
+	margin: 4px 0px 4px 0px;
+}
+
+.sfwl-form-field > .sfwl-control {
+	position: relative;
+	padding-right: 5px;
+	padding-left: 5px;
+	height: 20px;
+	width: 155px;
+	float: left;
+	margin: 4px 0px 4px 0px;
+}
+
+
+.sfwl-field1 {width:245px;}
+.sfwl-field2 {width:490px;}
+.sfwl-field3 {width:735px;}
+.sfwl-field4 { width:980px;}
+.sfwl-field5 { width:1225px;}
+
+
+.sfwl-col1 {width:262px;}
+.sfwl-col2 {width:507px;}
+.sfwl-col3 {width:752px;}
+.sfwl-col4 {width:997px;}
+.sfwl-col5 {width:1242px;}
+
+
+.sfwl-field2 > .sfwl-control {
+	position: relative;
+	padding-right: 5px;
+	padding-left: 5px;
+	float: left;
+	width: 400px;
+}
+
+.sfwl-field3 > .sfwl-control {
+	position: relative;
+	padding-right: 5px;
+	padding-left: 5px;
+	float: left;
+	width: 645px;
+}
+
+.sfwl-field4 > .sfwl-control {
+	position: relative;
+	padding-right: 5px;
+	padding-left: 5px;
+	float: left;
+	width: 890px;
+}
+.sfwl-field5 > .sfwl-control {
+	position: relative;
+	padding-right: 5px;
+	padding-left: 5px;
+	float: left;
+	width: 1135px;
+}
+
+.sfwl-col2 > .sfwl-control {
+	position: relative;
+	padding-right: 5px;
+	padding-left: 5px;
+	float: left;
+	width: 360px;
+}
+
+.sfwl-col3 > .sfwl-control {
+	position: relative;
+	padding-right: 5px;
+	padding-left: 5px;
+	float: left;
+	width: 605px;
+}
+
+.sfwl-col4 > .sfwl-control {
+	position: relative;
+	padding-right: 5px;
+	padding-left: 5px;
+	float: left;
+	width: 850px;
+}
+.sfwl-col5 > .sfwl-control {
+	position: relative;
+	padding-right: 5px;
+	padding-left: 5px;
+	float: left;
+	width: 1095px;
+}
+
+
+
+
+
+
+
