@@ -105,23 +105,23 @@ function fn_get_menu(menuId){
 		 	  $("#ul_lfmenu").html(leftMenuStr);
 		 	  $("#ul_fmenu").html(footMenustr);
 
-		 	var iconNavStr= "<li>"+
-		 	"<div class=\"img\"><img src=\""+base+"/images/ejymicon-02.png\" alt=\"\" style=\"cursor: pointer;\" onclick=\"location.href='"+base+"/ddwlGw/waybillTrack?title=货物追踪\'\"/></div>"+
-				"<a href=\""+base+"/ddwlGw/waybillTrack?title=货物追踪\">货物追踪</a>"+
-			"</li>"+
-			"<li>"+
-				"<div class=\"img\"><img src=\""+base+"/images/ejymicon-03.png\" alt=\"\" style=\"cursor: pointer;\" onclick=\"location.href='"+base+"/ddwlGw/queryFreight?title=运价查询'\"/></div>"+
-				"<a href=\"\">运价查询</a>"+
-			"</li>"+
-			"<li>"+
-				"<div class=\"img\"><img src=\""+base+"/images/ejymicon-04.png\" alt=\"\" style=\"cursor: pointer;\" onclick=\"location.href='"+base+"/ddwlGw/deptSearch?title=网点查询'\"/></div>"+
-				"<a href=\""+base+"/ddwlGw/deptSearch?title=网点查询\">网点查询</a>"+
-			"</li>"+
-			"<li>"+
-				"<div class=\"img\"><img src=\""+base+"/images/ejymicon-05.png\" alt=\"\" style=\"cursor: pointer;\" onclick=\"location.href=''\"/></div>"+
-				"<a href=\"\">代款查询</a>"+
-			"</li>";
-			$("#iconNav").html(iconNavStr);
+//		 	var iconNavStr= "<li>"+
+//		 	"<div class=\"img\"><img src=\""+base+"/images/ejymicon-02.png\" alt=\"\" style=\"cursor: pointer;\" onclick=\"location.href='"+base+"/ddwlGw/waybillTrack?title=货物追踪\'\"/></div>"+
+//				"<a href=\""+base+"/ddwlGw/waybillTrack?title=货物追踪\">货物追踪</a>"+
+//			"</li>"+
+//			"<li>"+
+//				"<div class=\"img\"><img src=\""+base+"/images/ejymicon-03.png\" alt=\"\" style=\"cursor: pointer;\" onclick=\"location.href='"+base+"/ddwlGw/queryFreight?title=运价查询'\"/></div>"+
+//				"<a href=\"\">运价查询</a>"+
+//			"</li>"+
+//			"<li>"+
+//				"<div class=\"img\"><img src=\""+base+"/images/ejymicon-04.png\" alt=\"\" style=\"cursor: pointer;\" onclick=\"location.href='"+base+"/ddwlGw/deptSearch?title=网点查询'\"/></div>"+
+//				"<a href=\""+base+"/ddwlGw/deptSearch?title=网点查询\">网点查询</a>"+
+//			"</li>"+
+//			"<li>"+
+//				"<div class=\"img\"><img src=\""+base+"/images/ejymicon-05.png\" alt=\"\" style=\"cursor: pointer;\" onclick=\"location.href=''\"/></div>"+
+//				"<a href=\"\">代款查询</a>"+
+//			"</li>";
+//			$("#iconNav").html(iconNavStr);
 		  }
 	 });
 }

@@ -27,9 +27,15 @@ public class MenuController extends AbstractController {
 	@ResponseBody
 	public ResultEntity getPhoneCode(String compCode) {
 		Map<String, Object> params=new HashMap<String, Object>();
-		params.put("compCode", compCode);
 		params.put("isWebMenu", 1);
+		params.put("parentCode", "daiyun");
 		List<PrivilegeEntity> list=privilegeService.getMenuService(params);
+		
+		params.clear();
+		params.put("privilegeCode", "daiyun");
+
+		List<PrivilegeEntity> list1=privilegeService.getMenuService(params);
+		list.addAll(list1);
 		MenuVo m=menuService.getMenuVo(list);
 		return returnSuccess(m);
 	}

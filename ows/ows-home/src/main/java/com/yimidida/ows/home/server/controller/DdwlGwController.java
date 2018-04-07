@@ -9,7 +9,6 @@ import javax.servlet.http.HttpSession;
 
 import jetbrick.template.utils.StringUtils;
 
-import org.apache.http.HttpRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,7 +23,6 @@ import com.yimidida.ows.home.share.entity.City;
 import com.yimidida.ows.home.share.entity.Html;
 
 @Controller
-@RequestMapping("/ddwlGw")
 public class DdwlGwController extends AbstractController {
 	@Autowired IHtmlService htmlService;
 	@Autowired IRecruitService recruitService;

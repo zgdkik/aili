@@ -28,7 +28,7 @@ public class MenuService implements IMenuService{
 		List<MenuList> menuLists=new ArrayList<MenuList>();
 		List<PrivilegeEntity> baseList=new ArrayList<PrivilegeEntity>();
 		for (PrivilegeEntity p : list) {
-			if("platform".equals(p.getParentCode())){
+			if("daiyun".equals(p.getParentCode())){
 				baseList.add(p);
 			}
 		}

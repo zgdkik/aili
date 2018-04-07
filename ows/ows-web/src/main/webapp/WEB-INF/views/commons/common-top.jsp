@@ -26,7 +26,7 @@
 <div class="container-fluid nav1"
 	style="background: #ceaa30 url(${base}/images/navbg.png) no-repeat center; ">
 	<div class="container"
-		style="border: 1px solid #ceaa30; height: 52px; line-height: 52px;">
+		style="height: 52px; line-height: 52px;">
 		<ul id="ul_hmenu">
 		</ul>
 	</div>
